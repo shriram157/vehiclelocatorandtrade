@@ -11,6 +11,8 @@ sap.ui.define([
 		 * @public
 		 * @returns {sap.ui.core.routing.Router} the router for this component
 		 */
+		 
+		 //  test for GIT Commit
 		getRouter: function () {
 			return this.getOwnerComponent().getRouter();
 		},
