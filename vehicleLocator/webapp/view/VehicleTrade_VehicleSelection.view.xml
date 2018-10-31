@@ -1,0 +1,101 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="vehicleLocator.controller.VehicleTrade_VehicleSelection" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form"
+	xmlns:uxap="sap.uxap" xmlns:t="sap.ui.table" xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages class="oImgsampl" height="200px">
+			<Page showNavButton="false">
+				<customHeader>
+					<Bar class="sapUiSmallPaddingBeginEnd clCustomHeaderBg">
+						<contentLeft>
+							<Image id="idLexusLogo" src="Images/Lexus.png" width="100px"/>
+							<Text text="|" class="sapUiTinyMarginBeginEnd"/>
+							<Text class="clCustomFont" text="Vehicle Locator-Trade"/>
+						</contentLeft>
+						<contentRight>
+							<Button text="Logout"/>
+						</contentRight>
+					</Bar>
+				</customHeader>
+				<content>
+					<Toolbar class="toolbar1">
+						<ToolbarSpacer></ToolbarSpacer>
+					<!--	<Button text="Vehicle Locator" press="handleLinkPress"/>
+						<Button text="Sold Order" press="handleLinkPress"/>
+						<Button text="Price Protection" press="handleLinkPress"/>
+						<Button text="Inventory Summary" press="handleLinkPress"/>
+						<Button text="Sujjest Order" press="handleLinkPress"/>-->
+					</Toolbar>
+					<VBox>
+						<OverflowToolbar id="otb1">
+							<Label text="Vehicle Locator" width="200px" class="vHlabe1clss"/>
+							<ToolbarSpacer/>
+						</OverflowToolbar>
+						<VBox>
+							<HBox>
+								<FlexBox width="40px"></FlexBox>
+								<FlexBox height="100px" alignItems="Center" justifyContent="Center">
+									<Label text="Series"/>
+									<FlexBox width="7px"></FlexBox>
+								<Select id="VT_VSeries" change="onVTVSseries" width="215px" forceSelection="true" class="sapUiSizeCompact VT_VSseries" items="{}">
+									<core:ListItem key="{}" text="{jsonDatamodel>Status}"/>
+								</Select>	
+								<!--	<SearchField width="215px" id="idVehclSerTrad"/>-->
+								</FlexBox>
+							</HBox>
+							<Table id="table" width="auto" class="sapUiResponsiveMargin" items="{/}" growingThreshold="150">
+								<columns>
+									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+										<Text text="Select"/>
+									</Column>
+									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+										<Text text="Vehicle Tracking Number"/>
+									</Column>
+									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+										<Text text="Series"/>
+									</Column>
+									<Column minScreenWidth="Desktop" demandPopin="true">
+										<Text text="Model"/>
+									</Column>
+									<Column minScreenWidth="Desktop" demandPopin="true">
+										<Text text="Suffix"/>
+									</Column>
+									<Column minScreenWidth="Desktop" demandPopin="true">
+										<Text text="APX"/>
+									</Column>
+									<Column minScreenWidth="Desktop" demandPopin="true">
+										<Text text="Color"/>
+									</Column>
+									<Column minScreenWidth="Desktop" demandPopin="true">
+										<Text text="Status"/>
+									</Column>
+									<Column minScreenWidth="Desktop" demandPopin="true">
+										<Text text="ETA Form"/>
+									</Column>
+									<Column minScreenWidth="Desktop" demandPopin="true">
+										<Text text="ETA To"/>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem press="onLineItemPressedtree1" type="Navigation">
+										<cells>
+											<ObjectIdentifier title="{}"/>
+											<Text text="{}"/>
+											<Text text="{}"/>
+											<Text text="{}"/>
+											<Text text="{}"/>
+											<Text text="{}"/>
+											<Text text="{}"/>
+											<Text text="{}"/>
+											<Text text="{}"/>
+											<Text text="{}"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</VBox>
+					</VBox>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

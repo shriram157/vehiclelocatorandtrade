@@ -1,0 +1,74 @@
+ID: vehicleLocator
+_schema-version: '2.1'
+description: vehicle Locator Application
+version: 0.0.1
+
+modules:
+ - name: vehicleLocator_hdb
+   type: hdb
+   path: vehicleLocator_hdb
+   requires:
+    - name: hdi_vehicleLocator_hdb
+
+ - name: vehicleLocator_Node
+   type: nodejs
+   path: vehicleLocator_Node
+   provides:
+    - name: vehicleLocator_Node_api
+      properties:
+         url: ${default-url}
+   requires:
+    - name: VEHICLE_LOCATOR_APIM_CUPS
+
+ - name: vehicleLocator
+   type: html5
+   path: vehicleLocator
+   parameters:
+      disk-quota: 256M
+      memory: 256M
+   build-parameters:
+      builder: grunt
+   requires:
+    - name: uaa_vehicleLocator
+    - name: dest_vehicleLocator
+    - name: vehicleLocator_Node_api
+      group: destinations
+      properties:
+        name: vehicleLocator-node-backend
+        url: '~{url}'
+        forwardAuthToken: true
+
+   provides:
+     - name: vehicleLocator    
+    
+resources:
+ - name: hdi_vehicleLocator_hdb
+   parameters:
+      config:
+         schema: vehicleLocator_hdb
+
+   properties:
+      hdi-container-name: ${service-name}
+   type: com.sap.xs.hdi-container
+   
+ - name: VEHICLE_LOCATOR_APIM_CUPS
+   type: org.cloudfoundry.existing-service
+   parameters:
+     service-name: VEHICLE_LOCATOR_APIM_CUPS
+   properties:
+      odata-call-service-name: '${service-name}'
+
+ - name: uaa_vehicleLocator
+   parameters:
+      path: ./xs-security.json
+      service-plan: application
+      service: xsuaa
+   type: org.cloudfoundry.managed-service
+
+
+ - name: dest_vehicleLocator
+   parameters:
+      service-plan: lite
+      service: destination
+   type: org.cloudfoundry.managed-service
+

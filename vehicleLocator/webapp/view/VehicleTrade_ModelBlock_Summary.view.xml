@@ -1,0 +1,133 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="vehicleLocator.controller.VehicleTrade_ModelBlock_Summary" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form"
+	xmlns:uxap="sap.uxap" xmlns:t="sap.ui.table" xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages class="oImgsampl" height="200px">
+			<Page showNavButton="false" navButtonPress="onBack">
+				<customHeader>
+					<Bar class="sapUiSmallPaddingBeginEnd clCustomHeaderBg">
+						<contentLeft>
+							<Image id="idLexusLogo" src="Images/Lexus.png" width="100px"/>
+							<Text text="|" class="sapUiTinyMarginBeginEnd"/>
+							<Text class="clCustomFont" text="Vehicle Locator-Trade"/>
+						</contentLeft>
+						<contentRight>
+							<Button text="Logout"/>
+						</contentRight>
+					</Bar>
+				</customHeader>
+				<content>
+					<Toolbar height="45px" class="toolbar3">
+					<!--	<Label text="Add Model Block" width="180px" class="vTlabe1clss"/>-->
+						<ToolbarSpacer></ToolbarSpacer>
+						<!--<Button text="Vehicle Locator" press="handleLinkPress"/>
+						<Button text="Sold Order" press="handleLinkPress"/>
+						<Button text="Price Protection" press="handleLinkPress"/>
+						<Button text="Inventory Summary" press="handleLinkPress"/>
+						<Button text="Sujjest Order" press="handleLinkPress"/>-->
+					</Toolbar>
+						<VBox>
+						<OverflowToolbar id="otb1">
+							<Label text="Add Model Block" width="200px" class="vHlabe1clss"/>
+							<ToolbarSpacer/>
+						
+						</OverflowToolbar>
+						</VBox>
+					<VBox class="sapUiSmallMargin">
+						<form:SimpleForm id="SimpleFormDisplay480_12dg0" editable="true" layout="ResponsiveGridLayout" labelSpanM="12" adjustLabelSpan="false"
+							emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2">
+							<form:content>
+								<core:Title text="" class="VTMBSClass"/>
+								<Label text="Dealer" required="true"/>
+							<Select id="VT_MBSdeal" change="onVT_MBSdeal" width="76%" forceSelection="true" class="sapUiSizeCompact VT_MBSdeal" items="{}">
+									<core:ListItem key="{}" text="{jsonDatamodel>Status}"/>
+								</Select>
+							<!--	<SearchField id="Searcid" width="76%"/>-->
+								<Label text="Vehicle Tracking Number" required="true"/>
+								<!--<Text text=""/>-->
+								<Text text="TCI00143453">
+									<layoutData>
+										<l:GridData span="L3 M12 S3"/>
+									</layoutData>
+								</Text>
+								<Button text="Select Vehicle" width="60%"/>
+								<Label text="Block Model No.of Days" required="true"/>
+								<Select id="VT_MBSbmnd" change="onVT_MBSbnmd" width="76%" forceSelection="true" class="sapUiSizeCompact VT_MBSbnmd" items="{}">
+									<core:ListItem key="{}" text="{jsonDatamodel>Status}"/>
+								</Select>
+							<!--	<SearchField id="Searcid2" width="76%"/>-->
+								<Label text="Comments"/>
+								<TextArea id="TypeHerid" value=" " width="76%" height="50px"/>
+								<!--<FlexBox width="40px"></FlexBox>
+								<FlexBox height="100px" alignItems="Center" justifyContent="Center">
+									<Button text="Submit"/>
+								</FlexBox>-->
+								<Label text=""/>
+								<Button text="Submit" press="onpresVMS" width="26%"/>
+								<core:Title text=""/>
+								<!--<ToolbarSpacer></ToolbarSpacer>-->
+								<!--<Label text="Zone"/>
+								<VBox>
+									<CheckBox text="Pasific"/>
+									<CheckBox text="Prairie"/>
+									<CheckBox text="Central"/>
+									<CheckBox text="Atlantic"/>
+									<CheckBox text="Cubic"/>
+								</VBox>-->
+							</form:content>
+						</form:SimpleForm>
+					</VBox>
+					<HBox>
+						<FlexBox width="40px"></FlexBox>
+						<FlexBox height="25px" alignItems="Center" justifyContent="Center">
+							<Label text="Do Not Call Block List" class="flexdontclabllist"/>
+							<FlexBox width="960px"></FlexBox>
+							<Button text="Delete"/>
+						</FlexBox>
+					</HBox>
+					<Table id="tableVTMBS" width="auto" class="sapUiResponsiveMargin" mode="MultiSelect" items="{/}" growingThreshold="150">
+						<columns>
+							<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+								<Text text="Dealer"/>
+							</Column>
+							<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+								<Text text="Series"/>
+							</Column>
+							<Column minScreenWidth="Desktop" demandPopin="true">
+								<Text text="Model"/>
+							</Column>
+							<Column minScreenWidth="Desktop" demandPopin="true">
+								<Text text="Block Duration"/>
+							</Column>
+							<Column minScreenWidth="Desktop" demandPopin="true">
+								<Text text="From Date"/>
+							</Column>
+							<Column minScreenWidth="Desktop" demandPopin="true">
+								<Text text="To Date"/>
+							</Column>
+							<Column minScreenWidth="Desktop" demandPopin="true">
+								<Text text="Comments"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem press="onLineItemPressedtree1" type="Navigation">
+								<cells>
+									<ObjectIdentifier title="{}"/>
+									<Text text="{}"/>
+									<Text text="{}"/>
+									<Text text="{}"/>
+									<Text text="{}"/>
+									<Text text="{}"/>
+									<Text text="{}"/>
+									<Text text="{}"/>
+									<Text text="{}"/>
+									<Text text="{}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

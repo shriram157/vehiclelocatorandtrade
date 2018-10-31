@@ -1,0 +1,195 @@
+{
+	"_version": "1.7.0",
+	"sap.app": {
+		"id": "vehicleLocator",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		
+		"dataSources": {
+			"mainService": {
+				"uri": "/sap/opu/odata/sap/Z_VEHICLE_CATALOGUE_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
+				}
+			}
+		},
+
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"sourceTemplate": {
+			"id": "ui5template.basicSAPUI5ApplicationProject",
+			"version": "1.40.12"
+		}
+	},
+
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_belize"
+
+		]
+	},
+
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "vehicleLocator.view.View1",
+			"type": "XML"
+		},
+		"dependencies": {
+			"minUI5Version": "1.30.0",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {},
+				"sap.ushell": {},
+				"sap.collaboration": {},
+				"sap.ui.comp": {},
+				"sap.uxap": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "vehicleLocator.i18n.i18n"
+				}
+			}
+		},
+
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"async": true,
+				"viewPath": "vehicleLocator.view",
+				"controlId": "idAppControl",
+				"controlAggregation": "pages"
+			},
+			"routes": [{
+				"pattern": "",
+				"name": "VehicleLocSearch",
+				"target": "VehicleLocSearch"
+			}, {
+				"pattern": "VehicleSearcResults",
+				"name": "VehicleSearcResults",
+				"target": "VehicleSearcResults"
+			}, {
+				"pattern": "VehicleTrade_CreateSingle",
+				"name": "VehicleTrade_CreateSingle",
+				"target": "VehicleTrade_CreateSingle"
+			}, {
+				"pattern": "VehicleTrade_VehicleSelection",
+				"name": "VehicleTrade_VehicleSelection",
+				"target": "VehicleTrade_VehicleSelection"
+			}, {
+				"pattern": "VehcTrad_Apprv_Rej_CounTrad",
+				"name": "VehcTrad_Apprv_Rej_CounTrad",
+				"target": "VehcTrad_Apprv_Rej_CounTrad"
+			}, {
+				"pattern": "VehicleTrade_UpdtTradReq",
+				"name": "VehicleTrade_UpdtTradReq",
+				"target": "VehicleTrade_UpdtTradReq"
+			}, {
+				"pattern": "VehicleTrade_History",
+				"name": "VehicleTrade_History",
+				"target": "VehicleTrade_History"
+
+			}, {
+				"pattern": "VehicleTrade_ModelBlock_Summary",
+				"name": "VehicleTrade_ModelBlock_Summary",
+				"target": "VehicleTrade_ModelBlock_Summary"
+
+			}, {
+				"pattern": "VehicleTrade_Summary",
+				"name": "VehicleTrade_Summary",
+				"target": "VehicleTrade_Summary"
+
+			}, {
+				"pattern": "VehicleTrade_VehicleSelection",
+				"name": "VehicleTrade_VehicleSelection",
+				"target": "VehicleTrade_VehicleSelection"
+
+			}],
+
+			"targets": {
+				"VehicleLocSearch": {
+					"viewName": "VehicleLocSearch",
+					"async": true,
+					"clearControlAggregation": false
+				},
+				"VehicleSearcResults": {
+					"viewName": "VehicleSearcResults",
+					"async": true,
+					"clearControlAggregation": false
+				},
+				"VehicleTrade_CreateSingle": {
+					"viewName": "VehicleTrade_CreateSingle",
+					"async": true,
+					"clearControlAggregation": false
+				},
+
+				"VehcTrad_Apprv_Rej_CounTrad": {
+					"viewName": "VehcTrad_Apprv_Rej_CounTrad",
+					"async": true,
+					"clearControlAggregation": false
+				},
+				"VehicleTrade_UpdtTradReq": {
+					"viewName": "VehicleTrade_UpdtTradReq",
+					"async": true,
+					"clearControlAggregation": false
+
+				},
+				"VehicleTrade_History": {
+					"viewName": "VehicleTrade_History",
+					"async": true,
+					"clearControlAggregation": false
+				},
+				"VehicleTrade_ModelBlock_Summary": {
+					"viewName": "VehicleTrade_ModelBlock_Summary",
+					"async": true,
+					"clearControlAggregation": false
+				},
+				"VehicleTrade_Summary": {
+					"viewName": "VehicleTrade_Summary",
+					"async": true,
+					"clearControlAggregation": false
+				},
+				"VehicleTrade_VehicleSelection": {
+					"viewName": "VehicleTrade_VehicleSelection",
+					"async": true,
+					"clearControlAggregation": false
+				}
+
+			}
+		},
+
+		"resources": {
+			"css": [{
+				"uri": "css/style.css"
+			}]
+		}
+	}
+}

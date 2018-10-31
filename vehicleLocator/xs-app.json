@@ -1,0 +1,35 @@
+{
+  "welcomeFile": "/vehicleLocator/index.html",
+  "authenticationMethod": "route",
+  "logout": {
+    "logoutEndpoint": "/do/logout"
+  },
+  "routes": [
+    {
+      "source": "^/vehicleLocator/(.*)$",
+      "target": "$1",
+      "localDir": "webapp"
+    },
+          {
+      "source": "/node(.*)",
+      "destination": "vehicleLocator-node-backend",
+      "csrfProtection": false,
+      "authenticationType": "none"
+    },
+         {
+         "source": "(.*)(.xsjs)",
+      "destination": "vehicleLocator-node-backend",
+      "csrfProtection": false,
+      "authenticationType": "none"     	
+         },
+        {
+          "source": "(.*)(.xsodata)",
+  "destination": "vehicleLocator-node-backend",
+  "authenticationType": "none"	
+        } 
+  ]
+}	
+	
+	
+	
+  
