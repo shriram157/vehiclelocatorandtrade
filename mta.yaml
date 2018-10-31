@@ -1,6 +1,6 @@
 ID: vehicleLocator
 _schema-version: '2.1'
-description: vehicle Locator Application
+description: vehicle Locator MTA
 version: 0.0.1
 
 modules:
@@ -13,6 +13,13 @@ modules:
  - name: vehicleLocator_Node
    type: nodejs
    path: vehicleLocator_Node
+   parameters:
+      host: vehicleLocator_Node
+      register-service-url: true
+      service-name: vehicleLocator_Node
+      service-url: '${default-url}'
+      disk-quota: 256MB
+      memory: 256MB
    provides:
     - name: vehicleLocator_Node_api
       properties:
@@ -24,6 +31,10 @@ modules:
    type: html5
    path: vehicleLocator
    parameters:
+      host: vehicleLocator
+      register-service-url: true
+      service-name: vehicleLocator
+      service-url: '${default-url}'
       disk-quota: 256M
       memory: 256M
    build-parameters:
@@ -41,6 +52,15 @@ modules:
    provides:
      - name: vehicleLocator    
     
+
+ - name: vehicleLocator_XSJS
+   type: nodejs
+   path: vehicleLocator_XSJS
+   provides:
+    - name: vehicleLocator_XSJS_api
+      properties:
+         url: ${default-url}
+
 resources:
  - name: hdi_vehicleLocator_hdb
    parameters:
