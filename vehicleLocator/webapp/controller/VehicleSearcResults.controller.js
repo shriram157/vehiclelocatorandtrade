@@ -16,9 +16,10 @@ sap.ui.define([
 			this._oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle(); // instantiate the resource 
 
 			var that = this;
-
+	       
+	       debugger;
 			$.ajax({
-				
+			
 			   url:"/node/Z_VEHICLE_CATALOGUE_SRV/zc_myear",
 			   
 				method: "GET",

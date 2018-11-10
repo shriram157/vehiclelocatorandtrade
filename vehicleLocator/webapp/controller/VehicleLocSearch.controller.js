@@ -121,7 +121,7 @@ sap.ui.define([
 			/*var that = this;*/
 
 		//	that.oDataUrl = "https://tcid1gwapp1.tci.internal.toyota.ca:44300/sap/opu/odata/sap/Z_VEHICLE_CATALOGUE_SRV";
-           that.oDataUrl = "/node/Z_VEHICLE_CATALOGUE_SRV";
+           that.oDataUrl = "/vehicleLocatorNode/node/Z_VEHICLE_CATALOGUE_SRV";
         //   that.oDataUrl = "https://vehiclelocator_node.cfapps.us10.hana.ondemand.com/node/Z_VEHICLE_CATALOGUE_SRV";
 			var oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
 			// oDataModel.setHeaders({

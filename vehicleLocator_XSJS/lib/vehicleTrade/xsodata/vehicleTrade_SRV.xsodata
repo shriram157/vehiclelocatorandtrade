@@ -1,0 +1,13 @@
+service { 
+
+      "vehicleTrade.Trade_Request"    as "TradeRequest"     navigates ( "toVehicles"   as "TradeVehicles" );
+      "vehicleTrade.Vehicle"          as "TradeVehicles";
+      "vehicleTrade.Trade_Comment"    as "TradeComment"     navigates ( "toComments"   as "TradeComments");
+      "vehicleTrade.Vehicle_Desc"     as "TradeVehicleDesc" navigates ( "toVehicleDesc" as "TradeVehicleDescs");
+
+       association "toVehicles" principal "TradeVehicles"("Trade_Id") multiplicity "1" dependent "TradeRequest"("Trade_Id") multiplicity "*"; 
+       association "toComments" principal "TradeComment"("Trade_Id") multiplicity "1" dependent "TradeRequest"("Trade_Id") multiplicity "*";
+       association "toVehicleDesc" principal "TradeVehicleDesc"("Trade_Id") multiplicity "1" dependent "TradeRequest"("Trade_Id") multiplicity "*";
+}  
+
+

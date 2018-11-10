@@ -56,10 +56,24 @@ modules:
  - name: vehicleLocator_XSJS
    type: nodejs
    path: vehicleLocator_XSJS
+   parameters:
+      host: vehicleXSJS
+      register-service-url: true
+      service-name: vehicleXSJS
+      service-url: '${default-url}'
+      disk-quota: 512M
+      memory: 256M
+   build-parameters:
+      builder: grunt
    provides:
     - name: vehicleLocator_XSJS_api
       properties:
          url: ${default-url}
+   requires:
+     - name: vehicleLocator_hdb
+     - name: hdi_vehicleLocator_hdb
+     - name: uaa_vehicleLocator
+     - name: dest_vehicleLocator
 
 resources:
  - name: hdi_vehicleLocator_hdb

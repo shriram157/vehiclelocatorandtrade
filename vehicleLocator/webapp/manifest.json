@@ -10,7 +10,7 @@
 		
 		"dataSources": {
 			"mainService": {
-				"uri": "/sap/opu/odata/sap/Z_VEHICLE_CATALOGUE_SRV/",
+				"uri": "/vehicleLocatorNode/sap/opu/odata/sap/Z_VEHICLE_CATALOGUE_SRV/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0",
