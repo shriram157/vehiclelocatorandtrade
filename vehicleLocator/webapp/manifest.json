@@ -9,14 +9,23 @@
 		},
 		
 		"dataSources": {
-			"mainService": {
+						"mainService": {
 				"uri": "/vehicleLocatorNode/sap/opu/odata/sap/Z_VEHICLE_CATALOGUE_SRV/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0",
 					"localUri": "localService/metadata.xml"
 				}
+			},
+								"mainService": {
+				"uri": "/Node/Z_VEHICLE_CATALOGUE_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
+				}
 			}
+ 
 		},
 
 		"title": "{{appTitle}}",

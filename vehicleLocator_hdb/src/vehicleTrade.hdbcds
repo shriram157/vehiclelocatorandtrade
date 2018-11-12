@@ -13,6 +13,12 @@ context vehicleTrade {
             @Comment : 'Requesting_Dealer_Name'
             Requesting_Dealer_Name : String(35);
 
+            @Comment : 'Requested Dealer'
+            Requested_Dealer      : String(10);
+
+            @Comment : 'Requested_Dealer_Name'
+            Requested_Dealer_Name : String(35);
+
             @Comment : 'Requested Vehicle VTN'
             Requested_Vtn          : String(6);
 
@@ -164,8 +170,6 @@ context vehicleTrade {
           @Comment : 'Description'
           Description : String(3);
     }
-    
-    
-    
+ 
     
 };

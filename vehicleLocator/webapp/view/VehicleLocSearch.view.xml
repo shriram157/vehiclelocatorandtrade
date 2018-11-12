@@ -9,10 +9,10 @@
 						<contentLeft>
 							<Image id="idLexusLogo" src="Images/Lexus.png" width="100px"/>
 							<Text text="|" class="sapUiTinyMarginBeginEnd"/>
-							<Text class="clCustomFont" text="Vehicle Locator-Trade"/>
+							<Text class="clCustomFont" text="{i18n>PageTitle}"/>
 						</contentLeft>
 						<contentRight>
-							<Button text="Logout"/>
+							<Button text="{i18n>Logout}"/>
 						</contentRight>
 					</Bar>
 				</customHeader>
@@ -46,34 +46,19 @@
 								</ComboBox>-->
 							</l:content>
 						</l:HorizontalLayout>
+						<MessageStrip id="SeriesErrMsgStrip" text="" showIcon="true" showCloseButton="false" visible="false" type="Error" class="customMargin"></MessageStrip>
 						<form:SimpleForm id="SimpleFormDisplay480_12120" editable="true" layout="ResponsiveGridLayout" labelSpanM="12" adjustLabelSpan="false"
 							emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2">
 							<form:content>
 								<core:Title text=""/>
-								<Label text="Year" required="true"/>
-								
-					<!--<Select  id ="MoyearCombo" items="{/}" width="70%">
-                    <core:Item key="{year}" text="{year}" />
-                     </Select>	-->		
-				<!--	<DatePicker id="oModelYearVLS" value="2018" valueFormat="yyyy" width="70%" displayFormat="yyyy" change="handleYearChange"/>	-->		
-								
-							<!--	<Select id="MoyearCombo" items="{oJsonModelVLS>/results}" forceSelection="true"  change="onVlsschange" class="sapUiSizeCompact VLSSSelectSeries" width="70%" selectedKey='{ }' >
-									<core:Item key="{path:'oJsonModelVLS>ModelYear'}{path:'oModel1>WBSELEMENT'}" text='{oModel1>POSID}'/>
-								</Select>-->
-							
-				<!--	<ComboBox placeholder="ModelYear" selectedText="2018" width="70%" selectionChange="ItemClickedVLS11" id="MoyearCombo" 
-								items="{path: '/results'}" > 
-									<core:Item  text="{ModelYear}"/>
-					</ComboBox>	-->
-				<ComboBox placeholder="Menu" selectedKey="2" width="70%" selectionChange="ItemClickedVLS" id="MoyearCombo"
-								items="">
-								    	<core:Item text="2016" key="0"/>
-										<core:Item text="2017" key="1"/>
-										<core:Item text="2018" key="2"/>
-										<core:Item text="2019" key="3"/>
-								</ComboBox> 		
-								
-								
+								<Label text="{i18n>ModelYear}" required="true"/>
+								<ComboBox placeholder="" width="70%" selectionChange="ItemClickedVLS" id="MoyearCombo" items="{/}">
+									<core:Item key="{year}" text="{year}"/>
+									<!--	<core:Item text="2016" key="0"/>
+									<core:Item text="2017" key="1"/>
+									<core:Item text="2018" key="2"/>
+									<core:Item text="2019" key="3"/>-->
+								</ComboBox>
 								<!--<ComboBox placeholder="Menu" selectedKey="2" width="70%" selectionChange="ItemClickedVLS" id="MoyearCombo"
 								items="{path: 'oJsonModelVLS>/', sorter: { path: 'ModelYear' } }"  />-->
 								<!--	<core:Item text="2016" key="0"/>
@@ -82,79 +67,65 @@
 										<core:Item text="2019" key="3"/>-->
 								<!--<DatePicker id="IdYearPicker" value="2018" valueFormat="yyyy" width="70%" displayFormat="yyyy" change="OnYearChange"/>-->
 								<!--	<DatePicker id="IdYearPicker" value="2018" valueFormat="yyyy" width="70%" displayFormat="yyyy" change="OnYearChange"/>-->
-		<Label text="Series" required="true"/>
-<!--	<ComboBox placeholder="Series"  width="70%" showSecondaryValues= "true" filterSecondaryValues="true"
+								<Label text="{i18n>Series}" required="true"/>
+								<!--	<ComboBox placeholder="Series"  width="70%" showSecondaryValues= "true" filterSecondaryValues="true"
  selectionChange="SeriesClickedVLS11" id="SeriesCmbo" class="sapUiSizeCompact VLSSSelectSeries" change="SeriesChange" 
 								items="{/}" > 
 									<core:ListItem   text="{ModelSeriesNo}"      key="{ModelSeriesNo}"  additionalText =""/>
 				   	</ComboBox>-->
-				   	
-
-	<ComboBox placeholder="Series"  width="70%" showSecondaryValues= "true" filterSecondaryValues="true"
- selectionChange="SeriesClickedVLS11" id="SeriesCmbo" class="sapUiSizeCompact VLSSSelectSeries" change="SeriesChange" 
-								items="{/}" >   
-								<core:ListItem   text="{TCIModelSeriesNo}"      key="{TCIModelSeriesNo}"  additionalText =""/>
-								<!--	<core:ListItem   text="{TCISeriesDescriptionEN}"      key="{TCISeriesDescriptionEN}"  additionalText =""/>-->
-				   	</ComboBox>				   	
-				   	
-				   	
-				   	
-				   	
-<!--<ComboBox placeholder="Series"  width="70%" showSecondaryValues= "true" filterSecondaryValues="true"
+								<ComboBox placeholder="" width="70%" showSecondaryValues="true" filterSecondaryValues="true" selectionChange="SeriesClickedVLS11"
+									id="SeriesCmbo" items="{SeriesData>/}" change="handleSeriesChange">
+									<core:ListItem text="{SeriesData>TCISeries} {SeriesData>TCISeriesDescriptionEN}" key="{SeriesData>TCISeries}" additionalText=""/>
+									<!--	<core:ListItem   text="{TCISeriesDescriptionEN}"      key="{TCISeriesDescriptionEN}"  additionalText =""/>-->
+								</ComboBox>
+								<!--<ComboBox placeholder="Series"  width="70%" showSecondaryValues= "true" filterSecondaryValues="true"
  selectionChange="SeriesClickedVLS11" id="SeriesCmbo" class="sapUiSizeCompact VLSSSelectSeries" change="SeriesChange" 
 								items="{SeriesModel>/}" > 
 									<core:ListItem   text="{SeriesModel>/ModelSeriesNo}"      key="{SeriesModel>/ModelSeriesNo}"  additionalText =""/>
-				   	</ComboBox>	-->			   	
-				   	
-				   	
-				   	
-				   	
-<!--<ComboBox  width="70%" change="SeriesChange" placeholder="Series"
+				   	</ComboBox>	-->
+								<!--<ComboBox  width="70%" change="SeriesChange" placeholder="Series"
 			items= "{JsSeriesModel>/'}"  >
 				<core:Item key="{JsSeriesModel>ModelSeriesNo}" text="{}" />
-			</ComboBox>-->				   	
-				   	
-				   	
-								
-							<!--	<Select id="VLSSeries" change="onVlsschange" enabled="true" width="70%" forceSelection="true" class="sapUiSizeCompact VLSSSelectSeries" items="{}">
+			</ComboBox>-->
+								<!--	<Select id="VLSSeries" change="onVlsschange" enabled="true" width="70%" forceSelection="true" class="sapUiSizeCompact VLSSSelectSeries" items="{}">
 									<core:ListItem key="{}" text="{jsonDatamodel>Series}"/>
 								</Select>-->
-								<Label text="Model Code" required="true"/>
-					<!--	<ComboBox placeholder="Model Code" selectedKey="2" showSecondaryValues= "true" width="90%" selectionChange="MCClickedVLS11" id="McCmbo" class="sapUiSizeCompact VLSSSelectSeries" 
+								<Label text="{i18n>ModelCode}" required="true"/>
+								<!--	<ComboBox placeholder="Model Code" selectedKey="2" showSecondaryValues= "true" width="90%" selectionChange="MCClickedVLS11" id="McCmbo" class="sapUiSizeCompact VLSSSelectSeries" 
 								items="{/}" > 
 									<core:ListItem text="{SeriesSequenceNumber}" additionalText ="4✕4 {TCIModelDescriptionEN}"/>
-				   	</ComboBox>	-->	
-				   	<ComboBox placeholder="Model Code" selectedKey="" showSecondaryValues= "true" width="90%" selectionChange="MCClickedVLS11" id="McCmbo" class="sapUiSizeCompact VLSSSelectSeries" 
-								items="{/}"> 
-							<core:ListItem text="{Model} {InteriorTrimDescriptionEN}"  key="{Model}{InteriorTrimDescriptionEN}"/>
-				   	</ComboBox>
-								
+				   	</ComboBox>	-->
+								<ComboBox placeholder="" selectedKey="" showSecondaryValues="true" width="90%" selectionChange="MCClickedVLS11" id="McCmbo"
+									change="handleModelChange" items="{ModelCode>/}">
+									<core:ListItem text="{ModelCode>Model} - {ModelCode>ENModelDesc}" key="{ModelCode>Model}"/>
+								</ComboBox>
 								<!--<Select id="VLSModelCode" change="onVlsMochange" width="90%" forceSelection="true" class="sapUiSizeCompact VLSSSelectModelC" items="{}">
 									<core:ListItem key="{}" text="{jsonDatamodel>Model Code}"/>
 								</Select>-->
-								<Label text="Suffix" required="true"/>
-				
-				<!--	<ComboBox placeholder="Suffix" selectedKey="" width="90%" selectionChange="SeriesClickedVLS11" id="SuffCmbo" class="sapUiSizeCompact VLSSSelectSeries" 
+								<Label text="{i18n>Suffix}" required="true"/>
+								<!--	<ComboBox placeholder="Suffix" selectedKey="" width="90%" selectionChange="SeriesClickedVLS11" id="SuffCmbo" class="sapUiSizeCompact VLSSSelectSeries" 
 								items="{path: '/results'}" > 
 									<core:Item  text="{Suffix}"/>
-				   	</ComboBox>-->	
-				   	<ComboBox placeholder="Suffix" selectedKey="" showSecondaryValues= "true" width="90%" selectionChange="SeriesClickedVLS11" id="SuffCmbo" class="sapUiSizeCompact VLSSSelectSeries" 
-								items="{/}"> 
-									<core:ListItem text="{Suffix} {ExteriorDescriptionEN}" key = "{Suffix}  {ExteriorDescriptionEN}" additionalText=""/>
-				   	</ComboBox>
-								
+				   	</ComboBox>-->
+								<ComboBox placeholder="" selectedKey="" showSecondaryValues="true" width="90%" change="handleSuffixChange"
+									selectionChange="SufficClickedVLS11" id="SuffCmbo" items="{ path:'Suffix>/', sorter : { path:'Suffix', ascending : 'true' } }">
+									<core:ListItem text="{Suffix>Suffix} - {Suffix>SuffixDescriptionEN}/{Suffix>MarketingTrimInteriorDescEN}" key="{Suffix>Suffix}"
+										additionalText=""/>
+									<!--{MarktgIntDescEN}  -->
+								</ComboBox>
+								<!--{SuffixDescriptionEN}- -->
 								<!--<Select id="VLSSuffix" change="onVlsMoSuffix" width="90%" forceSelection="true" class="sapUiSizeCompact VLSSSelectSuffix" items="{}">
 									<core:ListItem key="{}" text="{jsonDatamodel>Suffix}"/>
 								</Select>-->
 								<core:Title text=""/>
 								<ToolbarSpacer></ToolbarSpacer>
-								<Label text="Zone" required="true"/>
+								<Label text="{i18n>Zone}" required="true"/>
 								<VBox>
-									<CheckBox text="Pacific"/>
-									<CheckBox text="Prairie"/>
-									<CheckBox text="Central"/>
-									<CheckBox text="Atlantic"/>
-									<CheckBox text="Quebec"/>
+									<CheckBox text="{i18n>Pacific}" id="Pacific"/>
+									<CheckBox text="{i18n>Prairie}" id="Prairie"/>
+									<CheckBox text="{i18n>Central}" id="Central"/>
+									<CheckBox text="{i18n>Atlantic}" id="Atlantic"/>
+									<CheckBox text="{i18n>Quebec}" id="Quebec"/>
 								</VBox>
 							</form:content>
 						</form:SimpleForm>
@@ -164,7 +135,7 @@
 							class="simplVTARC" emptySpanM="0" columnsL="2" columnsM="2">
 							<form:content>
 								<core:Title text="" class="Vtaprct1"/>
-								<Button text="Search" icon="sap-icon://search" press="onSePress" type="Emphasized" width="30%"/>
+								<Button text="{i18n>Search}" icon="sap-icon://search" press="onSePress" type="Emphasized" width="30%"/>
 								<core:Title text="" class="Vtaprct1"/>
 								<Label text=""/>
 							</form:content>
