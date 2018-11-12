@@ -9,8 +9,8 @@
 		},
 		
 		"dataSources": {
-			"mainService": {
-				"uri": "https://vehiclelocator_node.cfapps.us10.hana.ondemand.com/node/Z_VEHICLE_CATALOGUE_SRV",
+						"mainService": {
+				"uri": "/vehicleLocatorNode/sap/opu/odata/sap/Z_VEHICLE_CATALOGUE_SRV/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0",
