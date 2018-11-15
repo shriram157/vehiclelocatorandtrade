@@ -27,14 +27,14 @@
 					</Toolbar>
 					<VBox>
 						<OverflowToolbar id="otb1">
-							<Label text="Vehicle Locator" width="200px" class="vHlabe1clss"/>
+							<Label text="{i18n>VehicleTrade-VehicleSelection}" width="200px" class="vHlabe1clss"/>
 							<ToolbarSpacer/>
 						</OverflowToolbar>
 						<VBox>
 							<HBox>
 								<FlexBox width="40px"></FlexBox>
 								<FlexBox height="100px" alignItems="Center" justifyContent="Center">
-									<Label text="Series"/>
+									<Label text="{i18n>Series}"/>
 									<FlexBox width="7px"></FlexBox>
 								<Select id="VT_VSeries" change="onVTVSseries" width="215px" forceSelection="true" class="sapUiSizeCompact VT_VSseries" items="{}">
 									<core:ListItem key="{}" text="{jsonDatamodel>Status}"/>
@@ -45,34 +45,34 @@
 							<Table id="table" width="auto" class="sapUiResponsiveMargin" items="{/}" growingThreshold="150">
 								<columns>
 									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
-										<Text text="Select"/>
+										<Text text="{i18n>Select}"/>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
-										<Text text="Vehicle Tracking Number"/>
+										<Text text="{i18n>VehicleTrackingNumber}"/>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
-										<Text text="Series"/>
+										<Text text="{i18n>Series}"/>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
-										<Text text="Model"/>
+										<Text text="{i18n>Model}"/>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
-										<Text text="Suffix"/>
+										<Text text="{i18n>Suffix}"/>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
-										<Text text="APX"/>
+										<Text text="{i18n>APX}"/>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
-										<Text text="Color"/>
+										<Text text="{i18n>Color}"/>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
-										<Text text="Status"/>
+										<Text text="{i18n>Status}"/>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
-										<Text text="ETA Form"/>
+										<Text text="{i18n>ETAFrom}"/>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
-										<Text text="ETA To"/>
+										<Text text="{i18n>ETATo}"/>
 									</Column>
 								</columns>
 								<items>

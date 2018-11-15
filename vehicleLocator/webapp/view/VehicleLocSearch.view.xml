@@ -1,7 +1,7 @@
 <mvc:View controllerName="vehicleLocator.controller.VehicleLocSearch" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:uxap="sap.uxap"
 	xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form">
-	<App>
+	<App id="idAppControl">
 		<pages class="oImgsampl" height="200px">
 			<Page showNavButton="false">
 				<customHeader>
@@ -109,9 +109,9 @@
 				   	</ComboBox>-->
 								<ComboBox placeholder="" selectedKey="" showSecondaryValues="true" width="90%" change="handleSuffixChange"
 									selectionChange="SufficClickedVLS11" id="SuffCmbo" items="{ path:'Suffix>/', sorter : { path:'Suffix', ascending : 'true' } }">
-									<core:ListItem text="{Suffix>Suffix} - {Suffix>SuffixDescriptionEN}/{Suffix>MarketingTrimInteriorDescEN}" key="{Suffix>Suffix}"
+									<core:ListItem text="{Suffix>Suffix} - {Suffix>SuffixDescriptionEN}/{Suffix>MarktgIntDescEN}" key="{Suffix>Suffix}"
 										additionalText=""/>
-									<!--{MarktgIntDescEN}  -->
+									<!--{MarktgIntDescEN , MarketingTrimInteriorDescEN}  -->
 								</ComboBox>
 								<!--{SuffixDescriptionEN}- -->
 								<!--<Select id="VLSSuffix" change="onVlsMoSuffix" width="90%" forceSelection="true" class="sapUiSizeCompact VLSSSelectSuffix" items="{}">

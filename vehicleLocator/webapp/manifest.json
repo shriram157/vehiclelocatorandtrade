@@ -9,14 +9,7 @@
 		},
 		
 		"dataSources": {
-						"mainService": {
-				"uri": "/vehicleLocatorNode/sap/opu/odata/sap/Z_VEHICLE_CATALOGUE_SRV/",
-				"type": "OData",
-				"settings": {
-					"odataVersion": "2.0",
-					"localUri": "localService/metadata.xml"
-				}
-			}
+					
 		},
 
 		"title": "{{appTitle}}",
@@ -51,7 +44,7 @@
 
 	"sap.ui5": {
 		"rootView": {
-			"viewName": "vehicleLocator.view.View1",
+			"viewName": "vehicleLocator.view.VehicleLocSearch",
 			"type": "XML"
 		},
 		"dependencies": {
@@ -86,14 +79,15 @@
 				"async": true,
 				"viewPath": "vehicleLocator.view",
 				"controlId": "idAppControl",
-				"controlAggregation": "pages"
+				"controlAggregation": "pages",
+				"transition":"flip"
 			},
 			"routes": [{
 				"pattern": "",
 				"name": "VehicleLocSearch",
 				"target": "VehicleLocSearch"
 			}, {
-				"pattern": "VehicleSearcResults",
+			  	"pattern": "VehicleSearcResults",
 				"name": "VehicleSearcResults",
 				"target": "VehicleSearcResults"
 			}, {

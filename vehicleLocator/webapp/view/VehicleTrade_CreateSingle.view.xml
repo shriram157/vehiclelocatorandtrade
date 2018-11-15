@@ -28,7 +28,7 @@
 					</Toolbar>
 					<VBox class="sapUiSmallMargin">
 						<OverflowToolbar id="otb1">
-							<Label text="Create Trade Request" width="200px" class="vHlabe1clss"/>
+							<Label text="{i18n>CreateTradeRequest}" width="200px" class="vHlabe1clss"/>
 							<ToolbarSpacer/>
 						</OverflowToolbar>
 						<!--<OverflowToolbar id="otb1" height="30px">
@@ -37,49 +37,49 @@
 						<form:SimpleForm id="SimpleFormDispla20" editable="true" layout="ResponsiveGridLayout" labelSpanM="12" adjustLabelSpan="false"
 							emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2">
 							<form:content>
-								<core:Title text="Requested Vehicle Information"/>
-								<Label text="Dealer"/>
+								<core:Title text="{i18n>RequestedVehicleInformation}"/>
+								<Label text="{i18n>Dealer}"/>
 								<Text text="01033-Sunrise Toyota"/>
-								<Label text="Model Year"/>
+								<Label text="{i18n>ModelYear}"/>
 								<Text text=""/>
-								<Label text="Series"/>
+								<Label text="{i18n>Series}"/>
 								<Text text=""/>
-								<Label text="Model"/>
+								<Label text="{i18n>Model}"/>
 								<Text text=""/>
-								<Label text="Suffix"/>
+								<Label text="{i18n>Suffix}"/>
 								<Text text=""/>
-								<Label text="APX"/>
+								<Label text="{i18n>APX}"/>
 								<Text text=""/>
-								<Label text="Exterior Color"/>
+								<Label text="{i18n>ExteriorColor}"/>
 								<Text text=""/>
-								<core:Title text="Other Vehicle Information"/>
-								<Label text="Vehicle Tracking Number"/>
+								<core:Title text="{i18n>OtherVehicleInformation}"/>
+								<Label text="{i18n>VehicleTrackingNumber}"/>
 								<Text text="TCIL33845639701"/>
-								<Label text="Model Year"/>
+								<Label text="{i18n>ModelYear}"/>
 								<Text text=""/>
-								<Label text="Series"/>
+								<Label text="{i18n>Series}"/>
 								<Text text=""/>
-								<Label text="Model"/>
+								<Label text="{i18n>Model}"/>
 								<Text text=""/>
-								<Label text="Suffix"/>
+								<Label text="{i18n>Suffix}"/>
 								<Text text=""/>
-								<Label text="APX"/>
+								<Label text="{i18n>APX}"/>
 								<Text text=""/>
-								<Label text="Exterior Color"/>
+								<Label text="{i18n>ExteriorColor}"/>
 								<Text text=""/>
-								<core:Title text="Trade Details"/>
-								<Label text="Trade in Return"/>
+								<core:Title text="{i18n>TradeDetails}"/>
+								<Label text="{i18n>TradeinReturn}"/>
 								<Select id="VT_CStradinRet" change="onVTCStir" width="220px" forceSelection="true" class="sapUiSizeCompact VT_CSstr" items="{}">
 									<core:ListItem key="{}" text="{jsonDatamodel>Status}"/>
 								</Select>
-								<Button text="Select Vehicle" press="onSelecveh">
+								<Button text="{i18n>SelectVehicle}" press="onSelecveh">
 									<layoutData>
 										<l:GridData span="L3 M12 S3"/>
 									</layoutData>
 								</Button>
-								<Label text="Trade Request Status"/>
+								<Label text="{i18n>TradeRequestStatus}"/>
 								<Text text="Request Sent"/>
-								<Label text="Comments"/>
+								<Label text="{i18n>Comments}"/>
 								<TextArea id="TypeHere" value=" " width="387px" height="100px"/>
 							</form:content>
 						</form:SimpleForm>
@@ -88,7 +88,7 @@
 				<footer>
 					<Bar>
 						<contentRight>
-							<Button text="Request" type="Reject" width="130px" press="onReqVT"/>
+							<Button text="{i18n>Request}" type="Reject" width="130px" press="onReqVT"/>
 						</contentRight>
 					</Bar>
 				</footer>
