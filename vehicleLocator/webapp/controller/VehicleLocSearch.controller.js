@@ -14,34 +14,34 @@ sap.ui.define([
 		onInit: function () {
 			debugger;
 			var isLocaleSent = window.location.search.match(/language=([^&]*)/i);
-            if (isLocaleSent) {
-                var sSelectedLocale = window.location.search.match(/language=([^&]*)/i)[1];
-            } else {
-                var sSelectedLocale = "EN"; // default is english 
-            }
-            //selected language. 
-            // if (window.location.search == "?language=fr") {
-            if (sSelectedLocale == "fr") {
-                var i18nModel = new sap.ui.model.resource.ResourceModel({
-                    bundleUrl: "i18n/i18n.properties",
-                    bundleLocale: ("fr")
-                });
-                this.getView().setModel(i18nModel, "i18n");
-                this.sCurrentLocale = 'FR';
-                // set the right image for logo  - french       
-                /*              var currentImageSource = this.getView().byId("idLexusLogo");
-                                currentImageSource.setProperty("src", "images/Lexus_FR.png");*/
-            } else {
-                var i18nModel = new sap.ui.model.resource.ResourceModel({
-                    bundleUrl: "i18n/i18n.properties",
-                    bundleLocale: ("en")
-                });
-                this.getView().setModel(i18nModel, "i18n");
-                this.sCurrentLocale = 'EN';
-                // set the right image for logo         
-                /*              var currentImageSource = this.getView().byId("idLexusLogo");
-                                currentImageSource.setProperty("src", "images/Lexus_EN.png");*/
-            }
+			if (isLocaleSent) {
+				var sSelectedLocale = window.location.search.match(/language=([^&]*)/i)[1];
+			} else {
+				var sSelectedLocale = "EN"; // default is english 
+			}
+			//selected language. 
+			// if (window.location.search == "?language=fr") {
+			if (sSelectedLocale == "fr") {
+				var i18nModel = new sap.ui.model.resource.ResourceModel({
+					bundleUrl: "i18n/i18n.properties",
+					bundleLocale: ("fr")
+				});
+				this.getView().setModel(i18nModel, "i18n");
+				this.sCurrentLocale = 'FR';
+				// set the right image for logo  - french       
+				/*              var currentImageSource = this.getView().byId("idLexusLogo");
+				                currentImageSource.setProperty("src", "images/Lexus_FR.png");*/
+			} else {
+				var i18nModel = new sap.ui.model.resource.ResourceModel({
+					bundleUrl: "i18n/i18n.properties",
+					bundleLocale: ("en")
+				});
+				this.getView().setModel(i18nModel, "i18n");
+				this.sCurrentLocale = 'EN';
+				// set the right image for logo         
+				/*              var currentImageSource = this.getView().byId("idLexusLogo");
+				                currentImageSource.setProperty("src", "images/Lexus_EN.png");*/
+			}
 
 			this.getView().byId("SeriesCmbo").setFilterFunction(function (sTerm, oItem) {
 				// A case-insensitive 'string contains' filter
@@ -249,7 +249,7 @@ sap.ui.define([
 				async: true,
 				success: function (result) {}
 			});
-			var Suffix =that.oDataUrl + "/zc_configuration"
+			var Suffix = that.oDataUrl + "/zc_configuration"
 			var ajax3 = $.ajax({
 				dataType: "json",
 				xhrFields: //
@@ -266,7 +266,7 @@ sap.ui.define([
 				async: true,
 				success: function (result) {}
 			});
-var SuffixInteriorDesc =  that.oDataUrl + "/zc_exterior_trim"
+			var SuffixInteriorDesc = that.oDataUrl + "/zc_exterior_trim"
 			var ajax4 = $.ajax({
 				dataType: "json",
 				xhrFields: //
@@ -301,7 +301,7 @@ var SuffixInteriorDesc =  that.oDataUrl + "/zc_exterior_trim"
 				var SuffixModel = new sap.ui.model.json.JSONModel(Suffix)
 				sap.ui.getCore().setModel(SuffixModel, "SuffixModel");
 				/*	that.BusyDialog.close();*/
-sap.ui.core.BusyIndicator.hide();
+				sap.ui.core.BusyIndicator.hide();
 			});
 			var a = new Date();
 
@@ -517,7 +517,7 @@ sap.ui.core.BusyIndicator.hide();
 				oResults = new Array();
 				for (var key in obj)
 					oResults.push(obj[key]);
-					
+
 				/*	oResults.Modelyear;
 					oResults.TCISeries;
 					oResults.Model;
@@ -794,18 +794,19 @@ sap.ui.core.BusyIndicator.hide();
 		},
 
 		onSePress: function () {
+			debugger
 
 			var that = this;
 			var MoyearCombo = that.getView().byId("MoyearCombo").getSelectedKey();
 			var SeriesCmbo = that.getView().byId("SeriesCmbo").getSelectedKey();
-		//	var oSeries = that.getView().byId("SeriesCmbo").getSelectedKey();
+			//	var oSeries = that.getView().byId("SeriesCmbo").getSelectedKey();
 			var McCmbo = that.getView().byId("McCmbo").getSelectedKey();
-		//	var oMcCmbo  = that.getView().byId("McCmbo").getSelectedKey();
+			//	var oMcCmbo  = that.getView().byId("McCmbo").getSelectedKey();
 			var SuffCmbo = that.getView().byId("SuffCmbo").getSelectedKey();
-		//	var suffix = that.getView().byId("SuffCmbo").getSelectedKey();
-			
+			//	var suffix = that.getView().byId("SuffCmbo").getSelectedKey();
+
 			/*var vZone = that.getView().byId("Pacific").getSelected();*/
-			
+
 			if (MoyearCombo == "" || MoyearCombo == undefined || MoyearCombo == null) {
 				//	sap.m.MessageBox.error("Please select ModelYear");
 				that.getView().byId("MoyearCombo").setValueState("Error");
@@ -866,84 +867,88 @@ sap.ui.core.BusyIndicator.hide();
 				that.getView().byId("SeriesErrMsgStrip").setProperty("visible", false);
 
 			}
-			
+
 			function validateVin(vin) {
-			var re = new RegExp("^[A-HJ-NPR-Z\\d]{8}[\\dX][A-HJ-NPR-Z\\d]{2}\\d{6}$");
-			return vin.match(re);
+				var re = new RegExp("^[A-HJ-NPR-Z\\d]{8}[\\dX][A-HJ-NPR-Z\\d]{2}\\d{6}$");
+				return vin.match(re);
 			}
+
+			/*	this.getRouter().navTo("VehicleSearcResults");*/
+			/*, {
+			     from: "VehicleLocSearch",
+				 moyearc : MoyearCombo,
+				 Seriesco: SeriesCmbo,
+				 modelcomb: McCmbo,
+				 suffixcom: SuffCmbo
+
+			}*/
+			var SelectedZone = [];
+			var obj = {};
+			if (that.getView().byId("Pacific").getSelected() == true) {
+				obj.moyearc = MoyearCombo;
+				obj.Seriesco = SeriesCmbo;
+				obj.modelcomb = McCmbo;
+				obj.suffixcom = SuffCmbo;
+				obj.Zone = that.getView().byId("Pacific").getProperty("text");
+				SelectedZone.push(obj)
+			}
+			if (that.getView().byId("Prairie").getSelected() == true) {
+				obj.moyearc = MoyearCombo;
+				obj.Seriesco = SeriesCmbo;
+				obj.modelcomb = McCmbo;
+				obj.suffixcom = SuffCmbo;
+				obj.Zone = that.getView().byId("Prairie").getProperty("text");
+				SelectedZone.push(obj)
+			}
+			if (that.getView().byId("Central").getSelected() == true) {
+				obj.moyearc = MoyearCombo;
+				obj.Seriesco = SeriesCmbo;
+				obj.modelcomb = McCmbo;
+				obj.suffixcom = SuffCmbo;
+				obj.Zone = that.getView().byId("Central").getProperty("text");
+				SelectedZone.push(obj)
+			}
+			if (that.getView().byId("Quebec").getSelected() == true) {
+				obj.moyearc = MoyearCombo;
+				obj.Seriesco = SeriesCmbo;
+				obj.modelcomb = McCmbo;
+				obj.suffixcom = SuffCmbo;
+				obj.Zone = that.getView().byId("Quebec").getProperty("text");
+				SelectedZone.push(obj)
+			}
+			if (that.getView().byId("Atlantic").getSelected() == true) {
+				var obj1 = {};
+				obj1.moyearc = MoyearCombo;
+				obj1.Seriesco = SeriesCmbo;
+				obj1.modelcomb = McCmbo;
+				obj1.suffixcom = SuffCmbo;
+				obj1.Zone = that.getView().byId("Atlantic").getProperty("text");
+			
+				SelectedZone.push(obj1)
+			}
+			/*this.getRouter().navTo("VehicleSearcResults");*/
+
+			this.getRouter().navTo("VehicleSearcResults" 
+			/*	Details: JSON.stringify(obj)*/
+			);
+
+			/*	this.getRouter().navTo("VehicleSearcResults"{
+		 obj : SelectedZone[];
 		
-		/*	this.getRouter().navTo("VehicleSearcResults");*/
-		/*, {
-		     from: "VehicleLocSearch",
+			
+		});*/
+
+			/*from: "VehicleLocSearch",
 			 moyearc : MoyearCombo,
 			 Seriesco: SeriesCmbo,
 			 modelcomb: McCmbo,
-			 suffixcom: SuffCmbo
+			 suffixcom: SuffCmbo*/
 
-		}*/
-	 var SelectedZone=[];
-	 var obj={};
-		if(that.getView().byId("Pacific").getSelected() ==true){
-			obj.moyearc = MoyearCombo;
-				obj.Seriesco= SeriesCmbo;
-				obj.modelcomb=McCmbo;
-			 obj.suffixcom=SuffCmbo;
-			 obj.Zone=that.getView().byId("Pacific").getProperty("text");
-			 	SelectedZone.push(obj)
-		}
-		if(that.getView().byId("Prairie").getSelected() ==true){
-			obj.moyearc = MoyearCombo;
-				obj.Seriesco= SeriesCmbo;
-				obj.modelcomb=McCmbo;
-			 obj.suffixcom=SuffCmbo;
-			 obj.Zone=that.getView().byId("Prairie").getProperty("text");
-			 SelectedZone.push(obj)
-		}
-		if(that.getView().byId("Central").getSelected() ==true){
-			obj.moyearc = MoyearCombo;
-				obj.Seriesco= SeriesCmbo;
-				obj.modelcomb=McCmbo;
-			 obj.suffixcom=SuffCmbo;
-			 obj.Zone=that.getView().byId("Central").getProperty("text");
-			 SelectedZone.push(obj)
-		}
-		if(that.getView().byId("Quebec").getSelected() ==true){
-			obj.moyearc = MoyearCombo;
-			obj.Seriesco= SeriesCmbo;
-			obj.modelcomb=McCmbo;
-			 obj.suffixcom=SuffCmbo;
-			 obj.Zone=that.getView().byId("Quebec").getProperty("text");
-			 SelectedZone.push(obj)
-		}
-			if(that.getView().byId("Atlantic").getSelected() ==true){
-			obj.moyearc = MoyearCombo;
-			obj.Seriesco= SeriesCmbo;
-			obj.modelcomb=McCmbo;
-			 obj.suffixcom=SuffCmbo;
-			 obj.Zone=that.getView().byId("Atlantic").getProperty("text");
-			 SelectedZone.push(obj)
-		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	//	that.getView().byId("Atlantic").getSelected() == false	
-			
-			
-			
-			
-			
-			
-			this.getRouter().navTo("VehicleSearcResults");
-		   /* var object = {};*/	
-			
-			
+			//	that.getView().byId("Atlantic").getSelected() == false	
+
+			/*	this.getRouter().navTo("VehicleSearcResults");*/
+			/* var object = {};*/
+
 		},
 		handleSeriesChange: function (oEvent) {
 			var that = this;

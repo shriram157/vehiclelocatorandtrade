@@ -10,6 +10,20 @@
 .clCustomFont {
     font-family: 'Satisfy', cursive;
 }*/
+.link { color: #FF0000; } 
+.link:hover { color:#FF0000 !important; } 
+
+
+.columnLabelStyle {
+  cursor: pointer !important;
+}
+
+.tableStyle .sapMListTblHeader {
+  cursor: pointer;
+}
+
+
+
 
 .sapContrastPlus.clCustomHeaderBg {
     background-color: #fff!important;
@@ -217,3 +231,23 @@
     height: 3rem;
     line-height: 3rem;
 }/* Enter your custom styles here */
+/* VehicleSearcHResutls table  Column hilight*/
+/*.oVSRTableColumns:active
+{
+  background-color: yellow;	
+}*/
+.oVSRTableColumns.sapFactsheetUtiLabel, .sapMListTbl .sapMLabel:active {
+ background-color: yellow;		
+}
+/*removing space in fragmennt in vehiclesearchresults*/
+oRespover.sapMBar sapMBar-CTX sapMContent-CTX sapMHeader-CTX sapMIBar sapMIBar-CTX {
+    
+     height: 0rem;	
+}
+
+
+
+
+
+
+

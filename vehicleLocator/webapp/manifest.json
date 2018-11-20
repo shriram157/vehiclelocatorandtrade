@@ -87,7 +87,7 @@
 				"name": "VehicleLocSearch",
 				"target": "VehicleLocSearch"
 			}, {
-			  	"pattern": "VehicleSearcResults",
+			  	"pattern": "VehicleSearcResults/{Detai",
 				"name": "VehicleSearcResults",
 				"target": "VehicleSearcResults"
 			}, {

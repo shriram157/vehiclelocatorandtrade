@@ -1,0 +1,33 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<ResponsivePopover placement="Bottom" afterOpen="onOpen">
+		<content>
+			<List>
+				<items>
+					<CustomListItem type="Active" press="onAscending" class="oFragmentvsr">
+						<HBox alignItems="Center" justifyContent="Center" class="HBoxStyle">
+							<core:Icon src="sap-icon://sort-ascending" width="" size="1.3em"/>
+							<Label text="Sort Ascending"/>
+						</HBox>
+					</CustomListItem>
+					<CustomListItem type="Active" press="onDescending">
+						<HBox alignItems="Center" justifyContent="Center" class="HBoxStyle">
+						<!--	<HBox>
+								<Label text="{i18n>Model}"/>
+								<core:Icon src="sap-icon://sort-ascending" width="" id="moAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="true"/>
+								<core:Icon src="sap-icon://sort-descending" width="" id="moDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
+							</HBox>-->
+								<core:Icon src="sap-icon://sort-descending" width="" size="1.3em"/>
+							<Label text="Sort Descending" class="sapUiTinyMarginBegin"/>
+						</HBox>
+					</CustomListItem>
+					<CustomListItem visible="false">
+						<HBox alignItems="Center" justifyContent="Center" class="HBoxStyle">
+							<Label text="Filter :"/>
+							<Input width="90%" change="onChange"/>
+						</HBox>
+					</CustomListItem>
+				</items>
+			</List>
+		</content>
+	</ResponsivePopover>
+</core:FragmentDefinition>
