@@ -151,49 +151,19 @@
 							<!--</form:content>
 							</form:SimpleForm>
 							</VBox>-->
-							<Table id="table1VSR" width="auto" class="sapUiResponsiveMargin tableStyle" items="{path : 'VehicleLocatorScdScr>/VehicleTrade',
-  sorter: [{
-        path: 'ZZSUFFIX', 
-        descending: false
-    }, {
-        path: 'ZZEXTCOL', 
-        descending: false
-    },{
-        path: 'ZZAPX', 
-        descending: false
-    },{
-        path: 'ZZORDERTYPE', 
-        descending: false
-    },
-    {
-        path: 'ZZADDDATA4', 
-        descending: false
-    },
-    {
-        path: 'PSTSP', 
-        descending: false
-    },
-    {
-        path: 'Z_PD_FLAG', 
-        descending: false
-    }]}"
-							
-							
-							growing="true"
-								growingThreshold="10" growingScrollToLoad="false">
+							<Table id="table1VSR" width="auto" mode="MultiSelect" class="sapUiResponsiveMargin tableStyle Resptable"
+								items="{path : 'VehicleLocatorScdScr>/VehicleTrade', sorter: [{ path: 'MATNR', descending: false },{ path: 'ZZSUFFIX', descending: false }, { path: 'ZZEXTCOL', descending: false },{ path: 'ZZAPX', descending: false },{ path: 'ZZORDERTYPE', descending: false }, { path: 'ZZADDDATA4', descending: false }, { path: 'PSTSP', descending: false }, { path: 'Z_PD_FLAG', descending: false }]}"
+								growingScrollToLoad="false">
 								<columns>
 									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
 										<Label text="{i18n>Trade}"/>
 									</Column>
-									<!--<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Begin">
-										<Text text=""/>
-									</Column>-->
 									<Column minScreenWidth="Desktop" demandPopin="true">
-										<Label text="{i18n>Dealer}" class="oVSRTableColumns"/>
+										<Label text="{i18n>Dealer}"/>
 									</Column>
-									<Column minScreenWidth="Desktop" demandPopin="true" class="columnLabelStyle">
+									<Column minScreenWidth="Desktop" demandPopin="true" class="columnLabelStyle oVSRTableColumns">
 										<HBox>
-											<Label text="{i18n>Model}"/>
+											<Label text="{i18n>Model}" class="oVSRTableColumns"/>
 											<core:Icon src="sap-icon://sort-ascending" width="" id="moAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="true"/>
 											<core:Icon src="sap-icon://sort-descending" width="" id="moDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
 										</HBox>
@@ -201,49 +171,49 @@
 									<Column minScreenWidth="Desktop" demandPopin="true" class="columnLabelStyle">
 										<HBox>
 											<Label text="{i18n>Color}"/>
-											<core:Icon src="sap-icon://sort-ascending" width="" id="coAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="true"/>
+											<core:Icon src="sap-icon://sort-ascending" width="" id="coAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
 											<core:Icon src="sap-icon://sort-descending" width="" id="coDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
 										</HBox>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true" class="columnLabelStyle">
 										<HBox>
 											<Label text="{i18n>Suffix}"/>
-											<core:Icon src="sap-icon://sort-ascending" width="" id="suAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="true"/>
+											<core:Icon src="sap-icon://sort-ascending" width="" id="suAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
 											<core:Icon src="sap-icon://sort-descending" width="" id="suDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
 										</HBox>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true" class="columnLabelStyle">
 										<HBox>
 											<Label text="{i18n>APX}"/>
-											<core:Icon src="sap-icon://sort-ascending" width="" id="apAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="true"/>
+											<core:Icon src="sap-icon://sort-ascending" width="" id="apAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
 											<core:Icon src="sap-icon://sort-descending" width="" id="apDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
 										</HBox>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true" class="columnLabelStyle">
 										<HBox>
 											<Label text="{i18n>OrderType}"/>
-											<core:Icon src="sap-icon://sort-ascending" width="" id="otAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="true"/>
+											<core:Icon src="sap-icon://sort-ascending" width="" id="otAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
 											<core:Icon src="sap-icon://sort-descending" width="" id="otDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
 										</HBox>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true" class="columnLabelStyle">
 										<HBox>
 											<Label text="{i18n>ETAFrom}"/>
-											<core:Icon src="sap-icon://sort-ascending" width="" id="etfAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="true"/>
+											<core:Icon src="sap-icon://sort-ascending" width="" id="etfAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
 											<core:Icon src="sap-icon://sort-descending" width="" id="etfDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
 										</HBox>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true" class="columnLabelStyle">
 										<HBox>
 											<Label text="{i18n>ETATo}"/>
-											<core:Icon src="sap-icon://sort-ascending" width="" id="ettAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="true"/>
+											<core:Icon src="sap-icon://sort-ascending" width="" id="ettAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
 											<core:Icon src="sap-icon://sort-descending" width="" id="ettDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
 										</HBox>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true" class="columnLabelStyle">
 										<HBox>
 											<Label text="{i18n>AccessoryInstall}"/>
-											<core:Icon src="sap-icon://sort-ascending" width="" id="aiAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="true"/>
+											<core:Icon src="sap-icon://sort-ascending" width="" id="aiAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
 											<core:Icon src="sap-icon://sort-descending" width="" id="aiDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
 										</HBox>
 									</Column>
@@ -259,7 +229,6 @@
 										<cells>
 											<HBox class="sapUiMediumMarginBegin">
 												<Link id="tradeId" text="Trade" class="sapUiSmallMarginTop link" subtle="true" press="oTradeLinkPress"/>
-												<CheckBox class="sapUiLargeMarginBottom"/>
 											</HBox>
 											<Text text="{VehicleLocatorScdScr>KUNNR} - {VehicleLocatorScdScr>NAME1}" class="sapUiSmallMarginTop"/>
 											<Text text="{VehicleLocatorScdScr>MATNR} - {VehicleLocatorScdScr>MODEL_DESC_EN}" class="sapUiSmallMarginTop"/>
@@ -328,6 +297,9 @@
 						</l:HorizontalLayout>
 					</VBox>-->
 					</VBox>
+					<FlexBox height="100px" id="PaginationFlexId" alignItems="Center" justifyContent="End">
+						<items></items>
+					</FlexBox>
 				</content>
 				<!--	<footer>
 						<OverflowToolbar id="otbFooter">

@@ -19,7 +19,7 @@
 				<content>
 					<Toolbar class="toolbar1">
 						<ToolbarSpacer></ToolbarSpacer>
-					<!--	<Button text="Vehicle Locator" press="handleLinkPress"/>
+						<!--	<Button text="Vehicle Locator" press="handleLinkPress"/>
 						<Button text="Sold Order" press="handleLinkPress"/>
 						<Button text="Price Protection" press="handleLinkPress"/>
 						<Button text="Inventory Summary" press="handleLinkPress"/>
@@ -27,7 +27,7 @@
 					</Toolbar>
 					<VBox>
 						<OverflowToolbar id="otb1">
-							<Label text="{i18n>VehicleTrade-VehicleSelection}" width="200px" class="vHlabe1clss"/>
+							<Label text="{i18n>VehicleTrade-VehicleSelection}" width="310px" class="vHlabe1clss"/>
 							<ToolbarSpacer/>
 						</OverflowToolbar>
 						<VBox>
@@ -36,10 +36,12 @@
 								<FlexBox height="100px" alignItems="Center" justifyContent="Center">
 									<Label text="{i18n>Series}"/>
 									<FlexBox width="7px"></FlexBox>
-								<Select id="VT_VSeries" change="onVTVSseries" width="215px" forceSelection="true" class="sapUiSizeCompact VT_VSseries" items="{}">
-									<core:ListItem key="{}" text="{jsonDatamodel>Status}"/>
-								</Select>	
-								<!--	<SearchField width="215px" id="idVehclSerTrad"/>-->
+									<ComboBox placeholder="" width="140%" showSecondaryValues="true" filterSecondaryValues="true" selectionChange="handleoVt_SeriesChange"
+										id="oVt_SeriesCmbo" items="{/}">
+										<core:ListItem text="{TCISeries} {TCISeriesDescriptionEN}" key="{TCISeries}" additionalText=""/>
+										<!--	<core:ListItem   text="{TCISeriesDescriptionEN}"      key="{TCISeriesDescriptionEN}"  additionalText =""/>-->
+									</ComboBox>
+									<!--	<SearchField width="215px" id="idVehclSerTrad"/>-->
 								</FlexBox>
 							</HBox>
 							<Table id="table" width="auto" class="sapUiResponsiveMargin" items="{/}" growingThreshold="150">
@@ -48,46 +50,92 @@
 										<Text text="{i18n>Select}"/>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
-										<Text text="{i18n>VehicleTrackingNumber}"/>
+										<HBox>
+											<Text text="{i18n>VehicleTrackingNumber}"/>
+										<!--	<core:Icon src="sap-icon://sort-ascending" width="" id="vtnAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="true" />
+											<core:Icon src="sap-icon://sort-descending" width="" id="vtnDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>-->
+										</HBox>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
-										<Text text="{i18n>Series}"/>
+										<HBox>
+											<Text text="{i18n>Series}"/>
+										<!--	<core:Icon src="sap-icon://sort-ascending" width="" id="senAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="true"/>
+											<core:Icon src="sap-icon://sort-descending" width="" id="senDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>-->
+										</HBox>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
-										<Text text="{i18n>Model}"/>
+										<HBox>
+											<Text text="{i18n>Model}"/>
+										<!--	<core:Icon src="sap-icon://sort-ascending" width="" id="moaAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="true"/>
+											<core:Icon src="sap-icon://sort-descending" width="" id="moaDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>-->
+										</HBox>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
-										<Text text="{i18n>Suffix}"/>
+										<HBox>
+											<Text text="{i18n>Suffix}"/>
+										<!--	<core:Icon src="sap-icon://sort-ascending" width="" id="suAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="true"/>
+											<core:Icon src="sap-icon://sort-descending" width="" id="suDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>-->
+										</HBox>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
-										<Text text="{i18n>APX}"/>
+										<HBox>
+											<Text text="{i18n>APX}"/>
+										<!--	<core:Icon src="sap-icon://sort-ascending" width="" id="ApsAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="true"/>
+											<core:Icon src="sap-icon://sort-descending" width="" id="ApxsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>-->
+										</HBox>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
-										<Text text="{i18n>Color}"/>
+										<HBox>
+											<Text text="{i18n>Color}"/>
+										<!--	<core:Icon src="sap-icon://sort-ascending" width="" id="coAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="true"/>
+											<core:Icon src="sap-icon://sort-descending" width="" id="coDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>-->
+										</HBox>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
+										<HBox>
 										<Text text="{i18n>Status}"/>
+									<!--	<core:Icon src="sap-icon://sort-ascending" width="" id="staAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="true"/>
+											<core:Icon src="sap-icon://sort-descending" width="" id="stDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>-->
+										</HBox>	
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
+										<HBox>
 										<Text text="{i18n>ETAFrom}"/>
+								<!--	<core:Icon src="sap-icon://sort-ascending" width="" id="etfAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="true"/>
+											<core:Icon src="sap-icon://sort-descending" width="" id="etsDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>-->
+										</HBox>		
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
+										<HBox>
 										<Text text="{i18n>ETATo}"/>
+									<!--	<core:Icon src="sap-icon://sort-ascending" width="" id="etofAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="true"/>
+											<core:Icon src="sap-icon://sort-descending" width="" id="etssDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>-->
+										</HBox>		
+									</Column>
+									<Column minScreenWidth="Desktop" demandPopin="true" visible="false">
+										<HBox>
+										<Text text="{i18n>Year}"/>
+									<!--	<core:Icon src="sap-icon://sort-ascending" width="" id="eyeAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="true"/>
+											<core:Icon src="sap-icon://sort-descending" width="" id="yessDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>-->
+										</HBox>		
 									</Column>
 								</columns>
 								<items>
-									<ColumnListItem press="onLineItemPressedtree1" type="Navigation">
+									<ColumnListItem press="onLineItemPressedtree1" type="Active">
 										<cells>
-											<ObjectIdentifier title="{}"/>
-											<Text text="{}"/>
-											<Text text="{}"/>
-											<Text text="{}"/>
-											<Text text="{}"/>
-											<Text text="{}"/>
-											<Text text="{}"/>
-											<Text text="{}"/>
-											<Text text="{}"/>
-											<Text text="{}"/>
+											<HBox class="sapUiMediumMarginBegin">
+												<Link id="oSelectId" text="Select" class="sapUiSmallMarginTop link" subtle="true" press="onSelectLink"/>
+											</HBox>
+											<Text text="{ZZVTN}"/>
+											<Text text="{TCISeries}{TCISeriesDescriptionEN}"/>
+											<Text text="{Model}-{ENModelDesc}"/>
+											<Text text="{Suffix}-{SuffixDescriptionEN}"/>
+											<Text text="{ZZAPX}"/>
+											<Text text="{ZZEXTCOL}-{MKTG_DESC_EN}"/>
+											<Text text="{ZZORDERTYPE}"/>
+											<Text text="{ZZADDDATA4}"/>
+											<Text text="{PSTSP}"/>
+											<Text text="{Year}"/>
 										</cells>
 									</ColumnListItem>
 								</items>

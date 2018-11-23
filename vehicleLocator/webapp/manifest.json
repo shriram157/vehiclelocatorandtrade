@@ -87,11 +87,11 @@
 				"name": "VehicleLocSearch",
 				"target": "VehicleLocSearch"
 			}, {
-			  	"pattern": "VehicleSearcResults/{Detai",
+			  	"pattern": "VehicleSearcResults",
 				"name": "VehicleSearcResults",
 				"target": "VehicleSearcResults"
 			}, {
-				"pattern": "VehicleTrade_CreateSingle",
+				"pattern": "VehicleTrade_CreateSingle/:SelectedTrade:",
 				"name": "VehicleTrade_CreateSingle",
 				"target": "VehicleTrade_CreateSingle"
 			}, {
