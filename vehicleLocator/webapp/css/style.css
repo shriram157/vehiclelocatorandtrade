@@ -12,15 +12,17 @@
     font-family: 'Satisfy', cursive;
 }*/
 
-.margin{
-                     margin-top: 1rem;
-             }
-             .cursor{
-                     cursor: pointer;
-             }
-             .textAlign{
-                 text-align:center;
-             }
+.margin {
+    margin-top: 1rem;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.textAlign {
+    text-align: center;
+}
 
 .link {
     color: #FF0000;
@@ -269,11 +271,14 @@
   background-color: yellow;	
 }*/
 
+
 /*.columnLabelStyle oVSRTableColumns.sapFactsheetUtiLabel,
 .sapMListTbl .sapMLabel:active {
     background-color: yellow;
 }
 */
+
+
 /*.oVSRTableColumns:checked + .oVSRTableColumns{
 	background-color: yellow;
 	
@@ -287,19 +292,20 @@ oRespover.sapMBar sapMBar-CTX sapMContent-CTX sapMHeader-CTX sapMIBar sapMIBar-C
 }
 
 .Resptable .sapMCbBg {
-   
     left: 8.8125rem !important;
 }
+
 * {
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-touch-callout: none;
     -webkit-text-size-adjust: none;
     -ms-text-size-adjust: none;
 }
-user agent stylesheet
-div {
+
+user agent stylesheet div {
     display: block;
 }
+
 .sapMCb {
     display: inline-block;
     position: relative;
@@ -312,95 +318,117 @@ div {
     padding: 0 0 0 3rem;
     cursor: default;
 }
+
 * {
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-touch-callout: none;
     -webkit-text-size-adjust: none;
     -ms-text-size-adjust: none;
 }
+
 * {
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-touch-callout: none;
     -webkit-text-size-adjust: none;
     -ms-text-size-adjust: none;
 }
-user agent stylesheet
-th {
+
+user agent stylesheet th {
     font-weight: bold;
     text-align: -internal-center;
 }
+
 .tableStyle .sapMListTblHeader {
     cursor: pointer;
 }
+
 .tableStyle .sapMListTblHeader {
     cursor: pointer;
 }
+
 * {
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-touch-callout: none;
     -webkit-text-size-adjust: none;
     -ms-text-size-adjust: none;
 }
+
 * {
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-touch-callout: none;
     -webkit-text-size-adjust: none;
     -ms-text-size-adjust: none;
 }
+
 .sapMListTbl {
     font-size: 0.875rem;
 }
+
 .sapMListTbl {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
     table-layout: fixed;
 }
+
 .sapMListUl {
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
+
 * {
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-touch-callout: none;
     -webkit-text-size-adjust: none;
     -ms-text-size-adjust: none;
 }
-user agent stylesheet
-table {
+
+user agent stylesheet table {
     display: table;
     border-collapse: separate;
     border-spacing: 2px;
     border-color: grey;
 }
+
 * {
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-touch-callout: none;
     -webkit-text-size-adjust: none;
     -ms-text-size-adjust: none;
 }
+
 * {
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-touch-callout: none;
     -webkit-text-size-adjust: none;
     -ms-text-size-adjust: none;
 }
+
 * {
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-touch-callout: none;
     -webkit-text-size-adjust: none;
     -ms-text-size-adjust: none;
 }
+
 * {
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-touch-callout: none;
     -webkit-text-size-adjust: none;
     -ms-text-size-adjust: none;
 }
+
 * {
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-touch-callout: none;
     -webkit-text-size-adjust: none;
     -ms-text-size-adjust: none;
 }
+/*/ serach results table css/*/
+.customStyleBox .sapMPanel {	margin: 0 0.5rem 0.5rem !important;}
+.customStyleBox .sapMPanelWrappingDiv,.customStyleBox .sapMPanelWrappingDivTb {	background: #ebebeb;}
+.customStyleBox .sapMPanelBGTranslucent,.customStyleBox .sapMPanelWrappingDiv,.customStyleBox .sapMPanelWrappingDivTb {	border-bottom: none !important;}
+.customStyleBox .sapMPanelWrappingDivTb {	padding-bottom: 1rem !important;}
+.customStyleBox .sapMPanelWrappingDivTb .sapMCb {	height: 2rem !important;}
+.customStyleBox .sapMPanelExpandableIcon {	color: #ebebeb !important;	outline: none !important;}

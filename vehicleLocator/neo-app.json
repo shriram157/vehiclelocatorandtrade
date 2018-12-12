@@ -19,13 +19,21 @@
       },
       "description": "SAPUI5 Test Resources"
     },
-      {
+    {
       "path": "vehicleLocatorNode",
-        "target": {
-          "type": "destination",
-          "name": "vehicleLocatorNode"
-        },
-        "description":"vehicleLocator_node"
+      "target": {
+        "type": "destination",
+        "name": "vehicleLocatorNode"
+      },
+      "description": "vehicleLocator_node"
+    },
+    {
+      "path": "/VehicleLocator_Xsodata",
+      "target": {
+        "type": "destination",
+        "name": "VehicleLocator_Xsodata"
+      },
+      "description": "vehicle Locator Xsodata"
     }
   ],
   "sendWelcomeFileRedirect": true

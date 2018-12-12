@@ -9,10 +9,10 @@
 						<contentLeft>
 							<Image id="idLexusLogo" src="Images/Lexus.png" width="100px"/>
 							<Text text="|" class="sapUiTinyMarginBeginEnd"/>
-							<Text class="clCustomFont" text="Vehicle Locator-Trade"/>
+							<Text class="clCustomFont" text="{i18n>VehicleLocator-Trade}"/>
 						</contentLeft>
 						<contentRight>
-							<Button text="Logout"/>
+							<Button text="{i18n>Logout}"/>
 						</contentRight>
 					</Bar>
 				</customHeader>
@@ -29,36 +29,36 @@
 					</Toolbar>
 					<VBox>
 						<OverflowToolbar id="otb1" class="otbVT_Hist">
-							<Label text="Vehicle Trade History" width="200px" class="vHlabe1clss"/>
+							<Label text="{i18n>VehicleTradeHistory}" width="200px" class="vHlabe1clss"/>
 							<ToolbarSpacer/>
-							<Button id="openMenVTH" class="VLbtn3" text="Export to Excel" type="Accept" press="handlebacksearch" width="138px"/>
+							<Button id="openMenVTH" class="VLbtn3" text="{i18n>ExporttoExcel}" type="Accept" press="handlebacksearch" width="138px"/>
 						</OverflowToolbar>
 						<VBox>
 							<Table id="tableVTH" width="auto" class="sapUiResponsiveMargin" items="{/}" growingThreshold="150">
 								<columns>
 									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
-										<Text text="Request No"/>
+										<Text text="{i18n>equestNo}"/>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
-										<Text text="Status"/>
+										<Text text="{i18n>Status}"/>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
-										<Text text="From / To"/>
+										<Text text="{i18n>From/To}"/>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
-										<Text text="Dealer"/>
+										<Text text="{i18n>Dealer}"/>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
-										<Text text="Model"/>
+										<Text text="{i18n>Model}"/>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
-										<Text text="Suffix"/>
+										<Text text="{i18n>Suffix}"/>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
-										<Text text="APX"/>
+										<Text text="{i18n>APX}"/>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
-										<Text text="Exterior Colour"/>
+										<Text text="{i18n>ExteriorColour}"/>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
 										<Text text="Accepted"/>

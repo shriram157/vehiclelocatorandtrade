@@ -28,7 +28,7 @@
 					</Toolbar>
 					<VBox class="sapUiSmallMargin">
 						<OverflowToolbar id="otb1">
-							<Label text="Create Trade Request" width="200px" class="vHlabe1clss"/>
+							<Label text="{i18n>CreateTradeRequest}" width="200px" class="vHlabe1clss"/>
 							<ToolbarSpacer/>
 						</OverflowToolbar>
 					</VBox>
@@ -36,66 +36,66 @@
 						<form:SimpleForm id="SimpleFormDispl2a20" editable="true" layout="ResponsiveGridLayout" labelSpanM="12" adjustLabelSpan="false"
 							emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2">
 							<form:content>
-								<core:Title text="Requested Vehicle Information"/>
-								<Label text="Vehicle Tracking Number"/>
-								<Text text="01033-Sunrise Toyota"/>
-								<Label text="Model Year"/>
+								<core:Title text="{i18n>RequestedVehicleInformation}"/>
+								<Label text="{i18n>VehicleTrackingNumber}"/>
 								<Text text=""/>
-								<Label text="Series"/>
+								<Label text="{i18n>ModelYear}"/>
 								<Text text=""/>
-								<Label text="Model"/>
+								<Label text="{i18n>Series}"/>
 								<Text text=""/>
-								<Label text="Suffix"/>
+								<Label text="{i18n>Model}"/>
 								<Text text=""/>
-								<Label text="APX"/>
+								<Label text="{i18n>Suffix}"/>
 								<Text text=""/>
-								<Label text="Color"/>
+								<Label text="{i18n>APX}"/>
 								<Text text=""/>
-								<Label text="Status"/>
+								<Label text="{i18n>ExteriorColor}"/>
 								<Text text=""/>
-								<Label text="Current ETA">
+								<Label text="{i18n>Status}"/>
+								<Text text=""/>
+								<Label text="{i18n>CurrentETA}"/>
+								<Text text=""/>
+								<Label text="{i18n>CurrentETA}"/>
+								<Text text=""/>
+								<Label text="" id="ctaid">
 									<layoutData>
 										<l:GridData span="L4 M12 S3"/>
 									</layoutData>
 								</Label>
-								<DatePicker id="dobt24e1" class="sapUiSmallMarginBottom34" placeholder="Date" width="95%" valueFormat="dd/mm/yyyy" displayFormat="long"
-									change="handleChange" value="">
+								<Text text="" id="ctatxtid">
 									<layoutData>
 										<l:GridData span="L4 M12 S3"/>
 									</layoutData>
-								</DatePicker>
-								<Text text="From"/>
-								<Label text=""></Label>
-								<DatePicker id="do2bt24e1" class="sapUiSmallMarginBottom34" placeholder="Date" width="95%" valueFormat="dd/mm/yyyy" displayFormat="long"
-									change="handleChange" value="">
+								</Text>
+								<Text text="{i18n>From}" id="fromid"/>
+								<Label text="" id="txteid"></Label>
+								<Text text="" id="txaid">
 									<layoutData>
 										<l:GridData span="L4 M12 S3"/>
 									</layoutData>
-								</DatePicker>
+								</Text>
+								<Text text="{i18n>To}" id="toetaid"/>
+								<Text text="" id="idetda"/>
+								<Label text="{i18n>PropsedETAtoNewDealer}" id="propetId"/>
+								<Text text="" id="idetada">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Text>
+								<Text text="{i18n>From}" id="fromsid"/>
+								<Label text="" id="frmlabltx"></Label>
+								<Text text="" id="fromssid">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Text>
 								<Text text="To"/>
-								<Text text=""/>
-								<Label text="Propsed ETA to New Dealer"/>
-								<DatePicker id="dobt24e1a" class="sapUiSmallMarginBottom34" placeholder="Date" width="95%" valueFormat="dd/mm/yyyy" displayFormat="long"
-									change="handleChange" value="">
-									<layoutData>
-										<l:GridData span="L4 M12 S3"/>
-									</layoutData>
-								</DatePicker>
-								<Text text="From"/>
-								<Label text=""></Label>
-								<DatePicker id="do2b3t24e1" class="sapUiSmallMarginBottom34" placeholder="Date" width="95%" valueFormat="dd/mm/yyyy" displayFormat="long"
-									change="handleChange" value="">
-									<layoutData>
-										<l:GridData span="L4 M12 S3"/>
-									</layoutData>
-								</DatePicker>
-								<Text text="To"/>
-								<Label text="Do not Call (DNC) Vehicle"/>
+								<Label text="{i18n>DonotCall(DNC)Vehicle}"/>
 								<Select id="VT_ARCTDnc" change="onVTARCTdnc" width="220px" forceSelection="true" class="sapUiSizeCompact VT_ARCr" items="{}">
 									<core:ListItem key="{}" text="{jsonDatamodel>Status}"/>
 								</Select>
 								<!--<Text text=""/>-->
-								<Label text="Trade in Return"/>
+								<Label text="{i18n>TradeinReturn}"/>
 								<Select id="VT_ARCTtrdinRet" change="onVTAtrdinrt" width="220px" forceSelection="true" class="sapUiSizeCompact VT_ATTrdinR" items="{}">
 									<core:ListItem key="{}" text="{jsonDatamodel>Status}"/>
 								</Select>
@@ -105,73 +105,74 @@
 										<l:GridData span="L3 M12 S3"/>
 									</layoutData>
 								</Button>-->
-								<Label text="Status"/>
+								<Label text="{i18n>Status}"/>
 								<Select id="VT_ARCTtrdinStatus" change="onVTARctstats" width="220px" forceSelection="true" class="sapUiSizeCompact VT_ATRCTstats" items="{}">
 									<core:ListItem key="{}" text="{jsonDatamodel>Status}"/>
 								</Select>
 								<!--<Text text="Request Sent"/>-->
-								<core:Title text="Other Vehicle Information"/>
+								<core:Title text="{i18n>OtherVehicleInformation}"/>
 								<Label text="Dealer"/>
 								<Text text="01003-Sunrise Toyota"/>
-								<Label text="Model Year"/>
+								<Label text="{i18n>ModelYear}"/>
 								<Text text=""/>
-								<Label text="Series"/>
+								<Label text="{i18n>Series}"/>
 								<Text text=""/>
-								<Label text="Model"/>
+								<Label text="{i18n>Model}"/>
 								<Text text=""/>
-								<Label text="Suffix"/>
+								<Label text="{i18n>Suffix}"/>
 								<Text text=""/>
-								<Label text="APX"/>
+								<Label text="{i18n>APX}"/>
 								<Text text=""/>
-								<Label text="Color"/>
+								<Label text="{i18n>Color}"/>
 								<Text text=""/>
-								<Label text="Status"/>
+								<Label text="{i18n>Status}"/>
 								<Text text=""/>
-								<Label text="Current ETA">
+								<Label text="{i18n>CurrentETA}" id="ctbid">
 									<layoutData>
 										<l:GridData span="L4 M12 S3"/>
 									</layoutData>
 								</Label>
-								<DatePicker id="dobt241" class="sapUiSmallMarginBottom34" placeholder="Date" width="95%" valueFormat="dd/mm/yyyy" displayFormat="long"
-									change="handleChange" value=""></DatePicker>
-								<Text text="From"/>
-								<Label text=""></Label>
-								<DatePicker id="do22bt24e1" class="sapUiSmallMarginBottom34" placeholder="Date" width="95%" valueFormat="dd/mm/yyyy" displayFormat="long"
-									change="handleChange" value="">
+								<Text text="" id="ctxtid">
 									<layoutData>
 										<l:GridData span="L4 M12 S3"/>
 									</layoutData>
-								</DatePicker>
-								<Text text="To"/>
-								<Label text="Propsed ETA to New Dealer"/>
-								<DatePicker id="dobt2431a" class="sapUiSmallMarginBottom34" placeholder="Date" width="95%" valueFormat="dd/mm/yyyy" displayFormat="long"
-									change="handleChange" value="">
+								</Text>
+								<Text text="{i18n>From}" id="frmid"/>
+								<Label text="" id="txeid"></Label>
+								<Text text="" id="txoaid">
 									<layoutData>
 										<l:GridData span="L4 M12 S3"/>
 									</layoutData>
-								</DatePicker>
-								<Text text="From"/>
-								<Label text=""></Label>
-								<DatePicker id="do224e1" class="sapUiSmallMarginBottom34" placeholder="Date" width="95%" valueFormat="dd/mm/yyyy" displayFormat="long"
-									change="handleChange" value="">
+								</Text>
+								<Text text="{i18n>To}" id="totaid"/>
+								<Text text="" id="idtda"/>
+								<Label text="{i18n>PropsedETAtoNewDealer}" id="provtId"/>
+								<Text text="" id="ideada">
 									<layoutData>
 										<l:GridData span="L4 M12 S3"/>
 									</layoutData>
-								</DatePicker>
-								<Text text="To"/>
+								</Text>
+								<Text text="{i18n>From}" id="fromovsid"/>
+								<Label text="" id="frmlbltx"></Label>
+								<Text text="" id="froovhid">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Text>
+								<Text text="{i18n>To}"/>
 							</form:content>
 						</form:SimpleForm>
 					</VBox>
 					<Table id="tableVrade" width="auto" class="sapUiResponsiveMargin" items="{/}" growingThreshold="150">
 						<columns>
 							<Column minScreenWidth="Desktop" demandPopin="true">
-								<Text text="Date"/>
+								<Text text="{i18n>Date}"/>
 							</Column>
 							<Column minScreenWidth="Desktop" demandPopin="true">
-								<Text text="User"/>
+								<Text text="{i18n>User}"/>
 							</Column>
 							<Column minScreenWidth="Desktop" demandPopin="true">
-								<Text text="Comments"/>
+								<Text text="{i18n>Comments}"/>
 							</Column>
 						</columns>
 						<items>
@@ -189,13 +190,13 @@
 							emptySpanL="0" class="simplVTARC" emptySpanM="0" columnsL="2" columnsM="2">
 							<form:content>
 								<core:Title text="" class="Vtaprct1"/>
-								<Label text="Comments"/>
+								<Label text="{i18n>Comments}"/>
 								<TextArea width="240px" height="100px">
 									<layoutData>
 										<l:GridData span="L5 M12 S3"/>
 									</layoutData>
 								</TextArea>
-								<Button text="Add Comments" width="142px"/>
+								<Button text="{i18n>AddComments}" width="142px"/>
 								<core:Title text="" class="Vtaprct1"/>
 								<Text
 									text="This trade information is a snap shot at the time of trade request creation. This information will be validated once after your input (Accept/Reject/Counter) before the function is completed."
@@ -204,17 +205,17 @@
 								<HBox>
 									<FlexBox width="10px"></FlexBox>
 									<FlexBox height="50px" alignItems="Start" justifyContent="Start">
-										<Button text="Accept" width="100px"/>
+										<Button text="{i18n>Accept}" width="100px"/>
 										<FlexBox width="7px"></FlexBox>
 									</FlexBox>
 									<FlexBox width="10px"></FlexBox>
 									<FlexBox height="50px" alignItems="Start" justifyContent="Start">
-										<Button text="Reject" width="100px"/>
+										<Button text="{i18n>Reject}" width="100px"/>
 										<FlexBox width="7px"></FlexBox>
 									</FlexBox>
 									<FlexBox width="10px"></FlexBox>
 									<FlexBox height="50px" alignItems="Start" justifyContent="Start">
-										<Button text="Counter Offer" width="150px"/>
+										<Button text="{i18n>CounterOffer}" width="150px"/>
 										<FlexBox width="7px"></FlexBox>
 									</FlexBox>
 								</HBox>
@@ -222,17 +223,17 @@
 								<HBox>
 									<FlexBox width="10px"></FlexBox>
 									<FlexBox height="200px" alignItems="Start" justifyContent="Start">
-										<Button text="Back" width="100px"/>
+										<Button text="{i18n>Back}" width="100px"/>
 										<FlexBox width="7px"></FlexBox>
 									</FlexBox>
 									<FlexBox width="10px"></FlexBox>
 									<FlexBox height="200px" alignItems="Start" justifyContent="Start">
-										<Button text="Cancel" width="100px"/>
+										<Button text="{i18n>Cancel}" width="100px"/>
 										<FlexBox width="7px"></FlexBox>
 									</FlexBox>
 									<FlexBox width="10px"></FlexBox>
 									<FlexBox height="200px" alignItems="Start" justifyContent="Start">
-										<Button text="Update" width="150px"/>
+										<Button text="{i18n>Update}" width="150px"/>
 										<FlexBox width="7px"></FlexBox>
 									</FlexBox>
 								</HBox>

@@ -109,7 +109,7 @@
 				   	</ComboBox>-->
 								<ComboBox placeholder="" selectedKey="" showSecondaryValues="true" width="90%" change="handleSuffixChange"
 									selectionChange="SufficClickedVLS11" id="SuffCmbo" items="{ path:'Suffix>/', sorter : { path:'Suffix', ascending : 'true' } }">
-									<core:ListItem text="{Suffix>Suffix} - {Suffix>SuffixDescriptionEN}/{Suffix>MarktgIntDescEN}" key="{Suffix>Suffix}"
+									<core:ListItem text="{Suffix>Suffix} - {Suffix>SuffixDescriptionEN}/{Suffix>InteriorDescriptionEN}" key="{Suffix>Suffix}"
 										additionalText=""/>
 									<!--{MarktgIntDescEN , MarketingTrimInteriorDescEN}  -->
 								</ComboBox>

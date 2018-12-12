@@ -12,7 +12,7 @@
 							<Text class="clCustomFont" text="Vehicle Locator-Trade"/>
 						</contentLeft>
 						<contentRight>
-							<Button text="Logout"/>
+							<Button text="{i18n>Logout}"/>
 						</contentRight>
 					</Bar>
 				</customHeader>
@@ -30,7 +30,7 @@
 						<VBox class="sapUiSmallMargin">
 						
 							<OverflowToolbar id="otb1">
-							<Label text="Create Trade Request" width="200px" class="vHlabe1clss"/>
+							<Label text="{i18n>CreateTradeRequest}" width="200px" class="vHlabe1clss"/>
 							<ToolbarSpacer/>
 							
 						</OverflowToolbar>
@@ -40,24 +40,30 @@
 						<form:SimpleForm id="SimpleFormDispl2a20" editable="true" layout="ResponsiveGridLayout" labelSpanM="12" adjustLabelSpan="false"
 							emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2">
 							<form:content>
-								<core:Title text="Requested Vehicle Information"/>
-								<Label text="Dealer"/>
-								<Text text="01033-Sunrise Toyota"/>
-								<Label text="Model Year"/>
-								<Text text=""/>
-								<Label text="Series"/>
-								<Text text=""/>
-								<Label text="Model"/>
-								<Text text=""/>
-								<Label text="Suffix"/>
-								<Text text=""/>
-								<Label text="APX"/>
-								<Text text=""/>
-								<Label text="Color"/>
-								<Text text=""/>
-								<Label text="Status"/>
-								<Text text=""/>
-								<Label text="Current ETA">
+								<core:Title text="{i18n>RequestedVehicleInformation}"/>
+									<Label text="{i18n>Dealer}"/>
+								<Text text="{}" id="derid"/>
+								<Label text="{i18n>ModelYear}"/>
+								<Text text="{}"/>
+								<Label text="{i18n>Series}"/>
+								<Text text="{}"/>
+								<Label text="{i18n>Model}"/>
+								<Text text="{} - {MODEL_DESC_EN}"/>
+								<Label text="{i18n>Suffix}"/>
+								<Text text="{} -{SUFFIX_DESC_EN}"/>
+								<Label text="{i18n>APX}"/>
+								<Text text="{}"/>
+								<Label text="{i18n>ExteriorColor}"/>
+								<Text text="{} - {}"/>
+								<Label text="{i18n>CurrentETA}" id="cetaelid"></Label>
+								<Text text="" id="ctid" visible="true"></Text>
+								<Text text="{i18n>From}" id="frid"/>
+								<Label text=""></Label>
+								<Text text="" id="textab"></Text>
+								<Text text="{i18n>To}" id="toabid"/>
+								<Text text="" id="totid"/>
+								<Label text="{i18n>PropsedETAtoNewDealer}" id="prplabid"/>
+								<Text text="" id="prid">
 									<layoutData>
 										<l:GridData span="L4 M12 S3"/>
 									</layoutData>
@@ -68,7 +74,7 @@
 										<l:GridData span="L4 M12 S3"/>
 									</layoutData>
 								</DatePicker>
-								<Text text="From"/>
+								<Text text="{i18n>From}"/>
 								<Label text=""></Label>
 								<DatePicker id="do2bt24e1" class="sapUiSmallMarginBottom34" placeholder="Date" width="95%" valueFormat="dd/mm/yyyy" displayFormat="long"
 									change="handleChange" value="">
@@ -76,47 +82,47 @@
 										<l:GridData span="L4 M12 S3"/>
 									</layoutData>
 								</DatePicker>
-								<Text text="To"/>
-								<Label text="Trade in Return"/>
+								<Text text="{i18n>To}"/>
+								<Label text="{i18n>TradeinReturn}"/>
 								<Select id="VT_UTRtrdinRet" change="onUtAtrdinrt" width="220px" forceSelection="true" class="sapUiSizeCompact VT_UtrTrdinR" items="{}">
 									<core:ListItem key="{}" text="{jsonDatamodel>Status}"/>
 								</Select>	
 							<!--	<SearchField value="" width="220px"></SearchField>-->
-								<Button text="Select Vehicle" press="onSelecveh">
+								<Button text="{i18n>SelectVehicle}" press="onSelecveh">
 									<layoutData>
 										<l:GridData span="L3 M12 S3"/>
 									</layoutData>
 								</Button>
-								<Label text="Status"/>
+								<Label text="{i18n>Status}"/>
 								<Select id="VT_UTRtStat" change="onUtAtrdinrt" width="220px" forceSelection="true" class="sapUiSizeCompact VT_Utrstat" items="{}">
 									<core:ListItem key="{}" text="{jsonDatamodel>Status}"/>
 								</Select>	
 								<!--<Text text="Countered"/>-->
-								<core:Title text="Other Vehicle Information"/>
-								<Label text="Vehicle Tracking Number"/>
+								<core:Title text="{i18n>OtherVehicleInformation}"/>
+								<Label text="{i18n>VehicleTrackingNumber}"/>
 								<Text text="TCIL33845639701"/>
-								<Label text="Model Year"/>
+								<Label text="{i18n>ModelYear}"/>
 								<Text text=""/>
-								<Label text="Series"/>
+								<Label text="{i18n>Series}"/>
 								<Text text=""/>
-								<Label text="Model"/>
+								<Label text="{i18n>Model}"/>
 								<Text text=""/>
-								<Label text="Suffix"/>
+								<Label text="{i18n>Suffix}"/>
 								<Text text=""/>
-								<Label text="APX"/>
+								<Label text="{i18n>APX}"/>
 								<Text text=""/>
-								<Label text="Color"/>
+								<Label text="{i18n>Color}"/>
 								<Text text=""/>
-								<Label text="Status"/>
+								<Label text="{i18n>Status}"/>
 								<Text text=""/>
-								<Label text="Current ETA">
+								<Label text="{i18n>CurrentETA}">
 									<layoutData>
 										<l:GridData span="L4 M12 S3"/>
 									</layoutData>
 								</Label>
 								<DatePicker id="dobt241" class="sapUiSmallMarginBottom34" placeholder="Date" width="95%" valueFormat="dd/mm/yyyy" displayFormat="long"
 									change="handleChange" value=""></DatePicker>
-								<Text text="From"/>
+								<Text text="{i18n>From}"/>
 								<Label text=""></Label>
 								<DatePicker id="do22bt24e1" class="sapUiSmallMarginBottom34" placeholder="Date" width="95%" valueFormat="dd/mm/yyyy" displayFormat="long"
 									change="handleChange" value="">
@@ -124,7 +130,7 @@
 										<l:GridData span="L4 M12 S3"/>
 									</layoutData>
 								</DatePicker>
-								<Text text="To"/>
+								<Text text="{i18n>To}"/>
 								<Text text=""/>
 							</form:content>
 						</form:SimpleForm>
@@ -132,13 +138,13 @@
 					<Table id="tableVrade" width="auto" class="sapUiResponsiveMargin" items="{/}" growingThreshold="150">
 						<columns>
 							<Column minScreenWidth="Desktop" demandPopin="true">
-								<Text text="Date"/>
+								<Text text="{i18n>Date}"/>
 							</Column>
 							<Column minScreenWidth="Desktop" demandPopin="true">
-								<Text text="User"/>
+								<Text text="{i18n>User}"/>
 							</Column>
 							<Column minScreenWidth="Desktop" demandPopin="true">
-								<Text text="Comments"/>
+								<Text text="{i18n>Comments}"/>
 							</Column>
 						</columns>
 						<items>
@@ -156,13 +162,13 @@
 							emptySpanM="0" columnsL="2" columnsM="2">
 							<form:content>
 								<core:Title text=""/>
-								<Label text="Comments"/>
+								<Label text="{i18n>Comments}"/>
 								<TextArea width="240px" height="100px">
 									<layoutData>
 										<l:GridData span="L5 M12 S3"/>
 									</layoutData>
 								</TextArea>
-								<Button text="Add Comments" width="142px"/>
+								<Button text="{i18n>AddComments}" width="142px"/>
 								<core:Title text=""/>
 							</form:content>
 						</form:SimpleForm>
@@ -171,7 +177,7 @@
 				<footer>
 					<Bar>
 						<contentRight>
-							<Button text="Submit" type="Emphasized" width="100px" press="onReqVT"/>
+							<Button text="{i18n>Submit}" type="Emphasized" width="100px" press="onReqVT"/>
 						</contentRight>
 					</Bar>
 				</footer>

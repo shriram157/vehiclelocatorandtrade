@@ -7,19 +7,23 @@
 		"applicationVersion": {
 			"version": "1.0.0"
 		},
-		
 		"dataSources": {
-					
+			"xsodata": {
+				"uri": "/vehicleTrade/xsodata/vehicleTrade_SRV.xsodata/$metadata/vehicleTrade/xsodata/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
+				}
+			}
 		},
-
 		"title": "{{appTitle}}",
 		"description": "{{appDescription}}",
 		"sourceTemplate": {
-			"id": "ui5template.basicSAPUI5ApplicationProject",
-			"version": "1.40.12"
+			"id": "servicecatalog.connectivityComponentForManifest",
+			"version": "0.0.0"
 		}
 	},
-
 	"sap.ui": {
 		"technology": "UI5",
 		"icons": {
@@ -38,10 +42,8 @@
 		"supportedThemes": [
 			"sap_hcb",
 			"sap_belize"
-
 		]
 	},
-
 	"sap.ui5": {
 		"rootView": {
 			"viewName": "vehicleLocator.view.VehicleLocSearch",
@@ -69,9 +71,22 @@
 				"settings": {
 					"bundleName": "vehicleLocator.i18n.i18n"
 				}
+			},
+			"TradeRequestModel": {
+				"uri": "/vehicleTrade/xsodata/vehicleTrade_SRV.xsodata/$metadata/vehicleTrade/xsodata/",
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request",
+					"serviceUrlParams": {
+                      "sap-client": "200"
+                  }
+				},
+				"dataSource": "xsodata",
+				"preload": true
 			}
 		},
-
 		"routing": {
 			"config": {
 				"routerClass": "sap.m.routing.Router",
@@ -80,54 +95,60 @@
 				"viewPath": "vehicleLocator.view",
 				"controlId": "idAppControl",
 				"controlAggregation": "pages",
-				"transition":"flip"
+				"transition": "flip"
 			},
-			"routes": [{
-				"pattern": "",
-				"name": "VehicleLocSearch",
-				"target": "VehicleLocSearch"
-			}, {
-			  	"pattern": "VehicleSearcResults",
-				"name": "VehicleSearcResults",
-				"target": "VehicleSearcResults"
-			}, {
-				"pattern": "VehicleTrade_CreateSingle/:SelectedTrade:",
-				"name": "VehicleTrade_CreateSingle",
-				"target": "VehicleTrade_CreateSingle"
-			}, {
-				"pattern": "VehicleTrade_VehicleSelection",
-				"name": "VehicleTrade_VehicleSelection",
-				"target": "VehicleTrade_VehicleSelection"
-			}, {
-				"pattern": "VehcTrad_Apprv_Rej_CounTrad",
-				"name": "VehcTrad_Apprv_Rej_CounTrad",
-				"target": "VehcTrad_Apprv_Rej_CounTrad"
-			}, {
-				"pattern": "VehicleTrade_UpdtTradReq",
-				"name": "VehicleTrade_UpdtTradReq",
-				"target": "VehicleTrade_UpdtTradReq"
-			}, {
-				"pattern": "VehicleTrade_History",
-				"name": "VehicleTrade_History",
-				"target": "VehicleTrade_History"
-
-			}, {
-				"pattern": "VehicleTrade_ModelBlock_Summary",
-				"name": "VehicleTrade_ModelBlock_Summary",
-				"target": "VehicleTrade_ModelBlock_Summary"
-
-			}, {
-				"pattern": "VehicleTrade_Summary",
-				"name": "VehicleTrade_Summary",
-				"target": "VehicleTrade_Summary"
-
-			}, {
-				"pattern": "VehicleTrade_VehicleSelection",
-				"name": "VehicleTrade_VehicleSelection",
-				"target": "VehicleTrade_VehicleSelection"
-
-			}],
-
+			"routes": [
+				{
+					"pattern": "",
+					"name": "VehicleLocSearch",
+					"target": "VehicleLocSearch"
+				},
+				{
+					"pattern": "VehicleSearcResults/:LoginUser:",
+					"name": "VehicleSearcResults",
+					"target": "VehicleSearcResults"
+				},
+				{
+					"pattern": "VehicleTrade_CreateSingle/:SelectedTrade:",
+					"name": "VehicleTrade_CreateSingle",
+					"target": "VehicleTrade_CreateSingle"
+				},
+				{
+					"pattern": "VehicleTrade_VehicleSelection",
+					"name": "VehicleTrade_VehicleSelection",
+					"target": "VehicleTrade_VehicleSelection"
+				},
+				{
+					"pattern": "VehcTrad_Apprv_Rej_CounTrad",
+					"name": "VehcTrad_Apprv_Rej_CounTrad",
+					"target": "VehcTrad_Apprv_Rej_CounTrad"
+				},
+				{
+					"pattern": "VehicleTrade_UpdtTradReq",
+					"name": "VehicleTrade_UpdtTradReq",
+					"target": "VehicleTrade_UpdtTradReq"
+				},
+				{
+					"pattern": "VehicleTrade_History",
+					"name": "VehicleTrade_History",
+					"target": "VehicleTrade_History"
+				},
+				{
+					"pattern": "VehicleTrade_ModelBlock_Summary",
+					"name": "VehicleTrade_ModelBlock_Summary",
+					"target": "VehicleTrade_ModelBlock_Summary"
+				},
+				{
+					"pattern": "VehicleTrade_Summary",
+					"name": "VehicleTrade_Summary",
+					"target": "VehicleTrade_Summary"
+				},
+				{
+					"pattern": "VehicleTrade_VehicleSelection",
+					"name": "VehicleTrade_VehicleSelection",
+					"target": "VehicleTrade_VehicleSelection"
+				}
+			],
 			"targets": {
 				"VehicleLocSearch": {
 					"viewName": "VehicleLocSearch",
@@ -144,7 +165,6 @@
 					"async": true,
 					"clearControlAggregation": false
 				},
-
 				"VehcTrad_Apprv_Rej_CounTrad": {
 					"viewName": "VehcTrad_Apprv_Rej_CounTrad",
 					"async": true,
@@ -154,7 +174,6 @@
 					"viewName": "VehicleTrade_UpdtTradReq",
 					"async": true,
 					"clearControlAggregation": false
-
 				},
 				"VehicleTrade_History": {
 					"viewName": "VehicleTrade_History",
@@ -176,14 +195,14 @@
 					"async": true,
 					"clearControlAggregation": false
 				}
-
 			}
 		},
-
 		"resources": {
-			"css": [{
-				"uri": "css/style.css"
-			}]
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
 		}
 	}
 }
