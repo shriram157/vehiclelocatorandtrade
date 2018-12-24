@@ -19,7 +19,7 @@ sap.ui.define([
 		
 		ItemClicked: function() {
 		
-          debugger;
+          /*debugger;*/
           
 			this.oText = this.getView().byId("combo1Menu").getSelectedItem().getText();
 
@@ -99,14 +99,14 @@ sap.ui.define([
 		},
 		
 		onBack: function() {
-			debugger;
+			/*debugger;*/
 			this.getRouter().navTo("VehicleLocSearch");
 		
 
 		},
 
 		onNavBack: function() {
-			debugger
+		/*	debugger*/
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
 

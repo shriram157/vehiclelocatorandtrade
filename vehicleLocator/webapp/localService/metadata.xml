@@ -1,0 +1,113 @@
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" Version="1.0">
+	<edmx:DataServices xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="2.0">
+		<Schema xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
+			xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2008/09/edm"
+			Namespace="default">
+			<EntityType Name="TradeRequestType">
+				<Key>
+					<PropertyRef Name="Trade_Id"/>
+				</Key>
+				<Property Name="Trade_Id" Type="Edm.String" Nullable="false" MaxLength="8"/>
+				<Property Name="Trade_Status" Type="Edm.String" MaxLength="1"/>
+				<Property Name="Requesting_Dealer" Type="Edm.String" MaxLength="10"/>
+				<Property Name="Requesting_Dealer_Name" Type="Edm.String" MaxLength="35"/>
+				<Property Name="Requested_Vtn" Type="Edm.String" MaxLength="6"/>
+				<Property Name="Offered_Vtn" Type="Edm.String" MaxLength="6"/>
+				<Property Name="Trade_Return" Type="Edm.String" MaxLength="1"/>
+				<Property Name="Req_Current_ETA_From" Type="Edm.DateTime"/>
+				<Property Name="Req_Current_ETA_To" Type="Edm.DateTime"/>
+				<Property Name="Req_Proposed_ETA_From" Type="Edm.DateTime"/>
+				<Property Name="Req_Proposed_ETA_To" Type="Edm.DateTime"/>
+				<Property Name="Off_Current_ETA_From" Type="Edm.DateTime"/>
+				<Property Name="Off_Current_ETA_To" Type="Edm.DateTime"/>
+				<Property Name="Off_Proposed_ETA_From" Type="Edm.DateTime"/>
+				<Property Name="Off_Proposed_ETA_To" Type="Edm.DateTime"/>
+				<Property Name="Created_By" Type="Edm.String" MaxLength="12"/>
+				<Property Name="Created_On" Type="Edm.DateTime"/>
+				<Property Name="Changed_on" Type="Edm.DateTime"/>
+				<Property Name="Requested_Dealer" Type="Edm.String" MaxLength="10"/>
+				<Property Name="Requested_Dealer_Name" Type="Edm.String" MaxLength="35"/>
+				<NavigationProperty Name="TradeVehicles" Relationship="default.toVehiclesType" FromRole="TradeRequestDependent"
+					ToRole="TradeVehiclesPrincipal"/>
+			</EntityType>
+			<EntityType Name="TradeVehiclesType">
+				<Key>
+					<PropertyRef Name="Trade_Id.Trade_Id"/>
+					<PropertyRef Name="VTN"/>
+				</Key>
+				<Property Name="Trade_Id.Trade_Id" Type="Edm.String" Nullable="false" MaxLength="8"/>
+				<Property Name="VTN" Type="Edm.String" Nullable="false" MaxLength="6"/>
+				<Property Name="Model_Year" Type="Edm.String" MaxLength="4"/>
+				<Property Name="Model" Type="Edm.String" MaxLength="40"/>
+				<Property Name="Series" Type="Edm.String" MaxLength="3"/>
+				<Property Name="Suffix" Type="Edm.String" MaxLength="2"/>
+				<Property Name="Int_Colour" Type="Edm.String" MaxLength="4"/>
+				<Property Name="Ext_Colour" Type="Edm.String" MaxLength="4"/>
+				<Property Name="APX" Type="Edm.String" MaxLength="2"/>
+				<Property Name="DNC" Type="Edm.String" MaxLength="1"/>
+				<Property Name="Status" Type="Edm.String" MaxLength="1"/>
+				<Property Name="Order_Type" Type="Edm.String" MaxLength="2"/>
+			</EntityType>
+			<EntityType Name="TradeCommentType">
+				<Key>
+					<PropertyRef Name="Trade_Id.Trade_Id"/>
+					<PropertyRef Name="Comment_Id"/>
+				</Key>
+				<Property Name="Trade_Id.Trade_Id" Type="Edm.String" Nullable="false" MaxLength="8"/>
+				<Property Name="Comment_Id" Type="Edm.String" Nullable="false" MaxLength="2"/>
+				<Property Name="Comment_Txt" Type="Edm.String" MaxLength="1024"/>
+				<Property Name="Comment_Date" Type="Edm.DateTime"/>
+				<Property Name="Created_By" Type="Edm.String" MaxLength="12"/>
+				<NavigationProperty Name="TradeComments" Relationship="default.toCommentsType" FromRole="TradeCommentPrincipal"
+					ToRole="TradeRequestDependent"/>
+			</EntityType>
+			<EntityType Name="TradeVehicleDescType">
+				<Key>
+					<PropertyRef Name="Trade_Id.Trade_Id"/>
+					<PropertyRef Name="VTN.VTN"/>
+					<PropertyRef Name="SPRAS"/>
+				</Key>
+				<Property Name="Trade_Id.Trade_Id" Type="Edm.String" Nullable="false" MaxLength="8"/>
+				<Property Name="VTN.VTN" Type="Edm.String" Nullable="false" MaxLength="6"/>
+				<Property Name="SPRAS" Type="Edm.String" Nullable="false" MaxLength="2"/>
+				<Property Name="Model_Desc" Type="Edm.String" MaxLength="40"/>
+				<Property Name="Series_Desc" Type="Edm.String" MaxLength="50"/>
+				<Property Name="Suffix_Desc" Type="Edm.String" MaxLength="30"/>
+				<Property Name="Int_Colour_Desc" Type="Edm.String" MaxLength="30"/>
+				<Property Name="Ext_Colour_Desc" Type="Edm.String" MaxLength="50"/>
+				<NavigationProperty Name="TradeVehicleDescs" Relationship="default.toVehicleDescType" FromRole="TradeVehicleDescPrincipal"
+					ToRole="TradeRequestDependent"/>
+			</EntityType>
+			<Association Name="toVehiclesType">
+				<End Type="default.TradeVehiclesType" Role="TradeVehiclesPrincipal" Multiplicity="1"/>
+				<End Type="default.TradeRequestType" Role="TradeRequestDependent" Multiplicity="*"/>
+			</Association>
+			<Association Name="toCommentsType">
+				<End Type="default.TradeCommentType" Role="TradeCommentPrincipal" Multiplicity="1"/>
+				<End Type="default.TradeRequestType" Role="TradeRequestDependent" Multiplicity="*"/>
+			</Association>
+			<Association Name="toVehicleDescType">
+				<End Type="default.TradeVehicleDescType" Role="TradeVehicleDescPrincipal" Multiplicity="1"/>
+				<End Type="default.TradeRequestType" Role="TradeRequestDependent" Multiplicity="*"/>
+			</Association>
+			<EntityContainer Name="v2" m:IsDefaultEntityContainer="true">
+				<EntitySet Name="TradeRequest" EntityType="default.TradeRequestType"/>
+				<EntitySet Name="TradeVehicles" EntityType="default.TradeVehiclesType"/>
+				<EntitySet Name="TradeComment" EntityType="default.TradeCommentType"/>
+				<EntitySet Name="TradeVehicleDesc" EntityType="default.TradeVehicleDescType"/>
+				<AssociationSet Name="toVehicles" Association="default.toVehiclesType">
+					<End Role="TradeVehiclesPrincipal" EntitySet="TradeVehicles"/>
+					<End Role="TradeRequestDependent" EntitySet="TradeRequest"/>
+				</AssociationSet>
+				<AssociationSet Name="toComments" Association="default.toCommentsType">
+					<End Role="TradeCommentPrincipal" EntitySet="TradeComment"/>
+					<End Role="TradeRequestDependent" EntitySet="TradeRequest"/>
+				</AssociationSet>
+				<AssociationSet Name="toVehicleDesc" Association="default.toVehicleDescType">
+					<End Role="TradeVehicleDescPrincipal" EntitySet="TradeVehicleDesc"/>
+					<End Role="TradeRequestDependent" EntitySet="TradeRequest"/>
+				</AssociationSet>
+			</EntityContainer>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

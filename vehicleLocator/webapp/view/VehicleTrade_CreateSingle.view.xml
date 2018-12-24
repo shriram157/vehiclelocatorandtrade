@@ -1,6 +1,6 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="vehicleLocator.controller.VehicleTrade_CreateSingle"
-	xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:uxap="sap.uxap" xmlns:t="sap.ui.table" xmlns:u="sap.ui.unified"
-	xmlns:f="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml">
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="vehicleLocator.controller.VehicleTrade_CreateSingle" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form"
+	xmlns:uxap="sap.uxap" xmlns:t="sap.ui.table" xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml">
 	<App>
 		<pages class="oImgsampl" height="200px">
 			<Page showNavButton="false" navButtonPress="onBack">
@@ -28,7 +28,7 @@
 					</Toolbar>
 					<VBox class="sapUiSmallMargin">
 						<OverflowToolbar id="otb1">
-							<Label text="Create Trade Request" width="200px" class="vHlabe1clss"/>
+							<Label text="{i18n>CreateTradeRequest}" width="250px" class="vHlabe1clss"/>
 							<ToolbarSpacer/>
 						</OverflowToolbar>
 						<!--<OverflowToolbar id="otb1" height="30px">
@@ -37,50 +37,129 @@
 						<form:SimpleForm id="SimpleFormDispla20" editable="true" layout="ResponsiveGridLayout" labelSpanM="12" adjustLabelSpan="false"
 							emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2">
 							<form:content>
-								<core:Title text="Requested Vehicle Information"/>
-								<Label text="Dealer"/>
-								<Text text="01033-Sunrise Toyota"/>
-								<Label text="Model Year"/>
-								<Text text=""/>
-								<Label text="Series"/>
-								<Text text=""/>
-								<Label text="Model"/>
-								<Text text=""/>
-								<Label text="Suffix"/>
-								<Text text=""/>
-								<Label text="APX"/>
-								<Text text=""/>
-								<Label text="Exterior Color"/>
-								<Text text=""/>
-								<core:Title text="Other Vehicle Information"/>
-								<Label text="Vehicle Tracking Number"/>
-								<Text text="TCIL33845639701"/>
-								<Label text="Model Year"/>
-								<Text text=""/>
-								<Label text="Series"/>
-								<Text text=""/>
-								<Label text="Model"/>
-								<Text text=""/>
-								<Label text="Suffix"/>
-								<Text text=""/>
-								<Label text="APX"/>
-								<Text text=""/>
-								<Label text="Exterior Color"/>
-								<Text text=""/>
-								<core:Title text="Trade Details"/>
-								<Label text="Trade in Return"/>
-								<Select id="VT_CStradinRet" change="onVTCStir" width="220px" forceSelection="true" class="sapUiSizeCompact VT_CSstr" items="{}">
-									<core:ListItem key="{}" text="{jsonDatamodel>Status}"/>
-								</Select>
-								<Button text="Select Vehicle" press="onSelecveh">
+								<core:Title text="{i18n>RequestedVehicleInformation}"/>
+								<Label text="{i18n>Dealer}"/>
+								<Text text="{path:'TradeModel>kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'}-{TradeModel>name1}"  id="dealrid"/>
+								<Label text="{i18n>ModelYear}"/>
+								<Text text="{TradeModel>zzmoyr}" id="zzMoyr"/>
+								<Label text="{i18n>Series}"/>
+								<Text text="{TradeModel>zzseries}-{TradeModel>zzseries_desc_en}" id="oSeries"/>
+								<Label text="{i18n>Model}"/>
+								<Text text="{TradeModel>matnr}-{TradeModel>model_desc_en}" id="oZmodel"/>
+								<Label text="{i18n>Suffix}"/>
+								<Text text="{TradeModel>zzsuffix}-{TradeModel>suffix_desc_en} /{TradeModel>zzintcol}{TradeModel>mrktg_int_desc_en}" id="oZsuffix"/>
+								<Label text="{i18n>APX}"/>
+								<Text text="{TradeModel>zzapx}" id="oApx"/>
+								<Label text="{i18n>Status}"/>
+								<Text text="{path:'TradeModel>zz_trading_ind',formatter:'vehicleLocator.Formatter.Formatter.Status'}"  id="oStatus"/>
+									<Label text="{i18n>OrderType}"/>
+								<Text text="{path:'TradeModel>zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}"   id="oOrdertype"/>
+									<Label text="{i18n>ExteriorColor}"/>
+								<Text text="{TradeModel>zzextcol}-{TradeModel>mktg_desc_en}" id="Zextcolo"/>
+								<Label text="{i18n>CurrentETA}" id="cetalabelid">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Label>
+								<Text text="" id="ctaid">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Text>
+								<Text text="{i18n>From}" id="fromid"/>
+								<Label text=""></Label>
+								<Text text="" id="textlab">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Text>
+								<Text text="{i18n>To}" id="tolabid"/>
+								<Text text="" id="totxtid"/>
+								<Label text="{i18n>PropsedETAtoNewDealer}" id="prpdlabid"/>
+								<Text text="" id="prpid">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Text>
+								<Text text="{i18n>From}" id="fromlabid"/>
+								<Label text="" id="frmlabid"></Label>
+								<Text text="" id="otextlabel">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Text>
+								<Text text="{i18n>To}" id="idlabltxt"/>
+
+								<core:Title text="{i18n>OfferVehicleInformation}" id="oOtherVehInfoid"/>
+						<!--	<VBox id="oVboxOtherVehicleInformation" visible="false">-->
+								<Label text="{i18n>VehicleTrackingNumber}" id="vtnlabeid" visible="false"/>
+								<Text text="{TradeModel>/VehicleTradeVehicle/ZZVTN}" id="vtnid" visible="false"/>
+								<Label text="{i18n>ModelYear}" id="moylablid" visible="false"/>
+								<Text text="{TradeModel>/VehicleTradeVehicle/Year}" id="yearid" visible="false"/>
+								<Label text="{i18n>Series}" id="serielabelid" visible="false"/>
+								<Text text="{TradeModel>/VehicleTradeVehicle/TCISeries} - {TradeModel>/VehicleTradeVehicle/TCISeriesDescriptionEN}" id="seiresid" visible="false"/>
+								<Label text="{i18n>Model}" id="modlabelid" visible="false"/>
+								<Text text="{TradeModel>/VehicleTradeVehicle/Model} - {TradeModel>/VehicleTradeVehicle/ENModelDesc}" id="modlid" visible="false"/>
+								<Label text="{i18n>Suffix}" id="sufflabeid" visible="false"/>
+								<Text text="{TradeModel>/VehicleTradeVehicle/zzsuffix} - {TradeModel>/VehicleTradeVehicle/suffix_desc_en}/{TradeModel>/VehicleTradeVehicle/zzintcol}{TradeModel>/VehicleTradeVehicle/mrktg_int_desc_en}" id="suffid" visible="false"/>
+								<Label text="{i18n>APX}" id="apxlabelid" visible="false"/>
+								
+									<Label text="{i18n>Status}"  visible="false" id="ofvestats"/>
+								<Text text="{TradeModel>zzapx}" id="offeredStatus" visible="false"/>
+									<Label text="{i18n>OrderType}"  visible="false" id="offordetype"/>
+								<Text text="{TradeModel>zzapx}" id="oofferedOrdertype" visible="false"/>
+								
+								<Text text="{TradeModel>/VehicleTradeVehicle/ZZAPX}" id="apxid" visible="false"/>
+								<Label text="{i18n>ExteriorColor}" id="extcollabelid" visible="false"/>
+								<Text text="{TradeModel>/VehicleTradeVehicle/ZZEXTCOL}" id="extcolod" visible="false"/>
+								<Label text="{i18n>CurrentETA}" id="ctrtaid" visible="false">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Label>
+								<Text text="" id="oCtraid" visible="false">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Text>
+								<Text text="{i18n>From}" id="fromLabeeid" visible="false"/>
+								<Label text="" id="labidtxt" visible="false"></Label>
+								<Text text="" id="labetxteid" visible="false">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Text>
+								<Text text="{i18n>To}" id="ototid" visible="false"/>
+								<Text text="" id="otitxt" visible="false"/>
+								<Label text="{i18n>PropsedETAtoNewDealer}" id="propetid" visible="false"/>
+								<Text text="" id="perpid" visible="false">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Text>
+								<Text text="{i18n>From}" id="frlabid" visible="false"/>
+								<Label text="" id="fmlabid" visible="false"></Label>
+								<Text text="" id="idlabeal" visible="false">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Text>
+								<Text text="{i18n>To}" id="textide" visible="false"/>
+							<!--	</VBox>-->
+								<core:Title text="{i18n>TradeDetails}"/>
+								<Label text="{i18n>TradeinReturn}"/>
+								<ComboBox id="VT_CStradinRet" selectionChange="onVTCStir" width="220px"  items="{/}">
+									<core:ListItem key="{State}" text="{State}-{Trade_return}"/>
+								</ComboBox>
+								<Button text="{i18n>SelectVehicle}" id="oSeleBtn" press="onSelecveh" visible="false">
 									<layoutData>
 										<l:GridData span="L3 M12 S3"/>
 									</layoutData>
 								</Button>
-								<Label text="Trade Request Status"/>
-								<Text text="Request Sent"/>
-								<Label text="Comments"/>
-								<TextArea id="TypeHere" value=" " width="387px" height="100px"/>
+								<Label text="{i18n>TradeRequestStatus}"/>
+								<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}"/>
+								<Label text="{i18n>Comments}"/>
+								<TextArea id="oTypeHere" value=" " width="387px" height="100px"/>
 							</form:content>
 						</form:SimpleForm>
 					</VBox>
@@ -88,7 +167,7 @@
 				<footer>
 					<Bar>
 						<contentRight>
-							<Button text="Request" type="Reject" width="130px" press="onReqVT"/>
+							<Button text="{i18n>Request}" type="Reject" width="130px" press="onRequestVT"/>
 						</contentRight>
 					</Bar>
 				</footer>

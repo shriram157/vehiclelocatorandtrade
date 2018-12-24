@@ -9,10 +9,10 @@
 						<contentLeft>
 							<Image id="idLexusLogo" src="Images/Lexus.png" width="100px"/>
 							<Text text="|" class="sapUiTinyMarginBeginEnd"/>
-							<Text class="clCustomFont" text="Vehicle Locator-Trade"/>
+							<Text class="clCustomFont" text="{i18n>VehicleLocator-Trade}"/>
 						</contentLeft>
 						<contentRight>
-							<Button text="Logout"/>
+							<Button text="{i18n>Logout}"/>
 						</contentRight>
 					</Bar>
 				</customHeader>
@@ -28,7 +28,7 @@
 					</Toolbar>
 						<VBox>
 						<OverflowToolbar id="otb1">
-							<Label text="Add Model Block" width="200px" class="vHlabe1clss"/>
+							<Label text="{i18n>AddModelBlock}" width="200px" class="vHlabe1clss"/>
 							<ToolbarSpacer/>
 						
 						</OverflowToolbar>
@@ -38,32 +38,32 @@
 							emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2">
 							<form:content>
 								<core:Title text="" class="VTMBSClass"/>
-								<Label text="Dealer" required="true"/>
+								<Label text="{i18n>Dealer}" required="true"/>
 							<Select id="VT_MBSdeal" change="onVT_MBSdeal" width="76%" forceSelection="true" class="sapUiSizeCompact VT_MBSdeal" items="{}">
 									<core:ListItem key="{}" text="{jsonDatamodel>Status}"/>
 								</Select>
 							<!--	<SearchField id="Searcid" width="76%"/>-->
-								<Label text="Vehicle Tracking Number" required="true"/>
+								<Label text="{i18n>VehicleTrackingNumber}" required="true"/>
 								<!--<Text text=""/>-->
 								<Text text="TCI00143453">
 									<layoutData>
 										<l:GridData span="L3 M12 S3"/>
 									</layoutData>
 								</Text>
-								<Button text="Select Vehicle" width="60%"/>
-								<Label text="Block Model No.of Days" required="true"/>
+								<Button text="{i18n>SelectVehicle}" width="60%"/>
+								<Label text="{i18n>BlockModelNo.ofDays}" required="true"/>
 								<Select id="VT_MBSbmnd" change="onVT_MBSbnmd" width="76%" forceSelection="true" class="sapUiSizeCompact VT_MBSbnmd" items="{}">
 									<core:ListItem key="{}" text="{jsonDatamodel>Status}"/>
 								</Select>
 							<!--	<SearchField id="Searcid2" width="76%"/>-->
-								<Label text="Comments"/>
+								<Label text="{i18n>Comments}"/>
 								<TextArea id="TypeHerid" value=" " width="76%" height="50px"/>
 								<!--<FlexBox width="40px"></FlexBox>
 								<FlexBox height="100px" alignItems="Center" justifyContent="Center">
 									<Button text="Submit"/>
 								</FlexBox>-->
 								<Label text=""/>
-								<Button text="Submit" press="onpresVMS" width="26%"/>
+								<Button text="{i18n>Submit}" press="onpresVMS" width="26%"/>
 								<core:Title text=""/>
 								<!--<ToolbarSpacer></ToolbarSpacer>-->
 								<!--<Label text="Zone"/>
@@ -80,33 +80,33 @@
 					<HBox>
 						<FlexBox width="40px"></FlexBox>
 						<FlexBox height="25px" alignItems="Center" justifyContent="Center">
-							<Label text="Do Not Call Block List" class="flexdontclabllist"/>
+							<Label text="{i18n>DoNotCallBlockList}" class="flexdontclabllist"/>
 							<FlexBox width="960px"></FlexBox>
-							<Button text="Delete"/>
+							<Button text="{i18n>Delete}"/>
 						</FlexBox>
 					</HBox>
 					<Table id="tableVTMBS" width="auto" class="sapUiResponsiveMargin" mode="MultiSelect" items="{/}" growingThreshold="150">
 						<columns>
 							<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
-								<Text text="Dealer"/>
+								<Text text="{i18n>Dealer}"/>
 							</Column>
 							<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
-								<Text text="Series"/>
+								<Text text="{i18n>Series}"/>
 							</Column>
 							<Column minScreenWidth="Desktop" demandPopin="true">
 								<Text text="Model"/>
 							</Column>
 							<Column minScreenWidth="Desktop" demandPopin="true">
-								<Text text="Block Duration"/>
+								<Text text="{i18n>BlockDuration}"/>
 							</Column>
 							<Column minScreenWidth="Desktop" demandPopin="true">
-								<Text text="From Date"/>
+								<Text text="{i18n>FromDate}"/>
 							</Column>
 							<Column minScreenWidth="Desktop" demandPopin="true">
-								<Text text="To Date"/>
+								<Text text="{i18n>ToDate}"/>
 							</Column>
 							<Column minScreenWidth="Desktop" demandPopin="true">
-								<Text text="Comments"/>
+								<Text text="{i18n>Comments}"/>
 							</Column>
 						</columns>
 						<items>

@@ -12,14 +12,14 @@
 							<Text class="clCustomFont" text="Vehicle Locator-Trade"/>
 						</contentLeft>
 						<contentRight>
-							<Button text="Logout"/>
+							<Button text="{i18n>Logout}"/>
 						</contentRight>
 					</Bar>
 				</customHeader>
 				<content>
 					<Toolbar class="toolbar1">
 						<ToolbarSpacer></ToolbarSpacer>
-					<!--	<Button text="Vehicle Locator" press="handleLinkPress"/>
+						<!--	<Button text="Vehicle Locator" press="handleLinkPress"/>
 						<Button text="Sold Order" press="handleLinkPress"/>
 						<Button text="Price Protection" press="handleLinkPress"/>
 						<Button text="Inventory Summary" press="handleLinkPress"/>
@@ -27,72 +27,181 @@
 					</Toolbar>
 					<VBox>
 						<OverflowToolbar id="otb1">
-							<Label text="Vehicle Locator" width="200px" class="vHlabe1clss"/>
+							<Label text="{i18n>VehicleTrade-VehicleSelection}" width="310px" class="vHlabe1clss"/>
 							<ToolbarSpacer/>
 						</OverflowToolbar>
 						<VBox>
 							<HBox>
 								<FlexBox width="40px"></FlexBox>
 								<FlexBox height="100px" alignItems="Center" justifyContent="Center">
-									<Label text="Series"/>
+									<Label text="{i18n>Series}"/>
 									<FlexBox width="7px"></FlexBox>
-								<Select id="VT_VSeries" change="onVTVSseries" width="215px" forceSelection="true" class="sapUiSizeCompact VT_VSseries" items="{}">
-									<core:ListItem key="{}" text="{jsonDatamodel>Status}"/>
-								</Select>	
-								<!--	<SearchField width="215px" id="idVehclSerTrad"/>-->
+									<ComboBox placeholder="" width="140%" showSecondaryValues="true" filterSecondaryValues="true" selectionChange="handleoVt_SeriesChange"
+										id="oVt_SeriesCmbo" items="{/}">
+										<core:ListItem text="{TCISeries} {TCISeriesDescriptionEN}" key="{TCISeries}" additionalText=""/>
+										<!--	<core:ListItem   text="{TCISeriesDescriptionEN}"      key="{TCISeriesDescriptionEN}"  additionalText =""/>-->
+									</ComboBox>
+									<!--	<SearchField width="215px" id="idVehclSerTrad"/>-->
 								</FlexBox>
 							</HBox>
-							<Table id="table" width="auto" class="sapUiResponsiveMargin" items="{/}" growingThreshold="150">
+							<t:Table id="table" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{/}" visibleRowCount="5">
+								<t:columns>
+									<t:Column id="TradecolId" width="6rem">
+										<Label text="{i18n>Select}"/>
+										<t:template>
+											<Link id="selectId" text="Select" class="link" subtle="true" press="oTradeLinkPress" wrapping="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="zzvtn" width="16rem" id="zzvtnid">
+										<Label text="{i18n>VehicleTrackingNumber}"/>
+										<t:template>
+											<Text text="{zzvtn}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="TCISeriesDescriptionEN" width="14rem" id="seriesr">
+										<Label text="{i18n>Series}"/>
+										<t:template>
+											<Text text="{TCISeriesDescriptionEN}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="matnr" width="14rem" id="matnr">
+										<Label text="{i18n>Model}"/>
+										<t:template>
+											<Text text="{matnr} - {model_desc_en}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="zzsuffix" width="8rem">
+										<Label text="{i18n>Suffix}"/>
+										<t:template>
+											<Text text="{zzsuffix} - {suffix_desc_en}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="zzapx" width="6rem">
+										<Label text="{i18n>APX}" wrapping="false"/>
+										<t:template>
+											<Text text="{zzapx}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column id="ID_DealerNet" sortProperty="zzextcol" width="14rem">
+										<Label text="{i18n>Color}" wrapping="false"/>
+										<t:template>
+											<Text text="{zzextcol} - {mktg_desc_en}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column id="ID_Profit" sortProperty="zzordertype" width="6rem">
+										<Label text="{i18n>OrderType}" wrapping="false"/>
+										<t:template>
+											<Text text="{zzordertype}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="zzadddata4" width="6rem">
+										<Label text="{i18n>ETAFrom}" wrapping="false"/>
+										<t:template>
+											<Text text="{zzadddata4}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="pstsp" width="6rem">
+										<Label text="{i18n>ETATo}" wrapping="false"/>
+										<t:template>
+											<Text text="{pstsp}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+								</t:columns>
+							</t:Table>
+							<!--		<Table id="table" width="auto" class="sapUiResponsiveMargin" items="{/}" growingThreshold="150">
 								<columns>
 									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
-										<Text text="Select"/>
+										<Text text="{i18n>Select}" design="Bold"/>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
-										<Text text="Vehicle Tracking Number"/>
+										<HBox>
+											<Text text="{i18n>VehicleTrackingNumber}" design="Bold"/>
+											<core:Icon src="sap-icon://sort-ascending" width="" id="vtnAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="true"/>
+											<core:Icon src="sap-icon://sort-descending" width="" id="vtnDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
+										</HBox>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
-										<Text text="Series"/>
+										<HBox>
+											<Text text="{i18n>Series}" design="Bold"/>
+										<core:Icon src="sap-icon://sort-ascending" width="" id="senAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
+											<core:Icon src="sap-icon://sort-descending" width="" id="senDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
+										</HBox>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
-										<Text text="Model"/>
+										<HBox>
+											<Text text="{i18n>Model}" design="Bold"/>
+											<core:Icon src="sap-icon://sort-ascending" width="" id="moAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
+											<core:Icon src="sap-icon://sort-descending" width="" id="moDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
+										</HBox>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
-										<Text text="Suffix"/>
+										<HBox>
+											<Text text="{i18n>Suffix}" design="Bold"/>
+											<core:Icon src="sap-icon://sort-ascending" width="" id="suAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
+											<core:Icon src="sap-icon://sort-descending" width="" id="suDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
+										</HBox>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
-										<Text text="APX"/>
+										<HBox>
+											<Text text="{i18n>APX}" design="Bold"/>
+											<core:Icon src="sap-icon://sort-ascending" width="" id="apAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
+											<core:Icon src="sap-icon://sort-descending" width="" id="apDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
+										</HBox>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
-										<Text text="Color"/>
+										<HBox>
+											<Text text="{i18n>Color}" design="Bold"/>
+											<core:Icon src="sap-icon://sort-ascending" width="" id="coAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
+											<core:Icon src="sap-icon://sort-descending" width="" id="coDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
+										</HBox>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
-										<Text text="Status"/>
+										<HBox>
+										<Text text="{i18n>OrderType}" design="Bold"/>
+										<core:Icon src="sap-icon://sort-ascending" width="" id="otAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
+											<core:Icon src="sap-icon://sort-descending" width="" id="otDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
+										</HBox>	
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
-										<Text text="ETA Form"/>
+										<HBox>
+										<Text text="{i18n>ETAFrom}" design="Bold"/>
+									<core:Icon src="sap-icon://sort-ascending" width="" id="etfAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
+											<core:Icon src="sap-icon://sort-descending" width="" id="etfDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
+										</HBox>		
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
-										<Text text="ETA To"/>
+										<HBox>
+										<Text text="{i18n>ETATo}" design="Bold"/>
+										<core:Icon src="sap-icon://sort-ascending" width="" id="ettAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
+											<core:Icon src="sap-icon://sort-descending" width="" id="ettDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
+										</HBox>		
 									</Column>
+									
 								</columns>
 								<items>
-									<ColumnListItem press="onLineItemPressedtree1" type="Navigation">
+									<ColumnListItem press="onLineItemPressedtree1" type="Active">
 										<cells>
-											<ObjectIdentifier title="{}"/>
-											<Text text="{}"/>
-											<Text text="{}"/>
-											<Text text="{}"/>
-											<Text text="{}"/>
-											<Text text="{}"/>
-											<Text text="{}"/>
-											<Text text="{}"/>
-											<Text text="{}"/>
-											<Text text="{}"/>
+											<HBox class="sapUiMediumMarginBegin">
+												<Link id="oSelectId" text="Select" class="sapUiSmallMarginTop link" subtle="true" press="onSelectLink"/>
+											</HBox>
+											<Text text="{ZZVTN}"/>
+											<Text text="{TCISeries}{TCISeriesDescriptionEN}"/>
+											<Text text="{Model}-{ENModelDesc}"/>
+											<Text text="{Suffix}-{SuffixDescriptionEN}"/>
+											<Text text="{ZZAPX}"/>
+											<Text text="{ZZEXTCOL}-{MKTG_DESC_EN}"/>
+											<Text text="{ZZORDERTYPE}"/>
+											<Text text="{ZZADDDATA4}"/>
+											<Text text="{PSTSP}"/>
+									
 										</cells>
 									</ColumnListItem>
 								</items>
-							</Table>
+							</Table>-->
 						</VBox>
+						<FlexBox height="100px" id="PagintionFlexId" alignItems="Center" justifyContent="End">
+							<items></items>
+						</FlexBox>
 					</VBox>
 				</content>
 			</Page>
