@@ -19,7 +19,7 @@ modules:
       service-name: vehicleLocator_Node
       service-url: '${default-url}'
       disk-quota: 256MB
-      memory: 128MB
+      memory: 256MB
    provides:
     - name: vehicleLocator_Node_api
       properties:
