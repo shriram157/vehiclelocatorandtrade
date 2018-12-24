@@ -15,6 +15,47 @@ sap.ui.define(function () {
 			}
 
 		},
+
+		OrderType: function (zzordertype) {
+			switch (zzordertype) {
+			case "SO":
+				return "STOCK Open";
+				break;
+			case "SR":
+				return "STOCK Restricted";
+				break;
+			case "DM":
+				return "DEMO";
+				break;
+			case "BA":
+				return "BANK ALLOC";
+				break;
+			case "LS":
+				return "LAUNCH Stock";
+				break;
+			case "RS":
+				return "RETAIL SOLD";
+				break;
+			case "F1":
+				return "DLR RAC";
+				break;
+			case "F2":
+				return "DLR ELITE";
+				break;
+			case "F3":
+				return "NAT RAC";
+				break;
+			case "F4":
+				return "NAT ELITE";
+				break;
+			case "F5":
+				return "MOBILITY";
+				break;
+
+			}
+
+		},
+
 		Dealer: function (kunnr) {
 			if (kunnr != null) {
 				return kunnr.substr(kunnr.length - 5);
@@ -22,16 +63,138 @@ sap.ui.define(function () {
 			}
 
 		},
-		AccessoryInstall: function(z_pd_flag)
-		{
-			if(z_pd_flag==false){
+		AccessoryInstall: function (z_pd_flag) {
+			if (z_pd_flag == false) {
 				return "No";
-			}
-			else if(z_pd_flag==true){
+			} else if (z_pd_flag == true) {
 				return "Yes";
 			}
+
+		},
+
+		DNC: function (DNC) {
+			if (DNC == "X") {
+				return "Yes";
+			} else if (DNC == null || DNC == "N") {
+				return "No";
+			} else if (DNC == "Y")
+			{
+				
+				return "Yes";	
+			}
+
+		},
+		DNCBlockout: function (DNC) {
+			switch (DNC) {
+			case "X":
+				return true;
+				break;
+			case "":
+				return false;
+				break;
+			case "Y":
+				return true;
+				break;
+			case "N":
+				return false;
+				break;	
+
+			}
 			
+			/*	if (DNC == "X") {
+				return true;
+			} else if (DNC == null || DNC =="") {
+				return false;
+			}
+		*/
+
+		},
+
+		TradeSummaryStatus: function (Trade_Status) {
+			switch (Trade_Status) {
+			case "A":
+				return "Accepted";
+				break;
+			case "C":
+				return "Countered";
+				break;
+			case "X": //Update this
+				return "Canceled";
+				break;
+			case "R": //Update this
+				return "Rejected";
+				break;
+			case "S": //Update this
+				return "Sent";
+				break;
+			case "F": //Update this
+				return "Failed";
+				break;
+
+			}
+
+		},
+	/*	AddCommnentButton: function (Trade_Status) {
+			if (Trade_Status == "C" || Trade_Status == "S") {
+				return true;
+			} else {
+				return false;
+
+			}
+
+		},*/
+		TradeReturn: function (Trade_Return) {
+			switch (Trade_Return) {
+			case "Y":
+				return "Yes-Single Vehicle";
+				break;
+			case "N":
+				return "No-Single Vehicle";
+				break;
+
+			}
+
+		},
+
+		TradeSummaryTrdReturn: function (Trade_Return) {
+			switch (Trade_Return) {
+			case "Y":
+				return "Yes";
+				break;
+			case "N":
+				return "No";
+				break;
+
+			}
+
+		},
+		TradeSummaryoDealer: function (Requesting_Dealer) {
+
+			if (Requesting_Dealer != null || Requesting_Dealer >= 5) {
+				return Requesting_Dealer.substr(Requesting_Dealer.length - 5);
+
+			}
+
+		},
+
+		TradeSummaryoDate: function (Created_On) {
+			if (Created_On != null && Created_On != "") {
+				var dateTo = Created_On.split("(")[1];
+				if (dateTo.includes("+") == true) {
+					dateTo = dateTo.split("+")[0];
+				} else {
+					dateTo = dateTo;
+				}
+				var dataTo1 = dateTo.substring(0, dateTo.length - 5);
+				var ValidTo = new Date(dataTo1 * 1000);
+				ValidTo = ValidTo.toGMTString().substring(4, 16);
+				var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+					pattern: "MM/dd/yyyy"
+				});
+				return oDateFormat.format(new Date(ValidTo));
+			}
 		}
+
 	};
 	return Formatter;
 }, true);

@@ -1,4 +1,4 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" 
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
 	controllerName="vehicleLocator.controller.VehicleTrade_VehicleSelection" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form"
 	xmlns:uxap="sap.uxap" xmlns:t="sap.ui.table" xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml">
 	<App>
@@ -44,86 +44,71 @@
 									<!--	<SearchField width="215px" id="idVehclSerTrad"/>-->
 								</FlexBox>
 							</HBox>
-							
-<t:Table id="table" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{/}" visibleRowCount="5">
-							<t:columns>
-								<t:Column id="TradecolId" width="6rem">
-									<Label text="{i18n>Select}"/>
-									<t:template>
-										<Link id="selectId" text="Select" class="link" subtle="true" press="oTradeLinkPress"  wrapping="false"/>
-									</t:template>
-								</t:Column>
-								<t:Column sortProperty="kunnr" width="16rem">
-									<Label text="{i18n>Dealer}"/>
-									<t:template>
-										<Text text="{path:'kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'} -{name1}"  wrapping="false"/>
-									</t:template>
-								</t:Column>
-								<t:Column sortProperty="matnr" width="14rem" id="matnr">
-									<Label text="{i18n>Model}"/>
-									<t:template>
-										<Text text="{matnr} - {model_desc_en}" wrapping="false"/>
-									</t:template>
-								</t:Column>
-								<t:Column sortProperty="zzsuffix" width="8rem">
-									<Label text="{i18n>Suffix}"/>
-									<t:template>
-										<Text text="{zzsuffix} - {suffix_desc_en}" wrapping="false"/>
-									</t:template>
-								</t:Column>
-								<t:Column sortProperty="zzapx" width="6rem">
-									<Label text="{i18n>APX}" wrapping="false"/>
-									<t:template>
-										<Text text="{zzapx}" wrapping="false"/>
-									</t:template>
-								</t:Column>
-								<t:Column id="ID_DealerNet" sortProperty="zzextcol" width="14rem">
-									<Label text="{i18n>Color}" wrapping="false"/>
-									<t:template>
-										<Text text="{zzextcol} - {mktg_desc_en}" wrapping="false"/>
-									</t:template>
-								</t:Column>
-								<t:Column id="ID_Profit" sortProperty="zzordertype" width="6rem">
-									<Label text="{i18n>OrderType}" wrapping="false"/>
-									<t:template>
-										<Text text="{zzordertype}" wrapping="false"/>
-									</t:template>
-								</t:Column>
-								<t:Column sortProperty="zzadddata4" width="6rem">
-									<Label text="{i18n>ETAFrom}" wrapping="false"/>
-									<t:template>
-										<Text text="{zzadddata4}" wrapping="false"/>
-									</t:template>
-								</t:Column>
-								<t:Column sortProperty="pstsp" width="6rem">
-									<Label text="{i18n>ETATo}" wrapping="false"/>
-									<t:template>
-										<Text text="{pstsp}" wrapping="false"/>
-									</t:template>
-								</t:Column>
-								<t:Column sortProperty="z_pd_flag" width="6rem">
-									<Label text="{i18n>AccessoryInstall}" wrapping="false"/>
-									<t:template>
-										<Text text="{path:'z_pd_flag',formatter:'vehicleLocator.Formatter.Formatter.AccessoryInstall'}" wrapping="false"/>
-									</t:template>
-								</t:Column>
-								<t:Column width="8rem">
-									<Label text="{i18n>City}" wrapping="false"/>
-									<t:template>
-										<Text text="{ort01}" wrapping="false"/>
-									</t:template>
-								</t:Column>
-								<t:Column width="12rem">
-									<Label text="{i18n>Province}" wrapping="false"/>
-									<t:template>
-										<Text text="{bezei}" wrapping="false"/>
-									</t:template>
-								</t:Column>
-							</t:columns>
-						</t:Table>				
-			
-							
-					<!--		<Table id="table" width="auto" class="sapUiResponsiveMargin" items="{/}" growingThreshold="150">
+							<t:Table id="table" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{/}" visibleRowCount="5">
+								<t:columns>
+									<t:Column id="TradecolId" width="6rem">
+										<Label text="{i18n>Select}"/>
+										<t:template>
+											<Link id="selectId" text="Select" class="link" subtle="true" press="oTradeLinkPress" wrapping="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="zzvtn" width="16rem" id="zzvtnid">
+										<Label text="{i18n>VehicleTrackingNumber}"/>
+										<t:template>
+											<Text text="{zzvtn}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="TCISeriesDescriptionEN" width="14rem" id="seriesr">
+										<Label text="{i18n>Series}"/>
+										<t:template>
+											<Text text="{TCISeriesDescriptionEN}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="matnr" width="14rem" id="matnr">
+										<Label text="{i18n>Model}"/>
+										<t:template>
+											<Text text="{matnr} - {model_desc_en}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="zzsuffix" width="8rem">
+										<Label text="{i18n>Suffix}"/>
+										<t:template>
+											<Text text="{zzsuffix} - {suffix_desc_en}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="zzapx" width="6rem">
+										<Label text="{i18n>APX}" wrapping="false"/>
+										<t:template>
+											<Text text="{zzapx}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column id="ID_DealerNet" sortProperty="zzextcol" width="14rem">
+										<Label text="{i18n>Color}" wrapping="false"/>
+										<t:template>
+											<Text text="{zzextcol} - {mktg_desc_en}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column id="ID_Profit" sortProperty="zzordertype" width="6rem">
+										<Label text="{i18n>OrderType}" wrapping="false"/>
+										<t:template>
+											<Text text="{zzordertype}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="zzadddata4" width="6rem">
+										<Label text="{i18n>ETAFrom}" wrapping="false"/>
+										<t:template>
+											<Text text="{zzadddata4}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="pstsp" width="6rem">
+										<Label text="{i18n>ETATo}" wrapping="false"/>
+										<t:template>
+											<Text text="{pstsp}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+								</t:columns>
+							</t:Table>
+							<!--		<Table id="table" width="auto" class="sapUiResponsiveMargin" items="{/}" growingThreshold="150">
 								<columns>
 									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
 										<Text text="{i18n>Select}" design="Bold"/>
@@ -214,9 +199,9 @@
 								</items>
 							</Table>-->
 						</VBox>
-							<FlexBox height="100px" id="PagintionFlexId" alignItems="Center" justifyContent="End">
-						<items></items>
-					</FlexBox>
+						<FlexBox height="100px" id="PagintionFlexId" alignItems="Center" justifyContent="End">
+							<items></items>
+						</FlexBox>
 					</VBox>
 				</content>
 			</Page>

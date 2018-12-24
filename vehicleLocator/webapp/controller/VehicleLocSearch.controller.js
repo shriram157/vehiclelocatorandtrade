@@ -17,13 +17,33 @@ sap.ui.define([
 				var oZoneUser = 50211;
 				var oTciUser =  61122;
 				var oLanguage = "EN";*/
+			var oLoginDealer = {
+				"Username": "AMRO",
+				"Language": "EN",
+				"BussinesspartnerCode": "2400042176",
+				"Zone": "5000", //we didnt get zone, pass for the loggin dealer 
+				"DealerCode": "42176",
+				"Dealername": "Toyota-Amro",
+				"UserType": "Dealer",
+				"Division": "10"
 
-			var isLocaleSent = window.location.search.match(/language=([^&]*)/i);
-			if (isLocaleSent) {
-				var sSelectedLocale = window.location.search.match(/language=([^&]*)/i)[1];
-			} else {
-				var sSelectedLocale = "EN"; // default is english 
+				/*	 Customer='2400042176',SalesOrganization='6000',DistributionChannel='10',Division='10')*/
+
+			};
+			sap.ui.getCore().LoginDetails = oLoginDealer;
+			if (oLoginDealer.Division == "10") {
+				this.Division = "TOY";
+			} else if (oLoginDealer.Division == "20") {
+				this.Division = "LEX";
 			}
+
+			/*	var isLocaleSent = window.location.search.match(/language=([^&]*)/i);
+				if (isLocaleSent) {
+					var sSelectedLocale = window.location.search.match(/language=([^&]*)/i)[1];
+				} else {
+					var sSelectedLocale = "EN"; // default is english 
+				}*/
+			var sSelectedLocale = "EN";
 			//selected language. 
 			// if (window.location.search == "?language=fr") {
 			if (sSelectedLocale == "fr") {
@@ -207,6 +227,76 @@ sap.ui.define([
 
 			/*	that.oDataUrl = "https://tcid1gwapp1.tci.internal.toyota.ca:44300/sap/opu/odata/sap/Z_VEHICLE_CATALOGUE_SRV";*/
 			//	that.oDataUrl = "/vehicleLocatorNode/node/Z_VEHICLE_CATALOGUE_SRV";
+			debugger
+			//Bussinesspartner zone implementation---------------------//
+			var that = this;
+			var SalesOrganization = 6000;
+			var DistributionChannel = 10;
+			var Division = sap.ui.getCore().LoginDetails.Division;
+			var oDealer = sap.ui.getCore().LoginDetails.BussinesspartnerCode;
+
+			var sLocation = window.location.host;
+			var sLocation_conf = sLocation.search("webide");
+
+			if (sLocation_conf == 0) {
+				this.sPrefix = "/vehicleLocatorNode";
+			} else {
+				this.sPrefix = "";
+
+			}
+
+			this.nodeJsUrl = this.sPrefix + "/node";
+			that.oDataUrl = this.nodeJsUrl + "/API_BUSINESS_PARTNER";
+
+			that.Customersales = this.nodeJsUrl + "/A_CustomerSalesArea";
+
+			that.BussinesspartnerUrl = that.oDataUrl + "/A_CustomerSalesArea?$filter=Customer eq'" + oDealer + "' and SalesOrganization eq '" +
+				SalesOrganization +
+				"' and DistributionChannel eq '" + DistributionChannel + "' and Division eq '" + Division + "'";
+
+			var ajax = $.ajax({
+				dataType: "json",
+				xhrFields: {
+					withCredentials: true
+				},
+				url: that.BussinesspartnerUrl,
+				async: true,
+				success: function (data) {
+					var Zone = data.d.results[0];
+					var SelectedZone = Zone.SalesOffice;
+					switch (SelectedZone) {
+					case "1000":
+						that.getView().byId("Pacific").setSelected(true);
+						return;
+						break;
+					case "2000":
+						that.getView().byId("Prairie").setSelected(true);
+						return;
+						break;
+					case "3000": //Update this
+						that.getView().byId("Central").setSelected(true);
+						return;
+						break;
+					case "4000": //Update this
+						that.getView().byId("Quebec").setSelected(true);
+						return;
+						break;
+					case "5000": //Update this
+						that.getView().byId("Atlantic").setSelected(true);
+						return;
+						break;
+					case "6000": //Update this
+						/*	that.getView().byId("Atlantic").setSelected(true);*/
+						return;
+						break;
+					}
+				},
+				error: function () {
+					alert("Error");
+				}
+			});
+
+			//Bussinesspartner zone implementation.----------//
 
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
@@ -468,6 +558,7 @@ sap.ui.define([
 							if (that.Fullurls[a].TCISeries == SeriesDescription[b].ModelSeriesNo) {
 								that.Fullurls[a].TCISeriesDescriptionEN = SeriesDescription[b].TCISeriesDescriptionEN;
 								that.Fullurls[a].TCISeriesDescriptionFR = SeriesDescription[b].TCISeriesDescriptionFR;
+								that.Fullurls[a].Division = SeriesDescription[b].Division;
 
 							}
 						}
@@ -477,6 +568,8 @@ sap.ui.define([
 					for (var i = 0; i < that.Fullurls.length; i++) {
 						that.Fullurls.TCISeriesDescriptionEN = "";
 						that.Fullurls.TCISeriesDescriptionFR = "";
+						that.Fullurls.Division = "";
+
 					}
 				}
 				/*	var obj = {};
@@ -485,7 +578,10 @@ sap.ui.define([
 						that.Fullurls = new Array();
 						for (var key in obj)
 							that.Fullurls.push(obj[key]);*/
-
+				debugger
+				that.Fullurls = that.Fullurls.filter(function (x) {
+					return x.Division == that.Division;
+				});
 				var SeriesModel = new sap.ui.model.json.JSONModel(that.Fullurls);
 				that.getView().setModel(SeriesModel, "SeriesData");
 
@@ -499,11 +595,11 @@ sap.ui.define([
 			that.getView().byId("SuffCmbo").setSelectedKey();
 			that.getView().setModel(that.oJsonModelVLS, "Suffix");
 			that.getView().setModel(that.oJsonModelVLS, "ModelCode");
-			that.getView().byId("Pacific").setSelected(false);
-			that.getView().byId("Prairie").setSelected(false);
-			that.getView().byId("Central").setSelected(false);
-			that.getView().byId("Atlantic").setSelected(false);
-			that.getView().byId("Quebec").setSelected(false);
+			/*	that.getView().byId("Pacific").setSelected(false);
+				that.getView().byId("Prairie").setSelected(false);
+				that.getView().byId("Central").setSelected(false);
+				that.getView().byId("Atlantic").setSelected(false);
+				that.getView().byId("Quebec").setSelected(false);*/
 
 			/* that.getView().byId("McCmbo").setModel(oJsonModelVLSEmty);
 			  that.getView().byId("SuffCmbo").setModel(oJsonModelVLSEmty);*/
@@ -578,11 +674,11 @@ sap.ui.define([
 
 			that.oSelectedModel = that.getView().byId("McCmbo").getSelectedKey();
 
-			that.getView().byId("Pacific").setSelected(false);
-			that.getView().byId("Prairie").setSelected(false);
-			that.getView().byId("Central").setSelected(false);
-			that.getView().byId("Atlantic").setSelected(false);
-			that.getView().byId("Quebec").setSelected(false);
+			/*	that.getView().byId("Pacific").setSelected(false);
+				that.getView().byId("Prairie").setSelected(false);
+				that.getView().byId("Central").setSelected(false);
+				that.getView().byId("Atlantic").setSelected(false);
+				that.getView().byId("Quebec").setSelected(false);*/
 			//	that.getView().byId("McCmbo").setSelectedKey(that.oSelectedModel);
 			//	that.oDataUrl = "https://vehiclelocator_node.cfapps.us10.hana.ondemand.com/node/Z_VEHICLE_CATALOGUE_SRV";
 
@@ -623,6 +719,7 @@ sap.ui.define([
 						SufixDescription.push(obj[key]);*/
 				var Suffix = new sap.ui.model.json.JSONModel(SufixDescription);
 				that.getView().setModel(Suffix, "Suffix");
+				sap.ui.getCore().setModel(Suffix, "VehicleLocatorSuffix");
 				/*	var oJsonModelVLS = new sap.ui.model.json.JSONModel(oResults);
 					that.getView().byId("SuffCmbo").setModel(oJsonModelVLS);*/
 
@@ -717,11 +814,11 @@ sap.ui.define([
 			that.getView().byId("McCmbo").setSelectedKey("");
 
 			that.oSelectedYear = that.getView().byId("MoyearCombo").getSelectedKey();
-			that.getView().byId("Pacific").setSelected(false);
-			that.getView().byId("Prairie").setSelected(false);
-			that.getView().byId("Central").setSelected(false);
-			that.getView().byId("Atlantic").setSelected(false);
-			that.getView().byId("Quebec").setSelected(false);
+			/*	that.getView().byId("Pacific").setSelected(false);
+				that.getView().byId("Prairie").setSelected(false);
+				that.getView().byId("Central").setSelected(false);
+				that.getView().byId("Atlantic").setSelected(false);
+				that.getView().byId("Quebec").setSelected(false);*/
 
 			that.SeriesBinding(that.oSelectedYear);
 
@@ -972,10 +1069,111 @@ sap.ui.define([
 						return SelectedZone.includes(person.vkbur);
 					});
 
+					var Dealer = sap.ui.getCore().LoginDetails.DealerCode;
+
+					var FilterDeleade_OrderTypefilteNotnull = filtered_zone.filter(function (x) {
+						return x.kunnr != null;
+					});
+					/*	var FilterDeleade_OrderTypefiltered_zone=FilterDeleade_OrderTypefilteNotnull.filter(function(x){return x.kunnr.slice(-5)==Dealer &&(x.zzordertype=="DM" ||x.zzordertype=="SO")});*/
+
+					//	var FilterDeleade_OrderTypefiltered_zone
+					var FilterDeleade_OrderTypefiltered_zone = FilterDeleade_OrderTypefilteNotnull.filter(function (x) {
+						return x.kunnr.slice(-5) != Dealer;
+					});
+
+					var oTCIcodes = [
+						"2400500000",
+						"2400542217",
+						"2400500002",
+						"2400500003",
+						"2400500004",
+						"2400500005",
+						"2400500006",
+						"2400500007",
+						"2400500008",
+						"2400500010",
+						"2400500011",
+						"2400500012",
+						"2400500013",
+						"2400500014",
+						"2400500015",
+						"2400500017",
+						"2400500018",
+						"2400500019",
+						"2400500020",
+						"2400500021",
+						"2400500023",
+						"2400500024",
+						"2400500025",
+						"2400500027",
+						"2400500028",
+						"2400500030",
+						"2400500032",
+						"2400500060",
+						"2400500064",
+						"2400500070",
+						"2400500072",
+						"2400500074",
+						"2400500076",
+						"2400500078",
+						"2400500099",
+						"2400500070",
+						"2400500072",
+						"2400500074",
+						"2400500076",
+						"2400500078"
+					];
+
+					//	var FilterDeleade_OrderTypefiltered_zone
+					var oExcludeTci = FilterDeleade_OrderTypefiltered_zone.filter(function (objFromA) {
+						return !oTCIcodes.find(function (objFromB) {
+							return (objFromA.kunnr).slice(-5) === objFromB.slice(-5);
+						});
+					});
+
+					var oZoneExclude = [
+						"2400507000",
+						"2400517000",
+						"2400547000",
+						"2400557000",
+						"2400577000",
+						"2400507100",
+						"2400517100",
+						"2400547100",
+						"2400557100",
+						"2400577100",
+						"2400500070",
+						"2400500072",
+						"2400500074",
+						"2400500076",
+						"2400500078",
+						"2400517200",
+						"2400517300",
+						"2400517600",
+						"2400517400",
+						"2400517500",
+						"2400557200",
+						"2400577200",
+						"2400577300",
+						"2400517210",
+						"2400517310",
+						"2400517610",
+						"2400517410",
+						"2400517510"
+					];
+			
+	var oZoneExclude = oExcludeTci.filter(function (objFromA) {
+						return !oZoneExclude.find(function (objFromB) {
+							return (objFromA.kunnr).slice(-5) === objFromB.slice(-5);
+						});
+					});				
+
 					var suffixField = that.value;
 					var oSuffmodel = new sap.ui.model.json.JSONModel(suffixField);
+					oSuffmodel.setSizeLimit(10000);
 					sap.ui.getCore().setModel(oSuffmodel, "oSuffieldmodel");
-					var oDumModel = new sap.ui.model.json.JSONModel(filtered_zone);
+					var oDumModel = new sap.ui.model.json.JSONModel(oZoneExclude);
+					oDumModel.setSizeLimit(100000);
 					sap.ui.getCore().setModel(oDumModel, "SearchedData");
 					that.getRouter().navTo("VehicleSearcResults", {
 						LoginUser: LoginUser
@@ -1069,26 +1267,202 @@ sap.ui.define([
 			}
 		},
 		SufficClickedVLS11: function (oEvent) {
-		/*	this.SelectedExteriorColorCode = oEvent.getParameter("selectedItem").oBindingContexts.Suffix.getObject().ExteriorColorCode;
-				this.SelectedTrimInteriorColor = oEvent.getParameter("selectedItem").oBindingContexts.Suffix.getObject().TrimInteriorColor;*/
-		/*	this.SelectedExteriorColorCode = "";
-				this.SelectedTrimInteriorColor = "";*/
-					this.SelectedExteriorColorCode = "";
-				this.SelectedTrimInteriorColor = "";
-				var that = this;
-				that.getView().byId("Pacific").setSelected(false);
-				that.getView().byId("Prairie").setSelected(false);
-				that.getView().byId("Central").setSelected(false);
-				that.getView().byId("Atlantic").setSelected(false);
-				that.getView().byId("Quebec").setSelected(false);
+			this.SelectedExteriorColorCode = oEvent.getParameter("selectedItem").oBindingContexts.Suffix.getObject().ExteriorColorCode;
+			this.SelectedTrimInteriorColor = oEvent.getParameter("selectedItem").oBindingContexts.Suffix.getObject().TrimInteriorColor;
+			/*	this.SelectedExteriorColorCode = "";
+					this.SelectedTrimInteriorColor = "";*/
+			/*	this.SelectedExteriorColorCode = "01D6";
+				this.SelectedTrimInteriorColor = "LC14";*/
+			var that = this;
+			/*that.getView().byId("Pacific").setSelected(false);
+			that.getView().byId("Prairie").setSelected(false);
+			that.getView().byId("Central").setSelected(false);
+			that.getView().byId("Atlantic").setSelected(false);
+			that.getView().byId("Quebec").setSelected(false);*/
 
-			}
-			//	}
+		},
+		//	}
 
 		/*onModleCodeClick: function (oEvent) {
 			var oSelectedItems = oEvent.oSource.getSelectedItem().getBindingContext().getObject();
 
 		}*/
+
+		DummyPress: function () {
+			var that = this;
+
+			/*$.ajax({
+				url: that.oDataUrl,
+				method: "GET",
+				async: false,
+				dataType: "json",
+
+				success: function (oData) {
+
+					debugger;
+					var Data = oData.d.results;
+				},
+		error: function (response) {
+					alert("Error");
+				}
+	
+         //   }
+//},
+			
+			});*/
+
+			var that = this;
+			var sLocation = window.location.host;
+			var sLocation_conf = sLocation.search("webide");
+
+			if (sLocation_conf == 0) {
+				this.sPrefix = "/VehicleLocator_Xsodata";
+			} else {
+				this.sPrefix = "";
+
+			}
+			this.nodeJsUrl = this.sPrefix + "/vehicleTrade";
+			that.TradeRequestoDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeRequest";
+			var ajax1 = $.ajax({
+				dataType: "json",
+				xhrFields: //
+				{
+					withCredentials: true
+				},
+
+				/*	beforeSend: function (request) {
+						request.setRequestHeader('Authorization', 'Basic ' + btoa('anisetc:anisetc'));
+					},*/
+				url: that.TradeRequestoDataUrl,
+				async: true,
+				success: function (result) {}
+			});
+			that.TradeVehiclesDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeVehicles";
+			/*var /zc_mmfields*/
+			var ajax2 = $.ajax({
+				dataType: "json",
+				xhrFields: //
+				{
+					withCredentials: true
+				}
+				/*,
+				      beforeSend: function (request)
+				           {
+				               request.setRequestHeader('Authorization', 'Basic ' + btoa(''));
+				           }*/
+				,
+				url: that.TradeVehiclesDataUrl,
+				async: true,
+				success: function (result) {}
+			});
+			that.oTradeVehicleDescDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeVehicleDesc";
+			/*	var oTradeVehicleDesc = that.oDataUrl + "/TradeVehicleDesc";*/
+			var ajax3 = $.ajax({
+				dataType: "json",
+				xhrFields: //
+				{
+					withCredentials: true
+				}
+				/*,
+				      beforeSend: function (request)
+				           {
+				               request.setRequestHeader('Authorization', 'Basic ' + btoa(''));
+				           }*/
+				,
+				url: that.oTradeVehicleDescDataUrl,
+				async: true,
+				success: function (result) {}
+			});
+
+			sap.ui.core.BusyIndicator.show();
+			var that = this;
+			$.when(ajax1, ajax2, ajax3).done(function (TradeRequest, TradeVehicles, oTradeVehicleDesc) {
+
+				var TradeRequest = TradeRequest[0].d.results;
+				var TradeRequestModel = new sap.ui.model.json.JSONModel(TradeRequest);
+				sap.ui.getCore().setModel(TradeRequestModel, "TradeRequestModel");
+
+				var TradeVehicles = TradeVehicles[0].d.results;
+				var TradeVehiclesModel = new sap.ui.model.json.JSONModel(TradeVehicles);
+				sap.ui.getCore().setModel(TradeVehiclesModel, "TradeVehiclesModel");
+
+				var oTradeVehicleDesc = oTradeVehicleDesc[0].d.results;
+				var oTradeVehicleDescModel = new sap.ui.model.json.JSONModel(oTradeVehicleDesc);
+				sap.ui.getCore().setModel(oTradeVehicleDescModel, "oTradeVehicleDescModel");
+				var filtered = [];
+				for (var i = 0; i < TradeRequest.length; i++) {
+					for (var j = 0; j < TradeVehicles.length; j++) {
+						if (TradeRequest[i].Trade_Id == TradeVehicles[j]["Trade_Id.Trade_Id"]) {
+							/*TradeRequest[i].push(TradeVehicles[j]);*/
+
+							var realMerge = function (to, from) {
+
+								for (var n in from) {
+
+									if (typeof to[n] != 'object') {
+										to[n] = from[n];
+									} else if (typeof from[n] == 'object') {
+										to[n] = realMerge(to[n], from[n]);
+									}
+								}
+								return to;
+							};
+							var merged = realMerge(TradeRequest[i], TradeVehicles[j]);
+							filtered.push(merged);
+
+						}
+					}
+
+				}
+				var Spars = "E";
+				var finalArray = [];
+				for (var k = 0; k < filtered.length; k++) {
+					for (var l = 0; l < oTradeVehicleDesc.length; l++) {
+						if (filtered[k].Trade_Id == oTradeVehicleDesc[l]["Trade_Id.Trade_Id"] && filtered[k].VTN == oTradeVehicleDesc[l]["VTN.VTN"] &&
+							oTradeVehicleDesc[l].SPRAS == Spars) {
+							filtered[k].Ext_Colour_Desc = oTradeVehicleDesc[l].Ext_Colour_Desc;
+							filtered[k].Int_Colour_Desc = oTradeVehicleDesc[l].Int_Colour_Desc;
+							filtered[k].Model_Desc = oTradeVehicleDesc[l].Model_Desc;
+							filtered[k].SPRAS = oTradeVehicleDesc[l].SPRAS;
+							filtered[k].Series_Desc = oTradeVehicleDesc[l].Series_Desc;
+							filtered[k].Suffix_Desc = oTradeVehicleDesc[l].Suffix_Desc;
+
+							/*Ext_Colour_Desc: "50"
+							Int_Colour_Desc: "30"
+							Model_Desc: "40"
+							SPRAS: "1"
+							Series_Desc: "50"
+							Suffix_Desc: "30"
+							TradeVehicleDescs: {__deferred: {…}}
+							Trade_Id.Trade_Id: "8"
+							VTN.VTN: "6" */
+
+							/*				var realMerge = function (to, from) {
+
+							    for (var n in from) {
+
+							        if (typeof to[n] != 'object') {
+							            to[n] = from[n];
+							        } else if (typeof from[n] == 'object') {
+							            to[n] = realMerge(to[n], from[n]);
+							        }
+							    }
+							    return to;
+							};*/
+							/*	var merged = realMerge(filtered[k],oTradeVehicleDesc[l]);
+												finalArray.push(merged);*/
+						}
+					}
+				}
+				debugger;
+				var oModel = new sap.ui.model.json.JSONModel(filtered);
+				sap.ui.getCore().setModel(oModel, "oVehicleTrade_Summary");
+				//	console(finalArray);
+				that.getRouter().navTo("VehicleTrade_Summary");
+				sap.ui.core.BusyIndicator.hide();
+			});
+
+		}
 
 	});
 });

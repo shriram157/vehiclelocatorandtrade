@@ -32,11 +32,12 @@ module.exports = function() {
 	var auth64 = 'Basic ' + new Buffer(uname + ':' + pwd).toString('base64');
 
 	var reqHeader = {
-		"Authorization": auth64,
-		"Content-Type": "application/json",
-		"APIKey": APIKey,
-		"x-csrf-token": "Fetch"
-	};
+        "Authorization": auth64,
+        "Content-Type": "application/json",
+        "APIKey": APIKey,
+        "x-csrf-token": "Fetch",
+        "InvalidateCache": "true"
+    };
 
 	app.use(function (req, res, next) {
 		res.header("Access-Control-Allow-Origin", "*");

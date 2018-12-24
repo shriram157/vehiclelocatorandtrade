@@ -18,7 +18,9 @@
 				</customHeader>
 				<content>
 					<Toolbar height="48px" class="toolbar1">
+						
 						<ToolbarSpacer></ToolbarSpacer>
+							<Button text="Dummy" press="DummyPress"/>
 						<!--	<Button text="Vehicle Locator" press="handleLinkPress"/>
 						<Button text="Sold Order" press="handleLinkPress"/>
 						<Button text="Price Protection" press="handleLinkPress"/>
@@ -121,11 +123,11 @@
 								<ToolbarSpacer></ToolbarSpacer>
 								<Label text="{i18n>Zone}" required="true"/>
 								<VBox>
-									<CheckBox text="{i18n>Pacific}" id="Pacific"/>
-									<CheckBox text="{i18n>Prairie}" id="Prairie"/>
-									<CheckBox text="{i18n>Central}" id="Central"/>
-									<CheckBox text="{i18n>Atlantic}" id="Atlantic"/>
-									<CheckBox text="{i18n>Quebec}" id="Quebec"/>
+									<CheckBox text="{i18n>Pacific}" id="Pacific" selected="false"/>
+									<CheckBox text="{i18n>Prairie}" id="Prairie" selected="false"/>
+									<CheckBox text="{i18n>Central}" id="Central" selected="false"/>
+									<CheckBox text="{i18n>Atlantic}" id="Atlantic" selected="false"/>
+									<CheckBox text="{i18n>Quebec}" id="Quebec" selected="false"/>
 								</VBox>
 							</form:content>
 						</form:SimpleForm>

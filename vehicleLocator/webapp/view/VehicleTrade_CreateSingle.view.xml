@@ -47,10 +47,14 @@
 								<Label text="{i18n>Model}"/>
 								<Text text="{TradeModel>matnr}-{TradeModel>model_desc_en}" id="oZmodel"/>
 								<Label text="{i18n>Suffix}"/>
-								<Text text="{TradeModel>zzsuffix}-{TradeModel>suffix_desc_en}" id="oZsuffix"/>
+								<Text text="{TradeModel>zzsuffix}-{TradeModel>suffix_desc_en} /{TradeModel>zzintcol}{TradeModel>mrktg_int_desc_en}" id="oZsuffix"/>
 								<Label text="{i18n>APX}"/>
 								<Text text="{TradeModel>zzapx}" id="oApx"/>
-								<Label text="{i18n>ExteriorColor}"/>
+								<Label text="{i18n>Status}"/>
+								<Text text="{path:'TradeModel>zz_trading_ind',formatter:'vehicleLocator.Formatter.Formatter.Status'}"  id="oStatus"/>
+									<Label text="{i18n>OrderType}"/>
+								<Text text="{path:'TradeModel>zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}"   id="oOrdertype"/>
+									<Label text="{i18n>ExteriorColor}"/>
 								<Text text="{TradeModel>zzextcol}-{TradeModel>mktg_desc_en}" id="Zextcolo"/>
 								<Label text="{i18n>CurrentETA}" id="cetalabelid">
 									<layoutData>
@@ -86,7 +90,7 @@
 								</Text>
 								<Text text="{i18n>To}" id="idlabltxt"/>
 
-								<core:Title text="{i18n>OfferVehicleInformation}" id="oOtherVehInfoid" width="200px"/>
+								<core:Title text="{i18n>OfferVehicleInformation}" id="oOtherVehInfoid"/>
 						<!--	<VBox id="oVboxOtherVehicleInformation" visible="false">-->
 								<Label text="{i18n>VehicleTrackingNumber}" id="vtnlabeid" visible="false"/>
 								<Text text="{TradeModel>/VehicleTradeVehicle/ZZVTN}" id="vtnid" visible="false"/>
@@ -97,8 +101,14 @@
 								<Label text="{i18n>Model}" id="modlabelid" visible="false"/>
 								<Text text="{TradeModel>/VehicleTradeVehicle/Model} - {TradeModel>/VehicleTradeVehicle/ENModelDesc}" id="modlid" visible="false"/>
 								<Label text="{i18n>Suffix}" id="sufflabeid" visible="false"/>
-								<Text text="{TradeModel>/VehicleTradeVehicle/Suffix} - {TradeModel>/VehicleTradeVehicle/SuffixDescriptionEN}" id="suffid" visible="false"/>
+								<Text text="{TradeModel>/VehicleTradeVehicle/zzsuffix} - {TradeModel>/VehicleTradeVehicle/suffix_desc_en}/{TradeModel>/VehicleTradeVehicle/zzintcol}{TradeModel>/VehicleTradeVehicle/mrktg_int_desc_en}" id="suffid" visible="false"/>
 								<Label text="{i18n>APX}" id="apxlabelid" visible="false"/>
+								
+									<Label text="{i18n>Status}"  visible="false" id="ofvestats"/>
+								<Text text="{TradeModel>zzapx}" id="offeredStatus" visible="false"/>
+									<Label text="{i18n>OrderType}"  visible="false" id="offordetype"/>
+								<Text text="{TradeModel>zzapx}" id="oofferedOrdertype" visible="false"/>
+								
 								<Text text="{TradeModel>/VehicleTradeVehicle/ZZAPX}" id="apxid" visible="false"/>
 								<Label text="{i18n>ExteriorColor}" id="extcollabelid" visible="false"/>
 								<Text text="{TradeModel>/VehicleTradeVehicle/ZZEXTCOL}" id="extcolod" visible="false"/>
@@ -141,13 +151,13 @@
 								<ComboBox id="VT_CStradinRet" selectionChange="onVTCStir" width="220px"  items="{/}">
 									<core:ListItem key="{State}" text="{State}-{Trade_return}"/>
 								</ComboBox>
-								<Button text="{i18n>SelectVehicle}" id="oSeleBtn" press="onSelecveh">
+								<Button text="{i18n>SelectVehicle}" id="oSeleBtn" press="onSelecveh" visible="false">
 									<layoutData>
 										<l:GridData span="L3 M12 S3"/>
 									</layoutData>
 								</Button>
 								<Label text="{i18n>TradeRequestStatus}"/>
-								<Text text="{Trade_Status}"/>
+								<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}"/>
 								<Label text="{i18n>Comments}"/>
 								<TextArea id="oTypeHere" value=" " width="387px" height="100px"/>
 							</form:content>

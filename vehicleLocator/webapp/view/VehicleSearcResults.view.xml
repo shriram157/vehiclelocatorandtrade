@@ -103,7 +103,8 @@
 										<core:ListItem text="{VehicleLocatorScdScr>zzsuffix} - {VehicleLocatorScdScr>suffix_desc_en}" key="{VehicleLocatorScdScr>ZZSUFFIX}"/>
 									</ComboBox>-->
 										<ComboBox id="VLRSuffix"  selectionChange="onStatusChange"  items="{/}">
-										<core:ListItem text="{zzsuffix} - {suffix_desc_en}" key="{zzsuffix}"/>
+										<core:ListItem text="{zzsuffix} - {suffix_desc_en}/{zzintcol} {mrktg_int_desc_en}" key="{zzsuffix}"/>
+									  <!--  <core:ListItem text="{Suffix} - {SuffixDescriptionEN}/{InteriorDescriptionEN}" key="{Suffix}"/>-->
 									</ComboBox>
 									<!--	<SearchField width="230px"/>-->
 								</FlexBox>
@@ -130,12 +131,12 @@
 								</FlexBox>
 								<FlexBox width="186px"></FlexBox>
 								<FlexBox height="30px" alignItems="Center" justifyContent="Center">
-									<CheckBox text="{i18n>IncludeSoldVehicles}" id="chkmov" select="onStatusChange"></CheckBox>
+									<CheckBox text="{i18n>IncludeSoldVehicles}" id="chkmov" select="onStatusChange" visible="false"></CheckBox>
 									<FlexBox width="7px"></FlexBox>
 								</FlexBox>                               
 								<FlexBox width="206px"></FlexBox>
 								<FlexBox height="30px" alignItems="Center" justifyContent="Center">
-									<CheckBox text="{i18n>IncludeFleetVehicles}" id="chkadd" select="onStatusChange"></CheckBox>
+									<CheckBox text="{i18n>IncludeFleetVehicles}" id="chkadd" select="onStatusChange"  visible="false"></CheckBox>
 								
 								</FlexBox>
 							</HBox>
@@ -199,19 +200,22 @@
 								<t:Column id="ID_Profit" sortProperty="zzordertype" width="6rem">
 									<Label text="{i18n>OrderType}" wrapping="false"/>
 									<t:template>
-										<Text text="{zzordertype}" wrapping="false"/>
+								<Text text="{path:'zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" wrapping="false"/>	
+									<!--	<Text text="{zzordertype}" wrapping="false"/>-->
 									</t:template>
 								</t:Column>
 								<t:Column sortProperty="zzadddata4" width="6rem">
 									<Label text="{i18n>ETAFrom}" wrapping="false"/>
 									<t:template>
-										<Text text="{zzadddata4}" wrapping="false"/>
+					<Text text="{path:'zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false"/>							
+									<!--	<Text text="{zzadddata4}" wrapping="false"/>-->
 									</t:template>
 								</t:Column>
 								<t:Column sortProperty="pstsp" width="6rem">
 									<Label text="{i18n>ETATo}" wrapping="false"/>
 									<t:template>
-										<Text text="{pstsp}" wrapping="false"/>
+								<Text text="{path:'pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false"/>			
+									<!--	<Text text="{pstsp}" wrapping="false"/>-->
 									</t:template>
 								</t:Column>
 								<t:Column sortProperty="z_pd_flag" width="6rem">

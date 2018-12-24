@@ -80,11 +80,13 @@
 					"defaultBindingMode": "OneWay",
 					"defaultCountMode": "Request",
 					"serviceUrlParams": {
-                      "sap-client": "200"
-                  }
+                     "sap-client": "200"
+                  },
+                   "json": true,
+                   "useBatch": false
 				},
 				"dataSource": "xsodata",
-				"preload": true
+				"preload": false
 			}
 		},
 		"routing": {
@@ -119,7 +121,7 @@
 					"target": "VehicleTrade_VehicleSelection"
 				},
 				{
-					"pattern": "VehcTrad_Apprv_Rej_CounTrad",
+					"pattern": "VehcTrad_Apprv_Rej_CounTrad/:selectedmyTr:",
 					"name": "VehcTrad_Apprv_Rej_CounTrad",
 					"target": "VehcTrad_Apprv_Rej_CounTrad"
 				},
