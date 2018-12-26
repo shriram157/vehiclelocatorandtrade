@@ -59,91 +59,8 @@
 								<Text text="{path:'Status',formatter:'vehicleLocator.Formatter.Formatter.Status'}"/>
 								<Label text="{i18n>OrderType}"/>
 								<Text text="{path:'Order_Type',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}"/>
-								<Label text="{i18n>CurrentETA}" id="cetalaid">
-									<layoutData>
-										<l:GridData span="L4 M12 S3"/>
-									</layoutData>
-								</Label>
-								<Text text="{path:'Off_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="ctqtid">
-									<layoutData>
-										<l:GridData span="L4 M12 S3"/>
-									</layoutData>
-								</Text>
-								<Text text="{i18n>From}" id="fromqid"/>
-								<Label text=""></Label>
-								<Text text="{path:'Off_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="txlab">
-									<layoutData>
-										<l:GridData span="L4 M12 S3"/>
-									</layoutData>
-								</Text>
-								<Text text="{i18n>To}" id="tobid"/>
-								<Text text="" id="toid"/>
-								<Label text="{i18n>PropsedETAtoNewDealer}" id="prolabid"/>
-								<Text text="{path:'Off_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="prptid">
-									<layoutData>
-										<l:GridData span="L4 M12 S3"/>
-									</layoutData>
-								</Text>
-								<Text text="{i18n>From}" id="fmlbid"/>
-								<Label text="" id="fromlbid"></Label>
-								<Text text="{path:'Off_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="otxlabel">
-									<layoutData>
-										<l:GridData span="L4 M12 S3"/>
-									</layoutData>
-								</Text>
-								<Text text="{i18n>To}" id="idlto"/>
-								<!--<Label text="{i18n>DonotCall(DNC)Vehicle}"/>
-								<ComboBox id="VT_ARCTDnc" selectionChange="onVTARCTdnc" width="220px" items="{/}">
-									<core:ListItem key="{DNC}" text="{path:'DNC',formatter:'vehicleLocator.Formatter.Formatter.DNC'}"/>
-								</ComboBox>
-								<Label text="{i18n>DNCBlockout(Days)}"/>
-								<ComboBox id="VT_ARCDnc" selectionChange="ondncblckoutchnage" width="220px" items="{/}"
-									visible="{path:'DNC',formatter:'vehicleLocator.Formatter.Formatter.DNCBlockout'}">
-									<core:ListItem key="{ZZDuration}" text="{ZZDuration}"/>
-								</ComboBox>-->
-								<Label text="{i18n>TradeinReturn}"/>
-								<ComboBox id="oTradeinRet" selectionChange="onTradeReqStat" width="220px" items="{/}" >
-									<core:ListItem key="{Trade_Return}" text="{path:'Trade_Return',formatter:'vehicleLocator.Formatter.Formatter.TradeReturn'}"/>
-									<layoutData>
-										<l:GridData span="L3 M12 S3"/>
-									</layoutData>
-								</ComboBox>
-								<Button text="{i18n>SelectVehicle}" id="oSelectBtn" press="onSelectvehcicle" enabled="true">
-									<layoutData>
-										<l:GridData span="L2 M12 S3"/>
-									</layoutData>
-								</Button>
-								<Label text="{i18n>Status}"/>
-								<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}"/>
-								<!--	<Label text="{i18n>TradeinReturn}"/>
-								<ComboBox id="VT_ARCTtrdinRet" selectionChange="onTradeReqStat" width="220px" items="{/}" selectedKey="{/0/Trade_Return}" editable="false">
-									<core:ListItem key="{Trade_Return}" text="{path:'Trade_Return',formatter:'vehicleLocator.Formatter.Formatter.TradeReturn'}"/>
-								</ComboBox>
-								<Label text="{i18n>Status}"/>
-								<ComboBox id="VT_ARCTtrdinStatus" selectionChange="onVTARctstats" width="220px" items="{/}" selectedKey="{/0/Trade_Status}" editable="false">
-									<core:ListItem key="{Trade_Status}" text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}"/>
-								</ComboBox>-->
-								<!--<Text text="Request Sent"/>-->
-								<core:Title text="{i18n>OfferVehicleInformation}" id="offfveh"/>
-								<Label text="{i18n>VehicleTrackingNumber}" id="vehtnum"/>
-								<Text text="{Requested_Vtn}" id="ovtnId"/>
-								<Label text="{i18n>ModelYear}" id="mdlyr"/>
-								<Text text="{Model_Year}" id="mdlyrtext"/>
-								<Label text="{i18n>Series}" id="seris"/>
-								<Text text="{Series}-{Series_Desc}" id="serisTex"/>
-								<Label text="{i18n>Model}" id="modl"/>
-								<Text text="{Model}-{Model_Desc}" id="mdlde"/>
-								<Label text="{i18n>Suffix}" id="suffx"/>
-								<Text text="{Suffix}-{Suffix_Desc}/{Int_Colour_Desc}" id="suffxidt"/>
-								<Label text="{i18n>APX}" id="apxid"/>
-								<Text text="{APX}" id="apxTid"/>
-								<Label text="{i18n>ExteriorColor}" id="extco"/>
-								<Text text="{Ext_Colour}-{Ext_Colour_Desc}" id="extclod"/>
-								<Label text="{i18n>Status}" id="sttid"/>
-								<Text text="{path:'Status',formatter:'vehicleLocator.Formatter.Formatter.Status'}" id="stdId"/>
-								<Label text="{i18n>OrderType}" id="ordtyp"/>
-								<Text text="{path:'Order_Type',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" id="ortype"/>
-								<Label text="{i18n>CurrentETA}" id="cetalabid">
+								
+									<Label text="{i18n>CurrentETA}" id="cetalabid">
 									<layoutData>
 										<l:GridData span="L4 M12 S3"/>
 									</layoutData>
@@ -176,6 +93,102 @@
 									</layoutData>
 								</Text>
 								<Text text="{i18n>To}" id="idlbltxt"/>
+								
+								
+								
+								
+							
+								<!--<Label text="{i18n>DonotCall(DNC)Vehicle}"/>
+								<ComboBox id="VT_ARCTDnc" selectionChange="onVTARCTdnc" width="220px" items="{/}">
+									<core:ListItem key="{DNC}" text="{path:'DNC',formatter:'vehicleLocator.Formatter.Formatter.DNC'}"/>
+								</ComboBox>
+								<Label text="{i18n>DNCBlockout(Days)}"/>
+								<ComboBox id="VT_ARCDnc" selectionChange="ondncblckoutchnage" width="220px" items="{/}"
+									visible="{path:'DNC',formatter:'vehicleLocator.Formatter.Formatter.DNCBlockout'}">
+									<core:ListItem key="{ZZDuration}" text="{ZZDuration}"/>
+								</ComboBox>-->
+								<Label text="{i18n>TradeinReturn}"/>
+								<ComboBox id="oTradeinRet" selectionChange="onTradeReqStat" width="220px" items="{/}" >
+									<core:ListItem key="{Trade_Return}" text="{path:'Trade_Return',formatter:'vehicleLocator.Formatter.Formatter.TradeReturn'}"/>
+									<layoutData>
+										<l:GridData span="L3 M12 S3"/>
+									</layoutData>
+								</ComboBox>
+								<Button text="{i18n>SelectVehicle}" id="oSelectBtn" press="onSelectvehcicle" enabled="true">
+									<layoutData>
+										<l:GridData span="L2 M12 S3"/>
+									</layoutData>
+								</Button>
+								<Label text="{i18n>Status}"/>
+								<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" id="oTrade_Status"/>
+								<!--	<Label text="{i18n>TradeinReturn}"/>
+								<ComboBox id="VT_ARCTtrdinRet" selectionChange="onTradeReqStat" width="220px" items="{/}" selectedKey="{/0/Trade_Return}" editable="false">
+									<core:ListItem key="{Trade_Return}" text="{path:'Trade_Return',formatter:'vehicleLocator.Formatter.Formatter.TradeReturn'}"/>
+								</ComboBox>
+								<Label text="{i18n>Status}"/>
+								<ComboBox id="VT_ARCTtrdinStatus" selectionChange="onVTARctstats" width="220px" items="{/}" selectedKey="{/0/Trade_Status}" editable="false">
+									<core:ListItem key="{Trade_Status}" text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}"/>
+								</ComboBox>-->
+								<!--<Text text="Request Sent"/>-->
+								<core:Title text="{i18n>OfferVehicleInformation}" id="offfveh"/>
+								<Label text="{i18n>VehicleTrackingNumber}" id="vehtnum"/>
+								<Text text="{VTN}" id="ovtnId"/>
+								<Label text="{i18n>ModelYear}" id="mdlyr"/>
+								<Text text="{Model_Year}" id="mdlyrtext"/>
+								<Label text="{i18n>Series}" id="seris"/>
+								<Text text="{Series}-{Series_Desc}" id="serisTex"/>
+								<Label text="{i18n>Model}" id="modl"/>
+								<Text text="{Model}-{Model_Desc}" id="mdlde"/>
+								<Label text="{i18n>Suffix}" id="suffx"/>
+								<Text text="{Suffix}-{Suffix_Desc}/{Int_Colour_Desc}" id="suffxidt"/>
+								<Label text="{i18n>APX}" id="apxid"/>
+								<Text text="{APX}" id="apxTid"/>
+								<Label text="{i18n>ExteriorColor}" id="extco"/>
+								<Text text="{Ext_Colour}-{Ext_Colour_Desc}" id="extclod"/>
+								<Label text="{i18n>Status}" id="sttid"/>
+								<Text text="{path:'Status',formatter:'vehicleLocator.Formatter.Formatter.Status'}" id="stdId"/>
+								<Label text="{i18n>OrderType}" id="ordtyp"/>
+								<Text text="{path:'Order_Type',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" id="ortype"/>
+							
+                                  	<Label text="{i18n>CurrentETA}" id="cetalaid">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Label>
+								<Text text="{path:'Off_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="ctqtid">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Text>
+								<Text text="{i18n>From}" id="fromqid"/>
+								<Label text=""></Label>
+								<Text text="{path:'Off_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="txlab">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Text>
+								<Text text="{i18n>To}" id="tobid"/>
+								<Text text="" id="toid"/>
+								<Label text="{i18n>PropsedETAtoNewDealer}" id="prolabid"/>
+								<Text text="{path:'Off_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="prptid">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Text>
+								<Text text="{i18n>From}" id="fmlbid"/>
+								<Label text="" id="fromlbid"></Label>
+								<Text text="{path:'Off_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="otxlabel">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Text>
+								<Text text="{i18n>To}" id="idlto"/>							
+							
+							
+							
+							
+							
+							
 							</form:content>
 						</form:SimpleForm>
 					</VBox>
@@ -262,12 +275,12 @@
 								<HBox>
 									<FlexBox width="10px"></FlexBox>
 									<FlexBox height="200px" alignItems="Start" justifyContent="Start">
-										<Button text="{i18n>Updatesubmit}" width="150px" press="oBack" id="oUpdateSubmitbtn"/>
+										<Button text="{i18n>Updatesubmit}" width="150px" press="oUpdateSubmitbtn"  id="oUpdateSubmitbtn"/>
 										<FlexBox width="7px"></FlexBox>
 									</FlexBox>
 									<FlexBox width="10px"></FlexBox>
 									<FlexBox height="200px" alignItems="Start" justifyContent="Start">
-										<Button text="{i18n>Update}" width="100px" id="oUpdatePagebtn"/>
+										<Button text="{i18n>Update}" width="100px" id="oUpdatePagebtn" press="Update"/>
 										<FlexBox width="7px"></FlexBox>
 									</FlexBox>
 									<FlexBox width="10px"></FlexBox>
