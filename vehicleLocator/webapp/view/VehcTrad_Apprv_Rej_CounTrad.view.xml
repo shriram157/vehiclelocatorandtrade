@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
 	controllerName="vehicleLocator.controller.VehcTrad_Apprv_Rej_CounTrad" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form"
 	xmlns:uxap="sap.uxap" xmlns:t="sap.ui.table" xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml">
@@ -286,4 +287,294 @@
 			</Page>
 		</pages>
 	</App>
+=======
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="vehicleLocator.controller.VehcTrad_Apprv_Rej_CounTrad" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form"
+	xmlns:uxap="sap.uxap" xmlns:t="sap.ui.table" xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages class="oImgsampl" height="200px">
+			<Page showNavButton="false" navButtonPress="onBack">
+				<customHeader>
+					<Bar class="sapUiSmallPaddingBeginEnd clCustomHeaderBg">
+						<contentLeft>
+							<Image id="idLexusLogo" src="Images/Lexus.png" width="100px"/>
+							<Text text="|" class="sapUiTinyMarginBeginEnd"/>
+							<Text class="clCustomFont" text="Vehicle Locator-Trade"/>
+						</contentLeft>
+						<contentRight>
+							<Button text="Logout"/>
+						</contentRight>
+					</Bar>
+				</customHeader>
+				<content>
+					<Toolbar height="45px" class="toolbar3">
+						<!--<Label text="" width="280px" class="vTlabe1clss"/>-->
+						<ToolbarSpacer></ToolbarSpacer>
+						<!--<Button text="Vehicle Locator" press="handleLinkPress"/>
+						<Button text="Sold Order" press="handleLinkPress"/>
+						<Button text="Price Protection" press="handleLinkPress"/>
+						<Button text="Inventory Summary" press="handleLinkPress"/>
+						<Button text="Sujjest Order" press="handleLinkPress"/>-->
+					</Toolbar>
+					<VBox class="sapUiSmallMargin">
+						<OverflowToolbar id="otb1">
+							<Label text="{i18n>CreateTradeRequest}" width="250px" class="vHlabe1clss"/>
+							<ToolbarSpacer/>
+						</OverflowToolbar>
+					</VBox>
+					<VBox class="sapUiSmallMargin">
+						<form:SimpleForm id="SimpleFormAproveTrReq" editable="true" layout="ResponsiveGridLayout" labelSpanM="12" adjustLabelSpan="false"
+							emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2">
+							<form:content>
+								<core:Title text="{i18n>RequestedVehicleInformation}"/>
+								<Label text="{i18n>VehicleTrackingNumber}"/>
+								<Text text="{Requested_Vtn}" id="ovtnId"/>
+								<Label text="{i18n>ModelYear}"/>
+								<Text text="{Model_Year}"/>
+								<Label text="{i18n>Series}"/>
+								<Text text="{Series}-{Series_Desc}"/>
+								<Label text="{i18n>Model}"/>
+								<Text text="{Model}-{Model_Desc}"/>
+								<Label text="{i18n>Suffix}"/>
+								<Text text="{Suffix}-{Suffix_Desc}/{Int_Colour_Desc}"/>
+								<Label text="{i18n>APX}"/>
+								<Text text="{APX}"/>
+								<Label text="{i18n>ExteriorColor}"/>
+								<Text text="{Ext_Colour}-{Ext_Colour_Desc}"/>
+								<Label text="{i18n>Status}"/>
+								<Text text="{path:'Status',formatter:'vehicleLocator.Formatter.Formatter.Status'}"/>
+								<Label text="{i18n>OrderType}"/>
+								<Text text="{path:'Order_Type',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}"/>
+								<Label text="{i18n>CurrentETA}" id="cetalabid">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Label>
+								<Text text="{path:'Req_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="ctetid">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Text>
+								<Text text="{i18n>From}" id="frmid"/>
+								<Label text=""></Label>
+								<Text text="{path:'Req_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="txtlab">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Text>
+								<Text text="{i18n>To}" id="tolbid"/>
+								<Text text="" id="totid"/>
+								<Label text="{i18n>PropsedETAtoNewDealer}" id="prlabid"/>
+								<Text text="{path:'Req_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="prpetid">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Text>
+								<Text text="{i18n>From}" id="fmlabid"/>
+								<Label text="" id="fromlabid"></Label>
+								<Text text="{path:'Req_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="otxtlabel">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Text>
+								<Text text="{i18n>To}" id="idlbltxt"/>
+								<Label text="{i18n>DonotCall(DNC)Vehicle}"/>  
+								<Text text="{path:'DNC',formatter:'vehicleLocator.Formatter.Formatter.DNC'}" id="VT_ARCTDnc" />
+							<!--	<ComboBox id="VT_ARCTDnc" selectionChange="onVTARCTdnc" width="220px"  items="{/}">
+									<core:ListItem key="{DNC}" text="{path:'DNC',formatter:'vehicleLocator.Formatter.Formatter.DNC'}"/>
+								</ComboBox>-->
+								<Label text="{i18n>DNCBlockout(Days)}"/>
+								<ComboBox id="VT_ARCDnc" selectionChange="ondncblckoutchnage" width="220px"  items="{/}">
+									<core:ListItem  key="{ZZDuration}" text="{ZZDuration}"/>
+								</ComboBox>
+								<Label text="{i18n>TradeinReturn}"/>
+								<ComboBox id="VT_ARCTtrdinRet" selectionChange="onTradeReqStat" width="220px"   items="{/}" selectedKey="{/0/Trade_Return}" editable="false">
+									<core:ListItem key="{Trade_Return}" text="{path:'Trade_Return',formatter:'vehicleLocator.Formatter.Formatter.TradeReturn'}"/>  
+							
+								</ComboBox>
+							
+								<Label text="{i18n>Status}"/>
+							<!--	<ComboBox id="VT_ARCTtrdinStatus" selectionChange="onVTARctstats" width="220px"   items="{/}"  selectedKey="{/0/Trade_Status}" editable="false">
+									<core:ListItem key="{Trade_Status}" text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}"/>
+						         </ComboBox>-->
+						        <Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}"  id="VT_ARCTtrdinStatus" width="220px"/>
+						         
+								<!--<Text text="Request Sent"/>-->
+								<core:Title text="{i18n>OfferVehicleInformation}"/>
+								<Label text="Dealer"/>
+								<Text text="{Requesting_Dealer}-{Requesting_Dealer_Name}"/>
+								<Label text="{i18n>ModelYear}"/>
+								<Text text="{Model_Year}"/>
+								<Label text="{i18n>Series}"/>
+								<Text text="{Series}-{Series_Desc}"/>
+								<Label text="{i18n>Model}"/>
+								<Text text="{Model}-{Model_Desc}"/>
+								<Label text="{i18n>Suffix}"/>
+								<Text text="{Suffix}-{Suffix_Desc}/{Int_Colour_Desc}"/>
+								<Label text="{i18n>APX}"/>
+								<Text text="{APX}"/>
+								<Label text="{i18n>ExteriorColor}"/>
+								<Text text="{Ext_Colour}-{Ext_Colour_Desc}"/>
+								<Label text="{i18n>Status}"/>
+								<Text text="{path:'Status',formatter:'vehicleLocator.Formatter.Formatter.Status'}"/>
+								<Label text="{i18n>OrderType}"/>
+								<Text text="{path:'Order_Type',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}"/>
+								<Label text="{i18n>CurrentETA}" id="cetalaid">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Label>
+								<Text text="{path:'Off_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="ctqtid">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Text>
+								<Text text="{i18n>From}" id="fromqid"/>
+								<Label text=""></Label>
+								<Text text="{path:'Off_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="txlab">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Text>
+								<Text text="{i18n>To}" id="tobid"/>
+								<Text text="" id="toid"/>
+								<Label text="{i18n>PropsedETAtoNewDealer}" id="prolabid"/>
+								<Text text="{path:'Off_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="prptid">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Text>
+								<Text text="{i18n>From}" id="fmlbid"/>
+								<Label text="" id="fromlbid"></Label>
+								<Text text="{path:'Off_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="otxlabel">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Text>
+								<Text text="{i18n>To}" id="idlto"/>
+							</form:content>
+						</form:SimpleForm>
+					</VBox>
+					<t:Table id="tableVrade" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None"
+						rows="{ path:'/', sorter : [{ path:'Comment_Date', descending : 'true' }] }">
+						<t:columns>
+							<t:Column id="Comment_Date" width="6rem">
+								<Label text="{i18n>Date}"/>
+								<t:template>
+									<Text text="{path:'Comment_Date',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false"/>
+								</t:template>
+							</t:Column>
+							<t:Column sortProperty="kunnr" width="16rem">
+								<Label text="{i18n>User}"/>
+								<t:template>
+									<Text text="{Created_By}" wrapping="false"/>
+								</t:template>
+							</t:Column>
+							<t:Column sortProperty="matnr" width="14rem" id="matnr">
+								<Label text="{i18n>Comments}"/>
+								<t:template>
+									<Text text="{Comment_Txt}" wrapping="false"/>
+								</t:template>
+							</t:Column>
+						</t:columns>
+					</t:Table>
+					<!--	<Table id="tableVrade" width="auto" class="sapUiResponsiveMargin" items="{/}" growingThreshold="150">
+						<columns>
+							<Column minScreenWidth="Desktop" demandPopin="true">
+								<Text text="{i18n>Date}"/>
+							</Column>
+							<Column minScreenWidth="Desktop" demandPopin="true">
+								<Text text="{i18n>User}"/>
+							</Column>
+							<Column minScreenWidth="Desktop" demandPopin="true">
+								<Text text="{i18n>Comments}"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem press="onLineItemPressedtree1" type="Navigation">
+								<cells>
+									<Text text="{Created_On}"/>
+									<Text text="{Created_By}"/>
+									<Text text="{Comment_Txt}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>-->
+					<VBox class="sapUiSmallMargin">
+						<form:SimpleForm id="SimpleForrmDisa220" editable="true" layout="ResponsiveGridLayout" labelSpanM="12" adjustLabelSpan="false"
+							emptySpanL="0" class="simplVTARC" emptySpanM="0" columnsL="2" columnsM="2">
+							<form:content>
+								<core:Title text="" class="Vtaprct1"/>
+								<Label text="{i18n>Comments}"/>
+								<TextArea width="240px" height="100px" id="oComments">
+									<layoutData>
+										<l:GridData span="L5 M12 S3"/>
+									</layoutData>
+								</TextArea>
+								<Button text="{i18n>AddComments}" id="oAddbutton" width="142px" enabled="false" press="oAddCommentsArea">
+									
+									</Button>
+				
+				
+			
+              	<FlexBox height="200px" alignItems="Start" justifyContent="Start">
+										<Text text="Trade Requested Created By {Created_By}" width="100px" id="cretby"/>
+										<FlexBox width="7px"></FlexBox>
+									</FlexBox>	
+							
+									
+									
+							
+								
+								<core:Title text="" class="Vtaprct1"/>
+								<Text
+									text="This trade information is a snap shot at the time of trade request creation. This information will be validated once after your input (Accept/Reject/Counter) before the function is completed."
+									width=""/>
+								<Label text=""/>
+								<HBox>
+									<FlexBox width="10px"></FlexBox>
+									<FlexBox height="50px" alignItems="Start" justifyContent="Start">
+										<Button text="{i18n>Accept}" width="100px" id="oacceptbtn"/>
+										<FlexBox width="7px"></FlexBox>
+									</FlexBox>
+									<FlexBox width="10px"></FlexBox>
+									<FlexBox height="50px" alignItems="Start" justifyContent="Start">
+										<Button text="{i18n>Reject}" width="100px" id="oRejectbtn"/>
+										<FlexBox width="7px"></FlexBox>
+									</FlexBox>
+									<FlexBox width="10px"></FlexBox>
+									<FlexBox height="50px" alignItems="Start" justifyContent="Start">
+										<Button text="{i18n>CounterOffer}" width="150px" id="oCounterofrbtn"/>
+										<FlexBox width="7px"></FlexBox>
+									</FlexBox>
+								</HBox>
+								<Label text=""/>
+								<HBox>
+							
+									<FlexBox width="10px"></FlexBox>
+									<FlexBox height="200px" alignItems="Start" justifyContent="Start">
+										<Button text="{i18n>Back}" width="100px" press="oBack" id="oBackbtnid"/>
+										<FlexBox width="7px"></FlexBox>
+									</FlexBox>
+									<FlexBox width="10px"></FlexBox>
+									<FlexBox height="200px" alignItems="Start" justifyContent="Start">
+										<Button text="{i18n>Cancel}" width="100px" id="oCancelbtn"/>
+										<FlexBox width="7px"></FlexBox>
+									</FlexBox>
+									<FlexBox width="10px"></FlexBox>
+									<FlexBox height="200px" alignItems="Start" justifyContent="Start">
+										<Button text="{i18n>Update}" width="150px" press="oUpdateTradeRequest" id="oUpdatebtn"/>
+										<FlexBox width="7px"></FlexBox>
+									</FlexBox>
+								</HBox>
+								
+								
+							</form:content>
+						</form:SimpleForm>
+					</VBox>
+				</content>
+			</Page>
+		</pages>
+	</App>
+>>>>>>> refs/heads/master
 </mvc:View>

@@ -39,12 +39,12 @@
 									<ComboBox placeholder="" width="140%" showSecondaryValues="true" filterSecondaryValues="true" selectionChange="handleoVt_SeriesChange"
 										id="oVt_SeriesCmbo" items="{/}">
 										<core:ListItem text="{TCISeries} {TCISeriesDescriptionEN}" key="{TCISeries}" additionalText=""/>
-									
+										<!--	<core:ListItem   text="{TCISeriesDescriptionEN}"      key="{TCISeriesDescriptionEN}"  additionalText =""/>-->
 									</ComboBox>
 									<!--	<SearchField width="215px" id="idVehclSerTrad"/>-->
 								</FlexBox>
 							</HBox>
-							<t:Table id="table" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{/}" visibleRowCount="20">
+							<t:Table id="table" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{/}" visibleRowCount="5">
 								<t:columns>
 									<t:Column id="TradecolId" width="6rem">
 										<Label text="{i18n>Select}"/>
@@ -58,10 +58,10 @@
 											<Text text="{zzvtn}" wrapping="false"/>
 										</t:template>
 									</t:Column>
-									<t:Column sortProperty="zzseries" width="14rem" id="seriesr">
+									<t:Column sortProperty="TCISeriesDescriptionEN" width="14rem" id="seriesr">
 										<Label text="{i18n>Series}"/>
 										<t:template>
-											<Text text="{zzseries}-{zzseries_desc_en}" wrapping="false"/>
+											<Text text="{TCISeriesDescriptionEN}" wrapping="false"/>
 										</t:template>
 									</t:Column>
 									<t:Column sortProperty="matnr" width="14rem" id="matnr">
@@ -91,19 +91,19 @@
 									<t:Column id="ID_Profit" sortProperty="zzordertype" width="6rem">
 										<Label text="{i18n>OrderType}" wrapping="false"/>
 										<t:template>
-											<Text text="{path:'zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}"  wrapping="false"/>
+											<Text text="{zzordertype}" wrapping="false"/>
 										</t:template>
 									</t:Column>
-									<t:Column sortProperty="zzadddata4" width="6rem" id="oETAFromId">
+									<t:Column sortProperty="zzadddata4" width="6rem">
 										<Label text="{i18n>ETAFrom}" wrapping="false"/>
 										<t:template>
-											<Text text="{path:'zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate'}" wrapping="false"/>
-										</t:template>  
+											<Text text="{zzadddata4}" wrapping="false"/>
+										</t:template>
 									</t:Column>
 									<t:Column sortProperty="pstsp" width="6rem">
 										<Label text="{i18n>ETATo}" wrapping="false"/>
 										<t:template>
-											<Text text="{path:'pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false"/>
+											<Text text="{pstsp}" wrapping="false"/>
 										</t:template>
 									</t:Column>
 								</t:columns>

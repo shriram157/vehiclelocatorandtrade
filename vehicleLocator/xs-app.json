@@ -20,8 +20,7 @@
 		"csrfProtection": false,
 		"authenticationType": "none"
 	}, {
-	
-	     "source": "/vehicleTrade/xsodata/(.*)",
+		"source": "(.*)(.xsodata)",
 		"destination": "vehicleLocator-node-backend",
 		"authenticationType": "none"
 	}]

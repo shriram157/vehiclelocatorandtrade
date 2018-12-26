@@ -93,38 +93,38 @@
 								<core:Title text="{i18n>OfferVehicleInformation}" id="oOtherVehInfoid"/>
 						<!--	<VBox id="oVboxOtherVehicleInformation" visible="false">-->
 								<Label text="{i18n>VehicleTrackingNumber}" id="vtnlabeid" visible="false"/>
-								<Text text="{TradeModel>/VehicleTradeVehicle/zzvtn}" id="vtnid" visible="false"/>
+								<Text text="{TradeModel>/VehicleTradeVehicle/ZZVTN}" id="vtnid" visible="false"/>
 								<Label text="{i18n>ModelYear}" id="moylablid" visible="false"/>
-								<Text text="{TradeModel>/VehicleTradeVehicle/zzmoyr}" id="yearid" visible="false"/>
+								<Text text="{TradeModel>/VehicleTradeVehicle/Year}" id="yearid" visible="false"/>
 								<Label text="{i18n>Series}" id="serielabelid" visible="false"/>
-								<Text text="{TradeModel>/VehicleTradeVehicle/zzseries} - {TradeModel>/VehicleTradeVehicle/zzseries_desc_en}" id="seiresid" visible="false"/>
+								<Text text="{TradeModel>/VehicleTradeVehicle/TCISeries} - {TradeModel>/VehicleTradeVehicle/TCISeriesDescriptionEN}" id="seiresid" visible="false"/>
 								<Label text="{i18n>Model}" id="modlabelid" visible="false"/>
-								<Text text="{TradeModel>/VehicleTradeVehicle/matnr} - {TradeModel>/VehicleTradeVehicle/model_desc_en}" id="modlid" visible="false"/>
+								<Text text="{TradeModel>/VehicleTradeVehicle/Model} - {TradeModel>/VehicleTradeVehicle/ENModelDesc}" id="modlid" visible="false"/>
 								<Label text="{i18n>Suffix}" id="sufflabeid" visible="false"/>
 								<Text text="{TradeModel>/VehicleTradeVehicle/zzsuffix} - {TradeModel>/VehicleTradeVehicle/suffix_desc_en}/{TradeModel>/VehicleTradeVehicle/zzintcol}{TradeModel>/VehicleTradeVehicle/mrktg_int_desc_en}" id="suffid" visible="false"/>
 								<Label text="{i18n>APX}" id="apxlabelid" visible="false"/>
-								  	<Text text="{TradeModel>zzapx}" id="apxid" visible="false"/>
-									<Label text="{i18n>Status}"  visible="false" id="ofvestats"/>
-								<Text text="{path:'TradeModel>zz_trading_ind',formatter:'vehicleLocator.Formatter.Formatter.Status'}" id="offeredStatus" visible="false"/>
-									<Label text="{i18n>OrderType}"  visible="false" id="offordetype"/>
-								<Text text="{path:'TradeModel>zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}"  id="oofferedOrdertype" visible="false"/>
 								
-							<!--	<Text text="{TradeModel>/VehicleTradeVehicle/ZZAPX}" id="apxid" visible="false"/>-->
+									<Label text="{i18n>Status}"  visible="false" id="ofvestats"/>
+								<Text text="{TradeModel>zzapx}" id="offeredStatus" visible="false"/>
+									<Label text="{i18n>OrderType}"  visible="false" id="offordetype"/>
+								<Text text="{TradeModel>zzapx}" id="oofferedOrdertype" visible="false"/>
+								
+								<Text text="{TradeModel>/VehicleTradeVehicle/ZZAPX}" id="apxid" visible="false"/>
 								<Label text="{i18n>ExteriorColor}" id="extcollabelid" visible="false"/>
-								<Text text="{TradeModel>/VehicleTradeVehicle/zzextcol}-{TradeModel>/VehicleTradeVehicle/mktg_desc_en}"  id="extcolod" visible="false"/>
+								<Text text="{TradeModel>/VehicleTradeVehicle/ZZEXTCOL}" id="extcolod" visible="false"/>
 								<Label text="{i18n>CurrentETA}" id="ctrtaid" visible="false">
 									<layoutData>
 										<l:GridData span="L4 M12 S3"/>
 									</layoutData>
 								</Label>
-								<Text text="{path:'TradeModel>/VehicleTradeVehicle/zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate'}"  id="oCtraid" visible="false">
+								<Text text="" id="oCtraid" visible="false">
 									<layoutData>
 										<l:GridData span="L4 M12 S3"/>
 									</layoutData>
 								</Text>
 								<Text text="{i18n>From}" id="fromLabeeid" visible="false"/>
 								<Label text="" id="labidtxt" visible="false"></Label>
-								<Text  text="{path:'TradeModel>/VehicleTradeVehicle/zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate'}" id="labetxteid" visible="false">
+								<Text text="" id="labetxteid" visible="false">
 									<layoutData>
 										<l:GridData span="L4 M12 S3"/>
 									</layoutData>
@@ -132,14 +132,14 @@
 								<Text text="{i18n>To}" id="ototid" visible="false"/>
 								<Text text="" id="otitxt" visible="false"/>
 								<Label text="{i18n>PropsedETAtoNewDealer}" id="propetid" visible="false"/>
-								<Text text="{path:'TradeModel>/VehicleTradeVehicle/pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="perpid" visible="false">
+								<Text text="" id="perpid" visible="false">
 									<layoutData>
 										<l:GridData span="L4 M12 S3"/>
 									</layoutData>
 								</Text>
 								<Text text="{i18n>From}" id="frlabid" visible="false"/>
 								<Label text="" id="fmlabid" visible="false"></Label>
-								<Text text="{path:'TradeModel>/VehicleTradeVehicle/zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate'}" id="idlabeal" visible="false">
+								<Text text="" id="idlabeal" visible="false">
 									<layoutData>
 										<l:GridData span="L4 M12 S3"/>
 									</layoutData>

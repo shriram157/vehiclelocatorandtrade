@@ -1019,7 +1019,7 @@ sap.ui.define([
 
 				SelectedZone.push("5000");
 			}
-		
+			/*this.getRouter().navTo("VehicleSearcResults");*/
 			that.getView().getModel("SeriesData").setProperty("/SelectedSeries", that.getView().byId("SeriesCmbo").getSelectedKey());
 			sap.ui.getCore().setModel(that.getView().getModel("SeriesData"), "SelectedSeriesFromScreen1");
 			var LoginUser = "Dealer";
@@ -1041,12 +1041,11 @@ sap.ui.define([
 
 			/*	var SeriesUrl= that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq 'YZ3DCT' and zzextcol eq '01D6' and zzintcol eq 'LC14' and zzsuffix eq 'AB' and zzmoyr eq '2018'";*/
 
-		/*	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq'" + McCmbo + "' and zzextcol eq '" + this.SelectedExteriorColorCode +
-				"' and zzintcol eq '" + this.SelectedTrimInteriorColor + "' and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + MoyearCombo +
-				"'";*/
 			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq'" + McCmbo + "' and zzextcol eq '" + this.SelectedExteriorColorCode +
-				"' and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + MoyearCombo +
+				"' and zzintcol eq '" + this.SelectedTrimInteriorColor + "' and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + MoyearCombo +
 				"'";
+			/*	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq'" + McCmbo + "' and zzextcol eq '" + this.SelectedExteriorColorCode +
+				"' and zzintcol eq '" + this.SelectedTrimInteriorColor + "' and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + MoyearCombo +"'";	*/
 
 			//	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq 'YZ3DCT' and zzextcol eq '01D6' and zzintcol eq 'LC14' and zzsuffix eq 'AB' and zzmoyr eq '2018'";
 			$.ajax({

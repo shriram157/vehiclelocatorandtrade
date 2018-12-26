@@ -20,7 +20,7 @@
 					<Toolbar height="48px" class="toolbar1">
 						
 						<ToolbarSpacer></ToolbarSpacer>
-						<!--	<Button text="Dummy" press="DummyPress"/>-->
+							<Button text="Dummy" press="DummyPress"/>
 						<!--	<Button text="Vehicle Locator" press="handleLinkPress"/>
 						<Button text="Sold Order" press="handleLinkPress"/>
 						<Button text="Price Protection" press="handleLinkPress"/>
