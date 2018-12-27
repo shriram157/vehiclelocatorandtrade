@@ -103,7 +103,7 @@ sap.ui.define([
 						this.sPrefix = "";
 
 					}
-					this.nodeJsUrl = this.sPrefix + "/vehicleTrade";
+					this.nodeJsUrl = this.sPrefix ;
 					that.oDataUrl = this.nodeJsUrl +
 						"/xsodata/vehicleTrade_SRV.xsodata//TradeComment";
 					$.ajax({
@@ -206,7 +206,7 @@ sap.ui.define([
 						this.sPrefix = "";
 
 					}
-					this.nodeJsUrl = this.sPrefix + "/vehicleTrade";
+					this.nodeJsUrl = this.sPrefix ;
 					that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment";
 					$.ajax({
 						url: that.oDataUrl,
@@ -289,7 +289,7 @@ sap.ui.define([
 						that.sPrefix = "";
 
 					}
-					that.nodeJsUrl = that.sPrefix + "/vehicleTrade";
+					that.nodeJsUrl = that.sPrefix;
 					that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
 
 					that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);

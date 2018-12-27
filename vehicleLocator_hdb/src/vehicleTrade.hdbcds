@@ -1,4 +1,3 @@
-@OData.publish : true
 context vehicleTrade {
     entity Trade_Request {
             @Comment : 'Trade_Id'
@@ -128,10 +127,6 @@ context vehicleTrade {
     };
 
     @Comment : 'Vehicle Descriptions'
-<<<<<<< HEAD
-    /*@@layout{"layoutInfo":{"external":[{"id":"Trade_Request","sourceName":"Trade_Id"},{"id":"Vehicle","sourceName":"VTN"},{"id":"Vehicle","sourceName":"SPRAS"},{"id":"Vehicle","sourceName":"Model_Desc"},{"id":"Vehicle","sourceName":"Series_Desc"},{"id":"Vehicle","sourceName":"Suffix_Desc"},{"id":"Vehicle","sourceName":"Int_Colour_Desc"},{"id":"Vehicle","sourceName":"Ext_Colour_Desc"}]}}*/
-=======
->>>>>>> refs/remotes/origin/XSJS_Requirements
     entity Vehicle_Desc {
         key Trade_Id        : association[*, 0..1] to Trade_Request { Trade_Id };
         key VTN             : association[*, 0..1] to Vehicle { VTN };
@@ -157,8 +152,6 @@ context vehicleTrade {
     technical configuration {
         column store;
     };
-<<<<<<< HEAD
-=======
 
     @Comment : 'Trade Status'
     entity Trade_Status {
@@ -179,5 +172,4 @@ context vehicleTrade {
     }
  
     
->>>>>>> refs/remotes/origin/XSJS_Requirements
 };

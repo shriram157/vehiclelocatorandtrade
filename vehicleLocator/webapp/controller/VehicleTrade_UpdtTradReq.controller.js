@@ -321,7 +321,7 @@ else if (SelTrdReturn == "Y" &&tradeStatus=="N") {
 						that.sPrefix = "";
 
 					}
-					that.nodeJsUrl = that.sPrefix + "/vehicleTrade";
+					that.nodeJsUrl = that.sPrefix;
 					that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
 
 					that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);

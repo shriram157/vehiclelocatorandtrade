@@ -43,10 +43,15 @@ modules:
     - name: uaa_vehicleLocator
     - name: dest_vehicleLocator
     - name: vehicleLocator_XSJS_api
+      group: destinations
+      properties:
+        name: vehicleLocator_XSJS_backend
+        url: '~{url}'
+        forwardAuthToken: true  
     - name: vehicleLocator_Node_api
       group: destinations
       properties:
-        name: vehicleLocator-node-backend
+        name: vehicleLocator_Node_backend
         url: '~{url}'
         forwardAuthToken: true
 
@@ -58,9 +63,9 @@ modules:
    type: nodejs
    path: vehicleLocator_XSJS
    parameters:
-      host: vehicleXSJS
+      host: vehicleLocator_XSJS
       register-service-url: true
-      service-name: vehicleXSJS
+      service-name: vehicleLocator_XSJS
       service-url: '${default-url}'
       disk-quota: 512M
       memory: 256M

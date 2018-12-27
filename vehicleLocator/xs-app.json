@@ -11,18 +11,24 @@
 		"localDir": "webapp"
 	}, {
 		"source": "/node(.*)",
-		"destination": "vehicleLocator-node-backend",
+		"destination": "vehicleLocator_Node_backend",
 		"csrfProtection": false,
 		"authenticationType": "none"
 	}, {
 		"source": "(.*)(.xsjs)",
-		"destination": "vehicleLocator-node-backend",
+		"destination": "vehicleLocator_XSJS_backend",
 		"csrfProtection": false,
 		"authenticationType": "none"
 	}, {
 		"source": "(.*)(.xsodata)",
-		"destination": "vehicleLocator-node-backend",
+		"destination": "vehicleLocator_XSJS_backend",
 		"authenticationType": "none"
-	}]
+    }, {
+		"source": "/xsodata/(.*)",
+		"destination": "vehicleLocator_XSJS_backend",
+		"authenticationType": "none"
+	}
+	
+	]
 }
 

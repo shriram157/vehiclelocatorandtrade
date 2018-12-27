@@ -1097,7 +1097,7 @@ sap.ui.define([
 				this.sPrefix = "";
 
 			}
-			this.nodeJsUrl = this.sPrefix + "/vehicleTrade";
+			this.nodeJsUrl = this.sPrefix ;
 			that.TradeRequestoDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeRequest";
 			var ajax = $.ajax({
 				dataType: "json",

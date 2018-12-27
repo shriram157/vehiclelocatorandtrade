@@ -354,7 +354,7 @@ sap.ui.define([
 					this.sPrefix = "";
 
 				}
-				this.nodeJsUrl = this.sPrefix + "/vehicleTrade";
+				this.nodeJsUrl = this.sPrefix ;
 				that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeRequest";
 				$.ajax({
 					url: that.oDataUrl,
@@ -550,7 +550,7 @@ sap.ui.define([
 							that.sPrefix = "";
 
 						}
-						that.nodeJsUrl = that.sPrefix + "/vehicleTrade";
+						that.nodeJsUrl = that.sPrefix;
 						that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
 
 						that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
@@ -689,7 +689,7 @@ sap.ui.define([
 						this.sPrefix = "";
 
 					}
-					this.nodeJsUrl = this.sPrefix + "/vehicleTrade";
+					this.nodeJsUrl = this.sPrefix ;
 					that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
 
 					that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
@@ -709,8 +709,8 @@ sap.ui.define([
 					});*/
 			}
 			//	var SeriesUrl = that.oDataUrl + "/TradeRequestType";
-			//	https://vehiclexsjs.cfapps.us10.hana.ondemand.com/vehicleTrade/xsodata/vehicleTrade_SRV.xsodata/TradeRequest
-			//	https://vehiclexsjs.cfapps.us10.hana.ondemand.com/vehicleTrade/xsodata/vehicleTrade_SRV.xsodata/TradeRequest
+			//	https://vehiclexsjs.cfapps.us10.hana.ondemand.com//xsodata/vehicleTrade_SRV.xsodata/TradeRequest
+			//	https://vehiclexsjs.cfapps.us10.hana.ondemand.com//xsodata/vehicleTrade_SRV.xsodata/TradeRequest
 
 			/*	$.ajax({
                                 url: SeriesUrl,
@@ -769,7 +769,7 @@ sap.ui.define([
 				this.sPrefix = "";
 
 			}
-			this.nodeJsUrl = this.sPrefix + "/vehicleTrade";
+			this.nodeJsUrl = this.sPrefix ;
 			that.TradeRequestoDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeRequest";
 			var ajax1 = $.ajax({
 				dataType: "json",
@@ -988,7 +988,7 @@ sap.ui.define([
 				that.sPrefix = "";
 
 			}
-			that.nodeJsUrl = that.sPrefix + "/vehicleTrade";
+			that.nodeJsUrl = that.sPrefix;
 			that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
 
 			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
@@ -1062,7 +1062,7 @@ sap.ui.define([
 				that.sPrefix = "";
 
 			}
-			that.nodeJsUrl = that.sPrefix + "/vehicleTrade";
+			that.nodeJsUrl = that.sPrefix;
 			that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
 
 			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
@@ -1156,7 +1156,7 @@ sap.ui.define([
 				that.sPrefix = "";
 
 			}
-			that.nodeJsUrl = that.sPrefix + "/vehicleTrade";
+			that.nodeJsUrl = that.sPrefix;
 			that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
 
 			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);

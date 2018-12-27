@@ -9,7 +9,7 @@
 		},
 		"dataSources": {
 			"xsodata": {
-				"uri": "/vehicleTrade/xsodata/vehicleTrade_SRV.xsodata/$metadata/vehicleTrade/xsodata/",
+				"uri": "/xsodata/vehicleTrade_SRV.xsodata/$metadata",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0",
@@ -73,7 +73,7 @@
 				}
 			},
 			"TradeRequestModel": {
-				"uri": "/vehicleTrade/xsodata/vehicleTrade_SRV.xsodata/$metadata/vehicleTrade/xsodata/",
+				"uri": "/xsodata/vehicleTrade_SRV.xsodata/$metadata",
 				"type": "sap.ui.model.odata.v2.ODataModel",
 				"settings": {
 					"defaultOperationMode": "Server",
@@ -85,8 +85,8 @@
                    "json": true,
                    "useBatch": false
 				},
-				"dataSource": "xsodata",
-				"preload": false
+				"dataSource": "xsodata"
+		
 			}
 		},
 		"routing": {
