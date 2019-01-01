@@ -32,6 +32,12 @@ module.exports = function () {
 		client = options.api.client;
 
 	console.log('The API Management URL', url);
+	
+	// /?sap-client=200
+	
+	 
+	
+ 	var clientSap = '/?sap-client=' + client;
 
 	var auth64 = 'Basic ' + new Buffer(uname + ':' + pwd).toString('base64');
 
@@ -55,12 +61,21 @@ module.exports = function () {
 
 	app.all('/*', function (req, res, next) {
 
+
+ 
+   var tempUrl = req.url;
+   if (tempUrl.includes('API_BUSINESS_PARTNER')) 
+   {
+   	clientSap ="";
+      }
+
+
 		let headOptions = {};
 
 		headOptions.Authorization = auth64;
 
 		let method = req.method;
-		let xurl = url + req.url;
+		let xurl = url + req.url + clientSap;
 		console.log('Method', method);
 		console.log('Incoming Url', xurl);
 		console.log('csrfToken before GET&POST', csrfToken);

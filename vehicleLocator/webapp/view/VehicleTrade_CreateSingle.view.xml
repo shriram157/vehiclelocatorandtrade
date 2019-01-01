@@ -56,39 +56,45 @@
 								<Text text="{path:'TradeModel>zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}"   id="oOrdertype"/>
 									<Label text="{i18n>ExteriorColor}"/>
 								<Text text="{TradeModel>zzextcol}-{TradeModel>mktg_desc_en}" id="Zextcolo"/>
+
+								
 								<Label text="{i18n>CurrentETA}" id="cetalabelid">
-									<layoutData>
-										<l:GridData span="L4 M12 S3"/>
-									</layoutData>
+									<!--<layoutData>-->
+									<!--	<l:GridData span="L4 M12 S3"/>-->
+									<!--</layoutData>-->
 								</Label>
 								<Text text="" id="ctaid">
-									<layoutData>
-										<l:GridData span="L4 M12 S3"/>
-									</layoutData>
+									<!--<layoutData>-->
+									<!--	<l:GridData span="L4 M12 S3"/>-->
+									<!--</layoutData>-->
 								</Text>
-								<Text text="{i18n>From}" id="fromid"/>
+								<Text text="{i18n>From}" id="fromid" wrapping='false' maxLines='1'/>
 								<Label text=""></Label>
-								<Text text="" id="textlab">
-									<layoutData>
-										<l:GridData span="L4 M12 S3"/>
-									</layoutData>
+								<Text text="" id="totxtid" wrapping='false'>
+									<!--<layoutData>-->
+									<!--	<l:GridData span="L4 M12 S3"/>-->
+									<!--</layoutData>-->
 								</Text>
-								<Text text="{i18n>To}" id="tolabid"/>
-								<Text text="" id="totxtid"/>
+								<Text text="{i18n>To}" id="tolabid" wrapping='false' maxLines='1'/>
+								<!--<Text text="" id="totxtid"/>-->
+								
 								<Label text="{i18n>PropsedETAtoNewDealer}" id="prpdlabid"/>
-								<Text text="" id="prpid">
-									<layoutData>
-										<l:GridData span="L4 M12 S3"/>
-									</layoutData>
+								<Text text="" id="prpid" maxLines='1'>
+									<!--<layoutData>-->
+									<!--	<l:GridData span="L4 M12 S3"/>-->
+									<!--</layoutData>-->
 								</Text>
 								<Text text="{i18n>From}" id="fromlabid"/>
-								<Label text="" id="frmlabid"></Label>
-								<Text text="" id="otextlabel">
-									<layoutData>
-										<l:GridData span="L4 M12 S3"/>
-									</layoutData>
+								<Label text="" id="frmlabid" wrapping='false'  ></Label>
+								<Text text="" id="otextlabel"  maxLines='1'>
+									<!--<layoutData>-->
+									<!--	<l:GridData span="L4 M12 S3"/>-->
+									<!--</layoutData>-->
 								</Text>
-								<Text text="{i18n>To}" id="idlabltxt"/>
+								<Text text="{i18n>To}" id="idlabltxt" wrapping='false'/>
+
+								
+								
 
 								<core:Title text="{i18n>OfferVehicleInformation}" id="oOtherVehInfoid"/>
 						<!--	<VBox id="oVboxOtherVehicleInformation" visible="false">-->
@@ -162,6 +168,12 @@
 								<TextArea id="oTypeHere" value=" " width="387px" height="100px"/>
 							</form:content>
 						</form:SimpleForm>
+						
+						
+						
+						
+						
+						
 					</VBox>
 				</content>
 				<footer>

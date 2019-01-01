@@ -144,9 +144,9 @@
 								<Label text="{i18n>OrderType}" id="ordtyp"/>
 								<Text text="{path:'Order_Type',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" id="ortype"/>
 								<Label text="{i18n>CurrentETA}" id="cetalabid">
-									<layoutData>
-										<l:GridData span="L4 M12 S3"/>
-									</layoutData>
+									<!--<layoutData>-->
+									<!--	<l:GridData span="L4 M12 S3"/>-->
+									<!--</layoutData>-->
 								</Label>
 								<Text text="{path:'Req_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="ctetid">
 									<layoutData>

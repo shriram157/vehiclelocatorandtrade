@@ -19,8 +19,12 @@
 				<content>
 					<Toolbar height="48px" class="toolbar1">
 						
-						<ToolbarSpacer></ToolbarSpacer>
-							<Button text="Dummy" press="DummyPress"/>
+					
+						
+						<Title text="Put the logged in dealer name here" titleStyle="H2" width="auto" textAlign="Left" visible="true" wrapping="false"
+				class="sapUiTinyMargin"/>
+							<ToolbarSpacer></ToolbarSpacer>
+						
 						<!--	<Button text="Vehicle Locator" press="handleLinkPress"/>
 						<Button text="Sold Order" press="handleLinkPress"/>
 						<Button text="Price Protection" press="handleLinkPress"/>
@@ -137,7 +141,7 @@
 							class="simplVTARC" emptySpanM="0" columnsL="2" columnsM="2">
 							<form:content>
 								<core:Title text="" class="Vtaprct1"/>
-								<Button text="{i18n>Search}" icon="sap-icon://search" press="onSePress" type="Emphasized" width="30%"/>
+								<Button text="{i18n>Search}" icon="sap-icon://search" press="onSePress" type="Emphasized" width="20rem"/>
 								<core:Title text="" class="Vtaprct1"/>
 								<Label text=""/>
 							</form:content>

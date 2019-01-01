@@ -1,6 +1,6 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="vehicleLocator.controller.VehicleSearcResults"
-	xmlns:t="sap.ui.table"	xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:uxap="sap.uxap" xmlns:u="sap.ui.unified"
-	xmlns:f="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml">
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:t="sap.ui.table" xmlns:l="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form" xmlns:uxap="sap.uxap" xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form"
+	xmlns:html="http://www.w3.org/1999/xhtml" controllerName="vehicleLocator.controller.VehicleSearcResults">
 	<App>
 		<pages class="oImgsampl" height="200px">
 			<Page showNavButton="false">
@@ -17,406 +17,159 @@
 					</Bar>
 				</customHeader>
 				<content>
-					<Toolbar class="toolbar1">
-						<ToolbarSpacer></ToolbarSpacer>
-						<!--	<Button text="Vehicle Locator" press="handleLinkPress"/>
-						<Button text="Sold Order" press="handleLinkPress"/>
-						<Button text="Price Protection" press="handleLinkPress"/>
-						<Button text="Inventory Summary" press="handleLinkPress"/>
-						<Button text="Sujjest Order" press="handleLinkPress"/>-->
-					</Toolbar>
-					<VBox>
-						<OverflowToolbar id="otb1">
-							<Label text="{i18n>VehicleLocator}" width="200px" class="vHlabe1clss"/>
-							<ToolbarSpacer/>
-							<!--	<Button id="dummybtn" class="" text="Trade" type="Default" press="handleDummyThird" width="138px"/>-->
-							<Button id="openMenu3" class="VLbtn1" text="{i18n>PullVehicles}" type="Default" press="handlePressPullvehcls" width="138px"/>
-							<Button id="openMenu4" class="VLbtn2" text="{i18n>ExporttoVehicles}" type="Default" press="handleExporttohecls" width="138px"/>
-							<Button id="openMenu5" class="VLbtn3" text="{i18n>BacktoSerach}" type="Default" press="handlebacksearch" width="138px"/>
-							
-						</OverflowToolbar>
-						<VBox>
-							<!--	<form:SimpleForm id="SimpleFormDisplay480_1212022" editable="true" layout="ResponsiveGridLayout" title="" labelSpanL="6" labelSpanM="12"
-								adjustLabelSpan="false" emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2" singleContainerFullSize="false">
-								<form:content>
-									<FlexBox height="100px" alignItems="Start" justifyContent="Start">
-										<Label text="Status"/>
-										<SearchField width="50px"/>
-									</FlexBox>
-								</form:content>
-							</form:SimpleForm>-->
-							<!--<form:SimpleForm id="SimpleFormDisplay480_" editable="true" layout="ResponsiveGridLayout" title="" labelSpanL="4" labelSpanM="12"
-							adjustLabelSpan="false" emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2" singleContainerFullSize="false">
-							<form:content>
-								<core:Title text=""/>
-								<CheckBox text="How Do Not Call(DNC)vehicles" id="labele"></CheckBox>
-								<CheckBox text="Show Hold Vehicles" id="value1"></CheckBox>
-								
-								<core:Title text=""/>
-								<CheckBox text="Include Sold Vehicles" id="labe"></CheckBox>
-								<CheckBox text="Include Fleet Vehicles" id="value2"></CheckBox>
-							
-							</form:content>
-						</form:SimpleForm>-->
-							<!--	<form:SimpleForm id="SimpleFormDisplay480_1212022" editable="true" layout="ResponsiveGridLayout" title="" labelSpanL="4" labelSpanM="12"
-							adjustLabelSpan="false" emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2" singleContainerFullSize="false">-->
-							<!--<VBox>
-							<form:SimpleForm id="SimpleFormDisplay480_1212022" editable="true" layout="ResponsiveGridLayout" title="" labelSpanL="6" labelSpanM="12"
-								adjustLabelSpan="false" emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2" singleContainerFullSize="false">
-								<form:content>
-									<core:Title text=""/>-->
-							<!--	<Panel>-->
-							<HBox>
-								<FlexBox width="130px"></FlexBox>
-								<FlexBox height="100px" alignItems="Center" justifyContent="Center">
-									<Label text="{i18n>Status}" design="Bold"/>
-									<FlexBox width="7px"></FlexBox>
-									<ComboBox id="VLRStatus" selectionChange="onStatusChange" width="215px" items="{/}">
-										<core:ListItem  text ="{path:'zz_trading_ind',formatter:'vehicleLocator.Formatter.Formatter.Status'}" key="{zz_trading_ind}"/>
-									</ComboBox>
-								</FlexBox>
-								<FlexBox width="125px"></FlexBox>
-								<FlexBox height="100px" alignItems="Center" justifyContent="Center">
-									<Label text="{i18n>Dealer}" design="Bold"/>
-									<FlexBox width="7px"></FlexBox>
-									<ComboBox id="VLRDealer"  selectionChange="onStatusChange" width="240px" items="{/}">
-										<!--	<core:ListItem text="{VehicleLocatorScdScr>kunnr} - {VehicleLocatorScdScr>name1}" key="{VehicleLocatorScdScr>kunnr}"/>-->
-										<core:ListItem text ="{path:'kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'} -{name1}" key="{kunnr}"/>
-									
-									</ComboBox>
-									<!--<ComboBox showSecondaryValues="true" required="true" fieldGroupIds="requiredField" width="230px" placeholder="{i18n>Dealers}"
-										value="{oDealerModel>/BusinessPartner}" id="dealerID" enabled="{detailView>/onlyShownoEditForChange}"
-										items="{path: 'oDealerModel>/', sorter: { path: 'BusinessPartnerName' } }" selectedKey="{BusinessPartner}"
-										selectionChange="onDealerSelected">
-										<core:ListItem key="{oDealerModel>BusinessPartner}" text="{oDealerModel>BusinessPartner}"
-											additionalText="{oDealerModel>BusinessPartnerName}"/>
-									</ComboBox>-->
-									<!--	<Select id="VLRDealer" change="onVlrDealChange" width="230px" forceSelection="true" class="sapUiSizeCompact VLRDealrChange" items="{}">
-										<core:ListItem key="{oJsonModel>Dealer}" text="{oJsonModel>Dealer}"/>
-									</Select>-->
-								</FlexBox>
-								<FlexBox width="125px"></FlexBox>
-								<FlexBox height="100px" alignItems="Center" justifyContent="Center">
-									<Label text="{i18n>Suffix}" design="Bold"/>
-									<FlexBox width="7px"></FlexBox>
-								<!--	<ComboBox id="VLRSuffix"  selectionChange="onSuffixChange"  items="{VehicleLocatorScdScr>/}">
-										<core:ListItem text="{VehicleLocatorScdScr>zzsuffix} - {VehicleLocatorScdScr>suffix_desc_en}" key="{VehicleLocatorScdScr>ZZSUFFIX}"/>
-									</ComboBox>-->
-										<ComboBox id="VLRSuffix"  selectionChange="onStatusChange"  items="{/}">
-										<core:ListItem text="{zzsuffix} - {suffix_desc_en}/{zzintcol} {mrktg_int_desc_en}" key="{zzsuffix}"/>
-									  <!--  <core:ListItem text="{Suffix} - {SuffixDescriptionEN}/{InteriorDescriptionEN}" key="{Suffix}"/>-->
-									</ComboBox>
-									<!--	<SearchField width="230px"/>-->
-								</FlexBox>
-								<FlexBox width="125px"></FlexBox>
-								<FlexBox height="100px" alignItems="Center" justifyContent="Center">
-									<Label text="{i18n>Color}" design="Bold"/>
-									<FlexBox width="7px"></FlexBox>
-									<ComboBox id="VLRColor"  selectionChange="onStatusChange" width="230px" items="{/}">
-										<core:ListItem text="{zzextcol} - {mktg_desc_en}" key="{zzextcol}"/>
-									</ComboBox>
-									<!--<SearchField width="230px"/>-->
-								</FlexBox>
-							</HBox>
-							<HBox>
-								<FlexBox width="160px"></FlexBox>
-								<FlexBox height="30px" alignItems="Center" justifyContent="Center">
-									<CheckBox text="{i18n>ShowDoNotCall(DNC)Vehicles}" id="chknew" select="onStatusChange"></CheckBox>
-									<FlexBox width="27px"></FlexBox>
-								</FlexBox>
-								<FlexBox width="115px"></FlexBox>
-								<FlexBox height="30px" alignItems="Center" justifyContent="Center">
-									<CheckBox text="{i18n>ShowHoldVehicles}" id="chkexi" select="onStatusChange"></CheckBox>
-									<FlexBox width="27px"></FlexBox>
-								</FlexBox>
-								<FlexBox width="186px"></FlexBox>
-								<FlexBox height="30px" alignItems="Center" justifyContent="Center">
-									<CheckBox text="{i18n>IncludeSoldVehicles}" id="chkmov" select="onStatusChange" visible="false"></CheckBox>
-									<FlexBox width="7px"></FlexBox>
-								</FlexBox>                               
-								<FlexBox width="206px"></FlexBox>
-								<FlexBox height="30px" alignItems="Center" justifyContent="Center">
-									<CheckBox text="{i18n>IncludeFleetVehicles}" id="chkadd" select="onStatusChange"  visible="false"></CheckBox>
-								
-								</FlexBox>
-							</HBox>
-							<!--	<CheckBox text="How Do Not Call(DNC)vehicles" id="chknew"></CheckBox>-->
-							<!--	<FlexBox height="100px" alignItems="Center" justifyContent="Center">
-										<Label text="Status"/>
-										<SearchField width="150px"/>
-									</FlexBox>
-									<FlexBox height="100px" alignItems="Center" justifyContent="Center">
-										<Label text="Status"/>
-										<SearchField width="150px"/>
-									</FlexBox>-->
-							<!--</Panel>-->
-							<!--	<core:Title text=""/>
-									<CheckBox text="How Do Not Call(DNC)vehicles" id="chknew"></CheckBox>
-									<CheckBox text="Show Hold Vehicles" id="chkexi"></CheckBox>
-									<CheckBox text="Include Sold Vehicles" id="chkmov"></CheckBox>
-									<CheckBox text="Include Fleet Vehicles" id="chkadd"></CheckBox>-->
-							<!--</form:content>
-							</form:SimpleForm>
-							</VBox>-->
-					<HBox class="customStyleBox">		
-					<t:Table id="table1VSR" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{/}" visibleRowCount="20">
-							<t:columns>
-								<t:Column id="TradecolId" width="6rem">
-									<Label text="{i18n>Trade}"/>
-									<t:template>
-										<Link id="tradeId" text="Trade" class="link" subtle="true" press="oTradeLinkPress"  wrapping="false"/>
-									</t:template>
-								</t:Column>
-								<t:Column sortProperty="kunnr" width="16rem">
-									<Label text="{i18n>Dealer}"/>
-									<t:template>
-										<Text text="{path:'kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'} -{name1}"  wrapping="false"/>
-									</t:template>
-								</t:Column>
-								<t:Column sortProperty="matnr" width="14rem" id="matnr">
-									<Label text="{i18n>Model}"/>
-									<t:template>
-										<Text text="{matnr} - {model_desc_en}" wrapping="false"/>
-									</t:template>
-								</t:Column>
-								<t:Column sortProperty="zzsuffix" width="8rem">
-									<Label text="{i18n>Suffix}"/>
-									<t:template>
-										<Text text="{zzsuffix} - {suffix_desc_en}" wrapping="false"/>
-									</t:template>
-								</t:Column>
-								<t:Column sortProperty="zzapx" width="6rem">
-									<Label text="{i18n>APX}" wrapping="false"/>
-									<t:template>
-										<Text text="{zzapx}" wrapping="false"/>
-									</t:template>
-								</t:Column>
-								<t:Column id="ID_DealerNet" sortProperty="zzextcol" width="14rem">
-									<Label text="{i18n>Color}" wrapping="false"/>
-									<t:template>
-										<Text text="{zzextcol} - {mktg_desc_en}" wrapping="false"/>
-									</t:template>
-								</t:Column>
-								<t:Column id="ID_Profit" sortProperty="zzordertype" width="6rem">
-									<Label text="{i18n>OrderType}" wrapping="false"/>
-									<t:template>
-								<Text text="{path:'zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" wrapping="false"/>	
+					<OverflowToolbar class="toolbar1">
+						<!--<ToolbarSpacer/>-->
+						<Label text="lets put the logged in dealer name" width="auto" class="vHlabe1clss"/>
+						<ToolbarSpacer/>
+						<Button id="openMenu3" class="VLbtn1" text="{i18n>PullVehicles}" type="Default" press="handlePressPullvehcls" width="auto"/>
+						<Button id="openMenu4" class="VLbtn2" text="{i18n>ExporttoVehicles}" type="Default" press="handleExporttohecls" width="auto"/>
+						<Button id="openMenu5" class="VLbtn3" text="{i18n>BacktoSerach}" type="Default" press="handlebacksearch" width="auto"/>
+					</OverflowToolbar>
+					<f:SimpleForm id="SimpleFormDisplay354" editable="false" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3"
+						labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+						singleContainerFullSize="false">
+						<f:content>
+							<l:VerticalLayout width="80%" class="gridWrapper">
+								<l:content>
+									<l:Grid containerQuery="true" hSpacing="1">
+										<html:div class="sapUiSmallMarginTop sapUiSmallMarginBottom">
+											<Label xmlns="sap.m" text="{i18n>Status}" labelFor="VLRStatus" design="Bold" vAlign="Middle" displayOnly="false" wrapping="true"></Label>
+											<ComboBox xmlns="sap.m" id="VLRStatus" selectionChange="onStatusChange" width="20rem" items="{/}">
+												<core:ListItem text="{path:'zz_trading_ind',formatter:'vehicleLocator.Formatter.Formatter.Status'}" key="{zz_trading_ind}"/>
+											</ComboBox>
+										</html:div>
+										<html:div class="sapUiSmallMarginTop sapUiSmallMarginBottom">
+											<Label xmlns="sap.m" text="{i18n>Dealer}" labelFor="VLRDealer" design="Bold"></Label>
+											<ComboBox xmlns="sap.m" id="VLRDealer" selectionChange="onStatusChange" width="20rem" items="{/}">
+												<!--	<core:ListItem text="{VehicleLocatorScdScr>kunnr} - {VehicleLocatorScdScr>name1}" key="{VehicleLocatorScdScr>kunnr}"/>-->
+												<core:ListItem text="{path:'kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'} -{name1}" key="{kunnr}"/>
+											</ComboBox>
+										</html:div>
+										<html:div class="sapUiSmallMarginTop sapUiSmallMarginBottom">
+											<Label xmlns="sap.m" text="{i18n>Suffix}" labelFor="VLRSuffix" design="Bold"></Label>
+											<ComboBox xmlns="sap.m" id="VLRSuffix" selectionChange="onStatusChange" items="{/}" width="20rem">
+												<core:ListItem text="{zzsuffix} - {suffix_desc_en}/{zzintcol} {mrktg_int_desc_en}" key="{zzsuffix}"/>
+											</ComboBox>
+										</html:div>
+										<html:div class="sapUiSmallMarginTop sapUiSmallMarginBottom">
+											<Label xmlns="sap.m" text="{i18n>Color}" labelFor="VLRColor" design="Bold"></Label>
+											<ComboBox xmlns="sap.m" id="VLRColor" selectionChange="onStatusChange" width="20rem" items="{/}">
+												<core:ListItem text="{zzextcol} - {mktg_desc_en}" key="{zzextcol}"/>
+											</ComboBox>
+										</html:div>
+										<CheckBox xmlns="sap.m" text="{i18n>ShowDoNotCall(DNC)Vehicles}" id="chknew" select="onStatusChange"/>
+										<CheckBox xmlns="sap.m" text="{i18n>ShowHoldVehicles}" id="chkexi" select="onStatusChange"/>
+										<CheckBox xmlns="sap.m" text="{i18n>IncludeSoldVehicles}" id="chkmov" select="onStatusChange" visible="false"/>
+										<CheckBox xmlns="sap.m" text="{i18n>IncludeFleetVehicles}" id="chkadd" select="onStatusChange" visible="false"/>
+									</l:Grid>
+								</l:content>
+							</l:VerticalLayout>
+						</f:content>
+					</f:SimpleForm>
+					<!--<HBox>-->
+					<!--	<FlexBox width="160px"/>-->
+					<!--	<FlexBox height="30px" alignItems="Center" justifyContent="Center">-->
+					<!--		<CheckBox text="{i18n>ShowDoNotCall(DNC)Vehicles}" id="chknew" select="onStatusChange"/>-->
+					<!--		<FlexBox width="27px"/>-->
+					<!--	</FlexBox>-->
+					<!--	<FlexBox width="115px"/>-->
+					<!--	<FlexBox height="30px" alignItems="Center" justifyContent="Center">-->
+					<!--		<CheckBox text="{i18n>ShowHoldVehicles}" id="chkexi" select="onStatusChange"/>-->
+					<!--		<FlexBox width="27px"/>-->
+					<!--	</FlexBox>-->
+					<!--	<FlexBox width="186px"/>-->
+					<!--	<FlexBox height="30px" alignItems="Center" justifyContent="Center">-->
+					<!--		<CheckBox text="{i18n>IncludeSoldVehicles}" id="chkmov" select="onStatusChange" visible="false"/>-->
+					<!--		<FlexBox width="7px"/>-->
+					<!--	</FlexBox>-->
+					<!--	<FlexBox width="206px"/>-->
+					<!--	<FlexBox height="30px" alignItems="Center" justifyContent="Center">-->
+					<!--		<CheckBox text="{i18n>IncludeFleetVehicles}" id="chkadd" select="onStatusChange" visible="false"/>-->
+					<!--	</FlexBox>-->
+					<!--</HBox>-->
+					<!--============================================================ new code ===================================================================Begin-->
+					<!--<Table id="table1VSR" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{/}" visibleRowCount="20">-->
+					<!--=================================================================new code ===================================================================End-->
+					<t:Table id="table1VSR" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{/}" visibleRowCount="20" alternateRowColors="true">
+						<t:columns>
+							<t:Column id="TradecolId" width="6rem">
+								<Label text="{i18n>Trade}"/>
+								<t:template>
+									<Link id="tradeId" text="Trade" class="link" subtle="true" press="oTradeLinkPress" wrapping="false"/>
+								</t:template>
+							</t:Column>
+							<t:Column sortProperty="kunnr" width="16rem">
+								<Label text="{i18n>Dealer}"/>
+								<t:template>
+									<Text text="{path:'kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'} -{name1}" wrapping="false"/>
+								</t:template>
+							</t:Column>
+							<t:Column sortProperty="matnr" width="14rem" id="matnr">
+								<Label text="{i18n>Model}"/>
+								<t:template>
+									<Text text="{matnr} - {model_desc_en}" wrapping="false"/>
+								</t:template>
+							</t:Column>
+							<t:Column sortProperty="zzsuffix" width="8rem">
+								<Label text="{i18n>Suffix}"/>
+								<t:template>
+									<Text text="{zzsuffix} - {suffix_desc_en}" wrapping="false"/>
+								</t:template>
+							</t:Column>
+							<t:Column sortProperty="zzapx" width="6rem">
+								<Label text="{i18n>APX}" wrapping="false"/>
+								<t:template>
+									<Text text="{zzapx}" wrapping="false"/>
+								</t:template>
+							</t:Column>
+							<t:Column id="ID_DealerNet" sortProperty="zzextcol" width="14rem">
+								<Label text="{i18n>Color}" wrapping="false"/>
+								<t:template>
+									<Text text="{zzextcol} - {mktg_desc_en}" wrapping="false"/>
+								</t:template>
+							</t:Column>
+							<t:Column id="ID_Profit" sortProperty="zzordertype" width="6rem">
+								<Label text="{i18n>OrderType}" wrapping="false"/>
+								<t:template>
+									<Text text="{path:'zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" wrapping="false"/>
 									<!--	<Text text="{zzordertype}" wrapping="false"/>-->
-									</t:template>
-								</t:Column>
-								<t:Column sortProperty="zzadddata4" width="6rem">
-									<Label text="{i18n>ETAFrom}" wrapping="false"/>
-									<t:template>
-					<Text text="{path:'zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false"/>							
+								</t:template>
+							</t:Column>
+							<t:Column sortProperty="zzadddata4" width="6rem">
+								<Label text="{i18n>ETAFrom}" wrapping="false"/>
+								<t:template>
+									<Text text="{path:'zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false"/>
 									<!--	<Text text="{zzadddata4}" wrapping="false"/>-->
-									</t:template>
-								</t:Column>
-								<t:Column sortProperty="pstsp" width="6rem">
-									<Label text="{i18n>ETATo}" wrapping="false"/>
-									<t:template>
-								<Text text="{path:'pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false"/>			
+								</t:template>
+							</t:Column>
+							<t:Column sortProperty="pstsp" width="6rem">
+								<Label text="{i18n>ETATo}" wrapping="false"/>
+								<t:template>
+									<Text text="{path:'pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false"/>
 									<!--	<Text text="{pstsp}" wrapping="false"/>-->
-									</t:template>
-								</t:Column>
-								<t:Column sortProperty="z_pd_flag" width="6rem">
-									<Label text="{i18n>AccessoryInstall}" wrapping="false"/>
-									<t:template>
-										<Text text="{path:'z_pd_flag',formatter:'vehicleLocator.Formatter.Formatter.AccessoryInstall'}" wrapping="false"/>
-									</t:template>
-								</t:Column>
-								<t:Column width="8rem">
-									<Label text="{i18n>City}" wrapping="false"/>
-									<t:template>
-										<Text text="{ort01}" wrapping="false"/>
-									</t:template>
-								</t:Column>
-								<t:Column width="12rem">
-									<Label text="{i18n>Province}" wrapping="false"/>
-									<t:template>
-										<Text text="{bezei}" wrapping="false"/>
-									</t:template>
-								</t:Column>
-							</t:columns>
-						</t:Table>			
-					</HBox>		
-						<!--
-							<HBox class="sapUiMediumMarginBegin">
-												<Link id="tradeId" text="Trade" class="sapUiSmallMarginTop link" subtle="true" press="oTradeLinkPress"/>
-											</HBox>
-											<Text text="{kunnr} - {name1}" class="sapUiSmallMarginTop"/>
-											<Text text="{matnr} - {model_desc_en}" class="sapUiSmallMarginTop"/>
-											<Text text="{zzsuffix} - {suffix_desc_en}" class="sapUiSmallMarginTop"/>
-											<Text text="{zzapx}" class="sapUiSmallMarginTop"/>
-											<Text text="{zzextcol} - {mktg_desc_en}" class="sapUiSmallMarginTop"/>
-											<Text text="{zzordertype}" class="sapUiSmallMarginTop"/>
-											<Text text="{zzadddata4}" class="sapUiSmallMarginTop"/>
-											<Text text="{pstsp}" class="sapUiSmallMarginTop"/>
-											<Text text ="{path:'z_pd_flag',formatter:'vehicleLocator.Formatter.Formatter.AccessoryInstall'}" class="sapUiSmallMarginTop sapUiMediumMarginBegin" textAlign="End"/>
-											<Text text="{ort01}" class="sapUiSmallMarginTop"/>
-											<Text text="{REGIO}" class="sapUiSmallMarginTop"/>
-						
-						
-						-->
-						<!--	<Table id="table1VSR" width="auto" mode="MultiSelect" class="sapUiResponsiveMargin tableStyle Resptable"
-								items="{path : '/', sorter: [{ path: 'kunnr', descending: false },{ path: 'zzsuffix', descending: false }, { path: 'zzextcol', descending: false },{ path: 'zzapx', descending: false },{ path: 'zzordertype', descending: false }, { path: 'zzadddata4', descending: false }, { path: 'pstsp', descending: false }, { path: 'z_pd_flag', descending: false }]}">
-								<columns>
-									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center" id="TradecolId" visible="true">
-										<Label text="{i18n>Trade}" design="Bold"/>
-									</Column>
-									<Column minScreenWidth="Desktop" demandPopin="true">
-										<Label text="{i18n>Dealer}" design="Bold"/>
-									</Column>
-									<Column minScreenWidth="Desktop" demandPopin="true" class="columnLabelStyle oVSRTableColumns">
-										<HBox>
-											<Label text="{i18n>Model}" class="oVSRTableColumns" design="Bold"/>
-											<core:Icon src="sap-icon://sort-ascending" width="" id="moAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="true"/>
-											<core:Icon src="sap-icon://sort-descending" width="" id="moDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-										</HBox>
-									</Column>
-								
-									<Column minScreenWidth="Desktop" demandPopin="true" class="columnLabelStyle">
-										<HBox>
-											<Label text="{i18n>Suffix}" design="Bold"/>
-											<core:Icon src="sap-icon://sort-ascending" width="" id="suAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-											<core:Icon src="sap-icon://sort-descending" width="" id="suDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-										</HBox>
-									</Column>
-									<Column minScreenWidth="Desktop" demandPopin="true" class="columnLabelStyle">
-										<HBox>
-											<Label text="{i18n>APX}" design="Bold"/>
-											<core:Icon src="sap-icon://sort-ascending" width="" id="apAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-											<core:Icon src="sap-icon://sort-descending" width="" id="apDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-										</HBox>
-									</Column>
-										<Column minScreenWidth="Desktop" demandPopin="true" class="columnLabelStyle">
-										<HBox>
-											<Label text="{i18n>Color}" design="Bold"/>
-											<core:Icon src="sap-icon://sort-ascending" width="" id="coAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-											<core:Icon src="sap-icon://sort-descending" width="" id="coDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-										</HBox>
-									</Column>
-									<Column minScreenWidth="Desktop" demandPopin="true" class="columnLabelStyle">
-										<HBox>
-											<Label text="{i18n>OrderType}" design="Bold"/>
-											<core:Icon src="sap-icon://sort-ascending" width="" id="otAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-											<core:Icon src="sap-icon://sort-descending" width="" id="otDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-										</HBox>
-									</Column>
-									<Column minScreenWidth="Desktop" demandPopin="true" class="columnLabelStyle">
-										<HBox>
-											<Label text="{i18n>ETAFrom}" design="Bold"/>
-											<core:Icon src="sap-icon://sort-ascending" width="" id="etfAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-											<core:Icon src="sap-icon://sort-descending" width="" id="etfDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-										</HBox>
-									</Column>
-									<Column minScreenWidth="Desktop" demandPopin="true" class="columnLabelStyle">
-										<HBox> 
-											<Label text="{i18n>ETATo}" design="Bold"/>
-											<core:Icon src="sap-icon://sort-ascending" width="" id="ettAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-											<core:Icon src="sap-icon://sort-descending" width="" id="ettDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-										</HBox>
-									</Column>
-									<Column minScreenWidth="Desktop" demandPopin="true" class="columnLabelStyle">
-										<HBox>
-											<Label text="{i18n>AccessoryInstall}" design="Bold"/>
-											<core:Icon src="sap-icon://sort-ascending" width="" id="aiAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-											<core:Icon src="sap-icon://sort-descending" width="" id="aiDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-										</HBox>
-									</Column>
-									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Right">
-										<Label text="{i18n>City}" design="Bold" class="sapUiSmallMarginBegin"/>
-									</Column>
-									<Column minScreenWidth="Desktop" demandPopin="true">
-										<Label text="{i18n>Province}" design="Bold"/>
-									</Column>
-								</columns>
-								<items>
-									<ColumnListItem press="onLineItemPressedtree1" type="Active">
-										<cells>
-											<HBox class="sapUiMediumMarginBegin">
-												<Link id="tradeId" text="Trade" class="sapUiSmallMarginTop link" subtle="true" press="oTradeLinkPress"/>
-											</HBox>
-											<Text text="{kunnr} - {name1}" class="sapUiSmallMarginTop"/>
-											<Text text="{matnr} - {model_desc_en}" class="sapUiSmallMarginTop"/>
-											<Text text="{zzsuffix} - {suffix_desc_en}" class="sapUiSmallMarginTop"/>
-											<Text text="{zzapx}" class="sapUiSmallMarginTop"/>
-											<Text text="{zzextcol} - {mktg_desc_en}" class="sapUiSmallMarginTop"/>
-											<Text text="{zzordertype}" class="sapUiSmallMarginTop"/>
-											<Text text="{zzadddata4}" class="sapUiSmallMarginTop"/>
-											<Text text="{pstsp}" class="sapUiSmallMarginTop"/>
-											<Text text ="{path:'z_pd_flag',formatter:'vehicleLocator.Formatter.Formatter.AccessoryInstall'}" class="sapUiSmallMarginTop sapUiMediumMarginBegin" textAlign="End"/>
-											<Text text="{ort01}" class="sapUiSmallMarginTop"/>
-											<Text text="{REGIO}" class="sapUiSmallMarginTop"/>
-										</cells>
-									</ColumnListItem>
-								</items>
-							</Table>-->
-						</VBox>
-						<!--	<VBox class="sapUiSmallMargin">
-						<form:SimpleForm id="SimpleFormDisplay480_121245" editable="true" layout="ResponsiveGridLayout" title="" labelSpanL="4" labelSpanM="12"
-							adjustLabelSpan="false" emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2" singleContainerFullSize="false">
-							<form:content>
-								<Lable text="Status"/>
-								<Input value=""/>
-								<Lable text="Dealer"/>
-								<Input value=""/>
-								<Lable text="Suffix"/>
-								<Input value=""/>
-								<Lable text="Color"/>
-								<Input value=""/>
-								
-								
-								
-							</form:content>
-						</form:SimpleForm>
-						</VBox>-->
-						<!--<VBox class="sapUiSmallMargin">
-						<l:HorizontalLayout>
-							<l:content>
-								<ComboBox placeholder="Vehicle Locator" selectionChange="ItemClicked" id="combo1Menu">
-									<items>
-										<core:Item text="Vehicle Locator"/>
-										<core:Item text="Vehicle Locator/Trade"/>
-										<core:Item text="Trade Summary"/>
-										<core:Item text="Trade History"/>
-										<core:Item text="Do Not Call Block List"/>
-									</items>
-								</ComboBox>
-								<ToolbarSpacer></ToolbarSpacer>
-								<Button id="openMenu3" text="Pull Vehicles" type="Emphasized" press="handlePressPullvehcls" width="180px"/>
-								<Button id="openMenu4" text="Export to Vehicles" type="Emphasized" press="handleExporttohecls" width="180px"/>
-								<Button id="openMenu5" text="Back to Serach" type="Emphasized" press="handlebacksearch" width="180px"/>
-								
-								
-							</l:content>
-						</l:HorizontalLayout>
-					</VBox>-->
-						<!--<VBox class="sapUiSmallMargin">
-						<l:HorizontalLayout>
-							<l:content>
-								<Button id="openMenu2" text="Vehicle Locator" type="Accept" press="handlePressOpenMenu" width="180px"/>
-								<ToolbarSpacer></ToolbarSpacer>
-								<Button id="openMenu3" text="Pull Vehicles" type="Emphasized" press="handlePressPullvehcls" width="180px"/>
-								<Button id="openMenu4" text="Export to Vehicles" type="Emphasized" press="handleExporttohecls" width="180px"/>
-								<Button id="openMenu5" text="Back to Serach" type="Emphasized" press="handlebacksearch" width="180px"/>
-							</l:content>
-						</l:HorizontalLayout>
-					</VBox>-->
-					</VBox>
+								</t:template>
+							</t:Column>
+							<t:Column sortProperty="z_pd_flag" width="6rem">
+								<Label text="{i18n>AccessoryInstall}" wrapping="false"/>
+								<t:template>
+									<Text text="{path:'z_pd_flag',formatter:'vehicleLocator.Formatter.Formatter.AccessoryInstall'}" wrapping="false"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="8rem">
+								<Label text="{i18n>City}" wrapping="false"/>
+								<t:template>
+									<Text text="{ort01}" wrapping="false"/>
+								</t:template>
+							</t:Column>
+							<t:Column width="12rem">
+								<Label text="{i18n>Province}" wrapping="false"/>
+								<t:template>
+									<Text text="{bezei}" wrapping="false"/>
+								</t:template>
+							</t:Column>
+						</t:columns>
+					</t:Table>
 				</content>
-				<!--	<footer>
-						<OverflowToolbar id="otbFooter">
-							
-							<ToolbarSpacer/>
-							<Button type="Accept" text="Accept">
-								<layoutData><OverflowToolbarLayoutData moveToOverflow="false"/></layoutData>
-							</Button>
-							<Button type="Reject" text="Reject">
-								<layoutData><OverflowToolbarLayoutData moveToOverflow="false"/></layoutData>
-							</Button>
-							
-						</OverflowToolbar>
-					</footer>-->
 			</Page>
 		</pages>
 	</App>
