@@ -161,64 +161,64 @@
 					<HBox class="customStyleBox">		
 					<t:Table id="table1VSR" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{/}" visibleRowCount="20">
 							<t:columns>
-								<t:Column id="TradecolId" width="6rem">
+								<t:Column id="TradecolId">
 									<Label text="{i18n>Trade}"/>
 									<t:template>
 										<Link id="tradeId" text="Trade" class="link" subtle="true" press="oTradeLinkPress"  wrapping="false"/>
 									</t:template>
 								</t:Column>
-								<t:Column sortProperty="kunnr" width="16rem">
+								<t:Column sortProperty="kunnr">
 									<Label text="{i18n>Dealer}"/>
 									<t:template>
 										<Text text="{path:'kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'} -{name1}"  wrapping="false"/>
 									</t:template>
 								</t:Column>
-								<t:Column sortProperty="matnr" width="14rem" id="matnr">
+								<t:Column sortProperty="matnr" id="matnr">
 									<Label text="{i18n>Model}"/>
 									<t:template>
 										<Text text="{matnr} - {model_desc_en}" wrapping="false"/>
 									</t:template>
 								</t:Column>
-								<t:Column sortProperty="zzsuffix" width="8rem">
+								<t:Column sortProperty="zzsuffix">
 									<Label text="{i18n>Suffix}"/>
 									<t:template>
 										<Text text="{zzsuffix} - {suffix_desc_en}" wrapping="false"/>
 									</t:template>
 								</t:Column>
-								<t:Column sortProperty="zzapx" width="6rem">
+								<t:Column sortProperty="zzapx">
 									<Label text="{i18n>APX}" wrapping="false"/>
 									<t:template>
 										<Text text="{zzapx}" wrapping="false"/>
 									</t:template>
 								</t:Column>
-								<t:Column id="ID_DealerNet" sortProperty="zzextcol" width="14rem">
+								<t:Column id="ID_DealerNet" sortProperty="zzextcol">
 									<Label text="{i18n>Color}" wrapping="false"/>
 									<t:template>
 										<Text text="{zzextcol} - {mktg_desc_en}" wrapping="false"/>
 									</t:template>
 								</t:Column>
-								<t:Column id="ID_Profit" sortProperty="zzordertype" width="6rem">
+								<t:Column id="ID_Profit" sortProperty="zzordertype">
 									<Label text="{i18n>OrderType}" wrapping="false"/>
 									<t:template>
 								<Text text="{path:'zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" wrapping="false"/>	
 									<!--	<Text text="{zzordertype}" wrapping="false"/>-->
 									</t:template>
 								</t:Column>
-								<t:Column sortProperty="zzadddata4" width="6rem">
+								<t:Column sortProperty="zzadddata4">
 									<Label text="{i18n>ETAFrom}" wrapping="false"/>
 									<t:template>
-					<Text text="{path:'zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false"/>							
+					<Text text="{path:'zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate'}" wrapping="false"/>							
 									<!--	<Text text="{zzadddata4}" wrapping="false"/>-->
 									</t:template>
 								</t:Column>
-								<t:Column sortProperty="pstsp" width="6rem">
+								<t:Column sortProperty="pstsp">
 									<Label text="{i18n>ETATo}" wrapping="false"/>
 									<t:template>
 								<Text text="{path:'pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false"/>			
 									<!--	<Text text="{pstsp}" wrapping="false"/>-->
 									</t:template>
 								</t:Column>
-								<t:Column sortProperty="z_pd_flag" width="6rem">
+								<t:Column sortProperty="z_pd_flag">
 									<Label text="{i18n>AccessoryInstall}" wrapping="false"/>
 									<t:template>
 										<Text text="{path:'z_pd_flag',formatter:'vehicleLocator.Formatter.Formatter.AccessoryInstall'}" wrapping="false"/>

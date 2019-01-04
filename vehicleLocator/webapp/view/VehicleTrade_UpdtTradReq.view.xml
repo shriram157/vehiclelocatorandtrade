@@ -60,7 +60,7 @@
 								<Label text="{i18n>OrderType}"/>
 								<Text text="{path:'Order_Type',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}"/>
 								
-									<Label text="{i18n>CurrentETA}" id="cetalabid">
+								<Label text="{i18n>CurrentETA}" id="cetalabid">
 									<layoutData>
 										<l:GridData span="L4 M12 S3"/>
 									</layoutData>
@@ -195,19 +195,19 @@
 					<t:Table id="tableVrade" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None"
 						rows="{ path:'/', sorter : [{ path:'Comment_Date', descending : 'true' }] }">
 						<t:columns>
-							<t:Column id="Comment_Date" width="6rem">
+							<t:Column id="Comment_Date">
 								<Label text="{i18n>Date}"/>
 								<t:template>
 									<Text text="{path:'Comment_Date',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false"/>
 								</t:template>
 							</t:Column>
-							<t:Column sortProperty="kunnr" width="16rem">
+							<t:Column sortProperty="kunnr">
 								<Label text="{i18n>User}"/>
 								<t:template>
-									<Text text="{Created_By}" wrapping="false"/>
+									<Text text="{Created_By}"/>
 								</t:template>
 							</t:Column>
-							<t:Column sortProperty="matnr" width="14rem" id="matnr">
+							<t:Column sortProperty="matnr" id="matnr">
 								<Label text="{i18n>Comments}"/>
 								<t:template>
 									<Text text="{Comment_Txt}" wrapping="false"/>

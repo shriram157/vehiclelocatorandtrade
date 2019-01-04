@@ -15,14 +15,12 @@
 		"csrfProtection": false,
 		"authenticationType": "none"
 	}, {
-		"source": "(.*)(.xsjs)",
-		"destination": "vehicleLocator-node-backend",
-		"csrfProtection": false,
+		"source": "(.*)(.xsodata)",
+		"destination": "vehicleLocator_XSJS_backend",
 		"authenticationType": "none"
-	}, {
-	
-	     "source": "/vehicleTrade/xsodata/(.*)",
-		"destination": "vehicleLocator-node-backend",
+    }, {
+		"source": "/xsodata/(.*)",
+		"destination": "vehicleLocator_XSJS_backend",
 		"authenticationType": "none"
 	}]
 }

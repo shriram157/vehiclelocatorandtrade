@@ -18,7 +18,7 @@
 				</customHeader>
 				<content>
 					<Toolbar height="45px" class="toolbar3">
-					<!--	<Label text="Add Model Block" width="180px" class="vTlabe1clss"/>-->
+						<!--	<Label text="Add Model Block" width="180px" class="vTlabe1clss"/>-->
 						<ToolbarSpacer></ToolbarSpacer>
 						<!--<Button text="Vehicle Locator" press="handleLinkPress"/>
 						<Button text="Sold Order" press="handleLinkPress"/>
@@ -26,44 +26,45 @@
 						<Button text="Inventory Summary" press="handleLinkPress"/>
 						<Button text="Sujjest Order" press="handleLinkPress"/>-->
 					</Toolbar>
-						<VBox>
+					<VBox>
 						<OverflowToolbar id="otb1">
 							<Label text="{i18n>AddModelBlock}" width="200px" class="vHlabe1clss"/>
 							<ToolbarSpacer/>
-						
 						</OverflowToolbar>
-						</VBox>
+					</VBox>
 					<VBox class="sapUiSmallMargin">
 						<form:SimpleForm id="SimpleFormDisplay480_12dg0" editable="true" layout="ResponsiveGridLayout" labelSpanM="12" adjustLabelSpan="false"
 							emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2">
 							<form:content>
 								<core:Title text="" class="VTMBSClass"/>
 								<Label text="{i18n>Dealer}" required="true"/>
-							<Select id="VT_MBSdeal" change="onVT_MBSdeal" width="76%" forceSelection="true" class="sapUiSizeCompact VT_MBSdeal" items="{}">
-									<core:ListItem key="{}" text="{jsonDatamodel>Status}"/>
-								</Select>
-							<!--	<SearchField id="Searcid" width="76%"/>-->
+								<ComboBox id="VT_MBSdeal"  showSecondaryValues="true" selectionChange="onVT_MBSdeal" width="76%"  items="{/}">
+									<core:ListItem key="{BusinessPartner}" text="{path:'BusinessPartner',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDealer'}" additionalText="{OrganizationBPName1}"/>
+									
+								</ComboBox>
+								<!--	<SearchField id="Searcid" width="76%"/>-->
 								<Label text="{i18n>VehicleTrackingNumber}" required="true"/>
 								<!--<Text text=""/>-->
-								<Text text="TCI00143453">
+								<Text text="" id="oVtno">
 									<layoutData>
 										<l:GridData span="L3 M12 S3"/>
 									</layoutData>
 								</Text>
-								<Button text="{i18n>SelectVehicle}" width="60%"/>
+								<Button text="{i18n>SelectVehicle}" width="60%" press="onSelect"/>
 								<Label text="{i18n>BlockModelNo.ofDays}" required="true"/>
-								<Select id="VT_MBSbmnd" change="onVT_MBSbnmd" width="76%" forceSelection="true" class="sapUiSizeCompact VT_MBSbnmd" items="{}">
+								<Input value ="15" id="inputblocknofdays"/>
+							<!--	<Select id="VT_MBSbmnd" change="onVT_MBSbnmd" width="76%"   items="{}">
 									<core:ListItem key="{}" text="{jsonDatamodel>Status}"/>
-								</Select>
-							<!--	<SearchField id="Searcid2" width="76%"/>-->
+								</Select>-->
+								<!--	<SearchField id="Searcid2" width="76%"/>-->
 								<Label text="{i18n>Comments}"/>
-								<TextArea id="TypeHerid" value=" " width="76%" height="50px"/>
+								<TextArea id="TypeHerid" value=" " width="76%" height="50px" maxLength="50"/>
 								<!--<FlexBox width="40px"></FlexBox>
 								<FlexBox height="100px" alignItems="Center" justifyContent="Center">
 									<Button text="Submit"/>
 								</FlexBox>-->
 								<Label text=""/>
-								<Button text="{i18n>Submit}" press="onpresVMS" width="26%"/>
+								<Button text="{i18n>Submit}" press="onSubmit" width="26%"/>
 								<core:Title text=""/>
 								<!--<ToolbarSpacer></ToolbarSpacer>-->
 								<!--<Label text="Zone"/>
@@ -82,10 +83,10 @@
 						<FlexBox height="25px" alignItems="Center" justifyContent="Center">
 							<Label text="{i18n>DoNotCallBlockList}" class="flexdontclabllist"/>
 							<FlexBox width="960px"></FlexBox>
-							<Button text="{i18n>Delete}"/>
+							<Button text="{i18n>Delete}" id="oDeleteid" press="oDeletepress"/>
 						</FlexBox>
 					</HBox>
-					<Table id="tableVTMBS" width="auto" class="sapUiResponsiveMargin" mode="MultiSelect" items="{/}" growingThreshold="150">
+					<!--				<Table id="tableVTMBS" width="auto" class="sapUiResponsiveMargin" mode="MultiSelect" items="{/}" growingThreshold="150">
 						<columns>
 							<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
 								<Text text="{i18n>Dealer}"/>
@@ -125,7 +126,64 @@
 								</cells>
 							</ColumnListItem>
 						</items>
-					</Table>
+					</Table>-->
+					<t:Table id="tableVTMBS" cellClick="onRowPress" selectionBehavior="Row" selectionMode="MultiToggle" rows="{/}">
+						<t:columns>
+						
+						
+							<t:Column sortProperty="ZzblockedDlr" width="16rem" id="ZzblockedDlr">
+								<Label text="{i18n>Dealer}"/>
+								<t:template>
+									<Text
+										text="{ZzblockedDlr}-{OrganizationBPName1}"
+										wrapping="false"/>
+								</t:template>
+							</t:Column>
+								<t:Column sortProperty="Zzseries" width="22rem" id="oSeires">
+								<Label text="{i18n>Series}" wrapping="false"/>
+								<t:template>
+									<Text
+										text="{Zzseries}-{TCISeriesDescriptionEN}"
+										wrapping="false"/>
+								</t:template>
+							</t:Column>
+							<t:Column sortProperty="Zzmodel" width="22rem" id="omodelvsr">
+								<Label text="{i18n>Model}"/>
+								<t:template>
+									<Text text="{Zzmodel}-{ModelDescriptionEN}" wrapping="false"/>
+								</t:template>
+							</t:Column>
+							<t:Column sortProperty="Zzduration" width="22rem" id="oBlockduration">
+								<Label text="{i18n>BlockDuration}" wrapping="false"/>
+								<t:template>
+									<Text
+										text="{Zzduration}"
+										wrapping="false"/>
+								</t:template>
+							</t:Column>
+							<t:Column sortProperty="ZzblkstartDate" width="14rem" id="fromdate">
+								<Label text="{i18n>FromDate}" wrapping="false"/>
+								<t:template>
+									<Text text="{path:'ZzblkstartDate',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}"
+										wrapping="false"/>
+								</t:template>
+							</t:Column>
+							<t:Column sortProperty="ZzblkendDate" width="6rem" id="todate">
+								<Label text="{i18n>ToDate}" wrapping="false"/>
+								<t:template>
+									<Text text="{path:'ZzblkendDate',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}"
+										wrapping="false"/>
+								</t:template>
+							</t:Column>
+							<t:Column sortProperty="Zzcomment" width="14rem" id="comment">
+								<Label text="{i18n>Comments}" wrapping="false"/>
+								<t:template>
+									<Text text="{Zzcomment}"
+										wrapping="false"/>
+								</t:template>
+							</t:Column>
+						</t:columns>
+					</t:Table>
 				</content>
 			</Page>
 		</pages>

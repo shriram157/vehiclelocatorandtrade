@@ -145,9 +145,9 @@ sap.ui.define([
 					});
 				}
 			},*/
-		onRouteMatched: function () {
+		onRouteMatched: function (oEvent) {
 			debugger;
-
+this.SelectedVehicleFrom=oEvent.getParameter("arguments").SelectedVehicleFrom;
 			var that = this;
 			var Model = sap.ui.getCore().getModel("SelectedSeriesFromScreen1");
 			that.getView().byId("oVt_SeriesCmbo").setModel(Model);
@@ -191,11 +191,26 @@ sap.ui.define([
 		oTradeLinkPress: function (oEvt) {
 
 			var oSelectedItem = oEvt.getSource().getBindingContext().getObject();
+			if(this.SelectedVehicleFrom=="VehileTrade_CreateSingle"){
 			sap.ui.getCore().getModel("TradeModel").setProperty("/VehicleTradeVehicle", oSelectedItem);
 			//	var oSelectedStrItems = JSON.stringify(oSelectedItem);
 			this.getRouter().navTo("VehicleTrade_CreateSingle", {
 				SelectedTrade: "VehicleTradeVehicle"
 			});
+			}
+			else if(this.SelectedVehicleFrom=="VehileTrade_CreateSingle"){
+					this.getRouter().navTo("VehicleTrade_UpdtTradReq");
+				
+			}
+				else if(this.SelectedVehicleFrom=="VehicleTrade_ModelBlock_Summary"){
+				//	var Selobj=escape(JSON.stringify(oSelectedItem));
+				var model= new sap.ui.model.json.JSONModel(oSelectedItem);
+				sap.ui.getCore().setModel(model,"VehicleTrade_ModelBlock_SummaryTrade")
+					this.getRouter().navTo("VehicleTrade_ModelBlock_Summary", {
+				SelectedTrade:"VehicleTradeVehicle"
+			});
+				
+			}
 
 		},
 		onChange: function (oEvent) {
