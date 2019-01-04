@@ -2,8 +2,10 @@ sap.ui.define([
 	/*"sap/ui/core/mvc/Controller"*/
 	"vehicleLocator/controller/BaseController",
 	"sap/ui/model/Sorter",
-	"sap/ui/model/Filter"
-], function (BaseController, Sorter, Filter) {
+	"sap/ui/model/Filter",
+	"vehicleLocator/Formatter/Formatter",
+	"sap/ui/table/SortOrder"
+], function (BaseController, Sorter, Filter, Formatter, SortOrder) {
 	"use strict";
 
 	return BaseController.extend("vehicleLocator.controller.VehicleTrade_VehicleSelection", {
@@ -16,10 +18,136 @@ sap.ui.define([
 			}
 			var oTable = this.getView().byId("table");
 			var that = this;
-			
+
 			this.getRouter().attachRouteMatched(this.onRouteMatched, this);
 
-		
+			/*	var SelSeriesKey = that.getView().byId("oVt_SeriesCmbo").getSelectedKey();
+				var Filter = this.oDumData.filter(function (x) {
+					return x.TCISeries == SelSeriesKey;
+				});
+				var model = new sap.ui.model.json.JSONModel(Filter);
+				that.getView().byId("table").setModel(model);*/
+
+			/**************Pagination*******************************/
+
+			/**************Pagination*******************************/
+
+		},
+		/*	onClick: function (oID) {
+
+				var that = this;
+				if (oID != undefined) {
+					$('#' + oID).click(function (oEvent) { 
+						var oTarget = oEvent.currentTarget;
+					
+						var oLabelText = oTarget.childNodes[0].textContent;
+						that.selooLabelText = oTarget.childNodes[0].textContent; 
+						var oIndex = oTarget.id.slice(-1);
+						if (oIndex == "6") {
+							oIndex = 8;
+						} else if (oIndex == "3") {
+							oIndex = 0;
+						} else if (oIndex == "2") {
+							oIndex = 9;
+						} else if (oIndex == "4") {
+							oIndex = 1;
+						} else if (oIndex == "8") {
+							oIndex = 6;
+						} else if (oIndex == "5") {
+							oIndex = 4;
+						} else if (oIndex == "7") {
+							oIndex = 10;
+						} else if (oIndex == "9") {
+							oIndex = 6;
+						} else if (oIndex == "0") {
+							oIndex = 12;
+						} else if (oIndex == "1") {
+							oIndex = 13;
+						}
+						var oView = that.getView();
+						var oTable = oView.byId("table");
+						var oModel = oTable.getModel().getData(); 
+						if (oModel.length != 0) {
+							var oKeys = Object.keys(oModel[0]); 
+							oTable.getModel().setProperty("/bindingValue", oKeys[oIndex]); 
+							switch (that.selooLabelText) {
+							case "Model":
+								if (that.getView().byId("moAsIcon").getVisible() == false) {
+									that.onAscending();
+								} else if (that.getView().byId("moAsIcon").getVisible() == true) {
+									that.onDescending();
+								}
+								break;
+							case "Color":
+								if (that.getView().byId("coAsIcon").getVisible() == false) {
+									that.onAscending();
+								} else if (that.getView().byId("coAsIcon").getVisible() == true) {
+									that.onDescending();
+								}
+								break;
+							case "Series":
+								if (that.getView().byId("senAsIcon").getVisible() == false) {
+									that.onAscending();
+								} else if (that.getView().byId("senAsIcon").getVisible() == true) {
+									that.onDescending();
+								}
+								break;
+							case "Suffix":
+								if (that.getView().byId("suAsIcon").getVisible() == false) {
+									that.onAscending();
+								} else if (that.getView().byId("suAsIcon").getVisible() == true) {
+									that.onDescending();
+								}
+								break;
+
+							case "APX":
+								if (that.getView().byId("apAsIcon").getVisible() == false) {
+									that.onAscending();
+								} else if (that.getView().byId("apAsIcon").getVisible() == true) {
+									that.onDescending();
+								}
+								break;
+							case "Order Type":
+								if (that.getView().byId("otAsIcon").getVisible() == false) {
+									that.onAscending();
+								} else if (that.getView().byId("otAsIcon").getVisible() == true) {
+									that.onDescending();
+								}
+								break;
+							case "ETA From":
+								if (that.getView().byId("etfAsIcon").getVisible() == false) {
+									that.onAscending();
+								} else if (that.getView().byId("etfAsIcon").getVisible() == true) {
+									that.onDescending();
+								}
+								break;
+							case "ETA To":
+								if (that.getView().byId("ettAsIcon").getVisible() == false) {
+									that.onAscending();
+								} else if (that.getView().byId("ettAsIcon").getVisible() == true) {
+									that.onDescending();
+								}
+								break;
+							case "Vehicle Tracking Number":
+								if (that.getView().byId("vtnAsIcon").getVisible() == false) {
+									that.onAscending();
+								} else if (that.getView().byId("vtnAsIcon").getVisible() == true) {
+									that.onDescending();
+								}
+								break;
+
+							}
+						} else {
+							sap.m.MessageBox.warning("No data is available to sort")
+						}
+
+						
+					});
+				}
+			},*/
+		onRouteMatched: function (oEvent) {
+			debugger;
+this.SelectedVehicleFrom=oEvent.getParameter("arguments").SelectedVehicleFrom;
 			var that = this;
 			var Model = sap.ui.getCore().getModel("SelectedSeriesFromScreen1");
 			that.getView().byId("oVt_SeriesCmbo").setModel(Model);
@@ -27,522 +155,62 @@ sap.ui.define([
 				var SeleKey = Model.getProperty("/SelectedSeries");
 				that.getView().byId("oVt_SeriesCmbo").setSelectedKey(SeleKey);
 			}
-			this.oDumData = [{
-				ZZVTN: "TCIL1000545673",
-				TCISeries: "CAM",
-				TCISeriesDescriptionEN: "CAMRY",
-				TCISeriesDescriptionFR: "CAMRY",
-				Model: "AY5F1T",
-				ENModelDesc: "TUNDRA 4X4 CREWMAX EN",
-				ZZEXTCOL: "0040",
-				MKTG_DESC_EN: "Alphine White",
-				Suffix: "AA",
-				SuffixDescriptionEN: "AA-SUFFIX",
-				ZZAPX: "00",
-				ZZORDERTYPE: "Stock - Open",
-				ZZADDDATA4: "2017-02-06",
-				PSTSP: "2018-05-01",
-				Year: "2017"
-			}, {
-				ZZVTN: "TCIL1000415666",
-				TCISeries: "CAM",
-				TCISeriesDescriptionEN: "CAMRY",
-				TCISeriesDescriptionFR: "CAMRY",
-				Model: "AY5F1T",
-				ENModelDesc: "TUNDRA 4X4 CREWMAX EN",
-				ZZEXTCOL: "0040",
-				MKTG_DESC_EN: "Alphine White",
-				Suffix: "AA",
-				SuffixDescriptionEN: "AA-SUFFIX",
-				ZZAPX: "00",
-				ZZORDERTYPE: "Stock - Open",
-				ZZADDDATA4: "2017-02-06",
-				PSTSP: "2018-05-01",
-				Year: "2017"
-			}, {
-				ZZVTN: "TCIL1000345623",
-				TCISeries: "CAM",
-				TCISeriesDescriptionEN: "CAMRY",
-				TCISeriesDescriptionFR: "CAMRY",
-				Model: "AY5F1T",
-				ENModelDesc: "TUNDRA 4X4 CREWMAX EN",
-				ZZEXTCOL: "0040",
-				MKTG_DESC_EN: "Black",
-				Suffix: "AA",
-				SuffixDescriptionEN: "AA-SUFFIX",
-				ZZAPX: "00",
-				ZZORDERTYPE: "Stock - Open",
-				ZZADDDATA4: "2017-02-06",
-				PSTSP: "2018-05-01",
-				Year: "2017"
-			}, {
-				ZZVTN: "TCIL100054454",
-				TCISeries: "SIE",
-				TCISeriesDescriptionEN: "SIENNA",
-				TCISeriesDescriptionFR: "SIENNA",
-				Model: "BZRFHT",
-				ENModelDesc: "HIGHLANDER",
-				ZZEXTCOL: "0218",
-				MKTG_DESC_EN: "MidLight BlackMetalic",
-				Suffix: "DC",
-				SuffixDescriptionEN: "DC - LTD 5 PSG - 0070 - LA24",
-				ZZAPX: "00",
-				ZZORDERTYPE: "Stock - Open",
-				ZZADDDATA4: "2018-02-06",
-				PSTSP: "2019-05-01",
-				Year: "2019"
-			}, {
-				ZZVTN: "TCIL100054433",
-				TCISeries: "COA",
-				TCISeriesDescriptionEN: "COROLLA",
-				TCISeriesDescriptionFR: "COROLLA",
-				Model: "B42HLT",
-				ENModelDesc: "COROLLA",
-				ZZEXTCOL: "01G3",
-				MKTG_DESC_EN: "Black",
-				Suffix: "BB",
-				SuffixDescriptionEN: "BB-SR5",
-				ZZAPX: "00",
-				ZZORDERTYPE: "Stock - Open",
-				ZZADDDATA4: "2017-05-01",
-				PSTSP: "2019-05-01",
-				Year: "2019"
-
-			}, {
-				ZZVTN: "TCIL1000545673",
-				TCISeries: "CAM",
-				TCISeriesDescriptionEN: "CAMRY",
-				TCISeriesDescriptionFR: "CAMRY",
-				Model: "AY5F1T",
-				ENModelDesc: "TUNDRA 4X4 CREWMAX EN",
-				ZZEXTCOL: "0040",
-				MKTG_DESC_EN: "Alphine White",
-				Suffix: "AA",
-				SuffixDescriptionEN: "AA-SUFFIX",
-				ZZAPX: "00",
-				ZZORDERTYPE: "Stock - Open",
-				ZZADDDATA4: "2017-02-06",
-				PSTSP: "2018-05-01",
-				Year: "2017"
-			}, {
-				ZZVTN: "TCIL1000542231",
-				TCISeries: "CAM",
-				TCISeriesDescriptionEN: "CAMRY",
-				TCISeriesDescriptionFR: "CAMRY",
-				Model: "AY5F1T",
-				ENModelDesc: "TUNDRA 4X4 CREWMAX EN",
-				ZZEXTCOL: "0040",
-				MKTG_DESC_EN: "Black",
-				Suffix: "AA",
-				SuffixDescriptionEN: "AA-SUFFIX",
-				ZZAPX: "00",
-				ZZORDERTYPE: "Stock - Open",
-				ZZADDDATA4: "2017-02-06",
-				PSTSP: "2018-05-01",
-				Year: "2017"
-			}, {
-				ZZVTN: "TCIL100054454",
-				TCISeries: "SIE",
-				TCISeriesDescriptionEN: "SIENNA",
-				TCISeriesDescriptionFR: "SIENNA",
-				Model: "BZRFHT",
-				ENModelDesc: "HIGHLANDER",
-				ZZEXTCOL: "0218",
-				MKTG_DESC_EN: "MidLight BlackMetalic",
-				Suffix: "DC",
-				SuffixDescriptionEN: "DC - LTD 5 PSG - 0070 - LA24",
-				ZZAPX: "00",
-				ZZORDERTYPE: "Stock - Open",
-				ZZADDDATA4: "2018-02-06",
-				PSTSP: "2019-05-01",
-				Year: "2018"
-			}, {
-				ZZVTN: "TCIL100054111",
-				TCISeries: "SIE",
-				TCISeriesDescriptionEN: "SIENNA",
-				TCISeriesDescriptionFR: "SIENNA",
-				Model: "BZRFHT",
-				ENModelDesc: "HIGHLANDER",
-				ZZEXTCOL: "0218",
-				MKTG_DESC_EN: "White",
-				Suffix: "DC",
-				SuffixDescriptionEN: "DC - LTD 5 PSG - 0070 - LA24",
-				ZZAPX: "00",
-				ZZORDERTYPE: "Stock - Open",
-				ZZADDDATA4: "2018-02-06",
-				PSTSP: "2019-05-01",
-				Year: "2019"
-			}, {
-				ZZVTN: "TCIL100054433",
-				TCISeries: "COA",
-				TCISeriesDescriptionEN: "COROLLA",
-				TCISeriesDescriptionFR: "COROLLA",
-				Model: "B42HLT",
-				ENModelDesc: "COROLLA",
-				ZZEXTCOL: "01G3",
-				MKTG_DESC_EN: "Black",
-				Suffix: "BB",
-				SuffixDescriptionEN: "BB-SR5",
-				ZZAPX: "00",
-				ZZORDERTYPE: "Stock - Open",
-				ZZADDDATA4: "2017-05-01",
-				PSTSP: "2019-05-01",
-				Year: "2019"
-
-			}, {
-				ZZVTN: "TCIL100034431",
-				TCISeries: "COA",
-				TCISeriesDescriptionEN: "COROLLA",
-				TCISeriesDescriptionFR: "COROLLA",
-				Model: "B42HLT",
-				ENModelDesc: "COROLLA",
-				ZZEXTCOL: "01G3",
-				MKTG_DESC_EN: "Metalic Black",
-				Suffix: "BB",
-				SuffixDescriptionEN: "BB-SR5",
-				ZZAPX: "00",
-				ZZORDERTYPE: "Stock - Open",
-				ZZADDDATA4: "2017-05-01",
-				PSTSP: "2019-05-01",
-				Year: "2019"
-
-			},
-			{
-				ZZVTN: "TCIL1000545673",
-				TCISeries: "CAM",
-				TCISeriesDescriptionEN: "CAMRY",
-				TCISeriesDescriptionFR: "CAMRY",
-				Model: "AY5F1T",
-				ENModelDesc: "TUNDRA 4X4 CREWMAX EN",
-				ZZEXTCOL: "0040",
-				MKTG_DESC_EN: "Alphine White",
-				Suffix: "AA",
-				SuffixDescriptionEN: "AA-SUFFIX",
-				ZZAPX: "00",
-				ZZORDERTYPE: "Stock - Open",
-				ZZADDDATA4: "2017-02-06",
-				PSTSP: "2018-05-01",
-				Year: "2017"
-			}, {
-				ZZVTN: "TCIL1000415666",
-				TCISeries: "CAM",
-				TCISeriesDescriptionEN: "CAMRY",
-				TCISeriesDescriptionFR: "CAMRY",
-				Model: "AY5F1T",
-				ENModelDesc: "TUNDRA 4X4 CREWMAX EN",
-				ZZEXTCOL: "0040",
-				MKTG_DESC_EN: "Alphine White",
-				Suffix: "AA",
-				SuffixDescriptionEN: "AA-SUFFIX",
-				ZZAPX: "00",
-				ZZORDERTYPE: "Stock - Open",
-				ZZADDDATA4: "2017-02-06",
-				PSTSP: "2018-05-01",
-				Year: "2017"
-			}, {
-				ZZVTN: "TCIL1000345623",
-				TCISeries: "CAM",
-				TCISeriesDescriptionEN: "CAMRY",
-				TCISeriesDescriptionFR: "CAMRY",
-				Model: "AY5F1T",
-				ENModelDesc: "TUNDRA 4X4 CREWMAX EN",
-				ZZEXTCOL: "0040",
-				MKTG_DESC_EN: "Black",
-				Suffix: "AA",
-				SuffixDescriptionEN: "AA-SUFFIX",
-				ZZAPX: "00",
-				ZZORDERTYPE: "Stock - Open",
-				ZZADDDATA4: "2017-02-06",
-				PSTSP: "2018-05-01",
-				Year: "2017"
-			}, {
-				ZZVTN: "TCIL100054454",
-				TCISeries: "SIE",
-				TCISeriesDescriptionEN: "SIENNA",
-				TCISeriesDescriptionFR: "SIENNA",
-				Model: "BZRFHT",
-				ENModelDesc: "HIGHLANDER",
-				ZZEXTCOL: "0218",
-				MKTG_DESC_EN: "MidLight BlackMetalic",
-				Suffix: "DC",
-				SuffixDescriptionEN: "DC - LTD 5 PSG - 0070 - LA24",
-				ZZAPX: "00",
-				ZZORDERTYPE: "Stock - Open",
-				ZZADDDATA4: "2018-02-06",
-				PSTSP: "2019-05-01",
-				Year: "2019"
-			}, {
-				ZZVTN: "TCIL100054433",
-				TCISeries: "COA",
-				TCISeriesDescriptionEN: "COROLLA",
-				TCISeriesDescriptionFR: "COROLLA",
-				Model: "B42HLT",
-				ENModelDesc: "COROLLA",
-				ZZEXTCOL: "01G3",
-				MKTG_DESC_EN: "Black",
-				Suffix: "BB",
-				SuffixDescriptionEN: "BB-SR5",
-				ZZAPX: "00",
-				ZZORDERTYPE: "Stock - Open",
-				ZZADDDATA4: "2017-05-01",
-				PSTSP: "2019-05-01",
-				Year: "2019"
-
-			}, {
-				ZZVTN: "TCIL1000545673",
-				TCISeries: "CAM",
-				TCISeriesDescriptionEN: "CAMRY",
-				TCISeriesDescriptionFR: "CAMRY",
-				Model: "AY5F1T",
-				ENModelDesc: "TUNDRA 4X4 CREWMAX EN",
-				ZZEXTCOL: "0040",
-				MKTG_DESC_EN: "Alphine White",
-				Suffix: "AA",
-				SuffixDescriptionEN: "AA-SUFFIX",
-				ZZAPX: "00",
-				ZZORDERTYPE: "Stock - Open",
-				ZZADDDATA4: "2017-02-06",
-				PSTSP: "2018-05-01",
-				Year: "2017"
-			}, {
-				ZZVTN: "TCIL1000542231",
-				TCISeries: "CAM",
-				TCISeriesDescriptionEN: "CAMRY",
-				TCISeriesDescriptionFR: "CAMRY",
-				Model: "AY5F1T",
-				ENModelDesc: "TUNDRA 4X4 CREWMAX EN",
-				ZZEXTCOL: "0040",
-				MKTG_DESC_EN: "Black",
-				Suffix: "AA",
-				SuffixDescriptionEN: "AA-SUFFIX",
-				ZZAPX: "00",
-				ZZORDERTYPE: "Stock - Open",
-				ZZADDDATA4: "2017-02-06",
-				PSTSP: "2018-05-01",
-				Year: "2017"
-			}, {
-				ZZVTN: "TCIL100054454",
-				TCISeries: "SIE",
-				TCISeriesDescriptionEN: "SIENNA",
-				TCISeriesDescriptionFR: "SIENNA",
-				Model: "BZRFHT",
-				ENModelDesc: "HIGHLANDER",
-				ZZEXTCOL: "0218",
-				MKTG_DESC_EN: "MidLight BlackMetalic",
-				Suffix: "DC",
-				SuffixDescriptionEN: "DC - LTD 5 PSG - 0070 - LA24",
-				ZZAPX: "00",
-				ZZORDERTYPE: "Stock - Open",
-				ZZADDDATA4: "2018-02-06",
-				PSTSP: "2019-05-01",
-				Year: "2018"
-			},  {
-				ZZVTN: "TCIL100054433",
-				TCISeries: "COA",
-				TCISeriesDescriptionEN: "COROLLA",
-				TCISeriesDescriptionFR: "COROLLA",
-				Model: "B42HLT",
-				ENModelDesc: "COROLLA",
-				ZZEXTCOL: "01G3",
-				MKTG_DESC_EN: "Black",
-				Suffix: "BB",
-				SuffixDescriptionEN: "BB-SR5",
-				ZZAPX: "00",
-				ZZORDERTYPE: "Stock - Open",
-				ZZADDDATA4: "2017-05-01",
-				PSTSP: "2019-05-01",
-				Year: "2019"
-
-			}, {
-				ZZVTN: "TCIL100054111",
-				TCISeries: "SIE",
-				TCISeriesDescriptionEN: "SIENNA",
-				TCISeriesDescriptionFR: "SIENNA",
-				Model: "BZRFHT",
-				ENModelDesc: "HIGHLANDER",
-				ZZEXTCOL: "0218",
-				MKTG_DESC_EN: "White",
-				Suffix: "DC",
-				SuffixDescriptionEN: "DC - LTD 5 PSG - 0070 - LA24",
-				ZZAPX: "00",
-				ZZORDERTYPE: "Stock - Open",
-				ZZADDDATA4: "2018-02-06",
-				PSTSP: "2019-05-01",
-				Year: "2019"
-			},{
-				ZZVTN: "TCIL100050000",
-				TCISeries: "COA",
-				TCISeriesDescriptionEN: "COROLLA",
-				TCISeriesDescriptionFR: "COROLLA",
-				Model: "B42HLT",
-				ENModelDesc: "COROLLA",
-				ZZEXTCOL: "01G3",
-				MKTG_DESC_EN: "Metalic Black",
-				Suffix: "BB",
-				SuffixDescriptionEN: "BB-SR5",
-				ZZAPX: "00",
-				ZZORDERTYPE: "Stock - Open",
-				ZZADDDATA4: "2017-05-01",
-				PSTSP: "2019-05-01",
-				Year: "2019"
-
-			}];
-			var SelSeriesKey = that.getView().byId("oVt_SeriesCmbo").getSelectedKey();
-			var Filter = this.oDumData.filter(function (x) {
-				return x.TCISeries == SelSeriesKey;
-			});
-			var model = new sap.ui.model.json.JSONModel(Filter);
-			that.getView().byId("table").setModel(model);
-
-/**************Pagination*******************************/
-  
-
-
-/**************Pagination*******************************/
-		
-		},
-	/*	onClick: function (oID) {
-
-			var that = this;
-			if (oID != undefined) {
-				$('#' + oID).click(function (oEvent) { 
-					var oTarget = oEvent.currentTarget;
+			if (sap.ui.getCore().getModel("oVehicleSelectionResults") != undefined) {
+				var oVehicleModel = sap.ui.getCore().getModel("oVehicleSelectionResults");
+				this.getView().byId("table").setModel(oVehicleModel);
 				
-					var oLabelText = oTarget.childNodes[0].textContent;
-					that.selooLabelText = oTarget.childNodes[0].textContent; 
-					var oIndex = oTarget.id.slice(-1);
-					if (oIndex == "6") {
-						oIndex = 8;
-					} else if (oIndex == "3") {
-						oIndex = 0;
-					} else if (oIndex == "2") {
-						oIndex = 9;
-					} else if (oIndex == "4") {
-						oIndex = 1;
-					} else if (oIndex == "8") {
-						oIndex = 6;
-					} else if (oIndex == "5") {
-						oIndex = 4;
-					} else if (oIndex == "7") {
-						oIndex = 10;
-					} else if (oIndex == "9") {
-						oIndex = 6;
-					} else if (oIndex == "0") {
-						oIndex = 12;
-					} else if (oIndex == "1") {
-						oIndex = 13;
-					}
-					var oView = that.getView();
-					var oTable = oView.byId("table");
-					var oModel = oTable.getModel().getData(); 
-					if (oModel.length != 0) {
-						var oKeys = Object.keys(oModel[0]); 
-						oTable.getModel().setProperty("/bindingValue", oKeys[oIndex]); 
-						switch (that.selooLabelText) {
-						case "Model":
-							if (that.getView().byId("moAsIcon").getVisible() == false) {
-								that.onAscending();
-							} else if (that.getView().byId("moAsIcon").getVisible() == true) {
-								that.onDescending();
-							}
-							break;
-						case "Color":
-							if (that.getView().byId("coAsIcon").getVisible() == false) {
-								that.onAscending();
-							} else if (that.getView().byId("coAsIcon").getVisible() == true) {
-								that.onDescending();
-							}
-							break;
-						case "Series":
-							if (that.getView().byId("senAsIcon").getVisible() == false) {
-								that.onAscending();
-							} else if (that.getView().byId("senAsIcon").getVisible() == true) {
-								that.onDescending();
-							}
-							break;
-						case "Suffix":
-							if (that.getView().byId("suAsIcon").getVisible() == false) {
-								that.onAscending();
-							} else if (that.getView().byId("suAsIcon").getVisible() == true) {
-								that.onDescending();
-							}
-							break;
-
-						case "APX":
-							if (that.getView().byId("apAsIcon").getVisible() == false) {
-								that.onAscending();
-							} else if (that.getView().byId("apAsIcon").getVisible() == true) {
-								that.onDescending();
-							}
-							break;
-						case "Order Type":
-							if (that.getView().byId("otAsIcon").getVisible() == false) {
-								that.onAscending();
-							} else if (that.getView().byId("otAsIcon").getVisible() == true) {
-								that.onDescending();
-							}
-							break;
-						case "ETA From":
-							if (that.getView().byId("etfAsIcon").getVisible() == false) {
-								that.onAscending();
-							} else if (that.getView().byId("etfAsIcon").getVisible() == true) {
-								that.onDescending();
-							}
-							break;
-						case "ETA To":
-							if (that.getView().byId("ettAsIcon").getVisible() == false) {
-								that.onAscending();
-							} else if (that.getView().byId("ettAsIcon").getVisible() == true) {
-								that.onDescending();
-							}
-							break;
-						case "Vehicle Tracking Number":
-							if (that.getView().byId("vtnAsIcon").getVisible() == false) {
-								that.onAscending();
-							} else if (that.getView().byId("vtnAsIcon").getVisible() == true) {
-								that.onDescending();
-							}
-							break;
-
-						}
-					} else {
-						sap.m.MessageBox.warning("No data is available to sort")
-					}
-
-					
-				});
+					var oProductNameColumn = this.getView().byId("oETAFromId");
+				this.getView().byId("table").sort(oProductNameColumn, SortOrder.Ascending);
+		
+				
+				
 			}
-		},*/
-		onRouteMatched: function () {
-		
-			
 		},
-		
-		onDescending : function()
-		{
-			
-			
-			
+
+		onDescending: function () {
+
 		},
-		
-		
+
 		handleoVt_SeriesChange: function () {
+			debugger;
 			var that = this;
-			var SelSeriesKey = that.getView().byId("oVt_SeriesCmbo").getSelectedKey();
-			var Filter = this.oDumData.filter(function (x) {
-				return x.TCISeries == SelSeriesKey;
-			});
-			var model = new sap.ui.model.json.JSONModel(Filter);
-			that.getView().byId("table").setModel(model);
+
+			var filterArray = [];
+
+			this.getView().byId("table").getBinding("rows").filter([]);
+			// onVlrCommonChange
+			var oSeries = this.getView().byId("oVt_SeriesCmbo").getSelectedKey();
+
+			if (oSeries != "") {
+
+				filterArray.push(new sap.ui.model.Filter("zzseries", sap.ui.model.FilterOperator.Contains, oSeries));
+			}
+			this.getView().byId("table").getBinding("rows").filter(filterArray);
+
 		},
-		onSelectLink: function (oEvt) {
+		oTradeLinkPress: function (oEvt) {
 
 			var oSelectedItem = oEvt.getSource().getBindingContext().getObject();
+			if(this.SelectedVehicleFrom=="VehileTrade_CreateSingle"){
 			sap.ui.getCore().getModel("TradeModel").setProperty("/VehicleTradeVehicle", oSelectedItem);
 			//	var oSelectedStrItems = JSON.stringify(oSelectedItem);
 			this.getRouter().navTo("VehicleTrade_CreateSingle", {
 				SelectedTrade: "VehicleTradeVehicle"
 			});
+			}
+			else if(this.SelectedVehicleFrom=="VehileTrade_CreateSingle"){
+					this.getRouter().navTo("VehicleTrade_UpdtTradReq");
+				
+			}
+				else if(this.SelectedVehicleFrom=="VehicleTrade_ModelBlock_Summary"){
+				//	var Selobj=escape(JSON.stringify(oSelectedItem));
+				var model= new sap.ui.model.json.JSONModel(oSelectedItem);
+				sap.ui.getCore().setModel(model,"VehicleTrade_ModelBlock_SummaryTrade")
+					this.getRouter().navTo("VehicleTrade_ModelBlock_Summary", {
+				SelectedTrade:"VehicleTradeVehicle"
+			});
+				
+			}
 
 		},
 		onChange: function (oEvent) {
@@ -946,8 +614,6 @@ sap.ui.define([
 			oInput.focus();
 			//	oInput.$().find('.sapMInputBaseInner')[0].select();
 		}
-		
-	
 
 		/*onSelectLink:function(oEvt)
 		   

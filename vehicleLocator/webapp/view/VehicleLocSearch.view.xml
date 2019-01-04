@@ -24,6 +24,7 @@
 						<Title text="Put the logged in dealer name here" titleStyle="H2" width="auto" textAlign="Left" visible="true" wrapping="false"
 				class="sapUiTinyMargin"/>
 							<ToolbarSpacer></ToolbarSpacer>
+							<Button text="BlockSummary" press="BlockSummarypress"/>
 						
 						<!--	<Button text="Vehicle Locator" press="handleLinkPress"/>
 						<Button text="Sold Order" press="handleLinkPress"/>
@@ -114,10 +115,10 @@
 									<core:Item  text="{Suffix}"/>
 				   	</ComboBox>-->
 								<ComboBox placeholder="" selectedKey="" showSecondaryValues="true" width="90%" change="handleSuffixChange"
-									selectionChange="SufficClickedVLS11" id="SuffCmbo" items="{ path:'Suffix>/', sorter : { path:'Suffix', ascending : 'true' } }">
-									<core:ListItem text="{Suffix>Suffix} - {Suffix>SuffixDescriptionEN}/{Suffix>InteriorDescriptionEN}" key="{Suffix>Suffix}"
+									selectionChange="SufficClickedVLS11" id="SuffCmbo" items="{Suffix>/}">
+									<core:ListItem text="{Suffix>Suffix} - {Suffix>SuffixDescriptionEN}/{Suffix>TrimInteriorColor}" key="{Suffix>Suffix}"
 										additionalText=""/>
-									<!--{MarktgIntDescEN , MarketingTrimInteriorDescEN}  -->
+									<!--{MarktgIntDescEN , MarketingTrimInteriorDescEN} /{Suffix>InteriorDescriptionEN} -->
 								</ComboBox>
 								<!--{SuffixDescriptionEN}- -->
 								<!--<Select id="VLSSuffix" change="onVlsMoSuffix" width="90%" forceSelection="true" class="sapUiSizeCompact VLSSSelectSuffix" items="{}">

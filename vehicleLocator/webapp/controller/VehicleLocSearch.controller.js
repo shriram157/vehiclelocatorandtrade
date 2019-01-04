@@ -717,7 +717,16 @@ sap.ui.define([
 					SufixDescription = new Array();
 					for (var key in obj)
 						SufixDescription.push(obj[key]);*/
-				var Suffix = new sap.ui.model.json.JSONModel(SufixDescription);
+				var	 result = SufixDescription.filter(function (a) {
+        var key = a.Suffix + '|' + a.TrimInteriorColor;
+        if (!this[key]) {
+            this[key] = true;
+            return true;
+        }
+    }, Object.create(null));	
+						
+						
+				var Suffix = new sap.ui.model.json.JSONModel(result);
 				that.getView().setModel(Suffix, "Suffix");
 				sap.ui.getCore().setModel(Suffix, "VehicleLocatorSuffix");
 				/*	var oJsonModelVLS = new sap.ui.model.json.JSONModel(oResults);
@@ -1041,8 +1050,17 @@ sap.ui.define([
 
 			/*	var SeriesUrl= that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq 'YZ3DCT' and zzextcol eq '01D6' and zzintcol eq 'LC14' and zzsuffix eq 'AB' and zzmoyr eq '2018'";*/
 
-			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq'" + McCmbo + "' and zzextcol eq '" + this.SelectedExteriorColorCode +
+
+		/*	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq'" + McCmbo + "' and zzextcol eq '" + this.SelectedExteriorColorCode +
 				"' and zzintcol eq '" + this.SelectedTrimInteriorColor + "' and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + MoyearCombo +
+				"'";*/
+		/*	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq'" + McCmbo + "' and zzextcol eq '" + this.SelectedExteriorColorCode +
+				"' and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + MoyearCombo +
+				"'";*/
+				//this.SelectedTrimInteriorColor='';
+			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq'" + McCmbo + "' and zzintcol eq '" + this.SelectedTrimInteriorColor + 
+				"' and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + MoyearCombo +
+
 				"'";
 			/*	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq'" + McCmbo + "' and zzextcol eq '" + this.SelectedExteriorColorCode +
 				"' and zzintcol eq '" + this.SelectedTrimInteriorColor + "' and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + MoyearCombo +"'";	*/
@@ -1168,11 +1186,26 @@ sap.ui.define([
 						});
 					});				
 
+/*var SelectedModel=that.getView().byId("McCmbo").getSelectedKey();
+var SelectedSeries = that.getView().byId("SeriesCmbo").getSelectedKey();
+var Suffix= that.getView().byId("SuffCmbo").getSelectedKey();
+var interioicolor=that.SelectedTrimInteriorColor;*/
+/*var interioicolor="LB43";*/
+/*var FilteredData=oZoneExclude.filter(function(x){
+	return x.matnr==SelectedModel&&x.zzseries==SelectedSeries&&x.zzsuffix==Suffix&&x.zzintcol==interioicolor;
+});*/
+
 					var suffixField = that.value;
 					var oSuffmodel = new sap.ui.model.json.JSONModel(suffixField);
 					oSuffmodel.setSizeLimit(10000);
 					sap.ui.getCore().setModel(oSuffmodel, "oSuffieldmodel");
 					var oDumModel = new sap.ui.model.json.JSONModel(oZoneExclude);
+					
+					
+					
+					
+					
+					
 					oDumModel.setSizeLimit(100000);
 					sap.ui.getCore().setModel(oDumModel, "SearchedData");
 					that.getRouter().navTo("VehicleSearcResults", {
@@ -1269,10 +1302,10 @@ sap.ui.define([
 		SufficClickedVLS11: function (oEvent) {
 			this.SelectedExteriorColorCode = oEvent.getParameter("selectedItem").oBindingContexts.Suffix.getObject().ExteriorColorCode;
 			this.SelectedTrimInteriorColor = oEvent.getParameter("selectedItem").oBindingContexts.Suffix.getObject().TrimInteriorColor;
-			/*	this.SelectedExteriorColorCode = "";
-					this.SelectedTrimInteriorColor = "";*/
+			/*	this.SelectedExteriorColorCode = "0070";
+					this.SelectedTrimInteriorColor = "LB43";*/
 			/*	this.SelectedExteriorColorCode = "01D6";
-				this.SelectedTrimInteriorColor = "LC14";*/
+				this.SelectedTrimInteriorColor = "LC42";*/
 			var that = this;
 			/*that.getView().byId("Pacific").setSelected(false);
 			that.getView().byId("Prairie").setSelected(false);
@@ -1462,7 +1495,16 @@ sap.ui.define([
 				sap.ui.core.BusyIndicator.hide();
 			});
 
+		},
+		BlockSummarypress : function()
+		{
+		debugger;
+	
+		    var that=this;
+			that.getRouter().navTo("VehicleTrade_ModelBlock_Summary");
+			
 		}
+		
 
 	});
 });

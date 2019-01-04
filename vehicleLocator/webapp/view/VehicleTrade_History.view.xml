@@ -17,9 +17,8 @@
 					</Bar>
 				</customHeader>
 				<content>
-				
 					<Toolbar height="45px" class="toolbar3">
-					<!--	<Label text="Vehicle Trade History" width="180px" class="vTlabe1clss"/>-->
+						<!--	<Label text="Vehicle Trade History" width="180px" class="vTlabe1clss"/>-->
 						<ToolbarSpacer></ToolbarSpacer>
 						<!--<Button text="Vehicle Locator" press="handleLinkPress"/>
 						<Button text="Sold Order" press="handleLinkPress"/>
@@ -31,13 +30,13 @@
 						<OverflowToolbar id="otb1" class="otbVT_Hist">
 							<Label text="{i18n>VehicleTradeHistory}" width="200px" class="vHlabe1clss"/>
 							<ToolbarSpacer/>
-							<Button id="openMenVTH" class="VLbtn3" text="{i18n>ExporttoExcel}" type="Accept" press="handlebacksearch" width="138px"/>
+							<Button id="openMenVTH" class="VLbtn3" text="{i18n>ExporttoExcel}" type="Accept" press="ExporttoExcellsheet" width="138px"/>
 						</OverflowToolbar>
 						<VBox>
-							<Table id="tableVTH" width="auto" class="sapUiResponsiveMargin" items="{/}" growingThreshold="150">
+							<!--	<Table id="tableVTH" width="auto" class="sapUiResponsiveMargin" items="{/}" growingThreshold="150">
 								<columns>
 									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
-										<Text text="{i18n>equestNo}"/>
+										<Text text="{i18n>RequestNo}"/>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
 										<Text text="{i18n>Status}"/>
@@ -47,6 +46,9 @@
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
 										<Text text="{i18n>Dealer}"/>
+									</Column>
+									<Column minScreenWidth="Desktop" demandPopin="true">
+										<Text text="{i18n>VehicleTrackingNumber}"/>
 									</Column>
 									<Column minScreenWidth="Desktop" demandPopin="true">
 										<Text text="{i18n>Model}"/>
@@ -80,7 +82,72 @@
 										</cells>
 									</ColumnListItem>
 								</items>
-							</Table>
+							</Table>-->
+							<t:Table id="tableVTH" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{/}" visibleRowCount="20">
+								<t:columns>
+									<t:Column id="TradecolId">
+										<Label text="{i18n>RequestNo}"/>
+										<t:template>
+											<Link id="tradeHId" text="{Trade_Id}" class="link" subtle="true" press="oTradeHistoryLinkPress" wrapping="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="Trade_Status">
+										<Label text="{i18n>Status}"/>
+										<t:template>
+											<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="">
+										<Label text="{i18n>From_To}"/>
+										<t:template>
+											<Text text="{= ${RequestingDealerVisible} === true ?'From':'To'}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="Requesting_Dealer">
+										<Label text="{i18n>Dealer}"/>
+										<t:template>
+											<Text text="{= ${RequestingDealerVisible} === true ?${Requested_Dealer}:${Requesting_Dealer}}-{= ${RequestingDealerVisible} === true ?${Requested_Dealer_Name}:${Requesting_Dealer_Name}}"/>
+											<!--<Text text="{path:'kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'} -{name1}" wrapping="false"/>-->
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty=""  id="matnr">
+										<Label text="{i18n>VehicleTrackingNumber}"/>
+										<t:template>
+											<Text text="{VTN}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="Model">
+										<Label text="{i18n>Model}"/>
+										<t:template>
+											<Text text="{Model}-{Model_Desc}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column id="Suffix" sortProperty="Suffix">
+										<Label text="{i18n>Suffix}" wrapping="false"/>
+										<t:template>
+											<Text text="{Suffix} - {Suffix_Desc}/{Int_Colour_Desc}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="APX">
+										<Label text="{i18n>APX}" wrapping="false"/>
+										<t:template>
+											<Text text="{APX}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="Ext_Colour" width="6rem">
+										<Label text="{i18n>ExteriorColor}" wrapping="false"/>
+										<t:template>
+											<Text text="{Ext_Colour}-{Ext_Colour_Desc}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="Changed_on">
+										<Label text="{i18n>Accepted}" wrapping="false"/>
+										<t:template>
+											<Text text="{path:'Changed_on',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+								</t:columns>
+							</t:Table>
 						</VBox>
 					</VBox>
 				</content>

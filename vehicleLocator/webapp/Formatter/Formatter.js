@@ -77,10 +77,9 @@ sap.ui.define(function () {
 				return "Yes";
 			} else if (DNC == null || DNC == "N") {
 				return "No";
-			} else if (DNC == "Y")
-			{
-				
-				return "Yes";	
+			} else if (DNC == "Y") {
+
+				return "Yes";
 			}
 
 		},
@@ -97,10 +96,10 @@ sap.ui.define(function () {
 				break;
 			case "N":
 				return false;
-				break;	
+				break;
 
 			}
-			
+
 			/*	if (DNC == "X") {
 				return true;
 			} else if (DNC == null || DNC =="") {
@@ -134,15 +133,15 @@ sap.ui.define(function () {
 			}
 
 		},
-	/*	AddCommnentButton: function (Trade_Status) {
-			if (Trade_Status == "C" || Trade_Status == "S") {
-				return true;
-			} else {
-				return false;
+		/*	AddCommnentButton: function (Trade_Status) {
+				if (Trade_Status == "C" || Trade_Status == "S") {
+					return true;
+				} else {
+					return false;
 
-			}
+				}
 
-		},*/
+			},*/
 		TradeReturn: function (Trade_Return) {
 			switch (Trade_Return) {
 			case "Y":
@@ -193,8 +192,23 @@ sap.ui.define(function () {
 				});
 				return oDateFormat.format(new Date(ValidTo));
 			}
+		},
+		VehicleSelectoinEtaFromDate: function (Created_On) {
+
+			if (Created_On != null && Created_On != "") {
+				
+			return	Created_On.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1');
+			
+			/*	var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+					pattern: "MM/dd/yyyy"
+				});
+				return oDateFormat.format(new Date(Created_On));*/
+			}
+
 		}
 
 	};
+
+
 	return Formatter;
 }, true);

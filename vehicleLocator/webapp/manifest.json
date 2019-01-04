@@ -9,7 +9,8 @@
 		},
 		"dataSources": {
 			"xsodata": {
-				"uri": "/xsodata/vehicleTrade_SRV.xsodata/$metadata",
+			
+					"uri": "/xsodata/vehicleTrade_SRV.xsodata/$metadata",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0",
@@ -85,8 +86,8 @@
                    "json": true,
                    "useBatch": false
 				},
-				"dataSource": "xsodata"
-		
+				"dataSource": "xsodata",
+				"preload": false
 			}
 		},
 		"routing": {
@@ -116,7 +117,7 @@
 					"target": "VehicleTrade_CreateSingle"
 				},
 				{
-					"pattern": "VehicleTrade_VehicleSelection",
+					"pattern": "VehicleTrade_VehicleSelection/:SelectedVehicleFrom:",
 					"name": "VehicleTrade_VehicleSelection",
 					"target": "VehicleTrade_VehicleSelection"
 				},
@@ -136,19 +137,14 @@
 					"target": "VehicleTrade_History"
 				},
 				{
-					"pattern": "VehicleTrade_ModelBlock_Summary",
+					"pattern": "VehicleTrade_ModelBlock_Summary/:SelectedTrade:",
 					"name": "VehicleTrade_ModelBlock_Summary",
 					"target": "VehicleTrade_ModelBlock_Summary"
 				},
 				{
-					"pattern": "VehicleTrade_Summary",
+					"pattern": "VehicleTrade_Summary/:DataClicked:",
 					"name": "VehicleTrade_Summary",
 					"target": "VehicleTrade_Summary"
-				},
-				{
-					"pattern": "VehicleTrade_VehicleSelection",
-					"name": "VehicleTrade_VehicleSelection",
-					"target": "VehicleTrade_VehicleSelection"
 				}
 			],
 			"targets": {

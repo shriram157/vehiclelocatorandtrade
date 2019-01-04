@@ -43,13 +43,13 @@
 							<t:Table id="table1vts" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{oVehiclTrade_SummaryRequestingData>/}">
 							
 								<t:columns>
-									<t:Column id="ORequlinlId" width="10rem">
+									<t:Column id="ORequlinlId">
 										<Label text="{i18n>Request}"/>
 										<t:template>
 											<Link id="otradIdz" text="{oVehiclTrade_SummaryRequestingData>Trade_Id}" class="link" subtle="true" press="oRequestLinkPress" wrapping="false"/>
 										</t:template>
 									</t:Column>
-									<t:Column sortProperty="Created_On" width="16rem">
+									<t:Column sortProperty="Created_On">
 										<Label text="{i18n>Created}"/>
 										<t:template>
 											<Text text="{path:'oVehiclTrade_SummaryRequestingData>Created_On',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false"/>
@@ -58,7 +58,7 @@
 									
 									
 									
-							<t:Column sortProperty="Requesting_Dealer" width="16rem">
+							<t:Column sortProperty="Requesting_Dealer">
 								<Label text="{i18n>Dealer}"/>
 								<t:template>
 									<Text text="{path:'oVehiclTrade_SummaryRequestingData>Requesting_Dealer',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDealer'}- {oVehiclTrade_SummaryRequestingData>Requesting_Dealer_Name}"
@@ -70,34 +70,34 @@
 									
 									
 								
-									<t:Column sortProperty="Model" width="22rem" id="omodelvsr">
+									<t:Column sortProperty="Model"  id="omodelvsr">
 										<Label text="{i18n>Model}"/>
 										<t:template>
 											<Text text="{oVehiclTrade_SummaryRequestingData>Model}-{oVehiclTrade_SummaryRequestingData>Model_Desc}" wrapping="false"/>
 										</t:template>
 									</t:Column>
-									<t:Column sortProperty="Suffix" width="22rem" id="oSuffixVT">
+									<t:Column sortProperty="Suffix"  id="oSuffixVT">
 										<Label text="{i18n>Suffix}" wrapping="false"/>
 										<t:template>
 											<Text text="{oVehiclTrade_SummaryRequestingData>Suffix}-{oVehiclTrade_SummaryRequestingData>Suffix_Desc}/{oVehiclTrade_SummaryRequestingData>Int_Colour_Desc}"
 												wrapping="false"/>
 										</t:template>
 									</t:Column>
-									<t:Column sortProperty="Trade_Return" width="14rem">
+									<t:Column sortProperty="Trade_Return">
 										<Label text="{i18n>TradeinReturn}" wrapping="false"/>
 										<t:template>
 											<Text text="{path:'oVehiclTrade_SummaryRequestingData>Trade_Return',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryTrdReturn'}"
 												wrapping="false"/>
 										</t:template>
 									</t:Column>
-									<t:Column sortProperty="Trade_Status" width="6rem">
+									<t:Column sortProperty="Trade_Status">
 										<Label text="{i18n>Status}" wrapping="false"/>
 										<t:template>
 											<Text text="{path:'oVehiclTrade_SummaryRequestingData>Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}"
 												wrapping="false"/>
 										</t:template>
 									</t:Column>
-									<t:Column sortProperty="Changed_On" width="14rem">
+									<t:Column sortProperty="Changed_On">
 										<Label text="{i18n>StatusUpdatedDate}" wrapping="false"/>
 										<t:template>
 											<Text text="{path:'oVehiclTrade_SummaryRequestingData>Changed_On',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false"/>
@@ -223,7 +223,7 @@
 					<t:Table id="table1Rts" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{oVehiclTrade_SummaryRequestedData>/}"
 						visibleRowCount="10">
 						<t:columns>
-							<t:Column id="ORequlinl" width="10rem">
+							<t:Column id="ORequlinl">
 								<Label text="{i18n>Request}"/>
 								<t:template>
 									<Link id="otradIdz2" text="{oVehiclTrade_SummaryRequestedData>Trade_Id}" class="link" subtle="true" press="oMyRequestLinkPress" wrapping="false"/>
@@ -233,7 +233,7 @@
 						
 						
 						
-							<t:Column sortProperty="Requested_Dealer" width="14rem" id="matnr">
+							<t:Column sortProperty="Requested_Dealer" id="matnr">
 										<Label text="{i18n>FromDealer}"/>
 										<t:template>
 											<Text text="{oVehiclTrade_SummaryRequestedData>Requested_Dealer}-{oVehiclTrade_SummaryRequestedData>Requested_Dealer_Name}" wrapping="false"/>
@@ -251,27 +251,27 @@
 									<Text text="{oVehiclTrade_SummaryData>Requested_Dealer_Name}" wrapping="false"/>
 								</t:template>
 							</t:Column>-->
-							<t:Column sortProperty="Model" width="22rem" id="oMdlvsr">
+							<t:Column sortProperty="Model"  id="oMdlvsr">
 								<Label text="{i18n>Model}"/>
 								<t:template>
 									<Text text="{oVehiclTrade_SummaryRequestedData>Model}-{oVehiclTrade_SummaryData>Model_Desc}" wrapping="false"/>
 								</t:template>
 							</t:Column>
-							<t:Column sortProperty="Suffix" width="22rem" id="oSufixVT">
+							<t:Column sortProperty="Suffix" id="oSufixVT">
 								<Label text="{i18n>Suffix}" wrapping="false"/>
 								<t:template>
 									<Text text="{oVehiclTrade_SummaryRequestedData>Suffix}-{oVehiclTrade_SummaryData>Suffix_Desc}/{oVehiclTrade_SummaryData>Int_Colour_Desc}"
 										wrapping="false"/>
 								</t:template>
 							</t:Column>
-							<t:Column sortProperty="Trade_Return" width="14rem">
+							<t:Column sortProperty="Trade_Return">
 								<Label text="{i18n>TradeinReturn}" wrapping="false"/>
 								<t:template>
 									<Text text="{path:'oVehiclTrade_SummaryRequestedData>Trade_Return',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryTrdReturn'}"
 										wrapping="false"/>
 								</t:template>
 							</t:Column>
-							<t:Column sortProperty="Trade_Status" width="6rem">
+							<t:Column sortProperty="Trade_Status">
 								<Label text="{i18n>Status}" wrapping="false"/>
 								<t:template>
 									<Text text="{path:'oVehiclTrade_SummaryRequestedData>Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}"

@@ -95,7 +95,7 @@ sap.ui.define([
 					sap.ui.getCore().setModel(oModel, "TradeModel");
 					this.getView().byId("SimpleFormDispla20").bindElement("TradeModel>/");
 				} else if (oReceivedDataString == "VehicleTradeVehicle") {
-					/*	this.getView().byId("oVboxOtherVehicleInformation").setVisible(true);*/
+				
 					this.getView().byId("vtnlabeid").setVisible(true);
 					this.getView().byId("vtnid").setVisible(true);
 					this.getView().byId("moylablid").setVisible(true);
@@ -110,7 +110,7 @@ sap.ui.define([
 					this.getView().byId("apxid").setVisible(true);
 					this.getView().byId("extcollabelid").setVisible(true);
 					this.getView().byId("extcolod").setVisible(true);
-					this.getView().byId("crtslabeid").setVisible(true);
+			
 					this.getView().byId("ctrtaid").setVisible(true);
 					this.getView().byId("fromLabeeid").setVisible(true);
 					this.getView().byId("labidtxt").setVisible(true);
@@ -160,14 +160,66 @@ sap.ui.define([
 				}*/
 
 		},
+		/*************************onSelectYes/No********************************/
 		onVTCStir: function () {
 			var selVT_CStradinRet = this.getView().byId("VT_CStradinRet").getSelectedKey();
+			if (selVT_CStradinRet == "Yes") {
+					this.getView().byId("oSeleBtn").setVisible(true);
+			} else if (selVT_CStradinRet == "No") {
+					this.getView().byId("oSeleBtn").setVisible(false);
+					this.getView().byId("oOtherVehInfoid").setText("");
+					this.getView().byId("vtnlabeid").setVisible(false);
+					this.getView().byId("vtnid").setVisible(false);
+					this.getView().byId("moylablid").setVisible(false);
+					this.getView().byId("yearid").setVisible(false);
+					this.getView().byId("serielabelid").setVisible(false);
+					this.getView().byId("seiresid").setVisible(false);
+					this.getView().byId("modlabelid").setVisible(false);
+					this.getView().byId("modlid").setVisible(false);
+					this.getView().byId("sufflabeid").setVisible(false);
+					this.getView().byId("suffid").setVisible(false);
+					this.getView().byId("apxlabelid").setVisible(false);
+					this.getView().byId("apxid").setVisible(false);
+					this.getView().byId("extcollabelid").setVisible(false);
+					this.getView().byId("extcolod").setVisible(false);
+
+					this.getView().byId("ofvestats").setVisible(false);
+					this.getView().byId("offeredStatus").setVisible(false);
+					this.getView().byId("offordetype").setVisible(false);
+					this.getView().byId("oofferedOrdertype").setVisible(false);
+
+				
+					this.getView().byId("ctrtaid").setVisible(false);
+					this.getView().byId("oCtraid").setVisible(false);
+					this.getView().byId("fromLabeeid").setVisible(false);
+					this.getView().byId("labidtxt").setVisible(false);
+					this.getView().byId("labetxteid").setVisible(false);
+					this.getView().byId("ototid").setVisible(false);
+					this.getView().byId("otitxt").setVisible(false);
+					this.getView().byId("propetid").setVisible(false);
+					this.getView().byId("perpid").setVisible(false);
+					this.getView().byId("frlabid").setVisible(false);
+					this.getView().byId("fmlabid").setVisible(false);
+					this.getView().byId("idlabeal").setVisible(false);
+					this.getView().byId("textide").setVisible(false);
+
+					/*var oReceivedData = sap.ui.getCore().VehicheSearcResults[this.oReceivedDataString];
+					var oModel = new sap.ui.model.json.JSONModel(oReceivedData);
+
+					this.getView().setModel(oModel, "TradeModel");
+					sap.ui.getCore().setModel(oModel, "TradeModel");
+					this.getView().byId("SimpleFormDispla20").bindElement("TradeModel>/");*/
+				}
+			
+			
+			
+		/*	var selVT_CStradinRet = this.getView().byId("VT_CStradinRet").getSelectedKey();
 			if (selVT_CStradinRet == "Yes") {
 				this.getView().byId("oSeleBtn").setVisible(true);
 
 			} else if (selVT_CStradinRet == "No") {
 				this.getView().byId("oSeleBtn").setVisible(false);
-			}
+			}*/
 
 		},
 
@@ -177,8 +229,104 @@ sap.ui.define([
 		},
 
 		onSelecveh: function () {
+			debugger
 
-			var that = this;
+            var that=this;
+			sap.ui.core.BusyIndicator.show();
+			
+			var McCmbo = this.getView().getModel("TradeModel").getData().matnr;
+			 this.SelectedExteriorColorCode = "";
+			  this.SelectedTrimInteriorColor = "";
+			 var SuffCmbo = this.getView().getModel("TradeModel").getData().zzsuffix;
+			 var MoyearCombo = this.getView().getModel("TradeModel").getData().zzmoyr;
+			 var oDealer = this.getView().getModel("TradeModel").getData().kunnr;
+		
+			
+			var sLocation = window.location.host;
+			var sLocation_conf = sLocation.search("webide");
+
+			if (sLocation_conf == 0) {
+				this.sPrefix = "/vehicleLocatorNode";
+			} else {
+				this.sPrefix = "";
+
+			}
+
+			this.nodeJsUrl = this.sPrefix + "/node";
+			that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_MASTER_SRV";
+
+			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
+
+			/*	var SeriesUrl= that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq 'YZ3DCT' and zzextcol eq '01D6' and zzintcol eq 'LC14' and zzsuffix eq 'AB' and zzmoyr eq '2018'";*/
+
+			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq'" + McCmbo + "' and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + MoyearCombo + "' and kunnr eq '" + oDealer +
+				"'";
+		
+			$.ajax({
+				url: SeriesUrl,
+				type: "GET",
+				dataType: 'json',
+				xhrFields: //
+				{
+					withCredentials: true
+				},
+				beforeSend: function (request) {
+					request.setRequestHeader('Authorization', 'Basic ' + btoa('anisetc:anisetc'));
+				},
+
+				success: function (odata, oresponse) {
+				
+					var a = odata.d.results;
+				
+				/*var filtered_ODealer = a.filter(function (x) {
+						return (x.kunnr==oDealer);
+					});*/
+					var Dealer = sap.ui.getCore().LoginDetails.DealerCode;
+
+					var FilterDelearNotnull = a.filter(function (x) {
+						return x.kunnr != null;
+					});
+					/*	var FilterDeleade_OrderTypefiltered_zone=FilterDeleade_OrderTypefilteNotnull.filter(function(x){return x.kunnr.slice(-5)==Dealer &&(x.zzordertype=="DM" ||x.zzordertype=="SO")});*/
+
+					//	var FilterDeleade_OrderTypefiltered_zone
+					var filtered_ODealer = FilterDelearNotnull.filter(function (x) {
+						return x.kunnr.slice(-5) != Dealer;
+					});
+					var ExcludeOrdType=[
+						"RS",
+						"F1",
+						"F2",
+						"F3",
+						"F4",
+						"F5"];
+						var oExcludeOrdrtype = filtered_ODealer.filter(function (objFromA) {
+						return !ExcludeOrdType.find(function (objFromB) {
+							return objFromA.zzordertype === objFromB;
+						});
+					});
+					
+
+					
+					var oJsonModel = new sap.ui.model.json.JSONModel(oExcludeOrdrtype);
+						oJsonModel.setSizeLimit(1500);	
+					sap.ui.getCore().setModel(oJsonModel,"oVehicleSelectionResults");
+					 that.getRouter().navTo("VehicleTrade_VehicleSelection",{
+					 	SelectedVehicleFrom:"VehileTrade_CreateSingle"
+					 });
+				     sap.ui.core.BusyIndicator.hide();
+					
+			
+				},
+				error:function(){
+					 that.getRouter().navTo("VehicleTrade_VehicleSelection",{
+					 	SelectedVehicleFrom:"VehileTrade_CreateSingle"
+					 });
+					 sap.ui.core.BusyIndicator.hide();
+				}
+			});
+		
+
+		/*	var that = this;
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
 
@@ -215,10 +363,9 @@ sap.ui.define([
 			this.nodeJsUrl = this.sPrefix + "/node";
 			that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_MASTER_SRV";
 			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
-			var ModelUrl = that.oDataUrl + "/zc_c_vehicle?$top=30";
+			var ModelUrl = that.oDataUrl + "/zc_c_vehicle?$top=5";
 
-			/*	that.TradeVehiclesDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeVehicles";*/
-			/*var /zc_mmfields*/
+		
 			var ajax2 = $.ajax({
 				dataType: "json",
 				xhrFields: //
@@ -249,11 +396,7 @@ sap.ui.define([
 				{
 					withCredentials: true
 				}
-				/*,
-				      beforeSend: function (request)
-				           {
-				               request.setRequestHeader('Authorization', 'Basic ' + btoa(''));
-				           }*/
+				
 				,
 				url: ModelDescUrl,
 				async: true,
@@ -300,7 +443,7 @@ sap.ui.define([
 				success: function (result) {}
 			});
 
-			sap.ui.core.BusyIndicator.show();
+	
 			var that = this;
 			$.when(ajax1, ajax2, ajax3, ajax4, ajax5).done(function (SeriesUrl, ModelUrl, ModelDescUrl, specificationurl, SuffixMarktingDesc) {
 				debugger
@@ -326,9 +469,9 @@ sap.ui.define([
 
 				that.getRouter().navTo("VehicleTrade_VehicleSelection");
 
-				sap.ui.core.BusyIndicator.hide();
+		
 			});
-
+*/
 		},
 		onRequestVT: function () {
 			debugger;
@@ -489,11 +632,14 @@ sap.ui.define([
 						} else {
 							var Changed_on = oDateFormat.format(new Date());
 						}
-
-						var Requested_Dealer = that.getView().byId("dealrid").getText().substr(0, that.getView().byId("dealrid").getText().indexOf(
-							"-"));
+						var Requested_Dealer = that.getView().getModel("TradeModel").oData.kunnr;
 						var Requested_Dealer_Name = that.getView().byId("dealrid").getText().substr(that.getView().byId("dealrid").getText().indexOf(
 							"-") + 1);
+
+					/*	var Requested_Dealer = that.getView().byId("dealrid").getText().substr(0, that.getView().byId("dealrid").getText().indexOf(
+							"-"));
+						var Requested_Dealer_Name = that.getView().byId("dealrid").getText().substr(that.getView().byId("dealrid").getText().indexOf(
+							"-") + 1);*/
 
 						var oEntry = {
 
@@ -566,7 +712,7 @@ sap.ui.define([
 							that.TradeComment(oEntry);
 							that.TradeVehcles(oEntry);
 							that.TradeStatus(oEntry);
-							that.VehicleTrade_Summary();
+						/*	that.VehicleTrade_Summary();*/
 						
 							
 							
@@ -735,223 +881,7 @@ sap.ui.define([
 			/*	Math.max.apply(Math, array.map(function(o) { return o.y; }))*/
 
 		},
-		VehicleTrade_Summary: function () {
 
-			var that = this;
-
-			/*$.ajax({
-				url: that.oDataUrl,
-				method: "GET",
-				async: false,
-				dataType: "json",
-
-				success: function (oData) {
-
-					debugger;
-					var Data = oData.d.results;
-				},
-		error: function (response) {
-					alert("Error");
-				}
-	
-         //   }
-//},
-			
-			});*/
-
-			var that = this;
-			var sLocation = window.location.host;
-			var sLocation_conf = sLocation.search("webide");
-
-			if (sLocation_conf == 0) {
-				this.sPrefix = "/VehicleLocator_Xsodata";
-			} else {
-				this.sPrefix = "";
-
-			}
-			this.nodeJsUrl = this.sPrefix ;
-			that.TradeRequestoDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeRequest";
-			var ajax1 = $.ajax({
-				dataType: "json",
-				xhrFields: //
-				{
-					withCredentials: true
-				},
-
-				/*	beforeSend: function (request) {
-						request.setRequestHeader('Authorization', 'Basic ' + btoa('anisetc:anisetc'));
-					},*/
-				url: that.TradeRequestoDataUrl,
-				async: true,
-				success: function (result) {}
-			});
-			that.TradeVehiclesDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeVehicles";
-			/*var /zc_mmfields*/
-			var ajax2 = $.ajax({
-				dataType: "json",
-				xhrFields: //
-				{
-					withCredentials: true
-				}
-				/*,
-				      beforeSend: function (request)
-				           {
-				               request.setRequestHeader('Authorization', 'Basic ' + btoa(''));
-				           }*/
-				,
-				url: that.TradeVehiclesDataUrl,
-				async: true,
-				success: function (result) {}
-			});
-			that.oTradeVehicleDescDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeVehicleDesc";
-			/*	var oTradeVehicleDesc = that.oDataUrl + "/TradeVehicleDesc";*/
-			var ajax3 = $.ajax({
-				dataType: "json",
-				xhrFields: //
-				{
-					withCredentials: true
-				}
-				/*,
-				      beforeSend: function (request)
-				           {
-				               request.setRequestHeader('Authorization', 'Basic ' + btoa(''));
-				           }*/
-				,
-				url: that.oTradeVehicleDescDataUrl,
-				async: true,
-				success: function (result) {}
-			});
-
-			sap.ui.core.BusyIndicator.show();
-			var that = this;
-			$.when(ajax1, ajax2, ajax3).done(function (TradeRequest, TradeVehicles, oTradeVehicleDesc) {
-   
-				var TradeRequest = TradeRequest[0].d.results;
-				var TradeRequestModel = new sap.ui.model.json.JSONModel(TradeRequest);
-				sap.ui.getCore().setModel(TradeRequestModel, "TradeRequestModel");
-
-				var TradeVehicles = TradeVehicles[0].d.results;
-				var TradeVehiclesModel = new sap.ui.model.json.JSONModel(TradeVehicles);
-				sap.ui.getCore().setModel(TradeVehiclesModel, "TradeVehiclesModel");
-
-				var oTradeVehicleDesc = oTradeVehicleDesc[0].d.results;
-				var oTradeVehicleDescModel = new sap.ui.model.json.JSONModel(oTradeVehicleDesc);
-				sap.ui.getCore().setModel(oTradeVehicleDescModel, "oTradeVehicleDescModel");
-				//	var filtered = [];
-				for (var i = 0; i < TradeRequest.length; i++) {
-					for (var j = 0; j < TradeVehicles.length; j++) {
-						if (TradeRequest[i].Trade_Id == TradeVehicles[j]["Trade_Id.Trade_Id"]) {
-							/*TradeRequest[i].push(TradeVehicles[j]);*/
-
-							TradeRequest[i].APX = TradeVehicles[j].APX;
-							TradeRequest[i].DNC = TradeVehicles[j].DNC;
-							TradeRequest[i].Ext_Colour = TradeVehicles[j].Ext_Colour;
-							TradeRequest[i].Int_Colour = TradeVehicles[j].Int_Colour;
-							TradeRequest[i].Model = TradeVehicles[j].Model;
-							TradeRequest[i].Model_Year = TradeVehicles[j].Model_Year;
-							TradeRequest[i].Order_Type = TradeVehicles[j].Order_Type;
-							TradeRequest[i].Series = TradeVehicles[j].Series;
-							TradeRequest[i].Status = TradeVehicles[j].Status;
-							TradeRequest[i].Suffix = TradeVehicles[j].Suffix;
-							TradeRequest[i]["Trade_Id.Trade_Id"] = TradeVehicles[j]["Trade_Id.Trade_Id"];
-							TradeRequest[i].VTN = TradeVehicles[j].VTN;
-
-							/*var realMerge = function (to, from) {
-
-    for (var n in from) {
-
-        if (typeof to[n] != 'object') {
-            to[n] = from[n];
-        } else if (typeof from[n] == 'object') {
-            to[n] = realMerge(to[n], from[n]);
-        }
-    }
-    return to;
-};
-	var merged = realMerge(TradeRequest[i],TradeVehicles[j]);*/
-
-						}
-					/*	else{
-					     	TradeRequest[i].APX = "";
-							TradeRequest[i].DNC = "";
-							TradeRequest[i].Ext_Colour = "";
-							TradeRequest[i].Int_Colour = "";
-							TradeRequest[i].Model = "";
-							TradeRequest[i].Model_Year = "";
-							TradeRequest[i].Order_Type = "";
-							TradeRequest[i].Series = "";
-							TradeRequest[i].Status = "";
-							TradeRequest[i].Suffix = "";
-							TradeRequest[i]["Trade_Id.Trade_Id"] = "";
-							TradeRequest[i].VTN ="";	
-							
-							
-							
-							
-						}*/
-					}
-
-				}
-				var filtered = TradeRequest;
-				var Spars = "E";
-				var finalArray = [];
-				for (var k = 0; k < filtered.length; k++) {
-					for (var l = 0; l < oTradeVehicleDesc.length; l++) {
-						if (filtered[k].Trade_Id == oTradeVehicleDesc[l]["Trade_Id.Trade_Id"] && filtered[k].VTN == oTradeVehicleDesc[l]["VTN.VTN"] &&
-							oTradeVehicleDesc[l].SPRAS == Spars) {
-							filtered[k].Ext_Colour_Desc = oTradeVehicleDesc[l].Ext_Colour_Desc;
-							filtered[k].Int_Colour_Desc = oTradeVehicleDesc[l].Int_Colour_Desc;
-							filtered[k].Model_Desc = oTradeVehicleDesc[l].Model_Desc;
-							filtered[k].SPRAS = oTradeVehicleDesc[l].SPRAS;
-							filtered[k].Series_Desc = oTradeVehicleDesc[l].Series_Desc;
-							filtered[k].Suffix_Desc = oTradeVehicleDesc[l].Suffix_Desc;
-
-							/*Ext_Colour_Desc: "50"
-							Int_Colour_Desc: "30"
-							Model_Desc: "40"
-							SPRAS: "1"
-							Series_Desc: "50"
-							Suffix_Desc: "30"
-							TradeVehicleDescs: {__deferred: {…}}
-							Trade_Id.Trade_Id: "8"
-							VTN.VTN: "6" */
-
-							/*				var realMerge = function (to, from) {
-
-							    for (var n in from) {
-
-							        if (typeof to[n] != 'object') {
-							            to[n] = from[n];
-							        } else if (typeof from[n] == 'object') {
-							            to[n] = realMerge(to[n], from[n]);
-							        }
-							    }
-							    return to;
-							};*/
-							/*	var merged = realMerge(filtered[k],oTradeVehicleDesc[l]);
-												finalArray.push(merged);*/
-						}
-						/*else {
-					filtered[k].Ext_Colour_Desc = "";
-							filtered[k].Int_Colour_Desc = "";
-							filtered[k].Model_Desc ="";
-							filtered[k].SPRAS = "";
-							filtered[k].Series_Desc = "";
-							filtered[k].Suffix_Desc = "";	
-							
-							
-						}*/
-					}
-				}
-				debugger;
-				var oModel = new sap.ui.model.json.JSONModel(filtered);
-				sap.ui.getCore().setModel(oModel, "oVehicleTrade_Summary");
-				//	console(finalArray);
-				that.getRouter().navTo("VehicleTrade_Summary");
-				sap.ui.core.BusyIndicator.hide();
-			});
-
-		},
 		TradeComment: function (oEntry) {
 			var that = this;
 			var Trade_Id = oEntry.Trade_Id;
@@ -1169,7 +1099,9 @@ sap.ui.define([
 			});
 
 			that.oDataModel.create("/TradeVehicleDesc", oEntry2, null, function (s) {
-				alert("ok");
+				that.getRouter().navTo("VehicleTrade_Summary",{
+					DataClicked:"Yes"
+				});
 			}, function () {
 
 			});
