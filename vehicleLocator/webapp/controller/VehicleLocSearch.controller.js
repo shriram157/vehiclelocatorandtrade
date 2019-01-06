@@ -30,6 +30,106 @@ sap.ui.define([
 				/*	 Customer='2400042176',SalesOrganization='6000',DistributionChannel='10',Division='10')*/
 
 			};
+			
+			// ========================================== integrating security ==========================================Begin
+			
+						//======================================================================================================================//			
+			//  on init method,  get the token attributes and authentication details to the UI from node layer.  - begin
+			//======================================================================================================================//		
+			//  get the Scopes to the UI 
+						var sLocation = window.location.host;
+			var sLocation_conf = sLocation.search("webide");
+			if (sLocation_conf == 0) {
+				this.sPrefix = "/vehicleLocatorNode"; // 
+				this.attributeUrl = "/userDetails/attributesforlocaltesting";
+			} else {
+				this.sPrefix = "";
+				this.attributeUrl = "/userDetails/attributes";
+			}
+
+			//this.sPrefix ="";
+			var that = this;
+			$.ajax({
+				url: this.sPrefix + "/userDetails/currentScopesForUser",
+				type: "GET",
+				dataType: "json",
+				success: function (oData) {
+					// var userScopes = oData;
+					// userScopes.forEach(function (data) {
+
+					var userType = oData.loggedUserType[0];
+					switch (userType) {
+					case "vehicelTradeDealerUser":
+					 
+// add your code here. // TODO: 
+						break;
+		 
+					case "internalTCIUser":
+// add your code here. // TODO:  
+						break;
+					case "ZoneUser":
+// add your code here. // TODO: 	 
+						break;
+					default:
+						// raise a message, because this should not be allowed. 
+// add your code here. // TODO: 
+					}
+				}
+
+ 
+			});
+
+			// get the attributes and BP Details - Minakshi to confirm if BP details needed		// TODO: 
+			$.ajax({
+				url: this.sPrefix + this.attributeUrl,
+				type: "GET",
+				dataType: "json",
+
+				success: function (oData) {
+					var BpDealer = [];
+					var userAttributes = [];
+
+					$.each(oData.attributes, function (i, item) {
+						var BpLength = item.BusinessPartner.length;
+
+						BpDealer.push({
+							"BusinessPartnerKey": item.BusinessPartnerKey,
+							"BusinessPartner": item.BusinessPartner, //.substring(5, BpLength),
+							"BusinessPartnerName": item.BusinessPartnerName, //item.OrganizationBPName1 //item.BusinessPartnerFullName
+							"Division": item.Division,
+							"BusinessPartnerType": item.BusinessPartnerType,
+							"searchTermReceivedDealerName": item.SearchTerm2
+						});
+
+					});
+				 //  set your model or use the model below - // TODO: 
+					that.getView().setModel(new sap.ui.model.json.JSONModel(BpDealer), "BpDealerModel");
+					// read the saml attachments the same way 
+					$.each(oData.samlAttributes, function (i, item) {
+						userAttributes.push({
+							"UserType": item.UserType[0],
+							"DealerCode": item.DealerCode[0],
+							"Language": item.Language[0]
+								// "Zone": item.Zone[0]   ---    Not yet available
+						});
+
+					});
+
+					that.getView().setModel(new sap.ui.model.json.JSONModel(userAttributes), "userAttributesModel");
+
+					//	that._getTheUserAttributes();
+
+				}.bind(this),
+				error: function (response) {
+					sap.ui.core.BusyIndicator.hide();
+				}
+			});
+
+			//---------------------------------------------security -----------------------------------------------------End
+			
+			
+			
+			
 			sap.ui.getCore().LoginDetails = oLoginDealer;
 			if (oLoginDealer.Division == "10") {
 				this.Division = "TOY";
@@ -320,9 +420,9 @@ sap.ui.define([
 					withCredentials: true
 				},
 
-				beforeSend: function (request) {
-					request.setRequestHeader('Authorization', 'Basic ' + btoa('anisetc:anisetc'));
-				},
+				// beforeSend: function (request) {
+				// 	request.setRequestHeader('Authorization', 'Basic ' + btoa('anisetc:anisetc'));
+				// },
 				url: SeriesUrl,
 				async: true,
 				success: function (result) {}
@@ -1074,9 +1174,9 @@ sap.ui.define([
 				{
 					withCredentials: true
 				},
-				beforeSend: function (request) {
-					request.setRequestHeader('Authorization', 'Basic ' + btoa('anisetc:anisetc'));
-				},
+				// beforeSend: function (request) {
+				// 	request.setRequestHeader('Authorization', 'Basic ' + btoa('anisetc:anisetc'));
+				// },
 
 				success: function (odata, oresponse) {
 					var a = odata.d.results;
