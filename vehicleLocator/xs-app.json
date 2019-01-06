@@ -1,7 +1,7 @@
 {
 
 	"welcomeFile": "/vehicleLocator/index.html",
-	"authenticationMethod": "none",
+	"authenticationMethod": "route",
 	"logout": {
 		"logoutEndpoint": "/do/logout"
 	},
@@ -13,7 +13,7 @@
 		"source": "/node(.*)",
 		"destination": "vehicleLocator_Node_backend",
 		"csrfProtection": false,
-		"authenticationType": "none"
+		"authenticationType": "xsuaa"
 	}, {
 		"source": "(.*)(.xsjs)",
 		"destination": "vehicleLocator_XSJS_backend",
@@ -27,8 +27,13 @@
 		"source": "/xsodata/(.*)",
 		"destination": "vehicleLocator_XSJS_backend",
 		"authenticationType": "none"
-	}
-	
+	}, {
+			"source": "/userDetails(.*)",
+			"destination": "vehicleLocator_Node_backend",
+			"csrfProtection": false,
+			"authenticationType": "xsuaa"
+
+		}
 	]
 }
 

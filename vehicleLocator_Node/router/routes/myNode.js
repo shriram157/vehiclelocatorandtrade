@@ -67,12 +67,8 @@ module.exports = function () {
    if (tempUrl.includes('API_BUSINESS_PARTNER')) 
    {
    	clientSap ="";
-<<<<<<< HEAD
-      }
-=======
-      };
->>>>>>> XSJS_Requirements
 
+      }
 
 		let headOptions = {};
 

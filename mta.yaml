@@ -25,6 +25,7 @@ modules:
       properties:
          url: ${default-url}
    requires:
+    - name: uaa_vehicleLocator
     - name: VEHICLE_LOCATOR_APIM_CUPS
 
  - name: vehicleLocator
