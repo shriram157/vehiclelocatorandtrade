@@ -56,6 +56,7 @@ module.exports = function () {
 		next();
 	});
 
+<<<<<<< HEAD
  
 	app.get("/whatscopesuseridhas", (req, res) => {
 		var userContext = req.authInfo;
@@ -116,6 +117,55 @@ module.exports = function () {
 			
 
 			if (scopeData[i] ==  xsuaaCredentials.xsappname + '.Manage_Trade_Request') {
+=======
+	app.get("/currentScopesForUser", (req, res) => {
+
+ 
+		var parsedData = JSON.stringify(req.authInfo.userAttributes);
+		var obj_data = JSON.parse(parsedData);
+
+		let legacyDealerCode;
+		try {
+			legacyDealerCode = obj_data.DealerCode[0];
+			var legacyDealerCodeAvailable = true;
+			console.log('Dealer code from the SAML Token is', legacyDealerCodeAvailable, legacyDealerCode)
+		} catch (e) {
+			console.log("Dealer Code is blank or is a local testing run")
+				// return;
+			var legacyDealerCodeAvailable = false;
+		}
+
+		let isItZoneUser;
+		try {
+			isItZoneUser = obj_data.ZONE[0];
+			var zoneUser = true;
+			console.log('Dealer code from the SAML Token is a zone User', zoneUser, isItZoneUser)
+		} catch (e) {
+			console.log("Not a zone User")
+				// return;
+			var zoneUser = false;
+		}		
+		
+		
+
+		var scopeData = req.authInfo.scopes;
+		var manageVehicles = false;
+ 
+		var viewTradeRequest = false;
+		var viewDNC = false;
+
+		var sendUserData = {
+			"loggedUserType": []
+		};
+
+
+	var SCOPE = xsuaaCredentials.xsappname ;
+          console.log ('The app name', SCOPE);
+
+		for (var i = 0; i < scopeData.length; i++) {
+
+			if (scopeData[i] ==  xsuaaCredentials.xsappname + '.Manage_Trade_request') {
+>>>>>>> refs/remotes/origin/XSJS_Requirements
 				var userType = "vehicelTradeDealerUser";
 				sendUserData.loggedUserType.push(userType);
 
