@@ -56,6 +56,18 @@ module.exports = function () {
 		next();
 	});
 
+ 
+	app.get("/whatscopesuseridhas", (req, res) => {
+		var userContext = req.authInfo;
+		var result = JSON.stringify({
+			userContext: userContext
+		});
+		res.type("application/json").status(200).send(result);
+	});
+
+
+ 
+
 	app.get("/currentScopesForUser", (req, res) => {
 
  
@@ -101,8 +113,9 @@ module.exports = function () {
           console.log ('The app name', SCOPE);
 
 		for (var i = 0; i < scopeData.length; i++) {
+			
 
-			if (scopeData[i] ==  xsuaaCredentials.xsappname + '.Manage_Trade_request') {
+			if (scopeData[i] ==  xsuaaCredentials.xsappname + '.Manage_Trade_Request') {
 				var userType = "vehicelTradeDealerUser";
 				sendUserData.loggedUserType.push(userType);
 

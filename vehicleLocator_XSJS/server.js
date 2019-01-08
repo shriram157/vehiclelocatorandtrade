@@ -1,23 +1,40 @@
 /*eslint no-console: 0, no-unused-vars: 0*/
-/*eslint no-console: 0, no-unused-vars: 0, no-undef:0*/
 "use strict";
 
+var xsjs = require("@sap/xsjs");
+var xsenv = require("@sap/xsenv");
 var port = process.env.PORT || 3000;
-var server = require("http").createServer();
-global.__base = __dirname + "/";
-var init = require(global.__base + "utils/initialize");
 
-//Initialize Express App for XSA UAA and HDBEXT Middleware
-var app = init.initExpress();
+var options = {
+	anonymous: true, // remove to authenticate calls
+	redirectUrl: "/index.xsjs"
+};
 
-//Setup Routes
-//var router = require("./router")(app, server);// TODO: 
+// configure HANA
+try {
+	options = Object.assign(options, xsenv.getServices({
+		hana: {
+			tag: "hana"
+		}
+	}));
+} catch (err) {
+	console.log("[WARN]", err.message);
+}
 
-//Initialize the XSJS Compatibility Layer
-init.initXSJS(app);
+// configure UAA
+/*try {
+	options = Object.assign(options, xsenv.getServices({
+		uaa: {
+			tag: "xsuaa"
+		}
+	}));
+} catch (err) {
+	console.log("[WARN]", err.message);
+}
+*/
+// start server
+xsjs(options).listen(port);
 
-//Start the Server 
-server.on("request", app);
-server.listen(port, function() {
-	console.info("HTTP Server: " + server.address().port);
-});
+console.log("Server listening on port %d", port);
+
+//  all my xjss odata will be part of this.

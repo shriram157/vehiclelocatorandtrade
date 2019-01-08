@@ -20,40 +20,13 @@ modules:
       service-url: '${default-url}'
       disk-quota: 256MB
       memory: 256MB
-   requires:
-    - name: VEHICLE_LOCATOR_APIM_CUPS
-    - name: uaa_vehicleLocator
    provides:
     - name: vehicleLocator_Node_api
       properties:
          url: ${default-url}
-
- - name: vehicleLocator_XSJS
-   type: nodejs
-   path: vehicleLocator_XSJS
-   parameters:
-      host: vehicleLocator_XSJS
-      register-service-url: true
-      service-name: vehicleLocator_XSJS
-      service-url: '${default-url}'
-      disk-quota: 512M
-      memory: 256M
-   build-parameters:
-     builder: npm
-     timeout: 60m
-   properties: 
-      SAP_JWT_TRUST_ACL: "[{\"clientid\":\"*\",\"identityzone\":\"*\"}]"
-
-   provides:
-    - name: vehicleLocator_XSJS_api
-      properties:
-         url: '${default-url}'
    requires:
-     - name: vehicleLocator_hdb
-     - name: hdi_vehicleLocator_hdb
-     - name: uaa_vehicleLocator
-     - name: dest_vehicleLocator
-
+    - name: uaa_vehicleLocator
+    - name: VEHICLE_LOCATOR_APIM_CUPS
 
  - name: vehicleLocator
    type: html5
@@ -74,18 +47,40 @@ modules:
       group: destinations
       properties:
         name: vehicleLocator_XSJS_backend
-        url: ~{url}
+        url: '~{url}'
         forwardAuthToken: true  
     - name: vehicleLocator_Node_api
       group: destinations
       properties:
         name: vehicleLocator_Node_backend
-        url: ~{url}
+        url: '~{url}'
         forwardAuthToken: true
 
    provides:
      - name: vehicleLocator    
+    
 
+ - name: vehicleLocator_XSJS
+   type: nodejs
+   path: vehicleLocator_XSJS
+   parameters:
+      host: vehicleLocator_XSJS
+      register-service-url: true
+      service-name: vehicleLocator_XSJS
+      service-url: '${default-url}'
+      disk-quota: 512M
+      memory: 256M
+   build-parameters:
+      builder: grunt
+   provides:
+    - name: vehicleLocator_XSJS_api
+      properties:
+         url: ${default-url}
+   requires:
+     - name: vehicleLocator_hdb
+     - name: hdi_vehicleLocator_hdb
+     - name: uaa_vehicleLocator
+     - name: dest_vehicleLocator
 
 resources:
  - name: hdi_vehicleLocator_hdb

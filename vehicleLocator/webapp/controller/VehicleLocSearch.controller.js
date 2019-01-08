@@ -79,7 +79,7 @@ sap.ui.define([
  
 			});
 
-			// get the attributes and BP Details - Minakshi to confirm if BP details needed		// TODO: 
+			// get the attributes and BP Details - 	// TODO: 
 			$.ajax({
 				url: this.sPrefix + this.attributeUrl,
 				type: "GET",
