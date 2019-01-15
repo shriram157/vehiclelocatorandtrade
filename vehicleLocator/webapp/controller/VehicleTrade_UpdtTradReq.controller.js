@@ -813,7 +813,7 @@ var UpdatedTreadeEntity="/TradeRequest('"+Trade_Id+"')";
 		
 			var oVTN = that.getView().byId("ovtnId").getText();
 			var Spars = this.getView().byId("SimpleFormUpdateTrReq").getModel().oData.SPRAS;
-				if (Spars == "fr") {
+				if (Spars != "E") {
 				Spars = "F";
 			} else {
 				Spars = "E";
@@ -855,7 +855,7 @@ var UpdatedTreadeEntity="/TradeRequest('"+Trade_Id+"')";
 			});
              var UpdatedTreadeEntity="/TradeVehicleDesc(Trade_Id.Trade_Id ='"+oEntry.Trade_Id+"',VTN.VTN ='"+oEntry2["VTN.VTN"]+"',SPRAS='"+oEntry2.SPRAS+"')";
 			that.oDataModel.update(UpdatedTreadeEntity, oEntry2, null, function (s) {
-				alert("ok");
+			
 			}, function () {
 
 			});
@@ -914,28 +914,29 @@ var UpdatedTreadeEntity="/TradeRequest('"+Trade_Id+"')";
 
 					};
 
-					var sLocation = window.location.host;
-					var sLocation_conf = sLocation.search("webide");
+						var sLocation = window.location.host;
+			var sLocation_conf = sLocation.search("webide");
 
-					if (sLocation_conf == 0) {
-						that.sPrefix = "/VehicleLocator_Xsodata";
-					} else {
-						that.sPrefix = "";
+			if (sLocation_conf == 0) {
+				that.sPrefix = "/VehicleLocator_Xsodata";
+			} else {
+				that.sPrefix = "";
 
-					}
-					that.nodeJsUrl = that.sPrefix + "/vehicleTrade";
-					that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
+			}
+			that.nodeJsUrl = that.sPrefix;
+			that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
 
-					that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
-					that.oDataModel.setHeaders({
-						"Content-Type": "application/json",
-						"X-Requested-With": "XMLHttpRequest",
-						"DataServiceVersion": "2.0",
-						"Accept": "application/json",
-						"Method": "POST"
-					});
+			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
+			that.oDataModel.setHeaders({
+				"Content-Type": "application/json",
+				"X-Requested-With": "XMLHttpRequest",
+				"DataServiceVersion": "2.0",
+				"Accept": "application/json",
+				"Method": "POST"
+			});
 
-					that.oDataModel.create("/TradeComment", oTradeComment, null, function (s) {
+			that.oDataModel.create("/TradeComment", oTradeComment, null, function (s) {
+
 						/*	that.TradeComment(oEntry);
 						this.getView().byId("Comment_Txt").setValue("");
 								that.VehicleTrade_Summary();*/
@@ -1009,9 +1010,7 @@ var UpdatedTreadeEntity="/TradeRequest('"+Trade_Id+"')";
 				{
 					withCredentials: true
 				},
-				beforeSend: function (request) {
-					request.setRequestHeader('Authorization', 'Basic ' + btoa('anisetc:anisetc'));
-				},
+				
 
 				success: function (odata, oresponse) {
 				
@@ -1020,7 +1019,11 @@ var UpdatedTreadeEntity="/TradeRequest('"+Trade_Id+"')";
 				/*var filtered_ODealer = a.filter(function (x) {
 						return (x.kunnr==oDealer);
 					});*/
-					var Dealer = sap.ui.getCore().LoginDetails.DealerCode;
+				/*	var Dealer = sap.ui.getCore().LoginDetails.DealerCode;*/
+				
+		var userAttributesModellen=sap.ui.getCore().getModel("LoginuserAttributesModel").getData();
+/* var Dealer=userAttributesModellen[0].DealerCode[0];*/
+ var Dealer=userAttributesModellen["0"].DealerCode; // security login code
 
 					var FilterDelearNotnull = a.filter(function (x) {
 						return x.kunnr != null;

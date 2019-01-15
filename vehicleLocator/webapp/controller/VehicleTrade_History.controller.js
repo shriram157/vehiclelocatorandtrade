@@ -19,7 +19,8 @@ sap.ui.define([
 				pattern: "yyyy-MM-dd'T'HH:mm:ss"
 			});
 
-			this.getRouter().attachRouteMatched(this.onRouteMatched, this);
+			//this.getRouter().attachRouteMatched(this.onRouteMatched, this);
+			this.getRouter().getRoute("VehicleTrade_History").attachPatternMatched(this.onRouteMatched, this);
 		},
 		onRouteMatched: function (oEvent) {
 			var dataFrom = oEvent.getParameter("arguments").DataClicked;
@@ -120,7 +121,8 @@ sap.ui.define([
 
 				}
 				var filtered = TradeRequest;
-				var Spars = "E";
+			/*	var Spars = "E";*/
+			var Spars = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language.slice(0,1);
 				var finalArray = [];
 				for (var k = 0; k < filtered.length; k++) {
 					for (var l = 0; l < oTradeVehicleDesc.length; l++) {
@@ -254,7 +256,11 @@ sap.ui.define([
 			//	sap.ui.getCore().setModel(oModel, "oVehicleTrade_Summary");
 				//	console(finalArray);
 			//	if (sap.ui.getCore().getModel("oVehicleTrade_Summary") != undefined) {
-					var Dealer = sap.ui.getCore().LoginDetails.DealerCode;
+				/*	var Dealer = sap.ui.getCore().LoginDetails.DealerCode;*/
+	var userAttributesModellen=sap.ui.getCore().getModel("LoginuserAttributesModel").getData();
+ /*var Dealer=userAttributesModellen[0].DealerCode[0];*/
+ var Dealer=userAttributesModellen[0].DealerCode;// Security login dealer
+				
 					if (Dealer.length == 10) {
 						Dealer = Dealer.slice(-5);
 					}

@@ -19,8 +19,9 @@ sap.ui.define([
 			_that.oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 				pattern: "yyyy-MM-dd'T'HH:mm:ss"
 			});
+		this.getRouter().getRoute("VehicleTrade_Summary").attachPatternMatched(this.onRouteMatched, this);		
 	
-			this.getRouter().attachRouteMatched(this.onRouteMatched, this);
+			/*this.getRouter().attachRouteMatched(this.onRouteMatched, this);*/
 		},
 		onRouteMatched: function (oEvent) {
 		var dataFrom=oEvent.getParameter("arguments").DataClicked;
@@ -58,11 +59,11 @@ sap.ui.define([
 
 			var that = this;
 			that.oRecTable = that.getView().byId("table1Rts");
-			that.oRecTableSelectObj =  oEvent.getSource().getParent().oBindingContexts.oVehiclTrade_SummaryRequestedData.getObject();
+			that.oRecTableSelectObj =  oEvent.getSource().getBindingContext().getObject();
 			
 				if (that.oRecTableSelectObj != undefined) {
 
-				var SelectedPath = oEvent.getSource().getParent().oBindingContexts.oVehiclTrade_SummaryRequestedData.getPath().split("/")[1];
+				var SelectedPath = oEvent.getSource().getBindingContext().getObject().getPath().split("/")[1];
               that.oRecTableSelectObj.FromRequesting=false;
              	var model = new sap.ui.model.json.JSONModel(that.oRecTableSelectObj);
              	model.setSizeLimit(1000);
@@ -247,7 +248,8 @@ sap.ui.define([
 
 				}
 				var filtered = TradeRequest;
-				var Spars = "E";
+				var Spars = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language.slice(0,1);
+			//	var Spars = "E";
 				var finalArray = [];
 				for (var k = 0; k < filtered.length; k++) {
 					for (var l = 0; l < oTradeVehicleDesc.length; l++) {
@@ -396,7 +398,7 @@ sap.ui.define([
         	if ("SPRAS" in filtered[n]) {
         filtered[n].SPRAS =filtered[n].SPRAS;
                } else {
-           filtered[n].SPRAS = "";
+           filtered[n].SPRAS = Spars;
         }
         
         	if ("Series_Desc" in filtered[n]) {
@@ -422,7 +424,10 @@ sap.ui.define([
 				sap.ui.getCore().setModel(oModel, "oVehicleTrade_Summary");
 				//	console(finalArray);
 					if (sap.ui.getCore().getModel("oVehicleTrade_Summary") != undefined) {
-				var Dealer=sap.ui.getCore().LoginDetails.DealerCode;
+			/*	var Dealer=sap.ui.getCore().LoginDetails.DealerCode;*/
+	var userAttributesModellen=sap.ui.getCore().getModel("LoginuserAttributesModel").getData();
+ /*var Dealer=userAttributesModellen[0].DealerCode[0];*/
+var  Dealer=userAttributesModellen[0].DealerCode; //security login code		
 				if(Dealer.length==10){
 					Dealer=Dealer.slice(-5);
 				}
@@ -436,7 +441,8 @@ sap.ui.define([
 				var model= new sap.ui.model.json.JSONModel(RequestedDealer);
 					model.setSizeLimit(1000);
 				that.getView().setModel(model, "oVehiclTrade_SummaryRequestedData");
-				that.getView().getModel("oVehiclTrade_SummaryRequestedData").refresh(true);
+				that.getView().byId("table1Rts").setModel(model);
+				//.getView().getModel("oVehiclTrade_SummaryRequestedData").refresh(true);
 				}
 			
 				sap.ui.core.BusyIndicator.hide();

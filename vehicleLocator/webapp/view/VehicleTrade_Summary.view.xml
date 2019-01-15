@@ -1,5 +1,5 @@
 <mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="vehicleLocator.controller.VehicleTrade_Summary"
-	xmlns:t="sap.ui.table" xmlns:u="sap.ui.unified" xmlns:html="http://www.w3.org/1999/xhtml">
+	xmlns:t="sap.ui.table" xmlns:u="sap.ui.unified"  xmlns:tnt="sap.tnt" xmlns:html="http://www.w3.org/1999/xhtml">
 	<App>
 		<pages class="oImgsampl" height="200px">
 			<Page showNavButton="false" navButtonPress="onBack">
@@ -220,13 +220,13 @@
 							<Label text=" " class="flexdontclabllist"/>
 						</FlexBox>
 					</HBox>
-					<t:Table id="table1Rts" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{oVehiclTrade_SummaryRequestedData>/}"
+					<t:Table id="table1Rts" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{/}"
 						visibleRowCount="10">
 						<t:columns>
 							<t:Column id="ORequlinl">
 								<Label text="{i18n>Request}"/>
 								<t:template>
-									<Link id="otradIdz2" text="{oVehiclTrade_SummaryRequestedData>Trade_Id}" class="link" subtle="true" press="oMyRequestLinkPress" wrapping="false"/>
+									<Link id="otradIdz2" text="{Trade_Id}" class="link" subtle="true" press="oMyRequestLinkPress" wrapping="false"/>
 								</t:template>
 							</t:Column>
 						
@@ -236,7 +236,7 @@
 							<t:Column sortProperty="Requested_Dealer" id="matnr">
 										<Label text="{i18n>FromDealer}"/>
 										<t:template>
-											<Text text="{oVehiclTrade_SummaryRequestedData>Requested_Dealer}-{oVehiclTrade_SummaryRequestedData>Requested_Dealer_Name}" wrapping="false"/>
+											<Text text="{Requested_Dealer}-{Requested_Dealer_Name}" wrapping="false"/>
 										</t:template>
 									</t:Column>
 						
@@ -254,27 +254,27 @@
 							<t:Column sortProperty="Model"  id="oMdlvsr">
 								<Label text="{i18n>Model}"/>
 								<t:template>
-									<Text text="{oVehiclTrade_SummaryRequestedData>Model}-{oVehiclTrade_SummaryData>Model_Desc}" wrapping="false"/>
+									<Text text="{Model}-{Model_Desc}" wrapping="false"/>
 								</t:template>
 							</t:Column>
 							<t:Column sortProperty="Suffix" id="oSufixVT">
 								<Label text="{i18n>Suffix}" wrapping="false"/>
 								<t:template>
-									<Text text="{oVehiclTrade_SummaryRequestedData>Suffix}-{oVehiclTrade_SummaryData>Suffix_Desc}/{oVehiclTrade_SummaryData>Int_Colour_Desc}"
+									<Text text="{Suffix}-{Suffix_Desc}/{Int_Colour_Desc}"
 										wrapping="false"/>
 								</t:template>
 							</t:Column>
 							<t:Column sortProperty="Trade_Return">
 								<Label text="{i18n>TradeinReturn}" wrapping="false"/>
 								<t:template>
-									<Text text="{path:'oVehiclTrade_SummaryRequestedData>Trade_Return',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryTrdReturn'}"
+									<Text text="{path:'Trade_Return',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryTrdReturn'}"
 										wrapping="false"/>
 								</t:template>
 							</t:Column>
 							<t:Column sortProperty="Trade_Status">
 								<Label text="{i18n>Status}" wrapping="false"/>
 								<t:template>
-									<Text text="{path:'oVehiclTrade_SummaryRequestedData>Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}"
+									<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}"
 										wrapping="false"/>
 								</t:template>
 							</t:Column>

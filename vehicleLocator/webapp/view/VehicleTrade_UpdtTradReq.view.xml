@@ -4,7 +4,7 @@
 	xmlns:uxap="sap.uxap" xmlns:t="sap.ui.table" xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml">-->
 <mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
 	controllerName="vehicleLocator.controller.VehicleTrade_UpdtTradReq" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form"
-	xmlns:uxap="sap.uxap" xmlns:t="sap.ui.table" xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml">	
+	xmlns:uxap="sap.uxap" xmlns:t="sap.ui.table" xmlns:u="sap.ui.unified"   xmlns:tnt="sap.tnt" xmlns:f="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml">	
 	<App>
 		<pages class="oImgsampl" height="200px">
 			<Page showNavButton="false" navButtonPress="onBack">
@@ -130,7 +130,7 @@
 								<Label text="{i18n>ModelYear}" id="mdlyr"/>
 								<Text text="{Model_Year}" id="mdlyrtext"/>
 								<Label text="{i18n>Series}" id="seris"/>
-								<Text text="{Series}-{Series_Desc}" id="serisTex"/>
+								<Text text="{Series_Desc}" id="serisTex"/>
 								<Label text="{i18n>Model}" id="modl"/>
 								<Text text="{Model}-{Model_Desc}" id="mdlde"/>
 								<Label text="{i18n>Suffix}" id="suffx"/>
@@ -262,12 +262,12 @@
 								<HBox>
 									<FlexBox width="10px"></FlexBox>
 									<FlexBox height="200px" alignItems="Start" justifyContent="Start">
-										<Button text="{i18n>Updatesubmit}" width="150px" press="oBack" id="oUpdateSubmitbtn"/>
+										<Button text="{i18n>Updatesubmit}" width="150px" press="oUpdateSubmitbtn"  id="oUpdateSubmitbtn"/>
 										<FlexBox width="7px"></FlexBox>
 									</FlexBox>
 									<FlexBox width="10px"></FlexBox>
 									<FlexBox height="200px" alignItems="Start" justifyContent="Start">
-										<Button text="{i18n>Update}" width="100px" id="oUpdatePagebtn"/>
+										<Button text="{i18n>Update}" width="100px" id="oUpdatePagebtn" press="Update"/>
 										<FlexBox width="7px"></FlexBox>
 									</FlexBox>
 									<FlexBox width="10px"></FlexBox>

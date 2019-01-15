@@ -1,5 +1,5 @@
 <mvc:View controllerName="vehicleLocator.controller.VehicleLocSearch" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
-	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:uxap="sap.uxap"
+	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:uxap="sap.uxap" xmlns:tnt="sap.tnt"
 	xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form">
 	<App id="idAppControl">
 		<pages class="oImgsampl" height="200px">
@@ -17,21 +17,26 @@
 					</Bar>
 				</customHeader>
 				<content>
-					<Toolbar height="48px" class="toolbar1">
+					<tnt:ToolHeader>
+						<Title id="oDealertitle" titleStyle="H3" width="auto" textAlign="Left" visible="true" wrapping="false" class="titledealervehiclesearch"/>
+						<ToolbarSpacer></ToolbarSpacer>
+						<Button text="{i18n>TradeSummary}" type="Transparent" press="handleLinkPress"/>
+						<Button text="{i18n>TradeHistory}" type="Transparent" press="handleLinkPress"/>
+						<Button text="{i18n>BlockSummary}" type="Transparent" press="BlockSummarypress"/>
+						<!--	<Button text="Vehicle Locator"  type="Transparent" press="handleLinkPress"/>-->
+					</tnt:ToolHeader>
+					<!--	<Toolbar height="48px" class="toolbar1">
 						
 					
 						
-						<Title text="Put the logged in dealer name here" titleStyle="H2" width="auto" textAlign="Left" visible="true" wrapping="false"
-				class="sapUiTinyMargin"/>
+						<Title id="oDealertitle" titleStyle="H2" width="auto" textAlign="Left" visible="true" wrapping="false"/>
 							<ToolbarSpacer></ToolbarSpacer>
 							<Button text="BlockSummary" press="BlockSummarypress"/>
 						
-						<!--	<Button text="Vehicle Locator" press="handleLinkPress"/>
+							<Button text="Vehicle Locator" press="handleLinkPress"/>
 						<Button text="Sold Order" press="handleLinkPress"/>
-						<Button text="Price Protection" press="handleLinkPress"/>
-						<Button text="Inventory Summary" press="handleLinkPress"/>
-						<Button text="Sujjest Order" press="handleLinkPress"/>-->
-					</Toolbar>
+				
+					</Toolbar>-->
 					<VBox class="sapUiSmallMargin">
 						<l:HorizontalLayout>
 							<l:content>
@@ -82,43 +87,27 @@
 				   	</ComboBox>-->
 								<ComboBox placeholder="" width="70%" showSecondaryValues="true" filterSecondaryValues="true" selectionChange="SeriesClickedVLS11"
 									id="SeriesCmbo" items="{SeriesData>/}" change="handleSeriesChange">
-									<core:ListItem text="{SeriesData>TCISeries} {SeriesData>TCISeriesDescriptionEN}" key="{SeriesData>TCISeries}" additionalText=""/>
-									<!--	<core:ListItem   text="{TCISeriesDescriptionEN}"      key="{TCISeriesDescriptionEN}"  additionalText =""/>-->
+									<core:ListItem text="{=${SeriesData>SPRAS}==='English' ? ${SeriesData>TCISeriesDescriptionEN}:${SeriesData>TCISeriesDescriptionFR} }"
+										key="{SeriesData>TCISeries}" additionalText=""/>
 								</ComboBox>
-								<!--<ComboBox placeholder="Series"  width="70%" showSecondaryValues= "true" filterSecondaryValues="true"
- selectionChange="SeriesClickedVLS11" id="SeriesCmbo" class="sapUiSizeCompact VLSSSelectSeries" change="SeriesChange" 
-								items="{SeriesModel>/}" > 
-									<core:ListItem   text="{SeriesModel>/ModelSeriesNo}"      key="{SeriesModel>/ModelSeriesNo}"  additionalText =""/>
-				   	</ComboBox>	-->
-								<!--<ComboBox  width="70%" change="SeriesChange" placeholder="Series"
-			items= "{JsSeriesModel>/'}"  >
-				<core:Item key="{JsSeriesModel>ModelSeriesNo}" text="{}" />
-			</ComboBox>-->
-								<!--	<Select id="VLSSeries" change="onVlsschange" enabled="true" width="70%" forceSelection="true" class="sapUiSizeCompact VLSSSelectSeries" items="{}">
-									<core:ListItem key="{}" text="{jsonDatamodel>Series}"/>
-								</Select>-->
 								<Label text="{i18n>ModelCode}" required="true"/>
-								<!--	<ComboBox placeholder="Model Code" selectedKey="2" showSecondaryValues= "true" width="90%" selectionChange="MCClickedVLS11" id="McCmbo" class="sapUiSizeCompact VLSSSelectSeries" 
-								items="{/}" > 
-									<core:ListItem text="{SeriesSequenceNumber}" additionalText ="4✕4 {TCIModelDescriptionEN}"/>
-				   	</ComboBox>	-->
 								<ComboBox placeholder="" selectedKey="" showSecondaryValues="true" width="90%" selectionChange="MCClickedVLS11" id="McCmbo"
 									change="handleModelChange" items="{ModelCode>/}">
-									<core:ListItem text="{ModelCode>Model} - {ModelCode>ENModelDesc}" key="{ModelCode>Model}"/>
+									<core:ListItem text="{ModelCode>Model}-{=${ModelCode>SPRAS}==='English' ? ${ModelCode>ENModelDesc}:${ModelCode>FRModelDesc} }"
+										key="{ModelCode>Model}" additionalText=""/>
+									<!--	<core:ListItem text="{ModelCode>Model} - {ModelCode>ENModelDesc}" key="{ModelCode>Model}"/>-->
 								</ComboBox>
-								<!--<Select id="VLSModelCode" change="onVlsMochange" width="90%" forceSelection="true" class="sapUiSizeCompact VLSSSelectModelC" items="{}">
-									<core:ListItem key="{}" text="{jsonDatamodel>Model Code}"/>
-								</Select>-->
 								<Label text="{i18n>Suffix}" required="true"/>
-								<!--	<ComboBox placeholder="Suffix" selectedKey="" width="90%" selectionChange="SeriesClickedVLS11" id="SuffCmbo" class="sapUiSizeCompact VLSSSelectSeries" 
-								items="{path: '/results'}" > 
-									<core:Item  text="{Suffix}"/>
-				   	</ComboBox>-->
 								<ComboBox placeholder="" selectedKey="" showSecondaryValues="true" width="90%" change="handleSuffixChange"
 									selectionChange="SufficClickedVLS11" id="SuffCmbo" items="{Suffix>/}">
-									<core:ListItem text="{Suffix>Suffix} - {Suffix>SuffixDescriptionEN}/{Suffix>TrimInteriorColor}" key="{Suffix>Suffix}"
-										additionalText=""/>
-									<!--{MarktgIntDescEN , MarketingTrimInteriorDescEN} /{Suffix>InteriorDescriptionEN} -->
+									<!--<core:ListItem text="{Suffix>Suffix} - {Suffix>SuffixDescriptionEN}/{Suffix>TrimInteriorColor}" key="{Suffix>Suffix}"
+										additionalText=""/>	-->
+									<core:ListItem
+										text="{Suffix>Suffix} {=${Suffix>SPRAS}==='English' ? ${Suffix>SuffixDescriptionEN}:${Suffix>SuffixDescriptionFR} } / {=${Suffix>SPRAS}==='English' ? ${Suffix>MarktgIntDescEN}:${Suffix>MarktgIntDescFR} }"
+										key="{Suffix>Suffix}" additionalText=""/>
+									<!--	<core:ListItem text="{Suffix>Suffix} - {Suffix>SuffixDescriptionEN}/{Suffix>TrimInteriorColor}" key="{Suffix>Suffix}"
+										additionalText=""/>-->
+									<!--{MarktgIntDescEN MarktgIntDescEN , MarketingTrimInteriorDescEN} /{Suffix>InteriorDescriptionEN} -->
 								</ComboBox>
 								<!--{SuffixDescriptionEN}- -->
 								<!--<Select id="VLSSuffix" change="onVlsMoSuffix" width="90%" forceSelection="true" class="sapUiSizeCompact VLSSSelectSuffix" items="{}">
@@ -139,11 +128,20 @@
 					</VBox>
 					<VBox class="sapUiSmallMargin">
 						<form:SimpleForm id="SimpleF2sa220" editable="true" layout="ResponsiveGridLayout" labelSpanM="12" adjustLabelSpan="false" emptySpanL="0"
-							class="simplVTARC" emptySpanM="0" columnsL="2" columnsM="2">
+							emptySpanM="0" columnsL="2" columnsM="2">
 							<form:content>
-								<core:Title text="" class="Vtaprct1"/>
-								<Button text="{i18n>Search}" icon="sap-icon://search" press="onSePress" type="Emphasized" width="20rem"/>
-								<core:Title text="" class="Vtaprct1"/>
+								<core:Title text=""/>
+								<Button width="10px" visible="false">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Button>
+								<Button text="{i18n>Search}" icon="sap-icon://search" press="onSePress" type="Emphasized">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Button>
+								<core:Title text=""/>
 								<Label text=""/>
 							</form:content>
 						</form:SimpleForm>

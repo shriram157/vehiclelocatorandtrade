@@ -11,7 +11,17 @@
 .clCustomFont {
     font-family: 'Satisfy', cursive;
 }*/
-
+/*======================= Start custom fonts and custom color on header style ==========================*/
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+.clCustomFont {font-family: 'Raleway', sans-serif;}
+.sapContrastPlus.clCustomHeaderBg,.clCustomHeaderBg.sapMIBar {  background-color: #fff!important; color: #2f3c48; text-shadow: none;}
+.sapContrastPlus.clCustomHeaderBg .sapMBtnInner {color: #2f3c48;text-shadow: none;}
+.sapContrastPlus.clCustomHeaderBg .sapMText {color: #2f3c48;}
+.sapContrastPlus.sapMIBar-CTX.clCustomHeaderBg .sapMBtn:hover>.sapMBtnHoverable:not(.sapMBtnActive) {background-color: transparent;color: #346187;}
+/*======================= End custom fonts and custom color on header style ==========================*/
+.oDealertitle{
+    color: #cae4fb;
+}
 .margin {
     margin-top: 1rem;
 }
@@ -61,7 +71,7 @@
 }
 
 
-/*For Customheader color change*/
+
 
 .toolbar1.sapMTB {
     white-space: nowrap;
@@ -78,7 +88,6 @@
 }
 
 
-/*  */
 
 .sapUiMedia-Std-Desktop .sapUxAPObjectPageHeaderContent {
     padding-left: 40rem;
@@ -92,7 +101,7 @@
 }
 
 
-/*toolbar link spaces*/
+
 
 .toolbar1.sapMIBar.sapMTB .sapMBarChild {
     margin-right: 1.90rem;
@@ -110,7 +119,7 @@
 /*toolbar2 link spaces*/
 
 .toolbar2.sapMIBar.sapMTB .sapMBarChild {
-    margin-right: 1.90rem;
+    margin-right: 2.90rem;
 }
 
 

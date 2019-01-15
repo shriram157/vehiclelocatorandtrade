@@ -18,8 +18,8 @@ sap.ui.define([
 							pattern: "yyyy-MM-dd'T'HH:mm:ss"
 						});
 						//***********Language translator functionality**********//
-
-						this.getRouter().attachRouteMatched(this.onRouteMatched, this);
+	this.getRouter().getRoute("VehicleTrade_ModelBlock_Summary").attachPatternMatched(this.onRouteMatched, this);
+						//this.getRouter().attachRouteMatched(this.onRouteMatched, this);
 						/*	this.getRouter().attachRouteMatched(this.onRouteMatched, this);*/
 					},
 
@@ -78,7 +78,8 @@ sap.ui.define([
 							async: true,
 							success: function (result) {}
 						});
-						var LoginBusinessPartnerCode = sap.ui.getCore().LoginDetails.BussinesspartnerCode;
+					var LoginBusinessPartnerCode =sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerKey;
+						//var LoginBusinessPartnerCode = sap.ui.getCore().LoginDetails.BussinesspartnerCode;
 						that.oDataUrl2 = this.nodeJsUrl + "/API_BUSINESS_PARTNER";
 						that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl2, true);
 						var Businesspartnerurl = that.oDataUrl2 + "/A_BusinessPartner?$filter=(Customer ne '')&$format=json";
@@ -149,7 +150,7 @@ sap.ui.define([
 									} else {
 										that.ZzblockId = "00000001";
 									}
-									var LoginBusinessPartnerCode = sap.ui.getCore().LoginDetails.BussinesspartnerCode;
+									var LoginBusinessPartnerCode = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerKey;
 
 									var FilteredBlockingDlr = ModelBlockSeturl.filter(function (x) {
 										return x.ZzblockingDlr != null;
@@ -393,7 +394,7 @@ sap.ui.define([
 								debugger
 								var that = this;
 								var oBlockId = ZzblockId;
-								var BlockingDealer = sap.ui.getCore().LoginDetails.DealerCode;
+								var BlockingDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
 								var BlockedDealer = this.getView().byId("VT_MBSdeal").getSelectedKey();
 								var oModelRequested = sap.ui.getCore().getModel("VehicleTrade_ModelBlock_SummaryTrade").getData().matnr;
 								var oSeries = sap.ui.getCore().getModel("VehicleTrade_ModelBlock_SummaryTrade").getData().zzseries;
@@ -422,7 +423,7 @@ sap.ui.define([
 								var Blockenddate = someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
 								Blockenddate = "/Date(" + Blockenddate + ")/";
 								//	Blockenddate = oDateFormat1.format(new Date(Blockenddate));
-								var Createdby = sap.ui.getCore().LoginDetails.Username;
+								var Createdby = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');;
 								/*	var Createdon = oDateFormat.format(new Date());*/
 								var Createdon = "";
 								var oDNSBlock = {
@@ -501,7 +502,7 @@ sap.ui.define([
 
 										var ModelBlockSeturl = ModelBlockSeturl.d.results;
 
-										var LoginBusinessPartnerCode = sap.ui.getCore().LoginDetails.BussinesspartnerCode;
+										var LoginBusinessPartnerCode = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerKey;
 
 										var FilteredBlockingDlr = ModelBlockSeturl.filter(function (x) {
 											return x.ZzblockingDlr != null;
@@ -534,7 +535,7 @@ sap.ui.define([
 									var SuffCmbo = "ML";
 									var MoyearCombo = "2018";
 									var oDealer = "2400042193";*/
-								var oDealer = sap.ui.getCore().LoginDetails.DealerCode;
+								var oDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
 								var sLocation = window.location.host;
 								var sLocation_conf = sLocation.search("webide");
 
@@ -562,15 +563,12 @@ sap.ui.define([
 									{
 										withCredentials: true
 									},
-									beforeSend: function (request) {
-										request.setRequestHeader('Authorization', 'Basic ' + btoa('anisetc:anisetc'));
-									},
-
+								
 									success: function (odata, oresponse) {
 
 										var a = odata.d.results;
 
-										var Dealer = sap.ui.getCore().LoginDetails.DealerCode;
+										var Dealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
 
 										var FilterDelearNotnull = a.filter(function (x) {
 											return x.kunnr != null;

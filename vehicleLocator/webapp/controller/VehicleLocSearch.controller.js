@@ -17,7 +17,7 @@ sap.ui.define([
 				var oZoneUser = 50211;
 				var oTciUser =  61122;
 				var oLanguage = "EN";*/
-			var oLoginDealer = {
+		/*	var oLoginDealer = {
 				"Username": "AMRO",
 				"Language": "EN",
 				"BussinesspartnerCode": "2400042176",
@@ -27,9 +27,9 @@ sap.ui.define([
 				"UserType": "Dealer",
 				"Division": "10"
 
-				/*	 Customer='2400042176',SalesOrganization='6000',DistributionChannel='10',Division='10')*/
+			
 
-			};
+			};*/
 			
 			// ========================================== integrating security ==========================================Begin
 			
@@ -37,6 +37,7 @@ sap.ui.define([
 			//  on init method,  get the token attributes and authentication details to the UI from node layer.  - begin
 			//======================================================================================================================//		
 			//  get the Scopes to the UI 
+				var that = this;
 						var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
 			if (sLocation_conf == 0) {
@@ -46,9 +47,9 @@ sap.ui.define([
 				this.sPrefix = "";
 				this.attributeUrl = "/userDetails/attributes";
 			}
-
+//that.userType ="vehicelTradeDealerUser";
 			//this.sPrefix ="";
-			var that = this;
+		
 			$.ajax({
 				url: this.sPrefix + "/userDetails/currentScopesForUser",
 				type: "GET",
@@ -57,8 +58,8 @@ sap.ui.define([
 					// var userScopes = oData;
 					// userScopes.forEach(function (data) {
 
-					var userType = oData.loggedUserType[0];
-					switch (userType) {
+				that.userType = oData.loggedUserType[0];
+					switch (that.userType) {
 					case "vehicelTradeDealerUser":
 					 
 // add your code here. // TODO: 
@@ -88,11 +89,18 @@ sap.ui.define([
 				success: function (oData) {
 					var BpDealer = [];
 					var userAttributes = [];
-
+/*	BpDealer.push({
+							"BusinessPartnerKey": "2400042193",
+							"BusinessPartner": "42193", //.substring(5, BpLength),
+							"BusinessPartnerName":"Don Valley North Toyota...", //item.OrganizationBPName1 //item.BusinessPartnerFullName
+							"Division": "10",
+							"BusinessPartnerType": "Z001",
+							"searchTermReceivedDealerName": "42120"
+						});*/
 					$.each(oData.attributes, function (i, item) {
 						var BpLength = item.BusinessPartner.length;
 
-						BpDealer.push({
+					BpDealer.push({
 							"BusinessPartnerKey": item.BusinessPartnerKey,
 							"BusinessPartner": item.BusinessPartner, //.substring(5, BpLength),
 							"BusinessPartnerName": item.BusinessPartnerName, //item.OrganizationBPName1 //item.BusinessPartnerFullName
@@ -104,21 +112,34 @@ sap.ui.define([
 					});
 				 //  set your model or use the model below - // TODO: 
 					that.getView().setModel(new sap.ui.model.json.JSONModel(BpDealer), "BpDealerModel");
+					sap.ui.getCore().setModel(new sap.ui.model.json.JSONModel(BpDealer),"LoginBpDealerModel");
+					var LoggedInDealer=sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
+						that.getView().byId("oDealertitle").setText(LoggedInDealer);
+					/*	userAttributes.push({
+							"UserType": "Dealer",
+							"DealerCode":  ["42193"],
+							"Language": "English",
+							
+						
+							
+						});*/
 					// read the saml attachments the same way 
 					$.each(oData.samlAttributes, function (i, item) {
 						userAttributes.push({
 							"UserType": item.UserType[0],
 							"DealerCode": item.DealerCode[0],
-							"Language": item.Language[0]
-								// "Zone": item.Zone[0]   ---    Not yet available
+							"Language": item.Language[0],
+							// "Zone": item.Zone[0]   ---    Not yet available
+							
 						});
 
 					});
 
 					that.getView().setModel(new sap.ui.model.json.JSONModel(userAttributes), "userAttributesModel");
-
+sap.ui.getCore().setModel(new sap.ui.model.json.JSONModel(userAttributes),"LoginuserAttributesModel");
 					//	that._getTheUserAttributes();
-
+					debugger
+                     that.security();
 				}.bind(this),
 				error: function (response) {
 					sap.ui.core.BusyIndicator.hide();
@@ -130,13 +151,8 @@ sap.ui.define([
 			
 			
 			
-			sap.ui.getCore().LoginDetails = oLoginDealer;
-			if (oLoginDealer.Division == "10") {
-				this.Division = "TOY";
-			} else if (oLoginDealer.Division == "20") {
-				this.Division = "LEX";
-			}
-
+		//	sap.ui.getCore().LoginDetails = oLoginDealer;
+		
 			/*	var isLocaleSent = window.location.search.match(/language=([^&]*)/i);
 				if (isLocaleSent) {
 					var sSelectedLocale = window.location.search.match(/language=([^&]*)/i)[1];
@@ -318,6 +334,10 @@ sap.ui.define([
 				document.getElementById(MoyearComboId).disabled = true;
 
 			};
+		},
+		security: function()
+		{
+			var that=this;
 			that._oViewModel = new sap.ui.model.json.JSONModel();
 			that.getView().byId("SeriesCmbo").setSelectedKey("");
 			//	 that.getView().byId("SeriesCmbo").setSelectedItem("");
@@ -329,12 +349,17 @@ sap.ui.define([
 			//	that.oDataUrl = "/vehicleLocatorNode/node/Z_VEHICLE_CATALOGUE_SRV";
 			debugger
 			//Bussinesspartner zone implementation---------------------//
-			var that = this;
-			var SalesOrganization = 6000;
+			
+		/*	var SalesOrganization = 6000;
 			var DistributionChannel = 10;
 			var Division = sap.ui.getCore().LoginDetails.Division;
-			var oDealer = sap.ui.getCore().LoginDetails.BussinesspartnerCode;
-
+			var oDealer = sap.ui.getCore().LoginDetails.BussinesspartnerCode;*/
+/*	var userType=sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].UserType[0];*/ ///for local testing/
+	var userType=sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].UserType;  // for Security*/
+				switch (userType) {
+				/*	case "vehicelTradeDealerUser":*/
+					case "Dealer":
+						
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
 
@@ -344,15 +369,27 @@ sap.ui.define([
 				this.sPrefix = "";
 
 			}
-
+if(that.getView().getModel("userAttributesModel")!=undefined)
+{
+	var userAttributesModellen=that.getView().getModel("userAttributesModel").getData();
+var BpDealer=that.getView().getModel("BpDealerModel").getData();
+var BusinessPartner=BpDealer[0].BusinessPartnerKey;
+	//for(var i=0;i<userAttributesModellen.length;i++){
+		var oDealer=userAttributesModellen[0].DealerCode[0];
+	/*	var SalesOrganization=userAttributesModellen[0].Zone;*/
+		  var Division=BpDealer[0].Division;
+		  /* var DistributionChannel="10";*/
 			this.nodeJsUrl = this.sPrefix + "/node";
 			that.oDataUrl = this.nodeJsUrl + "/API_BUSINESS_PARTNER";
 
 			that.Customersales = this.nodeJsUrl + "/A_CustomerSalesArea";
 
-			that.BussinesspartnerUrl = that.oDataUrl + "/A_CustomerSalesArea?$filter=Customer eq'" + oDealer + "' and SalesOrganization eq '" +
-				SalesOrganization +
-				"' and DistributionChannel eq '" + DistributionChannel + "' and Division eq '" + Division + "'";
+			/*that.BussinesspartnerUrl = that.oDataUrl + "/A_CustomerSalesArea?$filter=Customer eq'" + oDealer + 
+				"' and DistributionChannel eq '" + DistributionChannel + "' and Division eq '" + Division + "'";*/
+				
+that.BussinesspartnerUrl = that.oDataUrl + "/A_CustomerSalesArea?$filter=Customer eq'" + BusinessPartner + "' and Division eq '" + Division + "'";
+/*	that.BussinesspartnerUrl = that.oDataUrl + "/A_CustomerSalesArea?$filter=Customer eq'" + oDealer + "' and SalesOrganization eq '" +
+				SalesOrganization + "' and Division eq '" + Division + "'";*/
 
 			var ajax = $.ajax({
 				dataType: "json",
@@ -363,6 +400,7 @@ sap.ui.define([
 				async: true,
 				success: function (data) {
 					var Zone = data.d.results[0];
+					if(data.d.results.length!=0){
 					var SelectedZone = Zone.SalesOffice;
 					switch (SelectedZone) {
 					case "1000":
@@ -390,11 +428,15 @@ sap.ui.define([
 						return;
 						break;
 					}
+					}
 				},
 				error: function () {
 					alert("Error");
 				}
 			});
+			
+//	}
+}
 
 			//Bussinesspartner zone implementation.----------//
 
@@ -435,12 +477,7 @@ sap.ui.define([
 				{
 					withCredentials: true
 				}
-				/*,
-				      beforeSend: function (request)
-				           {
-				               request.setRequestHeader('Authorization', 'Basic ' + btoa(''));
-				           }*/
-				,
+		,
 				url: SeriesDes,
 				async: true,
 				success: function (result) {}
@@ -451,13 +488,7 @@ sap.ui.define([
 				xhrFields: //
 				{
 					withCredentials: true
-				}
-				/*,
-				      beforeSend: function (request)
-				           {
-				               request.setRequestHeader('Authorization', 'Basic ' + btoa(''));
-				           }*/
-				,
+				},
 				url: Suffix,
 				async: true,
 				success: function (result) {}
@@ -465,21 +496,15 @@ sap.ui.define([
 			var SuffixInteriorDesc = that.oDataUrl + "/zc_exterior_trim";
 			var ajax4 = $.ajax({
 				dataType: "json",
-				xhrFields: //
+				xhrFields: 
 				{
 					withCredentials: true
-				}
-				/*,
-				      beforeSend: function (request)
-				           {
-				               request.setRequestHeader('Authorization', 'Basic ' + btoa(''));
-				           }*/
-				,
+				},
 				url: SuffixInteriorDesc,
 				async: true,
 				success: function (result) {}
 			});
-			//}
+		
 			$.when(ajax1, ajax2, ajax3, ajax4).done(function (SeriesUrl, SeriesDes, Suffix, SuffixInteriorDesc) {
 
 				var SeriesUrl = SeriesUrl[0].d.results;
@@ -499,138 +524,35 @@ sap.ui.define([
 
 				var SuffixModel = new sap.ui.model.json.JSONModel(Suffix);
 				sap.ui.getCore().setModel(SuffixModel, "SuffixModel");
-				/*	that.BusyDialog.close();*/
+				
 				sap.ui.core.BusyIndicator.hide();
 			});
 			var a = new Date();
-
-			/*	that.oSelectedYear = a.getFullYear().toString();
-				that.oDataModel.read("/ZC_MODEL_DETAILS", "anisetc", "anisetc", false,
-				
-					function (oData) {
-						if (oData != undefined) {
-							var oResults = oData.results;
-
-							sap.ui.getCore().setModel(oResults, "McCmboSuffCmbo2");
-							var oResults = oResults.filter(function (x) {
-								return x.Modelyear == that.oSelectedYear;
-
-							});
-							var obj = {};
-							for (var i = 0, len = oResults.length; i < len; i++)
-								obj[oResults[i]['TCISeries']] = oResults[i];
-							oResults = new Array();
-							for (var key in obj)
-								oResults.push(obj[key]);
-							that.Fullurls = oResults;
-							var SeriesDescription = that.SeriesDescription(oResults);
-							if (SeriesDescription.length != 0) {
-								for (var a = 0; a < that.Fullurls.length; a++) {
-									for (var b = 0; b < SeriesDescription.length; b++) {
-
-										if (that.Fullurls[a].TCISeries == SeriesDescription[b].ModelSeriesNo) {
-											that.Fullurls[a].TCISeriesDescriptionEN = SeriesDescription[b].TCISeriesDescriptionEN;
-											that.Fullurls[a].TCISeriesDescriptionFR = SeriesDescription[b].TCISeriesDescriptionFR;
-
-										}
-									}
-
-								}
-							} else {
-								for (var i = 0; i < that.Fullurls.length; i++) {
-									that.Fullurls.TCISeriesDescriptionEN = "";
-									that.Fullurls.TCISeriesDescriptionFR = "";
-								}
-							}*/
-			/*	var obj = {};
-				for (var i = 0, len = that.Fullurls.length; i < len; i++)
-					obj[that.Fullurls[i]['Suffix']] = that.Fullurls[i];
-				that.Fullurls = new Array();
-				for (var key in obj)
-					that.Fullurls.push(obj[key]);*/
-
-			/*	var oJsonModelVLS = new sap.ui.model.json.JSONModel(that.Fullurls);
-				that.getView().byId("SeriesCmbo").setModel(oJsonModelVLS);*/
-			//	that.getView().byId("SuffCmbo").setModel(oJsonModelVLS);
-			//	that.oJsonModelVLS = new sap.ui.model.json.JSONModel(oResults);
-
-			//	that.getView().byId("SeriesCmbo").setModel(that.oJsonModelVLS);
-			/*	}
-			},*/
-			/*	function (oData) {
-					alert("Failed to get the Data");
-				});*/
-			/*that.oDataModel.read("/zc_exterior_trim", "anisetc", "anisetc", false,
-
-				function (oData) {
-					if (oData != undefined) {
-						var oResults = oData.results;
-						sap.ui.getCore().setModel(oResults, "McCmboSuffCmbo2");
-						that.oJsonModelVLS = new sap.ui.model.json.JSONModel(oResults);
-
-						that.getView().byId("McCmbo").setModel(that.oJsonModelVLS);
+						
+						
+						
+					 
+// add your code here. // TODO: 
+						break;
+		 
+					case "internalTCIUser":
+// add your code here. // TODO:  
+						break;
+					case "ZoneUser":
+// add your code here. // TODO: 	 
+						break;
+					default:
+						// raise a message, because this should not be allowed. 
+// add your code here. // TODO: 
 					}
-				},
-				function (oData) {
-					alert("Failed to get Data");
-				});*/
-			/*oDataModel.setHeaders({
-					"Content-Type": "application/json",
-					"X-Requested-With": "XMLHttpRequest",
-					"DataServiceVersion": "2.0",
-					"Accept": "application/json",
-					"Method": "",
-					"X-CSRF-TOKEN": "Fetch"
-				});
-				var BatchUrl = [];
-				BatchUrl.push(oDataModel.createBatchOperation("/ZC_MODEL_DETAILS", "POST"));
-				BatchUrl.push(oDataModel.createBatchOperation("/zc_exterior_trim", "POST"));
-			
-			
-			
-
-				oDataModel.addBatchReadOperations(BatchUrl);
-				oDataModel.setUseBatch(true);
-				oDataModel.submitBatch(function(oData, oResponse) {
-					var Data = oData.__batchResponses[0].data.results;
-					var Data2 = oData.__batchResponses[1].data.results;
-					sap.ui.getCore().setModel(Data, "McCmboSuffCmbo");
-					that.oJsonModelVLS = new sap.ui.model.json.JSONModel(Data);
-					sap.ui.getCore().setModel(Data2, "McCmboSuffCmbo2");
-					that.oJsonModelVLS2 = new sap.ui.model.json.JSONModel(Data2);
-
-					that.getView().byId("SeriesCmbo").setModel(that.oJsonModelVLS);
-					that.getView().byId("McCmbo").setModel(that.oJsonModelVLS);*/
-
-			/*	
-			   -------------WORKING ONE---------------------
-				sap.ui.getCore().setModel(Data, "McCmboSuffCmbo");
-				that.oJsonModelVLS = new sap.ui.model.json.JSONModel(Data);
-				that.getView().byId("McCmbo").setModel(that.oJsonModelVLS);
-				that.getView().byId("SuffCmbo").setModel(that.oJsonModelVLS);
 				
-				var Data2 = oData.__batchResponses[1].data.results;
-			    that.oJsonmodel = new sap.ui.model.json.JSONModel(Data2);
-			    that.getView().setModel(that.oJsonmodel);*/
+			
+			
+			
 
-			/* sap.ui.getCore().setModel(Data2, "SeriesModel");
-			    that.oJsonModelVLS2 = new sap.ui.model.json.JSONModel(Data2);
-				that.getView().byId("SeriesCmbo").setModel(that.oJsonModelVLS2);*/
+		
 
-			/*that.getView().byId("SeriesCmbo").setModel(oJsonModelVLS2);*/
-			/*  that.getView().byId("SeriesCmbo").setModel(new sap.ui.model.json.JSONModel(oJsonModelVLS2,"JsSeriesModel"));*/
-
-			/*	sap.ui.getCore().setModel(Data2, "SeriesCmbo");
-				that.oJsonModelVLS2 = new sap.ui.model.json.JSONModel(Data2);
-				that.getView().byId("SeriesCmbo").setModel(that.oJsonModelVLS2);*/
-
-			/*	that.oJsonModelVLS2.getData(Data2,"SeriesModel");
-				that.getView().byId("SeriesCmbo").setModel(that.oJsonModelVLS2);*/
-
-			/*	}, function(err) {
-				
-
-				});*/
+		
 
 		},
 		SeriesBinding: function (SelectedYear) {
@@ -651,6 +573,7 @@ sap.ui.define([
 					oResults.push(obj[key]);
 				that.Fullurls = oResults;
 				var SeriesDescription = that.SeriesDescription(oResults);
+				var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language;
 				if (SeriesDescription.length != 0) {
 					for (var a = 0; a < that.Fullurls.length; a++) {
 						for (var b = 0; b < SeriesDescription.length; b++) {
@@ -659,6 +582,7 @@ sap.ui.define([
 								that.Fullurls[a].TCISeriesDescriptionEN = SeriesDescription[b].TCISeriesDescriptionEN;
 								that.Fullurls[a].TCISeriesDescriptionFR = SeriesDescription[b].TCISeriesDescriptionFR;
 								that.Fullurls[a].Division = SeriesDescription[b].Division;
+								that.Fullurls[a].SPRAS = SPRAS;
 
 							}
 						}
@@ -669,9 +593,42 @@ sap.ui.define([
 						that.Fullurls.TCISeriesDescriptionEN = "";
 						that.Fullurls.TCISeriesDescriptionFR = "";
 						that.Fullurls.Division = "";
+						that.Fullurls.SPRAS = SPRAS;
 
 					}
 				}
+			for (var i = 0; i < that.Fullurls.length; i++) {
+				if("TCISeriesDescriptionEN" in that.Fullurls[i]){
+					that.Fullurls[i].TCISeriesDescriptionEN=that.Fullurls[i].TCISeriesDescriptionEN;
+				}
+				else{
+						that.Fullurls[i].TCISeriesDescriptionEN = "";
+				}
+				if("TCISeriesDescriptionFR" in that.Fullurls[i]){
+					that.Fullurls[i].TCISeriesDescriptionFR=that.Fullurls[i].TCISeriesDescriptionFR;
+				}
+				else{
+						that.Fullurls[i].TCISeriesDescriptionFR = "";
+				}
+				if("Division" in that.Fullurls[i]){
+					that.Fullurls[i].Division=that.Fullurls[i].Division;
+				}
+				else{
+						that.Fullurls[i].Division = "";
+				}
+				if("SPRAS" in that.Fullurls[i]){
+					that.Fullurls[i].SPRAS=that.Fullurls[i].SPRAS;
+				}
+				else{
+						that.Fullurls[i].SPRAS = SPRAS;
+						/*	that.Fullurls.SPRAS = SPRAS;*/
+				}
+					/*	that.Fullurls.TCISeriesDescriptionFR = "";
+						that.Fullurls.Division = "";*/
+
+					}
+				
+				
 				/*	var obj = {};
 						for (var i = 0, len = that.Fullurls.length; i < len; i++)
 							obj[that.Fullurls[i]['Suffix']] = that.Fullurls[i];
@@ -679,6 +636,16 @@ sap.ui.define([
 						for (var key in obj)
 							that.Fullurls.push(obj[key]);*/
 				debugger
+				
+				
+				if(that.getView().getModel("BpDealerModel")!=undefined){
+			if (that.getView().getModel("BpDealerModel").getData()[0].Division == "10") {
+				that.Division = "TOY";
+			} else if (that.getView().getModel("BpDealerModel").getData()[0].Division == "20") {
+				that.Division = "LEX";
+			}
+}
+				
 				that.Fullurls = that.Fullurls.filter(function (x) {
 					return x.Division == that.Division;
 				});
@@ -726,7 +693,10 @@ sap.ui.define([
 					oResults.TCISeries;
 					oResults.Model;
 					oResults.Suffix;*/
-
+			var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language;
+for(var i=0;i<oResults.length;i++){
+	oResults[i].SPRAS=SPRAS;
+}
 				var ModelCode = new sap.ui.model.json.JSONModel(oResults);
 				that.getView().setModel(ModelCode, "ModelCode");
 
@@ -765,10 +735,16 @@ sap.ui.define([
 		MCClickedVLS11: function ()
 
 		{
-
-			var that = this;
-			that.oJsonModelVLS = new sap.ui.model.json.JSONModel([]);
+				var that = this;
+         that.oJsonModelVLS = new sap.ui.model.json.JSONModel([]);
 			that.getView().setModel(that.oJsonModelVLS, "Suffix");
+		
+	 that.SuffixDescription();
+		},
+		SeriesFilterdData:function(SuffixDescription){
+			var that = this;
+		
+			that.FilteredSuffixDesc=SuffixDescription;
 
 			that.oSelectedYear = that.getView().byId("MoyearCombo").getSelectedKey();
 
@@ -795,22 +771,57 @@ sap.ui.define([
 				/*	this.oSufModelYear = oResults[0].ModelYear;
 					this.oSufTCISeries = oResults[0].TCISeries;
 					this.oSufModel = oResults[0].Model;*/
-				var SufixDescription = that.SuffixDescription(oResults);
+				var SufixDescription = SuffixDescription;
+					var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language;
 				for (var a = 0; a < that.Fullurls.length; a++) {
 					for (var b = 0; b < SufixDescription.length; b++) {
 
 						if (that.Fullurls[a].Suffix == SufixDescription[b].Suffix) {
 							SufixDescription[b].SuffixDescriptionEN = that.Fullurls[a].SuffixDescriptionEN;
 							SufixDescription[b].SuffixDescriptionFR = that.Fullurls[a].SuffixDescriptionFR;
-
+                            SufixDescription[b].SPRAS =SPRAS;
 						}
 					}
 
 				}
+				for (var i = 0; i < SufixDescription.length; i++) {
+				if("SuffixDescriptionEN" in SufixDescription[i]){
+					SufixDescription[i].SuffixDescriptionEN=SufixDescription[i].SuffixDescriptionEN;
+				}
+				else{
+						SufixDescription[i].SuffixDescriptionEN = "";
+				}
+				if("SuffixDescriptionFR" in SufixDescription[i]){
+					SufixDescription[i].SuffixDescriptionFR=SufixDescription[i].SuffixDescriptionFR;
+				}
+				else{
+						SufixDescription[i].SuffixDescriptionFR = "";
+				}
+				if("SPRAS" in SufixDescription[i]){
+					SufixDescription[i].SPRAS=SufixDescription[i].SPRAS;
+				}
+				else{
+						SufixDescription[i].SPRAS = SPRAS;
+						/*	that.Fullurls.SPRAS = SPRAS;*/
+				}
+					/*	that.Fullurls.TCISeriesDescriptionFR = "";
+						that.Fullurls.Division = "";*/
+
+					}
+					/*	var oSelectedSeries = that.getView().byId("SeriesCmbo").getSelectedKey();
+					var IntColor=SufixDescription.filter(function (x) {
+					return (x.ModelYear == that.oSelectedYear && x.TCISeries ==oSelectedSeries);
+
+				});
 				var SufixDescription = SufixDescription.filter(function (x) {
 					return (x.ModelYear == that.oSelectedYear && x.Model == (that.oSelectedModel.split("-")[0]).trim());
 
-				});
+				});*/
+			
+				/*var SufixDescription = SufixDescription.filter(function (x) {
+					return (x.ModelYear == that.oSelectedYear && x.TCISeries==oSelectedSeries);
+
+				});*/
 				/*	var obj = {};
 					for (var i = 0, len = SufixDescription.length; i < len; i++)
 						obj[SufixDescription[i]['Suffix']] = SufixDescription[i];
@@ -818,15 +829,24 @@ sap.ui.define([
 					for (var key in obj)
 						SufixDescription.push(obj[key]);*/
 				var	 result = SufixDescription.filter(function (a) {
-        var key = a.Suffix + '|' + a.TrimInteriorColor;
+        /*	if(sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language!="English"){*/
+       var key = a.Suffix + '|' + a.InteriorColor;
+				//var key = a.Suffix;
         if (!this[key]) {
             this[key] = true;
             return true;
         }
-    }, Object.create(null));	
-						
-						
-				var Suffix = new sap.ui.model.json.JSONModel(result);
+    }, Object.create(null));
+    
+			var result = result.filter(function (objFromA) {
+						return that.Fullurls.find(function (objFromB) {
+							return (objFromA.Model === objFromB.Model &&objFromA.ModelYear === objFromB.ModelYear &&objFromA.Suffix === objFromB.Suffix);
+						});
+					});	
+					//	that.FilteredSuffixDesc 
+		/*	var result=result.filter(function(x){
+				return x.InteriorColor!=""});*/
+			var Suffix = new sap.ui.model.json.JSONModel(result);
 				that.getView().setModel(Suffix, "Suffix");
 				sap.ui.getCore().setModel(Suffix, "VehicleLocatorSuffix");
 				/*	var oJsonModelVLS = new sap.ui.model.json.JSONModel(oResults);
@@ -835,17 +855,55 @@ sap.ui.define([
 			}
 
 		},
-		SuffixDescription: function (Data) {
+		SuffixDescription: function () {
 			var that = this;
 
-			if (sap.ui.getCore().getModel("SuffixInteriorDesc") != undefined) {
+			/*if (sap.ui.getCore().getModel("SuffixInteriorDesc") != undefined) {
 				that.SuffixDesc = sap.ui.getCore().getModel("SuffixInteriorDesc").getData();
 
 			} else {
 				that.SuffixDesc = [];
-			}
+			}*/
+			var sLocation = window.location.host;
+			var sLocation_conf = sLocation.search("webide");
 
-			return that.SuffixDesc;
+			if (sLocation_conf == 0) {
+				this.sPrefix = "/vehicleLocatorNode";
+			} else {
+				this.sPrefix = "";
+
+			}
+			
+			
+var Model_Year=this.getView().byId("MoyearCombo").getSelectedKey();
+var Series=this.getView().byId("SeriesCmbo").getSelectedKey();
+var  McCmbo=this.getView().byId("McCmbo").getSelectedKey();
+			this.nodeJsUrl = this.sPrefix + "/node";
+			that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_CATALOGUE_SRV";
+
+			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
+			var SeriesUrl = that.oDataUrl + "/zc_exterior_trim?$filter=ModelYear eq'"+Model_Year+"' and Model eq'"+McCmbo+"' and TCISeries eq '"+Series+"' &$format=json";
+			var ajax1 = $.ajax({
+				dataType: "json",
+				xhrFields: //
+				{
+					withCredentials: true
+				},
+
+				// beforeSend: function (request) {
+				// 	request.setRequestHeader('Authorization', 'Basic ' + btoa('anisetc:anisetc'));
+				// },
+				url: SeriesUrl,
+				async: true,
+				success: function (result) {
+				var SuffixDescription=result.d.results;
+				that.SeriesFilterdData(SuffixDescription);
+				}
+			});
+/*if(that.SuffixDesc==undefined){
+	that.SuffixDesc=[];
+}*/
+			
 		},
 
 		SeriesDescription: function (Data) {
@@ -1131,7 +1189,7 @@ sap.ui.define([
 			/*this.getRouter().navTo("VehicleSearcResults");*/
 			that.getView().getModel("SeriesData").setProperty("/SelectedSeries", that.getView().byId("SeriesCmbo").getSelectedKey());
 			sap.ui.getCore().setModel(that.getView().getModel("SeriesData"), "SelectedSeriesFromScreen1");
-			var LoginUser = "Dealer";
+			var LoginUser = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].UserType[0];
 
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
@@ -1187,7 +1245,14 @@ sap.ui.define([
 						return SelectedZone.includes(person.vkbur);
 					});
 
-					var Dealer = sap.ui.getCore().LoginDetails.DealerCode;
+				/*	var Dealer = sap.ui.getCore().LoginDetails.DealerCode;*/
+					var userAttributesModellen=that.getView().getModel("userAttributesModel").getData();
+var BpDealer=that.getView().getModel("BpDealerModel").getData();
+	//for(var i=0;i<userAttributesModellen.length;i++){
+		var Dealer=userAttributesModellen[0].DealerCode[0];
+		var SalesOrganization=userAttributesModellen[0].Zone;
+		  var Division=BpDealer[0].Division;
+/*sap.ui.getCore().getModel(new sap.ui.model.json.JSONModel(BpDealer),"LoginBpDealerModel");*/
 
 					var FilterDeleade_OrderTypefilteNotnull = filtered_zone.filter(function (x) {
 						return x.kunnr != null;
@@ -1400,8 +1465,15 @@ var interioicolor=that.SelectedTrimInteriorColor;*/
 			}
 		},
 		SufficClickedVLS11: function (oEvent) {
+			
+			/*	var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language;
+				if(SPRAS!="English"){*/
 			this.SelectedExteriorColorCode = oEvent.getParameter("selectedItem").oBindingContexts.Suffix.getObject().ExteriorColorCode;
 			this.SelectedTrimInteriorColor = oEvent.getParameter("selectedItem").oBindingContexts.Suffix.getObject().TrimInteriorColor;
+			/*	}
+				else{
+					
+				}*/
 			/*	this.SelectedExteriorColorCode = "0070";
 					this.SelectedTrimInteriorColor = "LB43";*/
 			/*	this.SelectedExteriorColorCode = "01D6";

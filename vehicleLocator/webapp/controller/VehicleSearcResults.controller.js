@@ -15,7 +15,7 @@ sap.ui.define([
 
 		onInit: function () {
 
-			//define JSON model
+			//define JSON model oDealersearchresults
 			this._oViewModel = new sap.ui.model.json.JSONModel();
 
 			this._oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle(); // instantiate the resource 
@@ -31,7 +31,7 @@ sap.ui.define([
 
 			this.getView().setModel(sap.ui.getCore().getModel("SearchedData"), "VehicleLocatorScdScr");
 
-			$.ajax({
+	/*		$.ajax({
 
 				url: "/node/Z_VEHICLE_CATALOGUE_SRV/VLCVEHICLE",
 
@@ -40,26 +40,12 @@ sap.ui.define([
 				dataType: "json",
 
 				success: function (oData) {
-					/*console.log(oData);*/
-					/*	oData.d.results[0];*/
+				
 					var oJsonModel = new sap.ui.model.json.JSONModel(oData.d.results);
 					that.getView().byId("table1VSR").setModel(oJsonModel);
 						oJsonModel.setSizeLimit(1000);
 
-					/* var oEsets = [];
-					$.each(oData.d.results[0], function(i, item) {*/
-					/*var oBusparLength = item.BusinessPartner.length;*/
-
-					/*	oEsets.push({
-							"ModelYear" : oData.d.results[0]
-							
-							"BusinessPartner": item.BusinessPartner.substring(5, oBusparLength),
-							"BusinessPartnerName": item.OrganizationBPName1 
-							//item.BusinessPartnerFullName
-						});*/
-
-					/*	});*/
-					/*	that.getView().setModel(new sap.ui.model.json.JSONModel(oEsets), "oDealerModel");*/
+				
 
 					var oDealer = [];
 					$.each(oData.d.results, function (i, item) {
@@ -76,14 +62,14 @@ sap.ui.define([
 				error: function (response) {
 
 				}
-			});
+			});*/
 
-			this.getRouter().attachRouteMatched(this.onRouteMatched, this);
-
+		//	this.getRouter().attachRouteMatched(this.onRouteMatched, this);
+this.getRouter().getRoute("VehicleSearcResults").attachPatternMatched(this.onRouteMatched, this);
 		},
 		onStatusChange: function () {
 
-			var filterArray = [];
+		var filterArray = [];
 			/*	this.getView().byId("table1VSR").getBinding("items").filter([]);*/
 			this.getView().byId("table1VSR").getBinding("rows").filter([]);
 			// onVlrCommonChange
@@ -436,9 +422,11 @@ sap.ui.define([
 		onRouteMatched: function (oEvent)
 
 		{
+			var LoggedInDealer=sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
+					this.getView().byId("oDealersearchresults").setText(LoggedInDealer);
 
 			var loginUser = oEvent.getParameter("arguments").LoginUser;
-			if (loginUser == "Dealer") {
+			if (loginUser == "vehicelTradeDealerUser") {
 				var oTradecolId = this.getView().byId('TradecolId');
 				oTradecolId.setVisible(oTradecolId.getVisible());
 				this.getView().byId('table1VSR').setSelectionMode("None");

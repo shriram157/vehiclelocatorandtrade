@@ -8,11 +8,13 @@ sap.ui.define([
 ], function (BaseController, JSONModel, ResourceModel, MessageBox, History, Formatter) {
 	"use strict";
 	var oController;
-	return BaseController.extend("vehicleLocator.controller.VehcTrad_Apprv_Rej_CounTrad", {
+return BaseController.extend("vehicleLocator.controller.VehcTrad_Apprv_Rej_CounTrad", {
 		onInit: function () {
 			var _that = this;
 			oController = this;
-			this.getRouter().attachRouteMatched(this.onRouteMatched, this);
+			
+			this.getRouter().getRoute("VehcTrad_Apprv_Rej_CounTrad").attachPatternMatched(this.onRouteMatched, this);	
+		/*	this.getRouter().attachRouteMatched(this.onRouteMatched, this);*/
 		},
 		onRouteMatched: function (oEvent) {
 			debugger
@@ -478,9 +480,7 @@ sap.ui.define([
 				{
 					withCredentials: true
 				},
-				beforeSend: function (request) {
-					request.setRequestHeader('Authorization', 'Basic ' + btoa('anisetc:anisetc'));
-				},
+				
 
 				success: function (odata, oresponse) {
 					debugger
