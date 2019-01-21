@@ -21,8 +21,7 @@ var appContext = logging.createAppContext();
 
 //Initialize Express App for XS UAA and HDBEXT Middleware
 var app = express();
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";   
- 
+
 app.use(logging.expressMiddleware(appContext));
 
 // =======================================For Authorizations and JWT use======================= BEGIN
