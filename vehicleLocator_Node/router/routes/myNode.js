@@ -7,8 +7,6 @@ var xsenv = require("@sap/xsenv");
 var passport = require('passport');
 var JWTStrategy = require('@sap/xssec').JWTStrategy;
 
-var async = require('async');
-
 var app = express();
 
 // Use the session middleware

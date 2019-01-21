@@ -1,36 +1,29 @@
 {
-	"engines": {
-		"node": "6.x"
-	},
 	"dependencies": {
-
+		"@sap/hdbext": "4.3.4",
+		"@sap/jobs-client": "1.1.1",
+		"@sap/logging": "^3.3.1",
 		"@sap/xsenv": "1.2.9",
 		"@sap/xssec": "2.1.10",
-		"@sap/hdbext": "4.3.4",
-		"@sap/textbundle": "2.1.0",
-		"@sap/logging": "^3.3.1",
-		"@sap/jobs-client": "1.1.1",
-		"passport": "0.3.2",
 		"express": "4.12.3",
-        "request": "",
-		"async": "2.5.0",
-		"ws": "1.1.4"
-
+		"passport": "0.3.2",
+		"request": "2.88.0"
 	},
 	"description": "Vehicle Locator Node Application  to make oDATA Calls to SAP API Management",
 	"devDependencies": {
-		"@sap/xsjs-test": "2.0.9"
+		"jest": "^23.6.0",
+		"jest-junit": "^5.2.0"
+	},
+	"engines": {
+		"node": "6.x"
 	},
 	"files": [],
 	"main": "server.js",
 	"name": "vehicleLocator_Node",
 	"scripts": {
 		"start": "node server.js",
-		"test": "node testrun.js"
+		"test": "jest --config jest.json",
+		"test-coverage": "jest --coverage --config jest.json"
 	},
-
 	"version": "1.0.0"
 }
-
-
-

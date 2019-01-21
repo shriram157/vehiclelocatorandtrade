@@ -3,7 +3,6 @@
 
 module.exports = function () {
 
-	var async = require('async');
 	var express = require('express');
 	var request = require('request');
 	var xsenv = require("@sap/xsenv");
