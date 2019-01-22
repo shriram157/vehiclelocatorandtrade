@@ -48,7 +48,7 @@
 								<Label text="{i18n>Series}"/>
 								<Text text="{Series_Desc}"/>
 								<Label text="{i18n>Model}"/>
-								<Text text="{Model}"/>
+								<Text text="{Model}-{model_desc_en}"/>
 								<Label text="{i18n>Suffix}"/>
 								<Text text="{Suffix}-{Suffix_Desc}/{Int_Colour_Desc}"/>
 								<Label text="{i18n>APX}"/>
@@ -137,7 +137,7 @@
 								<Text text="{Suffix}-{Suffix_Desc}/{Int_Colour_Desc}" id="suffxidt"/>
 								<Label text="{i18n>APX}" id="apxid"/>
 								<Text text="{APX}" id="apxTid"/>
-								<Label text="{i18n>ExteriorColor}" id="extco"/>
+								<Label text="{i18n>Color}" id="extco"/>
 								<Text text="{Ext_Colour}-{Ext_Colour_Desc}" id="extclod"/>
 								<Label text="{i18n>Status}" id="sttid"/>
 								<Text text="{path:'Status',formatter:'vehicleLocator.Formatter.Formatter.Status'}" id="stdId"/>

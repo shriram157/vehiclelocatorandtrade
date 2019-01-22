@@ -20,9 +20,9 @@
 					<tnt:ToolHeader>
 						<Title id="oDealertitle" titleStyle="H3" width="auto" textAlign="Left" visible="true" wrapping="false" class="titledealervehiclesearch"/>
 						<ToolbarSpacer></ToolbarSpacer>
-						<Button text="{i18n>TradeSummary}" type="Transparent" press="handleLinkPress"/>
-						<Button text="{i18n>TradeHistory}" type="Transparent" press="handleLinkPress"/>
-						<Button text="{i18n>BlockSummary}" type="Transparent" press="BlockSummarypress"/>
+						<Button text="{i18n>TradeSummary}" type="Transparent"  press="TradeSummaryLinkPress"/>
+						<Button text="{i18n>TradeHistory}" type="Transparent"  press="TradeHistoryLinkPress"/>
+						<Button text="{i18n>BlockSummary}" type="Transparent"  press="BlockSummarypress"/>
 						<!--	<Button text="Vehicle Locator"  type="Transparent" press="handleLinkPress"/>-->
 					</tnt:ToolHeader>
 					<!--	<Toolbar height="48px" class="toolbar1">
@@ -86,9 +86,9 @@
 									<core:ListItem   text="{ModelSeriesNo}"      key="{ModelSeriesNo}"  additionalText =""/>
 				   	</ComboBox>-->
 								<ComboBox placeholder="" width="70%" showSecondaryValues="true" filterSecondaryValues="true" selectionChange="SeriesClickedVLS11"
-									id="SeriesCmbo" items="{SeriesData>/}" change="handleSeriesChange">
-									<core:ListItem text="{=${SeriesData>SPRAS}==='English' ? ${SeriesData>TCISeriesDescriptionEN}:${SeriesData>TCISeriesDescriptionFR} }"
-										key="{SeriesData>TCISeries}" additionalText=""/>
+									id="SeriesCmbo" items="{/}" change="handleSeriesChange">
+									<core:ListItem text="{=${SPRAS}==='English' ? ${TCISeriesDescriptionEN}:${TCISeriesDescriptionFR} }"
+										key="{TCISeries}" additionalText=""/>
 								</ComboBox>
 								<Label text="{i18n>ModelCode}" required="true"/>
 								<ComboBox placeholder="" selectedKey="" showSecondaryValues="true" width="90%" selectionChange="MCClickedVLS11" id="McCmbo"
@@ -103,7 +103,7 @@
 									<!--<core:ListItem text="{Suffix>Suffix} - {Suffix>SuffixDescriptionEN}/{Suffix>TrimInteriorColor}" key="{Suffix>Suffix}"
 										additionalText=""/>	-->
 									<core:ListItem
-										text="{Suffix>Suffix} {=${Suffix>SPRAS}==='English' ? ${Suffix>SuffixDescriptionEN}:${Suffix>SuffixDescriptionFR} } / {=${Suffix>SPRAS}==='English' ? ${Suffix>MarktgIntDescEN}:${Suffix>MarktgIntDescFR} }"
+										text="{Suffix>Suffix} - {=${Suffix>SPRAS}==='English' ? ${Suffix>SuffixDescriptionEN}:${Suffix>SuffixDescriptionFR} }/{=${Suffix>SPRAS}==='English' ? ${Suffix>mrktg_int_desc_en}:${Suffix>mrktg_int_desc_fr} }"
 										key="{Suffix>Suffix}" additionalText=""/>
 									<!--	<core:ListItem text="{Suffix>Suffix} - {Suffix>SuffixDescriptionEN}/{Suffix>TrimInteriorColor}" key="{Suffix>Suffix}"
 										additionalText=""/>-->

@@ -49,8 +49,10 @@
 										</html:div>
 										<html:div class="sapUiSmallMarginTop sapUiSmallMarginBottom">
 											<Label xmlns="sap.m" text="{i18n>Suffix}" labelFor="VLRSuffix" design="Bold"></Label>
-											<ComboBox xmlns="sap.m" id="VLRSuffix" selectionChange="onStatusChange" items="{/}" width="20rem">
-												<core:ListItem text="{zzsuffix} - {suffix_desc_en}/{zzintcol} {mrktg_int_desc_en}" key="{zzsuffix}"/>
+											<ComboBox xmlns="sap.m" id="VLRSuffix" selectionChange="onSuffixChange" items="{/}" width="20rem">
+											<!--	<core:ListItem text="{zzsuffix} - {suffix_desc_en}/{mrktg_int_desc_en}" key="{zzsuffix}"/>-->
+									<core:ListItem 	text="{zzsuffix} - {=${SPRAS}==='English' ? ${suffix_desc_en}:${suffix_desc_fr} }/{=${SPRAS}==='English' ? ${mrktg_int_desc_en}:${mrktg_int_desc_fr} }"
+										key="{zzsuffix}" additionalText=""/>	
 											</ComboBox>
 										</html:div>
 										<html:div class="sapUiSmallMarginTop sapUiSmallMarginBottom">
@@ -115,7 +117,7 @@
 							<t:Column sortProperty="zzsuffix" width="8rem">
 								<Label text="{i18n>Suffix}"/>
 								<t:template>
-									<Text text="{zzsuffix} - {suffix_desc_en}" wrapping="false"/>
+									<Text text="{zzsuffix} - {suffix_desc_en}/{mrktg_int_desc_en}" wrapping="false"/>
 								</t:template>
 							</t:Column>
 							<t:Column sortProperty="zzapx" width="6rem">

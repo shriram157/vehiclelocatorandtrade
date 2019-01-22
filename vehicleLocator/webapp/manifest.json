@@ -127,12 +127,12 @@
 					"target": "VehcTrad_Apprv_Rej_CounTrad"
 				},
 				{
-					"pattern": "VehicleTrade_UpdtTradReq",
+					"pattern": "VehicleTrade_UpdtTradReq/:SelectedTrade:",
 					"name": "VehicleTrade_UpdtTradReq",
 					"target": "VehicleTrade_UpdtTradReq"
 				},
 				{
-					"pattern": "VehicleTrade_History",
+					"pattern": "VehicleTrade_History/:DataClicked:",
 					"name": "VehicleTrade_History",
 					"target": "VehicleTrade_History"
 				},

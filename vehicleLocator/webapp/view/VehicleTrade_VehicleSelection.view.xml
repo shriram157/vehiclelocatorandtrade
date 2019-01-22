@@ -72,7 +72,7 @@
 									<t:Column sortProperty="zzsuffix" width="8rem">
 										<Label text="{i18n>Suffix}"/>
 										<t:template>
-											<Text text="{zzsuffix} - {suffix_desc_en}" wrapping="false"/>
+											<Text text="{zzsuffix}-{suffix_desc_en}/{mrktg_int_desc_en}" wrapping="false"/>
 										</t:template>
 									</t:Column>
 									<t:Column sortProperty="zzapx" width="6rem">

@@ -24,10 +24,10 @@ sap.ui.define([
 		},
 		onRouteMatched: function (oEvent) {
 			var dataFrom = oEvent.getParameter("arguments").DataClicked;
-		//	if (dataFrom != undefined) {
+			if (dataFrom != undefined) {
 				this.VehicleHistory_Summary();
 
-		//	}
+		}
 		},
 
 		VehicleHistory_Summary: function () {

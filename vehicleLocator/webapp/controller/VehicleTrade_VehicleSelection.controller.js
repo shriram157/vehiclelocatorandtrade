@@ -199,8 +199,11 @@ this.SelectedVehicleFrom=oEvent.getParameter("arguments").SelectedVehicleFrom;
 				SelectedTrade: "VehicleTradeVehicle"
 			});
 			}
-			else if(this.SelectedVehicleFrom=="VehileTrade_CreateSingle"){
-					this.getRouter().navTo("VehicleTrade_UpdtTradReq");
+			else if(this.SelectedVehicleFrom=="VehileTrade_UpdtTradReq"){
+				sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").setProperty("/VehicleTrade_UpdtTradReqVehicle", oSelectedItem);
+					this.getRouter().navTo("VehicleTrade_UpdtTradReq", {
+				SelectedTrade:"VehicleTrade_updateTradeVehicle"
+			});
 				
 			}
 				else if(this.SelectedVehicleFrom=="VehicleTrade_ModelBlock_Summary"){

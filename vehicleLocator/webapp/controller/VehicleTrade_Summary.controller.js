@@ -63,7 +63,7 @@ sap.ui.define([
 			
 				if (that.oRecTableSelectObj != undefined) {
 
-				var SelectedPath = oEvent.getSource().getBindingContext().getObject().getPath().split("/")[1];
+				var SelectedPath = oEvent.getSource().getBindingContext().getPath().split("/")[1];
               that.oRecTableSelectObj.FromRequesting=false;
              	var model = new sap.ui.model.json.JSONModel(that.oRecTableSelectObj);
              	model.setSizeLimit(1000);

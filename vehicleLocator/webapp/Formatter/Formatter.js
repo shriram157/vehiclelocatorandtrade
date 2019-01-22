@@ -8,10 +8,10 @@ sap.ui.define(function () {
 			case "2":
 				return "Pipeline – non-Routable";
 				break;
-			case "3": //Update this
+		/*	case "3": //Update this
 				return "Pipeline – non-Routable";
 				break;
-
+*/
 			}
 
 		},
@@ -179,11 +179,16 @@ sap.ui.define(function () {
 		TradeSummaryoDate: function (Created_On) {
 			if (Created_On != null && Created_On != "") {
 				var dateTo = Created_On.split("(")[1];
-				if (dateTo.includes("+") == true) {
-					dateTo = dateTo.split("+")[0];
+				if (Created_On.includes("+") == true) {
+					/*dateTo = dateTo.split("+")[0];*/
+					Created_On =  new Date(Created_On.split("(")[1].substring(0,10) * 1000).toDateString().substring(4,15);
+					var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+					pattern: "MM/dd/yyyy"
+				});
+				return oDateFormat.format(new Date(Created_On));
+					
 				} else {
 					dateTo = dateTo;
-				}
 				var dataTo1 = dateTo.substring(0, dateTo.length - 5);
 				var ValidTo = new Date(dataTo1 * 1000);
 				ValidTo = ValidTo.toGMTString().substring(4, 16);
@@ -191,6 +196,8 @@ sap.ui.define(function () {
 					pattern: "MM/dd/yyyy"
 				});
 				return oDateFormat.format(new Date(ValidTo));
+				}
+			
 			}
 		},
 		VehicleSelectoinEtaFromDate: function (Created_On) {

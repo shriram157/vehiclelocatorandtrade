@@ -17,10 +17,10 @@ sap.ui.define([
 		},
 		onRouteMatched: function (oEvent) {
 			this.i18n = sap.ui.getCore().getModel("i18n").getResourceBundle();
-
+var SelectedTrade=oEvent.getParameter("arguments").SelectedTrade;
 			/*	var pardia_title = i18n.getText("ctrl_success_dialog");
 				var succdia_text = i18n.getText("ctrl_successdialog_text");*/
-			if (sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq") != undefined) {
+			if (sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq") != undefined &&SelectedTrade!="VehicleTrade_updateTradeVehicle") {
 				this.getView().byId("SimpleFormUpdateTrReq").setModel(sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq"));
 				var UpdateTrStatus = [];
 				this.getView().byId("SimpleFormUpdateTrReq").bindElement("/");
@@ -84,6 +84,189 @@ oUpdatePagebtn*/
 					Status.push(StatusData);*/
 				/*	var oStatusModel = new sap.ui.model.json.JSONModel(Status);*/
 				this.getView().byId("tableVrade").setModel(SelectedTradeComment);
+				/*	this.getView().byId("VT_ARCTtrdinRet").setModel(oStatusModel);*/
+			}
+			else if (sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq") != undefined &&SelectedTrade=="VehicleTrade_updateTradeVehicle") {
+				this.getView().byId("SimpleFormUpdateTrReq").setModel(sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq"));
+				var UpdateTrStatus = [];
+				this.getView().byId("SimpleFormUpdateTrReq").bindElement("/");
+				this.getView().byId("SimpleFormUpdateTrReq").getModel().refresh(true);
+				UpdateTrStatus.push(sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData());
+				var oStatusModel = new sap.ui.model.json.JSONModel(UpdateTrStatus);
+				this.getView().byId("oTradeinRet").setModel(oStatusModel);
+				var tradeStatus = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Trade_Return;
+				var tradeId = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Trade_Id.slice(2, 8);
+				var UpdateTradeRequestChange = this.i18n.getText("UpdateTradeRequestChange");
+				this.getView().byId("oUpdateTRId").setText(UpdateTradeRequestChange + tradeId);
+				var Add_CommentStatus = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Trade_Status;
+				if (Add_CommentStatus == "C" || Add_CommentStatus == "S") {
+					this.getView().byId("oAddbutton").setEnabled(true);
+				} else {
+					this.getView().byId("oAddbutton").setEnabled(false);
+				}
+
+				if (tradeStatus == "Y") {
+					var newItem = new sap.ui.core.Item({
+						key: "N",
+						text: "No-Single Vehicle"
+					});
+					this.getView().byId("oTradeinRet").insertItem(newItem);
+					this.getView().byId("oTradeinRet").setSelectedKey("Y");
+					this.getView().byId("oSelectBtn").setEnabled(true);
+				} else if (tradeStatus == "N") {
+					var newItem = new sap.ui.core.Item({
+						key: "Y",
+						text: "Yes-Single Vehicle"
+					});
+					this.getView().byId("oTradeinRet").insertItem(newItem);
+					this.getView().byId("oTradeinRet").setSelectedKey("N");
+
+					this.getView().byId("oSelectBtn").setEnabled(false);
+				}
+
+				var AcceptVisible = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().FromRequesting;
+				/*	var Status = StatusData.Trade_Status;*/
+				/*	oacceptbtn
+					oBackbtnid*/
+				/*	oUpdateSubmitbtn
+oUpdatePagebtn*/
+
+				if (AcceptVisible == true && (Add_CommentStatus == "S" || Add_CommentStatus == "C")) {
+					/*	this.getView().byId("oacceptbtn").setVisible(!AcceptVisible);
+						this.getView().byId("oRejectbtn").setVisible(!AcceptVisible);
+						this.getView().byId("oCounterofrbtn").setVisible(!AcceptVisible);*/
+					this.getView().byId("oUpdateSubmitbtn").setVisible(AcceptVisible);
+					this.getView().byId("oUpdatePagebtn").setVisible(AcceptVisible);
+				} else {
+					this.getView().byId("oUpdateSubmitbtn").setVisible(!AcceptVisible);
+					this.getView().byId("oUpdatePagebtn").setVisible(!AcceptVisible);
+					/*this.getView().byId("oCounterofrbtn").setVisible(!AcceptVisible);
+					this.getView().byId("oCancelbtn").setVisible(AcceptVisible);
+					this.getView().byId("oUpdatebtn").setVisible(AcceptVisible);*/
+				}
+
+				var SelectedTradeComment = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getProperty("/SelectedTradeComment");
+				/*	var Status = [];
+					Status.push(StatusData);*/
+				/*	var oStatusModel = new sap.ui.model.json.JSONModel(Status);*/
+				this.getView().byId("tableVrade").setModel(SelectedTradeComment);
+				
+var SelectedTrading=sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getProperty("/VehicleTrade_UpdtTradReqVehicle");		
+				if(SelectedTrading!=undefined){
+				this.getView().byId("ovtnId").setText(SelectedTrading.zzvtn);
+				 this.getView().byId("mdlyrtext").setText(SelectedTrading.zzmoyr);
+				  this.getView().byId("serisTex").setText(SelectedTrading.zzseries_desc_en);
+				  var ModelData=SelectedTrading.matnr+"-"+SelectedTrading.model_desc_en;
+				   this.getView().byId("mdlde").setText(ModelData);
+				   var Suffix=SelectedTrading.zzsuffix+"-"+SelectedTrading.suffix_desc_en;
+				    this.getView().byId("suffxidt").setText(Suffix);
+				     this.getView().byId("apxTid").setText(SelectedTrading.zzapx);
+				      this.getView().byId("extclod").setText(SelectedTrading.zzextcol);
+				      var zz_trading_ind="";
+				      switch (SelectedTrading.zz_trading_ind) {
+			case "1":
+				zz_trading_ind="Pipeline - Routable";
+				break;
+			case "2":
+				zz_trading_ind= "Pipeline – non-Routable";
+				break;
+			case "3": //Update this
+				zz_trading_ind= "Pipeline – non-Routable";
+				break;
+
+			}
+				      
+				      
+				      
+				       this.getView().byId("stdId").setText(zz_trading_ind);
+				       var zzordertype="";
+				       switch (SelectedTrading.zzordertype) {
+			case "SO":
+				zzordertype= "STOCK Open";
+				break;
+			case "SR":
+			zzordertype="STOCK Restricted";
+				break;
+			case "DM":
+				zzordertype= "DEMO";
+				break;
+			case "BA":
+				zzordertype= "BANK ALLOC";
+				break;
+			case "LS":
+				zzordertype= "LAUNCH Stock";
+				break;
+			case "RS":
+				zzordertype= "RETAIL SOLD";
+				break;
+			case "F1":
+				zzordertype= "DLR RAC";
+				break;
+			case "F2":
+				zzordertype= "DLR ELITE";
+				break;
+			case "F3":
+				zzordertype= "NAT RAC";
+				break;
+			case "F4":
+				zzordertype= "NAT ELITE";
+				break;
+			case "F5":
+				zzordertype= "MOBILITY";
+				break;
+
+			}
+				        this.getView().byId("ortype").setText(zzordertype);
+				       var  Created_On=SelectedTrading.zzadddata4;
+			if (Created_On != null && Created_On != "") {
+				var dateTo = Created_On.split("(")[1];
+				if (Created_On.includes("+") == true) {
+					/*dateTo = dateTo.split("+")[0];*/
+					Created_On =  new Date(Created_On.split("(")[1].substring(0,10) * 1000).toDateString().substring(4,15);
+					var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+					pattern: "MM/dd/yyyy"
+				});
+				var zzadddata4= oDateFormat.format(new Date(Created_On));
+					
+				} else {
+					dateTo = dateTo;
+				var dataTo1 = dateTo.substring(0, dateTo.length - 5);
+				var ValidTo = new Date(dataTo1 * 1000);
+				ValidTo = ValidTo.toGMTString().substring(4, 16);
+				var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+					pattern: "MM/dd/yyyy"
+				});
+					var zzadddata4= oDateFormat.format(new Date(ValidTo));
+				}
+			
+			}
+			else{
+					var zzadddata4="";
+			}
+		
+				   	 this.getView().byId("ctetid").setText(zzadddata4);
+				   	 
+var pstsp=SelectedTrading.pstsp;
+			if (pstsp != null && pstsp != "") {
+				
+		var PstpValue=	pstsp.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1');
+			
+			/*	var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+					pattern: "MM/dd/yyyy"
+				});
+				return oDateFormat.format(new Date(Created_On));*/
+			}
+			else{
+			var PstpValue="";	
+			}
+
+		
+				   	 this.getView().byId("txtlab").setText(PstpValue);
+				   	 /*this.getView().byId("prpetid").setText(SelectedTrading.);
+				   	 this.getView().byId("otxtlabel").setText(SelectedTrading.);*/
+				}
+				
+				
 				/*	this.getView().byId("VT_ARCTtrdinRet").setModel(oStatusModel);*/
 			}
 		},
@@ -365,7 +548,22 @@ oUpdatePagebtn*/
 					var Created_On="";
 				}*/
 
-			var Created_By = this.getView().byId("SimpleFormUpdateTrReq").getModel().oData.Created_By;
+		/*	var Created_By = this.getView().byId("SimpleFormUpdateTrReq").getModel().oData.Created_By;*/
+			
+				var Created_By = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
+
+						function truncateString(str, num) {
+							if (num > str.length) {
+								return str;
+							} else {
+								str = str.substring(0, num);
+								return str + "...";
+							}
+
+						}
+
+						Created_By = truncateString(Created_By, 9);
+			
 			var Created_On = this.getView().byId("SimpleFormUpdateTrReq").getModel().oData.Created_On;
 
 			if (Created_On != null && Created_On != "") {
@@ -584,7 +782,27 @@ var UpdatedTreadeEntity="/TradeRequest('"+Trade_Id+"')";
 					var Created_On="";
 				}*/
 
-			var Created_By = this.getView().byId("SimpleFormUpdateTrReq").getModel().oData.Created_By;
+		/*	var Created_By = this.getView().byId("SimpleFormUpdateTrReq").getModel().oData.Created_By;*/
+			var Created_By = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
+
+						function truncateString(str, num) {
+							if (num > str.length) {
+								return str;
+							} else {
+								str = str.substring(0, num);
+								return str + "...";
+							}
+
+						}
+
+						Created_By = truncateString(Created_By, 9);
+			
+			
+			
+			
+			
+			
+			
 			var Created_On = this.getView().byId("SimpleFormUpdateTrReq").getModel().oData.Created_On;
 
 			if (Created_On != null && Created_On != "") {
@@ -902,7 +1120,23 @@ var UpdatedTreadeEntity="/TradeRequest('"+Trade_Id+"')";
 						pattern: "yyyy-MM-dd'T'HH:mm:ss"
 					});
 					var oCommentdate = oDateFormat.format(new Date());
-					var oCreatedby = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Created_By;
+				/*	var oCreatedby = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Created_By;*/
+				
+					var Created_By = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
+
+						function truncateString(str, num) {
+							if (num > str.length) {
+								return str;
+							} else {
+								str = str.substring(0, num);
+								return str + "...";
+							}
+
+						}
+
+						Created_By = truncateString(Created_By, 9);
+				
+				
 
 					var oTradeComment = {
 
@@ -910,7 +1144,7 @@ var UpdatedTreadeEntity="/TradeRequest('"+Trade_Id+"')";
 						"Comment_Id": oComment_Id,
 						"Comment_Txt": Comment,
 						"Comment_Date": oCommentdate,
-						"Created_By": oCreatedby
+						"Created_By": Created_By
 
 					};
 
