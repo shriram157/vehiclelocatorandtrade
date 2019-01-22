@@ -90,26 +90,26 @@ sap.ui.define([
 				success: function (oData) {
 					var BpDealer = [];
 					var userAttributes = [];
-BpDealer.push({
+/*BpDealer.push({
 							"BusinessPartnerKey": "2400042193", 
 							"BusinessPartner": "42193", 
-							//.substring(5, BpLength),
+						
 							"BusinessPartnerName":"Don Valley North Toyota...", //item.OrganizationBPName1 //item.BusinessPartnerFullName
 							"Division": "10",
 							"BusinessPartnerType": "Z001",
 							"searchTermReceivedDealerName": "42120"
-						});
+						});*/
 					$.each(oData.attributes, function (i, item) {
 						var BpLength = item.BusinessPartner.length;
 
-				/*	BpDealer.push({
+					BpDealer.push({
 							"BusinessPartnerKey": item.BusinessPartnerKey,
 							"BusinessPartner": item.BusinessPartner, //.substring(5, BpLength),
 							"BusinessPartnerName": item.BusinessPartnerName, //item.OrganizationBPName1 //item.BusinessPartnerFullName
 							"Division": item.Division,
 							"BusinessPartnerType": item.BusinessPartnerType,
 							"searchTermReceivedDealerName": item.SearchTerm2
-						});*/
+						});
 
 					});
 				 //  set your model or use the model below - // TODO: 
@@ -117,23 +117,23 @@ BpDealer.push({
 					sap.ui.getCore().setModel(new sap.ui.model.json.JSONModel(BpDealer),"LoginBpDealerModel");
 					var LoggedInDealer=sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
 						that.getView().byId("oDealertitle").setText(LoggedInDealer);
-						userAttributes.push({
+					/*	userAttributes.push({
 							"UserType": "Dealer",
 							"DealerCode":  ["42193"],
 							"Language": "English",
 							
 						
 							
-						});
+						});*/
 					// read the saml attachments the same way 
 					$.each(oData.samlAttributes, function (i, item) {
-					/*	userAttributes.push({
+						userAttributes.push({
 							"UserType": item.UserType[0],
 							"DealerCode": item.DealerCode[0],
-							"Language": item.Language[0],
+							"Language": item.Language[0]
 							// "Zone": item.Zone[0]   ---    Not yet available
 							
-						});*/
+						});
 
 					});
 
