@@ -143,14 +143,14 @@
 								<Label text="{i18n>ETAFrom}" wrapping="false"/>
 								<t:template>
 								<!--	<Text text="{path:'zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false"/>-->
-									<Text text="{path:'zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate'}" wrapping="false"/>
+									<Text text="{path:'zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate1'}" wrapping="false"/>
 									<!--	<Text text="{zzadddata4}" wrapping="false"/>-->
 								</t:template>
 							</t:Column>
 							<t:Column sortProperty="pstsp" width="6rem">
 								<Label text="{i18n>ETATo}" wrapping="false"/>
 								<t:template>
-									<Text text="{path:'pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false"/>
+									<Text text="{path:'pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate1'}" wrapping="false"/>
 									<!--	<Text text="{pstsp}" wrapping="false"/>-->
 								</t:template>
 							</t:Column>

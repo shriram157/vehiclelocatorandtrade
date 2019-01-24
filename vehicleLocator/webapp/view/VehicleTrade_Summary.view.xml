@@ -97,10 +97,10 @@
 												wrapping="false"/>
 										</t:template>
 									</t:Column>
-									<t:Column sortProperty="Changed_On">
+									<t:Column sortProperty="Changed_on">
 										<Label text="{i18n>StatusUpdatedDate}" wrapping="false"/>
 										<t:template>
-											<Text text="{path:'oVehiclTrade_SummaryRequestingData>Changed_On',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false"/>
+											<Text text="{path:'oVehiclTrade_SummaryRequestingData>Changed_on',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false"/>
 										</t:template>
 									</t:Column>
 								</t:columns>

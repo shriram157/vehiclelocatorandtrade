@@ -103,7 +103,7 @@
 								<Label text="{i18n>ModelYear}" id="moylablid" visible="false"/>
 								<Text text="{TradeModel>/VehicleTradeVehicle/zzmoyr}" id="yearid" visible="false"/>
 								<Label text="{i18n>Series}" id="serielabelid" visible="false"/>
-								<Text text="{TradeModel>/VehicleTradeVehicle/zzseries} - {TradeModel>/VehicleTradeVehicle/zzseries_desc_en}" id="seiresid" visible="false"/>
+								<Text text="{TradeModel>/VehicleTradeVehicle/zzseries_desc_en}" id="seiresid" visible="false"/>
 								<Label text="{i18n>Model}" id="modlabelid" visible="false"/>
 								<Text text="{TradeModel>/VehicleTradeVehicle/matnr} - {TradeModel>/VehicleTradeVehicle/model_desc_en}" id="modlid" visible="false"/>
 								<Label text="{i18n>Suffix}" id="sufflabeid" visible="false"/>
@@ -163,7 +163,8 @@
 									</layoutData>
 								</Button>
 								<Label text="{i18n>TradeRequestStatus}"/>
-								<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}"/>
+							<!--	<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}"/>-->
+							<Text text="" id="oTrdareqstat"/>
 								<Label text="{i18n>Comments}"/>
 								<TextArea id="oTypeHere" value=" " width="387px" height="100px"/>
 							</form:content>

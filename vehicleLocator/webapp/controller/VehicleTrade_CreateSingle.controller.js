@@ -481,8 +481,8 @@ sap.ui.define([
 
 			jQuery.sap.require("sap.ui.core.format.DateFormat");
 			var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
-			/*	pattern: "yyyy-MM-dd'T'HH:mm:ss"*/
-				pattern: "yyyy-MM-dd"
+			pattern: "yyyy-MM-dd'T'HH:mm:ss"
+			/*	pattern: "yyyy-MM-dd"*/
 		
 			});
 
@@ -580,8 +580,7 @@ sap.ui.define([
 					var Requested_Vtn=that.getView().getModel("TradeModel").getData().zzvtn;
 						var Offered_Vtn = that.getView().byId("vtnid").getText();
 						var DateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
-						/*	pattern: "yyyy-MM-dd"*/
-							pattern: "yyyy-MM-dd"
+					    		pattern: "yyyy-MM-dd"
 						});
 						var Req_Current_ETA_FromData =  that.getView().byId("ctaid").getText();
 							if (Req_Current_ETA_FromData != "") {
@@ -690,18 +689,18 @@ sap.ui.define([
 							"Requested_Vtn": Requested_Vtn,
 							"Offered_Vtn": Offered_Vtn,
 							"Trade_Return": Trade_Return,
-							"Req_Current_ETA_From": Req_Current_ETA_From,
-							"Req_Current_ETA_To": Req_Current_ETA_To,
-							"Req_Proposed_ETA_From": Req_Proposed_ETA_From,
-							"Req_Proposed_ETA_To": Req_Proposed_ETA_To,
-							"Off_Current_ETA_From": Off_Current_ETA_From,
+							"Req_Current_ETA_From": new Date(Req_Current_ETA_From),
+							"Req_Current_ETA_To": new Date(Req_Current_ETA_To),
+							"Req_Proposed_ETA_From":  new Date(Req_Proposed_ETA_From),
+							"Req_Proposed_ETA_To":  new Date(Req_Proposed_ETA_To),
+							"Off_Current_ETA_From":  new Date(Off_Current_ETA_From),
 
-							"Off_Current_ETA_To": Off_Current_ETA_To,
-							"Off_Proposed_ETA_From": Off_Proposed_ETA_From,
-							"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
+							"Off_Current_ETA_To":  new Date(Off_Current_ETA_To),
+							"Off_Proposed_ETA_From":  new Date(Off_Proposed_ETA_From),
+							"Off_Proposed_ETA_To":  new Date(Off_Proposed_ETA_To),
 							"Created_By": Created_By,
-							"Created_On": Created_On,
-							"Changed_on": Changed_on,
+							"Created_On":  new Date(Created_On),
+							"Changed_on":  new Date(Changed_on),
 							"Requested_Dealer": Requested_Dealer,
 							"Requested_Dealer_Name": Requested_Dealer_Name
 
@@ -729,6 +728,7 @@ sap.ui.define([
 						});
 
 						that.oDataModel.create("/TradeRequest", oEntry, null, function (s) {
+							that.getView().byId("oTrdareqstat").setText("Request Sent");
 							that.TradeComment(oEntry);
 							that.TradeVehcles(oEntry);
 							that.TradeStatus(oEntry);
@@ -962,8 +962,8 @@ sap.ui.define([
 			var oCommentText = that.getView().byId("oTypeHere").getValue();
 
 			var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
-			/*	pattern: "yyyy-MM-dd'T'HH:mm:ss"*/
-				pattern: "yyyy-MM-dd"
+				pattern: "yyyy-MM-dd'T'HH:mm:ss"
+			/*	pattern: "yyyy-MM-dd"*/
 			});
 			var oCommentdate = oDateFormat.format(new Date());
 
@@ -990,7 +990,7 @@ sap.ui.define([
 				"Trade_Id.Trade_Id": Trade_Id,
 				"Comment_Id": that.oComment_Id,
 				"Comment_Txt": oCommentText,
-				"Comment_Date": oCommentdate,
+				"Comment_Date":  new Date(oCommentdate),
 				"Created_By": Created_By
 
 			};
@@ -1029,8 +1029,8 @@ sap.ui.define([
 			var Trade_Id = oEntry.Trade_Id;
 
 			var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
-			/*	pattern: "yyyy-MM-dd'T'HH:mm:ss"*/
-			pattern: "yyyy-MM-dd"
+				pattern: "yyyy-MM-dd'T'HH:mm:ss"
+		/*	pattern: "yyyy-MM-dd"*/
 			});
 			var oCommentdate = oDateFormat.format(new Date());
 			var Suffix = that.getView().byId("oZsuffix").getText().split("-")[0];
@@ -1106,8 +1106,8 @@ sap.ui.define([
 			var Trade_Id = oEntry.Trade_Id;
 
 			var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
-			/*	pattern: "yyyy-MM-dd'T'HH:mm:ss"*/
-				pattern: "yyyy-MM-dd"
+				pattern: "yyyy-MM-dd'T'HH:mm:ss"
+				/*pattern: "yyyy-MM-dd"*/
 			});
 			var oCommentdate = oDateFormat.format(new Date());
 			var Suffix = that.getView().byId("oZsuffix").getText().split("-")[0];

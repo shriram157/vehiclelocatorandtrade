@@ -200,19 +200,46 @@ sap.ui.define(function () {
 			
 			}
 		},
+			TradeSummaryoDate1: function (Created_On) {
+			if (Created_On != null && Created_On != "") {
+				var dateTo = Created_On.split("(")[1];
+				if (Created_On.includes("+") == true) {
+					/*dateTo = dateTo.split("+")[0];*/
+					Created_On =  new Date(Created_On.split("(")[1].substring(0,10) * 1000).toDateString().substring(4,15);
+					var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+					pattern: "yyyy-MM-dd"
+				});
+				return oDateFormat.format(new Date(Created_On));
+					
+				} else {
+					dateTo = dateTo;
+				var dataTo1 = dateTo.substring(0, dateTo.length - 5);
+				var ValidTo = new Date(dataTo1 * 1000);
+				ValidTo = ValidTo.toGMTString().substring(4, 16);
+				var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+					pattern: "yyyy-MM-dd"
+				});
+				return oDateFormat.format(new Date(ValidTo));
+				}
+			
+			}
+		},
 		VehicleSelectoinEtaFromDate: function (Created_On) {
 
 			if (Created_On != null && Created_On != "") {
 				
 			return	Created_On.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1');
-			
-			/*	var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
-					pattern: "MM/dd/yyyy"
-				});
-				return oDateFormat.format(new Date(Created_On));*/
 			}
 
-		}
+		},
+	VehicleSelectoinEtaFromDate1: function (Created_On) {
+
+			if (Created_On != null && Created_On != "") {
+				
+			return	Created_On.replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3');
+			}
+
+		},
 
 	};
 
