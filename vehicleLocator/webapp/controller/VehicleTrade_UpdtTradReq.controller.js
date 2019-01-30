@@ -1266,7 +1266,7 @@ var UpdatedTreadeEntity="/TradeRequest('"+Trade_Id+"')";
 
 					//	var FilterDeleade_OrderTypefiltered_zone
 					var filtered_ODealer = FilterDelearNotnull.filter(function (x) {
-						return x.kunnr.slice(-5) != Dealer;
+						return x.kunnr.slice(-5) == Dealer;
 					});
 					var ExcludeOrdType=[
 						"RS",
@@ -1280,10 +1280,19 @@ var UpdatedTreadeEntity="/TradeRequest('"+Trade_Id+"')";
 							return objFromA.zzordertype === objFromB;
 						});
 					});
-					
+					/*var includeDnc = oExcludeOrdrtype.filter(function (x) {
+						return x.dnc_ind == "Y";
+					});
+					var includeHoldStatus = includeDnc.filter(function (x) {
+						return x.Hold_stat == "Y";
+					});
+					var oJsonModel = new sap.ui.model.json.JSONModel(includeHoldStatus);*/
+					//comment this line
+					var oJsonModel = new sap.ui.model.json.JSONModel(oExcludeOrdrtype);
+					///////
 
 					
-					var oJsonModel = new sap.ui.model.json.JSONModel(oExcludeOrdrtype);
+				
 						oJsonModel.setSizeLimit(1500);	
 					sap.ui.getCore().setModel(oJsonModel,"oVehicleSelectionResults");
 					 that.getRouter().navTo("VehicleTrade_VehicleSelection",{

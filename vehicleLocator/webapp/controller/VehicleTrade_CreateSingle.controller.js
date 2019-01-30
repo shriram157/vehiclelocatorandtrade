@@ -90,12 +90,13 @@ sap.ui.define([
 					this.getView().byId("idlabeal").setVisible(false);
 					this.getView().byId("textide").setVisible(false);
 
-					var oReceivedData = sap.ui.getCore().VehicheSearcResults[oReceivedDataString];
+					var oReceivedData = sap.ui.getCore().SelectedTrade;
 					var oModel = new sap.ui.model.json.JSONModel(oReceivedData);
 
 					this.getView().setModel(oModel, "TradeModel");
 					sap.ui.getCore().setModel(oModel, "TradeModel");
 					this.getView().byId("SimpleFormDispla20").bindElement("TradeModel>/");
+					
 				} else if (oReceivedDataString == "VehicleTradeVehicle") {
 
 					this.getView().byId("vtnlabeid").setVisible(true);
@@ -142,10 +143,10 @@ sap.ui.define([
 				}
 			}
 			var oArray = [{
-					"Trade_return": "Single Vehicle",
+					"Trade_return": "Yes",
 					"State": "Yes"
 				}, {
-					"Trade_return": "",
+					"Trade_return": "No",
 					"State": "No"
 				}
 
@@ -164,6 +165,12 @@ sap.ui.define([
 
 	if(sap.ui.getCore().SelectedTradeStatus!=undefined){
 		this.getView().byId("VT_CStradinRet").setSelectedKey(sap.ui.getCore().SelectedTradeStatus);
+		if(sap.ui.getCore().SelectedTradeStatus=="Yes"){
+				this.getView().byId("oSeleBtn").setVisible(true);
+		}
+		else{
+				this.getView().byId("oSeleBtn").setVisible(false);
+		}
 	}
 		},
 		/*************************onSelectYes/No********************************/
@@ -244,7 +251,7 @@ sap.ui.define([
 			var SuffCmbo = this.getView().getModel("TradeModel").getData().zzsuffix;
 			var MoyearCombo = this.getView().getModel("TradeModel").getData().zzmoyr;
 			var oDealer = this.getView().getModel("TradeModel").getData().kunnr;
-			
+		//	var oDealer ="42120";
 			this.intercolor="42";
 
 			var sLocation = window.location.host;
@@ -264,7 +271,10 @@ sap.ui.define([
 
 			/*	var SeriesUrl= that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq 'YZ3DCT' and zzextcol eq '01D6' and zzintcol eq 'LC14' and zzsuffix eq 'AB' and zzmoyr eq '2018'";*/
 
-			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq'" + McCmbo + "' and zzsuffix eq '" + SuffCmbo +
+			/*var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq'" + McCmbo + "' and zzsuffix eq '" + SuffCmbo +
+				"' and zzmoyr eq '" + MoyearCombo + "' and kunnr eq '" + oDealer +
+				"'";*/
+				var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq'" + McCmbo + "' and zzsuffix eq '" + SuffCmbo +
 				"' and zzmoyr eq '" + MoyearCombo + "' and kunnr eq '" + oDealer +
 				"'";
 	/*	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '"+McCmbo+"' and endswith (zzintcol,'"+this.intercolor+"') and zzsuffix eq '"+SuffCmbo+"' and zzmoyr eq '"+MoyearCombo+"'&$format=json";	*/		
@@ -296,7 +306,7 @@ sap.ui.define([
 
 					//	var FilterDeleade_OrderTypefiltered_zone
 					var filtered_ODealer = FilterDelearNotnull.filter(function (x) {
-						return x.kunnr.slice(-5) != Dealer;
+						return x.kunnr.slice(-5) == Dealer;
 					});
 					var ExcludeOrdType = [
 						"RS",
@@ -311,8 +321,16 @@ sap.ui.define([
 							return objFromA.zzordertype === objFromB;
 						});
 					});
-
+	/*var includeDnc = oExcludeOrdrtype.filter(function (x) {
+						return x.dnc_ind == "Y";
+					});
+					var includeHoldStatus = includeDnc.filter(function (x) {
+						return x.Hold_stat == "Y";
+					});
+					var oJsonModel = new sap.ui.model.json.JSONModel(includeHoldStatus);*/
+					//comment this line
 					var oJsonModel = new sap.ui.model.json.JSONModel(oExcludeOrdrtype);
+					///////
 					oJsonModel.setSizeLimit(1500);
 					sap.ui.getCore().setModel(oJsonModel, "oVehicleSelectionResults");
 					that.getRouter().navTo("VehicleTrade_VehicleSelection", {

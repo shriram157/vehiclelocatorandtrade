@@ -15,7 +15,16 @@ sap.ui.define(function () {
 			}
 
 		},
-
+oTradeStatusBinding:function(Trade_return){
+	switch (Trade_return) {
+			case "Yes":
+				return "Yes-Single Vehicle";
+				break;
+			case "No":
+				return "No";
+				break;
+	}
+},
 		OrderType: function (zzordertype) {
 			switch (zzordertype) {
 			case "SO":
@@ -200,6 +209,13 @@ sap.ui.define(function () {
 			
 			}
 		},
+		ProposedEtaToDate:function(Proposed_ETA_To)
+{
+		var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+					pattern: "MM/dd/yyyy"
+				});
+				return oDateFormat.format(new Date(Proposed_ETA_To));
+},	
 			TradeSummaryoDate1: function (Created_On) {
 			if (Created_On != null && Created_On != "") {
 				var dateTo = Created_On.split("(")[1];

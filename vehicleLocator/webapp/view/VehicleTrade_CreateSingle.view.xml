@@ -79,14 +79,14 @@
 								<!--<Text text="" id="totxtid"/>-->
 								
 								<Label text="{i18n>PropsedETAtoNewDealer}" id="prpdlabid"/>
-								<Text text="" id="prpid" maxLines='1'>
+								<Text text="{path:'TradeModel>Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate'}" id="prpid" maxLines='1'>
 									<!--<layoutData>-->
 									<!--	<l:GridData span="L4 M12 S3"/>-->
 									<!--</layoutData>-->
 								</Text>
 								<Text text="{i18n>From}" id="fromlabid"/>
 								<Label text="" id="frmlabid" wrapping='false'  ></Label>
-								<Text text="" id="otextlabel"  maxLines='1'>
+								<Text text="{path:'TradeModel>Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.ProposedEtaToDate'}" id="otextlabel"  maxLines='1'>
 									<!--<layoutData>-->
 									<!--	<l:GridData span="L4 M12 S3"/>-->
 									<!--</layoutData>-->
@@ -138,14 +138,14 @@
 								<Text text="{i18n>To}" id="ototid" visible="false"/>
 								<Text text="" id="otitxt" visible="false"/>
 								<Label text="{i18n>PropsedETAtoNewDealer}" id="propetid" visible="false"/>
-								<Text text="" id="perpid" visible="false">
+								<Text text="{path:'TradeModel>/VehicleTradeVehicle/Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate'}" id="perpid" visible="false">
 									<layoutData>
 										<l:GridData span="L4 M12 S3"/>
 									</layoutData>
 								</Text>
 								<Text text="{i18n>From}" id="frlabid" visible="false"/>
 								<Label text="" id="fmlabid" visible="false"></Label>
-								<Text text="" id="idlabeal" visible="false">
+								<Text text="{path:'TradeModel>/VehicleTradeVehicle/Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.ProposedEtaToDate'}" id="idlabeal" visible="false">
 									<layoutData>
 										<l:GridData span="L4 M12 S3"/>
 									</layoutData>
@@ -155,7 +155,7 @@
 								<core:Title text="{i18n>TradeDetails}"/>
 								<Label text="{i18n>TradeinReturn}"/>
 								<ComboBox id="VT_CStradinRet" selectionChange="onVTCStir" width="220px"  items="{/}">
-									<core:ListItem key="{State}" text="{State}-{Trade_return}"/>
+									<core:ListItem key="{State}" text="{path:'Trade_return',formatter:'vehicleLocator.Formatter.Formatter.oTradeStatusBinding'}" />
 								</ComboBox>
 								<Button text="{i18n>SelectVehicle}" id="oSeleBtn" press="onSelecveh" visible="false">
 									<layoutData>

@@ -15,7 +15,6 @@ sap.ui.define([
 	return BaseController.extend("vehicleLocator.controller.VehicleSearcResults", {
 
 		onInit: function () {
-
 			//define JSON model oDealersearchresults
 			this._oViewModel = new sap.ui.model.json.JSONModel();
 
@@ -28,6 +27,8 @@ sap.ui.define([
 				this._oResponsivePopover.setModel(this.getView().getModel());
 			}
 			var oTable = this.getView().byId("table1VSR");
+
+			sap.ushell.components.tableSearchResults = this.getView().byId("table1VSR");
 
 			this.getView().setModel(sap.ui.getCore().getModel("SearchedData"), "VehicleLocatorScdScr");
 
@@ -67,131 +68,220 @@ sap.ui.define([
 			//	this.getRouter().attachRouteMatched(this.onRouteMatched, this);
 			this.getRouter().getRoute("VehicleSearcResults").attachPatternMatched(this.onRouteMatched, this);
 		},
-		onSuffixChange: function(oEvent)
-		{
-			debugger
-				sap.ui.core.BusyIndicator.show();
-	
-		
-			var SuffCmbo =this.getView().byId("VLRSuffix").getSelectedKey();
-	if(SuffCmbo!="all"){
-			this.intercolor = oEvent.getParameter("selectedItem").getBindingContext().getObject().int_c;
-			var that = this;
-			that.value=this.getView().byId("VLRSuffix").getSelectedItem().getText();
-			var SelectedMSMData=this.getOwnerComponent().SelectedMSMData;
-		var SelectedZone = this.getOwnerComponent().SelectedZone;
+		onSuffixChange: function (oEvent) {
+			// debugger;
+			sap.ui.core.BusyIndicator.show();
+			sap.ui.getCore().SelectedStauts = this.getView().byId("VLRStatus").getSelectedKey();
 
-		
-			var LoginUser = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].UserType[0];
-			/*var LoginUser = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].UserType; *///deployed vesrion latest 
+			var SuffCmbo = this.getView().byId("VLRSuffix").getSelectedKey();
+			if (SuffCmbo != "all") {
+				this.intercolor = oEvent.getParameter("selectedItem").getBindingContext().getObject().int_c;
+				var that = this;
+				that.value = this.getView().byId("VLRSuffix").getSelectedItem().getText();
+				var SelectedMSMData = this.getOwnerComponent().SelectedMSMData;
+				var SelectedZone = this.getOwnerComponent().SelectedZone;
 
-			var sLocation = window.location.host;
-			var sLocation_conf = sLocation.search("webide");
+				var LoginUser = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].UserType[0];
+				/*var LoginUser = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].UserType; */ //deployed vesrion latest 
 
-			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehicleLocatorNode";
-			} else {
-				this.sPrefix = "";
+				var sLocation = window.location.host;
+				var sLocation_conf = sLocation.search("webide");
 
-			}
+				if (sLocation_conf == 0) {
+					this.sPrefix = "/vehicleLocatorNode";
+				} else {
+					this.sPrefix = "";
 
-			this.nodeJsUrl = this.sPrefix + "/node";
-			that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_MASTER_SRV";
+				}
 
-			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
+				this.nodeJsUrl = this.sPrefix + "/node";
+				that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_MASTER_SRV";
 
-     	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '"+SelectedMSMData[0].McCmbo+"' and endswith (zzintcol,'"+this.intercolor+"') and zzsuffix eq '"+SuffCmbo+"' and zzmoyr eq '"+SelectedMSMData[0].MoyearCombo+"'&$format=json";
-			/*	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq'" + McCmbo + "' and zzextcol eq '" + this.SelectedExteriorColorCode +
-				"' and zzintcol eq '" + this.SelectedTrimInteriorColor + "' and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + MoyearCombo +"'";	*/
+				that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
 
-			//	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq 'YZ3DCT' and zzextcol eq '01D6' and zzintcol eq 'LC14' and zzsuffix eq 'AB' and zzmoyr eq '2018'";
-			$.ajax({
-				url: SeriesUrl,
-				type: "GET",
-				dataType: 'json',
-				xhrFields: //
-				{
-					withCredentials: true
-				},
-			
+				var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '" + SelectedMSMData[0].McCmbo +
+					"' and endswith (zzintcol,'" + this.intercolor + "') and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + SelectedMSMData[0].MoyearCombo +
+					"'&$format=json";
+				/*	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq'" + McCmbo + "' and zzextcol eq '" + this.SelectedExteriorColorCode +
+					"' and zzintcol eq '" + this.SelectedTrimInteriorColor + "' and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + MoyearCombo +"'";	*/
 
-				success: function (odata, oresponse) {
-					var a = odata.d.results;
-				
-					var filtered_zone = a.filter(function (person) {
-						return SelectedZone.includes(person.vkbur);
-					});
+				//	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq 'YZ3DCT' and zzextcol eq '01D6' and zzintcol eq 'LC14' and zzsuffix eq 'AB' and zzmoyr eq '2018'";
+				$.ajax({
+					url: SeriesUrl,
+					type: "GET",
+					dataType: 'json',
+					xhrFields: //
+					{
+						withCredentials: true
+					},
 
-				/*	var Dealer = sap.ui.getCore().LoginDetails.DealerCode;*/
-					var userAttributesModellen=that.getView().getModel("userAttributesModel").getData();
-var BpDealer=that.getView().getModel("BpDealerModel").getData();
-	//for(var i=0;i<userAttributesModellen.length;i++){
-		var Dealer=userAttributesModellen[0].DealerCode[0];
-		var SalesOrganization=userAttributesModellen[0].Zone;
-		  var Division=BpDealer[0].Division;
-/*sap.ui.getCore().getModel(new sap.ui.model.json.JSONModel(BpDealer),"LoginBpDealerModel");*/
+					success: function (odata, oresponse) {
+						var a = odata.d.results;
 
-					var FilterDeleade_OrderTypefilteNotnull = filtered_zone.filter(function (x) {
-						return x.kunnr != null;
-					});
-						var FilterDeleade_OrderTypefiltered_zone=FilterDeleade_OrderTypefilteNotnull.filter(function(x){return x.kunnr.slice(-5)!=Dealer &&(x.zzordertype=="DM" ||x.zzordertype=="SO")});
-
-					//	var FilterDeleade_OrderTypefiltered_zone
-					var FilterDeleade_OrderTypefiltered_zone = FilterDeleade_OrderTypefiltered_zone.filter(function (x) {
-						return x.kunnr.slice(-5) != Dealer;
-					});
-
-					var oTCIcodes = [
-						"2400500000",
-						"2400542217",
-						"2400500002",
-						"2400500003",
-						"2400500004",
-						"2400500005",
-						"2400500006",
-						"2400500007",
-						"2400500008",
-						"2400500010",
-						"2400500011",
-						"2400500012",
-						"2400500013",
-						"2400500014",
-						"2400500015",
-						"2400500017",
-						"2400500018",
-						"2400500019",
-						"2400500020",
-						"2400500021",
-						"2400500023",
-						"2400500024",
-						"2400500025",
-						"2400500027",
-						"2400500028",
-						"2400500030",
-						"2400500032",
-						"2400500060",
-						"2400500064",
-						"2400500070",
-						"2400500072",
-						"2400500074",
-						"2400500076",
-						"2400500078",
-						"2400500099",
-						"2400500070",
-						"2400500072",
-						"2400500074",
-						"2400500076",
-						"2400500078"
-					];
-
-					//	var FilterDeleade_OrderTypefiltered_zone
-					var oExcludeTci = FilterDeleade_OrderTypefiltered_zone.filter(function (objFromA) {
-						return !oTCIcodes.find(function (objFromB) {
-							return (objFromA.kunnr).slice(-5) === objFromB.slice(-5);
+						var filtered_zone = a.filter(function (person) {
+							return SelectedZone.includes(person.vkbur);
 						});
-					});
 
-					var oZoneExclude = [
+						/*	var Dealer = sap.ui.getCore().LoginDetails.DealerCode;*/
+						var userAttributesModellen = that.getView().getModel("userAttributesModel").getData();
+						var BpDealer = that.getView().getModel("BpDealerModel").getData();
+						//for(var i=0;i<userAttributesModellen.length;i++){
+						var Dealer = userAttributesModellen[0].DealerCode[0];
+						var SalesOrganization = userAttributesModellen[0].Zone;
+						var Division = BpDealer[0].Division;
+						/*sap.ui.getCore().getModel(new sap.ui.model.json.JSONModel(BpDealer),"LoginBpDealerModel");*/
+
+						var FilterDeleade_OrderTypefilteNotnull = filtered_zone.filter(function (x) {
+							return x.kunnr != null;
+						});
+						var FilterDeleade_OrderTypefiltered_zone = FilterDeleade_OrderTypefilteNotnull.filter(function (x) {
+							return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "DM" || x.zzordertype == "SO")
+						});
+
+						//	var FilterDeleade_OrderTypefiltered_zone
+						var FilterDeleade_OrderTypefiltered_zone = FilterDeleade_OrderTypefiltered_zone.filter(function (x) {
+							return x.kunnr.slice(-5) != Dealer;
+						});
+
+						var oTCIcodes = [
+							"2400500000",
+							"2400542217",
+							"2400500002",
+							"2400500003",
+							"2400500004",
+							"2400500005",
+							"2400500006",
+							"2400500007",
+							"2400500008",
+							"2400500010",
+							"2400500011",
+							"2400500012",
+							"2400500013",
+							"2400500014",
+							"2400500015",
+							"2400500017",
+							"2400500018",
+							"2400500019",
+							"2400500020",
+							"2400500021",
+							"2400500023",
+							"2400500024",
+							"2400500025",
+							"2400500027",
+							"2400500028",
+							"2400500030",
+							"2400500032",
+							"2400500060",
+							"2400500064",
+							"2400500070",
+							"2400500072",
+							"2400500074",
+							"2400500076",
+							"2400500078",
+							"2400500099",
+							"2400500070",
+							"2400500072",
+							"2400500074",
+							"2400500076",
+							"2400500078"
+						];
+
+						//	var FilterDeleade_OrderTypefiltered_zone
+						var oExcludeTci = FilterDeleade_OrderTypefiltered_zone.filter(function (objFromA) {
+							return !oTCIcodes.find(function (objFromB) {
+								return (objFromA.kunnr).slice(-5) === objFromB.slice(-5);
+							});
+						});
+
+						var oZoneIncludeData = [
+							"2400507000",
+							"2400517000",
+							"2400547000",
+							"2400557000",
+							"2400577000",
+							"2400507100",
+							"2400517100",
+							"2400547100",
+							"2400557100",
+							"2400577100",
+							"2400500070",
+							"2400500072",
+							"2400500074",
+							"2400500076",
+							"2400500078",
+							"2400517200",
+							"2400517300",
+							"2400517600",
+							"2400517400",
+							"2400517500",
+							"2400557200",
+							"2400577200",
+							"2400577300",
+							"2400517210",
+							"2400517310",
+							"2400517610",
+							"2400517410",
+							"2400517510"
+						];
+						//Code for Filtering
+						// var oZoneInclude = [];
+						// for (var n = 0; n < oZoneIncludeData.length; n++) {
+						// 	$.each(oExcludeTci, function (i, item) {
+						// 		if (oZoneIncludeData[n] == item.kunnr && item.zzordertype == "SO") {
+						// 			console.log("match", item.kunnr);
+						// 			oZoneInclude.push(item);
+						// 			console.log("matched Data", oZoneInclude);
+						// 		} else {
+						// 			oZoneInclude = [];
+						// 		}
+						// 	});
+						// }
+						// var oZoneInclude = oExcludeTci.filter(function (objFromA) {
+						// 					return oZoneInclude.find(function (objFromB) {
+						// 						return ((objFromA.kunnr).slice(-5) === objFromB.slice(-5) &&objFromA.zzordertype=="SO");
+						// 					});
+						// 				});	
+						/*	if (oZoneInclude.length != 0) {
+								var FilterZonestock = oZoneInclude.filter(function (x) {
+									return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "SO")
+								});
+
+							} else {
+								var FilterZonestock = oExcludeTci.filter(function (x) {
+									return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "DM" || x.zzordertype == "SO")
+								});
+
+							}*/
+						// var tempTabData = [];
+						// if (oZoneInclude.length != 0) {
+						// 	var FilterZonestock = oZoneInclude;
+						// 	tempTabData.push(oZoneInclude);
+						// 	/*var FilterZonestock = oZoneInclude.filter(function (x) {
+						// 		return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "SO" && x.zzordertype != "DM")
+						// 	});*/
+
+						// } 
+						var tempTabData = [];
+
+						var FilterZonestock = oExcludeTci.filter(function (x) {
+							return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "DM" || x.zzordertype == "SO")
+						});
+						tempTabData =FilterZonestock;
+						// debugger;
+						// for (var n = 0; n < oZoneIncludeData.length; n++) {
+						// 	$.each(FilterZonestock, function (i, item) {
+						// 		if (oZoneIncludeData[n] == item.kunnr && item.zzordertype == "SO") {
+						// 			console.log("match", item.kunnr);
+						// 			tempTabData.push(item);
+						// 			console.log("matched Data", tempTabData);
+						// 		} else {
+						// 			tempTabData.push(item);
+						// 		}
+						// 	});
+						// }
+						// tempTabData.push(FilterZonestock);
+						console.log("final searched data", tempTabData);
+						/*	var oZoneExclude = [
 						"2400507000",
 						"2400517000",
 						"2400547000",
@@ -223,179 +313,249 @@ var BpDealer=that.getView().getModel("BpDealerModel").getData();
 					];
 			
 	var oZoneExclude = oExcludeTci.filter(function (objFromA) {
-						return !oZoneExclude.find(function (objFromB) {
+						return oZoneExclude.find(function (objFromB) {
 							return (objFromA.kunnr).slice(-5) === objFromB.slice(-5);
 						});
-					});				
+					});	*/
 
-/*var SelectedModel=that.getView().byId("McCmbo").getSelectedKey();
-var SelectedSeries = that.getView().byId("SeriesCmbo").getSelectedKey();
-var Suffix= that.getView().byId("SuffCmbo").getSelectedKey();
-var interioicolor=that.SelectedTrimInteriorColor;*/
-/*var interioicolor="LB43";*/
-/*var FilteredData=oZoneExclude.filter(function(x){
-	return x.matnr==SelectedModel&&x.zzseries==SelectedSeries&&x.zzsuffix==Suffix&&x.zzintcol==interioicolor;
-});*/
+						/*var SelectedModel=that.getView().byId("McCmbo").getSelectedKey();
+						var SelectedSeries = that.getView().byId("SeriesCmbo").getSelectedKey();
+						var Suffix= that.getView().byId("SuffCmbo").getSelectedKey();
+						var interioicolor=that.SelectedTrimInteriorColor;*/
+						/*var interioicolor="LB43";*/
+						/*var FilteredData=oZoneExclude.filter(function(x){
+							return x.matnr==SelectedModel&&x.zzseries==SelectedSeries&&x.zzsuffix==Suffix&&x.zzintcol==interioicolor;
+						});*/
 
-					var suffixField = that.value;
-					var oSuffmodel = new sap.ui.model.json.JSONModel(suffixField);
-					oSuffmodel.setSizeLimit(10000);
-					sap.ui.getCore().setModel(oSuffmodel, "oSuffieldmodel");
-					/*var SuffixDataValue*/
-					
-					var SuffixDesc=sap.ui.getCore().getModel("VehicleLocatorSuffix").getData();
-				/*	for(var i=0;i<oZoneExclude.length;i++)
-					{
-						for (var j=0;j<SuffixDesc.length;j++)
-						{
-						 if(oZoneExclude[i].zzintcol.slice(-2)==SuffixDesc[j].int_c){
-						 	oZoneExclude[i].suffix_desc_en=SuffixDesc[j].SuffixDescriptionEN;
-						 		oZoneExclude[i].suffix_desc_fr=SuffixDesc[j].SuffixDescriptionFR;
-						 			oZoneExclude[i].mrktg_int_desc_en=SuffixDesc[j].mrktg_int_desc_en;
-						 				oZoneExclude[i].mrktg_int_desc_fr=SuffixDesc[j].mrktg_int_desc_fr;
-						 		
-						 }	
-							
-						}
-					}*/
-					
-					
-					var oDumModel = new sap.ui.model.json.JSONModel(oZoneExclude);
-					oDumModel.setSizeLimit(100000);
-					sap.ui.getCore().setModel(oDumModel, "SearchedData");
-					that.SuffixFilter();
-					
-				},
-				error: function (s, result) {
+						var suffixField = that.value;
+						var oSuffmodel = new sap.ui.model.json.JSONModel(suffixField);
+						oSuffmodel.setSizeLimit(10000);
+						sap.ui.getCore().setModel(oSuffmodel, "oSuffieldmodel");
+						/*var SuffixDataValue*/
+
+						var SuffixDesc = sap.ui.getCore().getModel("VehicleLocatorSuffix").getData();
+						/*	for(var i=0;i<oZoneExclude.length;i++)
+							{
+								for (var j=0;j<SuffixDesc.length;j++)
+								{
+								 if(oZoneExclude[i].zzintcol.slice(-2)==SuffixDesc[j].int_c){
+								 	oZoneExclude[i].suffix_desc_en=SuffixDesc[j].SuffixDescriptionEN;
+								 		oZoneExclude[i].suffix_desc_fr=SuffixDesc[j].SuffixDescriptionFR;
+								 			oZoneExclude[i].mrktg_int_desc_en=SuffixDesc[j].mrktg_int_desc_en;
+								 				oZoneExclude[i].mrktg_int_desc_fr=SuffixDesc[j].mrktg_int_desc_fr;
+								 		
+								 }	
+									
+								}
+							}*/
+
+						//	var oDumModel = new sap.ui.model.json.JSONModel(oZoneInclude);
+						var oDumModel = new sap.ui.model.json.JSONModel(tempTabData);
+						oDumModel.setSizeLimit(100000);
+						sap.ui.getCore().setModel(oDumModel, "SearchedData");
+						that.SuffixFilter();
+						that.onStatusChange();
+
+					},
+					error: function (s, result) {
 						sap.ui.core.BusyIndicator.hide();
 						that.Nodata();
-					sap.m.MessageBox.warning("No Data");
-				}
-			});
-}
-else{
-	
-			this.intercolor = "";
-			var that = this;
-			that.value=this.getView().byId("VLRSuffix").getSelectedItem().getText();
-			var SelectedMSMData=this.getOwnerComponent().SelectedMSMData;
-		var SelectedZone = this.getOwnerComponent().SelectedZone;
-
-		
-			var LoginUser = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].UserType[0];
-			/*var LoginUser = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].UserType; *///deployed vesrion latest 
-
-			var sLocation = window.location.host;
-			var sLocation_conf = sLocation.search("webide");
-
-			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehicleLocatorNode";
+						sap.m.MessageBox.warning("No Data");
+					}
+				});
 			} else {
-				this.sPrefix = "";
 
-			}
+				this.intercolor = "";
+				var that = this;
+				that.value = this.getView().byId("VLRSuffix").getSelectedItem().getText();
+				var SelectedMSMData = this.getOwnerComponent().SelectedMSMData;
+				var SelectedZone = this.getOwnerComponent().SelectedZone;
 
-			this.nodeJsUrl = this.sPrefix + "/node";
-			that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_MASTER_SRV";
+				var LoginUser = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].UserType[0];
+				/*var LoginUser = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].UserType; */ //deployed vesrion latest 
 
-			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
-				
-	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '"+SelectedMSMData[0].McCmbo+"' and endswith (zzintcol,'"+this.intercolor+"') and zzseries eq '"+SelectedMSMData[0].SeriesCmbo+"' and zzmoyr eq '"+SelectedMSMData[0].MoyearCombo+"'&$format=json";
+				var sLocation = window.location.host;
+				var sLocation_conf = sLocation.search("webide");
 
-     /*	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '"+SelectedMSMData[0].McCmbo+"' and zzmoyr eq '"+SelectedMSMData[0].MoyearCombo+"'&$format=json";*/
-     
-			/*	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq'" + McCmbo + "' and zzextcol eq '" + this.SelectedExteriorColorCode +
-				"' and zzintcol eq '" + this.SelectedTrimInteriorColor + "' and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + MoyearCombo +"'";	*/
+				if (sLocation_conf == 0) {
+					this.sPrefix = "/vehicleLocatorNode";
+				} else {
+					this.sPrefix = "";
 
-			//	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq 'YZ3DCT' and zzextcol eq '01D6' and zzintcol eq 'LC14' and zzsuffix eq 'AB' and zzmoyr eq '2018'";
-			$.ajax({
-				url: SeriesUrl,
-				type: "GET",
-				dataType: 'json',
-				xhrFields: //
-				{
-					withCredentials: true
-				},
-			
+				}
 
-				success: function (odata, oresponse) {
-					debugger;
-					var a = odata.d.results;
-				
-					var filtered_zone = a.filter(function (person) {
-						return SelectedZone.includes(person.vkbur);
-					});
+				this.nodeJsUrl = this.sPrefix + "/node";
+				that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_MASTER_SRV";
 
-				/*	var Dealer = sap.ui.getCore().LoginDetails.DealerCode;*/
-					var userAttributesModellen=that.getView().getModel("userAttributesModel").getData();
-var BpDealer=that.getView().getModel("BpDealerModel").getData();
-	//for(var i=0;i<userAttributesModellen.length;i++){
-		var Dealer=userAttributesModellen[0].DealerCode[0];
-		var SalesOrganization=userAttributesModellen[0].Zone;
-		  var Division=BpDealer[0].Division;
-/*sap.ui.getCore().getModel(new sap.ui.model.json.JSONModel(BpDealer),"LoginBpDealerModel");*/
+				that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
 
-					var FilterDeleade_OrderTypefilteNotnull = filtered_zone.filter(function (x) {
-						return x.kunnr != null;
-					});
-						var FilterDeleade_OrderTypefiltered_zone=FilterDeleade_OrderTypefilteNotnull.filter(function(x){return x.kunnr.slice(-5)!=Dealer &&(x.zzordertype=="DM" ||x.zzordertype=="SO")});
+				var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '" + SelectedMSMData[0].McCmbo +
+					"' and endswith (zzintcol,'" + this.intercolor + "') and zzseries eq '" + SelectedMSMData[0].SeriesCmbo + "' and zzmoyr eq '" +
+					SelectedMSMData[0].MoyearCombo + "'&$format=json";
 
-					//	var FilterDeleade_OrderTypefiltered_zone
-					var FilterDeleade_OrderTypefiltered_zone = FilterDeleade_OrderTypefiltered_zone.filter(function (x) {
-						return x.kunnr.slice(-5) != Dealer;
-					});
+				/*	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '"+SelectedMSMData[0].McCmbo+"' and zzmoyr eq '"+SelectedMSMData[0].MoyearCombo+"'&$format=json";*/
 
-					var oTCIcodes = [
-						"2400500000",
-						"2400542217",
-						"2400500002",
-						"2400500003",
-						"2400500004",
-						"2400500005",
-						"2400500006",
-						"2400500007",
-						"2400500008",
-						"2400500010",
-						"2400500011",
-						"2400500012",
-						"2400500013",
-						"2400500014",
-						"2400500015",
-						"2400500017",
-						"2400500018",
-						"2400500019",
-						"2400500020",
-						"2400500021",
-						"2400500023",
-						"2400500024",
-						"2400500025",
-						"2400500027",
-						"2400500028",
-						"2400500030",
-						"2400500032",
-						"2400500060",
-						"2400500064",
-						"2400500070",
-						"2400500072",
-						"2400500074",
-						"2400500076",
-						"2400500078",
-						"2400500099",
-						"2400500070",
-						"2400500072",
-						"2400500074",
-						"2400500076",
-						"2400500078"
-					];
+				/*	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq'" + McCmbo + "' and zzextcol eq '" + this.SelectedExteriorColorCode +
+					"' and zzintcol eq '" + this.SelectedTrimInteriorColor + "' and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + MoyearCombo +"'";	*/
 
-					//	var FilterDeleade_OrderTypefiltered_zone
-					var oExcludeTci = FilterDeleade_OrderTypefiltered_zone.filter(function (objFromA) {
-						return !oTCIcodes.find(function (objFromB) {
-							return (objFromA.kunnr).slice(-5) === objFromB.slice(-5);
+				//	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq 'YZ3DCT' and zzextcol eq '01D6' and zzintcol eq 'LC14' and zzsuffix eq 'AB' and zzmoyr eq '2018'";
+				$.ajax({
+					url: SeriesUrl,
+					type: "GET",
+					dataType: 'json',
+					xhrFields: //
+					{
+						withCredentials: true
+					},
+
+					success: function (odata, oresponse) {
+						//debugger;
+						var a = odata.d.results;
+
+						var filtered_zone = a.filter(function (person) {
+							return SelectedZone.includes(person.vkbur);
 						});
-					});
 
-					var oZoneExclude = [
+						/*	var Dealer = sap.ui.getCore().LoginDetails.DealerCode;*/
+						var userAttributesModellen = that.getView().getModel("userAttributesModel").getData();
+						var BpDealer = that.getView().getModel("BpDealerModel").getData();
+						//for(var i=0;i<userAttributesModellen.length;i++){
+						var Dealer = userAttributesModellen[0].DealerCode[0];
+						var SalesOrganization = userAttributesModellen[0].Zone;
+						var Division = BpDealer[0].Division;
+						/*sap.ui.getCore().getModel(new sap.ui.model.json.JSONModel(BpDealer),"LoginBpDealerModel");*/
+
+						var FilterDeleade_OrderTypefilteNotnull = filtered_zone.filter(function (x) {
+							return x.kunnr != null;
+						});
+						var FilterDeleade_OrderTypefiltered_zone = FilterDeleade_OrderTypefilteNotnull.filter(function (x) {
+							return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "DM" || x.zzordertype == "SO");
+						});
+
+						//	var FilterDeleade_OrderTypefiltered_zone
+						var FilterDeleade_OrderTypefiltered_zone = FilterDeleade_OrderTypefiltered_zone.filter(function (x) {
+							return x.kunnr.slice(-5) != Dealer;
+						});
+
+						var oTCIcodes = [
+							"2400500000",
+							"2400542217",
+							"2400500002",
+							"2400500003",
+							"2400500004",
+							"2400500005",
+							"2400500006",
+							"2400500007",
+							"2400500008",
+							"2400500010",
+							"2400500011",
+							"2400500012",
+							"2400500013",
+							"2400500014",
+							"2400500015",
+							"2400500017",
+							"2400500018",
+							"2400500019",
+							"2400500020",
+							"2400500021",
+							"2400500023",
+							"2400500024",
+							"2400500025",
+							"2400500027",
+							"2400500028",
+							"2400500030",
+							"2400500032",
+							"2400500060",
+							"2400500064",
+							"2400500070",
+							"2400500072",
+							"2400500074",
+							"2400500076",
+							"2400500078",
+							"2400500099",
+							"2400500070",
+							"2400500072",
+							"2400500074",
+							"2400500076",
+							"2400500078"
+						];
+
+						//	var FilterDeleade_OrderTypefiltered_zone
+						var oExcludeTci = FilterDeleade_OrderTypefiltered_zone.filter(function (objFromA) {
+							return !oTCIcodes.find(function (objFromB) {
+								return (objFromA.kunnr).slice(-5) === objFromB.slice(-5);
+							});
+						});
+
+						var oZoneIncludeData = [
+							"2400507000",
+							"2400517000",
+							"2400547000",
+							"2400557000",
+							"2400577000",
+							"2400507100",
+							"2400517100",
+							"2400547100",
+							"2400557100",
+							"2400577100",
+							"2400500070",
+							"2400500072",
+							"2400500074",
+							"2400500076",
+							"2400500078",
+							"2400517200",
+							"2400517300",
+							"2400517600",
+							"2400517400",
+							"2400517500",
+							"2400557200",
+							"2400577200",
+							"2400577300",
+							"2400517210",
+							"2400517310",
+							"2400517610",
+							"2400517410",
+							"2400517510"
+						];
+						//Code for Filtering
+						// var oZoneInclude = oExcludeTci.filter(function (objFromA) {
+						// 	return oZoneInclude.find(function (objFromB) {
+						// 		return ((objFromA.kunnr).slice(-5) === objFromB.slice(-5) && objFromA.zzordertype == "SO");
+						// 	});
+						// });
+						// if (oZoneInclude.length != 0) {
+						// 	var FilterZonestock = oZoneInclude.filter(function (x) {
+						// 		return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "SO")
+						// 	});
+
+						// } else {
+						// 	var FilterZonestock = oExcludeTci.filter(function (x) {
+						// 		return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "DM" || x.zzordertype == "SO")
+						// 	});
+
+						// }
+						var tempTabData = [];
+
+						var FilterZonestock = oExcludeTci.filter(function (x) {
+							return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "DM" || x.zzordertype == "SO")
+						});
+						// tempTabData = FilterZonestock;
+						//debugger;
+						for (var n = 0; n < oZoneIncludeData.length; n++) {
+							$.each(FilterZonestock, function (i, item) {
+								if (oZoneIncludeData[n] == item.kunnr && item.zzordertype == "SO" && item.zzordertype !== "DM") {
+									console.log("match", item.kunnr);
+									tempTabData.push(item);
+									console.log("matched Data", tempTabData);
+								} else {
+									tempTabData.push(item);
+								}
+							});
+						}
+						tempTabData.push(FilterZonestock);
+						console.log("final searched data", tempTabData);
+
+						/*	var oZoneExclude = [
 						"2400507000",
 						"2400517000",
 						"2400547000",
@@ -427,60 +587,58 @@ var BpDealer=that.getView().getModel("BpDealerModel").getData();
 					];
 			
 	var oZoneExclude = oExcludeTci.filter(function (objFromA) {
-						return !oZoneExclude.find(function (objFromB) {
+						return oZoneExclude.find(function (objFromB) {
 							return (objFromA.kunnr).slice(-5) === objFromB.slice(-5);
 						});
-					});				
+					});		*/
 
-/*var SelectedModel=that.getView().byId("McCmbo").getSelectedKey();
-var SelectedSeries = that.getView().byId("SeriesCmbo").getSelectedKey();
-var Suffix= that.getView().byId("SuffCmbo").getSelectedKey();
-var interioicolor=that.SelectedTrimInteriorColor;*/
-/*var interioicolor="LB43";*/
-/*var FilteredData=oZoneExclude.filter(function(x){
-	return x.matnr==SelectedModel&&x.zzseries==SelectedSeries&&x.zzsuffix==Suffix&&x.zzintcol==interioicolor;
-});*/
+						/*var SelectedModel=that.getView().byId("McCmbo").getSelectedKey();
+						var SelectedSeries = that.getView().byId("SeriesCmbo").getSelectedKey();
+						var Suffix= that.getView().byId("SuffCmbo").getSelectedKey();
+						var interioicolor=that.SelectedTrimInteriorColor;*/
+						/*var interioicolor="LB43";*/
+						/*var FilteredData=oZoneExclude.filter(function(x){
+							return x.matnr==SelectedModel&&x.zzseries==SelectedSeries&&x.zzsuffix==Suffix&&x.zzintcol==interioicolor;
+						});*/
 
-					var suffixField = that.value;
-					var oSuffmodel = new sap.ui.model.json.JSONModel(suffixField);
-					oSuffmodel.setSizeLimit(10000);
-					sap.ui.getCore().setModel(oSuffmodel, "oSuffieldmodel");
-					/*var SuffixDataValue*/
-					
-					var SuffixDesc=sap.ui.getCore().getModel("VehicleLocatorSuffix").getData();
-				/*	for(var i=0;i<oZoneExclude.length;i++)
-					{
-						for (var j=0;j<SuffixDesc.length;j++)
-						{
-						 if(oZoneExclude[i].zzintcol.slice(-2)==SuffixDesc[j].int_c){
-						 	oZoneExclude[i].suffix_desc_en=SuffixDesc[j].SuffixDescriptionEN;
-						 		oZoneExclude[i].suffix_desc_fr=SuffixDesc[j].SuffixDescriptionFR;
-						 			oZoneExclude[i].mrktg_int_desc_en=SuffixDesc[j].mrktg_int_desc_en;
-						 				oZoneExclude[i].mrktg_int_desc_fr=SuffixDesc[j].mrktg_int_desc_fr;
-						 		
-						 }	
-							
-						}
-					}*/
-					
-					
-					var oDumModel = new sap.ui.model.json.JSONModel(oZoneExclude);
-					oDumModel.setSizeLimit(100000);
-					sap.ui.getCore().setModel(oDumModel, "SearchedData");
-					that.SuffixFilter();
-					
-				},
-				error: function (s, result) {
+						var suffixField = that.value;
+						var oSuffmodel = new sap.ui.model.json.JSONModel(suffixField);
+						oSuffmodel.setSizeLimit(10000);
+						sap.ui.getCore().setModel(oSuffmodel, "oSuffieldmodel");
+						/*var SuffixDataValue*/
+
+						var SuffixDesc = sap.ui.getCore().getModel("VehicleLocatorSuffix").getData();
+						/*	for(var i=0;i<oZoneExclude.length;i++)
+							{
+								for (var j=0;j<SuffixDesc.length;j++)
+								{
+								 if(oZoneExclude[i].zzintcol.slice(-2)==SuffixDesc[j].int_c){
+								 	oZoneExclude[i].suffix_desc_en=SuffixDesc[j].SuffixDescriptionEN;
+								 		oZoneExclude[i].suffix_desc_fr=SuffixDesc[j].SuffixDescriptionFR;
+								 			oZoneExclude[i].mrktg_int_desc_en=SuffixDesc[j].mrktg_int_desc_en;
+								 				oZoneExclude[i].mrktg_int_desc_fr=SuffixDesc[j].mrktg_int_desc_fr;
+								 		
+								 }	
+									
+								}
+							}*/
+
+						var oDumModel = new sap.ui.model.json.JSONModel(tempTabData);
+						oDumModel.setSizeLimit(100000);
+						sap.ui.getCore().setModel(oDumModel, "SearchedData");
+						that.SuffixFilter();
+
+					},
+					error: function (s, result) {
 						sap.ui.core.BusyIndicator.hide();
 						that.Nodata();
-					sap.m.MessageBox.warning("No Data");
-				}
-			});
+						sap.m.MessageBox.warning("No Data");
+					}
+				});
 
-	
-	/*this.onStatusChange();
-	sap.ui.core.BusyIndicator.hide();*/
-}
+				/*this.onStatusChange();
+				sap.ui.core.BusyIndicator.hide();*/
+			}
 			/*	Details: JSON.stringify(obj)*/
 
 			/*	this.getRouter().navTo("VehicleSearcResults"{
@@ -500,11 +658,6 @@ var interioicolor=that.SelectedTrimInteriorColor;*/
 			/*	this.getRouter().navTo("VehicleSearcResults");*/
 			/* var object = {};*/
 
-		
-			
-			
-			
-			
 		},
 		onStatusChange: function () {
 
@@ -536,9 +689,9 @@ var interioicolor=that.SelectedTrimInteriorColor;*/
 				}
 
 			}
-			var Suffix =this.suffixSelectedKey;
-			if(Suffix!=this.getView().byId("VLRSuffix").getSelectedKey()){
-				Suffix=this.getView().byId("VLRSuffix").getSelectedKey();
+			var Suffix = this.suffixSelectedKey;
+			if (Suffix != this.getView().byId("VLRSuffix").getSelectedKey()) {
+				Suffix = this.getView().byId("VLRSuffix").getSelectedKey();
 			}
 			if (Suffix != "" && Suffix != "all") {
 
@@ -563,15 +716,29 @@ var interioicolor=that.SelectedTrimInteriorColor;*/
 			var ShowDoNotCallVehicles = this.getView().byId("chknew").getSelected();
 			if (ShowDoNotCallVehicles == true) {
 
+				/*	filterArray.push(new sap.ui.model.Filter("dnc_ind", sap.ui.model.FilterOperator.EQ, "Y"));*/
+				filterArray.push(new sap.ui.model.Filter("dnc_ind", sap.ui.model.FilterOperator.EQ, "Y"));
+			} else if (ShowDoNotCallVehicles == false) {
+
+				/*	filterArray.push(new sap.ui.model.Filter("dnc_ind", sap.ui.model.FilterOperator.EQ, "Y"));*/
 				filterArray.push(new sap.ui.model.Filter("dnc_ind", sap.ui.model.FilterOperator.EQ, "N"));
 			}
 			var ShowHoldVehicles = this.getView().byId("chkexi").getSelected();
 			if (ShowHoldVehicles == true) {
 
+				/*filterArray.push(new sap.ui.model.Filter("Hold_stat", sap.ui.model.FilterOperator.EQ, "Y"));*/
 				filterArray.push(new sap.ui.model.Filter("Hold_stat", sap.ui.model.FilterOperator.EQ, "Y"));
-			}
+			} else if (ShowHoldVehicles == false) {
 
-			this.getView().byId("table1VSR").getBinding("rows").filter(filterArray);
+				/*filterArray.push(new sap.ui.model.Filter("Hold_stat", sap.ui.model.FilterOperator.EQ, "Y"));*/
+				filterArray.push(new sap.ui.model.Filter("Hold_stat", sap.ui.model.FilterOperator.EQ, "N"));
+			}
+			// this.getView().byId("table1VSR").getBinding("rows").filter(filterArray);
+			//debugger;
+
+			sap.ushell.components.tableSearchResults.getBinding("rows").filter(filterArray);
+			// sap.ushell.components.tableSearchResults._updateRows();
+			// sap.ushell.components.tableSearchResults.updateRows();
 		},
 		/*onDealerChange: function () {
 
@@ -826,50 +993,135 @@ var interioicolor=that.SelectedTrimInteriorColor;*/
 			var that = this;
 			that.oTableSelectPath = oEvt.getSource().getParent().getBindingContext().getPath().split("/")[1];
 			sap.ui.getCore().VehicheSearcResults = this.getView().byId("table1VSR").getModel().getData();
+			that.selectedTrade = oEvt.getSource().getParent().getBindingContext().getObject();
+			var VTN = that.selectedTrade.zzvtn;
+			var dealercode = that.selectedTrade.kunnr.slice(-5);
 
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
 
 			if (sLocation_conf == 0) {
-				this.sPrefix = "/VehicleLocator_Xsodata";
+				this.sPrefix = "/vehicleLocatorNode";
 			} else {
 				this.sPrefix = "";
 
 			}
-			this.nodeJsUrl = this.sPrefix;
-			that.TradeRequestoDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeRequest";
+
+			this.nodeJsUrl = this.sPrefix + "/node";
+			that.oDataUrl = this.nodeJsUrl + "/Z_DEALER_TRADE_REQUEST_SRV";
+			var SeriesUrl = that.oDataUrl + "/CalculateETASet?&filter=VTN eq '" + VTN + "' and DelearCode eq '" + dealercode + "'&$format=json";
 			var ajax = $.ajax({
 				dataType: "json",
 				xhrFields: //
 				{
 					withCredentials: true
 				},
-				url: that.TradeRequestoDataUrl,
+				url: SeriesUrl,
 				async: true,
 				success: function (result) {
-					debugger
-					var Data = result;
+					//debugger;
+					var Data = result.d.results[0];
+					if (Data.MessageType == "E") {
+						Data.MessageType = "";
+						Data.Calculate = "20181126";
+					}
+					if (Data.MessageType != "E") {
+						var CurrentETAFrom = that.selectedTrade.zzadddata4;
+						if (CurrentETAFrom != null && CurrentETAFrom != "") {
 
+							CurrentETAFrom = CurrentETAFrom.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1');
+						}
+						var CurrentETATo = that.selectedTrade.pstsp;
+
+						if (CurrentETATo != null && CurrentETATo != "") {
+							var dateTo = CurrentETATo.split("(")[1];
+							if (CurrentETATo.includes("+") == true) {
+								/*dateTo = dateTo.split("+")[0];*/
+								CurrentETATo = new Date(CurrentETATo.split("(")[1].substring(0, 10) * 1000).toDateString().substring(4, 15);
+								var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+									pattern: "MM/dd/yyyy"
+								});
+								CurrentETATo = oDateFormat.format(new Date(CurrentETATo));
+
+							} else {
+								dateTo = dateTo;
+								var dataTo1 = dateTo.substring(0, dateTo.length - 5);
+								var ValidTo = new Date(dataTo1 * 1000);
+								ValidTo = ValidTo.toGMTString().substring(4, 16);
+								var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+									pattern: "MM/dd/yyyy"
+								});
+								CurrentETATo = oDateFormat.format(new Date(ValidTo));
+							}
+
+						}
+
+						var date1 = new Date(CurrentETAFrom);
+						var date2 = new Date(CurrentETATo);
+						var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+						var CurrentEtadiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+						function addDays(date, days) {
+							var result = new Date(date);
+							result.setDate(result.getDate() + days);
+							return result;
+						}
+						var Eta = Data.Calculate;
+						var Calculate = Eta.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1');
+						var Proposed_ETA_To = addDays(Calculate, CurrentEtadiff);
+						that.selectedTrade.Proposed_ETA_To = Proposed_ETA_To;
+						that.selectedTrade.Proposed_ETA_From = Data.Calculate;
+						//that.selectedTrade=escape(JSON.stringify(that.selectedTrade));
+						sap.ui.getCore().SelectedTrade = that.selectedTrade;
+						sap.ui.getCore().SelectedTradeStatus = "";
+						if (that.oTableSelectPath != undefined) {
+							that.getRouter().navTo("VehicleTrade_CreateSingle", {
+								SelectedTrade: that.oTableSelectPath
+							});
+							that.oTableSelect = undefined;
+						} else {
+							sap.m.MessageBox.warning("Please select the trade");
+							that.oTableSelect = undefined;
+						}
+
+					} else {
+						sap.ui.getCore().SelectedTrade = that.selectedTrade;
+						sap.ui.getCore().SelectedTradeStatus = "";
+						if (that.oTableSelectPath != undefined) {
+							that.getRouter().navTo("VehicleTrade_CreateSingle", {
+								SelectedTrade: that.oTableSelectPath
+							});
+							that.oTableSelect = undefined;
+						} else {
+							sap.m.MessageBox.warning("Please select the trade");
+							that.oTableSelect = undefined;
+						}
+					}
+
+				},
+				error: function () {
+					sap.ui.getCore().SelectedTrade = that.selectedTrade;
+					sap.ui.getCore().SelectedTradeStatus = "";
+					if (that.oTableSelectPath != undefined) {
+						that.getRouter().navTo("VehicleTrade_CreateSingle", {
+							SelectedTrade: that.oTableSelectPath
+						});
+						that.oTableSelect = undefined;
+					} else {
+						sap.m.MessageBox.warning("Please select the trade");
+						that.oTableSelect = undefined;
+					}
 				}
+
 			});
-sap.ui.getCore().SelectedTradeStatus="";
-			if (that.oTableSelectPath != undefined) {
-				this.getRouter().navTo("VehicleTrade_CreateSingle", {
-					SelectedTrade: that.oTableSelectPath
-				});
-				that.oTableSelect = undefined;
-			} else {
-				sap.m.MessageBox.warning("Please select the trade");
-				that.oTableSelect = undefined;
-			}
 
 		},
 
 		onRouteMatched: function (oEvent) {
-			debugger;
+			//debugger;
 			var RoutedData = JSON.parse(oEvent.getParameter("arguments").LoginUser);
 			DefaultSuffix = (RoutedData.selectedSuffix).replace("%2F", "/");
-		//	this.getView().byId("VLRSuffix").removeAllItems();
+			//	this.getView().byId("VLRSuffix").removeAllItems();
 			var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
 			this.getView().byId("oDealersearchresults").setText(LoggedInDealer);
 
@@ -889,6 +1141,7 @@ sap.ui.getCore().SelectedTradeStatus="";
 
 				/*	this.getView().setModel(sap.ui.getCore().getModel("oSuffieldmodel"),"VehicleLocatorScdScr");*/
 				var Status = sap.ui.getCore().getModel("SearchedData").getData();
+				debugger;
 				var model = new sap.ui.model.json.JSONModel(Status);
 				model.setSizeLimit(1000);
 				this.getView().byId("table1VSR").setModel(model);
@@ -914,7 +1167,7 @@ sap.ui.getCore().SelectedTradeStatus="";
 					obj.suffix_desc_fr = Suffix[i].SuffixDescriptionFR;
 					obj.mrktg_int_desc_en = Suffix[i].mrktg_int_desc_en;
 					obj.mrktg_int_desc_fr = Suffix[i].mrktg_int_desc_fr;
-					obj.int_c=Suffix[i].int_c;
+					obj.int_c = Suffix[i].int_c;
 					obj.SPRAS = Suffix[i].SPRAS;
 					SuffixData.push(obj);
 				}
@@ -929,40 +1182,41 @@ sap.ui.getCore().SelectedTradeStatus="";
 				Model.setSizeLimit(1000);
 				this.getView().byId("VLRColor").setModel(Model);
 				if (Color.length != 0) {
-				if(this.getView().byId("VLRColor").getItems().filter(function(x){return x.mProperties.key=="all"}).length==0)
-				{
-					var newItem = new sap.ui.core.Item({
-						key: "all",
-						text: "ALL"
-					});
-					this.getView().byId("VLRColor").insertItem(newItem);
-					this.getView().byId("VLRColor").setSelectedKey("all");
-					this.getView().byId("VLRColor").setSelectedItem("ALL");
+					if (this.getView().byId("VLRColor").getItems().filter(function (x) {
+							return x.mProperties.key == "all"
+						}).length == 0) {
+						var newItem = new sap.ui.core.Item({
+							key: "all",
+							text: "ALL"
+						});
+						this.getView().byId("VLRColor").insertItem(newItem);
+						this.getView().byId("VLRColor").setSelectedKey("all");
+						this.getView().byId("VLRColor").setSelectedItem("ALL");
+					}
+				} else {
+					if (this.getView().byId("VLRColor").getItems().filter(function (x) {
+							return x.mProperties.key == "all"
+						}).length == 0) {
+						var newItem = new sap.ui.core.Item({
+							key: "all",
+							text: "ALL"
+						});
+						this.getView().byId("VLRColor").insertItem(newItem);
+						this.getView().byId("VLRColor").setSelectedKey("all");
+						this.getView().byId("VLRColor").setSelectedItem("ALL");
+					}
 				}
-				}
-				else{
-					if(this.getView().byId("VLRColor").getItems().filter(function(x){return x.mProperties.key=="all"}).length==0)
-				{
-					var newItem = new sap.ui.core.Item({
-						key: "all",
-						text: "ALL"
-					});
-					this.getView().byId("VLRColor").insertItem(newItem);
-					this.getView().byId("VLRColor").setSelectedKey("all");
-					this.getView().byId("VLRColor").setSelectedItem("ALL");
-				}
-				}
-				}
+			}
 
-				/*var obj = {};
-				for (var i = 0, len = Suffix.length; i < len; i++)
-				/*	obj[Suffix[i]['zzsuffix']] = Suffix[i];*/
-				/*	obj[Suffix[i]['zzsuffix']] = Suffix[i];
-				Suffix = new Array();
-				for (var key in obj)
-					Suffix.push(obj[key]);*/
+			/*var obj = {};
+			for (var i = 0, len = Suffix.length; i < len; i++)
+			/*	obj[Suffix[i]['zzsuffix']] = Suffix[i];*/
+			/*	obj[Suffix[i]['zzsuffix']] = Suffix[i];
+			Suffix = new Array();
+			for (var key in obj)
+				Suffix.push(obj[key]);*/
 			//	if (this.getView().byId("table1VSR").getModel().getData().length != 0) {
-					/*	var	 Suffix = Suffix.filter(function (a) {
+			/*	var	 Suffix = Suffix.filter(function (a) {
      
        var key = a.zzsuffix + '|' + a.zzintcol;
 	
@@ -972,102 +1226,104 @@ sap.ui.getCore().SelectedTradeStatus="";
         }
     }, Object.create(null));*/
 
-					var Model = new sap.ui.model.json.JSONModel(SuffixData);
-					Model.setSizeLimit(1000);
-					this.getView().byId("VLRSuffix").setModel(Model);
-					for (var s = 0; s < SuffixData.length; s++) {
-						if (DefaultSuffix == SuffixData[s].zzsuffix + "-" + SuffixData[s].suffix_desc_en + "/" + SuffixData[s].mrktg_int_desc_en)
-						{
-							 this.getView().byId("VLRSuffix").setSelectedItem(SuffixData[s].zzsuffix + "-" + SuffixData[s].suffix_desc_en + "/" + SuffixData[s].mrktg_int_desc_en);
-							/*this.getView().byId("VLRSuffix").setSelectedItem().mAssociations.selectedItem;*/
-						}
-					}
+			var Model = new sap.ui.model.json.JSONModel(SuffixData);
+			Model.setSizeLimit(1000);
+			this.getView().byId("VLRSuffix").setModel(Model);
+			for (var s = 0; s < SuffixData.length; s++) {
+				if (DefaultSuffix == SuffixData[s].zzsuffix + "-" + SuffixData[s].suffix_desc_en + "/" + SuffixData[s].mrktg_int_desc_en) {
+					this.getView().byId("VLRSuffix").setSelectedItem(SuffixData[s].zzsuffix + "-" + SuffixData[s].suffix_desc_en + "/" + SuffixData[s]
+						.mrktg_int_desc_en);
+					/*this.getView().byId("VLRSuffix").setSelectedItem().mAssociations.selectedItem;*/
+				}
+			}
 			//	}/* else {*/
-				/*	var Model = new sap.ui.model.json.JSONModel([]);
-					Model.setSizeLimit(1000);
-					this.getView().byId("VLRSuffix").setModel(Model);*/
+			/*	var Model = new sap.ui.model.json.JSONModel([]);
+				Model.setSizeLimit(1000);
+				this.getView().byId("VLRSuffix").setModel(Model);*/
 			/*	}*/
-				if (SuffixData.length != 0) {
+			if (SuffixData.length != 0) {
 
 				/*	this.getView().byId("VLRSuffix").setSelectedKey(sap.ui.getCore().SuffixSelectedKey);*/
 				//	this.getView().byId("VLRSuffix").setSelectedText(sap.ui.getCore().SuffixSelectedItem);
-					/*	if(SuffixData[0].SPRAS.slice(0,1)!="E"){
-							this.getView().byId("VLRSuffix").setSelectedItem(SuffixData[0].zzsuffix + "-" + SuffixData[0].suffix_desc_fr + SuffixData[0].mrktg_int_desc_fr);
+				/*	if(SuffixData[0].SPRAS.slice(0,1)!="E"){
+						this.getView().byId("VLRSuffix").setSelectedItem(SuffixData[0].zzsuffix + "-" + SuffixData[0].suffix_desc_fr + SuffixData[0].mrktg_int_desc_fr);
+					
+					}
+					else{
+					this.getView().byId("VLRSuffix").setSelectedItem(SuffixData[0].zzsuffix + "-" + SuffixData[0].suffix_desc_en + SuffixData[0].mrktg_int_desc_en);
 						
-						}
-						else{
-						this.getView().byId("VLRSuffix").setSelectedItem(SuffixData[0].zzsuffix + "-" + SuffixData[0].suffix_desc_en + SuffixData[0].mrktg_int_desc_en);
-							
-						}*/
-					if(this.getView().byId("VLRSuffix").getItems().filter(function(x){return x.mProperties.key=="all"}).length==0){
+					}*/
+				if (this.getView().byId("VLRSuffix").getItems().filter(function (x) {
+						return x.mProperties.key == "all"
+					}).length == 0) {
 					var newItem = new sap.ui.core.Item({
 						key: "all",
 						text: "ALL"
 					});
 					this.getView().byId("VLRSuffix").insertItem(newItem);
-					}
 				}
+			}
 
-				var obj = {};
-				for (var i = 0, len = Status.length; i < len; i++)
-					obj[Status[i]['zz_trading_ind']] = Status[i];
-				Status = new Array();
-				for (var key in obj)
-					Status.push(obj[key]);
-	var StatusDataFilter=[];
-				for(var i=0;i<Status.length;i++){
-					if(Status[i].zz_trading_ind=="1"||Status[i].zz_trading_ind=="2"){
-						StatusDataFilter.push(Status[i]);
-					}
+			var obj = {};
+			for (var i = 0, len = Status.length; i < len; i++)
+				obj[Status[i]['zz_trading_ind']] = Status[i];
+			Status = new Array();
+			for (var key in obj)
+				Status.push(obj[key]);
+			var StatusDataFilter = [];
+			for (var i = 0; i < Status.length; i++) {
+				if (Status[i].zz_trading_ind == "1" || Status[i].zz_trading_ind == "2") {
+					StatusDataFilter.push(Status[i]);
 				}
-				if(StatusDataFilter.length==0){
-				StatusDataFilter=[{
-					"zz_trading_ind":"1"
-					
-				},{
-					"zz_trading_ind":"2"	
+			}
+			if (StatusDataFilter.length == 0) {
+				StatusDataFilter = [{
+					"zz_trading_ind": "1"
+
+				}, {
+					"zz_trading_ind": "2"
 				}];
-				}
-				/*Status.splice(-1,1);*/
-				var Model = new sap.ui.model.json.JSONModel(StatusDataFilter);
-				Model.setSizeLimit(1000);
+			}
+			/*Status.splice(-1,1);*/
+			var Model = new sap.ui.model.json.JSONModel(StatusDataFilter);
+			Model.setSizeLimit(1000);
 
-				var StatusFilter = StatusDataFilter.filter(function (x) {
-					return x.zz_trading_ind == "1";
+			var StatusFilter = StatusDataFilter.filter(function (x) {
+				return x.zz_trading_ind == "1";
+			});
+
+			this.getView().byId("VLRStatus").setModel(Model);
+			if (StatusFilter.length != 0) {
+
+				this.getView().byId("VLRStatus").setSelectedItem("Pipeline - Routable");
+				this.getView().byId("VLRStatus").setSelectedKey("1");
+			} else if (StatusDataFilter.length != 0) {
+				var newItem = new sap.ui.core.Item({
+					key: "1",
+					text: "Pipeline - Routable"
 				});
-
-				this.getView().byId("VLRStatus").setModel(Model);
-				if (StatusFilter.length != 0) {
-
-					this.getView().byId("VLRStatus").setSelectedItem("Pipeline - Routable");
-					this.getView().byId("VLRStatus").setSelectedKey("1");
-				}
-				else if(StatusDataFilter.length!=0){
-					var newItem = new sap.ui.core.Item({
-						key: "1",
-						text: "Pipeline - Routable"
-					});
-					this.getView().byId("VLRStatus").insertItem(newItem);
-						this.getView().byId("VLRStatus").setSelectedItem("Pipeline - Routable");
-					this.getView().byId("VLRStatus").setSelectedKey("1");
-				}
-				/*	if(StatusFilter.length!=0){
+				this.getView().byId("VLRStatus").insertItem(newItem);
+				this.getView().byId("VLRStatus").setSelectedItem("Pipeline - Routable");
+				this.getView().byId("VLRStatus").setSelectedKey("1");
+			}
+			/*	if(StatusFilter.length!=0){
 						this.getView().byId("VLRStatus").setSelectedItem("Pipeline - Routable");
 	this.getView().byId("VLRStatus").setSelectedKey("1");
 				}*/
 
-				var obj = {};
-				for (var i = 0, len = Dealer.length; i < len; i++)
-					obj[Dealer[i]['kunnr']] = Dealer[i];
-				Dealer = new Array();
-				for (var key in obj)
-					Dealer.push(obj[key]);
-				var Model1 = new sap.ui.model.json.JSONModel(Dealer);
-				Model1.setSizeLimit(1000);
-				this.getView().byId("VLRDealer").setModel(Model1);
-				if (Dealer.length != 0) {
-			if(this.getView().byId("VLRDealer").getItems().filter(function(x){return x.mProperties.key=="all"}).length==0)
-			{
+			var obj = {};
+			for (var i = 0, len = Dealer.length; i < len; i++)
+				obj[Dealer[i]['kunnr']] = Dealer[i];
+			Dealer = new Array();
+			for (var key in obj)
+				Dealer.push(obj[key]);
+			var Model1 = new sap.ui.model.json.JSONModel(Dealer);
+			Model1.setSizeLimit(1000);
+			this.getView().byId("VLRDealer").setModel(Model1);
+			if (Dealer.length != 0) {
+				if (this.getView().byId("VLRDealer").getItems().filter(function (x) {
+						return x.mProperties.key == "all"
+					}).length == 0) {
 					var newItem = new sap.ui.core.Item({
 						key: "all",
 						text: "ALL"
@@ -1076,10 +1332,10 @@ sap.ui.getCore().SelectedTradeStatus="";
 					this.getView().byId("VLRDealer").setSelectedItem("ALL");
 					this.getView().byId("VLRDealer").setSelectedKey("all");
 				}
-				}
-				else{
-						if(this.getView().byId("VLRDealer").getItems().filter(function(x){return x.mProperties.key=="all"}).length==0)
-			{
+			} else {
+				if (this.getView().byId("VLRDealer").getItems().filter(function (x) {
+						return x.mProperties.key == "all"
+					}).length == 0) {
 					var newItem = new sap.ui.core.Item({
 						key: "all",
 						text: "ALL"
@@ -1088,10 +1344,8 @@ sap.ui.getCore().SelectedTradeStatus="";
 					this.getView().byId("VLRDealer").setSelectedItem("ALL");
 					this.getView().byId("VLRDealer").setSelectedKey("all");
 				}
-					
-					
-				}
-			
+
+			}
 
 			{
 
@@ -1145,15 +1399,14 @@ if(sap.ui.Device.system.phone){
 			//By Sun
 			var suffixDropDown = this.getView().byId("VLRSuffix");
 			//	this.getOwnerComponent().suffixSelectedValue;
-				for(var i=0;i<suffixDropDown.getItems().length;i++){
-					if(this.getOwnerComponent().suffixSelectedValue==suffixDropDown.getItems()[i].getText()){
-							//suffixDropDown.setSelectedKey(suffixDropDown.getItems()[i].getKey());
-							this.suffixSelectedKey=suffixDropDown.getItems()[i].getKey();
-						suffixDropDown.setSelectedItem(suffixDropDown.getItems()[i]);
-					
-						
-					}
+			for (var i = 0; i < suffixDropDown.getItems().length; i++) {
+				if (this.getOwnerComponent().suffixSelectedValue == suffixDropDown.getItems()[i].getText()) {
+					//suffixDropDown.setSelectedKey(suffixDropDown.getItems()[i].getKey());
+					this.suffixSelectedKey = suffixDropDown.getItems()[i].getKey();
+					suffixDropDown.setSelectedItem(suffixDropDown.getItems()[i]);
+
 				}
+			}
 			/*if(this.getOwnerComponent().suffixSelectedIndex >= 0){
 				suffixDropDown.setSelectedIndex(this.getOwnerComponent().suffixSelectedIndex-3);
 				suffixDropDown.setSelectedItem(suffixDropDown.getItems()[this.getOwnerComponent().suffixSelectedIndex-3]);
@@ -1238,84 +1491,83 @@ if(sap.ui.Device.system.phone){
 					else arrData[i].DocumentDate;
 					if (arrData[i].WhtCertDate != null) arrData[i].WhtCertDate = arrData[i].WhtCertDate.split("T")[0];
 					else arrData[i].PaymentDate;*/
-				arrData[i].kunnr = arrData[i].kunnr + "-" + arrData[i].name1;
+				var kunnr = (arrData[i].kunnr).slice(-5) + "-" + arrData[i].name1;
 				var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language;
 				if (SPRAS != "English") {
-					arrData[i].matnr = arrData[i].matnr + "-" + arrData[i].model_desc_fr;
-					arrData[i].zzextcol = arrData[i].zzextcol + "-" + arrData[i].mktg_desc_fr;
-					arrData[i].zzsuffix = arrData[i].zzsuffix + "-" + arrData[i].suffix_desc_fr + "/" + arrData[i].mrktg_int_desc_fr;
+					var matnr = arrData[i].matnr + "-" + arrData[i].model_desc_fr;
+					var zzextcol = arrData[i].zzextcol + "-" + arrData[i].mktg_desc_fr;
+					var zzsuffix = arrData[i].zzsuffix + "-" + arrData[i].suffix_desc_fr + "/" + arrData[i].mrktg_int_desc_fr;
 				} else {
-					arrData[i].matnr = arrData[i].matnr + "-" + arrData[i].model_desc_en;
-					arrData[i].zzextcol = arrData[i].zzextcol + "-" + arrData[i].mktg_desc_en;
-					arrData[i].zzsuffix = arrData[i].zzsuffix + "-" + arrData[i].suffix_desc_en + "/" + arrData[i].mrktg_int_desc_en;
+					var matnr = arrData[i].matnr + "-" + arrData[i].model_desc_en;
+					var zzextcol = arrData[i].zzextcol + "-" + arrData[i].mktg_desc_en;
+					var zzsuffix = arrData[i].zzsuffix + "-" + arrData[i].suffix_desc_en + "/" + arrData[i].mrktg_int_desc_en;
 				}
 
-				//var zzordertype=
+				var zzordertype = "";
 				switch (arrData[i].zzordertype) {
 				case "SO":
-					arrData[i].zzordertype = "STOCK Open";
+					zzordertype = "STOCK Open";
 
 					break;
 				case "SR":
-					arrData[i].zzordertype = "STOCK Restricted";
+					zzordertype = "STOCK Restricted";
 
 					break;
 				case "DM":
-					arrData[i].zzordertype = "DEMO";
+					zzordertype = "DEMO";
 
 					break;
 				case "BA":
-					arrData[i].zzordertype = "BANK ALLOC";
+					zzordertype = "BANK ALLOC";
 
 					break;
 				case "LS":
-					arrData[i].zzordertype = "LAUNCH Stock";
+					zzordertype = "LAUNCH Stock";
 
 					break;
 				case "RS":
-					arrData[i].zzordertype = "RETAIL SOLD";
+					zzordertype = "RETAIL SOLD";
 
 					break;
 				case "F1":
-					arrData[i].zzordertype = "DLR RAC";
+					zzordertype = "DLR RAC";
 
 					break;
 				case "F2":
-					arrData[i].zzordertype = "DLR ELITE";
+					zzordertype = "DLR ELITE";
 
 					break;
 				case "F3":
-					arrData[i].zzordertype = "NAT RAC";
+					zzordertype = "NAT RAC";
 
 					break;
 				case "F4":
-					arrData[i].zzordertype = "NAT ELITE";
+					zzordertype = "NAT ELITE";
 
 					break;
 				case "F5":
-					arrData[i].zzordertype = "MOBILITY";
+					zzordertype = "MOBILITY";
 
 					break;
 
 				}
 
 				if (arrData[i].zzadddata4 != null && arrData[i].zzadddata4 != "") {
-			//	var zzadddata4 =
-			var userDate=arrData[i].zzadddata4;
+					//	var zzadddata4 =
+					var userDate = arrData[i].zzadddata4;
 					/*	arrData[i].zzadddata4=arrData[i].zzadddata4.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1');*/
 					//function convertDate(userDate) {
-					var DateFor=userDate.substr(4, 2) + "-" + userDate.substr(6, 2) + "-" + userDate.substr(0, 4);
-						var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
-							pattern: "yyyy-MM-dd"
-						});
-						var zzadddata4 = oDateFormat.format(new Date(DateFor));
-					
-				//	}
+					var DateFor = userDate.substr(4, 2) + "-" + userDate.substr(6, 2) + "-" + userDate.substr(0, 4);
+					var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+						pattern: "yyyy-MM-dd"
+					});
+					var zzadddata4 = oDateFormat.format(new Date(DateFor));
 
-				}
-				else{
-				var zzadddata4 = "";
-				 // arrData[i].push(zzadddata4);
+					//	}
+
+				} else {
+					var zzadddata4 = "";
+					// arrData[i].push(zzadddata4);
 				}
 
 				if (arrData[i].pstsp != null && arrData[i].pstsp != "") {
@@ -1326,7 +1578,7 @@ if(sap.ui.Device.system.phone){
 						var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 							pattern: "yyyy-MM-dd"
 						});
-							pstsp = oDateFormat.format(new Date(pstsp));
+						pstsp = oDateFormat.format(new Date(pstsp));
 
 					} else {
 						dateTo = dateTo;
@@ -1340,8 +1592,7 @@ if(sap.ui.Device.system.phone){
 
 					}
 
-				}
-				else{
+				} else {
 					var pstsp = "";
 				}
 
@@ -1351,8 +1602,8 @@ if(sap.ui.Device.system.phone){
 					var z_pd_flag = "Yes";
 				}
 
-				row += '="' + arrData[i].kunnr + '","' + arrData[i].matnr + '","' + arrData[i].zzsuffix +
-					'",="' + arrData[i].zzapx + '",="' + arrData[i].zzextcol + '",="' + arrData[i].zzordertype + '","' +zzadddata4 +
+				row += '="' + kunnr + '","' + matnr + '","' + zzsuffix +
+					'",="' + arrData[i].zzapx + '",="' + zzextcol + '",="' + zzordertype + '","' + zzadddata4 +
 					'","' + pstsp +
 					'","' + z_pd_flag + '","' + arrData[i].ort01 + '","' + arrData[i].bezei + '",';
 				//}
@@ -1789,20 +2040,21 @@ if(sap.ui.Device.system.phone){
 
 		},
 		handlebacksearch: function () {
+			this.getView().byId("chknew").setSelected(false);
+			this.getView().byId("chkexi").setSelected(false);
 			this.getRouter().navTo("VehicleLocSearch");
 			this.getView().byId("VLRSuffix").updateBindings();
 		},
-		SuffixFilter:function()
-		{
-		
-				if (sap.ui.getCore().getModel("SearchedData") && sap.ui.getCore().getModel("oSuffieldmodel") != undefined) {
+		SuffixFilter: function () {
+
+			if (sap.ui.getCore().getModel("SearchedData") && sap.ui.getCore().getModel("oSuffieldmodel") != undefined) {
 				this.getView().setModel(sap.ui.getCore().getModel("SearchedData"), "VehicleLocatorScdScr");
 
 				var Status = sap.ui.getCore().getModel("SearchedData").getData();
 				var model = new sap.ui.model.json.JSONModel(Status);
 				model.setSizeLimit(1000);
 				this.getView().byId("table1VSR").setModel(model);
-			
+
 				var oProductNameColumn = this.getView().byId("matnr");
 				this.getView().byId("table1VSR").sort(oProductNameColumn, SortOrder.Ascending);
 				var Dealer = sap.ui.getCore().getModel("SearchedData").getData();
@@ -1820,7 +2072,7 @@ if(sap.ui.Device.system.phone){
 					obj.suffix_desc_fr = Suffix[i].SuffixDescriptionFR;
 					obj.mrktg_int_desc_en = Suffix[i].mrktg_int_desc_en;
 					obj.mrktg_int_desc_fr = Suffix[i].mrktg_int_desc_fr;
-					obj.int_c=Suffix[i].int_c;
+					obj.int_c = Suffix[i].int_c;
 					obj.SPRAS = Suffix[i].SPRAS;
 					SuffixData.push(obj);
 				}
@@ -1835,133 +2087,134 @@ if(sap.ui.Device.system.phone){
 				Model.setSizeLimit(1000);
 				this.getView().byId("VLRColor").setModel(Model);
 				if (Color.length != 0) {
-				if(this.getView().byId("VLRColor").getItems().filter(function(x){return x.mProperties.key=="all"}).length==0)
-				{
-					var newItem = new sap.ui.core.Item({
-						key: "all",
-						text: "ALL"
-					});
-					this.getView().byId("VLRColor").insertItem(newItem);
-					this.getView().byId("VLRColor").setSelectedKey("all");
-					this.getView().byId("VLRColor").setSelectedItem("ALL");
+					if (this.getView().byId("VLRColor").getItems().filter(function (x) {
+							return x.mProperties.key == "all"
+						}).length == 0) {
+						var newItem = new sap.ui.core.Item({
+							key: "all",
+							text: "ALL"
+						});
+						this.getView().byId("VLRColor").insertItem(newItem);
+						this.getView().byId("VLRColor").setSelectedKey("all");
+						this.getView().byId("VLRColor").setSelectedItem("ALL");
+					}
+				} else {
+					if (this.getView().byId("VLRColor").getItems().filter(function (x) {
+							return x.mProperties.key == "all"
+						}).length == 0) {
+						var newItem = new sap.ui.core.Item({
+							key: "all",
+							text: "ALL"
+						});
+						this.getView().byId("VLRColor").insertItem(newItem);
+						this.getView().byId("VLRColor").setSelectedKey("all");
+						this.getView().byId("VLRColor").setSelectedItem("ALL");
+					}
 				}
-				}
-				else{
-					if(this.getView().byId("VLRColor").getItems().filter(function(x){return x.mProperties.key=="all"}).length==0)
-				{
-					var newItem = new sap.ui.core.Item({
-						key: "all",
-						text: "ALL"
-					});
-					this.getView().byId("VLRColor").insertItem(newItem);
-					this.getView().byId("VLRColor").setSelectedKey("all");
-					this.getView().byId("VLRColor").setSelectedItem("ALL");
-				}
-				}
-				}
+			}
 
-				/*var obj = {};
-				for (var i = 0, len = Suffix.length; i < len; i++)
-				/*	obj[Suffix[i]['zzsuffix']] = Suffix[i];*/
-				/*	obj[Suffix[i]['zzsuffix']] = Suffix[i];
+			/*var obj = {};
+			for (var i = 0, len = Suffix.length; i < len; i++)
+			/*	obj[Suffix[i]['zzsuffix']] = Suffix[i];*/
+			/*	obj[Suffix[i]['zzsuffix']] = Suffix[i];
 				Suffix = new Array();
 				for (var key in obj)
 			/*		Suffix.push(obj[key]);*/
-				/*if (this.getView().byId("table1VSR").getModel().getData().length != 0) {
-				*/
+			/*if (this.getView().byId("table1VSR").getModel().getData().length != 0) {
+			 */
 
-					/*var Model = new sap.ui.model.json.JSONModel(SuffixData);
-					Model.setSizeLimit(1000);
-					this.getView().byId("VLRSuffix").setModel(Model);*/
-				
-				//}/* else {*/
-				/*	var Model = new sap.ui.model.json.JSONModel([]);
-					Model.setSizeLimit(1000);
-					this.getView().byId("VLRSuffix").setModel(Model);*/
+			/*var Model = new sap.ui.model.json.JSONModel(SuffixData);
+			Model.setSizeLimit(1000);
+			this.getView().byId("VLRSuffix").setModel(Model);*/
+
+			//}/* else {*/
+			/*	var Model = new sap.ui.model.json.JSONModel([]);
+				Model.setSizeLimit(1000);
+				this.getView().byId("VLRSuffix").setModel(Model);*/
 			/*	}*/
-				if (SuffixData.length != 0) {
+			if (SuffixData.length != 0) {
 
 				/*	this.getView().byId("VLRSuffix").setSelectedKey(sap.ui.getCore().SuffixSelectedKey);*/
 				//	this.getView().byId("VLRSuffix").setSelectedText(sap.ui.getCore().SuffixSelectedItem);
-					/*	if(SuffixData[0].SPRAS.slice(0,1)!="E"){
-							this.getView().byId("VLRSuffix").setSelectedItem(SuffixData[0].zzsuffix + "-" + SuffixData[0].suffix_desc_fr + SuffixData[0].mrktg_int_desc_fr);
+				/*	if(SuffixData[0].SPRAS.slice(0,1)!="E"){
+						this.getView().byId("VLRSuffix").setSelectedItem(SuffixData[0].zzsuffix + "-" + SuffixData[0].suffix_desc_fr + SuffixData[0].mrktg_int_desc_fr);
+					
+					}
+					else{
+					this.getView().byId("VLRSuffix").setSelectedItem(SuffixData[0].zzsuffix + "-" + SuffixData[0].suffix_desc_en + SuffixData[0].mrktg_int_desc_en);
 						
-						}
-						else{
-						this.getView().byId("VLRSuffix").setSelectedItem(SuffixData[0].zzsuffix + "-" + SuffixData[0].suffix_desc_en + SuffixData[0].mrktg_int_desc_en);
-							
-						}*/
-					/*	var AllAdd=SuffixData.filter(function())*/
-						
+					}*/
+				/*	var AllAdd=SuffixData.filter(function())*/
+
 				/*	var newItem = new sap.ui.core.Item({
 						key: "all",
 						text: "ALL"
 					});
 				
 					this.getView().byId("VLRSuffix").insertItem(newItem);*/
-				}
+			}
 
-				var obj = {};
-				for (var i = 0, len = Status.length; i < len; i++)
-					obj[Status[i]['zz_trading_ind']] = Status[i];
-				Status = new Array();
-				for (var key in obj)
-					Status.push(obj[key]);
+			var obj = {};
+			for (var i = 0, len = Status.length; i < len; i++)
+				obj[Status[i]['zz_trading_ind']] = Status[i];
+			Status = new Array();
+			for (var key in obj)
+				Status.push(obj[key]);
 
-				/*Status.splice(-1,1);*/
-				var StatusDataFilter=[];
-				for(var i=0;i<Status.length;i++){
-					if(Status[i].zz_trading_ind=="1"||Status[i].zz_trading_ind=="2"){
-						StatusDataFilter.push(Status[i]);
-					}
+			/*Status.splice(-1,1);*/
+			var StatusDataFilter = [];
+			for (var i = 0; i < Status.length; i++) {
+				if (Status[i].zz_trading_ind == "1" || Status[i].zz_trading_ind == "2") {
+					StatusDataFilter.push(Status[i]);
 				}
-					if(StatusDataFilter.length==0){
-				StatusDataFilter=[{
-					"zz_trading_ind":"1"
-					
-				},{
-					"zz_trading_ind":"2"	
+			}
+			if (StatusDataFilter.length == 0) {
+				StatusDataFilter = [{
+					"zz_trading_ind": "1"
+
+				}, {
+					"zz_trading_ind": "2"
 				}];
-				}
-				var Model = new sap.ui.model.json.JSONModel(StatusDataFilter);
-				Model.setSizeLimit(1000);
+			}
+			var Model = new sap.ui.model.json.JSONModel(StatusDataFilter);
+			Model.setSizeLimit(1000);
 
-				var StatusFilter = StatusDataFilter.filter(function (x) {
-					return x.zz_trading_ind == "1";
+			var StatusFilter = StatusDataFilter.filter(function (x) {
+				return x.zz_trading_ind == "1";
+			});
+
+			this.getView().byId("VLRStatus").setModel(Model);
+			if (StatusFilter.length != 0) {
+
+				this.getView().byId("VLRStatus").setSelectedItem("Pipeline - Routable");
+				this.getView().byId("VLRStatus").setSelectedKey(sap.ui.getCore().SelectedStauts);
+			} else if (StatusDataFilter.length != 0) {
+				var newItem = new sap.ui.core.Item({
+					key: "1",
+					text: "Pipeline - Routable"
 				});
-
-				this.getView().byId("VLRStatus").setModel(Model);
-				if (StatusFilter.length != 0) {
-
-					this.getView().byId("VLRStatus").setSelectedItem("Pipeline - Routable");
-					this.getView().byId("VLRStatus").setSelectedKey("1");
-				}
-				else if(StatusDataFilter.length!=0){
-					var newItem = new sap.ui.core.Item({
-						key: "1",
-						text: "Pipeline - Routable"
-					});
-					this.getView().byId("VLRStatus").insertItem(newItem);
-						this.getView().byId("VLRStatus").setSelectedItem("Pipeline - Routable");
-					this.getView().byId("VLRStatus").setSelectedKey("1");
-				}
-				/*	if(StatusFilter.length!=0){
+				this.getView().byId("VLRStatus").insertItem(newItem);
+				this.getView().byId("VLRStatus").setSelectedItem("Pipeline - Routable");
+				this.getView().byId("VLRStatus").setSelectedKey(sap.ui.getCore().SelectedStauts);
+			}
+			/*	if(StatusFilter.length!=0){
 						this.getView().byId("VLRStatus").setSelectedItem("Pipeline - Routable");
 	this.getView().byId("VLRStatus").setSelectedKey("1");
 				}*/
 
-				var obj = {};
-				for (var i = 0, len = Dealer.length; i < len; i++)
-					obj[Dealer[i]['kunnr']] = Dealer[i];
-				Dealer = new Array();
-				for (var key in obj)
-					Dealer.push(obj[key]);
-				var Model1 = new sap.ui.model.json.JSONModel(Dealer);
-				Model1.setSizeLimit(1000);
-				this.getView().byId("VLRDealer").setModel(Model1);
-					if (Dealer.length != 0) {
-			if(this.getView().byId("VLRDealer").getItems().filter(function(x){return x.mProperties.key=="all"}).length==0)
-			{
+			var obj = {};
+			for (var i = 0, len = Dealer.length; i < len; i++)
+				obj[Dealer[i]['kunnr']] = Dealer[i];
+			Dealer = new Array();
+			for (var key in obj)
+				Dealer.push(obj[key]);
+			var Model1 = new sap.ui.model.json.JSONModel(Dealer);
+			Model1.setSizeLimit(1000);
+			this.getView().byId("VLRDealer").setModel(Model1);
+			if (Dealer.length != 0) {
+				if (this.getView().byId("VLRDealer").getItems().filter(function (x) {
+						return x.mProperties.key == "all"
+					}).length == 0) {
 					var newItem = new sap.ui.core.Item({
 						key: "all",
 						text: "ALL"
@@ -1970,10 +2223,10 @@ if(sap.ui.Device.system.phone){
 					this.getView().byId("VLRDealer").setSelectedItem("ALL");
 					this.getView().byId("VLRDealer").setSelectedKey("all");
 				}
-				}
-				else{
-						if(this.getView().byId("VLRDealer").getItems().filter(function(x){return x.mProperties.key=="all"}).length==0)
-			{
+			} else {
+				if (this.getView().byId("VLRDealer").getItems().filter(function (x) {
+						return x.mProperties.key == "all"
+					}).length == 0) {
 					var newItem = new sap.ui.core.Item({
 						key: "all",
 						text: "ALL"
@@ -1982,68 +2235,93 @@ if(sap.ui.Device.system.phone){
 					this.getView().byId("VLRDealer").setSelectedItem("ALL");
 					this.getView().byId("VLRDealer").setSelectedKey("all");
 				}
-					
-					
-				}
-			
-this.onStatusChange();
-	sap.ui.core.BusyIndicator.hide();
-		/*	{
 
-				var filterArray = [];
+			}
 
-				this.getView().byId("table1VSR").getBinding("rows").filter([]);
-				// onVlrCommonChange
-				var Status = this.getView().byId("VLRStatus").getSelectedKey();
-				if (Status != "") {
+			this.onStatusChange();
+			sap.ui.core.BusyIndicator.hide();
+			/*	{
 
-					filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.Contains, Status));
-				}
-				var Dealer = this.getView().byId("VLRDealer").getSelectedKey();
+					var filterArray = [];
 
-				var Suffix = this.getView().byId("VLRSuffix").getSelectedKey();
-				if (Suffix != "" && Suffix != "all") {
+					this.getView().byId("table1VSR").getBinding("rows").filter([]);
+					// onVlrCommonChange
+					var Status = this.getView().byId("VLRStatus").getSelectedKey();
+					if (Status != "") {
 
-					filterArray.push(new sap.ui.model.Filter("zzsuffix", sap.ui.model.FilterOperator.Contains, Suffix));
-				} else if (Suffix == "all") {
-					var SelSuffix = this.getView().byId("VLRSuffix").getModel().getData();
-					for (var i = 0; i < SelSuffix.length; i++) {
-						filterArray.push(new sap.ui.model.Filter("zzsuffix", sap.ui.model.FilterOperator.Contains, SelSuffix[i].zzsuffix));
+						filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.Contains, Status));
 					}
-				}
-		}*/
+					var Dealer = this.getView().byId("VLRDealer").getSelectedKey();
+
+					var Suffix = this.getView().byId("VLRSuffix").getSelectedKey();
+					if (Suffix != "" && Suffix != "all") {
+
+						filterArray.push(new sap.ui.model.Filter("zzsuffix", sap.ui.model.FilterOperator.Contains, Suffix));
+					} else if (Suffix == "all") {
+						var SelSuffix = this.getView().byId("VLRSuffix").getModel().getData();
+						for (var i = 0; i < SelSuffix.length; i++) {
+							filterArray.push(new sap.ui.model.Filter("zzsuffix", sap.ui.model.FilterOperator.Contains, SelSuffix[i].zzsuffix));
+						}
+					}
+			}*/
 		},
-		Nodata:function(){
-			
-		
+		Nodata: function () {
+
 			//	if (sap.ui.getCore().getModel("SearchedData") && sap.ui.getCore().getModel("oSuffieldmodel") != undefined) {
 			//	this.getView().setModel(sap.ui.getCore().getModel("SearchedData"), "VehicleLocatorScdScr");
 
 			//	var Status = sap.ui.getCore().getModel("SearchedData").getData();
-				var model = new sap.ui.model.json.JSONModel([]);
-				model.setSizeLimit(1000);
-				this.getView().byId("table1VSR").setModel(model);
-			
-				var Model = new sap.ui.model.json.JSONModel([]);
-				Model.setSizeLimit(1000);
-				this.getView().byId("VLRColor").setModel(Model);
-			
-				var Model = new sap.ui.model.json.JSONModel([]);
-				Model.setSizeLimit(1000);
+			var model = new sap.ui.model.json.JSONModel([]);
+			model.setSizeLimit(1000);
+			this.getView().byId("table1VSR").setModel(model);
 
-			
-				this.getView().byId("VLRStatus").setModel(Model);
-			
-			
+			var Model = new sap.ui.model.json.JSONModel([]);
+			Model.setSizeLimit(1000);
+			this.getView().byId("VLRColor").setModel(Model);
+			if (this.getView().byId("VLRColor").getItems().filter(function (x) {
+					return x.mProperties.key == "all"
+				}).length == 0) {
+				var newItem = new sap.ui.core.Item({
+					key: "all",
+					text: "ALL"
+				});
+				this.getView().byId("VLRColor").insertItem(newItem);
+				this.getView().byId("VLRColor").setSelectedKey("all");
+				this.getView().byId("VLRColor").setSelectedItem("ALL");
+			}
+			/*var Model = new sap.ui.model.json.JSONModel([]);
+				Model.setSizeLimit(1000);
+*/
+			var StatusDataFilter = [{
+				"zz_trading_ind": "1"
 
-				var Model1 = new sap.ui.model.json.JSONModel([]);
-				Model1.setSizeLimit(1000);
-				this.getView().byId("VLRDealer").setModel(Model1);
-				
+			}, {
+				"zz_trading_ind": "2"
+			}];
+
+			/*Status.splice(-1,1);*/
+			var Model = new sap.ui.model.json.JSONModel(StatusDataFilter);
+			Model.setSizeLimit(1000);
+
+			this.getView().byId("VLRStatus").setModel(Model);
+
+			var Model1 = new sap.ui.model.json.JSONModel([]);
+			Model1.setSizeLimit(1000);
+			this.getView().byId("VLRDealer").setModel(Model1);
+			if (this.getView().byId("VLRDealer").getItems().filter(function (x) {
+					return x.mProperties.key == "all"
+				}).length == 0) {
+				var newItem = new sap.ui.core.Item({
+					key: "all",
+					text: "ALL"
+				});
+				this.getView().byId("VLRDealer").insertItem(newItem);
+				this.getView().byId("VLRDealer").setSelectedItem("ALL");
+				this.getView().byId("VLRDealer").setSelectedKey("all");
+			}
 			this.onStatusChange();
-	sap.ui.core.BusyIndicator.hide();		
-				}
-		
+			sap.ui.core.BusyIndicator.hide();
+		}
 
 		/*	{
 
@@ -2069,8 +2347,6 @@ this.onStatusChange();
 					}
 				}
 		}*/
-		
-		
 
 		/*	1000=pacific
 			2000=prairie

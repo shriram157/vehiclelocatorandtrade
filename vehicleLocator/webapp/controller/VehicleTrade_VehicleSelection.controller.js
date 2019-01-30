@@ -190,31 +190,182 @@ this.SelectedVehicleFrom=oEvent.getParameter("arguments").SelectedVehicleFrom;
 
 		},
 		oTradeLinkPress: function (oEvt) {
+var that=this;
+			that.oSelectedItem = oEvt.getSource().getBindingContext().getObject();
+			var VTN=that.oSelectedItem.zzvtn;
+var dealercode=that.oSelectedItem.kunnr.slice(-5);
 
-			var oSelectedItem = oEvt.getSource().getBindingContext().getObject();
-			if(this.SelectedVehicleFrom=="VehileTrade_CreateSingle"){
-			sap.ui.getCore().getModel("TradeModel").setProperty("/VehicleTradeVehicle", oSelectedItem);
+var sLocation = window.location.host;
+			var sLocation_conf = sLocation.search("webide");
+		
+			if (sLocation_conf == 0) {
+				this.sPrefix = "/vehicleLocatorNode";
+			} else {
+				this.sPrefix = "";
+
+			}
+
+			this.nodeJsUrl = this.sPrefix + "/node";
+			that.oDataUrl = this.nodeJsUrl + "/Z_DEALER_TRADE_REQUEST_SRV";
+				var SeriesUrl = that.oDataUrl + "/CalculateETASet?&filter=VTN eq '"+VTN+"' and DelearCode eq '"+dealercode+"'&$format=json";
+			var ajax = $.ajax({
+				dataType: "json",
+				xhrFields: //
+				{
+					withCredentials: true
+				},
+				url:SeriesUrl,
+				async: true,
+				success: function (result) {
+				debugger;
+					var Data = result.d.results[0];
+					Data.MessageType="";
+					Data.Calculate="20181126";
+					if(Data.MessageType!="E"){
+						var CurrentETAFrom=that.oSelectedItem.zzadddata4;
+							if (CurrentETAFrom != null && CurrentETAFrom != "") {
+				
+			CurrentETAFrom=CurrentETAFrom.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1');
+			}
+				var CurrentETATo=that.oSelectedItem.pstsp;
+			
+			
+			if (CurrentETATo != null && CurrentETATo != "") {
+				var dateTo = CurrentETATo.split("(")[1];
+				if (CurrentETATo.includes("+") == true) {
+					/*dateTo = dateTo.split("+")[0];*/
+					CurrentETATo =  new Date(CurrentETATo.split("(")[1].substring(0,10) * 1000).toDateString().substring(4,15);
+					var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+					pattern: "MM/dd/yyyy"
+				});
+				CurrentETATo= oDateFormat.format(new Date(CurrentETATo));
+					
+				} else {
+					dateTo = dateTo;
+				var dataTo1 = dateTo.substring(0, dateTo.length - 5);
+				var ValidTo = new Date(dataTo1 * 1000);
+				ValidTo = ValidTo.toGMTString().substring(4, 16);
+				var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+					pattern: "MM/dd/yyyy"
+				});
+				CurrentETATo= oDateFormat.format(new Date(ValidTo));
+				}
+			
+			}
+		
+			var date1 = new Date(CurrentETAFrom);
+var date2 = new Date(CurrentETATo);
+var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+var CurrentEtadiff = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+function addDays(date, days) {
+  var result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return result;
+}
+var Eta=Data.Calculate;
+var Calculate=Eta.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1');
+var Proposed_ETA_To=addDays(Calculate,CurrentEtadiff);
+that.oSelectedItem.Proposed_ETA_To=Proposed_ETA_To;
+that.oSelectedItem.Proposed_ETA_From=Data.Calculate;
+//that.selectedTrade=escape(JSON.stringify(that.selectedTrade));
+if(that.SelectedVehicleFrom=="VehileTrade_CreateSingle"){
+			sap.ui.getCore().getModel("TradeModel").setProperty("/VehicleTradeVehicle", that.oSelectedItem);
 			//	var oSelectedStrItems = JSON.stringify(oSelectedItem);
-			this.getRouter().navTo("VehicleTrade_CreateSingle", {
+			that.getRouter().navTo("VehicleTrade_CreateSingle", {
 				SelectedTrade: "VehicleTradeVehicle"
 			});
 			}
-			else if(this.SelectedVehicleFrom=="VehileTrade_UpdtTradReq"){
-				sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").setProperty("/VehicleTrade_UpdtTradReqVehicle", oSelectedItem);
-					this.getRouter().navTo("VehicleTrade_UpdtTradReq", {
+			else if(that.SelectedVehicleFrom=="VehileTrade_UpdtTradReq"){
+				sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").setProperty("/VehicleTrade_UpdtTradReqVehicle", that.oSelectedItem);
+					that.getRouter().navTo("VehicleTrade_UpdtTradReq", {
 				SelectedTrade:"VehicleTrade_updateTradeVehicle"
 			});
 				
 			}
-				else if(this.SelectedVehicleFrom=="VehicleTrade_ModelBlock_Summary"){
+				else if(that.SelectedVehicleFrom=="VehicleTrade_ModelBlock_Summary"){
 				//	var Selobj=escape(JSON.stringify(oSelectedItem));
-				var model= new sap.ui.model.json.JSONModel(oSelectedItem);
+				var model= new sap.ui.model.json.JSONModel(that.oSelectedItem);
 				sap.ui.getCore().setModel(model,"VehicleTrade_ModelBlock_SummaryTrade")
-					this.getRouter().navTo("VehicleTrade_ModelBlock_Summary", {
+					that.getRouter().navTo("VehicleTrade_ModelBlock_Summary", {
 				SelectedTrade:"VehicleTradeVehicle"
 			});
 				
 			}
+			
+			
+			
+					}
+					else{
+						if(that.SelectedVehicleFrom=="VehileTrade_CreateSingle"){
+			sap.ui.getCore().getModel("TradeModel").setProperty("/VehicleTradeVehicle", that.oSelectedItem);
+			//	var oSelectedStrItems = JSON.stringify(oSelectedItem);
+			that.getRouter().navTo("VehicleTrade_CreateSingle", {
+				SelectedTrade: "VehicleTradeVehicle"
+			});
+			}
+			else if(that.SelectedVehicleFrom=="VehileTrade_UpdtTradReq"){
+				sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").setProperty("/VehicleTrade_UpdtTradReqVehicle", that.oSelectedItem);
+					that.getRouter().navTo("VehicleTrade_UpdtTradReq", {
+				SelectedTrade:"VehicleTrade_updateTradeVehicle"
+			});
+				
+			}
+				else if(that.SelectedVehicleFrom=="VehicleTrade_ModelBlock_Summary"){
+				//	var Selobj=escape(JSON.stringify(oSelectedItem));
+				var model= new sap.ui.model.json.JSONModel(that.oSelectedItem);
+				sap.ui.getCore().setModel(model,"VehicleTrade_ModelBlock_SummaryTrade")
+					that.getRouter().navTo("VehicleTrade_ModelBlock_Summary", {
+				SelectedTrade:"VehicleTradeVehicle"
+			});
+				
+			}
+			}
+
+				},
+				error:function(){
+					var that=this;
+					if(that.SelectedVehicleFrom=="VehileTrade_CreateSingle"){
+			sap.ui.getCore().getModel("TradeModel").setProperty("/VehicleTradeVehicle", that.oSelectedItem);
+			//	var oSelectedStrItems = JSON.stringify(oSelectedItem);
+			that.getRouter().navTo("VehicleTrade_CreateSingle", {
+				SelectedTrade: "VehicleTradeVehicle"
+			});
+			}
+			else if(that.SelectedVehicleFrom=="VehileTrade_UpdtTradReq"){
+				sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").setProperty("/VehicleTrade_UpdtTradReqVehicle", that.oSelectedItem);
+					that.getRouter().navTo("VehicleTrade_UpdtTradReq", {
+				SelectedTrade:"VehicleTrade_updateTradeVehicle"
+			});
+				
+			}
+				else if(that.SelectedVehicleFrom=="VehicleTrade_ModelBlock_Summary"){
+				//	var Selobj=escape(JSON.stringify(oSelectedItem));
+				var model= new sap.ui.model.json.JSONModel(that.oSelectedItem);
+				sap.ui.getCore().setModel(model,"VehicleTrade_ModelBlock_SummaryTrade")
+					that.getRouter().navTo("VehicleTrade_ModelBlock_Summary", {
+				SelectedTrade:"VehicleTradeVehicle"
+			});
+				
+			}
+			}
+				
+			});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			
+			
 
 		},
 		onChange: function (oEvent) {
