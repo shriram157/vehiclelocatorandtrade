@@ -159,7 +159,7 @@
 													<l:GridData span="L2 M2 S6"/>
 												</layoutData>
 											</Label>
-											<ComboBox id="VLRStatus" selectionChange="onStatusPress" items="{/}" class="sapUiTinyMarginBegin" width="300px">
+											<ComboBox id="VLRStatus" selectionChange="onStatusChange" items="{/}" class="sapUiTinyMarginBegin" width="300px">
 												<core:ListItem text="{path:'zz_trading_ind',formatter:'vehicleLocator.Formatter.Formatter.Status'}" key="{zz_trading_ind}"/>
 												<layoutData>
 													<l:GridData span="L2 M2 S6"/>

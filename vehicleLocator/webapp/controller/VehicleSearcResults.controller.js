@@ -261,12 +261,18 @@ sap.ui.define([
 						// 	});*/
 
 						// } 
-						var tempTabData = [];
+						// var tempTabData = [];
 
 						var FilterZonestock = oExcludeTci.filter(function (x) {
 							return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "DM" || x.zzordertype == "SO")
 						});
-						tempTabData =FilterZonestock;
+						var tempTabData = FilterZonestock.filter(function (array_el) {
+							return oZoneIncludeData.filter(function (anotherOne_el) {
+								return (anotherOne_el == array_el.kunnr && array_el.zzordertype == "DM");
+							}).length == 0;
+						});
+						console.log("final searched data", tempTabData);
+						// tempTabData = FilterZonestock;
 						// debugger;
 						// for (var n = 0; n < oZoneIncludeData.length; n++) {
 						// 	$.each(FilterZonestock, function (i, item) {
@@ -534,26 +540,31 @@ sap.ui.define([
 						// 	});
 
 						// }
-						var tempTabData = [];
+						// var tempTabData = [];
 
 						var FilterZonestock = oExcludeTci.filter(function (x) {
-							return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "DM" || x.zzordertype == "SO")
+							return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "DM" || x.zzordertype == "SO");
 						});
 						// tempTabData = FilterZonestock;
 						//debugger;
-						for (var n = 0; n < oZoneIncludeData.length; n++) {
-							$.each(FilterZonestock, function (i, item) {
-								if (oZoneIncludeData[n] == item.kunnr && item.zzordertype == "SO" && item.zzordertype !== "DM") {
-									console.log("match", item.kunnr);
-									tempTabData.push(item);
-									console.log("matched Data", tempTabData);
-								} else {
-									tempTabData.push(item);
-								}
-							});
-						}
-						tempTabData.push(FilterZonestock);
-						console.log("final searched data", tempTabData);
+						// for (var n = 0; n < oZoneIncludeData.length; n++) {
+						// 	$.each(FilterZonestock, function (i, item) {
+						// 		if (oZoneIncludeData[n] == item.kunnr && item.zzordertype == "SO" && item.zzordertype !== "DM") {
+						// 			console.log("match", item.kunnr);
+						// 			tempTabData.push(item);
+						// 			console.log("matched Data", tempTabData);
+						// 		} else {
+						// 			tempTabData.push(item);
+						// 		}
+						// 	});
+						// }
+						// tempTabData.push(FilterZonestock);
+						var filteredArray = FilterZonestock.filter(function (array_el) {
+							return oZoneIncludeData.filter(function (anotherOne_el) {
+								return (anotherOne_el == array_el.kunnr && array_el.zzordertype == "DM");
+							}).length == 0;
+						});
+						console.log("final searched data", filteredArray);
 
 						/*	var oZoneExclude = [
 						"2400507000",
@@ -623,7 +634,7 @@ sap.ui.define([
 								}
 							}*/
 
-						var oDumModel = new sap.ui.model.json.JSONModel(tempTabData);
+						var oDumModel = new sap.ui.model.json.JSONModel(filteredArray);
 						oDumModel.setSizeLimit(100000);
 						sap.ui.getCore().setModel(oDumModel, "SearchedData");
 						that.SuffixFilter();
