@@ -3,15 +3,15 @@ sap.ui.define(function () {
 		Status: function (zz_trading_ind) {
 			switch (zz_trading_ind) {
 			case "1":
-				return "Pipeline - Routable";
+				return "Stock-Non-Routable";
 				break;
 			case "2":
-				return "Pipeline – non-Routable";
+				return "Pipeline – Routable";
 				break;
-		/*	case "3": //Update this
-				return "Pipeline – non-Routable";
+			case "3": //Update this
+				return "Pipeline – Routable";
 				break;
-*/
+
 			}
 
 		},
@@ -73,11 +73,12 @@ oTradeStatusBinding:function(Trade_return){
 
 		},
 		AccessoryInstall: function (z_pd_flag) {
-			if (z_pd_flag == false) {
-				return "No";
-			} else if (z_pd_flag == true) {
+		 if (z_pd_flag == "D") {
 				return "Yes";
 			}
+			else {
+				return "No";
+			} 
 
 		},
 
@@ -192,7 +193,7 @@ oTradeStatusBinding:function(Trade_return){
 					/*dateTo = dateTo.split("+")[0];*/
 					Created_On =  new Date(Created_On.split("(")[1].substring(0,10) * 1000).toDateString().substring(4,15);
 					var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
-					pattern: "MM/dd/yyyy"
+					pattern: "yyyy-MM-dd"
 				});
 				return oDateFormat.format(new Date(Created_On));
 					
@@ -202,7 +203,7 @@ oTradeStatusBinding:function(Trade_return){
 				var ValidTo = new Date(dataTo1 * 1000);
 				ValidTo = ValidTo.toGMTString().substring(4, 16);
 				var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
-					pattern: "MM/dd/yyyy"
+					pattern: "yyyy-MM-dd"
 				});
 				return oDateFormat.format(new Date(ValidTo));
 				}
@@ -212,7 +213,7 @@ oTradeStatusBinding:function(Trade_return){
 		ProposedEtaToDate:function(Proposed_ETA_To)
 {
 		var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
-					pattern: "MM/dd/yyyy"
+					pattern: "yyyy-MM-dd"
 				});
 				return oDateFormat.format(new Date(Proposed_ETA_To));
 },	
@@ -244,7 +245,7 @@ oTradeStatusBinding:function(Trade_return){
 
 			if (Created_On != null && Created_On != "") {
 				
-			return	Created_On.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1');
+			return	Created_On.replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3');
 			}
 
 		},

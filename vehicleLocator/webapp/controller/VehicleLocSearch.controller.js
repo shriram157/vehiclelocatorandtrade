@@ -89,26 +89,26 @@ sap.ui.define([
 				success: function (oData) {
 					var BpDealer = [];
 					var userAttributes = [];
-					BpDealer.push({
-						"BusinessPartnerKey": "2400042120",
-						"BusinessPartner": "42120",
+				/*	BpDealer.push({
+						"BusinessPartnerKey": "2400042193",
+						"BusinessPartner": "42193",
 
 						"BusinessPartnerName": "Don Valley North Toyota...", //item.OrganizationBPName1 //item.BusinessPartnerFullName
 						"Division": "10",
 						"BusinessPartnerType": "Z001",
 						"searchTermReceivedDealerName": "42120"
-					});
+					});*/
 					$.each(oData.attributes, function (i, item) {
 						var BpLength = item.BusinessPartner.length;
 
-						/*	BpDealer.push({
+					BpDealer.push({
 									"BusinessPartnerKey": item.BusinessPartnerKey,
 									"BusinessPartner": item.BusinessPartner, //.substring(5, BpLength),
 									"BusinessPartnerName": item.BusinessPartnerName, //item.OrganizationBPName1 //item.BusinessPartnerFullName
 									"Division": item.Division,
 									"BusinessPartnerType": item.BusinessPartnerType,
 									"searchTermReceivedDealerName": item.SearchTerm2
-								});*/
+								});
 
 					});
 					//  set your model or use the model below - // TODO: 
@@ -116,21 +116,21 @@ sap.ui.define([
 					sap.ui.getCore().setModel(new sap.ui.model.json.JSONModel(BpDealer), "LoginBpDealerModel");
 					var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
 					that.getView().byId("oDealertitle").setText(LoggedInDealer);
-					userAttributes.push({
+			/*	userAttributes.push({
 						"UserType": "Dealer",
-						"DealerCode": ["42120"],
+						"DealerCode": "42193",
 						"Language": "English"
 
-					});
+					});*/
 					// read the saml attachments the same way 
 					$.each(oData.samlAttributes, function (i, item) {
-					/*	userAttributes.push({
+						userAttributes.push({
 							"UserType": item.UserType[0],
 							"DealerCode": item.DealerCode[0],
 							"Language": item.Language[0]
 							// "Zone": item.Zone[0]   ---    Not yet available
 							
-						});*/
+						});
 
 					});
 
@@ -370,7 +370,7 @@ sap.ui.define([
 					var BpDealer = that.getView().getModel("BpDealerModel").getData();
 					var BusinessPartner = BpDealer[0].BusinessPartnerKey;
 					//for(var i=0;i<userAttributesModellen.length;i++){
-					var oDealer = userAttributesModellen[0].DealerCode[0];
+					var oDealer = userAttributesModellen[0].DealerCode;
 					/*	var SalesOrganization=userAttributesModellen[0].Zone;*/
 					var Division = BpDealer[0].Division;
 					/* var DistributionChannel="10";*/
@@ -1274,11 +1274,13 @@ for(var i=0;i<oResults.length;i++){
 				SelectedZone.push("5000");
 			}
 			this.getOwnerComponent().SelectedZone = SelectedZone;
+			this.getOwnerComponent().suffixSelectedValue=that.getView().byId("SuffCmbo").getSelectedItem().getText();
 			/*this.getRouter().navTo("VehicleSearcResults");*/
 			this.getOwnerComponent().SelectedMSMData = [{
 				"MoyearCombo": MoyearCombo,
 				"SeriesCmbo": SeriesCmbo,
-				"McCmbo": McCmbo
+				"McCmbo": McCmbo,
+				"SuffCmbo":SuffCmbo
 
 			}];
 			that.getView().getModel("SeriesData").setProperty("/SelectedSeries", that.getView().byId("SeriesCmbo").getSelectedKey());
@@ -1349,7 +1351,7 @@ for(var i=0;i<oResults.length;i++){
 					var userAttributesModellen = that.getView().getModel("userAttributesModel").getData();
 					var BpDealer = that.getView().getModel("BpDealerModel").getData();
 					//for(var i=0;i<userAttributesModellen.length;i++){
-					var Dealer = userAttributesModellen[0].DealerCode[0];
+					var Dealer = userAttributesModellen[0].DealerCode;
 					var SalesOrganization = userAttributesModellen[0].Zone;
 					var Division = BpDealer[0].Division;
 					/*sap.ui.getCore().getModel(new sap.ui.model.json.JSONModel(BpDealer),"LoginBpDealerModel");*/
@@ -1446,7 +1448,7 @@ for(var i=0;i<oResults.length;i++){
 						"2400517510"
 					];
 					//Code for Filtering
-					var oZoneInclude=[];
+				/*	var oZoneInclude=[];
 					for (var n = 0; n < oZoneIncludeData.length; n++) {
 						$.each(oExcludeTci, function (i, item) {
 							if (oZoneIncludeData[n] == item.kunnr && item.zzordertype == "SO") {
@@ -1455,13 +1457,13 @@ for(var i=0;i<oResults.length;i++){
 								console.log("matched Data", oZoneInclude);
 							}
 						});
-					}
+					}*/
 					// var oZoneInclude = oExcludeTci.filter(function (objFromA) {
 					// 	return oZoneIncludeData.find(function (objFromB) {
 					// 		return ((objFromA.kunnr).slice(-5) === objFromB.slice(-5) && objFromA.zzordertype == "SO");
 					// 	});
 					// });
-					console.log("oZoneInclude", oZoneInclude);
+				/*	console.log("oZoneInclude", oZoneInclude);
 					if (oZoneInclude.length != 0) {
 						var FilterZonestock = oZoneInclude.filter(function (x) {
 							return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "SO" && x.zzordertype != "DM")
@@ -1472,7 +1474,17 @@ for(var i=0;i<oResults.length;i++){
 							return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "DM" || x.zzordertype == "SO")
 						});
 
-					}
+					}*/
+					
+						var FilterZonestock = oExcludeTci.filter(function (x) {
+							return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "DM" || x.zzordertype == "SO");
+						});
+						var tempTabData = FilterZonestock.filter(function (array_el) {
+							return oZoneIncludeData.filter(function (anotherOne_el) {
+								return (anotherOne_el == array_el.kunnr && array_el.zzordertype == "DM");
+							}).length == 0;
+						});
+						console.log("final searched data", tempTabData);
 
 					/*var SelectedModel=that.getView().byId("McCmbo").getSelectedKey();
 					var SelectedSeries = that.getView().byId("SeriesCmbo").getSelectedKey();
@@ -1508,7 +1520,7 @@ for(var i=0;i<oResults.length;i++){
 					//paste
 					//oZoneInclude
 					//	var oDumModel = new sap.ui.model.json.JSONModel(oZoneInclude);
-					var oDumModel = new sap.ui.model.json.JSONModel(FilterZonestock);
+					var oDumModel = new sap.ui.model.json.JSONModel(tempTabData);
 					oDumModel.setSizeLimit(100000);
 					sap.ui.getCore().setModel(oDumModel, "SearchedData");
 					var Obj = {};
@@ -1520,6 +1532,8 @@ for(var i=0;i<oResults.length;i++){
 					});
 				},
 				error: function (s, result) {
+					debugger;
+					var a=s;
 					sap.ui.core.BusyIndicator.hide();
 					sap.m.MessageBox.warning("No Data");
 				}

@@ -38,7 +38,7 @@
 									<FlexBox width="7px"></FlexBox>
 									<ComboBox placeholder="" width="140%" showSecondaryValues="true" filterSecondaryValues="true" selectionChange="handleoVt_SeriesChange"
 										id="oVt_SeriesCmbo" items="{/}">
-										<core:ListItem text="{TCISeries} {TCISeriesDescriptionEN}" key="{TCISeries}" additionalText=""/>
+										<core:ListItem text="{TCISeriesDescriptionEN}" key="{TCISeries}" additionalText=""/>
 									</ComboBox>
 									<!--	<SearchField width="215px" id="idVehclSerTrad"/>-->
 								</FlexBox>

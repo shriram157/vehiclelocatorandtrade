@@ -252,35 +252,35 @@
 					<!--============================================================ new code ===================================================================Begin-->
 					<!--<Table id="table1VSR" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{/}" visibleRowCount="20">-->
 					<!--=================================================================new code ===================================================================End-->
-					<ScrollContainer height="60%" width="100%" horizontal="true" vertical="true">
+				<!--	<ScrollContainer height="60%" width="100%" horizontal="true" vertical="true">-->
 						<t:Table id="table1VSR" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{/}" visibleRowCount="20"
 							alternateRowColors="true" class="sapUiMediumMarginBegin">
 							<t:columns>
-								<t:Column id="TradecolId" width="6rem">
+								<t:Column id="TradecolId" width="4rem">
 									<Label text="{i18n>Trade}"/>
 									<t:template>
-										<Link id="tradeId" text="Trade" class="link" subtle="true" press="oTradeLinkPress" wrapping="false"/>
+										<Link id="tradeId" text="Trade" class="link" subtle="true" press="oTradeLinkPress"  wrapping="false"/>
 									</t:template>
 								</t:Column>
-								<t:Column sortProperty="kunnr" width="16rem">
+								<t:Column sortProperty="kunnr" width="12rem">
 									<Label text="{i18n>Dealer}"/>
 									<t:template>
 										<Text text="{path:'kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'} -{name1}" wrapping="false"/>
 									</t:template>
 								</t:Column>
-								<t:Column sortProperty="matnr" width="14rem" id="matnr">
+								<t:Column sortProperty="matnr" width="17rem" id="matnr">
 									<Label text="{i18n>Model}"/>
 									<t:template>
 										<Text text="{matnr} - {model_desc_en}" wrapping="false"/>
 									</t:template>
 								</t:Column>
-								<t:Column sortProperty="zzsuffix" width="8rem">
+								<t:Column sortProperty="zzsuffix" width="12rem">
 									<Label text="{i18n>Suffix}"/>
 									<t:template>
 										<Text text="{zzsuffix} - {suffix_desc_en}/{mrktg_int_desc_en}" wrapping="false"/>
 									</t:template>
 								</t:Column>
-								<t:Column sortProperty="zzapx" width="6rem">
+								<t:Column sortProperty="zzapx" width="3rem">
 									<Label text="{i18n>APX}" wrapping="false"/>
 									<t:template>
 										<Text text="{zzapx}" wrapping="false"/>
@@ -292,7 +292,7 @@
 										<Text text="{zzextcol} - {mktg_desc_en}" wrapping="false"/>
 									</t:template>
 								</t:Column>
-								<t:Column id="ID_Profit" sortProperty="zzordertype" width="6rem">
+								<t:Column id="ID_Profit" sortProperty="zzordertype" width="8rem">
 									<Label text="{i18n>OrderType}" wrapping="false"/>
 									<t:template>
 										<Text text="{path:'zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" wrapping="false"/>
@@ -314,19 +314,19 @@
 										<!--	<Text text="{pstsp}" wrapping="false"/>-->
 									</t:template>
 								</t:Column>
-								<t:Column sortProperty="z_pd_flag" width="6rem">
+								<t:Column sortProperty="z_pd_flag" width="7rem">
 									<Label text="{i18n>AccessoryInstall}" wrapping="false"/>
 									<t:template>
 										<Text text="{path:'z_pd_flag',formatter:'vehicleLocator.Formatter.Formatter.AccessoryInstall'}" wrapping="false"/>
 									</t:template>
 								</t:Column>
-								<t:Column width="8rem">
+								<t:Column>
 									<Label text="{i18n>City}" wrapping="false"/>
 									<t:template>
 										<Text text="{ort01}" wrapping="false"/>
 									</t:template>
 								</t:Column>
-								<t:Column width="12rem">
+								<t:Column>
 									<Label text="{i18n>Province}" wrapping="false"/>
 									<t:template>
 										<Text text="{bezei}" wrapping="false"/>
@@ -334,7 +334,7 @@
 								</t:Column>
 							</t:columns>
 						</t:Table>
-					</ScrollContainer>
+				<!--	</ScrollContainer>-->
 				</content>
 			</Page>
 		</pages>

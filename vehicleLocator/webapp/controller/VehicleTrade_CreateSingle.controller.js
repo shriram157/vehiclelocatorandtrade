@@ -79,10 +79,10 @@ sap.ui.define([
 					this.getView().byId("ctrtaid").setVisible(false);
 					this.getView().byId("oCtraid").setVisible(false);
 					this.getView().byId("fromLabeeid").setVisible(false);
-					this.getView().byId("labidtxt").setVisible(false);
+				/*	this.getView().byId("labidtxt").setVisible(false);  ===del===*/
 					this.getView().byId("labetxteid").setVisible(false);
 					this.getView().byId("ototid").setVisible(false);
-					this.getView().byId("otitxt").setVisible(false);
+				/*	this.getView().byId("otitxt").setVisible(false);  ===del===*/
 					this.getView().byId("propetid").setVisible(false);
 					this.getView().byId("perpid").setVisible(false);
 					this.getView().byId("frlabid").setVisible(false);
@@ -117,10 +117,10 @@ sap.ui.define([
       this.getView().byId("oCtraid").setVisible(true);
 					this.getView().byId("ctrtaid").setVisible(true);
 					this.getView().byId("fromLabeeid").setVisible(true);
-					this.getView().byId("labidtxt").setVisible(true);
+				/*	this.getView().byId("labidtxt").setVisible(true);*/
 					this.getView().byId("labetxteid").setVisible(true);
 					this.getView().byId("ototid").setVisible(true);
-					this.getView().byId("otitxt").setVisible(true);
+				/*	this.getView().byId("otitxt").setVisible(true);*/
 					this.getView().byId("propetid").setVisible(true);
 					this.getView().byId("perpid").setVisible(true);
 					this.getView().byId("frlabid").setVisible(true);
@@ -205,10 +205,10 @@ sap.ui.define([
 				this.getView().byId("ctrtaid").setVisible(false);
 				this.getView().byId("oCtraid").setVisible(false);
 				this.getView().byId("fromLabeeid").setVisible(false);
-				this.getView().byId("labidtxt").setVisible(false);
+			/*	this.getView().byId("labidtxt").setVisible(false);*/
 				this.getView().byId("labetxteid").setVisible(false);
 				this.getView().byId("ototid").setVisible(false);
-				this.getView().byId("otitxt").setVisible(false);
+			/*	this.getView().byId("otitxt").setVisible(false);*/
 				this.getView().byId("propetid").setVisible(false);
 				this.getView().byId("perpid").setVisible(false);
 				this.getView().byId("frlabid").setVisible(false);
@@ -243,14 +243,18 @@ sap.ui.define([
 			debugger
 
 			var that = this;
-			/*	sap.ui.core.BusyIndicator.show();*/
-
-			var McCmbo = this.getView().getModel("TradeModel").getData().matnr;
+			/*	sap.ui.core.BusyIndicator.show();     "MoyearCombo": MoyearCombo,
+				"SeriesCmbo": SeriesCmbo,
+				"McCmbo": McCmbo*/
+ 
+			var McCmbo = this.getOwnerComponent().SelectedMSMData[0].McCmbo;
 			this.SelectedExteriorColorCode = "";
 			this.SelectedTrimInteriorColor = "";
-			var SuffCmbo = this.getView().getModel("TradeModel").getData().zzsuffix;
-			var MoyearCombo = this.getView().getModel("TradeModel").getData().zzmoyr;
-			var oDealer = this.getView().getModel("TradeModel").getData().kunnr;
+			var SuffCmbo = this.getOwnerComponent().SelectedMSMData[0].SuffCmbo;
+			var MoyearCombo = this.getOwnerComponent().SelectedMSMData[0].MoyearCombo;
+				var oDealer=sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].DealerCode;
+				
+		//	var oDealer = this.getView().getModel("TradeModel").getData().kunnr;
 		//	var oDealer ="42120";
 			this.intercolor="42";
 
@@ -321,6 +325,11 @@ sap.ui.define([
 							return objFromA.zzordertype === objFromB;
 						});
 					});
+				//		var oJsonModel = new sap.ui.model.json.JSONModel(oExcludeOrdrtype);
+					var IncludeOrdertype=oExcludeOrdrtype.filter(function (x) {
+						return (x.zzordertype == "SO" || x.zzordertype == "DM");
+					});
+						var oJsonModel = new sap.ui.model.json.JSONModel(IncludeOrdertype);
 	/*var includeDnc = oExcludeOrdrtype.filter(function (x) {
 						return x.dnc_ind == "Y";
 					});
@@ -329,7 +338,7 @@ sap.ui.define([
 					});
 					var oJsonModel = new sap.ui.model.json.JSONModel(includeHoldStatus);*/
 					//comment this line
-					var oJsonModel = new sap.ui.model.json.JSONModel(oExcludeOrdrtype);
+				
 					///////
 					oJsonModel.setSizeLimit(1500);
 					sap.ui.getCore().setModel(oJsonModel, "oVehicleSelectionResults");
@@ -681,8 +690,12 @@ sap.ui.define([
 						}
 
 						Created_By = truncateString(Created_By, 9);
+                       var Created_On = new Date();
+                       	Created_On = oDateFormat.format(new Date(Created_On));
+                       	var Changed_on = new Date();
+                        Changed_on = oDateFormat.format(new Date(Changed_on));	
 
-						var Created_On = that.getView().byId("idlabeal").getText();
+					/*	var Created_On = that.getView().byId("idlabeal").getText();
 						if (Created_On != "") {
 							var Created_On = oDateFormat.format(new Date(Created_On));
 						} else {
@@ -693,7 +706,7 @@ sap.ui.define([
 							var Changed_on = oDateFormat.format(new Date(Changed_on));
 						} else {
 							var Changed_on = oDateFormat.format(new Date());
-						}
+						}*/
 						var Requested_Dealer = that.getView().getModel("TradeModel").oData.kunnr;
 						var Requested_Dealer_Name = that.getView().byId("dealrid").getText().substr(that.getView().byId("dealrid").getText().indexOf(
 							"-") + 1);
@@ -746,7 +759,7 @@ sap.ui.define([
 						});
 
 						that.oDataModel.create("/TradeRequest", oEntry, null, function (s) {
-							that.getView().byId("oTrdareqstat").setText("Request Sent");
+						//	that.getView().byId("oTrdareqstat").setText("Request Sent");
 							that.TradeComment(oEntry);
 							that.TradeVehcles(oEntry);
 							that.TradeStatus(oEntry);

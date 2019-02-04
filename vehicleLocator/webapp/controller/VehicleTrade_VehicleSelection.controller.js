@@ -173,22 +173,285 @@ this.SelectedVehicleFrom=oEvent.getParameter("arguments").SelectedVehicleFrom;
 		},
 
 		handleoVt_SeriesChange: function () {
-			debugger;
+			debugger
+
 			var that = this;
+			var McCmbo = this.getOwnerComponent().SelectedMSMData[0].McCmbo;
+			this.SelectedExteriorColorCode = "";
+			this.SelectedTrimInteriorColor = "";
+			var SuffCmbo = this.getOwnerComponent().SelectedMSMData[0].SuffCmbo;
+			var MoyearCombo = this.getOwnerComponent().SelectedMSMData[0].MoyearCombo;
+				var oDealer=sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].DealerCode;
+				var Series=this.getView().byId("oVt_SeriesCmbo").getSelectedKey();
+				
+		//	var oDealer = this.getView().getModel("TradeModel").getData().kunnr;
+		//	var oDealer ="42120";
+			this.intercolor="42";
 
-			var filterArray = [];
+			var sLocation = window.location.host;
+			var sLocation_conf = sLocation.search("webide");
 
-			this.getView().byId("table").getBinding("rows").filter([]);
-			// onVlrCommonChange
-			var oSeries = this.getView().byId("oVt_SeriesCmbo").getSelectedKey();
+			if (sLocation_conf == 0) {
+				this.sPrefix = "/vehicleLocatorNode";
+			} else {
+				this.sPrefix = "";
 
-			if (oSeries != "") {
-
-				filterArray.push(new sap.ui.model.Filter("zzseries", sap.ui.model.FilterOperator.Contains, oSeries));
 			}
-			this.getView().byId("table").getBinding("rows").filter(filterArray);
 
+			this.nodeJsUrl = this.sPrefix + "/node";
+			that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_MASTER_SRV";
+
+			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
+
+			/*	var SeriesUrl= that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq 'YZ3DCT' and zzextcol eq '01D6' and zzintcol eq 'LC14' and zzsuffix eq 'AB' and zzmoyr eq '2018'";*/
+
+			/*var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq'" + McCmbo + "' and zzsuffix eq '" + SuffCmbo +
+				"' and zzmoyr eq '" + MoyearCombo + "' and kunnr eq '" + oDealer +
+				"'";*/
+				var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq'" + McCmbo + "' and zzsuffix eq '" + SuffCmbo +
+				"' and zzmoyr eq '" + MoyearCombo + "' and kunnr eq '" + oDealer +
+				"'and zzseries eq '" +Series+"'";
+				
+				
+				
+				
+				
+	/*	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '"+McCmbo+"' and endswith (zzintcol,'"+this.intercolor+"') and zzsuffix eq '"+SuffCmbo+"' and zzmoyr eq '"+MoyearCombo+"'&$format=json";	*/		
+
+			$.ajax({
+				url: SeriesUrl,
+				type: "GET",
+				dataType: 'json',
+				xhrFields: //
+				{
+					withCredentials: true
+				},
+
+				success: function (odata, oresponse) {
+
+					var a = odata.d.results;
+
+					/*var filtered_ODealer = a.filter(function (x) {
+							return (x.kunnr==oDealer);
+						});*/
+					//	var Dealer = sap.ui.getCore().LoginDetails.DealerCode;
+					var userAttributesModellen = sap.ui.getCore().getModel("LoginuserAttributesModel").getData();
+					/*var Dealer=userAttributesModellen[0].DealerCode[0];*/
+					var Dealer = userAttributesModellen[0].DealerCode;
+					var FilterDelearNotnull = a.filter(function (x) {
+						return x.kunnr != null;
+					});
+					/*	var FilterDeleade_OrderTypefiltered_zone=FilterDeleade_OrderTypefilteNotnull.filter(function(x){return x.kunnr.slice(-5)==Dealer &&(x.zzordertype=="DM" ||x.zzordertype=="SO")});*/
+
+					//	var FilterDeleade_OrderTypefiltered_zone
+					var filtered_ODealer = FilterDelearNotnull.filter(function (x) {
+						return x.kunnr.slice(-5) == Dealer;
+					});
+					var ExcludeOrdType = [
+						"RS",
+						"F1",
+						"F2",
+						"F3",
+						"F4",
+						"F5"
+					];
+					var oExcludeOrdrtype = filtered_ODealer.filter(function (objFromA) {
+						return !ExcludeOrdType.find(function (objFromB) {
+							return objFromA.zzordertype === objFromB;
+						});
+					});
+				//		var oJsonModel = new sap.ui.model.json.JSONModel(oExcludeOrdrtype);
+					var IncludeOrdertype=oExcludeOrdrtype.filter(function (x) {
+						return (x.zzordertype == "SO" || x.zzordertype == "DM");
+					});
+						var oJsonModel = new sap.ui.model.json.JSONModel(IncludeOrdertype);
+	/*var includeDnc = oExcludeOrdrtype.filter(function (x) {
+						return x.dnc_ind == "Y";
+					});
+					var includeHoldStatus = includeDnc.filter(function (x) {
+						return x.Hold_stat == "Y";
+					});
+					var oJsonModel = new sap.ui.model.json.JSONModel(includeHoldStatus);*/
+					//comment this line
+				
+					///////
+					oJsonModel.setSizeLimit(1500);
+					sap.ui.getCore().setModel(oJsonModel, "oVehicleSelectionResults");
+				that.SeriesFilteredBinding();
+					/*  sap.ui.core.BusyIndicator.hide();*/
+
+				},
+				error: function () {
+				that.SeriesFilteredBindingNodata();
+					/*	 sap.ui.core.BusyIndicator.hide();*/
+				}
+			});
+
+			/*	var that = this;
+			var sLocation = window.location.host;
+			var sLocation_conf = sLocation.search("webide");
+
+			if (sLocation_conf == 0) {
+				this.sPrefix = "/vehicleLocatorNode";
+			} else {
+				this.sPrefix = "";
+
+			}
+
+			this.nodeJsUrl = this.sPrefix + "/node";
+			that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_CATALOGUE_SRV";
+			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
+			var SeriesUrl = that.oDataUrl + "/zc_mmfields";
+
+			var ajax1 = $.ajax({
+				dataType: "json",
+				xhrFields: //
+				{
+					withCredentials: true
+				},
+
+				url: SeriesUrl,
+				async: true,
+				success: function (result) {}
+			});
+			if (sLocation_conf == 0) {
+				this.sPrefix = "/vehicleLocatorNode";
+			} else {
+				this.sPrefix = "";
+
+			}
+
+			this.nodeJsUrl = this.sPrefix + "/node";
+			that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_MASTER_SRV";
+			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
+			var ModelUrl = that.oDataUrl + "/zc_c_vehicle?$top=5";
+
+		
+			var ajax2 = $.ajax({
+				dataType: "json",
+				xhrFields: //
+				{
+					withCredentials: true
+				},
+
+				url: ModelUrl,
+				async: true,
+				success: function (result) {}
+			});
+
+			if (sLocation_conf == 0) {
+				this.sPrefix = "/vehicleLocatorNode";
+			} else {
+				this.sPrefix = "";
+
+			}
+
+			this.nodeJsUrl = this.sPrefix + "/node";
+			that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_MASTER_SRV";
+			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
+			var ModelDescUrl = that.oDataUrl + "/zc_model";
+
+			var ajax3 = $.ajax({
+				dataType: "json",
+				xhrFields: //
+				{
+					withCredentials: true
+				}
+				
+				,
+				url: ModelDescUrl,
+				async: true,
+				success: function (result) {}
+			});
+
+			if (sLocation_conf == 0) {
+				this.sPrefix = "/vehicleLocatorNode";
+			} else {
+				this.sPrefix = "";
+
+			}
+
+			this.nodeJsUrl = this.sPrefix + "/node";
+			that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_CATALOGUE_SRV";
+			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
+			var specificationurl = that.oDataUrl + "/zc_specification";
+
+			var ajax4 = $.ajax({
+				dataType: "json",
+				xhrFields: //
+				{
+					withCredentials: true
+				},
+
+				url: specificationurl,
+				async: true,
+				success: function (result) {}
+
+			});
+			this.nodeJsUrl = this.sPrefix + "/node";
+			that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_CATALOGUE_SRV";
+			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
+
+			var SuffixMarktingDesc = that.oDataUrl + "/zc_exterior_trim";
+			var ajax5 = $.ajax({
+				dataType: "json",
+				xhrFields: //
+				{
+					withCredentials: true
+				},
+				url: SuffixMarktingDesc,
+				async: true,
+				success: function (result) {}
+			});
+
+	
+			var that = this;
+			$.when(ajax1, ajax2, ajax3, ajax4, ajax5).done(function (SeriesUrl, ModelUrl, ModelDescUrl, specificationurl, SuffixMarktingDesc) {
+				debugger
+				var SeriesUrl = SeriesUrl[0].d.results;
+				var SeriesUrlModel = new sap.ui.model.json.JSONModel(SeriesUrl);
+				sap.ui.getCore().setModel(SeriesUrlModel, "VehicleSeleSeries");
+
+				var ModelUrl = ModelUrl[0].d.results;
+				var ModelUrlModel = new sap.ui.model.json.JSONModel(ModelUrl);
+				sap.ui.getCore().setModel(ModelUrlModel, "VehicleSeleModel");
+
+				var ModelDescUrl = ModelDescUrl[0].d.results;
+				var ModelDescUrlModel = new sap.ui.model.json.JSONModel(ModelDescUrl);
+				sap.ui.getCore().setModel(ModelDescUrlModel, "VehicleSeleModelDesModel");
+
+				var specificationurl = specificationurl[0].d.results;
+				var specificationurlModel = new sap.ui.model.json.JSONModel(specificationurl);
+				sap.ui.getCore().setModel(specificationurl, "VehicleSelespecificationurl");
+
+				var SuffixMarktingDesc = SuffixMarktingDesc[0].d.results;
+				var SuffixMarktingDescModel = new sap.ui.model.json.JSONModel(SuffixMarktingDesc);
+				sap.ui.getCore().setModel(SuffixMarktingDescModel, "VehicleSeleSuffixMarktingDesc");
+
+				that.getRouter().navTo("VehicleTrade_VehicleSelection");
+
+		
+			});
+*/
 		},
+		
+		SeriesFilteredBinding:function(){
+				if (sap.ui.getCore().getModel("oVehicleSelectionResults") != undefined) {
+				var oVehicleModel = sap.ui.getCore().getModel("oVehicleSelectionResults");
+				this.getView().byId("table").setModel(oVehicleModel);
+				
+					var oProductNameColumn = this.getView().byId("oETAFromId");
+				this.getView().byId("table").sort(oProductNameColumn, SortOrder.Ascending);
+			}
+		},
+		SeriesFilteredBindingNodata:function(){
+			var oVehicleModel=new sap.ui.model.json.JSONModel([]);
+			this.getView().byId("table").setModel(oVehicleModel);
+				
+					var oProductNameColumn = this.getView().byId("oETAFromId");
+				this.getView().byId("table").sort(oProductNameColumn, SortOrder.Ascending);
+		},
+		
 		oTradeLinkPress: function (oEvt) {
 var that=this;
 			that.oSelectedItem = oEvt.getSource().getBindingContext().getObject();
@@ -207,7 +470,7 @@ var sLocation = window.location.host;
 
 			this.nodeJsUrl = this.sPrefix + "/node";
 			that.oDataUrl = this.nodeJsUrl + "/Z_DEALER_TRADE_REQUEST_SRV";
-				var SeriesUrl = that.oDataUrl + "/CalculateETASet?&filter=VTN eq '"+VTN+"' and DelearCode eq '"+dealercode+"'&$format=json";
+				var SeriesUrl = that.oDataUrl + "/CalculateETASet?$filter=VTN eq '"+VTN+"' and DelearCode eq '"+dealercode+"'&$format=json";
 			var ajax = $.ajax({
 				dataType: "json",
 				xhrFields: //
@@ -219,8 +482,8 @@ var sLocation = window.location.host;
 				success: function (result) {
 				debugger;
 					var Data = result.d.results[0];
-					Data.MessageType="";
-					Data.Calculate="20181126";
+				/*	Data.MessageType="";
+					Data.Calculate="20181126";*/
 					if(Data.MessageType!="E"){
 						var CurrentETAFrom=that.oSelectedItem.zzadddata4;
 							if (CurrentETAFrom != null && CurrentETAFrom != "") {

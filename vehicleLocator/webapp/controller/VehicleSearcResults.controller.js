@@ -72,7 +72,7 @@ sap.ui.define([
 			// debugger;
 			sap.ui.core.BusyIndicator.show();
 			sap.ui.getCore().SelectedStauts = this.getView().byId("VLRStatus").getSelectedKey();
-
+	this.getOwnerComponent().suffixSelectedValue=this.getView().byId("VLRSuffix").getSelectedItem().getText();
 			var SuffCmbo = this.getView().byId("VLRSuffix").getSelectedKey();
 			if (SuffCmbo != "all") {
 				this.intercolor = oEvent.getParameter("selectedItem").getBindingContext().getObject().int_c;
@@ -126,7 +126,7 @@ sap.ui.define([
 						var userAttributesModellen = that.getView().getModel("userAttributesModel").getData();
 						var BpDealer = that.getView().getModel("BpDealerModel").getData();
 						//for(var i=0;i<userAttributesModellen.length;i++){
-						var Dealer = userAttributesModellen[0].DealerCode[0];
+						var Dealer = userAttributesModellen[0].DealerCode;
 						var SalesOrganization = userAttributesModellen[0].Zone;
 						var Division = BpDealer[0].Division;
 						/*sap.ui.getCore().getModel(new sap.ui.model.json.JSONModel(BpDealer),"LoginBpDealerModel");*/
@@ -426,7 +426,7 @@ sap.ui.define([
 						var userAttributesModellen = that.getView().getModel("userAttributesModel").getData();
 						var BpDealer = that.getView().getModel("BpDealerModel").getData();
 						//for(var i=0;i<userAttributesModellen.length;i++){
-						var Dealer = userAttributesModellen[0].DealerCode[0];
+						var Dealer = userAttributesModellen[0].DealerCode;
 						var SalesOrganization = userAttributesModellen[0].Zone;
 						var Division = BpDealer[0].Division;
 						/*sap.ui.getCore().getModel(new sap.ui.model.json.JSONModel(BpDealer),"LoginBpDealerModel");*/
@@ -676,6 +676,13 @@ sap.ui.define([
 			/*	this.getView().byId("table1VSR").getBinding("items").filter([]);*/
 			this.getView().byId("table1VSR").getBinding("rows").filter([]);
 			// onVlrCommonChange
+			this.SelectedDealer=this.getView().byId("VLRDealer").getSelectedKey();
+				this.SelectedColor=this.getView().byId("VLRColor").getSelectedKey();
+				
+			
+			
+			
+			
 			var Status = this.getView().byId("VLRStatus").getSelectedKey();
 			if (Status != "") {
 				/*this.getView().byId("VLRDealer").setSelectedKey("");
@@ -689,12 +696,13 @@ sap.ui.define([
 				}
 			}
 			var Dealer = this.getView().byId("VLRDealer").getSelectedKey();
+		
 			if (Dealer != "" && Dealer != "all") {
 
 				filterArray.push(new sap.ui.model.Filter("kunnr", sap.ui.model.FilterOperator.Contains, Dealer));
 			} else if (Dealer == "all") {
 
-				var SelDealers = this.getView().byId("VLRDealer").getModel().getData();
+				var SelDealers = this.getView().byId("table1VSR").getBinding("rows").getModel().getData();
 				for (var i = 0; i < SelDealers.length; i++) {
 					filterArray.push(new sap.ui.model.Filter("kunnr", sap.ui.model.FilterOperator.Contains, SelDealers[i].kunnr));
 				}
@@ -719,7 +727,7 @@ sap.ui.define([
 				filterArray.push(new sap.ui.model.Filter("zzextcol", sap.ui.model.FilterOperator.Contains, Color));
 			} else if (Color == "all") {
 				/*	var SelColor = this.getView().byId("VLRSuffix").getModel().getData();*/
-				var SelColor = this.getView().byId("VLRColor").getModel().getData();
+				var SelColor = this.getView().byId("table1VSR").getBinding("rows").getModel().getData();
 				for (var i = 0; i < SelColor.length; i++) {
 					filterArray.push(new sap.ui.model.Filter("zzextcol", sap.ui.model.FilterOperator.Contains, SelColor[i].zzextcol));
 				}
@@ -748,6 +756,98 @@ sap.ui.define([
 			//debugger;
 
 			sap.ushell.components.tableSearchResults.getBinding("rows").filter(filterArray);
+			var FilterdedTableData=sap.ushell.components.tableSearchResults.getBinding("rows").aIndices;
+			var tableData=sap.ushell.components.tableSearchResults.getModel().getData();
+			/*var Color=[];
+			var Dealer=[];
+			for(var i=0;i<FilterdedTableData.length;i++){
+				Color.push(tableData[FilterdedTableData[i]]);
+				Dealer.push(tableData[FilterdedTableData[i]]);
+			}
+			
+			///for Dealer
+				var obj = {};
+			for (var i = 0, len = Dealer.length; i < len; i++)
+				obj[Dealer[i]['kunnr']] = Dealer[i];
+			Dealer = new Array();
+			for (var key in obj)
+				Dealer.push(obj[key]);
+			var Model1 = new sap.ui.model.json.JSONModel(Dealer);
+			Model1.setSizeLimit(1000);
+			this.getView().byId("VLRDealer").setModel(Model1);
+			if (Dealer.length != 0) {
+				if (this.getView().byId("VLRDealer").getItems().filter(function (x) {
+						return x.mProperties.key == "all"
+					}).length == 0) {
+					var newItem = new sap.ui.core.Item({
+						key: "all",
+						text: "ALL"
+					});
+					this.getView().byId("VLRDealer").insertItem(newItem);
+				//	this.getView().byId("VLRDealer").setSelectedItem("ALL");
+					this.getView().byId("VLRDealer").setSelectedKey(this.SelectedDealer);
+				}
+			} else {
+				if (this.getView().byId("VLRDealer").getItems().filter(function (x) {
+						return x.mProperties.key == "all"
+					}).length == 0) {
+					var newItem = new sap.ui.core.Item({
+						key: "all",
+						text: "ALL"
+					});
+					this.getView().byId("VLRDealer").insertItem(newItem);
+					this.getView().byId("VLRDealer").setSelectedItem("ALL");
+					this.getView().byId("VLRDealer").setSelectedKey("all");
+				}
+
+			}
+			
+			
+			///for Color
+				var obj = {};
+				for (var i = 0, len = Color.length; i < len; i++)
+					obj[Color[i]['zzextcol']] = Color[i];
+				Color = new Array();
+				for (var key in obj)
+					Color.push(obj[key]);
+				var Model = new sap.ui.model.json.JSONModel(Color);
+				Model.setSizeLimit(1000);
+				this.getView().byId("VLRColor").setModel(Model);
+				if (Color.length != 0) {
+					if (this.getView().byId("VLRColor").getItems().filter(function (x) {
+							return x.mProperties.key == "all"
+						}).length == 0) {
+						var newItem = new sap.ui.core.Item({
+							key: "all",
+							text: "ALL"
+						});
+						this.getView().byId("VLRColor").insertItem(newItem);
+						this.getView().byId("VLRColor").setSelectedKey(this.SelectedColor);
+					//	this.getView().byId("VLRColor").setSelectedItem("ALL");
+					}
+				} else {
+					if (this.getView().byId("VLRColor").getItems().filter(function (x) {
+							return x.mProperties.key == "all"
+						}).length == 0) {
+						var newItem = new sap.ui.core.Item({
+							key: "all",
+							text: "ALL"
+						});
+						this.getView().byId("VLRColor").insertItem(newItem);
+						this.getView().byId("VLRColor").setSelectedKey("all");
+						this.getView().byId("VLRColor").setSelectedItem("ALL");
+					}
+				}
+			*/
+			
+			
+			
+			
+			
+			
+			
+			
+		//	this.DealarandColorBinding();
 			// sap.ushell.components.tableSearchResults._updateRows();
 			// sap.ushell.components.tableSearchResults.updateRows();
 		},
@@ -1000,6 +1100,141 @@ sap.ui.define([
 				this.getView().byId("table1VSR").getBinding("items").filter(filterArray);
 
 			},*/
+			DealarandColorBinding:function(){
+				var SelectedDealer=this.getView().byId("VLRDealer").getSelectedKey();
+				var SelectedColor=this.getView().byId("VLRColor").getSelectedKey();
+				var Status = this.getView().byId("VLRStatus").getSelectedKey();
+			
+					var ShowHoldVehicles = this.getView().byId("chkexi").getSelected();
+					if(ShowHoldVehicles==true){
+					var	ShowHoldVehiclesSel="Y";
+					}
+						else{
+							var	ShowHoldVehiclesSel="N";
+						}
+						var ShowDoNotCallVehicles = this.getView().byId("chknew").getSelected();
+						if(ShowDoNotCallVehicles==true){
+						var	ShowDoNotCallVehiclesSel="Y";
+					}
+						else{
+							var	ShowDoNotCallVehiclesSel="N";
+						}
+						//var Data=this.getView().byId("table1VSR").getModel().getData();
+						if(Status=="1"){
+					
+						var FilteredTableData = this.getView().byId("table1VSR").getModel().getData().filter(function(x){return x.zz_trading_ind=="1"&&x.dnc_ind==ShowDoNotCallVehiclesSel&&x.Hold_stat==ShowHoldVehiclesSel});
+						}
+						else{
+						var FilteredTableData = this.getView().byId("table1VSR").getModel().getData().filter(function(x){return (x.zz_trading_ind=="2" || x.zz_trading_ind=="3")&&x.dnc_ind==ShowDoNotCallVehiclesSel&&x.Hold_stat==ShowHoldVehiclesSel});
+						}
+			var Dealer=FilteredTableData;
+			var obj = {};
+			for (var i = 0, len = Dealer.length; i < len; i++)
+				obj[Dealer[i]['kunnr']] = Dealer[i];
+			Dealer = new Array();
+			for (var key in obj)
+				Dealer.push(obj[key]);
+			var Model1 = new sap.ui.model.json.JSONModel(Dealer);
+			Model1.setSizeLimit(1000);
+			this.getView().byId("VLRDealer").setModel(Model1);
+			if (Dealer.length != 0) {
+				if (this.getView().byId("VLRDealer").getItems().filter(function (x) {
+						return x.mProperties.key == "all"
+					}).length == 0) {
+					var newItem = new sap.ui.core.Item({
+						key: "all",
+						text: "ALL"
+					});
+					this.getView().byId("VLRDealer").insertItem(newItem);
+				//	this.getView().byId("VLRDealer").setSelectedItem("ALL");
+					this.getView().byId("VLRDealer").setSelectedKey(SelectedDealer);
+				}
+			} else {
+				if (this.getView().byId("VLRDealer").getItems().filter(function (x) {
+						return x.mProperties.key == "all"
+					}).length == 0) {
+					var newItem = new sap.ui.core.Item({
+						key: "all",
+						text: "ALL"
+					});
+					this.getView().byId("VLRDealer").insertItem(newItem);
+					this.getView().byId("VLRDealer").setSelectedItem("ALL");
+					this.getView().byId("VLRDealer").setSelectedKey("all");
+				}
+
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			var Color=FilteredTableData;
+				var obj = {};
+				for (var i = 0, len = Color.length; i < len; i++)
+					obj[Color[i]['zzextcol']] = Color[i];
+				Color = new Array();
+				for (var key in obj)
+					Color.push(obj[key]);
+				var Model = new sap.ui.model.json.JSONModel(Color);
+				Model.setSizeLimit(1000);
+				this.getView().byId("VLRColor").setModel(Model);
+				if (Color.length != 0) {
+					if (this.getView().byId("VLRColor").getItems().filter(function (x) {
+							return x.mProperties.key == "all";
+						}).length == 0) {
+						var newItem = new sap.ui.core.Item({
+							key: "all",
+							text: "ALL"
+						});
+						this.getView().byId("VLRColor").insertItem(newItem);
+						this.getView().byId("VLRColor").setSelectedKey(SelectedColor);
+					//	this.getView().byId("VLRColor").setSelectedItem("ALL");
+					}
+				} else {
+					if (this.getView().byId("VLRColor").getItems().filter(function (x) {
+							return x.mProperties.key == "all"
+						}).length == 0) {
+						var newItem = new sap.ui.core.Item({
+							key: "all",
+							text: "ALL"
+						});
+						this.getView().byId("VLRColor").insertItem(newItem);
+						this.getView().byId("VLRColor").setSelectedKey("all");
+						this.getView().byId("VLRColor").setSelectedItem("ALL");
+					}
+				}
+						
+			},
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		oTradeLinkPress: function (oEvt) {
 			var that = this;
 			that.oTableSelectPath = oEvt.getSource().getParent().getBindingContext().getPath().split("/")[1];
@@ -1017,10 +1252,12 @@ sap.ui.define([
 				this.sPrefix = "";
 
 			}
-
+/*VTN="000571";
+ dealercode="53170";*/
 			this.nodeJsUrl = this.sPrefix + "/node";
 			that.oDataUrl = this.nodeJsUrl + "/Z_DEALER_TRADE_REQUEST_SRV";
-			var SeriesUrl = that.oDataUrl + "/CalculateETASet?&filter=VTN eq '" + VTN + "' and DelearCode eq '" + dealercode + "'&$format=json";
+			var SeriesUrl = that.oDataUrl + "/CalculateETASet?$filter=VTN eq '" + VTN + "' and DelearCode eq '" + dealercode + "'&$format=json";
+                                           /* /CalculateETASet?$filter=VTN eq '000571' and DelearCode eq '53170'&$format=json*/
 			var ajax = $.ajax({
 				dataType: "json",
 				xhrFields: //
@@ -1032,10 +1269,10 @@ sap.ui.define([
 				success: function (result) {
 					//debugger;
 					var Data = result.d.results[0];
-					if (Data.MessageType == "E") {
+				/*	if (Data.MessageType == "E") {
 						Data.MessageType = "";
 						Data.Calculate = "20181126";
-					}
+					}*/
 					if (Data.MessageType != "E") {
 						var CurrentETAFrom = that.selectedTrade.zzadddata4;
 						if (CurrentETAFrom != null && CurrentETAFrom != "") {
@@ -1164,7 +1401,7 @@ sap.ui.define([
 				var oProductNameColumn = this.getView().byId("matnr");
 				this.getView().byId("table1VSR").sort(oProductNameColumn, SortOrder.Ascending);
 				var Dealer = sap.ui.getCore().getModel("SearchedData").getData();
-
+				
 				var Suffix = sap.ui.getCore().getModel("VehicleLocatorSuffix").getData();
 				var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language;
 				/*for(var i=0;i<Suffix.length;i++){
@@ -1300,22 +1537,36 @@ sap.ui.define([
 			Model.setSizeLimit(1000);
 
 			var StatusFilter = StatusDataFilter.filter(function (x) {
-				return x.zz_trading_ind == "1";
+				return (x.zz_trading_ind == "2" ||x.zz_trading_ind == "3");
 			});
+			 var Statusind1= StatusDataFilter.filter(function (x) {
+				return (x.zz_trading_ind == "1");
+			});
+			
+			
 
 			this.getView().byId("VLRStatus").setModel(Model);
 			if (StatusFilter.length != 0) {
 
 				this.getView().byId("VLRStatus").setSelectedItem("Pipeline - Routable");
-				this.getView().byId("VLRStatus").setSelectedKey("1");
+				this.getView().byId("VLRStatus").setSelectedKey("2");
+				
 			} else if (StatusDataFilter.length != 0) {
 				var newItem = new sap.ui.core.Item({
-					key: "1",
+					key: "2",
 					text: "Pipeline - Routable"
 				});
+				
 				this.getView().byId("VLRStatus").insertItem(newItem);
 				this.getView().byId("VLRStatus").setSelectedItem("Pipeline - Routable");
-				this.getView().byId("VLRStatus").setSelectedKey("1");
+				this.getView().byId("VLRStatus").setSelectedKey("2");
+			}
+			if(Statusind1.length==0){
+					var newItem = new sap.ui.core.Item({
+					key: "1",
+					text: "Stock-Non-Routable"
+				});
+				this.getView().byId("VLRStatus").insertItem(newItem);
 			}
 			/*	if(StatusFilter.length!=0){
 						this.getView().byId("VLRStatus").setSelectedItem("Pipeline - Routable");
@@ -2191,9 +2442,12 @@ if(sap.ui.Device.system.phone){
 			Model.setSizeLimit(1000);
 
 			var StatusFilter = StatusDataFilter.filter(function (x) {
-				return x.zz_trading_ind == "1";
+				return (x.zz_trading_ind == "2" ||x.zz_trading_ind == "3");
 			});
-
+           var Statusind1= StatusDataFilter.filter(function (x) {
+				return (x.zz_trading_ind == "1");
+			});
+		
 			this.getView().byId("VLRStatus").setModel(Model);
 			if (StatusFilter.length != 0) {
 
@@ -2201,12 +2455,19 @@ if(sap.ui.Device.system.phone){
 				this.getView().byId("VLRStatus").setSelectedKey(sap.ui.getCore().SelectedStauts);
 			} else if (StatusDataFilter.length != 0) {
 				var newItem = new sap.ui.core.Item({
-					key: "1",
+					key: "2",
 					text: "Pipeline - Routable"
 				});
 				this.getView().byId("VLRStatus").insertItem(newItem);
 				this.getView().byId("VLRStatus").setSelectedItem("Pipeline - Routable");
 				this.getView().byId("VLRStatus").setSelectedKey(sap.ui.getCore().SelectedStauts);
+			}
+				if(Statusind1.length==0){
+					var newItem = new sap.ui.core.Item({
+					key: "1",
+					text: "Stock-Non-Routable"
+				});
+				this.getView().byId("VLRStatus").insertItem(newItem);
 			}
 			/*	if(StatusFilter.length!=0){
 						this.getView().byId("VLRStatus").setSelectedItem("Pipeline - Routable");
