@@ -20,6 +20,10 @@
 	}, {
 		"name": "$XSAPPNAME.Manage_DNC",
 		"description": "Manage DNC"
+	}, {
+		"name": "$XSAPPNAME.JobScheduler",
+		"description": "Scope for Job Scheduler",
+		"grant-as-authority-to-apps": ["jobscheduler"]
 	}],
 	"attributes": [{
 		"name": "DealerCode",
@@ -80,6 +84,12 @@
 				"UserType"
 			]
 
+		}, {
+			"name": "JobScheduler",
+			"description": "",
+			"scope-references": [
+				"$XSAPPNAME.JobScheduler"
+			]
 		}
 	]
 }

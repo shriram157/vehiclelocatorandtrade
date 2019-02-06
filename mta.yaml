@@ -21,14 +21,17 @@ modules:
       disk-quota: 256MB
       memory: 256MB
    properties:
+      SAP_JWT_TRUST_ACL: '[{"clientid":"*","identityzone":"*"}]'
       NODE_TLS_REJECT_UNAUTHORIZED: 0
    provides:
     - name: vehicleLocator_Node_api
       properties:
          url: ${default-url}
    requires:
-    - name: uaa_vehicleLocator
     - name: VEHICLE_LOCATOR_APIM_CUPS
+    - name: hdi_vehicleLocator_hdb
+    - name: uaa_vehicleLocator
+    - name: jobscheduler_vehicleLocator
 
  - name: vehicleLocator
    type: html5
@@ -109,4 +112,11 @@ resources:
    type: org.cloudfoundry.managed-service
    parameters:
       service: destination
+      service-plan: lite
+
+ - name: jobscheduler_vehicleLocator
+   type: com.sap.xs.job-scheduler
+   parameters:
+      service: jobscheduler
+      service-name: jobscheduler
       service-plan: lite
