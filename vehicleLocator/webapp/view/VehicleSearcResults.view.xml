@@ -159,7 +159,7 @@
 													<l:GridData span="L2 M2 S6"/>
 												</layoutData>
 											</Label>
-											<ComboBox id="VLRStatus" selectionChange="onStatusChange" items="{/}" class="sapUiTinyMarginBegin" width="300px">
+											<ComboBox id="VLRStatus" selectionChange="onStatusChangeMultiple" items="{/}" class="sapUiTinyMarginBegin" width="300px">
 												<core:ListItem text="{path:'zz_trading_ind',formatter:'vehicleLocator.Formatter.Formatter.Status'}" key="{zz_trading_ind}"/>
 												<layoutData>
 													<l:GridData span="L2 M2 S6"/>
@@ -268,7 +268,7 @@
 										<Text text="{path:'kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'} -{name1}" wrapping="false"/>
 									</t:template>
 								</t:Column>
-								<t:Column sortProperty="matnr" width="17rem" id="matnr">
+								<t:Column sortProperty="matnr"  id="matnr" width="17rem">
 									<Label text="{i18n>Model}"/>
 									<t:template>
 										<Text text="{matnr} - {model_desc_en}" wrapping="false"/>
@@ -286,7 +286,7 @@
 										<Text text="{zzapx}" wrapping="false"/>
 									</t:template>
 								</t:Column>
-								<t:Column id="ID_DealerNet" sortProperty="zzextcol" width="14rem">
+								<t:Column id="ID_DealerNet" sortProperty="zzextcol" width="9rem">
 									<Label text="{i18n>Color}" wrapping="false"/>
 									<t:template>
 										<Text text="{zzextcol} - {mktg_desc_en}" wrapping="false"/>
@@ -321,13 +321,13 @@
 									</t:template>
 								</t:Column>
 								<t:Column>
-									<Label text="{i18n>City}" wrapping="false"/>
+									<Label text="{i18n>City}"  width="3rem" wrapping="false"/>
 									<t:template>
 										<Text text="{ort01}" wrapping="false"/>
 									</t:template>
 								</t:Column>
 								<t:Column>
-									<Label text="{i18n>Province}" wrapping="false"/>
+									<Label text="{i18n>Province}" width="4rem" wrapping="false"/>
 									<t:template>
 										<Text text="{bezei}" wrapping="false"/>
 									</t:template>

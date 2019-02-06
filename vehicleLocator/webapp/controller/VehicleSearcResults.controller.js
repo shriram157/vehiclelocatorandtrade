@@ -725,12 +725,108 @@ sap.ui.define([
 			if (Color != "" && Color != "all") {
 
 				filterArray.push(new sap.ui.model.Filter("zzextcol", sap.ui.model.FilterOperator.Contains, Color));
+			
+				/*var Dealer=this.getView().byId("table1VSR").getModel().getData().filter(function(x){return x.zzextcol==Color})
+			
+					var obj = {};
+			for (var i = 0, len = Dealer.length; i < len; i++)
+				obj[Dealer[i]['kunnr']] = Dealer[i];
+			Dealer = new Array();
+			for (var key in obj)
+				Dealer.push(obj[key]);
+					var selctedDealer=	this.getView().byId("VLRDealer").getSelectedKey();
+			var Model1 = new sap.ui.model.json.JSONModel(Dealer);
+			Model1.setSizeLimit(1000);
+			this.getView().byId("VLRDealer").setModel(Model1);
+			if (Dealer.length != 0) {
+				if (this.getView().byId("VLRDealer").getItems().filter(function (x) {
+						return x.mProperties.key == "all"
+					}).length == 0) {
+					var newItem = new sap.ui.core.Item({
+						key: "all",
+						text: "ALL"
+					});
+					this.getView().byId("VLRDealer").insertItem(newItem);
+			var	SelctKey=Dealer.filter(function(x){return x.kunnr==selctedDealer});
+					if(selctedDealer==""||SelctKey.length==0){
+					this.getView().byId("VLRDealer").setSelectedItem("ALL");
+					this.getView().byId("VLRDealer").setSelectedKey("all");
+					}
+					else{
+							this.getView().byId("VLRDealer").setSelectedKey(selctedDealer);
+					}
+				}
+			} else {
+				if (this.getView().byId("VLRDealer").getItems().filter(function (x) {
+						return x.mProperties.key == "all"
+					}).length == 0) {
+					var newItem = new sap.ui.core.Item({
+						key: "all",
+						text: "ALL"
+					});
+					this.getView().byId("VLRDealer").insertItem(newItem);
+					if(selctedDealer==""){
+					this.getView().byId("VLRDealer").setSelectedItem("ALL");
+					this.getView().byId("VLRDealer").setSelectedKey("all");
+					}
+					else{
+							this.getView().byId("VLRDealer").setSelectedKey(selctedDealer);
+					}
+				}
+
+			}*/
+				
 			} else if (Color == "all") {
-				/*	var SelColor = this.getView().byId("VLRSuffix").getModel().getData();*/
+			
 				var SelColor = this.getView().byId("table1VSR").getBinding("rows").getModel().getData();
 				for (var i = 0; i < SelColor.length; i++) {
 					filterArray.push(new sap.ui.model.Filter("zzextcol", sap.ui.model.FilterOperator.Contains, SelColor[i].zzextcol));
 				}
+				/*var Dealer=SelColor;
+				var obj = {};
+			for (var i = 0, len = Dealer.length; i < len; i++)
+				obj[Dealer[i]['kunnr']] = Dealer[i];
+			Dealer = new Array();
+			for (var key in obj)
+				Dealer.push(obj[key]);
+			var Model1 = new sap.ui.model.json.JSONModel(Dealer);
+			Model1.setSizeLimit(1000);
+			var selctedDealer=	this.getView().byId("VLRDealer").getSelectedKey();
+			this.getView().byId("VLRDealer").setModel(Model1);
+			if (Dealer.length != 0) {
+				if (this.getView().byId("VLRDealer").getItems().filter(function (x) {
+						return x.mProperties.key == "all"
+					}).length == 0) {
+					var newItem = new sap.ui.core.Item({
+						key: "all",
+						text: "ALL"
+					});
+					var	SelctKey=Dealer.filter(function(x){return x.kunnr==selctedDealer});
+					this.getView().byId("VLRDealer").insertItem(newItem);
+					if(selctedDealer==""||SelctKey.length==0){
+					this.getView().byId("VLRDealer").setSelectedItem("ALL");
+					this.getView().byId("VLRDealer").setSelectedKey("all");
+					}
+					else{
+							this.getView().byId("VLRDealer").setSelectedKey(selctedDealer);
+					}
+				}
+			} else {
+				if (this.getView().byId("VLRDealer").getItems().filter(function (x) {
+						return x.mProperties.key == "all"
+					}).length == 0) {
+					var newItem = new sap.ui.core.Item({
+						key: "all",
+						text: "ALL"
+					});
+					this.getView().byId("VLRDealer").insertItem(newItem);
+					this.getView().byId("VLRDealer").setSelectedItem("ALL");
+					this.getView().byId("VLRDealer").setSelectedKey("all");
+				}
+
+			}*/
+				
+				
 			}
 			var ShowDoNotCallVehicles = this.getView().byId("chknew").getSelected();
 			if (ShowDoNotCallVehicles == true) {
@@ -2593,6 +2689,124 @@ if(sap.ui.Device.system.phone){
 			}
 			this.onStatusChange();
 			sap.ui.core.BusyIndicator.hide();
+		},
+		onStatusChangeMultiple:function(){
+		var Status=this.getView().byId("VLRStatus").getSelectedKey();
+			if(Status=="1"){
+			var Dealer=this.getView().byId("table1VSR").getModel().getData().filter(function(x){return x.zz_trading_ind=="1"})
+			}
+			else{
+			var Dealer=this.getView().byId("table1VSR").getModel().getData().filter(function(x){return (x.zz_trading_ind=="2"||x.zz_trading_ind=="3")})
+			}
+					var obj = {};
+			for (var i = 0, len = Dealer.length; i < len; i++)
+				obj[Dealer[i]['kunnr']] = Dealer[i];
+			Dealer = new Array();
+			for (var key in obj)
+				Dealer.push(obj[key]);
+					var selctedDealer=	this.getView().byId("VLRDealer").getSelectedKey();
+			var Model1 = new sap.ui.model.json.JSONModel(Dealer);
+			Model1.setSizeLimit(1000);
+			this.getView().byId("VLRDealer").setModel(Model1);
+			if (Dealer.length != 0) {
+				if (this.getView().byId("VLRDealer").getItems().filter(function (x) {
+						return x.mProperties.key == "all"
+					}).length == 0) {
+					var newItem = new sap.ui.core.Item({
+						key: "all",
+						text: "ALL"
+					});
+					this.getView().byId("VLRDealer").insertItem(newItem);
+			var	SelctKey=Dealer.filter(function(x){return x.kunnr==selctedDealer});
+					if(selctedDealer==""||SelctKey.length==0){
+					this.getView().byId("VLRDealer").setSelectedItem("ALL");
+					this.getView().byId("VLRDealer").setSelectedKey("all");
+					}
+					else{
+							this.getView().byId("VLRDealer").setSelectedKey(selctedDealer);
+					}
+				}
+			} else {
+				if (this.getView().byId("VLRDealer").getItems().filter(function (x) {
+						return x.mProperties.key == "all"
+					}).length == 0) {
+					var newItem = new sap.ui.core.Item({
+						key: "all",
+						text: "ALL"
+					});
+					this.getView().byId("VLRDealer").insertItem(newItem);
+					if(selctedDealer==""){
+					this.getView().byId("VLRDealer").setSelectedItem("ALL");
+					this.getView().byId("VLRDealer").setSelectedKey("all");
+					}
+					else{
+							this.getView().byId("VLRDealer").setSelectedKey(selctedDealer);
+					}
+				}
+
+			}
+			
+			var Status=this.getView().byId("VLRStatus").getSelectedKey();
+			if(Status=="1"){
+			var Color=this.getView().byId("table1VSR").getModel().getData().filter(function(x){return x.zz_trading_ind=="1"})
+			}
+			else{
+			var Color=this.getView().byId("table1VSR").getModel().getData().filter(function(x){return (x.zz_trading_ind=="2"||x.zz_trading_ind=="3")})
+			}
+			//	var Color = sap.ui.getCore().getModel("SearchedData").getData();
+				var obj = {};
+				for (var i = 0, len = Color.length; i < len; i++)
+					obj[Color[i]['zzextcol']] = Color[i];
+				Color = new Array();
+				for (var key in obj)
+					Color.push(obj[key]);
+				var Model = new sap.ui.model.json.JSONModel(Color);
+				Model.setSizeLimit(1000);
+					var selctedColor=	this.getView().byId("VLRColor").getSelectedKey();
+				this.getView().byId("VLRColor").setModel(Model);
+				if (Color.length != 0) {
+					if (this.getView().byId("VLRColor").getItems().filter(function (x) {
+							return x.mProperties.key == "all"
+						}).length == 0) {
+						var newItem = new sap.ui.core.Item({
+							key: "all",
+							text: "ALL"
+						});
+						var	SelctKey=Dealer.filter(function(x){return x.kunnr==selctedColor});
+						this.getView().byId("VLRColor").insertItem(newItem);
+						
+						/*this.getView().byId("VLRColor").setSelectedKey("all");
+						this.getView().byId("VLRColor").setSelectedItem("ALL");*/
+						if(selctedColor==""||SelctKey.length==0){
+					this.getView().byId("VLRColor").setSelectedItem("ALL");
+					this.getView().byId("VLRColor").setSelectedKey("all");
+					}
+					else{
+							this.getView().byId("VLRColor").setSelectedKey(selctedColor);
+					}
+					}
+				} else {
+					if (this.getView().byId("VLRColor").getItems().filter(function (x) {
+							return x.mProperties.key == "all"
+						}).length == 0) {
+						var newItem = new sap.ui.core.Item({
+							key: "all",
+							text: "ALL"
+						});
+						this.getView().byId("VLRColor").insertItem(newItem);
+						this.getView().byId("VLRColor").setSelectedKey("all");
+						this.getView().byId("VLRColor").setSelectedItem("ALL");
+					}
+				}
+		//	}
+			
+			
+			
+			
+			
+			
+			this.onStatusChange();
+			
 		}
 
 		/*	{

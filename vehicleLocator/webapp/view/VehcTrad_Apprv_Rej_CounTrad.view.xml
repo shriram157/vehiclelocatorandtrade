@@ -88,27 +88,24 @@
 									</layoutData>
 								</Text>
 								<Text text="{i18n>To}" id="idlbltxt"/>
-								<Label text="{i18n>DonotCall(DNC)Vehicle}"/>  
-								<Text text="{path:'DNC',formatter:'vehicleLocator.Formatter.Formatter.DNC'}" id="VT_ARCTDnc" />
-							<!--	<ComboBox id="VT_ARCTDnc" selectionChange="onVTARCTdnc" width="220px"  items="{/}">
+								<Label text="{i18n>DonotCall(DNC)Vehicle}"/>
+								<Text text="{path:'DNC',formatter:'vehicleLocator.Formatter.Formatter.DNC'}" id="VT_ARCTDnc"/>
+								<!--	<ComboBox id="VT_ARCTDnc" selectionChange="onVTARCTdnc" width="220px"  items="{/}">
 									<core:ListItem key="{DNC}" text="{path:'DNC',formatter:'vehicleLocator.Formatter.Formatter.DNC'}"/>
 								</ComboBox>-->
 								<Label text="{i18n>DNCBlockout(Days)}"/>
-								<ComboBox id="VT_ARCDnc" selectionChange="ondncblckoutchnage" width="220px"  items="{/}">
-									<core:ListItem  key="{Zzduration}" text="{Zzduration}"/>
+								<ComboBox id="VT_ARCDnc" selectionChange="ondncblckoutchnage" width="220px" items="{/}">
+									<core:ListItem key="{Zzduration}" text="{Zzduration}"/>
 								</ComboBox>
 								<Label text="{i18n>TradeinReturn}"/>
-								<ComboBox id="VT_ARCTtrdinRet" selectionChange="onTradeReqStat" width="220px"   items="{/}" selectedKey="{/0/Trade_Return}" editable="false">
-									<core:ListItem key="{Trade_Return}" text="{path:'Trade_Return',formatter:'vehicleLocator.Formatter.Formatter.TradeReturn'}"/>  
-							
+								<ComboBox id="VT_ARCTtrdinRet" selectionChange="onTradeReqStat" width="220px" items="{/}" selectedKey="{/0/Trade_Return}" editable="false">
+									<core:ListItem key="{Trade_Return}" text="{path:'Trade_Return',formatter:'vehicleLocator.Formatter.Formatter.TradeReturn'}"/>
 								</ComboBox>
-							
 								<Label text="{i18n>Status}"/>
-							<!--	<ComboBox id="VT_ARCTtrdinStatus" selectionChange="onVTARctstats" width="220px"   items="{/}"  selectedKey="{/0/Trade_Status}" editable="false">
+								<!--	<ComboBox id="VT_ARCTtrdinStatus" selectionChange="onVTARctstats" width="220px"   items="{/}"  selectedKey="{/0/Trade_Status}" editable="false">
 									<core:ListItem key="{Trade_Status}" text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}"/>
 						         </ComboBox>-->
-						        <Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}"  id="VT_ARCTtrdinStatus" width="220px"/>
-						         
+								<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" id="VT_ARCTtrdinStatus" width="220px"/>
 								<!--<Text text="Request Sent"/>-->
 								<core:Title text="{i18n>OfferVehicleInformation}"/>
 								<Label text="Dealer"/>
@@ -165,35 +162,35 @@
 							</form:content>
 						</form:SimpleForm>
 					</VBox>
-			<form:SimpleForm id="SimpleFormApr" editable="true" layout="ResponsiveGridLayout" labelSpanM="12" adjustLabelSpan="false"
-							emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2">
-							<form:content>
-								<core:Title text=""/>			
-					<t:Table id="tableVrade" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None"
-						rows="{ path:'/', sorter : [{ path:'Comment_Date', descending : 'true' }] }">
-						<t:columns>
-							<t:Column id="Comment_Date">
-								<Label text="{i18n>Date}"/>
-								<t:template>
-									<Text text="{path:'Comment_Date',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false"/>
-								</t:template>
-							</t:Column>
-							<t:Column sortProperty="kunnr">
-								<Label text="{i18n>User}"/>
-								<t:template>
-									<Text text="{Created_By}" wrapping="false"/>
-								</t:template>
-							</t:Column>
-							<t:Column sortProperty="matnr" id="matnr">
-								<Label text="{i18n>Comments}"/>
-								<t:template>
-									<Text text="{Comment_Txt}" wrapping="false"/>
-								</t:template>
-							</t:Column>
-						</t:columns>
-					</t:Table>
+					<form:SimpleForm id="SimpleFormApr" editable="true" layout="ResponsiveGridLayout" labelSpanM="12" adjustLabelSpan="false" emptySpanL="0"
+						emptySpanM="0" columnsL="2" columnsM="2">
+						<form:content>
+							<core:Title text=""/>
+							<t:Table id="tableVrade" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None"
+								rows="{ path:'/', sorter : [{ path:'Comment_Date', descending : 'true' }] }">
+								<t:columns>
+									<t:Column id="Comment_Date">
+										<Label text="{i18n>Date}"/>
+										<t:template>
+											<Text text="{path:'Comment_Date',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="kunnr">
+										<Label text="{i18n>User}"/>
+										<t:template>
+											<Text text="{Created_By}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="matnr" id="matnr">
+										<Label text="{i18n>Comments}"/>
+										<t:template>
+											<Text text="{Comment_Txt}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+								</t:columns>
+							</t:Table>
 						</form:content>
-                   </form:SimpleForm>		
+					</form:SimpleForm>
 					<!--	<Table id="tableVrade" width="auto" class="sapUiResponsiveMargin" items="{/}" growingThreshold="150">
 						<columns>
 							<Column minScreenWidth="Desktop" demandPopin="true">
@@ -227,21 +224,11 @@
 										<l:GridData span="L5 M12 S3"/>
 									</layoutData>
 								</TextArea>
-								<Button text="{i18n>AddComments}" id="oAddbutton" width="142px" enabled="false" press="oAddCommentsArea">
-									
-									</Button>
-				
-				
-			
-              	<FlexBox height="200px" alignItems="Start" justifyContent="Start">
-										<Text text="Trade Requested Created By {Created_By}" width="100px" id="cretby"/>
-										<FlexBox width="7px"></FlexBox>
-									</FlexBox>	
-							
-									
-									
-							
-								
+								<Button text="{i18n>AddComments}" id="oAddbutton" width="142px" enabled="false" press="oAddCommentsArea"></Button>
+								<FlexBox height="200px" alignItems="Start" justifyContent="Start">
+									<Text text="Trade Requested Created By {Created_By}" width="100px" id="cretby"/>
+									<FlexBox width="7px"></FlexBox>
+								</FlexBox>
 								<core:Title text="" class="Vtaprct1"/>
 								<Text
 									text="This trade information is a snap shot at the time of trade request creation. This information will be validated once after your input (Accept/Reject/Counter) before the function is completed."
@@ -266,7 +253,6 @@
 								</HBox>
 								<Label text=""/>
 								<HBox>
-							
 									<FlexBox width="10px"></FlexBox>
 									<FlexBox height="200px" alignItems="Start" justifyContent="Start">
 										<Button text="{i18n>Back}" width="100px" press="oBack" id="oBackbtnid"/>
@@ -283,8 +269,6 @@
 										<FlexBox width="7px"></FlexBox>
 									</FlexBox>
 								</HBox>
-								
-								
 							</form:content>
 						</form:SimpleForm>
 					</VBox>

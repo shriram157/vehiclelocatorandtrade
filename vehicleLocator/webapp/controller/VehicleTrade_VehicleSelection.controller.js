@@ -181,7 +181,7 @@ this.SelectedVehicleFrom=oEvent.getParameter("arguments").SelectedVehicleFrom;
 			this.SelectedTrimInteriorColor = "";
 			var SuffCmbo = this.getOwnerComponent().SelectedMSMData[0].SuffCmbo;
 			var MoyearCombo = this.getOwnerComponent().SelectedMSMData[0].MoyearCombo;
-				var oDealer=sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].DealerCode;
+				var oDealer=sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerKey;
 				var Series=this.getView().byId("oVt_SeriesCmbo").getSelectedKey();
 				
 		//	var oDealer = this.getView().getModel("TradeModel").getData().kunnr;
@@ -208,10 +208,13 @@ this.SelectedVehicleFrom=oEvent.getParameter("arguments").SelectedVehicleFrom;
 			/*var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq'" + McCmbo + "' and zzsuffix eq '" + SuffCmbo +
 				"' and zzmoyr eq '" + MoyearCombo + "' and kunnr eq '" + oDealer +
 				"'";*/
-				var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq'" + McCmbo + "' and zzsuffix eq '" + SuffCmbo +
+			/*	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq'" + McCmbo + "' and zzsuffix eq '" + SuffCmbo +
 				"' and zzmoyr eq '" + MoyearCombo + "' and kunnr eq '" + oDealer +
-				"'and zzseries eq '" +Series+"'";
+				"'and zzseries eq '" +Series+"'";*/
 				
+				
+			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=zzseries eq'"+Series+ "'and kunnr eq '"+oDealer+"'&$format=json"
+
 				
 				
 				
@@ -236,7 +239,7 @@ this.SelectedVehicleFrom=oEvent.getParameter("arguments").SelectedVehicleFrom;
 						});*/
 					//	var Dealer = sap.ui.getCore().LoginDetails.DealerCode;
 					var userAttributesModellen = sap.ui.getCore().getModel("LoginuserAttributesModel").getData();
-					/*var Dealer=userAttributesModellen[0].DealerCode[0];*/
+				/*	var Dealer=userAttributesModellen[0].DealerCode[0];***/
 					var Dealer = userAttributesModellen[0].DealerCode;
 					var FilterDelearNotnull = a.filter(function (x) {
 						return x.kunnr != null;
@@ -530,6 +533,7 @@ var Calculate=Eta.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1');
 var Proposed_ETA_To=addDays(Calculate,CurrentEtadiff);
 that.oSelectedItem.Proposed_ETA_To=Proposed_ETA_To;
 that.oSelectedItem.Proposed_ETA_From=Data.Calculate;
+that.oSelectedItem.FromFourth="FromFourth";
 //that.selectedTrade=escape(JSON.stringify(that.selectedTrade));
 if(that.SelectedVehicleFrom=="VehileTrade_CreateSingle"){
 			sap.ui.getCore().getModel("TradeModel").setProperty("/VehicleTradeVehicle", that.oSelectedItem);

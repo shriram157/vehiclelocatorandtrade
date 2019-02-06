@@ -52,14 +52,16 @@
 								<Label text="{i18n>CurrentETA}" id="cetalabelid"/>
 								<VBox>
 									<HBox>
-										<Text text="{path:'TradeModel>zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate'}"
+										<Text text="{path:'TradeModel>zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate'}" 
 											class="sapUiSmallMarginEnd" id="ctaid"></Text>
-										<Text text="{i18n>From}" id="fromid" wrapping='false' maxLines='1'/>
+												<Label text="" width="3rem"/>
+									<Text text="{i18n>From}" id="fromid" wrapping='true' maxLines='1'/>
 									</HBox>
 									<HBox>
 										<Text text="{path:'TradeModel>pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="totxtid"
 											class="sapUiSmallMarginEnd"></Text>
-										<Text text="{i18n>To}" id="tolabid" wrapping='false'/>
+											<Label text="" width="3rem"/>
+										<Text text="{i18n>To}" id="tolabid" wrapping='true'/>
 									</HBox>
 								</VBox>
 								<Label text="{i18n>PropsedETAtoNewDealer}" id="prpdlabid"/>
@@ -67,17 +69,19 @@
 									<HBox>
 										<Text text="{path:'TradeModel>Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate'}" id="prpid"
 											class="sapUiSmallMarginEnd"></Text>
-										<Text text="{i18n>From}" id="fromlabid"/>
+										<Text text="{i18n>From}" id="fromlabid" wrapping='true'/>
 									</HBox>
 									<HBox>
 										<Text text="{path:'TradeModel>Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.ProposedEtaToDate'}" id="otextlabel"
 											class="sapUiSmallMarginEnd" maxLines='1'></Text>
-										<Text text="{i18n>To}" id="idlabltxt"/>
+										<Text text="{i18n>To}" id="idlabltxt" wrapping='true'/>
 									</HBox>
 								</VBox>
 								<core:Title text="{i18n>OfferVehicleInformation}" id="oOtherVehInfoid"/>
 								<!--	<VBox id="oVboxOtherVehicleInformation" visible="false">-->
+									<Text text="{TradeModel>/VehicleTradeVehicle/FromFourth}" id="FromFourth" visible="false"/>
 								<Label text="{i18n>VehicleTrackingNumber}" id="vtnlabeid" visible="false"/>
+							
 								<Text text="{TradeModel>/VehicleTradeVehicle/zzvtn}" id="vtnid" visible="false"/>
 								<Label text="{i18n>ModelYear}" id="moylablid" visible="false"/>
 								<Text text="{TradeModel>/VehicleTradeVehicle/zzmoyr}" id="yearid" visible="false"/>
@@ -90,11 +94,11 @@
 									text="{TradeModel>/VehicleTradeVehicle/zzsuffix} - {TradeModel>/VehicleTradeVehicle/suffix_desc_en}/{TradeModel>/VehicleTradeVehicle/mrktg_int_desc_en}"
 									id="suffid" visible="false"/>
 								<Label text="{i18n>APX}" id="apxlabelid" visible="false"/>
-								<Text text="{TradeModel>zzapx}" id="apxid" visible="false"/>
+								<Text text="{TradeModel>/VehicleTradeVehicle/zzapx}" id="apxid" visible="false"/>
 								<Label text="{i18n>Status}" visible="false" id="ofvestats"/>
-								<Text text="{path:'TradeModel>zz_trading_ind',formatter:'vehicleLocator.Formatter.Formatter.Status'}" id="offeredStatus" visible="false"/>
+								<Text text="{path:'TradeModel>/VehicleTradeVehicle/zz_trading_ind',formatter:'vehicleLocator.Formatter.Formatter.Status'}" id="offeredStatus" visible="false"/>
 								<Label text="{i18n>OrderType}" visible="false" id="offordetype"/>
-								<Text text="{path:'TradeModel>zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" id="oofferedOrdertype" visible="false"/>
+								<Text text="{path:'TradeModel>/VehicleTradeVehicle/zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" id="oofferedOrdertype" visible="false"/>
 								<!--	<Text text="{TradeModel>/VehicleTradeVehicle/ZZAPX}" id="apxid" visible="false"/>-->
 								<Label text="{i18n>ExteriorColor}" id="extcollabelid" visible="false"/>
 								<Text text="{TradeModel>/VehicleTradeVehicle/zzextcol}-{TradeModel>/VehicleTradeVehicle/mktg_desc_en}" id="extcolod" visible="false"/>

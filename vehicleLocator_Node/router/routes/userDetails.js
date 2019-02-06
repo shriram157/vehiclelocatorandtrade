@@ -272,15 +272,19 @@ module.exports = function () {
 					switch (attributeFromSAP) {
 					case "01":
 						receivedData.Division = "10";
-						receivedData.Attribute = "01"
+						receivedData.Attribute = "01";
+						receiveData.Div = "TOY";
 						break;
 					case "02":
 						receivedData.Division = "20";
-						receivedData.Attribute = "02"
+						receivedData.Attribute = "02";
+						receiveData.Div = "LEX";
+					
 						break;
 					case "03":
 						receivedData.Division = "Dual";
-						receivedData.Attribute = "03"
+						receivedData.Attribute = "03";
+						receiveData.Div = "";
 						break;
 					case "04":
 						receivedData.Division = "10";
@@ -292,7 +296,8 @@ module.exports = function () {
 						break;
 					default:
 						receivedData.Division = "10"; //  lets put that as a toyota dealer
-						receivedData.Attribute = "01"
+						receivedData.Attribute = "01";
+						receiveData.Div = "TOY";
 
 					}
 

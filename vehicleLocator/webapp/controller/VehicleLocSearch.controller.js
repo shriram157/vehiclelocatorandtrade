@@ -90,8 +90,8 @@ sap.ui.define([
 					var BpDealer = [];
 					var userAttributes = [];
 				/*	BpDealer.push({
-						"BusinessPartnerKey": "2400042193",
-						"BusinessPartner": "42193",
+						"BusinessPartnerKey": "2400042120",
+						"BusinessPartner": "42120",
 
 						"BusinessPartnerName": "Don Valley North Toyota...", //item.OrganizationBPName1 //item.BusinessPartnerFullName
 						"Division": "10",
@@ -118,7 +118,7 @@ sap.ui.define([
 					that.getView().byId("oDealertitle").setText(LoggedInDealer);
 			/*	userAttributes.push({
 						"UserType": "Dealer",
-						"DealerCode": "42193",
+						"DealerCode": "42120",
 						"Language": "English"
 
 					});*/
@@ -379,13 +379,11 @@ sap.ui.define([
 
 					that.Customersales = this.nodeJsUrl + "/A_CustomerSalesArea";
 
-					/*that.BussinesspartnerUrl = that.oDataUrl + "/A_CustomerSalesArea?$filter=Customer eq'" + oDealer + 
-						"' and DistributionChannel eq '" + DistributionChannel + "' and Division eq '" + Division + "'";*/
+				
 
 					that.BussinesspartnerUrl = that.oDataUrl + "/A_CustomerSalesArea?$filter=Customer eq'" + BusinessPartner + "' and Division eq '" +
 						Division + "'";
-					/*	that.BussinesspartnerUrl = that.oDataUrl + "/A_CustomerSalesArea?$filter=Customer eq'" + oDealer + "' and SalesOrganization eq '" +
-									SalesOrganization + "' and Division eq '" + Division + "'";*/
+				
 
 					var ajax = $.ajax({
 						dataType: "json",
@@ -1535,7 +1533,7 @@ for(var i=0;i<oResults.length;i++){
 					debugger;
 					var a=s;
 					sap.ui.core.BusyIndicator.hide();
-					sap.m.MessageBox.warning("No Data");
+				/*	sap.m.MessageBox.warning("No Data");*/
 				}
 			});
 

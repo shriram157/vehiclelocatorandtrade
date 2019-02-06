@@ -180,6 +180,8 @@ sap.ui.define([
 			if (selVT_CStradinRet == "Yes") {
 				this.getView().byId("oSeleBtn").setVisible(true);
 			} else if (selVT_CStradinRet == "No") {
+				
+           this.getView().byId("FromFourth").setText("");
 				this.getView().byId("oSeleBtn").setVisible(false);
 				this.getView().byId("oOtherVehInfoid").setText("");
 				this.getView().byId("vtnlabeid").setVisible(false);
@@ -252,7 +254,9 @@ sap.ui.define([
 			this.SelectedTrimInteriorColor = "";
 			var SuffCmbo = this.getOwnerComponent().SelectedMSMData[0].SuffCmbo;
 			var MoyearCombo = this.getOwnerComponent().SelectedMSMData[0].MoyearCombo;
-				var oDealer=sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].DealerCode;
+			/*	var oDealer=sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].DealerCode;*/
+				  var oDealer=sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerKey;
+					var Series=this.getOwnerComponent().SelectedMSMData[0].SeriesCmbo;                      
 				
 		//	var oDealer = this.getView().getModel("TradeModel").getData().kunnr;
 		//	var oDealer ="42120";
@@ -273,15 +277,13 @@ sap.ui.define([
 
 			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
 
-			/*	var SeriesUrl= that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq 'YZ3DCT' and zzextcol eq '01D6' and zzintcol eq 'LC14' and zzsuffix eq 'AB' and zzmoyr eq '2018'";*/
-
-			/*var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq'" + McCmbo + "' and zzsuffix eq '" + SuffCmbo +
+			/*
+			 working#######
+			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq'" + McCmbo + "' and zzsuffix eq '" + SuffCmbo +
 				"' and zzmoyr eq '" + MoyearCombo + "' and kunnr eq '" + oDealer +
 				"'";*/
-				var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq'" + McCmbo + "' and zzsuffix eq '" + SuffCmbo +
-				"' and zzmoyr eq '" + MoyearCombo + "' and kunnr eq '" + oDealer +
-				"'";
 	/*	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '"+McCmbo+"' and endswith (zzintcol,'"+this.intercolor+"') and zzsuffix eq '"+SuffCmbo+"' and zzmoyr eq '"+MoyearCombo+"'&$format=json";	*/		
+ 	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=zzseries eq'"+Series+ "'and kunnr eq '"+oDealer+"'&$format=json";
 
 			$.ajax({
 				url: SeriesUrl,
@@ -594,7 +596,7 @@ sap.ui.define([
 							var Trade_Return = "N";
 						}
 
-						var Trade_Status = "";
+						var Trade_Status = "S";
 						/*	var Requesting_Dealer = that.getView().byId("dealrid").getText().substr(0, that.getView().byId("dealrid").getText().indexOf(
 								"-"));*/
 						var Requesting_Dealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerKey;
@@ -611,9 +613,9 @@ sap.ui.define([
 						});
 						var Req_Current_ETA_FromData =  that.getView().byId("ctaid").getText();
 							if (Req_Current_ETA_FromData != "") {
-							var Req_Current_ETA_From = DateFormat.format(new Date(Req_Current_ETA_FromData));
+							var Req_Current_ETA_From = oDateFormat.format(new Date(Req_Current_ETA_FromData));
 						} else {
-							var Req_Current_ETA_From = DateFormat.format(new Date());
+							var Req_Current_ETA_From = "0000-00-00T00:00:00";
 						}
 							
 					/*	that.getView().byId("ctaid").getText();*/
@@ -624,10 +626,16 @@ sap.ui.define([
 						}*/
 						var Req_Current_ETA_To =  that.getView().byId("totxtid").getText();
 							if (Req_Current_ETA_To != "") {
+							var Req_Current_ETA_To = oDateFormat.format(new Date(Req_Current_ETA_To));
+						} else {
+							var Req_Current_ETA_To = "0000-00-00T00:00:00";
+						}
+					/*	var Req_Current_ETA_To =  that.getView().byId("totxtid").getText();
+							if (Req_Current_ETA_To != "") {
 							var Req_Current_ETA_To = DateFormat.format(new Date(Req_Current_ETA_To));
 						} else {
-							var Req_Current_ETA_To = DateFormat.format(new Date());
-						}
+							var Req_Current_ETA_To = "0000-00-00T00:00:00";
+						}*/
 					/*	that.getView().byId("totxtid").getText();*/
 
 					/*	if (Req_Current_ETA_To != "") {
@@ -641,40 +649,40 @@ sap.ui.define([
 						if (Req_Proposed_ETA_From != "") {
 							var Req_Proposed_ETA_From = oDateFormat.format(new Date(Req_Proposed_ETA_From));
 						} else {
-							var Req_Proposed_ETA_From = oDateFormat.format(new Date());
+							var Req_Proposed_ETA_From = "0000-00-00T00:00:00";
 						}
 						var Req_Proposed_ETA_To = that.getView().byId("otextlabel").getText();
 						if (Req_Proposed_ETA_To != "") {
 							var Req_Proposed_ETA_To = oDateFormat.format(new Date(Req_Proposed_ETA_To));
 						} else {
-							var Req_Proposed_ETA_To = oDateFormat.format(new Date());
+							var Req_Proposed_ETA_To = "0000-00-00T00:00:00";
 						}
 
 						var Off_Current_ETA_From = that.getView().byId("oCtraid").getText();
 						if (Off_Current_ETA_From != "") {
 							var Off_Current_ETA_From = oDateFormat.format(new Date(Off_Current_ETA_From));
 						} else {
-							var Off_Current_ETA_From = oDateFormat.format(new Date());
+							var Off_Current_ETA_From = "0000-00-00T00:00:00";
 						}
 						var Off_Current_ETA_To = that.getView().byId("labetxteid").getText();
 						if (Off_Current_ETA_To != "") {
 							var Off_Current_ETA_To = oDateFormat.format(new Date(Off_Current_ETA_To));
 						} else {
-							var Off_Current_ETA_To = oDateFormat.format(new Date());
+							var Off_Current_ETA_To = "0000-00-00T00:00:00";
 						}
 
 						var Off_Proposed_ETA_From = that.getView().byId("perpid").getText();
 						if (Off_Proposed_ETA_From != "") {
 							var Off_Proposed_ETA_From = oDateFormat.format(new Date(Off_Proposed_ETA_From));
 						} else {
-							var Off_Proposed_ETA_From = oDateFormat.format(new Date());
+							var Off_Proposed_ETA_From = "0000-00-00T00:00:00";
 						}
 
 						var Off_Proposed_ETA_To = that.getView().byId("idlabeal").getText();
 						if (Off_Proposed_ETA_To != "") {
 							var Off_Proposed_ETA_To = oDateFormat.format(new Date(Off_Proposed_ETA_To));
 						} else {
-							var Off_Proposed_ETA_To = oDateFormat.format(new Date());
+							var Off_Proposed_ETA_To = "0000-00-00T00:00:00";
 						}
 
 						var Created_By = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
@@ -761,7 +769,9 @@ sap.ui.define([
 						that.oDataModel.create("/TradeRequest", oEntry, null, function (s) {
 						//	that.getView().byId("oTrdareqstat").setText("Request Sent");
 							that.TradeComment(oEntry);
-							that.TradeVehcles(oEntry);
+							if(that.getView().byId("FromFourth").getText()=="FromFourth"){
+								that.TradeVehcles(oEntry);
+							}
 							that.TradeStatus(oEntry);
 							/*	that.VehicleTrade_Summary();*/
 
@@ -1047,6 +1057,7 @@ sap.ui.define([
 				"Method": "POST"
 			});
 
+         
 			that.oDataModel.create("/TradeComment", oTradeComment, null, function (s) {
 				that.getView().byId("oTypeHere").setValue("");
 			}, function () {
@@ -1064,28 +1075,43 @@ sap.ui.define([
 		/*	pattern: "yyyy-MM-dd"*/
 			});
 			var oCommentdate = oDateFormat.format(new Date());
-			var Suffix = that.getView().byId("oZsuffix").getText().split("-")[0];
+		/*	var Suffix = that.getView().byId("oZsuffix").getText().split("-")[0];*/
+		
+			var Suffix = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzsuffix;
+			
+			
 		//	if (Suffix != "") {
-				var intColor =	that.getView().getModel("TradeModel").getData().zzintcol;
+				var intColor =	that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzintcol;
 			/*	var intColor = that.getView().byId("oZsuffix").getText().split("/")[1];*/
 			/*} else {
 				var intColor = "";
 			}*/
-			var model = that.getView().byId("oZmodel").getText().split("-")[0];
-			var modelYear = that.getView().byId("zzMoyr").getText();
+		/*	var model = that.getView().byId("oZmodel").getText().split("-")[0];*/
+	    var model =	that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.matnr;
+	    var modelYear = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzmoyr;
+		var Apx = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzapx;
+		var Series= that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzseries;
+		var exterior = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzextcol;
+		var vtn = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzvtn;
+		var ostatus =  that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zz_trading_ind;
+		var oOrdertype = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzordertype;
+		var DNC = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.dnc_ind;
+		/*	var modelYear = that.getView().byId("zzMoyr").getText();
 			var Apx = that.getView().byId("oApx").getText();
 			var Series =that.getView().getModel("TradeModel").getData().zzseries;
 			var exterior = that.getView().byId("Zextcolo").getText().split("-")[0];
 			var vtn = that.getView().byId("vtnid").getText();
-			var ostatus = that.getView().getModel("TradeModel").getData().zz_trading_ind;
+			var ostatus = that.getView().getModel("TradeModel").getData().zz_trading_ind;*/
 			/*	if(ostatus=="Pipeline – non-Routable"){
 					ostatus="2";
 				}
 				else if(ostatus=="Pipeline - Routable"){
 					ostatus="1";
 				}*/
-			var oOrdertype = that.getView().getModel("TradeModel").getData().zzordertype;
-			var DNC = that.getView().getModel("TradeModel").getData().dnc_ind;
+				
+			
+		/*	var oOrdertype = that.getView().getModel("TradeModel").getData().zzordertype;
+			var DNC = that.getView().getModel("TradeModel").getData().dnc_ind;*/
 			var oEntry1 = {
 				APX: Apx,
 				DNC: DNC,

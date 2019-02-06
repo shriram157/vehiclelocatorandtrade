@@ -3,7 +3,7 @@
 	xmlns:uxap="sap.uxap"  xmlns:tnt="sap.tnt" xmlns:t="sap.ui.table" xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml">
 	<App>
 		<pages class="oImgsampl" height="200px">
-			<Page showNavButton="false">
+			<Page showNavButton="false" enableScrolling="false">
 				<customHeader>
 					<Bar class="sapUiSmallPaddingBeginEnd clCustomHeaderBg">
 						<contentLeft>
@@ -51,16 +51,16 @@
 											<Link id="selectId" text="Select" class="link" subtle="true" press="oTradeLinkPress" wrapping="false"/>
 										</t:template>
 									</t:Column>
-									<t:Column sortProperty="zzvtn" width="16rem" id="zzvtnid">
+									<t:Column sortProperty="zzvtn" width="11rem" id="zzvtnid">
 										<Label text="{i18n>VehicleTrackingNumber}"/>
 										<t:template>
 											<Text text="{zzvtn}" wrapping="false"/>
 										</t:template>
 									</t:Column>
-									<t:Column sortProperty="zzseries" width="14rem" id="seriesr">
+									<t:Column sortProperty="zzseries" width="7rem" id="seriesr">
 										<Label text="{i18n>Series}"/>
 										<t:template>
-											<Text text="{zzseries}-{zzseries_desc_en}" wrapping="false"/>
+											<Text text="{zzseries_desc_en}" wrapping="false"/>
 										</t:template>
 									</t:Column>
 									<t:Column sortProperty="matnr" width="14rem" id="matnr">
@@ -75,13 +75,13 @@
 											<Text text="{zzsuffix}-{suffix_desc_en}/{mrktg_int_desc_en}" wrapping="false"/>
 										</t:template>
 									</t:Column>
-									<t:Column sortProperty="zzapx" width="6rem">
+									<t:Column sortProperty="zzapx" width="3rem">
 										<Label text="{i18n>APX}" wrapping="false"/>
 										<t:template>
 											<Text text="{zzapx}" wrapping="false"/>
 										</t:template>
 									</t:Column>
-									<t:Column id="ID_DealerNet" sortProperty="zzextcol" width="14rem">
+									<t:Column id="ID_DealerNet" sortProperty="zzextcol" width="10rem">
 										<Label text="{i18n>Color}" wrapping="false"/>
 										<t:template>
 											<Text text="{zzextcol} - {mktg_desc_en}" wrapping="false"/>

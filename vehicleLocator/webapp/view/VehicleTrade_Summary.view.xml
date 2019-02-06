@@ -236,7 +236,9 @@
 							<t:Column sortProperty="Requested_Dealer" id="matnr">
 										<Label text="{i18n>FromDealer}"/>
 										<t:template>
-											<Text text="{Requested_Dealer}-{Requested_Dealer_Name}" wrapping="false"/>
+										<!--	<Text text="{Requested_Dealer}-{Requested_Dealer_Name}" wrapping="false"/>-->
+										
+			<Text text="{path:'Requested_Dealer',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDealer'}-{Requested_Dealer_Name}"></Text>
 										</t:template>
 									</t:Column>
 						
