@@ -112,7 +112,7 @@
 						labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
 						singleContainerFullSize="false">-->
 					<f:SimpleForm columnsL="2" columnsM="2" editable="true" emptySpanL="0" emptySpanM="0" labelSpanL="3" labelSpanM="3"
-						layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024">
+						layout="ResponsiveGridLayout" maxContainerCols="2"   minWidth="1024">
 						<f:content>
 							<!--	<l:VerticalLayout width="80%" class="gridWrapper">
 								<l:content>
@@ -176,7 +176,7 @@
 													<l:GridData span="L2 M2 S6"/>
 												</layoutData>
 											</Label>
-											<ComboBox id="VLRDealer" selectionChange="onStatusChange" items="{/}" class="sapUiTinyMarginBegin" width="300px">
+											<ComboBox id="VLRDealer" selectionChange="onDealerChange" items="{/}" class="sapUiTinyMarginBegin" width="300px">
 												<core:ListItem text="{path:'kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'} -{name1}" key="{kunnr}"/>
 												<layoutData>
 													<l:GridData span="L6 M2 S6"/>
@@ -212,7 +212,7 @@
 													<l:GridData span="L2 M2 S8"/>
 												</layoutData>
 											</Label>
-											<ComboBox id="VLRColor" selectionChange="onStatusChange" class="sapUiTinyMarginBegin" items="{/}" width="300px">
+											<ComboBox id="VLRColor" selectionChange="onColourChange" class="sapUiTinyMarginBegin" items="{/}" width="300px">
 												<core:ListItem text="{zzextcol} - {mktg_desc_en}" key="{zzextcol}"/>
 												<layoutData>
 													<l:GridData span="L2 M2 S8"/>

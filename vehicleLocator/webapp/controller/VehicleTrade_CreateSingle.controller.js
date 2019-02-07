@@ -611,12 +611,20 @@ sap.ui.define([
 						var DateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 					    		pattern: "yyyy-MM-dd"
 						});
-						var Req_Current_ETA_FromData =  that.getView().byId("ctaid").getText();
+					/*	var Req_Current_ETA_FromData =  that.getView().byId("ctaid").getText();
 							if (Req_Current_ETA_FromData != "") {
-							var Req_Current_ETA_From = oDateFormat.format(new Date(Req_Current_ETA_FromData));
+							var Req_Current_ETA_From = DateFormat.format(new Date(Req_Current_ETA_FromData));
+						} else {
+							var Req_Current_ETA_From = "0000-00-00T00:00:00";
+						}*/
+					/*	/  sssssssss  /*/
+							var Req_Current_ETA_FromData =  that.getView().byId("ctaid").getText();
+							if (Req_Current_ETA_FromData != "") {
+							var Req_Current_ETA_From =  new Date(oDateFormat.format(new Date(Req_Current_ETA_FromData)));
 						} else {
 							var Req_Current_ETA_From = "0000-00-00T00:00:00";
 						}
+						/*	/  sssssssss  /*/	
 							
 					/*	that.getView().byId("ctaid").getText();*/
 					/*	if (Req_Current_ETA_FromData != "") {
@@ -624,9 +632,16 @@ sap.ui.define([
 						} else {
 							var Req_Current_ETA_From = oDateFormat.format(new Date());
 						}*/
-						var Req_Current_ETA_To =  that.getView().byId("totxtid").getText();
+					/*old working				
+					var Req_Current_ETA_To =  that.getView().byId("totxtid").getText();
 							if (Req_Current_ETA_To != "") {
-							var Req_Current_ETA_To = oDateFormat.format(new Date(Req_Current_ETA_To));
+							var Req_Current_ETA_To = DateFormat.format(new Date(Req_Current_ETA_To));
+						} else {
+							var Req_Current_ETA_To = "0000-00-00T00:00:00";
+						}*/
+						var Req_Current_ETA_ToDate =  that.getView().byId("totxtid").getText();
+							if (Req_Current_ETA_ToDate != "") {
+							var Req_Current_ETA_To =  new Date(oDateFormat.format(new Date(Req_Current_ETA_ToDate)));
 						} else {
 							var Req_Current_ETA_To = "0000-00-00T00:00:00";
 						}
@@ -644,43 +659,43 @@ sap.ui.define([
 							var Req_Current_ETA_To = oDateFormat.format(new Date());
 						}
 */
-						var Req_Proposed_ETA_From = that.getView().byId("prpid").getText();
+						var Req_Proposed_ETA_FromDate = that.getView().byId("prpid").getText();
 
-						if (Req_Proposed_ETA_From != "") {
-							var Req_Proposed_ETA_From = oDateFormat.format(new Date(Req_Proposed_ETA_From));
+						if (Req_Proposed_ETA_FromDate != "") {
+							var Req_Proposed_ETA_From =  new Date(oDateFormat.format(new Date(Req_Proposed_ETA_FromDate)));
 						} else {
 							var Req_Proposed_ETA_From = "0000-00-00T00:00:00";
 						}
-						var Req_Proposed_ETA_To = that.getView().byId("otextlabel").getText();
-						if (Req_Proposed_ETA_To != "") {
-							var Req_Proposed_ETA_To = oDateFormat.format(new Date(Req_Proposed_ETA_To));
+						var Req_Proposed_ETA_ToDate = that.getView().byId("otextlabel").getText();
+						if (Req_Proposed_ETA_ToDate != "") {
+							var Req_Proposed_ETA_To =  new Date(oDateFormat.format(new Date(Req_Proposed_ETA_ToDate)));
 						} else {
 							var Req_Proposed_ETA_To = "0000-00-00T00:00:00";
 						}
 
-						var Off_Current_ETA_From = that.getView().byId("oCtraid").getText();
-						if (Off_Current_ETA_From != "") {
-							var Off_Current_ETA_From = oDateFormat.format(new Date(Off_Current_ETA_From));
+						var Off_Current_ETA_FromDate = that.getView().byId("oCtraid").getText();
+						if (Off_Current_ETA_FromDate != "") {
+							var Off_Current_ETA_From =  new Date(oDateFormat.format(new Date(Off_Current_ETA_FromDate)));
 						} else {
 							var Off_Current_ETA_From = "0000-00-00T00:00:00";
 						}
-						var Off_Current_ETA_To = that.getView().byId("labetxteid").getText();
-						if (Off_Current_ETA_To != "") {
-							var Off_Current_ETA_To = oDateFormat.format(new Date(Off_Current_ETA_To));
+						var Off_Current_ETA_ToDate = that.getView().byId("labetxteid").getText();
+						if (Off_Current_ETA_ToDate != "") {
+							var Off_Current_ETA_To =  new Date(oDateFormat.format(new Date(Off_Current_ETA_ToDate)));
 						} else {
 							var Off_Current_ETA_To = "0000-00-00T00:00:00";
 						}
 
-						var Off_Proposed_ETA_From = that.getView().byId("perpid").getText();
-						if (Off_Proposed_ETA_From != "") {
-							var Off_Proposed_ETA_From = oDateFormat.format(new Date(Off_Proposed_ETA_From));
+						var Off_Proposed_ETA_FromDate = that.getView().byId("perpid").getText();
+						if (Off_Proposed_ETA_FromDate != "") {
+							var Off_Proposed_ETA_From = new Date(oDateFormat.format(new Date(Off_Proposed_ETA_FromDate)));
 						} else {
 							var Off_Proposed_ETA_From = "0000-00-00T00:00:00";
 						}
 
-						var Off_Proposed_ETA_To = that.getView().byId("idlabeal").getText();
-						if (Off_Proposed_ETA_To != "") {
-							var Off_Proposed_ETA_To = oDateFormat.format(new Date(Off_Proposed_ETA_To));
+						var Off_Proposed_ETA_ToDate = that.getView().byId("idlabeal").getText();
+						if (Off_Proposed_ETA_ToDate != "") {
+							var Off_Proposed_ETA_To = new Date(oDateFormat.format(new Date(Off_Proposed_ETA_ToDate)));
 						} else {
 							var Off_Proposed_ETA_To = "0000-00-00T00:00:00";
 						}
@@ -728,18 +743,18 @@ sap.ui.define([
 							"Requested_Vtn": Requested_Vtn,
 							"Offered_Vtn": Offered_Vtn,
 							"Trade_Return": Trade_Return,
-							"Req_Current_ETA_From": new Date(Req_Current_ETA_From),
-							"Req_Current_ETA_To": new Date(Req_Current_ETA_To),
-							"Req_Proposed_ETA_From":  new Date(Req_Proposed_ETA_From),
-							"Req_Proposed_ETA_To":  new Date(Req_Proposed_ETA_To),
-							"Off_Current_ETA_From":  new Date(Off_Current_ETA_From),
+							"Req_Current_ETA_From": Req_Current_ETA_From,
+							"Req_Current_ETA_To": Req_Current_ETA_To,
+							"Req_Proposed_ETA_From":  Req_Proposed_ETA_From,
+							"Req_Proposed_ETA_To":  Req_Proposed_ETA_To,
+							"Off_Current_ETA_From":  Off_Current_ETA_From,
 
-							"Off_Current_ETA_To":  new Date(Off_Current_ETA_To),
-							"Off_Proposed_ETA_From":  new Date(Off_Proposed_ETA_From),
-							"Off_Proposed_ETA_To":  new Date(Off_Proposed_ETA_To),
+							"Off_Current_ETA_To":  Off_Current_ETA_To,
+							"Off_Proposed_ETA_From":  Off_Proposed_ETA_From,
+							"Off_Proposed_ETA_To":  Off_Proposed_ETA_To,
 							"Created_By": Created_By,
 							"Created_On":  new Date(Created_On),
-							"Changed_on":  new Date(Changed_on),
+							"Changed_on": new Date(Changed_on),
 							"Requested_Dealer": Requested_Dealer,
 							"Requested_Dealer_Name": Requested_Dealer_Name
 
@@ -769,9 +784,9 @@ sap.ui.define([
 						that.oDataModel.create("/TradeRequest", oEntry, null, function (s) {
 						//	that.getView().byId("oTrdareqstat").setText("Request Sent");
 							that.TradeComment(oEntry);
-							if(that.getView().byId("FromFourth").getText()=="FromFourth"){
+						//	if(that.getView().byId("FromFourth").getText()=="FromFourth"){
 								that.TradeVehcles(oEntry);
-							}
+						//	}
 							that.TradeStatus(oEntry);
 							/*	that.VehicleTrade_Summary();*/
 
@@ -1112,6 +1127,21 @@ sap.ui.define([
 			
 		/*	var oOrdertype = that.getView().getModel("TradeModel").getData().zzordertype;
 			var DNC = that.getView().getModel("TradeModel").getData().dnc_ind;*/
+		var oSuffixReq = that.getView().byId("oZsuffix").getText().split("-")[0];
+		var omodelReq = that.getView().byId("oZmodel").getText().split("-")[0];
+		var omodelYearReq = that.getView().byId("zzMoyr").getText();
+		var oApxReq = that.getView().byId("oApx").getText();
+		var oSeriesReq = that.getView().getModel("TradeModel").getData().zzseries;
+		var oexteriorReq = 	that.getView().byId("Zextcolo").getText().split("-")[0];
+		var ointeriorReq = that.getView().getModel("TradeModel").oData.zzintcol;
+		var ovtnReq = that.getView().getModel("TradeModel").oData.zzvtn;
+		var ostatusReq = that.getView().getModel("TradeModel").getData().zz_trading_ind;
+		var oOrdertypeReq = that.getView().getModel("TradeModel").getData().zzordertype;
+		var oDNCreq = that.getView().getModel("TradeModel").getData().dnc_ind;
+			
+			
+			
+			
 			var oEntry1 = {
 				APX: Apx,
 				DNC: DNC,
@@ -1123,11 +1153,35 @@ sap.ui.define([
 				Series: Series,
 				Status: ostatus,
 				Suffix: Suffix,
-
-				VTN: vtn,
+                VTN: vtn,
 			};
 			oEntry1["Trade_Id.Trade_Id"] = oEntry.Trade_Id;
-
+			var oEntry2 = {
+				
+				APX: oApxReq,
+				DNC: oDNCreq,
+				Ext_Colour: oexteriorReq,
+				Int_Colour: ointeriorReq,
+				Model: omodelReq,
+				Model_Year: omodelYearReq,
+				Order_Type: oOrdertypeReq,
+				Series: oSeriesReq,
+				Status: ostatusReq,
+				Suffix: oSuffixReq,
+				VTN: ovtnReq,	
+				};
+				oEntry2["Trade_Id.Trade_Id"] = oEntry.Trade_Id;
+		var oVehicleDetails = [];
+			oVehicleDetails.push(oEntry2);
+		if(that.getView().byId("FromFourth").getText()=="FromFourth"){
+								oVehicleDetails.push(oEntry1);
+							}
+	
+	
+			
+		/*	oEntry1["Trade_Id.Trade_Id"] = oEntry.Trade_Id;*/
+		/*	oVehicleDetails["Trade_Id.Trade_Id"] = oEntry.Trade_Id;
+*/
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
 
@@ -1148,13 +1202,16 @@ sap.ui.define([
 				"Accept": "application/json",
 				"Method": "POST"
 			});
+			  
 
-			that.oDataModel.create("/TradeVehicles", oEntry1, null, function (s) {
+		/*	that.oDataModel.create("/TradeVehicles", oEntry1, null, function (s) {*/
+		for(var i=0; i<oVehicleDetails.length;i++){
+			that.oDataModel.create("/TradeVehicles", oVehicleDetails[i], null, function (s) {
 				/*	alert("ok");*/
 			}, function () {
 
 			});
-
+	}
 		},
 
 		TradeStatus: function (oEntry) {
