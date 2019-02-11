@@ -107,25 +107,26 @@
 						         </ComboBox>-->
 								<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" id="VT_ARCTtrdinStatus" width="220px"/>
 								<!--<Text text="Request Sent"/>-->
-								<core:Title text="{i18n>OfferVehicleInformation}"/>
-								<Label text="Dealer"/>
-								<Text text="{Requesting_Dealer}-{Requesting_Dealer_Name}" id="oRequesteddealer"/>
-								<Label text="{i18n>ModelYear}"/>
-								<Text text="{Model_Year}"/>
-								<Label text="{i18n>Series}"/>
-								<Text text="{Series}-{Series_Desc}"/>
-								<Label text="{i18n>Model}"/>
-								<Text text="{Model}-{Model_Desc}"/>
-								<Label text="{i18n>Suffix}"/>
-								<Text text="{Suffix}-{Suffix_Desc}/{Int_Colour_Desc}"/>
-								<Label text="{i18n>APX}"/>
-								<Text text="{APX}"/>
-								<Label text="{i18n>ExteriorColor}"/>
-								<Text text="{Ext_Colour}-{Ext_Colour_Desc}"/>
-								<Label text="{i18n>Status}"/>
-								<Text text="{path:'Status',formatter:'vehicleLocator.Formatter.Formatter.Status'}"/>
-								<Label text="{i18n>OrderType}"/>
-								<Text text="{path:'Order_Type',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}"/>
+								<core:Title text="{i18n>OfferVehicleInformation}" id="Offerevehid"/>
+								<Label text="Dealer" id="offeredDealer"/>
+								<Text text="{path:'/OffredVehicle/Requesting_Dealer',formatter:'vehicleLocator.Formatter.Formatter.Dealer'}-{/OffredVehicle/Requesting_Dealer_Name}" id="oRequesteddealer"/>
+							<!--	"{path:'TradeModel>kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'}-{TradeModel>name1}"-->
+								<Label text="{i18n>ModelYear}" id="ofrModellabl"/>
+								<Text text="{/OffredVehicle/Model_Year}" id="ofrmodelyeartext"/>
+								<Label text="{i18n>Series}" id="ofrserieslabl"/>
+								<Text text="{/OffredVehicle/Series}-{/OffredVehicle/Series_Desc}" id="ofrseriestxt"/>
+								<Label text="{i18n>Model}" id="ofrmodllabl"/>
+								<Text text="{/OffredVehicle/Model}-{/OffredVehicle/Model_Desc}" id="ofrmodltxt"/>
+								<Label text="{i18n>Suffix}" id="ofrsuffixlabl"/>
+								<Text text="{/OffredVehicle/Suffix}-{/OffredVehicle/Suffix_Desc}/{/OffredVehicle/Int_Colour_Desc}" id="ofrsuffixstxt"/>
+								<Label text="{i18n>APX}" id="ofrapxlabl"/>
+								<Text text="{/OffredVehicle/APX}" id="ofrapxtxt"/>
+								<Label text="{i18n>ExteriorColor}" id="ofrextcolorlabl"/>
+								<Text text="{/OffredVehicle/Ext_Colour}-{/OffredVehicle/Ext_Colour_Desc}" id="ofrexttxt"/>
+								<Label text="{i18n>Status}" id="ofrstatuslabl"/>
+								<Text text="{path:'/OffredVehicle/Status',formatter:'vehicleLocator.Formatter.Formatter.Status'}" id="ofrstatustxt"/>
+								<Label text="{i18n>OrderType}" id="ofrordrtypelabl"/>
+								<Text text="{path:'/OffredVehicle/Order_Type',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" id="ofrordtypetxt"/>
 								<Label text="{i18n>CurrentETA}" id="cetalaid">
 									<layoutData>
 										<l:GridData span="L4 M12 S3"/>
@@ -144,7 +145,7 @@
 									</layoutData>
 								</Text>
 								<Text text="{i18n>To}" id="tobid"/>
-								<Text text="" id="toid"/>
+							<!--	<Text text="" id="toid"/>-->	<Text text=""/>
 								<Label text="{i18n>PropsedETAtoNewDealer}" id="prolabid"/>
 								<Text text="{path:'Off_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="prptid">
 									<layoutData>

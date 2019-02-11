@@ -132,7 +132,10 @@
 							<form:content>
 								<core:Title text=""/>
 								<Button width="10px" visible="false">
-									<layoutData>
+								<!--	<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>-->
+										<layoutData>
 										<l:GridData span="L4 M12 S3"/>
 									</layoutData>
 								</Button>

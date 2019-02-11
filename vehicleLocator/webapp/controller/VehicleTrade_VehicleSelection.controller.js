@@ -19,7 +19,7 @@ sap.ui.define([
 			var oTable = this.getView().byId("table");
 			var that = this;
 		this.getRouter().getRoute("VehicleTrade_VehicleSelection").attachPatternMatched(this.onRouteMatched, this);		
-
+ 
 			//this.getRouter().attachRouteMatched(this.onRouteMatched, this);
 
 			/*	var SelSeriesKey = that.getView().byId("oVt_SeriesCmbo").getSelectedKey();
