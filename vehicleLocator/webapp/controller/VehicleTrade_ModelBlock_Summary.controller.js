@@ -269,6 +269,34 @@ sap.ui.define([
 
 									});
 							},
+					
+						
+				VehicleLocSearchPressMBS:function()
+				{
+						var that=this;
+					that.getRouter().navTo("VehicleLocSearch");	
+					
+				},
+				TradeSummaryLinkPressMBS:function()
+				{
+					var that=this;
+					that.getRouter().navTo("VehicleTrade_Summary");		
+					
+				},
+				TradeHistoryLinkPressMBS : function()
+				{
+						var that=this;
+					that.getRouter().navTo("VehicleTrade_History");	
+					
+				},
+				
+						
+							
+							
+							
+							
+							
+							
 							oDeletepress: function () {
 								var that = this;
 								//	var oTable = that.getView().byId("tableVTMBS");

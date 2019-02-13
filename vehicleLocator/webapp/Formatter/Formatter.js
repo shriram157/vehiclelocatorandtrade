@@ -158,7 +158,7 @@ oTradeStatusBinding:function(Trade_return){
 				return "Yes-Single Vehicle";
 				break;
 			case "N":
-				return "No-Single Vehicle";
+				return "No";
 				break;
 
 			}
@@ -187,7 +187,7 @@ oTradeStatusBinding:function(Trade_return){
 		},
 
 		TradeSummaryoDate: function (Created_On) {
-			if (Created_On != null && Created_On != "") {
+			if (Created_On != null && Created_On != "" && Created_On !="/Date(0)/") {
 				var dateTo = Created_On.split("(")[1];
 				if (Created_On.includes("+") == true) {
 					/*dateTo = dateTo.split("+")[0];*/
@@ -209,6 +209,9 @@ oTradeStatusBinding:function(Trade_return){
 				}
 			
 			}
+			else{
+				return "";
+			}
 		},
 		ProposedEtaToDate:function(Proposed_ETA_To)
 {
@@ -218,7 +221,7 @@ oTradeStatusBinding:function(Trade_return){
 				return oDateFormat.format(new Date(Proposed_ETA_To));
 },	
 			TradeSummaryoDate1: function (Created_On) {
-			if (Created_On != null && Created_On != "") {
+			if (Created_On != null && Created_On != "" && Created_On !="/Date(0)/") {
 				var dateTo = Created_On.split("(")[1];
 				if (Created_On.includes("+") == true) {
 					/*dateTo = dateTo.split("+")[0];*/
@@ -239,6 +242,9 @@ oTradeStatusBinding:function(Trade_return){
 				return oDateFormat.format(new Date(ValidTo));
 				}
 			
+			}
+			else{
+				return "";
 			}
 		},
 		VehicleSelectoinEtaFromDate: function (Created_On) {

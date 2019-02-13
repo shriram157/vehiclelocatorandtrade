@@ -111,7 +111,7 @@
 					<!--	<f:SimpleForm id="SimpleFormDisplay354" editable="false" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3"
 						labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
 						singleContainerFullSize="false">-->
-					<f:SimpleForm columnsL="2" columnsM="2" editable="true" emptySpanL="0" emptySpanM="0" labelSpanL="3" labelSpanM="3"
+					<f:SimpleForm columnsL="2" columnsM="2" editable="true"   emptySpanL="0" emptySpanM="0" labelSpanL="3" labelSpanM="3"
 						layout="ResponsiveGridLayout" maxContainerCols="2"   minWidth="1024">
 						<f:content>
 							<!--	<l:VerticalLayout width="80%" class="gridWrapper">

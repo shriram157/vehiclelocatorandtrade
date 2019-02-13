@@ -89,7 +89,7 @@ sap.ui.define([
 				success: function (oData) {
 					var BpDealer = [];
 					var userAttributes = [];
-			/*	BpDealer.push({
+		/*	BpDealer.push({
 						"BusinessPartnerKey": "2400042120",
 						"BusinessPartner": "42120",
 
@@ -101,7 +101,7 @@ sap.ui.define([
 					$.each(oData.attributes, function (i, item) {
 						var BpLength = item.BusinessPartner.length;
 
-					BpDealer.push({
+				BpDealer.push({
 									"BusinessPartnerKey": item.BusinessPartnerKey,
 									"BusinessPartner": item.BusinessPartner, //.substring(5, BpLength),
 									"BusinessPartnerName": item.BusinessPartnerName, //item.OrganizationBPName1 //item.BusinessPartnerFullName

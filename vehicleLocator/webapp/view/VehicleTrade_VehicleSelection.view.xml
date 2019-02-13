@@ -43,7 +43,7 @@
 									<!--	<SearchField width="215px" id="idVehclSerTrad"/>-->
 								</FlexBox>
 							</HBox>
-							<t:Table id="table" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{/}" visibleRowCount="20">
+							<t:Table id="table" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{/}" visibleRowCount="20" class="sapUiMediumMarginBegin">
 								<t:columns>
 									<t:Column id="TradecolId" width="6rem">
 										<Label text="{i18n>Select}"/>

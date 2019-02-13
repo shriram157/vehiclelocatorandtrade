@@ -452,6 +452,24 @@ var Accepted=i18n.getText("Accepted");
 
 			
 			
+		},
+	
+		VehicleLocSearchPressVH:function()
+		{
+			var that=this;
+			that.getRouter().navTo("VehicleLocSearch");	
+		},
+		TradeSummaryLinkPressTH:function()
+		{
+			var that=this;
+			that.getRouter().navTo("VehicleTrade_Summary");	
+			
+		},
+		BlockSummarypressTH : function()
+		{
+				var that=this;
+			that.getRouter().navTo("VehicleTrade_ModelBlock_Summary");	
+			
 		}
 		
 

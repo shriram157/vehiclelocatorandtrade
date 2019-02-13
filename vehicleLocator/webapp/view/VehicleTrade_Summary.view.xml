@@ -16,15 +16,19 @@
 					</Bar>
 				</customHeader>
 				<content>
-					<Toolbar class="toolbar3">
+						<tnt:ToolHeader>
 						<Label text="" width="180px" class="vTlabe1clss"/>
 						<ToolbarSpacer></ToolbarSpacer>
+						<Button text="{i18n>LocateVechicles}" type="Transparent"  press="VehicleLocSearchPress"/>
+						<Button text="{i18n>TradeHistory}" type="Transparent"  press="TradeHistoryLinkPressTS"/>
+						<Button text="{i18n>ModelBlock}" type="Transparent"  press="BlockSummarypressTS"/>
+						
 						<!--<Button text="Vehicle Locator" press="handleLinkPress"/>
 						<Button text="Sold Order" press="handleLinkPress"/>
 						<Button text="Price Protection" press="handleLinkPress"/>
 						<Button text="Inventory Summary" press="handleLinkPress"/>
 						<Button text="Sujjest Order" press="handleLinkPress"/>-->
-					</Toolbar>
+						</tnt:ToolHeader>
 					<VBox class="sapUiSmallMargin">
 						<OverflowToolbar id="otb1">
 							<Label text="{i18n>TradeSummary}" width="200px" class="vHlabe1clss"/>
@@ -57,7 +61,7 @@
     		    }">
 							
 								<t:columns>
-									<t:Column id="ORequlinlId">
+									<t:Column id="ORequlinlId"  sortProperty="Trade_Id">
 										<Label text="{i18n>Request}"/>
 										<t:template>
 											<Link id="otradIdz" text="{Trade_Id}" class="link" subtle="true" press="oRequestLinkPress" wrapping="false"/>
@@ -237,16 +241,13 @@
 					<t:Table id="table1Rts" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{/}"
 						visibleRowCount="10">
 						<t:columns>
-							<t:Column id="ORequlinl">
+							<t:Column id="ORequlinl" sortProperty="Trade_Id">
 								<Label text="{i18n>Request}"/>
 								<t:template>
 									<Link id="otradIdz2" text="{Trade_Id}" class="link" subtle="true" press="oMyRequestLinkPress" wrapping="false"/>
 								</t:template>
 							</t:Column>
-						
-						
-						
-						
+				
 							<t:Column sortProperty="Requesting_Dealer" id="matnr">
 										<Label text="{i18n>FromDealer}"/>
 										<t:template>

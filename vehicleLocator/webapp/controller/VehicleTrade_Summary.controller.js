@@ -32,6 +32,35 @@ sap.ui.define([
 		
 }
 		},
+		
+			VehicleLocSearchPress : function()
+			{
+			var that=this;
+			that.getRouter().navTo("VehicleLocSearch");	
+			
+			
+			
+			},
+			
+			TradeHistoryLinkPressTS : function()
+			{
+			var that=this;
+		    that.getRouter().navTo("VehicleTrade_History", {
+				DataClicked: "Yes"
+			});
+			
+			},
+			BlockSummarypressTS : function()
+			{
+			var that = this;
+			that.getRouter().navTo("VehicleTrade_ModelBlock_Summary");	
+			},
+			
+			
+			
+		
+		
+		
 		oRequestLinkPress: function (oEvt) {
 			var that = this;
 
@@ -92,6 +121,8 @@ sap.ui.define([
 			
 
 		},
+		
+
 		VehicleTrade_Summary: function () {
 
 			var that = this;

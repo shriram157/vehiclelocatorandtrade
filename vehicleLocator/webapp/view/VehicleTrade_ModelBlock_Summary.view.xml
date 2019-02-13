@@ -17,15 +17,18 @@
 					</Bar>
 				</customHeader>
 				<content>
-					<Toolbar height="45px" class="toolbar3">
+						<tnt:ToolHeader>
+				<!--	<Toolbar height="45px" class="toolbar3">-->
 						<!--	<Label text="Add Model Block" width="180px" class="vTlabe1clss"/>-->
 						<ToolbarSpacer></ToolbarSpacer>
-						<!--<Button text="Vehicle Locator" press="handleLinkPress"/>
-						<Button text="Sold Order" press="handleLinkPress"/>
-						<Button text="Price Protection" press="handleLinkPress"/>
-						<Button text="Inventory Summary" press="handleLinkPress"/>
-						<Button text="Sujjest Order" press="handleLinkPress"/>-->
-					</Toolbar>
+						
+						
+						
+						<Button text="{i18n>LocateVechicles}" type="Transparent"  press="VehicleLocSearchPressMBS"/>
+						<Button text="{i18n>TradeSummary}" type="Transparent" press="TradeSummaryLinkPressMBS"/>
+						<Button text="{i18n>TradeHistory}" type="Transparent" press="TradeHistoryLinkPressMBS"/>
+				
+						</tnt:ToolHeader>
 					<VBox>
 						<OverflowToolbar id="otb1">
 							<Label text="{i18n>AddModelBlock}" width="200px" class="vHlabe1clss"/>

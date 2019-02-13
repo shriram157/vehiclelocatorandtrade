@@ -507,6 +507,18 @@ sap.ui.define([
 		},
 		onRequestVT: function () {
 			debugger;
+			/*	var that = this;*/
+			/*	if (this.getView().byId("VT_CStradinRet").getSelectedKey() == "Yes" && this.getView().byId("FromFourth").getText() == "") 
+				{
+					sap.m.MessageBox.warning("Please select VehicleList");
+					return;
+				}*/
+			if (this.getView().byId("VT_CStradinRet").getSelectedKey() == "Yes" && this.getView().byId("FromFourth").getText() == "") {
+				sap.m.MessageBox.warning("Please select a vehicle");
+
+				return;
+
+			}
 
 			jQuery.sap.require("sap.ui.core.format.DateFormat");
 			var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
@@ -518,7 +530,7 @@ sap.ui.define([
 			//------ requested dealer info//
 			var TradeRequest = this.getView().byId("VT_CStradinRet").getSelectedKey();
 			if (TradeRequest == "") {
-				sap.m.MessageBox.warning("Please select trade in return");
+				sap.m.MessageBox.warning("Please select Trade in Return");
 				return;
 			} else {
 				var that = this;
@@ -783,8 +795,8 @@ sap.ui.define([
 
 						that.oDataModel.create("/TradeRequest", oEntry, null, function (s) {
 							//	that.getView().byId("oTrdareqstat").setText("Request Sent");
-							if(that.getView().byId("oTypeHere").getValue()!="" &&that.getView().byId("oTypeHere").getValue()!=" "){
-							that.TradeComment(oEntry);
+							if (that.getView().byId("oTypeHere").getValue() != "" && that.getView().byId("oTypeHere").getValue() != " ") {
+								that.TradeComment(oEntry);
 							}
 							//	if(that.getView().byId("FromFourth").getText()=="FromFourth"){
 							that.TradeVehcles(oEntry);

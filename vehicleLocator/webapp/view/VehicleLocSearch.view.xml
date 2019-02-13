@@ -20,9 +20,9 @@
 					<tnt:ToolHeader>
 						<Title id="oDealertitle" titleStyle="H3" width="auto" textAlign="Left" visible="true" wrapping="false" class="titledealervehiclesearch"/>
 						<ToolbarSpacer></ToolbarSpacer>
-						<Button text="{i18n>TradeSummary}" type="Transparent"  press="TradeSummaryLinkPress"/>
-						<Button text="{i18n>TradeHistory}" type="Transparent"  press="TradeHistoryLinkPress"/>
-						<Button text="{i18n>BlockSummary}" type="Transparent"  press="BlockSummarypress"/>
+						<Button text="{i18n>TradeSummary}" type="Transparent" press="TradeSummaryLinkPress"/>
+						<Button text="{i18n>TradeHistory}" type="Transparent" press="TradeHistoryLinkPress"/>
+						<Button text="{i18n>ModelBlock}" type="Transparent" press="BlockSummarypress"/>
 						<!--	<Button text="Vehicle Locator"  type="Transparent" press="handleLinkPress"/>-->
 					</tnt:ToolHeader>
 					<!--	<Toolbar height="48px" class="toolbar1">
@@ -86,20 +86,19 @@
 									<core:ListItem   text="{ModelSeriesNo}"      key="{ModelSeriesNo}"  additionalText =""/>
 				   	</ComboBox>-->
 								<ComboBox placeholder="" width="70%" showSecondaryValues="true" filterSecondaryValues="true" selectionChange="SeriesClickedVLS11"
-									id="SeriesCmbo" items="{/}" change="handleSeriesChange">
-									<core:ListItem text="{=${SPRAS}==='English' ? ${TCISeriesDescriptionEN}:${TCISeriesDescriptionFR} }"
-										key="{TCISeries}" additionalText=""/>
+									id="SeriesCmbo" items="{path:'/', sorter : [{ path:'TCISeriesDescriptionEN', ascending : 'true' } ]}" change="handleSeriesChange">
+									<core:ListItem text="{=${SPRAS}==='English' ? ${TCISeriesDescriptionEN}:${TCISeriesDescriptionFR} }" key="{TCISeries}" additionalText=""/>
 								</ComboBox>
 								<Label text="{i18n>ModelCode}" required="true"/>
 								<ComboBox placeholder="" selectedKey="" showSecondaryValues="true" width="90%" selectionChange="MCClickedVLS11" id="McCmbo"
-									change="handleModelChange" items="{ModelCode>/}">
+									change="handleModelChange" items="{ path:'ModelCode>/', sorter : [{ path:'Model', ascending : 'true' } ] }">
 									<core:ListItem text="{ModelCode>Model}-{=${ModelCode>SPRAS}==='English' ? ${ModelCode>ENModelDesc}:${ModelCode>FRModelDesc} }"
 										key="{ModelCode>Model}" additionalText=""/>
 									<!--	<core:ListItem text="{ModelCode>Model} - {ModelCode>ENModelDesc}" key="{ModelCode>Model}"/>-->
 								</ComboBox>
 								<Label text="{i18n>Suffix}" required="true"/>
 								<ComboBox placeholder="" selectedKey="" showSecondaryValues="true" width="90%" change="handleSuffixChange"
-									selectionChange="SufficClickedVLS11" id="SuffCmbo" items="{Suffix>/}">
+									selectionChange="SufficClickedVLS11" id="SuffCmbo" items="{ path:'Suffix>/', sorter : [{ path:'Suffix', ascending : 'true' } ] }">
 									<!--<core:ListItem text="{Suffix>Suffix} - {Suffix>SuffixDescriptionEN}/{Suffix>TrimInteriorColor}" key="{Suffix>Suffix}"
 										additionalText=""/>	-->
 									<core:ListItem
@@ -131,15 +130,15 @@
 							emptySpanM="0" columnsL="2" columnsM="2">
 							<form:content>
 								<core:Title text=""/>
-								<Button width="10px" visible="false">
-								<!--	<layoutData>
+							<Button width="40px" visible="false">
+									<layoutData>
 										<l:GridData span="L4 M12 S3"/>
-									</layoutData>-->
-										<layoutData>
+									</layoutData>
+									<layoutData>
 										<l:GridData span="L4 M12 S3"/>
 									</layoutData>
 								</Button>
-								<Button text="{i18n>Search}" icon="sap-icon://search" press="onSePress" type="Emphasized">
+								<Button text="{i18n>Search}" icon="sap-icon://search" press="onSePress"  type="Emphasized">
 									<layoutData>
 										<l:GridData span="L4 M12 S3"/>
 									</layoutData>
