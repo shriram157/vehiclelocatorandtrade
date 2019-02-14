@@ -22,13 +22,15 @@ modules:
       memory: 256MB
    properties:
       NODE_TLS_REJECT_UNAUTHORIZED: 0
+      TRADE_REQ_CLEANUP_TASK_SCH: "0 0 * * *"
    provides:
     - name: vehicleLocator_Node_api
       properties:
          url: ${default-url}
    requires:
-    - name: uaa_vehicleLocator
     - name: VEHICLE_LOCATOR_APIM_CUPS
+    - name: hdi_vehicleLocator_hdb
+    - name: uaa_vehicleLocator
 
  - name: vehicleLocator
    type: html5
