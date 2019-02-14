@@ -90,7 +90,7 @@ context vehicleTrade {
         key Trade_Id   : association[*, 0..1] to Trade_Request { Trade_Id };
 
             @Comment : 'Vehicle VTN'
-        key VTN        : String(6);
+        key VTN        : String(7);
 
             @Comment : 'Model Year'
             Model_Year : String(4);

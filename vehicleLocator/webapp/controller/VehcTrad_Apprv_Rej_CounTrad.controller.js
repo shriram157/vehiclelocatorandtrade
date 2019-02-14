@@ -697,13 +697,22 @@ sap.ui.define([
 			var Offered_Vtn = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Offered_Vtn;
 			var Trade_Return = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Trade_Return;
 			var Req_Current_ETA_From = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Req_Current_ETA_From;
+			Req_Current_ETA_From = this.DatesFormatting(Req_Current_ETA_From);
 			var Req_Current_ETA_To = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Req_Current_ETA_To;
+				Req_Current_ETA_To = this.DatesFormatting(Req_Current_ETA_To);
 			var Req_Proposed_ETA_From = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Req_Proposed_ETA_From;
+			Req_Proposed_ETA_From = this.DatesFormatting(Req_Proposed_ETA_From);
 			var Req_Proposed_ETA_To = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Req_Proposed_ETA_To;
+				Req_Proposed_ETA_To = this.DatesFormatting(Req_Proposed_ETA_To);
 			var Off_Current_ETA_From = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Off_Current_ETA_From;
+			
+				Off_Current_ETA_From = this.DatesFormatting(Off_Current_ETA_From);
 			var Off_Current_ETA_To = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Off_Current_ETA_To;
+				Off_Current_ETA_To = this.DatesFormatting(Off_Current_ETA_To);
 			var Off_Proposed_ETA_From = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Off_Proposed_ETA_From;
+				Off_Proposed_ETA_From = this.DatesFormatting(Off_Proposed_ETA_From);
 			var Off_Proposed_ETA_To = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Off_Proposed_ETA_To;
+				Off_Proposed_ETA_To = this.DatesFormatting(Off_Proposed_ETA_To);
 			/*	var Created_By = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_By;*/
 			var Created_By = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
 
@@ -720,7 +729,8 @@ sap.ui.define([
 			Created_By = truncateString(Created_By, 9);
 
 			var Created_On = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_On;
-			var Changed_on = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Changed_on;
+				Created_On = this.DatesFormatting(Created_On);
+		//	var Changed_on = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Changed_on;
 			var Requested_Dealer = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Dealer;
 			var Requested_Dealer_Name = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Dealer_Name;
 
@@ -808,7 +818,7 @@ sap.ui.define([
 
 				//	that.getRouter().navTo("VehicleTrade_Summary");
 			}, function () {
-				alert("fail");
+			
 			});
 
 		},
@@ -859,7 +869,7 @@ sap.ui.define([
 
 			var Created_On = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_On;
 			Created_On = this.DatesFormatting(Created_On);
-			Created_On.setDate(Created_On.getDate() + 1);
+		//	Created_On.setDate(Created_On.getDate() + 1);
 			//	var Changed_on = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Changed_on;
 			var Requested_Dealer = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Dealer;
 			var Requested_Dealer_Name = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Dealer_Name;
@@ -869,7 +879,7 @@ sap.ui.define([
 			/*	var Trade_Status = "R";*/
 			//	}
 			var Changed_on = new Date(oDateFormat.format(new Date()));
-			Changed_on.setDate(Changed_on.getDate() + 1);
+		//	Changed_on.setDate(Changed_on.getDate() + 1);
 			var oEntry = {
 
 				"Trade_Id": Trade_Id,
@@ -1028,7 +1038,7 @@ sap.ui.define([
 				"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
 				"Created_By": Created_By,
 				"Created_On": Created_On,
-				"Changed_on": Changed_on,
+				"Changed_on": new Date(Changed_on),
 				"Requested_Dealer": Requested_Dealer,
 				"Requested_Dealer_Name": Requested_Dealer_Name
 					/*"Trade_Id": Trade_Id,
@@ -1272,20 +1282,28 @@ sap.ui.define([
 				pattern: "yyyy-MM-dd'T'HH:mm:ss"
 			});
 			var Trade_Id = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Trade_Id;
-			var Trade_Status = "C";
+			var Trade_Status = "F";
 			var Requesting_Dealer = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requesting_Dealer;
 			var Requesting_Dealer_Name = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requesting_Dealer_Name;
 			var Requested_Vtn = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Vtn;
 			var Offered_Vtn = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Offered_Vtn;
 			var Trade_Return = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Trade_Return;
 			var Req_Current_ETA_From = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Req_Current_ETA_From;
+			Req_Current_ETA_From = this.DatesFormatting(Req_Current_ETA_From);
 			var Req_Current_ETA_To = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Req_Current_ETA_To;
+			Req_Current_ETA_To = this.DatesFormatting(Req_Current_ETA_To);
 			var Req_Proposed_ETA_From = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Req_Proposed_ETA_From;
+			Req_Proposed_ETA_From = this.DatesFormatting(Req_Proposed_ETA_From);
 			var Req_Proposed_ETA_To = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Req_Proposed_ETA_To;
+			Req_Proposed_ETA_To = this.DatesFormatting(Req_Proposed_ETA_To);
 			var Off_Current_ETA_From = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Off_Current_ETA_From;
+			Off_Current_ETA_From = this.DatesFormatting(Off_Current_ETA_From);
 			var Off_Current_ETA_To = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Off_Current_ETA_To;
+			Off_Current_ETA_To = this.DatesFormatting(Off_Current_ETA_To);
 			var Off_Proposed_ETA_From = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Off_Proposed_ETA_From;
+			Off_Proposed_ETA_From = this.DatesFormatting(Off_Proposed_ETA_From);
 			var Off_Proposed_ETA_To = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Off_Proposed_ETA_To;
+			Off_Proposed_ETA_To = this.DatesFormatting(Off_Proposed_ETA_To);
 			/*	var Created_By = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_By;*/
 			var Created_By = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
 
@@ -1329,7 +1347,7 @@ sap.ui.define([
 				"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
 				"Created_By": Created_By,
 				"Created_On": Created_On,
-				"Changed_on": Changed_on,
+				"Changed_on": new Date(Changed_on),
 				"Requested_Dealer": Requested_Dealer,
 				"Requested_Dealer_Name": Requested_Dealer_Name
 					/*"Trade_Id": Trade_Id,
