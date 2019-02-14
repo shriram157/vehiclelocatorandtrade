@@ -458,6 +458,7 @@ this.SelectedVehicleFrom=oEvent.getParameter("arguments").SelectedVehicleFrom;
 		oTradeLinkPress: function (oEvt) {
 var that=this;
 			that.oSelectedItem = oEvt.getSource().getBindingContext().getObject();
+			that.oSelectedItem.FromFourth="FromFourth";
 			var VTN=that.oSelectedItem.zzvtn;
 var dealercode=that.oSelectedItem.kunnr.slice(-5);
 

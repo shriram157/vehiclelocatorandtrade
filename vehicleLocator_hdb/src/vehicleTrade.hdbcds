@@ -20,10 +20,10 @@ context vehicleTrade {
             Requested_Dealer_Name : String(35);
 
             @Comment : 'Requested Vehicle VTN'
-            Requested_Vtn          : String(6);
+            Requested_Vtn          : String(7);
 
             @Comment : 'Offered Vehicle VTN'
-            Offered_Vtn            : String(6);
+            Offered_Vtn            : String(7);
 
             @Comment : 'Trade In Return'
             Trade_Return           : String(1);

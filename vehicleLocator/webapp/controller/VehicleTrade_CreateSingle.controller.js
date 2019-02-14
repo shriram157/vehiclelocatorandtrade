@@ -729,7 +729,12 @@ sap.ui.define([
 						Created_On = oDateFormat.format(new Date(Created_On));
 						var Changed_on = new Date();
 						Changed_on = oDateFormat.format(new Date(Changed_on));
-
+					/*	var Created_On = new Date();
+						Created_On = new Date(oDateFormat.format(new Date(Created_On)));
+						  Created_On.setDate(Created_On.getDate() + 1);
+						var Changed_on = new Date();
+						Changed_on = new Date(oDateFormat.format(new Date(Changed_on)));
+                       Changed_on.setDate(Changed_on.getDate() + 1);*/
 						/*	var Created_On = that.getView().byId("idlabeal").getText();
 							if (Created_On != "") {
 								var Created_On = oDateFormat.format(new Date(Created_On));
@@ -1035,7 +1040,9 @@ sap.ui.define([
 				pattern: "yyyy-MM-dd'T'HH:mm:ss"
 					/*	pattern: "yyyy-MM-dd"*/
 			});
-			var oCommentdate = oDateFormat.format(new Date());
+		/*	var oCommentdate = new Date(oDateFormat.format(new Date()));
+			  oCommentdate.setDate(oCommentdate.getDate() + 1);*/
+			  var oCommentdate = oDateFormat.format(new Date());
 
 			/*	var Created_By = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');*/
 
@@ -1060,6 +1067,7 @@ sap.ui.define([
 				"Trade_Id.Trade_Id": Trade_Id,
 				"Comment_Id": that.oComment_Id,
 				"Comment_Txt": oCommentText,
+				/*"Comment_Date": oCommentdate,*/
 				"Comment_Date": new Date(oCommentdate),
 				"Created_By": Created_By
 
@@ -1102,7 +1110,9 @@ sap.ui.define([
 				pattern: "yyyy-MM-dd'T'HH:mm:ss"
 					/*	pattern: "yyyy-MM-dd"*/
 			});
-			var oCommentdate = oDateFormat.format(new Date());
+			var oCommentdate = new Date(oDateFormat.format(new Date()));
+			 oCommentdate.setDate(oCommentdate.getDate() + 1);
+			
 			/*	var Suffix = that.getView().byId("oZsuffix").getText().split("-")[0];*/
 
 			/*	var modelYear = that.getView().byId("zzMoyr").getText();
@@ -1222,7 +1232,9 @@ sap.ui.define([
 				pattern: "yyyy-MM-dd'T'HH:mm:ss"
 					/*pattern: "yyyy-MM-dd"*/
 			});
-			var oCommentdate = oDateFormat.format(new Date());
+				var oCommentdate = oDateFormat.format(new Date());
+		/*	var oCommentdate = new Date(oDateFormat.format(new Date()));
+			 oCommentdate.setDate(oCommentdate.getDate() + 1);*/
 			/*		var Suffix = that.getView().byId("oZsuffix").getText().split("-")[0];
 					if (Suffix != "") {
 						var Suffix = that.getView().byId("oZsuffix").getText();
