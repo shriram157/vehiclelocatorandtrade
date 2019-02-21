@@ -442,5 +442,17 @@ user agent stylesheet table {
 .customStyleBox .sapMPanelWrappingDivTb .sapMCb {	height: 2rem !important;}
 .customStyleBox .sapMPanelExpandableIcon {	color: #ebebeb !important;	outline: none !important;}
 
+/*screen 5 MessageStrip*/
+.Messagestrip1.sapMMsgStrip {
+     border: 0px; 
+    border-radius: 0.1875rem;
+    box-sizing: border-box;
+    font-size: 0.875rem;
+    font-weight: normal;
+    padding: 0.4375rem 1rem;
+    position: relative;
+    min-height: 2rem;
+}
+
 
 

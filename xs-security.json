@@ -37,7 +37,19 @@
 		"name": "Zone",
 		"description": "restrict based on Zone",
 		"valueType": "s"
-	}],
+ 
+		}, {
+				"name": "FirstName",
+				"description": "First Name From Token",
+				"valueType": "s"
+	 	
+			}, {
+				"name": "LastName",
+				"description": "Last Name From Token",
+				"valueType": "s"
+			}	
+ 
+	],
 
 	"role-templates": [{
 			"name": "VehicleTrade_Dealer_User",
@@ -51,7 +63,9 @@
 			"attribute-references": [
 				"DealerCode",
 				"Language",
-				"UserType"
+				"UserType",
+				"FirstName",
+				"LastName"
 			]
 		}, {
 			"name": "Zone_User",
@@ -64,7 +78,9 @@
 			"attribute-references": [
 				"Zone",
 				"Language",
-				"UserType"
+				"UserType",
+				"FirstName",
+				"LastName"
 			]
 		}, {
 			"name": "TCI_user",
@@ -77,7 +93,9 @@
 			],
 			"attribute-references": [
 				"Language",
-				"UserType"
+				"UserType",
+				"FirstName",
+				"LastName"
 			]
 
 		}

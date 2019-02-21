@@ -53,13 +53,11 @@
 								<VBox>
 									<HBox>
 										<Text text="{path:'TradeModel>zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate'}"
-											class="sapUiSmallMarginEnd" id="ctaid"></Text>
-										<!--	<Label text="" width="2rem"/>-->
-										<!--	<Label text="" width="3rem"/>-->
-										<Text text="{i18n>From}" id="fromid" wrapping='true' />
+											class="sapUiSmallMarginEnd" id="ctaid" width="4.5rem" ></Text>
+										<Text text="{i18n>From}" id="fromid" wrapping='true'/>
 									</HBox>
 									<HBox>
-										<Text text="{path:'TradeModel>pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="totxtid"
+										<Text text="{path:'TradeModel>pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="totxtid" width="4.5rem"
 											class="sapUiSmallMarginEnd"></Text>
 										<!--	<Label text="" width="3rem"/>-->
 										<Text text="{i18n>To}" id="tolabid" wrapping='true'/>
@@ -68,12 +66,12 @@
 								<Label text="{i18n>PropsedETAtoNewDealer}" id="prpdlabid"/>
 								<VBox>
 									<HBox>
-										<Text text="{path:'TradeModel>Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate'}" id="prpid"
+										<Text text="{path:'TradeModel>Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate'}" id="prpid" width="4.5rem"
 											class="sapUiSmallMarginEnd"></Text>
 										<Text text="{i18n>From}" id="fromlabid" wrapping='true'/>
 									</HBox>
 									<HBox>
-										<Text text="{path:'TradeModel>Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.ProposedEtaToDate'}" id="otextlabel"
+										<Text text="{path:'TradeModel>Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.ProposedEtaToDate'}" id="otextlabel" width="4.5rem"
 											class="sapUiSmallMarginEnd" maxLines='1'></Text>
 										<Text text="{i18n>To}" id="idlabltxt" wrapping='true'/>
 									</HBox>
@@ -107,12 +105,12 @@
 								<Label text="{i18n>CurrentETA}" id="ctrtaid" visible="false"/>
 								<VBox>
 									<HBox>
-										<Text text="{path:'TradeModel>/VehicleTradeVehicle/zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate'}"
+										<Text text="{path:'TradeModel>/VehicleTradeVehicle/zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate'}" width="4.5rem"
 											id="oCtraid" visible="false" class="sapUiSmallMarginEnd"></Text>
 										<Text text="{i18n>From}" id="fromLabeeid" visible="false"/>
 									</HBox>
 									<HBox>
-										<Text text="{path:'TradeModel>/VehicleTradeVehicle/pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="labetxteid"
+										<Text text="{path:'TradeModel>/VehicleTradeVehicle/pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="labetxteid" width="4.5rem"
 											visible="false" class="sapUiSmallMarginEnd"/>
 										<Text text="{i18n>To}" id="ototid" visible="false"/>
 									</HBox>
@@ -121,13 +119,13 @@
 								<VBox>
 									<HBox>
 										<Text
-											text="{path:'TradeModel>/VehicleTradeVehicle/Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate'}"
+											text="{path:'TradeModel>/VehicleTradeVehicle/Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate'}" width="4.5rem"
 											id="perpid" visible="false" class="sapUiSmallMarginEnd"/>
 										<Text text="{i18n>From}" id="frlabid" visible="false"/>
 									</HBox>
 									<HBox>
 										<Label text="" id="fmlabid" visible="false"></Label>
-										<Text text="{path:'TradeModel>/VehicleTradeVehicle/Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.ProposedEtaToDate'}"
+										<Text text="{path:'TradeModel>/VehicleTradeVehicle/Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.ProposedEtaToDate'}" width="4.5rem"
 											id="idlabeal" visible="false" class="sapUiSmallMarginEnd"/>
 										<Text text="{i18n>To}" id="textide" visible="false"/>
 									</HBox>

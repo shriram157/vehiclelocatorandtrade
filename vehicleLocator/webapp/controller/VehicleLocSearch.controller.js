@@ -38,47 +38,99 @@ sap.ui.define([
 			//  on init method,  get the token attributes and authentication details to the UI from node layer.  - begin
 			//======================================================================================================================//		
 			//  get the Scopes to the UI 
-			var that = this;
-			var sLocation = window.location.host;
-			var sLocation_conf = sLocation.search("webide");
-			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehicleLocatorNode"; // 
-				this.attributeUrl = "/userDetails/attributesforlocaltesting";
-			} else {
-				this.sPrefix = "";
-				this.attributeUrl = "/userDetails/attributes";
-			}
-			//that.userType ="vehicelTradeDealerUser";
-			//this.sPrefix ="";
-
-			$.ajax({
-				url: this.sPrefix + "/userDetails/currentScopesForUser",
-				type: "GET",
-				dataType: "json",
-				success: function (oData) {
-					// var userScopes = oData;
-					// userScopes.forEach(function (data) {
-
-					that.userType = oData.loggedUserType[0];
-					switch (that.userType) {
-					case "vehicelTradeDealerUser":
-
-						// add your code here. // TODO: 
-						break;
-
-					case "internalTCIUser":
-						// add your code here. // TODO:  
-						break;
-					case "ZoneUser":
-						// add your code here. // TODO: 	 
-						break;
-					default:
-						// raise a message, because this should not be allowed. 
-						// add your code here. // TODO: 
-					}
+			// var that = this;
+			// var sLocation = window.location.host;
+			// var sLocation_conf = sLocation.search("webide");
+			// if (sLocation_conf == 0) {
+			// 	this.sPrefix = "/vehicleLocatorNode"; // 
+			// 	this.attributeUrl = "/userDetails/attributesforlocaltesting";
+			// } else {
+			// 	this.sPrefix = "";
+			// 	this.attributeUrl = "/userDetails/attributes";
+			// }
+			// //that.userType ="vehicelTradeDealerUser";
+			// //this.sPrefix ="";
+			
+			
+				// the business partner oData calls should happen onit.
+				var sLocation = window.location.host;
+				var sLocation_conf = sLocation.search("webide");
+				if (sLocation_conf == 0) {
+					this.sPrefix = "/vehicleLocatorNode"; // the destination
+					this.attributeUrl = "/userDetails/attributesforlocaltesting";
+					this.currentScopeUrl = "/userDetails/currentScopesForUserLocaltesting";
+				} else {
+					this.sPrefix = "";
+					this.attributeUrl = "/userDetails/attributes";
+				 
+					this.currentScopeUrl = "/userDetails/currentScopesForUser";
+		 
 				}
+ 
+			
+				//  ajax call to BP Data and Scope Data
+				var oModelDetailview = this.getView().getModel("detailView");
+				var that = this;
+				$.ajax({
+					url: this.sPrefix + this.currentScopeUrl,
+					type: "GET",
+					dataType: "json",
+					success: function (oData) {
+						// var userScopes = oData;
+						// userScopes.forEach(function (data) {
 
-			});
+						var userType = oData.loggedUserType[0];
+						switch (userType) {
+						case "vehicelTradeDealerUser":
+
+ 
+
+							break;
+
+						case "internalTCIUser":
+						 
+							break;
+						case "ZoneUser":
+						 
+							break;
+						default:
+							// raise a message, because this should not be allowed. 
+
+						}
+						 
+					}
+
+				});
+			
+
+			// $.ajax({
+			// 	url: this.sPrefix + "/userDetails/currentScopesForUser",
+			// 	type: "GET",
+			// 	dataType: "json",
+			// 	success: function (oData) {
+			// 		// var userScopes = oData;
+			// 		// userScopes.forEach(function (data) {
+
+			// 		that.userType = oData.loggedUserType[0];
+			// 		switch (that.userType) {
+			// 		case "vehicelTradeDealerUser":
+
+			// 			// add your code here. // TODO: 
+			// 			break;
+
+			// 		case "internalTCIUser":
+			// 			// add your code here. // TODO:  
+			// 			break;
+			// 		case "ZoneUser":
+			// 			// add your code here. // TODO: 	 
+			// 			break;
+			// 		default:
+			// 			// raise a message, because this should not be allowed. 
+			// 			// add your code here. // TODO: 
+			// 		}
+			// 	}
+
+			// });
 
 			// get the attributes and BP Details - 	// TODO: 
 			$.ajax({
@@ -96,43 +148,68 @@ sap.ui.define([
 						"BusinessPartnerName": "Don Valley North Toyota...", //item.OrganizationBPName1 //item.BusinessPartnerFullName
 						"Division": "10",
 						"BusinessPartnerType": "Z001",
-						"searchTermReceivedDealerName": "42120"
+						"searchTermReceivedDealerName": "42120",
+						"LoggedinUserFirstName" : "User",
+						"LoggedinUserLastName": "42120"
 					});*/
 					$.each(oData.attributes, function (i, item) {
 						var BpLength = item.BusinessPartner.length;
 
-			BpDealer.push({
+								BpDealer.push({
 									"BusinessPartnerKey": item.BusinessPartnerKey,
 									"BusinessPartner": item.BusinessPartner, //.substring(5, BpLength),
 									"BusinessPartnerName": item.BusinessPartnerName, //item.OrganizationBPName1 //item.BusinessPartnerFullName
 									"Division": item.Division,
 									"BusinessPartnerType": item.BusinessPartnerType,
-									"searchTermReceivedDealerName": item.SearchTerm2
+									"searchTermReceivedDealerName": item.SearchTerm2,
+								/*	"LoggedinUserFirstName" : item.FirstName,
+									"LoggedinUserLastname": item.LastName*/
 								});
+ 
 
 					});
+					
+					// 		BpDealer.push({
+					// 	"BusinessPartnerKey": "2400042120",
+					// 	"BusinessPartner": "42120",
+
+					// 	"BusinessPartnerName": "Don Valley North Toyota...", //item.OrganizationBPName1 //item.BusinessPartnerFullName
+					// 	"Division": "10",
+					// 	"BusinessPartnerType": "Z001",
+					// 	"searchTermReceivedDealerName": "42120"
+					// });		
+								
 					//  set your model or use the model below - // TODO: 
 					that.getView().setModel(new sap.ui.model.json.JSONModel(BpDealer), "BpDealerModel");
 					sap.ui.getCore().setModel(new sap.ui.model.json.JSONModel(BpDealer), "LoginBpDealerModel");
 					var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
 					that.getView().byId("oDealertitle").setText(LoggedInDealer);
-		/*	userAttributes.push({
-						"UserType": "Dealer",
-						"DealerCode": "42120",
-						"Language": "English"
-
-					});*/
+		
 					// read the saml attachments the same way 
 					$.each(oData.samlAttributes, function (i, item) {
 						userAttributes.push({
 							"UserType": item.UserType[0],
 							"DealerCode": item.DealerCode[0],
-							"Language": item.Language[0]
+							"Language": item.Language[0],
+							  "LoggedinUserFirstName":item.FirstName[0],
+							   "LoggedinUserLastName":item.LastName[0]
+							  
 							// "Zone": item.Zone[0]   ---    Not yet available
 							
 						});
-
+ 
 					 });
+					 
+	 			/*	userAttributes.push({
+						"UserType": "Dealer",
+						"DealerCode": "42120",
+						"Language": "English",
+						"LoggedinUserFirstName" : "User",
+						"LoggedinUserLastName" : "42120"
+
+					});	*/
+					 
+					 
 
 					that.getView().setModel(new sap.ui.model.json.JSONModel(userAttributes), "userAttributesModel");
 					sap.ui.getCore().setModel(new sap.ui.model.json.JSONModel(userAttributes), "LoginuserAttributesModel");
@@ -149,12 +226,12 @@ sap.ui.define([
 
 			//	sap.ui.getCore().LoginDetails = oLoginDealer;
 
-			/*	var isLocaleSent = window.location.search.match(/language=([^&]*)/i);
+				var isLocaleSent = window.location.search.match(/language=([^&]*)/i);
 				if (isLocaleSent) {
 					var sSelectedLocale = window.location.search.match(/language=([^&]*)/i)[1];
 				} else {
 					var sSelectedLocale = "EN"; // default is english 
-				}*/
+				}
 			var sSelectedLocale = "EN";
 			//selected language. 
 			// if (window.location.search == "?language=fr") {
@@ -180,138 +257,11 @@ sap.ui.define([
 				/*              var currentImageSource = this.getView().byId("idLexusLogo");
 				                currentImageSource.setProperty("src", "images/Lexus_EN.png");*/
 			}
-			/*
-						this.getView().byId("SeriesCmbo").setFilterFunction(function (sTerm, oItem) {
-						
-							return oItem.getText().match(new RegExp("^" + sTerm, "i")) || oItem.getKey().match(new RegExp("^" + sTerm, "i"));
-						});
-						this.getView().byId("McCmbo").setFilterFunction(function (sTerm, oItem) {
-						
-							return oItem.getText().match(new RegExp("^" + sTerm, "i")) || oItem.getKey().match(new RegExp("^" + sTerm, "i"));
-						});
-						this.getView().byId("SuffCmbo").setFilterFunction(function (sTerm, oItem) {
-						
-							return oItem.getText().match(new RegExp("^" + sTerm, "i")) || oItem.getKey().match(new RegExp("^" + sTerm, "i"));
-						});*/
-			/*	sap.ui.core.BusyIndicator.show();*/
-			/*	this.BusyDialog = new sap.m.BusyDialog("CrtNotifbusyDialog_Text11467", {
-					text: ''
-				});
-				this.BusyDialog.open();*/
-			/*-------------afterrendering code----------------*/
+/// set the logo
 
-			/*	var that = this;
-				that._oViewModel = new sap.ui.model.json.JSONModel();
+				this._setTheLogo();
 
-				that._oResourceBundle = that.getOwnerComponent().getModel("i18n").getResourceBundle(); // instantiate the resource 
-
-				
-
-				that.oDataUrl = "https://tcid1gwapp1.tci.internal.toyota.ca:44300/sap/opu/odata/sap/Z_VEHICLE_CATALOGUE_SRV";
-
-				var oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
-				oDataModel.setHeaders({
-					"Content-Type": "application/json",
-					"X-Requested-With": "XMLHttpRequest",
-					"DataServiceVersion": "2.0",
-					"Accept": "application/json",
-					"Method": "GET"
-				});
-				var BatchUrl = [];
-				BatchUrl.push(oDataModel.createBatchOperation("/ZC_MODEL_DETAILS", "GET"));
-				BatchUrl.push(oDataModel.createBatchOperation("/zc_exterior_trim", "GET"));
-
-				oDataModel.addBatchReadOperations(BatchUrl);
-				oDataModel.setUseBatch(true);
-				oDataModel.submitBatch(function(oData, oResponse) {
-					var Data = oData.__batchResponses[0].data.results;
-					var Data2 = oData.__batchResponses[1].data.results;
-					sap.ui.getCore().setModel(Data, "McCmboSuffCmbo");
-					that.oJsonModelVLS = new sap.ui.model.json.JSONModel(Data);
-					
-					sap.ui.getCore().setModel(Data2, "McCmboSuffCmbo2");
-					that.oJsonModelVLS2 = new sap.ui.model.json.JSONModel(Data2);
-
-
-					that.getView().byId("SeriesCmbo").setModel(that.oJsonModelVLS);
-					that.getView().byId("McCmbo").setModel(that.oJsonModelVLS);
-
-				}, function(err) {
-
-				});*/
-
-			/*-------------afterrendering code----------------*/
-
-			/*	that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
-			    that.oDataModel.read("/zc_exterior_trim", "anisetc", "anisetc", false,
-					function(oData) 
-					{
-						console.log("/zc_exterior_trim", oData);
-						var oResults = oData.results;
-
-						var oJsonModelVLS = new sap.ui.model.json.JSONModel(oResults);
-						that.getView().byId("McCmbo").setModel(oJsonModelVLS);
-						that.getView().byId("SuffCmbo").setModel(oJsonModelVLS);
-				
-
-					},
-					function(oError) {
-
-					});
-
-			    	that.oDataModel.read("/zc_mmfields", "anisetc", "anisetc", false,
-					function(oData) {
-						console.log("zc_mmfields", oData);
-						var oResults = oData.results;
-						var oJsonModelVLS2 = new sap.ui.model.json.JSONModel(oResults);
-						that.getView().byId("SeriesCmbo").setModel(oJsonModelVLS2);
-				
-					},
-					function(oError) {
-
-					});*/
-
-			/*	$.ajax({
-						url: "https://tcid1gwapp1.tci.internal.toyota.ca:44300/sap/opu/odata/sap/Z_VEHICLE_CATALOGUE_SRV/zc_myear",
-						method: "GET",
-						async: false,
-						dataType: "json",
-
-						success: function(oData) 
-						{
-							
-				            console.log(oData);
-							oData.d.results[0];
-
-							var oJsonModelVLS = new sap.ui.model.json.JSONModel(oData.d);
-							that.getView().byId("MoyearCombo").setModel(oJsonModelVLS);
-							that.getView().byId("SuffCmbo").setModel(oJsonModelVLS);
-
-						},
-						error: function(response) {
-
-						}
-					});
-
-					$.ajax({
-						url: "https://tcid1gwapp1.tci.internal.toyota.ca:44300/sap/opu/odata/sap/Z_VEHICLE_CATALOGUE_SRV/zc_mmfields",
-
-						method: "GET",
-						async: false,
-						dataType: "json",
-
-						success: function(oData) {
-							console.log(oData);
-							oData.d.results[0];
-							var oJsonModelVLS2 = new sap.ui.model.json.JSONModel(oData.d);
-							that.getView().byId("SeriesCmbo").setModel(oJsonModelVLS2);
-							that.getView().byId("McCmbo").setModel(oJsonModelVLS2);
-
-						},
-						error: function(response) {
-
-						}
-					});*/
+  
 			this.bindMonthYear();
 		},
 		onAfterRendering: function () {
@@ -331,8 +281,40 @@ sap.ui.define([
 
 			};
 		},
+		
+					_setTheLogo: function (oEvent) {
+
+				// if (userDetails[0].UserType == 'Dealer') {
+
+				var isDivisionSent = window.location.search.match(/Division=([^&]*)/i);
+				if (isDivisionSent) {
+					this.sDivision = window.location.search.match(/Division=([^&]*)/i)[1];
+
+					// if (this.sDivision == aDataBP[0].Division) {
+
+					// 	this.getView().byId("messageStripError").setProperty("visible", false);
+
+					if (this.sDivision == '10') // set the toyoto logo
+					{
+						var currentImageSource = this.getView().byId("idLexusLogo");
+						currentImageSource.setProperty("src", "images/toyota_logo_colour.png");
+
+					} else { // set the lexus logo
+						var currentImageSource = this.getView().byId("idLexusLogo");
+						currentImageSource.setProperty("src", "images/i_lexus_black_full.png");
+
+						// }
+					}
+				}
+
+			},
+		
+		
+		
+		
+		
 		security: function () {
-			sap.ui.core.BusyIndicator.show();
+			// sap.ui.core.BusyIndicator.show();
 			var that = this;
 			that._oViewModel = new sap.ui.model.json.JSONModel();
 			that.getView().byId("SeriesCmbo").setSelectedKey("");
@@ -352,6 +334,14 @@ sap.ui.define([
 				var oDealer = sap.ui.getCore().LoginDetails.BussinesspartnerCode;*/
 			/*	var userType=sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].UserType[0];*/ ///for local testing/
 			var userType = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].UserType; // for Security*/
+			var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
+			var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
+			this.TruncUserName = LoggedinUserFname+LoggedinUserLname;
+			
+		
+		/*	var oTruncLoggedUser  = [];
+			oTruncLoggedUser.push(TruncUserName);*/
+			
 			switch (userType) {
 				/*	case "vehicelTradeDealerUser":*/
 			case "Dealer":
@@ -426,7 +416,7 @@ sap.ui.define([
 
 						},
 						error: function () {
-							alert("Error");
+							// alert("Error");
 						}
 					});
 
@@ -1284,6 +1274,10 @@ for(var i=0;i<oResults.length;i++){
 			that.getView().getModel("SeriesData").setProperty("/SelectedSeries", that.getView().byId("SeriesCmbo").getSelectedKey());
 			sap.ui.getCore().setModel(that.getView().getModel("SeriesData"), "SelectedSeriesFromScreen1");
 			var LoginUser = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].UserType[0];
+			var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
+			var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
+			this.TruncUserName = LoggedinUserFname+LoggedinUserLname;
+			
 			/*var LoginUser = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].UserType; */ //deployed vesrion latest 
 
 			var sLocation = window.location.host;
@@ -1522,11 +1516,13 @@ for(var i=0;i<oResults.length;i++){
 					oDumModel.setSizeLimit(100000);
 					sap.ui.getCore().setModel(oDumModel, "SearchedData");
 					var Obj = {};
-					Obj.selectedSuffix = selectedSuffix.replace("/", "%2F");
+					Obj.selectedSuffix = selectedSuffix.replace(/\//g, "%2F");
 					Obj.LoginUser = LoginUser;
 					sap.ui.core.BusyIndicator.hide();
 					that.getRouter().navTo("VehicleSearcResults", {
-						LoginUser: JSON.stringify(Obj)
+						
+						LoginUser: JSON.stringify(Obj),
+					
 					});
 				},
 				error: function (s, result) {

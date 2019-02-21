@@ -711,20 +711,21 @@ sap.ui.define([
 						} else {
 							var Off_Proposed_ETA_To = "0000-00-00T00:00:00";
 						}
-
-						var Created_By = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
+             var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
+			var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
+			var Created_By  = LoggedinUserFname+LoggedinUserLname;
 
 						function truncateString(str, num) {
 							if (num > str.length) {
 								return str;
 							} else {
 								str = str.substring(0, num);
-								return str + "...";
+								return str;
 							}
 
 						}
 
-						Created_By = truncateString(Created_By, 9);
+						Created_By = truncateString(Created_By, 12);
 						var Created_On = new Date();
 						Created_On = oDateFormat.format(new Date(Created_On));
 						var Changed_on = new Date();
@@ -1046,19 +1047,22 @@ sap.ui.define([
 
 			/*	var Created_By = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');*/
 
-			var Created_By = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
+		/*	var Created_By = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');*/
+		  var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
+			var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
+			var Created_By  = LoggedinUserFname+LoggedinUserLname;
 
 			function truncateString(str, num) {
 				if (num > str.length) {
 					return str;
 				} else {
 					str = str.substring(0, num);
-					return str + "...";
+					return str;
 				}
 
 			}
 
-			Created_By = truncateString(Created_By, 9);
+			Created_By = truncateString(Created_By, 12);
 
 			/*this.getView().byId("oDealersearchresults").setText(LoggedInDealer);*/
 

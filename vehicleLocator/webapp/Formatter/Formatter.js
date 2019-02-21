@@ -252,14 +252,15 @@ oTradeStatusBinding:function(Trade_return){
 			if (Created_On != null && Created_On != "") {
 				
 			return	Created_On.replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3');
+		 
 			}
-
 		},
 	VehicleSelectoinEtaFromDate1: function (Created_On) {
 
 			if (Created_On != null && Created_On != "") {
 				
 			return	Created_On.replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3');
+		 
 			}
 
 		},
