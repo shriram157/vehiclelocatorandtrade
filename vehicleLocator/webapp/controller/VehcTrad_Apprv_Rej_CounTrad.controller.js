@@ -1,3 +1,4 @@
+var local;
 sap.ui.define([
 	"vehicleLocator/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
@@ -16,13 +17,20 @@ sap.ui.define([
 		onInit: function () {
 			var _that = this;
 			oController = this;
-
+			
 			this.getRouter().getRoute("VehcTrad_Apprv_Rej_CounTrad").attachPatternMatched(this.onRouteMatched, this);
 		},
 		onRouteMatched: function (oEvent) {
 			debugger
 			var that = this;
+			// local =this;
 			that.oSelectedItems = oEvent.getParameter("arguments").selectedmyTr;
+			// local.oViewModel = new sap.ui.model.json.JSONModel({
+   //             busy: false,
+   //             delay: 0,
+   //             additionalComments: ""
+   //         });
+   //         local.getView().setModel(local.oViewModel, "LocalTradeModel");
 
 			/* SelectedPath	*/
 			if (that.oSelectedItems != undefined && that.oSelectedItems != "SelectedFromTradeHistory") {
@@ -34,21 +42,30 @@ sap.ui.define([
 					var TradeId = StatusData.Trade_Id;
 					this.VehicleTrade_SummaryData(StatusData);
 
-					/*	oacceptbtn
-						oBackbtnid*/
-					if (AcceptVisible == true && (Status == "S")) {
-						this.getView().byId("oacceptbtn").setVisible(AcceptVisible);
-						this.getView().byId("oRejectbtn").setVisible(AcceptVisible);
-						this.getView().byId("oCounterofrbtn").setVisible(AcceptVisible);
-						this.getView().byId("oCancelbtn").setVisible(!AcceptVisible);
-						this.getView().byId("oUpdatebtn").setVisible(!AcceptVisible);
-					} else {
-
+				
+					if (AcceptVisible == false && (Status == "S")) {
 						this.getView().byId("oacceptbtn").setVisible(!AcceptVisible);
 						this.getView().byId("oRejectbtn").setVisible(!AcceptVisible);
 						this.getView().byId("oCounterofrbtn").setVisible(!AcceptVisible);
 						this.getView().byId("oCancelbtn").setVisible(AcceptVisible);
 						this.getView().byId("oUpdatebtn").setVisible(AcceptVisible);
+					/*	this.getView().byId("oacceptbtn").setVisible(!AcceptVisible);
+						this.getView().byId("oRejectbtn").setVisible(!AcceptVisible);
+						this.getView().byId("oCounterofrbtn").setVisible(!AcceptVisible);
+						this.getView().byId("oCancelbtn").setVisible(AcceptVisible);
+						this.getView().byId("oUpdatebtn").setVisible(AcceptVisible);*/
+					} else {
+
+						this.getView().byId("oacceptbtn").setVisible(AcceptVisible);
+						this.getView().byId("oRejectbtn").setVisible(AcceptVisible);
+						this.getView().byId("oCounterofrbtn").setVisible(AcceptVisible);
+						this.getView().byId("oCancelbtn").setVisible(AcceptVisible);
+						this.getView().byId("oUpdatebtn").setVisible(AcceptVisible);
+					/*	this.getView().byId("oacceptbtn").setVisible(AcceptVisible);
+						this.getView().byId("oRejectbtn").setVisible(AcceptVisible);
+						this.getView().byId("oCounterofrbtn").setVisible(AcceptVisible);
+						this.getView().byId("oCancelbtn").setVisible(!AcceptVisible);
+						this.getView().byId("oUpdatebtn").setVisible(!AcceptVisible);*/
 
 					}
 
@@ -135,20 +152,25 @@ sap.ui.define([
 					this.VehicleTrade_SummaryData(StatusData);
 					var AcceptVisible = StatusData.FromRequesting;
 					var Status = StatusData.Trade_Status;
-					//	this.getView().byId("oacceptbtn").setVisible(AcceptVisible);
-					if (AcceptVisible == false && (Status == "S" || Status == "C")) {
-						this.getView().byId("oacceptbtn").setVisible(AcceptVisible);
-						this.getView().byId("oRejectbtn").setVisible(AcceptVisible);
-						this.getView().byId("oCounterofrbtn").setVisible(AcceptVisible);
-						this.getView().byId("oCancelbtn").setVisible(!AcceptVisible);
-						this.getView().byId("oUpdatebtn").setVisible(!AcceptVisible);
-					} else {
-
+				
+					if (AcceptVisible == true && (Status == "S" || Status == "C")) {
 						this.getView().byId("oacceptbtn").setVisible(!AcceptVisible);
 						this.getView().byId("oRejectbtn").setVisible(!AcceptVisible);
 						this.getView().byId("oCounterofrbtn").setVisible(!AcceptVisible);
 						this.getView().byId("oCancelbtn").setVisible(AcceptVisible);
 						this.getView().byId("oUpdatebtn").setVisible(AcceptVisible);
+					} else {
+
+					/*	this.getView().byId("oacceptbtn").setVisible(!AcceptVisible);
+						this.getView().byId("oRejectbtn").setVisible(!AcceptVisible);
+						this.getView().byId("oCounterofrbtn").setVisible(!AcceptVisible);
+						this.getView().byId("oCancelbtn").setVisible(AcceptVisible);
+						this.getView().byId("oUpdatebtn").setVisible(AcceptVisible);*/
+					    this.getView().byId("oacceptbtn").setVisible(!AcceptVisible);
+						this.getView().byId("oRejectbtn").setVisible(!AcceptVisible);
+						this.getView().byId("oCounterofrbtn").setVisible(!AcceptVisible);
+						this.getView().byId("oCancelbtn").setVisible(!AcceptVisible);
+						this.getView().byId("oUpdatebtn").setVisible(!AcceptVisible);
 
 					}
 
@@ -285,6 +307,15 @@ sap.ui.define([
 				this.getView().byId("oUpdatebtn").setVisible(false);
 				this.getView().byId("oBackbtnid").setEnabled(true);
 				this.getView().byId("oBackbtnid").setVisible(true);
+				/* lates changes
+				this.getView().byId("oAddbutton").setEnabled(true);
+				this.getView().byId("oacceptbtn").setVisible(true);
+				this.getView().byId("oRejectbtn").setVisible(true);
+				this.getView().byId("oCounterofrbtn").setVisible(true);
+				this.getView().byId("oCancelbtn").setVisible(true);
+				this.getView().byId("oUpdatebtn").setVisible(true);
+				this.getView().byId("oBackbtnid").setEnabled(false);
+				this.getView().byId("oBackbtnid").setVisible(false);*/
 				/*	this.getView().byId("VT_ARCTtrdinRet").setEnabled(true);*/
 
 				/*	if (Add_CommentStatus == "C" || Add_CommentStatus == "S") {
@@ -314,16 +345,18 @@ sap.ui.define([
 
 						debugger;
 						var Data = oData.d.results;
-						var Trade_Comment = Data.filter(function (x) {
+					var Trade_Comment = Data.filter(function (x) {
 							return x["Trade_Id.Trade_Id"] == Tradeid;
 						});
 						var oModel = new sap.ui.model.json.JSONModel(Trade_Comment);
 						that.getView().byId("tableVrade").setModel(oModel);
+						
 					}
 				});
 
 			}
 		},
+		
 		oAddCommentsArea: function () {
 			var Comment = this.getView().byId("oComments").getValue();
 			if (Comment == "") {
@@ -356,14 +389,14 @@ sap.ui.define([
 						var oComment_Id = "01";
 					}
 					var TradeId = this.Tradeid;
-
+						console.log("TradeId",TradeId);
 					var that = this;
 
 					var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 						pattern: "yyyy-MM-dd'T'HH:mm:ss"
 					});
 					var oCommentdate = new Date(oDateFormat.format(new Date()));
-					 oCommentdate.setDate(oCommentdate.getDate() + 1);
+					 oCommentdate.setDate(oCommentdate.getDate());
 					/*	var oCreatedby = this.getView().byId("SimpleFormAproveTrReq").getModel().getData().Created_By;*/
 		    var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
 			var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
@@ -412,13 +445,53 @@ sap.ui.define([
 						"Method": "POST"
 					});
 
-					that.oDataModel.create("/TradeComment", oTradeComment, null, function (s) {
-						/*	that.TradeComment(oEntry);
-						this.getView().byId("Comment_Txt").setValue("");
-								that.VehicleTrade_Summary();*/
-						//	that.getRouter().navTo("VehicleTrade_Summary");
+					that.oDataModel.create("/TradeComment", oTradeComment, null, function (s) 
+					{
+			/*	var that = this;*/
+				var sLocation = window.location.host;
+				var sLocation_conf = sLocation.search("webide");
+
+				if (sLocation_conf == 0) {
+					that.sPrefix = "/VehicleLocator_Xsodata";
+				} else {
+					that.sPrefix = "";
+
+				}
+				that.nodeJsUrl = that.sPrefix;
+				that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment";
+				$.ajax({
+					url: that.oDataUrl,
+					method: "GET",
+					async: false,
+					dataType: "json",
+
+					success: function (oData) {
+
+						debugger;
+						var Data = oData.d.results;
+						
+						// console.log("additional Comment", 	local.oViewModel);
+						console.log("trade id",TradeId);
+						
+					var oComTrade_Comment = Data.filter(function (x) {
+							return x["Trade_Id.Trade_Id"] == TradeId;
+						});
+						
+					var oModel = new sap.ui.model.json.JSONModel(oComTrade_Comment);
+					/*	oModel.updateBindings(true);*/	
+					that.getView().byId("tableVrade").setModel(oModel);
+				
+					}
+				});
+						
+						
+					
 						that.getView().byId("oComments").setValue("");
-					}, function () {
+				/*	var oComModel = new sap.ui.model.json.JSON();*/
+					
+		
+					}, function ()
+					{
 
 					});
 
@@ -443,7 +516,9 @@ sap.ui.define([
 			var CommentTableData = this.getView().byId("tableVrade").getModel();
 			sap.ui.getCore().setModel(SimpleFormAproveTrReq, "SelectedSimpleFormAproveTrReq");
 			sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").setProperty("/SelectedTradeComment", CommentTableData);
-			this.getRouter().navTo("VehicleTrade_UpdtTradReq");
+			this.getRouter().navTo("VehicleTrade_UpdtTradReq",{
+				SelectedTrade : "VehicleTrade_ApprvTradeVehicle"
+			});
 
 		},
 		oAccept: function () {

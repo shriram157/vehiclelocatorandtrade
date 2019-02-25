@@ -2,7 +2,7 @@
 	xmlns:t="sap.ui.table" xmlns:u="sap.ui.unified"  xmlns:tnt="sap.tnt" xmlns:html="http://www.w3.org/1999/xhtml">
 	<App>
 		<pages class="oImgsampl" height="200px">
-			<Page showNavButton="false" navButtonPress="onBack">
+			<Page showNavButton="false" navButtonPress="onBack" class="sapUiContentPadding">
 				<customHeader>
 					<Bar class="sapUiSmallPaddingBeginEnd clCustomHeaderBg">
 						<contentLeft>
@@ -44,14 +44,7 @@
 					<VBox>
 						<VBox>
 						<!--	visibleRowCount="10" visibleRowCountMode="Interactive">-->
-						
-	
-						
-						
-						
-						
-						
-							<t:Table id="table1vts" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{
+							<t:Table id="table1vts" cellClick="onRowPress" selectionBehavior="Row" class="sapUiResponsiveMargin" selectionMode="None" rows="{
     		    path:'/',
     		    sorter : [{
     		      path:'Changed_on',
@@ -65,8 +58,8 @@
     		    }]
     		    
     		    
-    		    }"  				alternateRowColors="true"   class="sapUiResponsiveMargin" 
-							width="auto" >
+    		    }"   	alternateRowColors="true" 
+							width="auto">
 							
 								<t:columns>
 									<t:Column id="ORequlinlId"  sortProperty="Trade_Id">
@@ -246,19 +239,8 @@
 							<Label text=" " class="flexdontclabllist"/>
 						</FlexBox>
 					</HBox>
-					
-					
-					
-										<t:Table id="table1Rts" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{/}" visibleRowCount="10"
-							alternateRowColors="true"   class="sapUiResponsiveMargin"  
-							width="auto"   >	
-					
-					
-					
-					
-					
-					<!--<t:Table id="table1Rts" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{/}"-->
-					<!--	visibleRowCount="10">-->
+					<t:Table id="table1Rts" cellClick="onRowPress" selectionBehavior="Row" class="sapUiResponsiveMargin" selectionMode="None" rows="{/}"
+						visibleRowCount="10" width="auto">
 						<t:columns>
 							<t:Column id="ORequlinl" sortProperty="Trade_Id">
 								<Label text="{i18n>Request}"/>

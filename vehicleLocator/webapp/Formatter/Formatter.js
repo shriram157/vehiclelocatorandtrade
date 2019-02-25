@@ -72,13 +72,26 @@ oTradeStatusBinding:function(Trade_return){
 			}
 
 		},
-		AccessoryInstall: function (z_pd_flag) {
+	/*	AccessoryInstall: function (z_pd_flag) {
 		 if (z_pd_flag == "D") {
 				return "Yes";
 			}
 			else {
 				return "No";
 			} 
+
+		},*/
+			AccessoryInstall: function (non_D_flag, pd_flag) {
+			if (pd_flag == "" &&non_D_flag == "") {
+				return "No";
+			} else if (pd_flag == ""&&non_D_flag == "X") {
+				return "No";
+			} else if (pd_flag == "D"&&non_D_flag == "") {
+                return "Yes";
+			} else if (pd_flag == "D"&&non_D_flag == "X") {
+                return "Yes";
+			}
+
 
 		},
 
@@ -252,15 +265,14 @@ oTradeStatusBinding:function(Trade_return){
 			if (Created_On != null && Created_On != "") {
 				
 			return	Created_On.replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3');
-		 
 			}
+
 		},
 	VehicleSelectoinEtaFromDate1: function (Created_On) {
 
 			if (Created_On != null && Created_On != "") {
 				
 			return	Created_On.replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3');
-		 
 			}
 
 		},

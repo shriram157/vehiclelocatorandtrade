@@ -73,8 +73,10 @@ sap.ui.define([
              that.oTableSelectObj.FromRequesting=true;
              	var model = new sap.ui.model.json.JSONModel(that.oTableSelectObj);
              	model.setSizeLimit(1000);
-				sap.ui.getCore().setModel(model, "MyTradeRequestSelected");
-			sap.ui.getCore().setModel(null,"MyTradeRequested");
+			/*	sap.ui.getCore().setModel(model, "MyTradeRequestSelected");
+		         	sap.ui.getCore().setModel(null,"MyTradeRequested");*/
+		         	sap.ui.getCore().setModel(model, "MyTradeRequested");
+				    sap.ui.getCore().setModel(null,"MyTradeRequestSelected");
                 this.getRouter().navTo("VehcTrad_Apprv_Rej_CounTrad", {
 					selectedmyTr: SelectedPath
 				});
@@ -98,9 +100,15 @@ sap.ui.define([
               that.oRecTableSelectObj.FromRequesting=false;
              	var model = new sap.ui.model.json.JSONModel(that.oRecTableSelectObj);
              	model.setSizeLimit(1000);
-				sap.ui.getCore().setModel(model, "MyTradeRequested");
+			/*	sap.ui.getCore().setModel(model, "MyTradeRequested");
+				    sap.ui.getCore().setModel(null,"MyTradeRequestSelected");*/
+				    	sap.ui.getCore().setModel(model, "MyTradeRequestSelected");
+		         	sap.ui.getCore().setModel(null,"MyTradeRequested");
+				    
+				    
+				
 			//	if(sap.ui.getCore().getModel("MyTradeRequestSelected")!=undefined){
-					sap.ui.getCore().setModel(null,"MyTradeRequestSelected");
+					
 			//	}
                 this.getRouter().navTo("VehcTrad_Apprv_Rej_CounTrad", {
 					selectedmyTr: SelectedPath
@@ -113,13 +121,6 @@ sap.ui.define([
 			
 			
 			
-			/*if(that.oRecTableSelectObj!=){
-				
-			}else{
-				
-			}*/
-			
-
 		},
 		
 

@@ -544,7 +544,59 @@ if(that.SelectedVehicleFrom=="VehileTrade_CreateSingle"){
 			});
 			}
 			else if(that.SelectedVehicleFrom=="VehileTrade_UpdtTradReq"){
-				sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").setProperty("/VehicleTrade_UpdtTradReqVehicle", that.oSelectedItem);
+				//.getProperty("/OffredVehicle")
+				that.oSelectedItem.Offered_Vtn=that.oSelectedItem.zzvtn;
+					that.oSelectedItem.Model_Year=that.oSelectedItem.zzmoyr
+						that.oSelectedItem.Series_Desc=that.oSelectedItem.zzseries_desc_en
+						that.oSelectedItem.zzseries_desc_fr=that.oSelectedItem.zzseries_desc_fr
+						that.oSelectedItem.zzseries_desc_en=that.oSelectedItem.zzseries_desc_en
+							that.oSelectedItem.Series=that.oSelectedItem.zzseries
+							that.oSelectedItem.Model=that.oSelectedItem.matnr
+							that.oSelectedItem.Model_Desc=that.oSelectedItem.model_desc_en
+							that.oSelectedItem.Suffix=that.oSelectedItem.zzsuffix
+							that.oSelectedItem.Suffix_Desc=that.oSelectedItem.suffix_desc_en
+								that.oSelectedItem.Int_Colour_Desc=that.oSelectedItem.mrktg_int_desc_en
+									that.oSelectedItem.APX=that.oSelectedItem.zzapx
+										that.oSelectedItem.Ext_Colour_Desc=that.oSelectedItem.mktg_desc_en;
+										that.oSelectedItem.Status=sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Status;
+											that.oSelectedItem.Order_Type=that.oSelectedItem.zzordertype;
+											//	var Req_Current_ETA_From=Number(that.oSelectedItem.pstsp);
+										
+											
+												that.oSelectedItem.Req_Current_ETA_From=that.oSelectedItem.pstsp;
+												
+													var dateString  =that.oSelectedItem.zzadddata4;
+var year        = dateString.substring(0,4);
+var month       = dateString.substring(4,6);
+var day         = dateString.substring(6,8);
+
+var Req_Current_ETA_To= new Date(year, month-1, day);
+													  Req_Current_ETA_To = new Date(Req_Current_ETA_To);
+				 Req_Current_ETA_To =  Date.parse(Req_Current_ETA_To);
+												
+												
+													that.oSelectedItem.Req_Current_ETA_To="/Date("+ Req_Current_ETA_To +")/" ;
+											//	var Proposed_ETA_From=Number(that.oSelectedItem.Proposed_ETA_From);
+												var dateString  =that.oSelectedItem.Proposed_ETA_From;
+var year        = dateString.substring(0,4);
+var month       = dateString.substring(4,6);
+var day         = dateString.substring(6,8);
+
+var Proposed_ETA_From= new Date(year, month-1, day);
+													  Proposed_ETA_From = new Date(Proposed_ETA_From);
+				 Proposed_ETA_From =  Date.parse(Proposed_ETA_From);
+				 
+														that.oSelectedItem.Req_Proposed_ETA_From="/Date("+ Proposed_ETA_From +")/" ;
+															var Req_Proposed_ETA_To=Number(that.oSelectedItem.Proposed_ETA_To);
+													  Req_Proposed_ETA_To = new Date(Req_Proposed_ETA_To);
+				 Req_Proposed_ETA_To =  Date.parse(Req_Proposed_ETA_To);
+														
+															that.oSelectedItem.Req_Proposed_ETA_To="/Date("+ Req_Proposed_ETA_To +")/";
+								
+							
+				
+				
+				sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").setProperty("/OffredVehicle", that.oSelectedItem);
 					that.getRouter().navTo("VehicleTrade_UpdtTradReq", {
 				SelectedTrade:"VehicleTrade_updateTradeVehicle"
 			});
