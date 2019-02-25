@@ -254,7 +254,11 @@
 					<!--=================================================================new code ===================================================================End-->
 				<!--	<ScrollContainer height="60%" width="100%" horizontal="true" vertical="true">-->
 						<t:Table id="table1VSR" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{/}" visibleRowCount="20"
-							alternateRowColors="true" class="sapUiMediumMarginBegin">
+							alternateRowColors="true"   class="sapUiResponsiveMargin" 
+							width="auto"   >
+ 
+							
+							
 							<t:columns>
 								<t:Column id="TradecolId" width="4rem">
 									<Label text="{i18n>Trade}"/>

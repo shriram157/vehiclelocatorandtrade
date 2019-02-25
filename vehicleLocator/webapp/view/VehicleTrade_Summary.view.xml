@@ -44,6 +44,13 @@
 					<VBox>
 						<VBox>
 						<!--	visibleRowCount="10" visibleRowCountMode="Interactive">-->
+						
+	
+						
+						
+						
+						
+						
 							<t:Table id="table1vts" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{
     		    path:'/',
     		    sorter : [{
@@ -58,7 +65,8 @@
     		    }]
     		    
     		    
-    		    }">
+    		    }"  				alternateRowColors="true"   class="sapUiResponsiveMargin" 
+							width="auto" >
 							
 								<t:columns>
 									<t:Column id="ORequlinlId"  sortProperty="Trade_Id">
@@ -238,8 +246,19 @@
 							<Label text=" " class="flexdontclabllist"/>
 						</FlexBox>
 					</HBox>
-					<t:Table id="table1Rts" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{/}"
-						visibleRowCount="10">
+					
+					
+					
+										<t:Table id="table1Rts" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{/}" visibleRowCount="10"
+							alternateRowColors="true"   class="sapUiResponsiveMargin"  
+							width="auto"   >	
+					
+					
+					
+					
+					
+					<!--<t:Table id="table1Rts" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{/}"-->
+					<!--	visibleRowCount="10">-->
 						<t:columns>
 							<t:Column id="ORequlinl" sortProperty="Trade_Id">
 								<Label text="{i18n>Request}"/>
