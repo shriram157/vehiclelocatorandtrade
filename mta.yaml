@@ -1,114 +1,101 @@
-ID: vehicleLocator
+ID: vehiclelocatorandtrade
 _schema-version: '2.1'
-description: vehicle Locator MTA
+description: Vehicle locator and trade consolidated app
 version: 0.0.1
 
 modules:
- - name: vehicleLocator_hdb
+ - name: vehiclelocatorandtrade-hdb
    type: hdb
    path: vehicleLocator_hdb
    requires:
-    - name: hdi_vehicleLocator_hdb
+    - name: hdi_vehiclelocatorandtrade
 
- - name: vehicleLocator_Node
+ - name: vehiclelocatorandtrade-node
    type: nodejs
    path: vehicleLocator_Node
    parameters:
-      host: vehicleLocator_Node
-      register-service-url: true
-      service-name: vehicleLocator_Node
-      service-url: '${default-url}'
-      disk-quota: 256MB
-      memory: 256MB
+      host: tci-dev-${app-name}
+      disk-quota: 256M
+      memory: 256M
    properties:
       NODE_TLS_REJECT_UNAUTHORIZED: 0
       TRADE_REQ_CLEANUP_TASK_SCH: "0 0 * * *"
    provides:
-    - name: vehicleLocator_Node_api
+    - name: vehiclelocatorandtrade-node_api
       properties:
          url: ${default-url}
    requires:
-    - name: VEHICLE_LOCATOR_APIM_CUPS
-    - name: hdi_vehicleLocator_hdb
-    - name: uaa_vehicleLocator
+    - name: application-logs_vehiclelocatorandtrade
+    - name: hdi_vehiclelocatorandtrade
+    - name: uaa_vehiclelocatorandtrade
+    - name: VEHICLE_LOCATOR_AND_TRADE_APIM_CUPS
 
- - name: vehicleLocator
-   type: html5
-   path: vehicleLocator
-   parameters:
-      host: vehicleLocator
-      register-service-url: true
-      service-name: vehicleLocator
-      service-url: '${default-url}'
-      disk-quota: 256M
-      memory: 256M
-   build-parameters:
-      builder: grunt
-   requires:
-    - name: uaa_vehicleLocator
-    - name: dest_vehicleLocator
-    - name: vehicleLocator_XSJS_api
-      group: destinations
-      properties:
-        name: vehicleLocator_XSJS_backend
-        url: '~{url}'
-        forwardAuthToken: true  
-    - name: vehicleLocator_Node_api
-      group: destinations
-      properties:
-        name: vehicleLocator_Node_backend
-        url: '~{url}'
-        forwardAuthToken: true
-
-   provides:
-     - name: vehicleLocator    
-    
-
- - name: vehicleLocator_XSJS
+ - name: vehiclelocatorandtrade-xsjs
    type: nodejs
    path: vehicleLocator_XSJS
    parameters:
-      host: vehicleLocator_XSJS
-      register-service-url: true
-      service-name: vehicleLocator_XSJS
+      host: tci-dev-${app-name}
       service-url: '${default-url}'
       disk-quota: 512M
       memory: 256M
    provides:
-    - name: vehicleLocator_XSJS_api
+    - name: vehiclelocatorandtrade-xsjs_api
       properties:
          url: ${default-url}
    requires:
-     - name: vehicleLocator_hdb
-     - name: hdi_vehicleLocator_hdb
-     - name: uaa_vehicleLocator
-     - name: dest_vehicleLocator
+    - name: vehiclelocatorandtrade-hdb
+    - name: hdi_vehiclelocatorandtrade
+    - name: uaa_vehiclelocatorandtrade
+
+ - name: vehiclelocatorandtrade
+   type: html5
+   path: vehicleLocator
+   parameters:
+      host: tci-dev-${app-name}
+      disk-quota: 256M
+      memory: 512M
+   build-parameters:
+      builder: grunt
+   requires:
+    - name: application-logs_vehiclelocatorandtrade
+    - name: uaa_vehiclelocatorandtrade
+    - name: vehiclelocatorandtrade-node_api
+      group: destinations
+      properties:
+         name: vehiclelocatorandtrade-node
+         forwardAuthToken: true
+         timeout: 60000
+         url: '~{url}'
+    - name: vehiclelocatorandtrade-xsjs_api
+      group: destinations
+      properties:
+         name: vehiclelocatorandtrade-xsjs
+         forwardAuthToken: true
+         url: '~{url}'
 
 resources:
- - name: hdi_vehicleLocator_hdb
+ - name: application-logs_vehiclelocatorandtrade
+   parameters:
+      service: application-logs
+      service-plan: lite
+   type: org.cloudfoundry.managed-service
+
+ - name: hdi_vehiclelocatorandtrade
    type: com.sap.xs.hdi-container
    parameters:
       config:
          schema: vehicleLocator_hdb
    properties:
       hdi-container-name: ${service-name}
-   
- - name: VEHICLE_LOCATOR_APIM_CUPS
-   type: org.cloudfoundry.existing-service
-   parameters:
-     service-name: VEHICLE_LOCATOR_APIM_CUPS
-   properties:
-      odata-call-service-name: '${service-name}'
 
- - name: uaa_vehicleLocator
-   type: org.cloudfoundry.managed-service
+ - name: uaa_vehiclelocatorandtrade
    parameters:
-      service: xsuaa
-      service-plan: application
       path: ./xs-security.json
-
- - name: dest_vehicleLocator
+      service-plan: application
+      service: xsuaa
    type: org.cloudfoundry.managed-service
+
+ - name: VEHICLE_LOCATOR_AND_TRADE_APIM_CUPS
    parameters:
-      service: destination
-      service-plan: lite
+      service-name: VEHICLE_LOCATOR_AND_TRADE_APIM_CUPS
+   type: org.cloudfoundry.existing-service

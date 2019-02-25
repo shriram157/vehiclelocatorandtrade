@@ -1,35 +1,35 @@
 {
 
-	"welcomeFile": "/vehicleLocator/index.html",
+	"welcomeFile": "/vehiclelocatorandtrade/index.html",
 	"authenticationMethod": "route",
 	"logout": {
 		"logoutEndpoint": "/do/logout"
 	},
 	"routes": [{
-		"source": "^/vehicleLocator/(.*)$",
+		"source": "^/vehiclelocatorandtrade/(.*)$",
 		"target": "$1",
 		"localDir": "webapp"
 	}, {
 		"source": "/node(.*)",
-		"destination": "vehicleLocator_Node_backend",
+		"destination": "vehiclelocatorandtrade-node",
 		"csrfProtection": false,
 		"authenticationType": "xsuaa"
 	}, {
 		"source": "(.*)(.xsjs)",
-		"destination": "vehicleLocator_XSJS_backend",
+		"destination": "vehiclelocatorandtrade-xsjs",
 		"csrfProtection": false,
 		"authenticationType": "none"
 	}, {
 		"source": "(.*)(.xsodata)",
-		"destination": "vehicleLocator_XSJS_backend",
+		"destination": "vehiclelocatorandtrade-xsjs",
 		"authenticationType": "none"
     }, {
 		"source": "/xsodata/(.*)",
-		"destination": "vehicleLocator_XSJS_backend",
+		"destination": "vehiclelocatorandtrade-xsjs",
 		"authenticationType": "none"
 	}, {
 			"source": "/userDetails(.*)",
-			"destination": "vehicleLocator_Node_backend",
+			"destination": "vehiclelocatorandtrade-node",
 			"csrfProtection": false,
 			"authenticationType": "xsuaa"
 
