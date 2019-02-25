@@ -168,19 +168,19 @@
 							<t:Table id="tableVrade" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None"
 								rows="{ path:'/', sorter : [{ path:'Comment_Date', descending : 'true' }] }">
 								<t:columns>
-									<t:Column id="Comment_Date">
+									<t:Column sortProperty="Comment_Date" id="Comment_Date">
 										<Label text="{i18n>Date}"/>
 										<t:template>
 											<Text text="{path:'Comment_Date',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false"/>
 										</t:template>
 									</t:Column>
-									<t:Column sortProperty="kunnr">
+									<t:Column>
 										<Label text="{i18n>User}"/>
 										<t:template>
 											<Text text="{Created_By}" wrapping="false"/>
 										</t:template>
 									</t:Column>
-									<t:Column sortProperty="matnr" id="matnr">
+									<t:Column sortProperty="matnr">
 										<Label text="{i18n>Comments}"/>
 										<t:template>
 											<Text text="{Comment_Txt}" wrapping="false"/>
@@ -220,7 +220,7 @@
 								<VBox>
 									<!--	<FlexBox height="100px" alignItems="Start" justifyContent="Start"/>-->
 									<Label text="{i18n>Comments}" class="sapUiSmallMarginBottom"/>
-									<TextArea width="240px" height="100px" id="oComments">
+									<TextArea width="240px" height="100px" id="oComments" value="">
 										<layoutData>
 											<l:GridData span="L4 M12 S3"/>
 										</layoutData>

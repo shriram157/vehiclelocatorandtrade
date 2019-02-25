@@ -125,6 +125,7 @@
 								</ComboBox>-->
 								<!--<Text text="Request Sent"/>-->
 								<core:Title text="{i18n>OfferVehicleInformation}" id="offfveh"/>
+								
 								<Label text="{i18n>VehicleTrackingNumber}" id="vehtnum"/>
 								<Text text="{/OffredVehicle/Offered_Vtn}" id="ovtnId"/>
 								<Label text="{i18n>ModelYear}" id="mdlyr"/>
@@ -154,14 +155,14 @@
 									</layoutData>
 								</Text>
 								<Text text="{i18n>From}" id="frmid"/>
-								<Label text="" id="emptyids"></Label>
+								<Label text=""></Label>
 								<Text text="{path:'/OffredVehicle/Req_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="txtlab">
 									<layoutData>
 										<l:GridData span="L4 M12 S3"/>
 									</layoutData>
 								</Text>
 								<Text text="{i18n>To}" id="tolbid"/>
-								<Text text="" id="totid"/>
+								<Text text=""/>
 								<Label text="{i18n>PropsedETAtoNewDealer}" id="prlabid"/>
 								<Text text="{path:'/OffredVehicle/Req_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="prpetid">
 									<layoutData>
@@ -169,13 +170,14 @@
 									</layoutData>
 								</Text>
 								<Text text="{i18n>From}" id="fmlabid"/>
-								<Label text="" id="fromlabid"></Label>
+								<Label text=""></Label>
 								<Text text="{path:'/OffredVehicle/Req_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="otxtlabel">
 									<layoutData>
 										<l:GridData span="L4 M12 S3"/>
 									</layoutData>
 								</Text>
 								<Text text="{i18n>To}" id="idlbltxt"/>
+								<Text text="{/OffredVehicle/FromFourth}" id="otextId" visible="false"/>
 							</form:content>
 						</form:SimpleForm>
 					</VBox>
