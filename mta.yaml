@@ -14,7 +14,7 @@ modules:
    type: nodejs
    path: vehicleLocator_Node
    parameters:
-      host: tci-dev-${app-name}
+      host: tci-dev-vehiclelocatorandtrade-hdb
       disk-quota: 256M
       memory: 256M
    properties:
@@ -34,7 +34,7 @@ modules:
    type: nodejs
    path: vehicleLocator_XSJS
    parameters:
-      host: tci-dev-${app-name}
+      host: tci-dev-vehiclelocatorandtrade-xsjs
       service-url: '${default-url}'
       disk-quota: 512M
       memory: 256M
@@ -51,7 +51,7 @@ modules:
    type: html5
    path: vehicleLocator
    parameters:
-      host: tci-dev-${app-name}
+      host: tci-dev-vehiclelocatorandtrade
       disk-quota: 256M
       memory: 512M
    build-parameters:
