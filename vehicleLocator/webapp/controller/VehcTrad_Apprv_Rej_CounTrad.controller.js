@@ -185,7 +185,7 @@ sap.ui.define([
 					//	this.getView().byId("SimpleFormAproveTrReq").bindElement("/");
 
 					var Dnc = StatusData.DNC;
-					/*	if (Dnc == "Y" || Dnc == "X") {
+						if (Dnc == "Y" || Dnc == "X") {
 							this.getView().byId("VT_ARCDnc").setVisible(true);
 							var newItem = new sap.ui.core.Item({
 								key: "0",
@@ -209,7 +209,7 @@ sap.ui.define([
 							this.getView().byId("VT_ARCDnc").setVisible(false);
 							this.getView().byId("VT_ARCDnc").setSelectedKey("");
 							this.getView().byId("VT_ARCDnc").setSelectedItem("");
-						}*/
+						}
 
 					this.getView().byId("SimpleForrmDisa220").setModel(sap.ui.getCore().getModel("MyTradeRequested"));
 					this.getView().byId("SimpleForrmDisa220").bindElement("/");
@@ -561,7 +561,7 @@ sap.ui.define([
 				var oWnoApx = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.APX;
 				var oWnoIntcolorcode = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.Int_Colour;
 			} else {
-				var RequstingDealer = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requesting_Dealer;
+				var RequestingDealer = "";
 				var oWningVTN = "";
 				var oWnModelyear = "";
 				var oWnSuffixcode = "";
@@ -602,13 +602,22 @@ sap.ui.define([
 
 */
 			/* var AcceptUrl =  that.oDataUrl+"/ApproveTradeReqSet?$filter=RequestingDel eq '2400042193' and (VehiclesOwningDelear eq '2400042193'  or VehiclesOwningDelear eq '2400042176' ) and (Suffixcode eq 'ML' or Suffixcode eq 'ML' ) and (Modelyear eq '2018' or Modelyear eq '2018')  and (Modelcode eq 'YZ3DCT' or Modelcode eq 'YZ3DCT' ) and ( Interiorcolorcode eq 'LC14' or Interiorcolorcode eq 'LC14') and  ( Exteriorcolorcode eq '01D6' or Exteriorcolorcode eq '01D6' ) and ( APX eq '00' or APX eq '00' ) and  ( VTN eq '000828' or  VTN eq '000826')&$format=json";*/
-			var AcceptUrl = that.oDataUrl + "/ApproveTradeReqSet?$filter=RequestingDel eq '" + RequestingDealer +
+		/*	var AcceptUrl = that.oDataUrl + "/ApproveTradeReqSet?$filter=RequestingDel eq '" + RequestingDealer +
 				"' and (VehiclesOwningDelear eq '" + RequestingDealer + "'or VehiclesOwningDelear eq '" + RequstedDealer +
 				"' ) and (Suffixcode eq '" + oSuffixcode + "' or Suffixcode eq '" + oWnSuffixcode + "' )and (Modelyear eq '" + oModelyear +
 				"' or Modelyear eq '" + oWnModelyear + "')  and (Modelcode eq '" + oModelcode + "' or Modelcode eq '" + oWnModelcode +
 				"' )and ( Interiorcolorcode eq '" + oIntcolorcode + "' or Interiorcolorcode eq '" + oWnoIntcolorcode +
 				"') and ( Exteriorcolorcode eq '" + oExtcolorcode + "' or Exteriorcolorcode eq '" + oWnoExtcolorcode + "' ) and ( APX eq '" + oApx +
+				"' or APX eq '" + oWnoApx + "' ) and  ( VTN eq '" + oVehTrano + "' or VTN eq '" + oWningVTN + "')&$format=json";*/
+				
+			var AcceptUrl = that.oDataUrl + "/ApproveTradeReqSet?$filter=RequestingDel eq '" + RequstedDealer +
+				"' and (VehiclesOwningDelear eq '" + RequstedDealer + "'or VehiclesOwningDelear eq '" + RequestingDealer +
+				"' ) and (Suffixcode eq '" + oSuffixcode + "' or Suffixcode eq '" + oWnSuffixcode + "' )and (Modelyear eq '" + oModelyear +
+				"' or Modelyear eq '" + oWnModelyear + "')  and (Modelcode eq '" + oModelcode + "' or Modelcode eq '" + oWnModelcode +
+				"' )and ( Interiorcolorcode eq '" + oIntcolorcode + "' or Interiorcolorcode eq '" + oWnoIntcolorcode +
+				"') and ( Exteriorcolorcode eq '" + oExtcolorcode + "' or Exteriorcolorcode eq '" + oWnoExtcolorcode + "' ) and ( APX eq '" + oApx +
 				"' or APX eq '" + oWnoApx + "' ) and  ( VTN eq '" + oVehTrano + "' or VTN eq '" + oWningVTN + "')&$format=json";
+	
 
 			$.ajax({
 				url: AcceptUrl,
@@ -647,12 +656,14 @@ sap.ui.define([
 							that.getRouter().navTo("VehicleTrade_Summary", {
 								DataClicked: "Yes"
 							});
+							}
 						sap.m.MessageBox.success(Message, {
 							actions: [sap.m.MessageBox.Action.OK ],
 							onClose: fnCallbackMessageBox1
 						});
+						debugger;
 						that.AcceptSuccess();
-					}
+					
 
 				}
 				},
@@ -826,7 +837,8 @@ sap.ui.define([
 			//	 var Created_On = oDateFormat.format(new Date(ValidTo));
 			/*	var Trade_Status = "R";*/
 			//	}
-			var Changed_on = oDateFormat.format(new Date());
+			var Changed_on = new Date(oDateFormat.format(new Date()));
+				Changed_on = oDateFormat.format(new Date(Changed_on));
 			var oEntry = {
 
 				"Trade_Id": Trade_Id,
@@ -836,14 +848,14 @@ sap.ui.define([
 				"Requested_Vtn": Requested_Vtn,
 				"Offered_Vtn": Offered_Vtn,
 				"Trade_Return": Trade_Return,
-				"Req_Current_ETA_From": new Date(Req_Current_ETA_From),
-				"Req_Current_ETA_To": new Date(Req_Current_ETA_To),
-				"Req_Proposed_ETA_From": new Date(Req_Proposed_ETA_From),
-				"Req_Proposed_ETA_To": new Date(Req_Proposed_ETA_To),
-				"Off_Current_ETA_From": new Date(Off_Current_ETA_From),
-				"Off_Current_ETA_To": new Date(Off_Current_ETA_To),
-				"Off_Proposed_ETA_From": new Date(Off_Proposed_ETA_From),
-				"Off_Proposed_ETA_To": new Date(Off_Proposed_ETA_To),
+				"Req_Current_ETA_From": Req_Current_ETA_From,
+				"Req_Current_ETA_To": Req_Current_ETA_To,
+				"Req_Proposed_ETA_From": Req_Proposed_ETA_From,
+				"Req_Proposed_ETA_To": Req_Proposed_ETA_To,
+				"Off_Current_ETA_From": Off_Current_ETA_From,
+				"Off_Current_ETA_To": Off_Current_ETA_To,
+				"Off_Proposed_ETA_From": Off_Proposed_ETA_From,
+				"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
 				"Created_By": Created_By,
 			/*	"Created_On": new Date(Created_On),*/
 				"Created_On":Created_On,

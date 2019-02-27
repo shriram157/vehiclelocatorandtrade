@@ -253,6 +253,7 @@
 					<!--<Table id="table1VSR" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{/}" visibleRowCount="20">-->
 					<!--=================================================================new code ===================================================================End-->
 					<!--	<ScrollContainer height="60%" width="100%" horizontal="true" vertical="true">-->
+					<FlexBox height="30px">
 					<t:Table id="table1VSR" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{/}" visibleRowCount="20"
 						alternateRowColors="true" class="sapUiResponsiveMargin" width="auto">
 						<t:columns>
@@ -335,6 +336,7 @@
 							</t:Column>
 						</t:columns>
 					</t:Table>
+					</FlexBox>
 					<!--	</ScrollContainer>-->
 				</content>
 			</Page>
