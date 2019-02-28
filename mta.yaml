@@ -14,7 +14,7 @@ modules:
    type: nodejs
    path: vehicleLocator_Node
    parameters:
-      host: tci-dev-vehiclelocatorandtrade-hdb
+      host: tci-dev-vehiclelocatorandtrade-node
       disk-quota: 256M
       memory: 256M
    properties:
