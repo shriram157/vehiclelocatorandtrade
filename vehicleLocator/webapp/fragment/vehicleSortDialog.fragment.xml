@@ -1,0 +1,18 @@
+<core:FragmentDefinition xmlns="sap.m"
+                         xmlns:core="sap.ui.core">
+    <ViewSettingsDialog confirm="handleConfirm" cancel="handleCancel" id="vsd1">
+        <sortItems>
+            <ViewSettingsItem selected="true" key="kunnr" text="Dealer Number" />
+            <ViewSettingsItem key="matnr" text="Model" />
+            <ViewSettingsItem key="zzsuffix" text="Suffix" />
+            <ViewSettingsItem key="zzapx" text="APX" />
+            <ViewSettingsItem key="zzextcol" text="Color" />
+            <ViewSettingsItem key="zzordertype" text="Order Type" />
+            <ViewSettingsItem key="zzadddata4" text="Eta From" />
+            <ViewSettingsItem key="pstsp" text="Eta To" />
+            <ViewSettingsItem key="non_D_flag" text="Accessory Install" />
+            <ViewSettingsItem key="ort01" text="City" />
+            <ViewSettingsItem key="bezei" text="Province" />
+        </sortItems>
+     </ViewSettingsDialog>
+</core:FragmentDefinition>
