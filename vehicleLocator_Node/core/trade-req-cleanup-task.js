@@ -3,7 +3,7 @@
 
 var moment = require("moment");
 
-function run(client) {
+function run(client, log) {
 	return new Promise((resolve, reject) => {
 		var today = moment(new Date()).format("YYYY-MM-DD");
 		var selectSql = "SELECT \"Trade_Id\", \"Requested_Dealer\", \"Requested_Vtn\" FROM " +
@@ -19,7 +19,7 @@ function run(client) {
 					return;
 				}
 				if (selectResults.length == 0) {
-					console.log("No trade requests accepted today found.");
+					log.logMessage("info", "[TRADE_REQ_CLEANUP_TASK] No trade requests accepted today found.");
 					resolve();
 					return;
 				}
@@ -45,7 +45,7 @@ function run(client) {
 						}));
 					}
 					Promise.all(updatePromises).then(() => {
-						console.log("Cleaned up stale trade requests.");
+						log.logMessage("info", "[TRADE_REQ_CLEANUP_TASK] Cleaned up stale trade requests.");
 						resolve();
 						return;
 					}).catch(err => {
