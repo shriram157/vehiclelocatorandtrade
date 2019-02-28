@@ -2,29 +2,30 @@
 	"dependencies": {
 		"@sap/hdbext": "4.3.4",
 		"@sap/logging": "^3.3.1",
-		"@sap/xsenv": "1.2.9",
-		"@sap/xssec": "2.1.10",
-		"express": "4.12.3",
-		"node-schedule": "^1.3.1",
-		"passport": "0.3.2",
-		"request": "2.88.0",
-    "cf-nodejs-logging-support": "^3.0.13" 	},
-    
-	"description": "Vehicle Locator Node Application  to make oDATA Calls to SAP API Management",
-	"devDependencies": {
-		"jest": "^23.6.0",
-		"jest-junit": "^5.2.0"
+		"@sap/xsenv": "^1.3.0",
+		"@sap/xssec": "^2.1.16",
+		"cf-nodejs-logging-support": "^3.0.14",
+		"cors": "^2.8.5",
+		"express": "^4.16.4",
+		"node-schedule": "^1.3.2",
+		"passport": "^0.4.0",
+		"request": "^2.88.0"
 	},
-	"engines": {
-		"node": "6.x"
+	"description": "Node.js module for vehicle locator and trade consolidated app",
+	"devDependencies": {
+		"jest": "^24.1.0",
+		"jest-junit": "^6.3.0"
 	},
 	"files": [],
 	"main": "server.js",
 	"name": "vehicleLocator_Node",
 	"scripts": {
-		"start": "node server.js",
-		"test": "jest --config jest.json",
-		"test-coverage": "jest --coverage --config jest.json"
+		"test": "node node_modules/jest/bin/jest --config jest.json",
+		"test-coverage": "node node_modules/jest/bin/jest --coverage --config jest.json",
+		"start": "node server.js"
+	},
+	"engines": {
+		"node": "8.x"
 	},
 	"version": "1.0.0"
 }

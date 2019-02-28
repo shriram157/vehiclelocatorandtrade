@@ -1,33 +1,30 @@
-/*eslint no-console: 0, no-unused-vars: 0, no-undef:0*/
-/*eslint-env node, es6 */
-//  =================== vehicle Locator Node Server============================= //
-'use strict';
-var https = require('https');
-var port = process.env.PORT || 3000;
-var xsenv = require('@sap/xsenv');
-var server = require('http').createServer();
-// https.globalAgent.options.ca = xsenv.loadCertificates();
-global.__base = __dirname + '/';
+/*eslint new-cap: 0, no-console: 0, no-shadow: 0, no-unused-vars: 0*/
+/*eslint-env es6, node*/
 
-//Initialize Express App for XSA UAA and HDBEXT Middleware
-var passport = require('passport');
+"use strict";
+
+var cors = require("cors");
+var express = require("express");
 var hdbext = require("@sap/hdbext");
-var express = require('express');
+var https = require("https");
+var log = require("cf-nodejs-logging-support");
+var passport = require("passport");
 var schedule = require("node-schedule");
+var tradeReqCleanUpTask = require("./core/trade-req-cleanup-task");
+var xsenv = require("@sap/xsenv");
+var xssec = require("@sap/xssec");
 
-//logging
-var logging = require('@sap/logging');
-var appContext = logging.createAppContext();
+var server = require("http").createServer();
+var port = process.env.PORT || 3000;
 
-//Initialize Express App for XS UAA and HDBEXT Middleware
+// Initialize Express app and set up middleware
 var app = express();
 
-app.use(logging.expressMiddleware(appContext));
+// Logging
+log.setLoggingLevel(process.env.LOG_LEVEL || "info");
+app.use(log.logNetwork);
 
-// =======================================For Authorizations and JWT use======================= BEGIN
-
-// Libraries that you require to set up authorization.
-
+// HANA
 // HANA must be set up before passport, otherwise you get an error about session variable
 var hanaOptions = xsenv.getServices({
 	hana: {
@@ -36,44 +33,43 @@ var hanaOptions = xsenv.getServices({
 });
 var hdbPool = hdbext.getPool(hanaOptions.hana);
 
-var JWTStrategy = require('@sap/xssec').JWTStrategy;
-var services = xsenv.getServices({
+// XSUAA
+passport.use("JWT", new xssec.JWTStrategy(xsenv.getServices({
 	uaa: {
 		tag: "xsuaa"
 	}
-});
-passport.use(new JWTStrategy(services.uaa));
+}).uaa));
 app.use(passport.initialize());
-app.use(passport.authenticate('JWT', {
+app.use(passport.authenticate("JWT", {
 	session: false
 }));
 
-// =======================================For Authorizations and JWT use=======================END
+// CORS
+app.use(cors());
 
-// Initialize scheduler job
+// Scheduler
 var tradeReqCleanUpTaskSchSpec = process.env.TRADE_REQ_CLEANUP_TASK_SCH || "0 0 * * *";
-var tradeReqCleanUpTask = require("./core/trade-req-cleanup-task");
 var job = schedule.scheduleJob(tradeReqCleanUpTaskSchSpec, function () {
 	hdbPool.acquire(function (err, client) {
 		if (err) {
-			console.error(err.toString());
+			log.logMessage("error", err.toString());
 			return;
 		}
-		tradeReqCleanUpTask.run(client).then(() => {
-			console.log("Trade request clean-up task ran successfully.");
+		tradeReqCleanUpTask.run(client, log).then(() => {
+			log.logMessage("info", "[TRADE_REQ_CLEANUP_TASK] Task ran successfully.");
 			hdbPool.release(client);
 		}).catch(err => {
-			console.error("Trade request clean-up task FAILED: " + err.message);
+			log.logMessage("error", "[TRADE_REQ_CLEANUP_TASK] Task FAILED: " + err.message);
 			hdbPool.release(client);
 		});
 	});
 });
 
-//Setup Routes
-var router = require('./router')(app, server);
+// Router
+var router = require("./router")(app, log);
 
-//Start the Server
-server.on('request', app);
+// Start server
+server.on("request", app);
 server.listen(port, function () {
-	console.info(`HTTP Server: ${server.address().port}`);
+	log.logMessage("info", "Server is listening on port %d", port);
 });

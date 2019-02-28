@@ -1,9 +1,10 @@
-/*eslint no-console: 0, no-unused-vars: 0, no-shadow: 0, quotes: 0, no-use-before-define: 0, new-cap:0 */
+/*eslint new-cap: 0, no-console: 0, no-shadow: 0, no-unused-vars: 0*/
+/*eslint-env es6, node*/
+
 "use strict";
 
-module.exports = function () {
+module.exports = function (log) {
 
-	var async = require('async');
 	var express = require('express');
 	var request = require('request');
 	var xsenv = require("@sap/xsenv");
@@ -13,13 +14,6 @@ module.exports = function () {
 	var app = express.Router();
 	//var express = require('express');
 	// const correlator = require('correlation-id');
-	 var log = require('cf-nodejs-logging-support');
-
-	// Set the minimum logging level (Levels: error, warn, info, verbose, debug, silly)
-	log.setLoggingLevel("info");
-
-	// Bind to express app
-	app.use(log.logNetwork);
 
 	var options = {};
 	options = Object.assign(options, xsenv.getServices({
