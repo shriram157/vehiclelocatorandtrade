@@ -186,7 +186,7 @@ sap.ui.define([
 
 					var Dnc = StatusData.DNC;
 						if (Dnc == "Y" || Dnc == "X") {
-							this.getView().byId("VT_ARCDnc").setVisible(true);
+							this.getView().byId("VT_ARCDnc").setVisible(false);
 							var newItem = new sap.ui.core.Item({
 								key: "0",
 								text: "0"
@@ -1266,8 +1266,11 @@ sap.ui.define([
 				});*/
 			/*	pattern: "yyyyMMdd'T'HHmmss"*/
 
-			var oDateFormat1 = sap.ui.core.format.DateFormat.getDateTimeInstance({
+		/*	var oDateFormat1 = sap.ui.core.format.DateFormat.getDateTimeInstance({
 				pattern: "ddMMyyyy"
+			});*/
+				var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+				pattern: "yyyy-MM-dd'T'HH:mm:ss"
 			});
 
 			var that = this;
@@ -2246,7 +2249,12 @@ sap.ui.define([
 			} else {
 				return "0000-00-00T00:00:00";
 			}
-		}
+		},
+	/*	onBack :function()
+		{
+		this.getRouter().navTo("VehicleSearcResults");	
+			
+		}*/
 
 	});
 });
