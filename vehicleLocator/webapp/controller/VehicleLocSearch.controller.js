@@ -224,39 +224,39 @@ sap.ui.define([
 
 			//---------------------------------------------security -----------------------------------------------------End
 
-			//	sap.ui.getCore().LoginDetails = oLoginDealer;
+				sap.ui.getCore().LoginDetails = oLoginDealer;
 
-			// 	var isLocaleSent = window.location.search.match(/language=([^&]*)/i);
-			// 	if (isLocaleSent) {
-			// 		var sSelectedLocale = window.location.search.match(/language=([^&]*)/i)[1];
-			// 	} else {
-			// 		var sSelectedLocale = "EN"; // default is english 
-			// 	}
-			// var sSelectedLocale = "EN";
-			// //selected language. 
-			// // if (window.location.search == "?language=fr") {
-			// if (sSelectedLocale == "fr") {
-			// 	var i18nModel = new sap.ui.model.resource.ResourceModel({
-			// 		bundleUrl: "i18n/i18n_fr.properties",
-			// 		bundleLocale: ("fr")
-			// 	});
-			// 	sap.ui.getCore().setModel(i18nModel, "i18n");
-			// 	this.sCurrentLocale = 'FR';
-			// 	// set the right image for logo  - french       
-			// 	/*              var currentImageSource = this.getView().byId("idLexusLogo");
-			// 	                currentImageSource.setProperty("src", "images/Lexus_FR.png");*/
-			// } else {
-			// 	var i18nModel = new sap.ui.model.resource.ResourceModel({
-			// 		bundleUrl: "i18n/i18n_en.properties",
-			// 		bundleLocale: ("en")
-			// 	});
-			// 	sap.ui.getCore().setModel(i18nModel, "i18n");
-			// 	this.getView().setModel(i18nModel, "i18n");
-			// 	this.sCurrentLocale = 'EN';
-			// 	// set the right image for logo         
-			// 	/*              var currentImageSource = this.getView().byId("idLexusLogo");
-			// 	                currentImageSource.setProperty("src", "images/Lexus_EN.png");*/
-			// }
+				var isLocaleSent = window.location.search.match(/language=([^&]*)/i);
+				if (isLocaleSent) {
+					var sSelectedLocale = window.location.search.match(/language=([^&]*)/i)[1];
+				} else {
+					var sSelectedLocale = "EN"; // default is english 
+				}
+			var sSelectedLocale = "EN";
+			//selected language. 
+			// if (window.location.search == "?language=fr") {
+			if (sSelectedLocale == "fr") {
+				var i18nModel = new sap.ui.model.resource.ResourceModel({
+					bundleUrl: "i18n/i18n_fr.properties",
+					bundleLocale: ("fr")
+				});
+				sap.ui.getCore().setModel(i18nModel, "i18n");
+				this.sCurrentLocale = 'FR';
+				// set the right image for logo  - french       
+				/*              var currentImageSource = this.getView().byId("idLexusLogo");
+				                currentImageSource.setProperty("src", "images/Lexus_FR.png");*/
+			} else {
+				var i18nModel = new sap.ui.model.resource.ResourceModel({
+					bundleUrl: "i18n/i18n_en.properties",
+					bundleLocale: ("en")
+				});
+				sap.ui.getCore().setModel(i18nModel, "i18n");
+				this.getView().setModel(i18nModel, "i18n");
+				this.sCurrentLocale = 'EN';
+				// set the right image for logo         
+				/*              var currentImageSource = this.getView().byId("idLexusLogo");
+				                currentImageSource.setProperty("src", "images/Lexus_EN.png");*/
+			}
 			
 /// set the logo and Language. 
 
