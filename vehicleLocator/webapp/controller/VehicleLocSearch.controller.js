@@ -224,7 +224,7 @@ sap.ui.define([
 
 			//---------------------------------------------security -----------------------------------------------------End
 
-				sap.ui.getCore().LoginDetails = oLoginDealer;
+			//	sap.ui.getCore().LoginDetails = oLoginDealer;
 
 				var isLocaleSent = window.location.search.match(/language=([^&]*)/i);
 				if (isLocaleSent) {
@@ -260,7 +260,7 @@ sap.ui.define([
 			
 /// set the logo and Language. 
 
-				// this._setTheLanguage();
+				this._setTheLanguage();
 
 				this._setTheLogo();
 
