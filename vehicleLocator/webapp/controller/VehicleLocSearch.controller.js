@@ -260,7 +260,7 @@ sap.ui.define([
 			
 /// set the logo and Language. 
 
-				this._setTheLanguage();
+				// this._setTheLanguage();
 
 				this._setTheLogo();
 
