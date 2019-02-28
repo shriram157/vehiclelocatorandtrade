@@ -238,7 +238,7 @@
                         <Text text = "{i18n>Dealer}"  />
                     </Column>
                     <Column id="matnr1" demandPopin="true" minScreenWidth="Tablet"  width="17rem"
-                            hAlign="Left">
+                            hAlign="Center"   >
                         <Text text="{i18n>Model}"/>
                     </Column>
                     <Column id="suffix1"  demandPopin="true"  width="12rem"
@@ -263,7 +263,7 @@
                     <Column id="pstsp1"   demandPopin="true" minScreenWidth="Tablet">
                         <Text text="{i18n>ETATo}" />
                     </Column>
-                    <Column id="accessoryInstall1"  demandPopin="true" minScreenWidth="Tablet" width="5rem" >
+                    <Column id="accessoryInstall1"  demandPopin="true" minScreenWidth="Tablet" width="5rem" hAlign="Center">
                         <Text text="{i18n>AccessoryInstall}"  wrapping="true"/>
                     </Column>
                     <Column id="city1"  demandPopin="true" minScreenWidth="Tablet">

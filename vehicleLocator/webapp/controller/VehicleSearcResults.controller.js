@@ -532,6 +532,20 @@ sap.ui.define([
 			var FilterdedTableData=sap.ushell.components.tableSearchResults.getBinding("items").aIndices;
 			// var tableData=sap.ushell.components.tableSearchResults.getModel().getData();   // guna
 			
+			// set the count to screen. 
+			
+			
+								    	       var tableLength =  FilterdedTableData.length;
+				    	       var oModelDetail = this.getView().getModel("detailView");
+
+				    	       		var sExpectedText = this.getView().getModel("i18n").getResourceBundle().getText("tableCount", [tableLength]);
+				    	       		oModelDetail.setProperty("/tableCount", sExpectedText);
+			
+			
+			
+			
+			
+			
 			var tableData=sap.ushell.components.tableSearchResults.getModel("vehicleSearchTableModel").getData();
 			
 			
@@ -872,7 +886,7 @@ sap.ui.define([
 				    	       		var sExpectedText = this.getView().getModel("i18n").getResourceBundle().getText("tableCount", [tableLength]);
 				    	       		oModelDetail.setProperty("/tableCount", sExpectedText);
 									
-		// set teh model count length to here. 	// TODO: Guna	
+
 								
 								// instead of setting by id set this to a model and bind it to screen
 
@@ -1814,6 +1828,13 @@ if(sap.ui.Device.system.phone){
 				model.setSizeLimit(1000);
 				// this.getView().byId("table1VSR").setModel(model); //guna
 				      this.getView().setModel(model, "vehicleSearchTableModel");
+				      
+									    	       var tableLength = this.getView().getModel("vehicleSearchTableModel").getData().length;
+				    	       var oModelDetail = this.getView().getModel("detailView");
+
+				    	       		var sExpectedText = this.getView().getModel("i18n").getResourceBundle().getText("tableCount", [tableLength]);
+				    	       		oModelDetail.setProperty("/tableCount", sExpectedText);			      
+ 
 
 				var oProductNameColumn = this.getView().byId("matnr");
 				// this.getView().byId("table1VSR").sort(oProductNameColumn, SortOrder.Ascending); //guna
@@ -2045,6 +2066,12 @@ if(sap.ui.Device.system.phone){
 			model.setSizeLimit(1000);
 			// this.getView().byId("table1VSR").setModel(model); //guna
 				      this.getView().setModel(model, "vehicleSearchTableModel");
+				      
+										    	       var tableLength = this.getView().getModel("vehicleSearchTableModel").getData().length;
+				    	       var oModelDetail = this.getView().getModel("detailView");
+
+				    	       		var sExpectedText = this.getView().getModel("i18n").getResourceBundle().getText("tableCount", [tableLength]);
+				    	       		oModelDetail.setProperty("/tableCount", sExpectedText);		      
 
 			var Model = new sap.ui.model.json.JSONModel([]);
 			Model.setSizeLimit(1000);
