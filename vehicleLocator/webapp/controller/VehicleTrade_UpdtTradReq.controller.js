@@ -653,7 +653,7 @@ VehicleDelete:function(){
 
 								if (Created_On != null && Created_On != "") {
 									var dateTo = Created_On.split("(")[1];
-									if (dateTo.includes("+") == true) {
+									if (dateTo.indexOf("+") != -1) {
 										dateTo = dateTo.split("+")[0];
 									} else {
 										dateTo = dateTo;

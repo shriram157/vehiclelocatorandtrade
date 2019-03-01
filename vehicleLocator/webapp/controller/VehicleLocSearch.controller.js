@@ -1315,9 +1315,20 @@ for(var i=0;i<oResults.length;i++){
 					/*	var filtered = a.filter(function(item) {
     return SelectedZone.indexOf(item.id) !== -1 && item.gender==='m';
 });*/
-					var filtered_zone = a.filter(function (person) {
+				/*	var filtered_zone = a.filter(function (person) {
 						return SelectedZone.includes(person.vkbur);
-					});
+					});*/
+						var filtered_zone = [];
+						for (var i = 0; i < SelectedZone.length; i++) {
+							for (var j = 0; j < a.length; j++) {
+								if (SelectedZone[i] == a[j].vkbur) {
+									filtered_zone.push(a[j]);
+
+								}
+
+							}
+
+						}
 
 					/*	var Dealer = sap.ui.getCore().LoginDetails.DealerCode;*/
 					var userAttributesModellen = that.getView().getModel("userAttributesModel").getData();

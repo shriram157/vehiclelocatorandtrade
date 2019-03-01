@@ -499,7 +499,7 @@ var sLocation = window.location.host;
 			
 			if (CurrentETATo != null && CurrentETATo != "") {
 				var dateTo = CurrentETATo.split("(")[1];
-				if (CurrentETATo.includes("+") == true) {
+				if (CurrentETATo.indexOf("+") != -1) {
 					/*dateTo = dateTo.split("+")[0];*/
 					CurrentETATo =  new Date(CurrentETATo.split("(")[1].substring(0,10) * 1000).toDateString().substring(4,15);
 					var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
