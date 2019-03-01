@@ -3,7 +3,7 @@
 
 "use strict";
 
-module.exports = function (log) {
+module.exports = function (appContext) {
 
 	var express = require('express');
 	var request = require('request');
@@ -12,6 +12,8 @@ module.exports = function (log) {
 	var auth64;
 
 	var app = express.Router();
+	var routerLogger = appContext.createLogContext().getLogger("/Application/Route/UserDetails");
+
 	//var express = require('express');
 	// const correlator = require('correlation-id');
 
@@ -32,7 +34,7 @@ module.exports = function (log) {
 
 	var xsuaaCredentials = uaaService.uaa;
 	if (!xsuaaCredentials) {
-		logger.error('uaa service not found');
+		routerLogger.error('uaa service not found');
 		res.status(401).json({
 			message: "uaa service not found"
 		});
@@ -75,6 +77,9 @@ module.exports = function (log) {
 	});
 
 	app.get("/currentScopesForUser", (req, res) => {
+		var logger = req.loggingContext.getLogger("/Application/Route/UserDetails/CurrentScopesForUser");
+		var tracer = req.loggingContext.getTracer(__filename);
+
 		var xsAppName = xsuaaCredentials.xsappname;
 
 		var parsedData = JSON.stringify(req.authInfo.userAttributes);
@@ -85,10 +90,10 @@ module.exports = function (log) {
 			legacyDealerCode = obj_data.DealerCode[0];
 			var legacyDealerCodeAvailable = true;
 
-			req.logMessage("info", "currentScopes for User Requested");
-			req.logMessage("info", 'Dealer code from the SAML Token is', legacyDealerCodeAvailable, legacyDealerCode);
+			logger.info("currentScopes for User Requested");
+			logger.info('Dealer code from the SAML Token is: %s %s', legacyDealerCodeAvailable, legacyDealerCode);
 		} catch (e) {
-			req.logMessage("info", "Dealer Code is blank or is a local testing run");
+			logger.info("Dealer Code is blank or is a local testing run");
 			// return;
 			var legacyDealerCodeAvailable = false;
 		}
@@ -100,23 +105,23 @@ module.exports = function (log) {
 		};
 
 		var SCOPE = xsuaaCredentials.xsappname;
-		req.logMessage("info", 'The app name', SCOPE);
-		req.logMessage("info", 'Scope Data length', scopeData.length);
+		logger.info('The app name: %s', SCOPE);
+		logger.info('Scope Data length: %s', scopeData.length);
 		var viewSuggestOrder = false;
 
 		for (var i = 0; i < scopeData.length; i++) {
-			console.log("scope Data to be analyzed", scopeData[i])
+			logger.info("scope Data to be analyzed: %s", scopeData[i])
 
 		}
 		for (var i = 0; i < scopeData.length; i++) {
 
-			req.logMessage("info", 'inside For loop with iteration', i, scopeData[i]);
+			logger.info('inside For loop with iteration: %s %s', i, scopeData[i]);
 
 			if (scopeData[i] == xsuaaCredentials.xsappname + '.Manage_Suggest_Order_Requests') {
 				var userType = "DealerUser";
 				sendUserData.loggedUserType.push(userType);
 
-				req.logMessage("info", "usertype", userType)
+				logger.info("usertype: %s", userType)
 				return res.type("text/plain").status(200).send(JSON.stringify(sendUserData));
 				break;
 			}
@@ -195,9 +200,9 @@ module.exports = function (log) {
 			FirstName: ['firstName'],
 			LastName: ['LastName']
 		};
-		// req.logMessage("info", req.authInfo.userAttributes);
+		// logger.info(req.authInfo.userAttributes);
 		var parsedData = JSON.stringify(obj_temp);
-		//		 req.logMessage("info", 'After Json Stringify', parsedData);
+		//		 logger.info('After Json Stringify: %s', parsedData);
 		var obj_parsed = JSON.parse(parsedData);
 		sendToUi.samlAttributes.push(obj_parsed);
 
@@ -212,9 +217,9 @@ module.exports = function (log) {
 		var csrfToken;
 		var samlData = parsedData;
 
-		//	req.logMessage("info", 'saml data', samlData);
+		//	logger.info('saml data: %s', samlData);
 
-		//		req.logMessage("info", 'send to ui data', sendToUi);
+		//		logger.info('send to ui data: %s', sendToUi);
 
 		let checkSAMLDetails;
 		try {
@@ -257,7 +262,7 @@ module.exports = function (log) {
 				csrfToken = response.headers['x-csrf-token'];
 
 				var json = JSON.parse(body);
-				// req.logMessage("info", json);  // // TODO: delete it Guna
+				// logger.info(json);  // // TODO: delete it Guna
 
 				for (var i = 0; i < json.d.results.length; i++) {
 
@@ -331,7 +336,10 @@ module.exports = function (log) {
 	});
 
 	app.get("/attributes", (req, res) => {
-		req.logMessage("info", "attributes fetch started")
+		var logger = req.loggingContext.getLogger("/Application/Route/UserDetails/Attributes");
+		var tracer = req.loggingContext.getTracer(__filename);
+
+		logger.info("attributes fetch started")
 
 		var receivedData = {};
 
@@ -343,9 +351,9 @@ module.exports = function (log) {
 
 		};
 
-		req.logMessage("info", req.authInfo.userAttributes);
+		logger.info(req.authInfo.userAttributes);
 		var parsedData = JSON.stringify(req.authInfo.userAttributes);
-		req.logMessage("info", 'After Json Stringify', parsedData);
+		logger.info('After Json Stringify: %s', parsedData);
 
 		var obj = JSON.stringify(req.authInfo.userAttributes);
 		var obj_parsed = JSON.parse(obj);
@@ -354,15 +362,15 @@ module.exports = function (log) {
 		var csrfToken;
 		var samlData = parsedData;
 
-		req.logMessage("info", 'saml data', samlData);
+		logger.info('saml data: %s', samlData);
 
-		req.logMessage("info", 'send to ui data', sendToUi);
+		logger.info('send to ui data: %s', sendToUi);
 
 		let checkSAMLDetails;
 		try {
 			checkSAMLDetails = obj_data.DealerCode[0];
 		} catch (e) {
-			req.logMessage("info", "Dealer Code is blank or is a local testing run")
+			logger.info("Dealer Code is blank or is a local testing run")
 				// return;
 			var nosamlData = true;
 		}
@@ -373,7 +381,7 @@ module.exports = function (log) {
 
 		var userType = userAttributes.UserType[0];
 
-		req.logMessage("info", 'after json Parse', obj_data);
+		logger.info('after json Parse: %s', obj_data);
 		//	var userType = obj_data.UserType[0];
 
 		if (userType == 'Dealer') {
@@ -386,7 +394,7 @@ module.exports = function (log) {
 			var zoneToWhichUSerBelongs = userAttributes.Zone[0];
 		}
 
-		req.logMessage("info", 'Dealer Number logged in and accessed parts Availability App', legacyDealer);
+		logger.info('Dealer Number logged in and accessed parts Availability App: %s', legacyDealer);
 
 		//	if  usertype eq dealer then just get the details for that dealer,  otherwise get everything else
 
@@ -396,7 +404,7 @@ module.exports = function (log) {
 				"' &$expand=to_Customer&$format=json&?sap-client=" + client;
 
 		} else {
-			req.logMessage("info", 'Logged in User Type outside', userType);
+			logger.info('Logged in User Type outside: %s', userType);
 			if (tempUSerType == 'Zone') {
 
 				// he is a zone user.            	
@@ -425,7 +433,7 @@ module.exports = function (log) {
 
 				}
 
-				req.logMessage("info", 'Logged in User Zone before the API Url', userZone);
+				logger.info('Logged in User Zone before the API Url: %s', userZone);
 
 				url1 = "/API_BUSINESS_PARTNER/A_BusinessPartner?sap-client=" + client + "&$format=json" +
 					"&$expand=to_Customer/to_CustomerSalesArea&$filter=(BusinessPartnerType eq 'Z001' or BusinessPartnerType eq 'Z004' or BusinessPartnerType eq 'Z005') " +
@@ -436,13 +444,13 @@ module.exports = function (log) {
 
 			} else {
 
-				req.logMessage("info", 'Logged in User just before internal user call', userType);
+				logger.info('Logged in User just before internal user call: %s', userType);
 
 				var url1 = "/API_BUSINESS_PARTNER/A_BusinessPartner/?$format=json&$expand=to_Customer&?sap-client=" + client +
 					"&$filter=(BusinessPartnerType eq 'Z001' or BusinessPartnerType eq 'Z004' or BusinessPartnerType eq 'Z005') and zstatus ne 'X' &$orderby=BusinessPartner asc";
 			}
 		}
-		req.logMessage("info", 'Final url being fetched', url + url1);
+		logger.info('Final url being fetched: %s', url + url1);
 		request({
 			url: url + url1,
 			headers: reqHeader
@@ -454,14 +462,14 @@ module.exports = function (log) {
 				csrfToken = response.headers['x-csrf-token'];
 
 				var json = JSON.parse(body);
-				// req.logMessage("info", json);  // // TODO: delete it Guna
+				// logger.info(json);  // // TODO: delete it Guna
 
 				for (var i = 0; i < json.d.results.length; i++) {
 
-					// req.logMessage("info", 'Json from SAP sales office', json.d.results[i].SalesOffice); 
-					// req.logMessage("info", 'Business Partner', json.d.results[i].BusinessPartner);
-					// 	req.logMessage("info", 'User Zone from SAML', userZone); 
-					// req.logMessage("info", 'User Type from SAML', userType); 
+					// logger.info('Json from SAP sales office: %s', json.d.results[i].SalesOffice); 
+					// logger.info('Business Partner: %s', json.d.results[i].BusinessPartner);
+					// logger.info('User Zone from SAML: %s', userZone); 
+					// logger.info('User Type from SAML: %s', userType); 
 
 					if (userType != 'Dealer') {
 						if (json.d.results[i].to_Customer) {
@@ -495,7 +503,7 @@ module.exports = function (log) {
 						try {
 							attributeFromSAP = json.d.results[i].to_Customer.Attribute1;
 						} catch (e) {
-							req.logMessage("info", "The Data is sent without Attribute value for the BP", json.d.results[i].BusinessPartner)
+							logger.info("The Data is sent without Attribute value for the BP: %s", json.d.results[i].BusinessPartner)
 								// return;
 						}
 
@@ -541,7 +549,7 @@ module.exports = function (log) {
 					}
 				}
 				res.type("application/json").status(200).send(sendToUi);
-				req.logMessage("info", 'Results sent successfully');
+				logger.info('Results sent successfully');
 			} else {
 
 				var result = JSON.stringify(body);
