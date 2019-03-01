@@ -7,9 +7,11 @@
 				<customHeader>
 					<Bar class="sapUiSmallPaddingBeginEnd clCustomHeaderBg">
 						<contentLeft>
-							<Image id="idLexusLogo" src="Images/Lexus.png" width="100px"/>
+												 
+					<Image id="idLexusLogo" src="Images/toyota_logo_colour.png" width="100px"/>
 							<Text text="|" class="sapUiTinyMarginBeginEnd"/>
 							<Text class="clCustomFont" text="{i18n>PageTitle}"/>
+							
 						</contentLeft>
 						<contentRight>
 							<!--	<Button text="Logout"/>-->
@@ -192,9 +194,11 @@
 					<!--			</t:template>-->
 					<!--		</t:Column>-->
 					<!--	</t:columns>-->
+					          <!--growing="true"-->
+               <!--    growingScrollToLoad="false"-->
 					<!--</t:Table>-->
 	
-	            <Table id="table1VSR" width="auto" class="sapUiResponsiveMargin"
+	            <Table id="table1VSR" width="97%" class="sapUiResponsiveMargin"
                    items="{
                     path: 'vehicleSearchTableModel>/',
                     sorter: {
@@ -204,8 +208,7 @@
                     }"
                    noDataText="{worklistView>/tableNoDataText}"
                    busyIndicatorDelay="{worklistView>/tableBusyDelay}"
-                   growing="true"
-                   growingScrollToLoad="true"
+         
                    updateFinished="onUpdateFinished"
                    mode="None"
                    modeAnimationOn="true">
@@ -216,12 +219,12 @@
                         <Title id="tableHeader" text="{detailView>/tableCount}"/>
 
                         <ToolbarSpacer/>
-                        <SearchField id="searchVehicleList" liveChange="onLiveChange" showSearchButton="true"
-                                     placeholder="Search table...">
-                            <layoutData>
-                                <OverflowToolbarLayoutData minWidth="200px" maxWidth="300px" shrinkable="true"/>
-                            </layoutData>
-                        </SearchField>
+                        <!--<SearchField id="searchVehicleList" liveChange="onLiveChange" showSearchButton="true"-->
+                        <!--             placeholder="Search table...">-->
+                        <!--    <layoutData>-->
+                        <!--        <OverflowToolbarLayoutData minWidth="200px" maxWidth="300px" shrinkable="true"/>-->
+                        <!--    </layoutData>-->
+                        <!--</SearchField>-->
                         <!--<Button text="Reset" type="Transparent" press="onReset"/>-->
                         <Button tooltip="Sort table by selected fields" icon="sap-icon://drop-down-list"
                                 press="handleViewSettingsDialogButtonPressed" text="Sorting"/>
@@ -234,11 +237,11 @@
                             hAlign="Left">
                         <Text text="{i18n>Trade}" id="nameColumnTitle2"/>
                     </Column>
-                    <Column id="dealerId1" demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="14rem">
-                        <Text text = "{i18n>Dealer}"/>
+                    <Column id="dealerId1" demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="14rem"  >
+                        <Text text = "{i18n>Dealer}"  />
                     </Column>
                     <Column id="matnr1" demandPopin="true" minScreenWidth="Tablet"  width="17rem"
-                            hAlign="Center">
+                            hAlign="Center"   >
                         <Text text="{i18n>Model}"/>
                     </Column>
                     <Column id="suffix1"  demandPopin="true"  width="12rem"
@@ -284,7 +287,7 @@
                         	
                             <Link id="tradeId1" text="Trade" class="link" subtle="true" press="oTradeLinkPress" wrapping="false"/>
                    
-                          	<Text text="{path:'vehicleSearchTableModel>kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'} - {vehicleSearchTableModel>name1}" wrapping="true" />
+                          	<Text text="{path:'vehicleSearchTableModel>kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'} -{vehicleSearchTableModel>name1}" wrapping="true" />
                           	<Text text="{vehicleSearchTableModel>matnr} - {vehicleSearchTableModel>model_desc_en}" wrapping="true"/>
                           	<Text text="{vehicleSearchTableModel>zzsuffix} - {vehicleSearchTableModel>suffix_desc_en}/{vehicleSearchTableModel>mrktg_int_desc_en}" wrapping="false"/>
                          	<Text text="{vehicleSearchTableModel>zzapx}" wrapping="true"/>

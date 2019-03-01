@@ -12,7 +12,7 @@ var app = express();
 // Use the session middleware
 
 // vehicle Locator Node Module. 
-module.exports = function (appContext) {
+module.exports = function (log) {
 	var app = express.Router();
 
 	// SAP Calls Start from here

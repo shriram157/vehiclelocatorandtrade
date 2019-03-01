@@ -7,7 +7,7 @@ var cors = require("cors");
 var express = require("express");
 var hdbext = require("@sap/hdbext");
 var https = require("https");
-var logging = require("@sap/logging");
+var log = require("cf-nodejs-logging-support");
 var passport = require("passport");
 var schedule = require("node-schedule");
 var tradeReqCleanUpTask = require("./core/trade-req-cleanup-task");
@@ -21,12 +21,8 @@ var port = process.env.PORT || 3000;
 var app = express();
 
 // Logging
-var appContext = logging.createAppContext();
-app.use(logging.middleware({
-	appContext: appContext,
-	logNetwork: true
-}));
-var logger = appContext.createLogContext().getLogger("/Application/Server");
+log.setLoggingLevel(process.env.LOG_LEVEL || "info");
+app.use(log.logNetwork);
 
 // HANA
 // HANA must be set up before passport, otherwise you get an error about session variable
@@ -56,24 +52,24 @@ var tradeReqCleanUpTaskSchSpec = process.env.TRADE_REQ_CLEANUP_TASK_SCH || "0 0 
 var job = schedule.scheduleJob(tradeReqCleanUpTaskSchSpec, function () {
 	hdbPool.acquire(function (err, client) {
 		if (err) {
-			logger.error("FAILED to acquire HDB client: %s", err.toString());
+			log.logMessage("error", err.toString());
 			return;
 		}
 		tradeReqCleanUpTask.run(client, log).then(() => {
-			logger.info("[TRADE_REQ_CLEANUP_TASK] Task ran successfully.");
+			log.logMessage("info", "[TRADE_REQ_CLEANUP_TASK] Task ran successfully.");
 			hdbPool.release(client);
 		}).catch(err => {
-			logger.error("[TRADE_REQ_CLEANUP_TASK] Task FAILED: %s", err.message);
+			log.logMessage("error", "[TRADE_REQ_CLEANUP_TASK] Task FAILED: " + err.message);
 			hdbPool.release(client);
 		});
 	});
 });
 
 // Router
-var router = require("./router")(app, appContext);
+var router = require("./router")(app, log);
 
 // Start server
 server.on("request", app);
 server.listen(port, function () {
-	logger.info("Server is listening on port %d", port);
+	log.logMessage("info", "Server is listening on port %d", port);
 });

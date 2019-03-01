@@ -41,7 +41,13 @@ sap.ui.define([
 
 			});
 
-			this.getView().setModel(oViewModel, "detailView");
+				this.getView().setModel(oViewModel, "detailView");
+				
+		 /// set the logo and Language. 
+
+				this._setTheLanguage();
+
+				this._setTheLogo();
 
 			//	this.getRouter().attachRouteMatched(this.onRouteMatched, this);
 			this.getRouter().getRoute("VehicleSearcResults").attachPatternMatched(this.onRouteMatched, this);
@@ -174,19 +180,11 @@ sap.ui.define([
 						];
 
 						//	var FilterDeleade_OrderTypefiltered_zone
-					/*	var oExcludeTci = FilterDeleade_OrderTypefiltered_zone.filter(function (objFromA) {
+						var oExcludeTci = FilterDeleade_OrderTypefiltered_zone.filter(function (objFromA) {
 							return !oTCIcodes.find(function (objFromB) {
 								return (objFromA.kunnr).slice(-5) === objFromB.slice(-5);
 							});
-						});*/
-						
-						var oExcludeTci=[];
-						 for( var i=FilterDeleade_OrderTypefiltered_zone.length-1; i>=0; --i){ 
-      if( oTCIcodes.indexOf( (FilterDeleade_OrderTypefiltered_zone[i].kunnr)) == -1 ){ 
-        oExcludeTci.push( FilterDeleade_OrderTypefiltered_zone[i] ); 
-      } 
-    }
-					
+						});
 
 						var oZoneIncludeData = [
 							"2400507000",
@@ -375,17 +373,11 @@ sap.ui.define([
 						];
 
 						//	var FilterDeleade_OrderTypefiltered_zone
-					/*	var oExcludeTci = FilterDeleade_OrderTypefiltered_zone.filter(function (objFromA) {
+						var oExcludeTci = FilterDeleade_OrderTypefiltered_zone.filter(function (objFromA) {
 							return !oTCIcodes.find(function (objFromB) {
 								return (objFromA.kunnr).slice(-5) === objFromB.slice(-5);
 							});
-						});*/
-							var oExcludeTci=[];
-						 for( var i=FilterDeleade_OrderTypefiltered_zone.length-1; i>=0; --i){ 
-      if( oTCIcodes.indexOf( (FilterDeleade_OrderTypefiltered_zone[i].kunnr)) == -1 ){ 
-        oExcludeTci.push( FilterDeleade_OrderTypefiltered_zone[i] ); 
-      } 
-    }
+						});
 
 						var oZoneIncludeData = [
 							"2400507000",
@@ -2488,22 +2480,88 @@ if(sap.ui.Device.system.phone){
 						this.getView().byId("VLRColor").setSelectedKey(selctedColor);
 					}
 				}
-			} else {
-				if (this.getView().byId("VLRColor").getItems().filter(function (x) {
-						return x.mProperties.key == "all"
-					}).length == 0) {
-					var newItem = new sap.ui.core.Item({
-						key: "all",
-						text: "ALL"
-					});
-					this.getView().byId("VLRColor").insertItem(newItem);
-					this.getView().byId("VLRColor").setSelectedKey("all");
-					this.getView().byId("VLRColor").setSelectedItem("ALL");
-				}
-			}
+			
+			
+			
+			
+			
+			
+			
+			this.onStatusChange();	
+		},
+			_setTheLanguage: function (oEvent) {
 
-			this.onStatusChange();
-		}
+				var oI18nModel = new sap.ui.model.resource.ResourceModel({
+					bundleUrl: "i18n/i18n.properties"
+				});
+				this.getView().setModel(oI18nModel, "i18n");
+
+				//  get the locale to determine the language. 
+				var isLocaleSent = window.location.search.match(/language=([^&]*)/i);
+				if (isLocaleSent) {
+					var sSelectedLocale = window.location.search.match(/language=([^&]*)/i)[1];
+				} else {
+					var sSelectedLocale = "EN"; // default is english 
+				}
+
+				//selected language.	
+				// if (window.location.search == "?language=fr") {
+				if (sSelectedLocale == "fr") {
+					var i18nModel = new sap.ui.model.resource.ResourceModel({
+						bundleUrl: "i18n/i18n.properties",
+						bundleLocale: ("fr")
+
+					});
+					this.getView().setModel(i18nModel, "i18n");
+					this.sCurrentLocale = 'FR';
+					// set the right image for logo	 - french		
+					/*				var currentImageSource = this.getView().byId("idLexusLogo");
+									currentImageSource.setProperty("src", "images/Lexus_FR.png");*/
+
+				} else {
+					var i18nModel = new sap.ui.model.resource.ResourceModel({
+						bundleUrl: "i18n/i18n.properties",
+						bundleLocale: ("en")
+
+					});
+					this.getView().setModel(i18nModel, "i18n");
+					this.sCurrentLocale = 'EN';
+					// set the right image for logo			
+					/*				var currentImageSource = this.getView().byId("idLexusLogo");
+									currentImageSource.setProperty("src", "images/Lexus_EN.png");*/
+
+				}
+
+				var oModeli18n = this.getView().getModel("i18n");
+				this._oResourceBundle = oModeli18n.getResourceBundle();
+			},
+		
+ 					_setTheLogo: function (oEvent) {
+
+				// if (userDetails[0].UserType == 'Dealer') {
+
+				var isDivisionSent = window.location.search.match(/Division=([^&]*)/i);
+				if (isDivisionSent) {
+					this.sDivision = window.location.search.match(/Division=([^&]*)/i)[1];
+
+					// if (this.sDivision == aDataBP[0].Division) {
+
+					// 	this.getView().byId("messageStripError").setProperty("visible", false);
+
+					if (this.sDivision == '10') // set the toyoto logo
+					{
+						var currentImageSource = this.getView().byId("idLexusLogo");
+						currentImageSource.setProperty("src", "Images/toyota_logo_colour.png");  
+
+					} else { // set the lexus logo
+						var currentImageSource = this.getView().byId("idLexusLogo");
+						currentImageSource.setProperty("src", "Images/i_lexus_black_full.png");
+
+						// }
+					}
+				}
+
+			}
 
 		/*	{
 

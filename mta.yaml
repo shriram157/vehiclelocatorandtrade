@@ -18,10 +18,6 @@ modules:
       disk-quota: 256M
       memory: 256M
    properties:
-      XS_APP_LOG_LEVEL: info
-      XS_LOG_USER: true
-      XS_LOG_REFERER: true
-      XS_LOG_CONNECTION_DATA: true
       NODE_TLS_REJECT_UNAUTHORIZED: 0
       TRADE_REQ_CLEANUP_TASK_SCH: "0 0 * * *"
    provides:
@@ -58,8 +54,6 @@ modules:
       host: tci-dev-vehiclelocatorandtrade
       disk-quota: 256M
       memory: 512M
-   properties:
-      XS_APP_LOG_LEVEL: info
    build-parameters:
       builder: grunt
    requires:
@@ -97,8 +91,8 @@ resources:
  - name: uaa_vehiclelocatorandtrade
    parameters:
       path: ./xs-security.json
-      service: xsuaa
       service-plan: application
+      service: xsuaa
    type: org.cloudfoundry.managed-service
 
  - name: VEHICLE_LOCATOR_AND_TRADE_APIM_CUPS
