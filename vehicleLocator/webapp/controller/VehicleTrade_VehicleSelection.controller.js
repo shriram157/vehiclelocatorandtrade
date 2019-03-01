@@ -258,11 +258,21 @@ this.SelectedVehicleFrom=oEvent.getParameter("arguments").SelectedVehicleFrom;
 						"F4",
 						"F5"
 					];
-					var oExcludeOrdrtype = filtered_ODealer.filter(function (objFromA) {
+				/*	var oExcludeOrdrtype = filtered_ODealer.filter(function (objFromA) {
 						return !ExcludeOrdType.find(function (objFromB) {
 							return objFromA.zzordertype === objFromB;
 						});
-					});
+					});*/
+						var oExcludeOrdrtype=[];
+						 for( var i=filtered_ODealer.length-1; i>=0; --i){ 
+      if( ExcludeOrdType.indexOf( (filtered_ODealer[i].zzordertype)) == -1 ){ 
+        ExcludeOrdType.push( filtered_ODealer[i] ); 
+      } 
+    }
+					
+					
+					
+					
 				//		var oJsonModel = new sap.ui.model.json.JSONModel(oExcludeOrdrtype);
 					var IncludeOrdertype=oExcludeOrdrtype.filter(function (x) {
 						return (x.zzordertype == "SO" || x.zzordertype == "DM");

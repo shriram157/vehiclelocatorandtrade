@@ -169,11 +169,18 @@ sap.ui.define([
 									/* var FilterredBusinessUrl=FiltBusinesspartnerurl.filter(function (x) {
 					return (x.BusinessPartner).slice(-5) == (LoginBusinessPartnerCode).slice(-5);
 				});*/
-									var FilterredBusinessUrl = FiltBusinesspartnerurl.filter(function (objFromA) {
+								/*	var FilterredBusinessUrl = FiltBusinesspartnerurl.filter(function (objFromA) {
 										return FilterredBusinessUrl.find(function (objFromB) {
 											return (objFromA.BusinessPartner).slice(-5) === objFromB.slice(-5);
 										});
-									});
+									});*/
+										var FilterredBusinessUrl=[];
+						 for( var i=FiltBusinesspartnerurl.length-1; i>=0; --i){ 
+      if( FilterredBusinessUrl.indexOf( (FiltBusinesspartnerurl[i].zzordertype)) != -1 ){ 
+        FilterredBusinessUrl.push( FiltBusinesspartnerurl[i] ); 
+      } 
+    }
+									
 									/* for(var i=0;len=FilteredBlockingDlr.length;i<len;i++){*/
 									for (var i = 0; i < FilteredBlockingDlr.length; i++) {
 										for (var j = 0; j < FilterredBusinessUrl.length; j++) {
@@ -188,11 +195,17 @@ sap.ui.define([
 										FilterredSeriesUrl.push(FilteredBlockingDlr[k].Zzseries);
 									}
 
-									var FilterredSeriesUrl = SeriesDescUrl.filter(function (objFromA) {
+								/*	var FilterredSeriesUrl = SeriesDescUrl.filter(function (objFromA) {
 										return FilterredSeriesUrl.find(function (objFromB) {
 											return (objFromA.ModelSeriesNo) === objFromB;
 										});
-									});
+									});*/
+										var FilterredSeriesUrl=[];
+						 for( var i=SeriesDescUrl.length-1; i>=0; --i){ 
+      if( FilterredSeriesUrl.indexOf( (SeriesDescUrl[i].zzordertype)) != -1 ){ 
+        FilterredSeriesUrl.push( SeriesDescUrl[i] ); 
+      } 
+    }
 									for (var l = 0; l < FilteredBlockingDlr.length; l++) {
 										for (var m = 0; m < FilterredSeriesUrl.length; m++) {
 											if (FilteredBlockingDlr[l].Zzseries == FilterredSeriesUrl[m].ModelSeriesNo) {
@@ -207,11 +220,17 @@ sap.ui.define([
 										FilterredModelUrl.push(FilteredBlockingDlr[k].Zzmodel);
 									}
 
-									var FilterredModelUrl = ModelUrl.filter(function (objFromA) {
+								/*	var FilterredModelUrl = ModelUrl.filter(function (objFromA) {
 										return FilterredModelUrl.find(function (objFromB) {
 											return (objFromA.Model) === objFromB;
 										});
-									});
+									});*/
+										var FilterredModelUrl=[];
+						 for( var i=ModelUrl.length-1; i>=0; --i){ 
+      if( FilterredModelUrl.indexOf( (ModelUrl[i].zzordertype)) != -1 ){ 
+        FilterredModelUrl.push( ModelUrl[i] ); 
+      } 
+    }
 									for (var l = 0; l < FilteredBlockingDlr.length; l++) {
 										for (var m = 0; m < FilterredModelUrl.length; m++) {
 											if (FilteredBlockingDlr[l].Zzmodel == FilterredModelUrl[m].Model) {
@@ -615,11 +634,17 @@ sap.ui.define([
 											"F4",
 											"F5"
 										];
-										var oExcludeOrdrtype = filtered_ODealer.filter(function (objFromA) {
+									/*	var oExcludeOrdrtype = filtered_ODealer.filter(function (objFromA) {
 											return !ExcludeOrdType.find(function (objFromB) {
 												return objFromA.zzordertype === objFromB;
 											});
-										});
+										});*/
+											var oExcludeOrdrtype=[];
+						 for( var i=filtered_ODealer.length-1; i>=0; --i){ 
+      if( ExcludeOrdType.indexOf( (filtered_ODealer[i].zzordertype)) == -1 ){ 
+        ExcludeOrdType.push( filtered_ODealer[i] ); 
+      } 
+    }
 
 										/*var includeDnc = oExcludeOrdrtype.filter(function (x) {
 						return x.dnc_ind == "Y";

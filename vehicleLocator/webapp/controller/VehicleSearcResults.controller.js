@@ -174,11 +174,19 @@ sap.ui.define([
 						];
 
 						//	var FilterDeleade_OrderTypefiltered_zone
-						var oExcludeTci = FilterDeleade_OrderTypefiltered_zone.filter(function (objFromA) {
+					/*	var oExcludeTci = FilterDeleade_OrderTypefiltered_zone.filter(function (objFromA) {
 							return !oTCIcodes.find(function (objFromB) {
 								return (objFromA.kunnr).slice(-5) === objFromB.slice(-5);
 							});
-						});
+						});*/
+						
+						var oExcludeTci=[];
+						 for( var i=FilterDeleade_OrderTypefiltered_zone.length-1; i>=0; --i){ 
+      if( oTCIcodes.indexOf( (FilterDeleade_OrderTypefiltered_zone[i].kunnr)) == -1 ){ 
+        oExcludeTci.push( FilterDeleade_OrderTypefiltered_zone[i] ); 
+      } 
+    }
+					
 
 						var oZoneIncludeData = [
 							"2400507000",
@@ -367,11 +375,17 @@ sap.ui.define([
 						];
 
 						//	var FilterDeleade_OrderTypefiltered_zone
-						var oExcludeTci = FilterDeleade_OrderTypefiltered_zone.filter(function (objFromA) {
+					/*	var oExcludeTci = FilterDeleade_OrderTypefiltered_zone.filter(function (objFromA) {
 							return !oTCIcodes.find(function (objFromB) {
 								return (objFromA.kunnr).slice(-5) === objFromB.slice(-5);
 							});
-						});
+						});*/
+							var oExcludeTci=[];
+						 for( var i=FilterDeleade_OrderTypefiltered_zone.length-1; i>=0; --i){ 
+      if( oTCIcodes.indexOf( (FilterDeleade_OrderTypefiltered_zone[i].kunnr)) == -1 ){ 
+        oExcludeTci.push( FilterDeleade_OrderTypefiltered_zone[i] ); 
+      } 
+    }
 
 						var oZoneIncludeData = [
 							"2400507000",
