@@ -96,9 +96,25 @@ sap.ui.define([
 					success: function (odata, oresponse) {
 						var a = odata.d.results;
 
-						var filtered_zone = a.filter(function (person) {
-							return SelectedZone.includes(person.vkbur);
-						});
+						// var filtered_zone = a.filter(function (person) {
+						// 	return SelectedZone.includes(person.vkbur);
+						// });
+					var filtered_zone=[];
+                      for(var i=0;i<SelectedZone.length;i++)
+                      {
+                          for(var j=0;j<a.length;j++)
+                          {
+                              if(SelectedZone[i]==a[j].vkbur)
+                              {
+                                  filtered_zone.push(a[j]);
+                              
+                             }
+                              
+                          }
+                          
+                      }	
+						
+						
 
 						/*	var Dealer = sap.ui.getCore().LoginDetails.DealerCode;*/
 						var userAttributesModellen = that.getView().getModel("userAttributesModel").getData();
@@ -112,7 +128,7 @@ sap.ui.define([
 							return x.kunnr != null;
 						});
 						var FilterDeleade_OrderTypefiltered_zone = FilterDeleade_OrderTypefilteNotnull.filter(function (x) {
-							return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "DM" || x.zzordertype == "SO")
+							return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "DM" || x.zzordertype == "SO");
 						});
 
 						//	var FilterDeleade_OrderTypefiltered_zone
