@@ -16,7 +16,7 @@ sap.ui.define([
 	return BaseController.extend("vehicleLocator.controller.VehcTrad_Apprv_Rej_CounTrad", {
 		onInit: function () {
 			var _that = this;
-			oController = this;
+			oController = this; 
 			
 			this.getRouter().getRoute("VehcTrad_Apprv_Rej_CounTrad").attachPatternMatched(this.onRouteMatched, this);
 		},
