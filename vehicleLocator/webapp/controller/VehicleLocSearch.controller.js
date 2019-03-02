@@ -1343,7 +1343,7 @@ for(var i=0;i<oResults.length;i++){
 						return x.kunnr != null;
 					});
 					var FilterZonestockData = FilterDeleade_OrderTypefilteNotnull.filter(function (x) {
-						return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "SO" || x.zzordertype == "DM");
+						return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "SO" || x.zzordertype == "DM")
 					});
 					//	var FilterDeleade_OrderTypefiltered_zone
 					var FilterDeleade_OrderTypefiltered_zone = FilterZonestockData.filter(function (x) {
@@ -1945,11 +1945,11 @@ for(var i=0;i<oResults.length;i++){
 					if (this.sDivision == '10') // set the toyoto logo
 					{
 						var currentImageSource = this.getView().byId("idLexusLogo");
-						currentImageSource.setProperty("src", "Images/toyota_logo_colour.png");  
+						currentImageSource.setProperty("src", "images/toyota_logo_colour.png");
 
 					} else { // set the lexus logo
 						var currentImageSource = this.getView().byId("idLexusLogo");
-						currentImageSource.setProperty("src", "Images/i_lexus_black_full.png");
+						currentImageSource.setProperty("src", "images/i_lexus_black_full.png");
 
 						// }
 					}

@@ -4,7 +4,7 @@ sap.ui.define([
 	'sap/ui/model/resource/ResourceModel',
 	'sap/m/MessageBox',
 	"sap/ui/core/routing/History",
-	"vehicleLocator/Formatter/Formatter"
+	"vehicleLocator/Formatter/Formatter",
 
 ], function (BaseController, JSONModel, ResourceModel, MessageBox, History, Formatter) {
 	"use strict";
@@ -18,12 +18,6 @@ sap.ui.define([
 			_that.oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 				pattern: "yyyy-MM-dd'T'HH:mm:ss"
 			});
-
-		 /// set the logo and Language. 
-
-				this._setTheLanguage();
-
-				this._setTheLogo();
 
 			//this.getRouter().attachRouteMatched(this.onRouteMatched, this);
 			this.getRouter().getRoute("VehicleTrade_History").attachPatternMatched(this.onRouteMatched, this);
@@ -476,82 +470,7 @@ var Accepted=i18n.getText("Accepted");
 				var that=this;
 			that.getRouter().navTo("VehicleTrade_ModelBlock_Summary");	
 			
-		},
-		
-		_setTheLanguage: function (oEvent) {
-
-				var oI18nModel = new sap.ui.model.resource.ResourceModel({
-					bundleUrl: "i18n/i18n.properties"
-				});
-				this.getView().setModel(oI18nModel, "i18n");
-
-				//  get the locale to determine the language. 
-				var isLocaleSent = window.location.search.match(/language=([^&]*)/i);
-				if (isLocaleSent) {
-					var sSelectedLocale = window.location.search.match(/language=([^&]*)/i)[1];
-				} else {
-					var sSelectedLocale = "EN"; // default is english 
-				}
-
-				//selected language.	
-				// if (window.location.search == "?language=fr") {
-				if (sSelectedLocale == "fr") {
-					var i18nModel = new sap.ui.model.resource.ResourceModel({
-						bundleUrl: "i18n/i18n.properties",
-						bundleLocale: ("fr")
-
-					});
-					this.getView().setModel(i18nModel, "i18n");
-					this.sCurrentLocale = 'FR';
-					// set the right image for logo	 - french		
-					/*				var currentImageSource = this.getView().byId("idLexusLogo");
-									currentImageSource.setProperty("src", "images/Lexus_FR.png");*/
-
-				} else {
-					var i18nModel = new sap.ui.model.resource.ResourceModel({
-						bundleUrl: "i18n/i18n.properties",
-						bundleLocale: ("en")
-
-					});
-					this.getView().setModel(i18nModel, "i18n");
-					this.sCurrentLocale = 'EN';
-					// set the right image for logo			
-					/*				var currentImageSource = this.getView().byId("idLexusLogo");
-									currentImageSource.setProperty("src", "images/Lexus_EN.png");*/
-
-				}
-
-				var oModeli18n = this.getView().getModel("i18n");
-				this._oResourceBundle = oModeli18n.getResourceBundle();
-			},
-		
- 					_setTheLogo: function (oEvent) {
-
-				// if (userDetails[0].UserType == 'Dealer') {
-
-				var isDivisionSent = window.location.search.match(/Division=([^&]*)/i);
-				if (isDivisionSent) {
-					this.sDivision = window.location.search.match(/Division=([^&]*)/i)[1];
-
-					// if (this.sDivision == aDataBP[0].Division) {
-
-					// 	this.getView().byId("messageStripError").setProperty("visible", false);
-
-					if (this.sDivision == '10') // set the toyoto logo
-					{
-						var currentImageSource = this.getView().byId("idLexusLogo");
-						currentImageSource.setProperty("src", "Images/toyota_logo_colour.png");  
-
-					} else { // set the lexus logo
-						var currentImageSource = this.getView().byId("idLexusLogo");
-						currentImageSource.setProperty("src", "Images/i_lexus_black_full.png");
-
-						// }
-					}
-				}
-
-			}	
-		
+		}
 		
 
 	});
