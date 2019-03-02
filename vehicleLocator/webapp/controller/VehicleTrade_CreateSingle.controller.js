@@ -15,11 +15,11 @@ sap.ui.define([
 		onInit: function () {
 			var _that = this;
 			//Global date format
-			jQuery.sap.require("sap.ui.core.format.DateFormat");
-			_that.oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
-				pattern: "yyyy-MM-dd'T'HH:mm:ss"
-			});
-			//***********Language translator functionality**********//
+			// jQuery.sap.require("sap.ui.core.format.DateFormat");
+			// _that.oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+			// 	pattern: "yyyy-MM-dd'T'HH:mm:ss"
+			// });
+			// //***********Language translator functionality**********//
 			// var isLocaleSent = window.location.search.match(/language=([^&]*)/i);
 			// if (isLocaleSent) {
 			// 	var sSelectedLocale = window.location.search.match(/language=([^&]*)/i)[1];
@@ -45,9 +45,8 @@ sap.ui.define([
 			// 	this.sCurrentLocale = 'EN';
 
 			// }
-					 /// set the logo and Language. 
-
-				this._setTheLanguage();
+			
+							this._setTheLanguage();
 
 				this._setTheLogo();
 			
@@ -328,11 +327,18 @@ sap.ui.define([
 						"F4",
 						"F5"
 					];
-					var oExcludeOrdrtype = filtered_ODealer.filter(function (objFromA) {
+				/*	var oExcludeOrdrtype = filtered_ODealer.filter(function (objFromA) {
 						return !ExcludeOrdType.find(function (objFromB) {
 							return objFromA.zzordertype === objFromB;
 						});
-					});
+					});*/
+						var oExcludeOrdrtype=[];
+						 for( var i=filtered_ODealer.length-1; i>=0; --i){ 
+      if( ExcludeOrdType.indexOf( (filtered_ODealer[i].zzordertype)) == -1 ){ 
+        ExcludeOrdType.push( filtered_ODealer[i] ); 
+      } 
+    }
+					
 					//		var oJsonModel = new sap.ui.model.json.JSONModel(oExcludeOrdrtype);
 					var IncludeOrdertype = oExcludeOrdrtype.filter(function (x) {
 						return (x.zzordertype == "SO" || x.zzordertype == "DM");

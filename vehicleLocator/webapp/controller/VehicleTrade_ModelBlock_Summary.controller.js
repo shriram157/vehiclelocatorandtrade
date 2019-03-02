@@ -175,11 +175,18 @@ sap.ui.define([
 									/* var FilterredBusinessUrl=FiltBusinesspartnerurl.filter(function (x) {
 					return (x.BusinessPartner).slice(-5) == (LoginBusinessPartnerCode).slice(-5);
 				});*/
-									var FilterredBusinessUrl = FiltBusinesspartnerurl.filter(function (objFromA) {
+								/*	var FilterredBusinessUrl = FiltBusinesspartnerurl.filter(function (objFromA) {
 										return FilterredBusinessUrl.find(function (objFromB) {
 											return (objFromA.BusinessPartner).slice(-5) === objFromB.slice(-5);
 										});
-									});
+									});*/
+										var FilterredBusinessUrl=[];
+						 for( var i=FiltBusinesspartnerurl.length-1; i>=0; --i){ 
+      if( FilterredBusinessUrl.indexOf( (FiltBusinesspartnerurl[i].zzordertype)) != -1 ){ 
+        FilterredBusinessUrl.push( FiltBusinesspartnerurl[i] ); 
+      } 
+    }
+									
 									/* for(var i=0;len=FilteredBlockingDlr.length;i<len;i++){*/
 									for (var i = 0; i < FilteredBlockingDlr.length; i++) {
 										for (var j = 0; j < FilterredBusinessUrl.length; j++) {
@@ -194,11 +201,17 @@ sap.ui.define([
 										FilterredSeriesUrl.push(FilteredBlockingDlr[k].Zzseries);
 									}
 
-									var FilterredSeriesUrl = SeriesDescUrl.filter(function (objFromA) {
+								/*	var FilterredSeriesUrl = SeriesDescUrl.filter(function (objFromA) {
 										return FilterredSeriesUrl.find(function (objFromB) {
 											return (objFromA.ModelSeriesNo) === objFromB;
 										});
-									});
+									});*/
+										var FilterredSeriesUrl=[];
+						 for( var i=SeriesDescUrl.length-1; i>=0; --i){ 
+      if( FilterredSeriesUrl.indexOf( (SeriesDescUrl[i].zzordertype)) != -1 ){ 
+        FilterredSeriesUrl.push( SeriesDescUrl[i] ); 
+      } 
+    }
 									for (var l = 0; l < FilteredBlockingDlr.length; l++) {
 										for (var m = 0; m < FilterredSeriesUrl.length; m++) {
 											if (FilteredBlockingDlr[l].Zzseries == FilterredSeriesUrl[m].ModelSeriesNo) {
@@ -213,11 +226,17 @@ sap.ui.define([
 										FilterredModelUrl.push(FilteredBlockingDlr[k].Zzmodel);
 									}
 
-									var FilterredModelUrl = ModelUrl.filter(function (objFromA) {
+								/*	var FilterredModelUrl = ModelUrl.filter(function (objFromA) {
 										return FilterredModelUrl.find(function (objFromB) {
 											return (objFromA.Model) === objFromB;
 										});
-									});
+									});*/
+										var FilterredModelUrl=[];
+						 for( var i=ModelUrl.length-1; i>=0; --i){ 
+      if( FilterredModelUrl.indexOf( (ModelUrl[i].zzordertype)) != -1 ){ 
+        FilterredModelUrl.push( ModelUrl[i] ); 
+      } 
+    }
 									for (var l = 0; l < FilteredBlockingDlr.length; l++) {
 										for (var m = 0; m < FilterredModelUrl.length; m++) {
 											if (FilteredBlockingDlr[l].Zzmodel == FilterredModelUrl[m].Model) {
@@ -621,11 +640,17 @@ sap.ui.define([
 											"F4",
 											"F5"
 										];
-										var oExcludeOrdrtype = filtered_ODealer.filter(function (objFromA) {
+									/*	var oExcludeOrdrtype = filtered_ODealer.filter(function (objFromA) {
 											return !ExcludeOrdType.find(function (objFromB) {
 												return objFromA.zzordertype === objFromB;
 											});
-										});
+										});*/
+											var oExcludeOrdrtype=[];
+						 for( var i=filtered_ODealer.length-1; i>=0; --i){ 
+      if( ExcludeOrdType.indexOf( (filtered_ODealer[i].zzordertype)) == -1 ){ 
+        ExcludeOrdType.push( filtered_ODealer[i] ); 
+      } 
+    }
 
 										/*var includeDnc = oExcludeOrdrtype.filter(function (x) {
 						return x.dnc_ind == "Y";
@@ -653,83 +678,7 @@ sap.ui.define([
 									}
 								});
 
-							},
-							
-					_setTheLanguage: function (oEvent) {
-
-				var oI18nModel = new sap.ui.model.resource.ResourceModel({
-					bundleUrl: "i18n/i18n.properties"
-				});
-				this.getView().setModel(oI18nModel, "i18n");
-
-				//  get the locale to determine the language. 
-				var isLocaleSent = window.location.search.match(/language=([^&]*)/i);
-				if (isLocaleSent) {
-					var sSelectedLocale = window.location.search.match(/language=([^&]*)/i)[1];
-				} else {
-					var sSelectedLocale = "EN"; // default is english 
-				}
-
-				//selected language.	
-				// if (window.location.search == "?language=fr") {
-				if (sSelectedLocale == "fr") {
-					var i18nModel = new sap.ui.model.resource.ResourceModel({
-						bundleUrl: "i18n/i18n.properties",
-						bundleLocale: ("fr")
-
-					});
-					this.getView().setModel(i18nModel, "i18n");
-					this.sCurrentLocale = 'FR';
-					// set the right image for logo	 - french		
-					/*				var currentImageSource = this.getView().byId("idLexusLogo");
-									currentImageSource.setProperty("src", "images/Lexus_FR.png");*/
-
-				} else {
-					var i18nModel = new sap.ui.model.resource.ResourceModel({
-						bundleUrl: "i18n/i18n.properties",
-						bundleLocale: ("en")
-
-					});
-					this.getView().setModel(i18nModel, "i18n");
-					this.sCurrentLocale = 'EN';
-					// set the right image for logo			
-					/*				var currentImageSource = this.getView().byId("idLexusLogo");
-									currentImageSource.setProperty("src", "images/Lexus_EN.png");*/
-
-				}
-
-				var oModeli18n = this.getView().getModel("i18n");
-				this._oResourceBundle = oModeli18n.getResourceBundle();
-			},
-		
- 					_setTheLogo: function (oEvent) {
-
-				// if (userDetails[0].UserType == 'Dealer') {
-
-				var isDivisionSent = window.location.search.match(/Division=([^&]*)/i);
-				if (isDivisionSent) {
-					this.sDivision = window.location.search.match(/Division=([^&]*)/i)[1];
-
-					// if (this.sDivision == aDataBP[0].Division) {
-
-					// 	this.getView().byId("messageStripError").setProperty("visible", false);
-
-					if (this.sDivision == '10') // set the toyoto logo
-					{
-						var currentImageSource = this.getView().byId("idLexusLogo");
-						currentImageSource.setProperty("src", "Images/toyota_logo_colour.png");  
-
-					} else { // set the lexus logo
-						var currentImageSource = this.getView().byId("idLexusLogo");
-						currentImageSource.setProperty("src", "Images/i_lexus_black_full.png");
-
-						// }
-					}
-				}
-
-			}			
-							
-							
+							}
 
 					});
 			});

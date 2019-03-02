@@ -19,12 +19,10 @@ sap.ui.define([
 			var oTable = this.getView().byId("table");
 			var that = this;
 			
-		     	this._setTheLanguage();
+					     	this._setTheLanguage();
 
 				this._setTheLogo();	
-			
-			
-			
+				
 		this.getRouter().getRoute("VehicleTrade_VehicleSelection").attachPatternMatched(this.onRouteMatched, this);		
  
 			//this.getRouter().attachRouteMatched(this.onRouteMatched, this);
@@ -265,11 +263,21 @@ this.SelectedVehicleFrom=oEvent.getParameter("arguments").SelectedVehicleFrom;
 						"F4",
 						"F5"
 					];
-					var oExcludeOrdrtype = filtered_ODealer.filter(function (objFromA) {
+				/*	var oExcludeOrdrtype = filtered_ODealer.filter(function (objFromA) {
 						return !ExcludeOrdType.find(function (objFromB) {
 							return objFromA.zzordertype === objFromB;
 						});
-					});
+					});*/
+						var oExcludeOrdrtype=[];
+						 for( var i=filtered_ODealer.length-1; i>=0; --i){ 
+      if( ExcludeOrdType.indexOf( (filtered_ODealer[i].zzordertype)) == -1 ){ 
+        ExcludeOrdType.push( filtered_ODealer[i] ); 
+      } 
+    }
+					
+					
+					
+					
 				//		var oJsonModel = new sap.ui.model.json.JSONModel(oExcludeOrdrtype);
 					var IncludeOrdertype=oExcludeOrdrtype.filter(function (x) {
 						return (x.zzordertype == "SO" || x.zzordertype == "DM");
@@ -506,7 +514,7 @@ var sLocation = window.location.host;
 			
 			if (CurrentETATo != null && CurrentETATo != "") {
 				var dateTo = CurrentETATo.split("(")[1];
-				if (CurrentETATo.includes("+") == true) {
+				if (CurrentETATo.indexOf("+") != -1) {
 					/*dateTo = dateTo.split("+")[0];*/
 					CurrentETATo =  new Date(CurrentETATo.split("(")[1].substring(0,10) * 1000).toDateString().substring(4,15);
 					var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
@@ -1097,7 +1105,7 @@ var Proposed_ETA_From= new Date(year, month-1, day);
 			//	oInput.$().find('.sapMInputBaseInner')[0].select();
 		},
 		
-		_setTheLanguage: function (oEvent) {
+				_setTheLanguage: function (oEvent) {
 
 			var oI18nModel = new sap.ui.model.resource.ResourceModel({
 				bundleUrl: "i18n/i18n.properties"
@@ -1170,6 +1178,7 @@ var Proposed_ETA_From= new Date(year, month-1, day);
 			}
 
 		}
+		
 
 		/*onSelectLink:function(oEvt)
 		   

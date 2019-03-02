@@ -180,11 +180,19 @@ sap.ui.define([
 						];
 
 						//	var FilterDeleade_OrderTypefiltered_zone
-						var oExcludeTci = FilterDeleade_OrderTypefiltered_zone.filter(function (objFromA) {
+					/*	var oExcludeTci = FilterDeleade_OrderTypefiltered_zone.filter(function (objFromA) {
 							return !oTCIcodes.find(function (objFromB) {
 								return (objFromA.kunnr).slice(-5) === objFromB.slice(-5);
 							});
-						});
+						});*/
+						
+						var oExcludeTci=[];
+						 for( var i=FilterDeleade_OrderTypefiltered_zone.length-1; i>=0; --i){ 
+      if( oTCIcodes.indexOf( (FilterDeleade_OrderTypefiltered_zone[i].kunnr)) == -1 ){ 
+        oExcludeTci.push( FilterDeleade_OrderTypefiltered_zone[i] ); 
+      } 
+    }
+					
 
 						var oZoneIncludeData = [
 							"2400507000",
@@ -373,11 +381,17 @@ sap.ui.define([
 						];
 
 						//	var FilterDeleade_OrderTypefiltered_zone
-						var oExcludeTci = FilterDeleade_OrderTypefiltered_zone.filter(function (objFromA) {
+					/*	var oExcludeTci = FilterDeleade_OrderTypefiltered_zone.filter(function (objFromA) {
 							return !oTCIcodes.find(function (objFromB) {
 								return (objFromA.kunnr).slice(-5) === objFromB.slice(-5);
 							});
-						});
+						});*/
+							var oExcludeTci=[];
+						 for( var i=FilterDeleade_OrderTypefiltered_zone.length-1; i>=0; --i){ 
+      if( oTCIcodes.indexOf( (FilterDeleade_OrderTypefiltered_zone[i].kunnr)) == -1 ){ 
+        oExcludeTci.push( FilterDeleade_OrderTypefiltered_zone[i] ); 
+      } 
+    }
 
 						var oZoneIncludeData = [
 							"2400507000",
@@ -2480,17 +2494,23 @@ if(sap.ui.Device.system.phone){
 						this.getView().byId("VLRColor").setSelectedKey(selctedColor);
 					}
 				}
-			
-			
-			
-			
+			} else {
+				if (this.getView().byId("VLRColor").getItems().filter(function (x) {
+						return x.mProperties.key == "all"
+					}).length == 0) {
+					var newItem = new sap.ui.core.Item({
+						key: "all",
+						text: "ALL"
+					});
+					this.getView().byId("VLRColor").insertItem(newItem);
+					this.getView().byId("VLRColor").setSelectedKey("all");
+					this.getView().byId("VLRColor").setSelectedItem("ALL");
+				}
 			}
-			
-			
-			this.onStatusChange();	
-			
+
+			this.onStatusChange();
 		},
-			_setTheLanguage: function (oEvent) {
+		_setTheLanguage: function (oEvent) {
 
 				var oI18nModel = new sap.ui.model.resource.ResourceModel({
 					bundleUrl: "i18n/i18n.properties"
@@ -2563,6 +2583,8 @@ if(sap.ui.Device.system.phone){
 				}
 
 			}
+
+ 
 
 		/*	{
 

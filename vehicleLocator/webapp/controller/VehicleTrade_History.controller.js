@@ -4,7 +4,7 @@ sap.ui.define([
 	'sap/ui/model/resource/ResourceModel',
 	'sap/m/MessageBox',
 	"sap/ui/core/routing/History",
-	"vehicleLocator/Formatter/Formatter",
+	"vehicleLocator/Formatter/Formatter"
 
 ], function (BaseController, JSONModel, ResourceModel, MessageBox, History, Formatter) {
 	"use strict";
