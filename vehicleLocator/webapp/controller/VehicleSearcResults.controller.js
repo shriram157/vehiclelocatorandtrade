@@ -2467,7 +2467,7 @@ if(sap.ui.Device.system.phone){
 						text: "ALL"
 					});
 					var SelctKey = Color.filter(function (x) {
-						return x.zzextcol == selctedColor
+						return x.zzextcol == selctedColor;
 					});
 					this.getView().byId("VLRColor").insertItem(newItem);
 
@@ -2484,10 +2484,11 @@ if(sap.ui.Device.system.phone){
 			
 			
 			
-			
+			}
 			
 			
 			this.onStatusChange();	
+			
 		},
 			_setTheLanguage: function (oEvent) {
 

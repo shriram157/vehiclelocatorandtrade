@@ -1343,7 +1343,7 @@ for(var i=0;i<oResults.length;i++){
 						return x.kunnr != null;
 					});
 					var FilterZonestockData = FilterDeleade_OrderTypefilteNotnull.filter(function (x) {
-						return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "SO" || x.zzordertype == "DM")
+						return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "SO" || x.zzordertype == "DM");
 					});
 					//	var FilterDeleade_OrderTypefiltered_zone
 					var FilterDeleade_OrderTypefiltered_zone = FilterZonestockData.filter(function (x) {
