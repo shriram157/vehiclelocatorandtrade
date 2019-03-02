@@ -7,7 +7,10 @@
 				<customHeader>
 					<Bar class="sapUiSmallPaddingBeginEnd clCustomHeaderBg">
 						<contentLeft>
-							<Image id="idLexusLogo" src="Images/Lexus.png" width="100px"/>
+							<!--<Image id="idLexusLogo" src="Images/Lexus.png" width="100px"/>-->
+							<!--<Text text="|" class="sapUiTinyMarginBeginEnd"/>-->
+							<!--<Text class="clCustomFont" text="{i18n>PageTitle}"/>-->
+							<Image id="idLexusLogo" src="Images/toyota_logo_colour.png" width="100px"/>
 							<Text text="|" class="sapUiTinyMarginBeginEnd"/>
 							<Text class="clCustomFont" text="{i18n>PageTitle}"/>
 						</contentLeft>
@@ -204,8 +207,7 @@
                     }"
                    noDataText="{worklistView>/tableNoDataText}"
                    busyIndicatorDelay="{worklistView>/tableBusyDelay}"
-                   growing="true"
-                   growingScrollToLoad="true"
+
                    updateFinished="onUpdateFinished"
                    mode="None"
                    modeAnimationOn="true">
@@ -216,12 +218,12 @@
                         <Title id="tableHeader" text="{detailView>/tableCount}"/>
 
                         <ToolbarSpacer/>
-                        <SearchField id="searchVehicleList" liveChange="onLiveChange" showSearchButton="true"
-                                     placeholder="Search table...">
-                            <layoutData>
-                                <OverflowToolbarLayoutData minWidth="200px" maxWidth="300px" shrinkable="true"/>
-                            </layoutData>
-                        </SearchField>
+                        <!--<SearchField id="searchVehicleList" liveChange="onLiveChange" showSearchButton="true"-->
+                        <!--             placeholder="Search table...">-->
+                        <!--    <layoutData>-->
+                        <!--        <OverflowToolbarLayoutData minWidth="200px" maxWidth="300px" shrinkable="true"/>-->
+                        <!--    </layoutData>-->
+                        <!--</SearchField>-->
                         <!--<Button text="Reset" type="Transparent" press="onReset"/>-->
                         <Button tooltip="Sort table by selected fields" icon="sap-icon://drop-down-list"
                                 press="handleViewSettingsDialogButtonPressed" text="Sorting"/>
@@ -278,9 +280,7 @@
                 <items>
                    <ColumnListItem type="Active" press="onRowPress" id="onlinkPress">
                         <cells>
-                        	
-     
-                        	
+       
                         	
                             <Link id="tradeId1" text="Trade" class="link" subtle="true" press="oTradeLinkPress" wrapping="false"/>
                    
@@ -314,14 +314,6 @@
             </Table>
 	
 <!--============================ use the below	-->
-		
- 
- 
-	
-	
-	
-	
-	
 	
 	
 				</content>

@@ -43,6 +43,14 @@ sap.ui.define([
 
 			this.getView().setModel(oViewModel, "detailView");
 
+		/// set the logo and Language. 
+
+				this._setTheLanguage();
+
+				this._setTheLogo();	
+
+
+
 			//	this.getRouter().attachRouteMatched(this.onRouteMatched, this);
 			this.getRouter().getRoute("VehicleSearcResults").attachPatternMatched(this.onRouteMatched, this);
 		},
@@ -538,7 +546,6 @@ sap.ui.define([
 				filterArray.push(new sap.ui.model.Filter("Hold_stat", sap.ui.model.FilterOperator.EQ, "N"));
 			}
 			// this.getView().byId("table1VSR").getBinding("rows").filter(filterArray);
-			//debugger;
 
 			// sap.ushell.components.tableSearchResults.getBinding("rows").filter(filterArray);  // guna
 			sap.ushell.components.tableSearchResults.getBinding("items").filter(filterArray);
@@ -546,6 +553,41 @@ sap.ui.define([
 			var FilterdedTableData = sap.ushell.components.tableSearchResults.getBinding("items").aIndices;
 			// var tableData=sap.ushell.components.tableSearchResults.getModel().getData();   // guna
 
+// also lets try to apply the filter data if the value is not initial in the filter field. 
+
+			//debugger;
+// trey to push the filter array also here ---------------------------------------------
+// searchVehicleList
+   //       var sSearchQuery = this.byId("searchVehicleList").getValue(); 
+   //      if (sSearchQuery) {
+			// 	var oFilter = new Filter([
+			// 		new Filter("kunnr", sap.ui.model.FilterOperator.Contains, sSearchQuery),
+			// 		new Filter("matnr", sap.ui.model.FilterOperator.Contains, sSearchQuery),
+			// 		new Filter("zzsuffix", sap.ui.model.FilterOperator.Contains, sSearchQuery),
+			// 		new Filter("zzapx", sap.ui.model.FilterOperator.Contains, sSearchQuery),
+			// 		new Filter("zzextcol", sap.ui.model.FilterOperator.Contains, sSearchQuery),
+			// 		new Filter("zzordertype", sap.ui.model.FilterOperator.Contains, sSearchQuery),
+			// 		new Filter("zzadddata4", sap.ui.model.FilterOperator.Contains, sSearchQuery),
+			// 		new Filter("pstsp", sap.ui.model.FilterOperator.Contains, sSearchQuery),
+			// 		new Filter("non_D_flag", sap.ui.model.FilterOperator.Contains, sSearchQuery),
+			// 		new Filter("ort01", sap.ui.model.FilterOperator.Contains, sSearchQuery),
+			// 		new Filter("bezei", sap.ui.model.FilterOperator.Contains, sSearchQuery)
+			// 	], false);
+			 
+			// 	// aFilters.push(oFilter);
+			// 	filterArray.push(oFilter);
+			// }
+
+			// this.byId("table1VSR")
+			// 	.getBinding("items")
+			// 	.filter(aFilters)
+			// 	.sort(aSorters);
+
+	sap.ushell.components.tableSearchResults.getBinding("items").filter(filterArray);
+
+
+// filter array end --------------------------------------------------------------------
+ 
 			// set the count to screen. 
 
 			var tableLength = FilterdedTableData.length;
@@ -580,12 +622,12 @@ sap.ui.define([
 
 				// var FilteredTableData = this.getView().byId("table1VSR").getModel().getData().filter(function(x){return x.zz_trading_ind=="1"&&x.dnc_ind==ShowDoNotCallVehiclesSel&&x.Hold_stat==ShowHoldVehiclesSel});
 				var FilteredTableData = this.getView().getModel("vehicleSearchTableModel").getData().filter(function (x) {
-					return x.zz_trading_ind == "1" && x.dnc_ind == ShowDoNotCallVehiclesSel && x.Hold_stat == ShowHoldVehiclesSel
+					return x.zz_trading_ind == "1" && x.dnc_ind == ShowDoNotCallVehiclesSel && x.Hold_stat == ShowHoldVehiclesSel;
 				});
 			} else {
 				var FilteredTableData = this.getView().getModel("vehicleSearchTableModel").getData().filter(function (x) {
 					return (x.zz_trading_ind == "2" || x.zz_trading_ind == "3") && x.dnc_ind == ShowDoNotCallVehiclesSel && x.Hold_stat ==
-						ShowHoldVehiclesSel
+						ShowHoldVehiclesSel;
 				});
 				// var FilteredTableData = this.getView().byId("table1VSR").getModel().getData().filter(function(x){return (x.zz_trading_ind=="2" || x.zz_trading_ind=="3")&&x.dnc_ind==ShowDoNotCallVehiclesSel&&x.Hold_stat==ShowHoldVehiclesSel});
 			}
@@ -2503,7 +2545,80 @@ if(sap.ui.Device.system.phone){
 			}
 
 			this.onStatusChange();
-		}
+		},
+	_setTheLanguage: function (oEvent) {
+
+				var oI18nModel = new sap.ui.model.resource.ResourceModel({
+					bundleUrl: "i18n/i18n.properties"
+				});
+				this.getView().setModel(oI18nModel, "i18n");
+
+				//  get the locale to determine the language. 
+				var isLocaleSent = window.location.search.match(/language=([^&]*)/i);
+				if (isLocaleSent) {
+					var sSelectedLocale = window.location.search.match(/language=([^&]*)/i)[1];
+				} else {
+					var sSelectedLocale = "EN"; // default is english 
+				}
+
+				//selected language.	
+				// if (window.location.search == "?language=fr") {
+				if (sSelectedLocale == "fr") {
+					var i18nModel = new sap.ui.model.resource.ResourceModel({
+						bundleUrl: "i18n/i18n.properties",
+						bundleLocale: ("fr")
+
+					});
+					this.getView().setModel(i18nModel, "i18n");
+					this.sCurrentLocale = 'FR';
+					// set the right image for logo	 - french		
+					/*				var currentImageSource = this.getView().byId("idLexusLogo");
+									currentImageSource.setProperty("src", "images/Lexus_FR.png");*/
+
+				} else {
+					var i18nModel = new sap.ui.model.resource.ResourceModel({
+						bundleUrl: "i18n/i18n.properties",
+						bundleLocale: ("en")
+
+					});
+					this.getView().setModel(i18nModel, "i18n");
+					this.sCurrentLocale = 'EN';
+					// set the right image for logo			
+					/*				var currentImageSource = this.getView().byId("idLexusLogo");
+									currentImageSource.setProperty("src", "images/Lexus_EN.png");*/
+
+				}
+
+				var oModeli18n = this.getView().getModel("i18n");
+				this._oResourceBundle = oModeli18n.getResourceBundle();
+			},
+		
+ 					_setTheLogo: function (oEvent) {
+
+				// if (userDetails[0].UserType == 'Dealer') {
+
+				var isDivisionSent = window.location.search.match(/Division=([^&]*)/i);
+				if (isDivisionSent) {
+					this.sDivision = window.location.search.match(/Division=([^&]*)/i)[1];
+
+					// if (this.sDivision == aDataBP[0].Division) {
+
+					// 	this.getView().byId("messageStripError").setProperty("visible", false);
+
+					if (this.sDivision == '10') // set the toyoto logo
+					{
+						var currentImageSource = this.getView().byId("idLexusLogo");
+						currentImageSource.setProperty("src", "Images/toyota_logo_colour.png");  
+
+					} else { // set the lexus logo
+						var currentImageSource = this.getView().byId("idLexusLogo");
+						currentImageSource.setProperty("src", "Images/i_lexus_black_full.png");
+
+						// }
+					}
+				}
+
+			}
 
 		/*	{
 

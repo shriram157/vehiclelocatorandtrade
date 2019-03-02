@@ -7,9 +7,9 @@
 				<customHeader>
 					<Bar class="sapUiSmallPaddingBeginEnd clCustomHeaderBg">
 						<contentLeft>
-							<Image id="idLexusLogo" src="Images/Lexus.png" width="100px"/>
+							<Image id="idLexusLogo" src="Images/toyota_logo_colour.png" width="100px"/>
 							<Text text="|" class="sapUiTinyMarginBeginEnd"/>
-							<Text class="clCustomFont" text="{i18n>VehicleLocator-Trade}"/>
+							<Text class="clCustomFont" text="{i18n>PageTitle}"/>
 						</contentLeft>
 						<contentRight>
 							<Button text="{i18n>Logout}"/>
