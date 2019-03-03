@@ -191,7 +191,7 @@ module.exports = function (log) {
 		var obj_temp = {
 			Language: ['English', 'English'],
 			UserType: ['National', 'National'],
-			DealerCode: ['42120 ', '42120 '],
+			DealerCode: ['42120', '42120'],
 			FirstName: ['firstName'],
 			LastName: ['LastName']
 		};
