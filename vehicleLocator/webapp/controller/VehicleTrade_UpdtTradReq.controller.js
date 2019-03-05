@@ -492,16 +492,89 @@ Update: function () {
 						
 										});
 											that.VehicleDelete();
+											that.TradeRequestCreate();
+											that.TradeVehicleCreate();
 										//  
 										//write two functions for trade request and vehicle
 										//here left side data only send to backend by taking from simpleform for 'this.getView().byId("").getModel()'
 						}
 						else if(oOfferedVehicle == ""){
-							// for both req and offered vehicle needs to remove from HDB like before Delete operation
+							var Trade_Id = this.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Trade_Id;
+					
+                        	var sLocation = window.location.host;
+						var sLocation_conf = sLocation.search("webide");
+
+						if (sLocation_conf == 0) {
+							that.sPrefix = "/VehicleLocator_Xsodata";
+						} else {
+							that.sPrefix = "";
+
+						}
+						//	that.nodeJsUrl = that.sPrefix + "/vehicleTrade";
+						that.nodeJsUrl = that.sPrefix;
+						that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
+
+						that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
+						that.oDataModel.setHeaders({
+							"Content-Type": "application/json",
+							"X-Requested-With": "XMLHttpRequest",
+							"DataServiceVersion": "2.0",
+							"Accept": "application/json",
+							"Method": "DELETE"
+						});
+						var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
+						that.oDataModel.remove(UpdatedTreadeEntity, null, null, function (s) {
+							
+
+										},
+										function () {
+										
+						
+										});
+											that.VehicleDelete();
+											that.TradeRequestCreate();
+											that.TradeVehicleCreateForWithOutChange();
 
 							}else if (oOfferedVehicle =="FromFourth")
 							{
 								//delete from both tables and insert new data with updated data (from screen 4)
+									
+						var Trade_Id = this.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Trade_Id;
+					
+
+						var sLocation = window.location.host;
+						var sLocation_conf = sLocation.search("webide");
+
+						if (sLocation_conf == 0) {
+							that.sPrefix = "/VehicleLocator_Xsodata";
+						} else {
+							that.sPrefix = "";
+
+						}
+						//	that.nodeJsUrl = that.sPrefix + "/vehicleTrade";
+						that.nodeJsUrl = that.sPrefix;
+						that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
+
+						that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
+						that.oDataModel.setHeaders({
+							"Content-Type": "application/json",
+							"X-Requested-With": "XMLHttpRequest",
+							"DataServiceVersion": "2.0",
+							"Accept": "application/json",
+							"Method": "DELETE"
+						});
+						var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
+						that.oDataModel.remove(UpdatedTreadeEntity, null, null, function (s) {
+							
+
+										},
+										function () {
+										
+						
+										});
+											that.VehicleDelete();
+											that.TradeRequestCreate();
+											that.TradeVehicleCreateFromVehicle_Selection();
 							}	
 							},
 VehicleDelete:function(){
@@ -1017,7 +1090,7 @@ VehicleDelete:function(){
 								this.getRouter().navTo("VehcTrad_Apprv_Rej_CounTrad");
 
 							},
-							onSelectvehcicle: function () {
+			onSelectvehcicle: function () {
 								debugger
 
 								var that = this;
@@ -1147,7 +1220,7 @@ VehicleDelete:function(){
 		{
 			 var oRequestedData = this.getView().byId("SimpleFormUpdateTrReq").getModel().getData();
 			
-				var oEntry = {
+			/*	var oEntry = {
 
 							"Trade_Id": Trade_Id,
 							"Trade_Status": Trade_Status,
@@ -1172,8 +1245,609 @@ VehicleDelete:function(){
 							"Requested_Dealer_Name": Requested_Dealer_Name
 
 						};
+			*/
+		},
+			TradeRequestCreate:function()
+			{
+			
+			
+
+			jQuery.sap.require("sap.ui.core.format.DateFormat");
+			var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+				pattern: "yyyy-MM-dd'T'HH:mm:ss"
+					/*	pattern: "yyyy-MM-dd"*/
+
+			});
+
+			//------ requested dealer info//
+			
+				var that = this;
+				var sLocation = window.location.host;
+				var sLocation_conf = sLocation.search("webide");
+
+				if (sLocation_conf == 0) {
+					this.sPrefix = "/VehicleLocator_Xsodata";
+				} else {
+					this.sPrefix = "";
+
+				}
+				     var Trade_Id = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Trade_Id;
+				     var RequestData=this.getView().byId("SimpleFormUpdateTrReq").getModel().getData();
+                                 
+                                 	
+						if (that.getView().byId("oTradeinRet").getSelectedKey() == "Y") {
+							var Trade_Return = "Y";
+						} else if (that.getView().byId("oTradeinRet").getSelectedKey() == "N") {
+							var Trade_Return = "N";
+						}
+
+						var Trade_Status = RequestData.Trade_Status;
+						/*	var Requesting_Dealer = that.getView().byId("dealrid").getText().substr(0, that.getView().byId("dealrid").getText().indexOf(
+								"-"));*/
+					/*	var Requesting_Dealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerKey;*/
+					
+                var Requesting_Dealer = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Requesting_Dealer;
+               
+						/*	var Requesting_Dealer_Name = that.getView().byId("dealrid").getText().substr(that.getView().byId("dealrid").getText().indexOf(
+								"-") + 1);*/
+					/*	var Requesting_Dealer_Name = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName;*/
+					
+                var Requesting_Dealer_Name =  that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Requesting_Dealer_Name;
+						//var Requested_Vtn = that.getView().byId("vtnid").getText();
+						var Requested_Vtn =  that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Requested_Vtn;
+						var Offered_Vtn = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Offered_Vtn;
+						var DateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+							pattern: "yyyy-MM-dd"
+						});
+						/*	var Req_Current_ETA_FromData =  that.getView().byId("ctaid").getText();
+								if (Req_Current_ETA_FromData != "") {
+								var Req_Current_ETA_From = DateFormat.format(new Date(Req_Current_ETA_FromData));
+							} else {
+								var Req_Current_ETA_From = "0000-00-00T00:00:00";
+							}*/
+						/*	/  sssssssss  /*/
+						var Req_Current_ETA_From =  that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Req_Current_ETA_From;
+							Req_Current_ETA_From = this.DatesFormatting(Req_Current_ETA_From);
+					/*	if (Req_Current_ETA_FromData != "") {
+							var Req_Current_ETA_From = new Date(oDateFormat.format(new Date(Req_Current_ETA_FromData)));
+						} else {
+							var Req_Current_ETA_From = "0000-00-00T00:00:00";
+						}*/
+						/*	/  sssssssss  /*/
+
+						/*	that.getView().byId("ctaid").getText();*/
+						/*	if (Req_Current_ETA_FromData != "") {
+								var Req_Current_ETA_From = oDateFormat.format(new Date(Req_Current_ETA_FromData));
+							} else {
+								var Req_Current_ETA_From = oDateFormat.format(new Date());
+							}*/
+						/*old working				
+						var Req_Current_ETA_To =  that.getView().byId("totxtid").getText();
+								if (Req_Current_ETA_To != "") {
+								var Req_Current_ETA_To = DateFormat.format(new Date(Req_Current_ETA_To));
+							} else {
+								var Req_Current_ETA_To = "0000-00-00T00:00:00";
+							}*/
+						var Req_Current_ETA_To =that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Req_Current_ETA_To;
+							Req_Current_ETA_To = this.DatesFormatting(Req_Current_ETA_To);
+					/*	if (Req_Current_ETA_ToDate != "") {
+							var Req_Current_ETA_To = new Date(oDateFormat.format(new Date(Req_Current_ETA_ToDate)));
+						} else {
+							var Req_Current_ETA_To = "0000-00-00T00:00:00";
+						}*/
+						/*	var Req_Current_ETA_To =  that.getView().byId("totxtid").getText();
+								if (Req_Current_ETA_To != "") {
+								var Req_Current_ETA_To = DateFormat.format(new Date(Req_Current_ETA_To));
+							} else {
+								var Req_Current_ETA_To = "0000-00-00T00:00:00";
+							}*/
+						/*	that.getView().byId("totxtid").getText();*/
+
+						/*	if (Req_Current_ETA_To != "") {
+							var Req_Current_ETA_To = oDateFormat.format(new Date(Req_Current_ETA_To));
+						} else {
+							var Req_Current_ETA_To = oDateFormat.format(new Date());
+						}
+*/
+						var Req_Proposed_ETA_From = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Req_Proposed_ETA_From;
+							Req_Proposed_ETA_From = this.DatesFormatting(Req_Proposed_ETA_From);
+
+					/*	if (Req_Proposed_ETA_FromDate != "") {
+							var Req_Proposed_ETA_From = new Date(oDateFormat.format(new Date(Req_Proposed_ETA_FromDate)));
+						} else {
+							var Req_Proposed_ETA_From = "0000-00-00T00:00:00";
+						}*/
+						var Req_Proposed_ETA_To = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Req_Proposed_ETA_To;
+							Req_Proposed_ETA_To = this.DatesFormatting(Req_Proposed_ETA_To);
+					/*	if (Req_Proposed_ETA_ToDate != "") {
+							var Req_Proposed_ETA_To = new Date(oDateFormat.format(new Date(Req_Proposed_ETA_ToDate)));
+						} else {
+							var Req_Proposed_ETA_To = "0000-00-00T00:00:00";
+						}*/
+
+						var Off_Current_ETA_From = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Off_Current_ETA_From;
+							Off_Current_ETA_From = this.DatesFormatting(Off_Current_ETA_From);
+					/*	if (Off_Current_ETA_FromDate != "") {
+							var Off_Current_ETA_From = new Date(oDateFormat.format(new Date(Off_Current_ETA_FromDate)));
+						} else {
+							var Off_Current_ETA_From = "0000-00-00T00:00:00";
+						}*/
+						var Off_Current_ETA_To = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Off_Current_ETA_To;
+							Off_Current_ETA_To = this.DatesFormatting(Off_Current_ETA_To);
+					/*	if (Off_Current_ETA_ToDate != "") {
+							var Off_Current_ETA_To = new Date(oDateFormat.format(new Date(Off_Current_ETA_ToDate)));
+						} else {
+							var Off_Current_ETA_To = "0000-00-00T00:00:00";
+						}*/
+
+						var Off_Proposed_ETA_From =that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Off_Proposed_ETA_From;
+							Off_Proposed_ETA_From = this.DatesFormatting(Off_Proposed_ETA_From);
+					/*	if (Off_Proposed_ETA_FromDate != "") {
+							var Off_Proposed_ETA_From = new Date(oDateFormat.format(new Date(Off_Proposed_ETA_FromDate)));
+						} else {
+							var Off_Proposed_ETA_From = "0000-00-00T00:00:00";
+						}*/
+
+						var Off_Proposed_ETA_To = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Off_Proposed_ETA_To;
+							Off_Proposed_ETA_To = this.DatesFormatting(Off_Proposed_ETA_To);
+					/*	if (Off_Proposed_ETA_ToDate != "") {
+							var Off_Proposed_ETA_To = new Date(oDateFormat.format(new Date(Off_Proposed_ETA_ToDate)));
+						} else {
+							var Off_Proposed_ETA_To = "0000-00-00T00:00:00";
+						}*/
+             var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
+			var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
+			var Created_By  = LoggedinUserFname+LoggedinUserLname;
+
+						function truncateString(str, num) {
+							if (num > str.length) {
+								return str;
+							} else {
+								str = str.substring(0, num);
+								return str;
+							}
+
+						}
+
+						Created_By = truncateString(Created_By, 12);
+						var Created_On = this.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Created_On;
+						Created_On = this.DatesFormatting(Created_On);
+					
+						var Changed_on = new Date();
+						Changed_on = oDateFormat.format(new Date(Changed_on));
+					/*	var Created_On = new Date();
+						Created_On = new Date(oDateFormat.format(new Date(Created_On)));
+						  Created_On.setDate(Created_On.getDate() + 1);
+						var Changed_on = new Date();
+						Changed_on = new Date(oDateFormat.format(new Date(Changed_on)));
+                       Changed_on.setDate(Changed_on.getDate() + 1);*/
+						/*	var Created_On = that.getView().byId("idlabeal").getText();
+							if (Created_On != "") {
+								var Created_On = oDateFormat.format(new Date(Created_On));
+							} else {
+								var Created_On = oDateFormat.format(new Date());
+							}
+							var Changed_on = that.getView().byId("idlabeal").getText();;
+							if (Changed_on != "") {
+								var Changed_on = oDateFormat.format(new Date(Changed_on));
+							} else {
+								var Changed_on = oDateFormat.format(new Date());
+							}*/
+						var Requested_Dealer = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Requested_Dealer;
+						var Requested_Dealer_Name = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Requested_Dealer_Name.substr( that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Requested_Dealer_Name.indexOf(
+							"-") + 1);
+
+						var oEntry = {
+
+							"Trade_Id": Trade_Id,
+							"Trade_Status": Trade_Status,
+							"Requesting_Dealer": Requesting_Dealer,
+							"Requesting_Dealer_Name": Requesting_Dealer_Name,
+							"Requested_Vtn": Requested_Vtn,
+							"Offered_Vtn": Offered_Vtn,
+							"Trade_Return": Trade_Return,
+							"Req_Current_ETA_From": Req_Current_ETA_From,
+							"Req_Current_ETA_To": Req_Current_ETA_To,
+							"Req_Proposed_ETA_From": Req_Proposed_ETA_From,
+							"Req_Proposed_ETA_To": Req_Proposed_ETA_To,
+							"Off_Current_ETA_From": Off_Current_ETA_From,
+
+							"Off_Current_ETA_To": Off_Current_ETA_To,
+							"Off_Proposed_ETA_From": Off_Proposed_ETA_From,
+							"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
+							"Created_By": Created_By,
+							"Created_On": Created_On,
+							"Changed_on": new Date(Changed_on),
+							"Requested_Dealer": Requested_Dealer,
+							"Requested_Dealer_Name": Requested_Dealer_Name
+
+						};
+
+						var sLocation = window.location.host;
+						var sLocation_conf = sLocation.search("webide");
+
+						if (sLocation_conf == 0) {
+							that.sPrefix = "/VehicleLocator_Xsodata";
+						} else {
+							that.sPrefix = "";
+
+						}
+						that.nodeJsUrl = that.sPrefix;
+						that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
+
+						that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
+						that.oDataModel.setHeaders({
+							"Content-Type": "application/json",
+							"X-Requested-With": "XMLHttpRequest",
+							"DataServiceVersion": "2.0",
+							"Accept": "application/json",
+							"Method": "POST"
+						});
+
+						that.oDataModel.create("/TradeRequest", oEntry, null, function (s) {
+							//	that.getView().byId("oTrdareqstat").setText("Request Sent");
+							
+						}, function () {
+
+						});
+
+					},
+		TradeVehicleCreate: function(){
+
+			var that = this;
+		/*	var Trade_Id = oEntry.Trade_Id;*/
+		    var VehicleTrade_Id =  that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Trade_Id;
+
+			var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+				pattern: "yyyy-MM-dd'T'HH:mm:ss"
+					/*	pattern: "yyyy-MM-dd"*/
+			});
+			var oCommentdate = new Date(oDateFormat.format(new Date()));
+			 oCommentdate.setDate(oCommentdate.getDate() + 1);
+			
+		
+			var oSuffixReq =  that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Suffix.split("-")[0];
+			var omodelReq = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Model.split("-")[0];
+			var omodelYearReq = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Model_Year;
+			var oApxReq = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().APX;
+			var oSeriesReq =  that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Series;
+			var oexteriorReq = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Ext_Colour.split("-")[0];
+			var ointeriorReq = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Int_Colour;
+			var ovtnReq = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().VTN;
+			var ostatusReq =  that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Status;
+			var oOrdertypeReq =  that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Order_Type;
+			var oDNCreq =  that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().DNC;
+
+			var oEntry2 = {
+				APX: oApxReq,
+				DNC: oDNCreq,
+				Ext_Colour: oexteriorReq,
+				Int_Colour: ointeriorReq,
+				Model: omodelReq,
+				Model_Year: omodelYearReq,
+				Order_Type: oOrdertypeReq,
+				Series: oSeriesReq,
+				Status: ostatusReq,
+				Suffix: oSuffixReq,
+				VTN: ovtnReq,
+			};
+			oEntry2["Trade_Id.Trade_Id"] = VehicleTrade_Id;
+			var oVehicleDetails = [];
+			oVehicleDetails.push(oEntry2);
+			if (that.getView().byId("otextId").getText()!= "RemoveOffered") {
+			//	changehere also
+				var Suffix = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Suffix;
+
+				var intColor =that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Int_Colour;
+
+				var model =that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Model;
+				var modelYear = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Model_Year;
+				var Apx = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.APX;
+				var Series = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Series;
+				var exterior = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Ext_Colour;
+				var vtn = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.VTN;
+				var ostatus = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Status;
+				var oOrdertype = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Order_Type;
+				var DNC = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.DNC;
+				var oEntry1 = {
+					APX: Apx,
+					DNC: DNC,
+					Ext_Colour: exterior,
+					Int_Colour: intColor,
+					Model: model,
+					Model_Year: modelYear,
+					Order_Type: oOrdertype,
+					Series: Series,
+					Status: ostatus,
+					Suffix: Suffix,
+					VTN: vtn,
+				};
+				oEntry1["Trade_Id.Trade_Id"] = VehicleTrade_Id;
+				oVehicleDetails.push(oEntry1);
+			}
+
+			/*	oEntry1["Trade_Id.Trade_Id"] = oEntry.Trade_Id;*/
+			/*	oVehicleDetails["Trade_Id.Trade_Id"] = oEntry.Trade_Id;
+			 */
+			var sLocation = window.location.host;
+			var sLocation_conf = sLocation.search("webide");
+
+			if (sLocation_conf == 0) {
+				that.sPrefix = "/VehicleLocator_Xsodata";
+			} else {
+				that.sPrefix = "";
+
+			}
+			that.nodeJsUrl = that.sPrefix;
+			that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
+
+			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
+			that.oDataModel.setHeaders({
+				"Content-Type": "application/json",
+				"X-Requested-With": "XMLHttpRequest",
+				"DataServiceVersion": "2.0",
+				"Accept": "application/json",
+				"Method": "POST"
+			});
+
+			/*	that.oDataModel.create("/TradeVehicles", oEntry1, null, function (s) {*/
+			for (var i = 0; i < oVehicleDetails.length; i++) {
+				that.oDataModel.create("/TradeVehicles", oVehicleDetails[i], null, function (s) {
+					/*	alert("ok");*/
+				}, function () {
+
+				});
+			}
+		},
+			DatesFormatting: function (Created_On) {
+			if (Created_On != null && Created_On != "" && Created_On != "/Date(0)/") {
+				var dateTo = Created_On.split("(")[1];
+				if (Created_On.indexOf("+") != -1) {
+					/*dateTo = dateTo.split("+")[0];*/
+					Created_On = new Date(Created_On.split("(")[1].substring(0, 10) * 1000).toDateString().substring(4, 15);
+					var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+						pattern: "yyyy-MM-dd'T'HH:mm:ss"
+					});
+					return new Date(oDateFormat.format(new Date(Created_On)));
+
+				} else {
+					dateTo = dateTo;
+					var dataTo1 = dateTo.substring(0, dateTo.length - 5);
+					var ValidTo = new Date(dataTo1 * 1000);
+					ValidTo = ValidTo.toGMTString().substring(4, 16);
+					var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+						pattern: "yyyy-MM-dd'T'HH:mm:ss"
+					});
+					return new Date(oDateFormat.format(new Date(ValidTo)));
+				}
+
+			} else {
+				return "0000-00-00T00:00:00";
+			}
+		},
+		TradeVehicleCreateForWithOutChange:function(){
+				var that = this;
+		/*	var Trade_Id = oEntry.Trade_Id;*/
+		    var VehicleTrade_Id =  that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Trade_Id;
+
+			var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+				pattern: "yyyy-MM-dd'T'HH:mm:ss"
+					/*	pattern: "yyyy-MM-dd"*/
+			});
+			var oCommentdate = new Date(oDateFormat.format(new Date()));
+			 oCommentdate.setDate(oCommentdate.getDate() + 1);
+			
+		
+			var oSuffixReq =  that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Suffix.split("-")[0];
+			var omodelReq = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Model.split("-")[0];
+			var omodelYearReq = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Model_Year;
+			var oApxReq = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().APX;
+			var oSeriesReq =  that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Series;
+			var oexteriorReq = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Ext_Colour.split("-")[0];
+			var ointeriorReq = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Int_Colour;
+			var ovtnReq = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().VTN;
+			var ostatusReq =  that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Status;
+			var oOrdertypeReq =  that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Order_Type;
+			var oDNCreq =  that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().DNC;
+
+			var oEntry2 = {
+				APX: oApxReq,
+				DNC: oDNCreq,
+				Ext_Colour: oexteriorReq,
+				Int_Colour: ointeriorReq,
+				Model: omodelReq,
+				Model_Year: omodelYearReq,
+				Order_Type: oOrdertypeReq,
+				Series: oSeriesReq,
+				Status: ostatusReq,
+				Suffix: oSuffixReq,
+				VTN: ovtnReq,
+			};
+			oEntry2["Trade_Id.Trade_Id"] = VehicleTrade_Id;
+			var oVehicleDetails = [];
+			oVehicleDetails.push(oEntry2);
+			if (that.getView().byId("otextId").getText()==""&&that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().VehicleTradeVehicle!={}) {
+				var Suffix = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Suffix;
+
+				var intColor =that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Int_Colour;
+
+				var model =that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Model;
+				var modelYear = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Model_Year;
+				var Apx = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.APX;
+				var Series = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Series;
+				var exterior = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Ext_Colour;
+				var vtn = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.VTN;
+				var ostatus = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Status;
+				var oOrdertype = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Order_Type;
+				var DNC = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.DNC;
+				var oEntry1 = {
+					APX: Apx,
+					DNC: DNC,
+					Ext_Colour: exterior,
+					Int_Colour: intColor,
+					Model: model,
+					Model_Year: modelYear,
+					Order_Type: oOrdertype,
+					Series: Series,
+					Status: ostatus,
+					Suffix: Suffix,
+					VTN: vtn,
+				};
+				oEntry1["Trade_Id.Trade_Id"] = VehicleTrade_Id;
+				oVehicleDetails.push(oEntry1);
+			}
+
+			/*	oEntry1["Trade_Id.Trade_Id"] = oEntry.Trade_Id;*/
+			/*	oVehicleDetails["Trade_Id.Trade_Id"] = oEntry.Trade_Id;
+			 */
+			var sLocation = window.location.host;
+			var sLocation_conf = sLocation.search("webide");
+
+			if (sLocation_conf == 0) {
+				that.sPrefix = "/VehicleLocator_Xsodata";
+			} else {
+				that.sPrefix = "";
+
+			}
+			that.nodeJsUrl = that.sPrefix;
+			that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
+
+			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
+			that.oDataModel.setHeaders({
+				"Content-Type": "application/json",
+				"X-Requested-With": "XMLHttpRequest",
+				"DataServiceVersion": "2.0",
+				"Accept": "application/json",
+				"Method": "POST"
+			});
+
+			/*	that.oDataModel.create("/TradeVehicles", oEntry1, null, function (s) {*/
+			for (var i = 0; i < oVehicleDetails.length; i++) {
+				that.oDataModel.create("/TradeVehicles", oVehicleDetails[i], null, function (s) {
+					/*	alert("ok");*/
+				}, function () {
+
+				});
+			}
+		
+			
+			
 			
 		},
+		TradeVehicleCreateFromVehicle_Selection:function(){
+			
+				var that = this;
+		/*	var Trade_Id = oEntry.Trade_Id;*/
+		    var VehicleTrade_Id =  that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Trade_Id;
+
+			var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+				pattern: "yyyy-MM-dd'T'HH:mm:ss"
+					/*	pattern: "yyyy-MM-dd"*/
+			});
+			var oCommentdate = new Date(oDateFormat.format(new Date()));
+			 oCommentdate.setDate(oCommentdate.getDate() + 1);
+			
+		
+			var oSuffixReq =  that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Suffix.split("-")[0];
+			var omodelReq = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Model.split("-")[0];
+			var omodelYearReq = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Model_Year;
+			var oApxReq = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().APX;
+			var oSeriesReq =  that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Series;
+			var oexteriorReq = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Ext_Colour.split("-")[0];
+			var ointeriorReq = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Int_Colour;
+			var ovtnReq = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().VTN;
+			var ostatusReq =  that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Status;
+			var oOrdertypeReq =  that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Order_Type;
+			var oDNCreq =  that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().DNC;
+
+			var oEntry2 = {
+				APX: oApxReq,
+				DNC: oDNCreq,
+				Ext_Colour: oexteriorReq,
+				Int_Colour: ointeriorReq,
+				Model: omodelReq,
+				Model_Year: omodelYearReq,
+				Order_Type: oOrdertypeReq,
+				Series: oSeriesReq,
+				Status: ostatusReq,
+				Suffix: oSuffixReq,
+				VTN: ovtnReq,
+			};
+			oEntry2["Trade_Id.Trade_Id"] = VehicleTrade_Id;
+			var oVehicleDetails = [];
+			oVehicleDetails.push(oEntry2);
+			if (that.getView().byId("otextId").getText()=="FromFourth"&&that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().VehicleTradeVehicle!={}) {
+				var Suffix = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Suffix;
+
+				var intColor =that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Int_Colour;
+
+				var model =that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Model;
+				var modelYear = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Model_Year;
+				var Apx = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.APX;
+				var Series = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Series;
+				var exterior = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Ext_Colour;
+				var vtn = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.VTN;
+				var ostatus = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Status;
+				var oOrdertype = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Order_Type;
+				var DNC = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.DNC;
+				var oEntry1 = {
+					APX: Apx,
+					DNC: DNC,
+					Ext_Colour: exterior,
+					Int_Colour: intColor,
+					Model: model,
+					Model_Year: modelYear,
+					Order_Type: oOrdertype,
+					Series: Series,
+					Status: ostatus,
+					Suffix: Suffix,
+					VTN: vtn,
+				};
+				oEntry1["Trade_Id.Trade_Id"] = VehicleTrade_Id;
+				oVehicleDetails.push(oEntry1);
+			}
+
+			/*	oEntry1["Trade_Id.Trade_Id"] = oEntry.Trade_Id;*/
+			/*	oVehicleDetails["Trade_Id.Trade_Id"] = oEntry.Trade_Id;
+			 */
+			var sLocation = window.location.host;
+			var sLocation_conf = sLocation.search("webide");
+
+			if (sLocation_conf == 0) {
+				that.sPrefix = "/VehicleLocator_Xsodata";
+			} else {
+				that.sPrefix = "";
+
+			}
+			that.nodeJsUrl = that.sPrefix;
+			that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
+
+			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
+			that.oDataModel.setHeaders({
+				"Content-Type": "application/json",
+				"X-Requested-With": "XMLHttpRequest",
+				"DataServiceVersion": "2.0",
+				"Accept": "application/json",
+				"Method": "POST"
+			});
+
+			/*	that.oDataModel.create("/TradeVehicles", oEntry1, null, function (s) {*/
+			for (var i = 0; i < oVehicleDetails.length; i++) {
+				that.oDataModel.create("/TradeVehicles", oVehicleDetails[i], null, function (s) {
+					/*	alert("ok");*/
+				}, function () {
+
+				});
+			}
+		
+			
+			
+			
+		
+		},
+		
+		
+		
 	_setTheLanguage: function (oEvent) {
 
 				var oI18nModel = new sap.ui.model.resource.ResourceModel({
