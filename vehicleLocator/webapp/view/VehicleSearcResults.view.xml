@@ -197,16 +197,15 @@
 					<!--	</t:columns>-->
 					<!--</t:Table>-->
 	
-	            <Table id="table1VSR" width="auto" class="sapUiResponsiveMargin"
+	            <Table id="table1VSR" width="98%" class="sapUiResponsiveMargin"
                    items="{
                     path: 'vehicleSearchTableModel>/',
                     sorter: {
-                    path: 'kunnr',
+                    path: 'pstsp',
                     descending: false
                     }
                     }"
-                   noDataText="{worklistView>/tableNoDataText}"
-                   busyIndicatorDelay="{worklistView>/tableBusyDelay}"
+                       noDataText="{i18n>NoData}"
 
                    updateFinished="onUpdateFinished"
                    mode="None"

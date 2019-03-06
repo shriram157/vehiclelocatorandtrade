@@ -2393,24 +2393,24 @@ if(sap.ui.Device.system.phone){
 				if (Status == "1") {
 
 					var Dealer = this.getView().getModel("vehicleSearchTableModel").getData().filter(function (x) {
-						return x.zz_trading_ind == "1"
+						return x.zz_trading_ind == "1";
 					});
 					//		var Dealer=this.getView().byId("table1VSR").getModel().getData().filter(function(x){return x.zz_trading_ind=="1"})
 				} else {
 					var Dealer = this.getView().getModel("vehicleSearchTableModel").getData().filter(function (x) {
-						return (x.zz_trading_ind == "2" || x.zz_trading_ind == "3")
+						return (x.zz_trading_ind == "2" || x.zz_trading_ind == "3");
 					});
 					// var Dealer=this.getView().byId("table1VSR").getModel().getData().filter(function(x){return (x.zz_trading_ind=="2"||x.zz_trading_ind=="3")})
 				}
 			} else {
 				if (Status == "1") {
 					var Dealer = this.getView().getModel("vehicleSearchTableModel").getData().filter(function (x) {
-						return x.zz_trading_ind == "1" && x.zzextcol == ColorSel
+						return x.zz_trading_ind == "1" && x.zzextcol == ColorSel;
 					});
 					// var Dealer=this.getView().byId("table1VSR").getModel().getData().filter(function(x){return x.zz_trading_ind=="1" &&x.zzextcol==ColorSel})
 				} else {
 					var Dealer = this.getView().getModel("vehicleSearchTableModel").getData().filter(function (x) {
-						return (x.zz_trading_ind == "2" || x.zz_trading_ind == "3") && x.zzextcol == ColorSel
+						return (x.zz_trading_ind == "2" || x.zz_trading_ind == "3") && x.zzextcol == ColorSel;
 					});
 					// var Dealer=this.getView().byId("table1VSR").getModel().getData().filter(function(x){return (x.zz_trading_ind=="2"||x.zz_trading_ind=="3") &&x.zzextcol==ColorSel})
 				}
@@ -2428,7 +2428,7 @@ if(sap.ui.Device.system.phone){
 			this.getView().byId("VLRDealer").setModel(Model1);
 			if (Dealer.length != 0) {
 				if (this.getView().byId("VLRDealer").getItems().filter(function (x) {
-						return x.mProperties.key == "all"
+						return x.mProperties.key == "all";
 					}).length == 0) {
 					var newItem = new sap.ui.core.Item({
 						key: "all",
@@ -2436,7 +2436,7 @@ if(sap.ui.Device.system.phone){
 					});
 					this.getView().byId("VLRDealer").insertItem(newItem);
 					var SelctKey = Dealer.filter(function (x) {
-						return x.kunnr == selctedDealer
+						return x.kunnr == selctedDealer;
 					});
 					if (selctedDealer == "" || SelctKey.length == 0) {
 						this.getView().byId("VLRDealer").setSelectedItem("ALL");
@@ -2447,7 +2447,7 @@ if(sap.ui.Device.system.phone){
 				}
 			} else {
 				if (this.getView().byId("VLRDealer").getItems().filter(function (x) {
-						return x.mProperties.key == "all"
+						return x.mProperties.key == "all";
 					}).length == 0) {
 					var newItem = new sap.ui.core.Item({
 						key: "all",
@@ -2474,24 +2474,24 @@ if(sap.ui.Device.system.phone){
 				if (Status == "1") {
 					// var Color=this.getView().byId("table1VSR").getModel().getData().filter(function(x){return x.zz_trading_ind=="1"})
 					var Color = this.getView().getModel("vehicleSearchTableModel").getData().filter(function (x) {
-						return x.zz_trading_ind == "1"
+						return x.zz_trading_ind == "1";
 					});
 
 				} else {
 					// var Color=this.getView().byId("table1VSR").getModel().getData().filter(function(x){return (x.zz_trading_ind=="2"||x.zz_trading_ind=="3")})
 					var Color = this.getView().getModel("vehicleSearchTableModel").getData().filter(function (x) {
-						return (x.zz_trading_ind == "2" || x.zz_trading_ind == "3")
+						return (x.zz_trading_ind == "2" || x.zz_trading_ind == "3");
 					});
 				}
 			} else {
 				if (Status == "1") {
 					// var Color=this.getView().byId("table1VSR").getModel().getData().filter(function(x){return x.zz_trading_ind=="1"&&x.kunnr==DealerSel})
 					var Color = this.getView().getModel("vehicleSearchTableModel").getData().filter(function (x) {
-						return x.zz_trading_ind == "1" && x.kunnr == DealerSel
+						return x.zz_trading_ind == "1" && x.kunnr == DealerSel;
 					});
 				} else {
 					var Color = this.getView().getModel("vehicleSearchTableModel").getData().filter(function (x) {
-						return (x.zz_trading_ind == "2" || x.zz_trading_ind == "3") && x.kunnr == DealerSel
+						return (x.zz_trading_ind == "2" || x.zz_trading_ind == "3") && x.kunnr == DealerSel;
 					});
 					// var Color=this.getView().byId("table1VSR").getModel().getData().filter(function(x){return (x.zz_trading_ind=="2"||x.zz_trading_ind=="3")&&x.kunnr==DealerSel})
 				}
@@ -2510,14 +2510,14 @@ if(sap.ui.Device.system.phone){
 			this.getView().byId("VLRColor").setModel(Model);
 			if (Color.length != 0) {
 				if (this.getView().byId("VLRColor").getItems().filter(function (x) {
-						return x.mProperties.key == "all"
+						return x.mProperties.key == "all";
 					}).length == 0) {
 					var newItem = new sap.ui.core.Item({
 						key: "all",
 						text: "ALL"
 					});
 					var SelctKey = Color.filter(function (x) {
-						return x.zzextcol == selctedColor
+						return x.zzextcol == selctedColor;
 					});
 					this.getView().byId("VLRColor").insertItem(newItem);
 
@@ -2532,7 +2532,7 @@ if(sap.ui.Device.system.phone){
 				}
 			} else {
 				if (this.getView().byId("VLRColor").getItems().filter(function (x) {
-						return x.mProperties.key == "all"
+						return x.mProperties.key == "all";
 					}).length == 0) {
 					var newItem = new sap.ui.core.Item({
 						key: "all",

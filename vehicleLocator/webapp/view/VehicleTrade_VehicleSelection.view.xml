@@ -3,7 +3,7 @@
 	xmlns:uxap="sap.uxap"  xmlns:tnt="sap.tnt" xmlns:t="sap.ui.table" xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml">
 	<App>
 		<pages class="oImgsampl" height="200px">
-			<Page showNavButton="false" enableScrolling="false">
+			<Page showNavButton="false" enableScrolling="true">
 				<customHeader>
 					<Bar class="sapUiSmallPaddingBeginEnd clCustomHeaderBg">
 						<contentLeft>
@@ -43,70 +43,241 @@
 									<!--	<SearchField width="215px" id="idVehclSerTrad"/>-->
 								</FlexBox>
 							</HBox>
-							<t:Table id="table" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{/}" visibleRowCount="20" class="sapUiMediumMarginBegin">
-								<t:columns>
-									<t:Column id="TradecolId" width="6rem">
-										<Label text="{i18n>Select}"/>
-										<t:template>
-											<Link id="selectId" text="Select" class="link" subtle="true" press="oTradeLinkPress" wrapping="false"/>
-										</t:template>
-									</t:Column>
-									<t:Column sortProperty="zzvtn" width="11rem" id="zzvtnid">
-										<Label text="{i18n>VehicleTrackingNumber}"/>
-										<t:template>
-											<Text text="{zzvtn}" wrapping="false"/>
-										</t:template>
-									</t:Column>
-									<t:Column sortProperty="zzseries" width="7rem" id="seriesr">
-										<Label text="{i18n>Series}"/>
-										<t:template>
-											<Text text="{zzseries_desc_en}" wrapping="false"/>
-										</t:template>
-									</t:Column>
-									<t:Column sortProperty="matnr" width="14rem" id="matnr">
-										<Label text="{i18n>Model}"/>
-										<t:template>
-											<Text text="{matnr} - {model_desc_en}" wrapping="false"/>
-										</t:template>
-									</t:Column>
-									<t:Column sortProperty="zzsuffix" width="8rem">
-										<Label text="{i18n>Suffix}"/>
-										<t:template>
-											<Text text="{zzsuffix}-{suffix_desc_en}/{mrktg_int_desc_en}" wrapping="false"/>
-										</t:template>
-									</t:Column>
-									<t:Column sortProperty="zzapx" width="3rem">
-										<Label text="{i18n>APX}" wrapping="false"/>
-										<t:template>
-											<Text text="{zzapx}" wrapping="false"/>
-										</t:template>
-									</t:Column>
-									<t:Column id="ID_DealerNet" sortProperty="zzextcol" width="10rem">
-										<Label text="{i18n>Color}" wrapping="false"/>
-										<t:template>
-											<Text text="{zzextcol} - {mktg_desc_en}" wrapping="false"/>
-										</t:template>
-									</t:Column>
-									<t:Column id="ID_Profit" sortProperty="zzordertype" width="6rem">
-										<Label text="{i18n>OrderType}" wrapping="false"/>
-										<t:template>
-											<Text text="{path:'zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" wrapping="false"/>
-										</t:template>
-									</t:Column>
-									<t:Column sortProperty="zzadddata4" width="6rem" id="oETAFromId">
-										<Label text="{i18n>ETAFrom}" wrapping="false"/>
-										<t:template>
-											<Text text="{path:'zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate1'}" wrapping="false"/>
-										</t:template>
-									</t:Column>
-									<t:Column sortProperty="pstsp" width="6rem">
-										<Label text="{i18n>ETATo}" wrapping="false"/>
-										<t:template>
-											<Text text="{path:'pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate1'}" wrapping="false"/>
-										</t:template>
-									</t:Column>
-								</t:columns>
-							</t:Table>
+
+		          <Table id="vehicleSelectTable" width="auto" class="sapUiResponsiveMargin"
+                   items="{
+                    path: 'vehicleSelectTableModel>/',
+                    sorter: {
+                    path: 'zzadddata4',
+                    descending: true
+                    }
+                    }"
+                   noDataText="{i18n>NoData}"
+                  
+
+                   updateFinished="onUpdateFinished"
+                   mode="None"
+                   modeAnimationOn="true">
+
+                <headerToolbar>
+                    <OverflowToolbar id="otbSubheader">
+
+                        <Title id="tableHeader1" text="{detailView>/tableCountSelect}"/>
+
+                        <ToolbarSpacer/>
+                        <SearchField id="searchVehicleList" liveChange="onLiveChange" showSearchButton="true"
+                                     placeholder="Search table...">
+                            <layoutData>
+                                <OverflowToolbarLayoutData minWidth="200px" maxWidth="300px" shrinkable="true"/>
+                            </layoutData>
+                        </SearchField>
+                        <!--<Button text="Reset" type="Transparent" press="onReset"/>-->
+                        <Button tooltip="Sort table by selected fields" icon="sap-icon://drop-down-list"
+                                press="handleViewSettingsDialogButtonPressed" text="Sorting"/>
+                    </OverflowToolbar>
+                </headerToolbar>
+
+                <columns>
+
+                    <Column id="TradecolId" demandPopin="true" minScreenWidth="Tablet"   width="3rem"
+                            hAlign="Left">
+                        <Text text="{i18n>Select}" id="nameColumnTitle2"/>
+                    </Column>
+                    
+                    <Column id="vehicleTrackNum" demandPopin="true" minScreenWidth="Tablet" hAlign="Center" width="auto">
+                        <Text text="{i18n>VehicleTrackingNumber}"/>
+                    </Column>
+                    <Column id="series1" demandPopin="true" minScreenWidth="Tablet"  width="auto"
+                            hAlign="Center">
+                        <Text text="{i18n>Series}"/>
+                    </Column>
+                    <Column id="model1"  demandPopin="true"  width="auto"
+                            minScreenWidth="Tablet"  hAlign="Left">
+                        <Text text="{i18n>Model}"/>
+                    </Column>
+                    <Column id="suffix1"   demandPopin="true"
+                            minScreenWidth="Tablet" width="auto">
+                        <Text text="{i18n>Suffix}" id="nameColumnTitle1"/>
+                    </Column>
+                    <Column id="apx1"  demandPopin="true"  
+                            minScreenWidth="Tablet">
+                        <Text text="{i18n>APX}" />
+                    </Column>
+                    <Column id="color1"  demandPopin="true" minScreenWidth="Tablet">
+                        <Text text="{i18n>Color}"/>
+                    </Column>
+                    <Column id="ordertype1"   hAlign="Center" demandPopin="true"
+                            minScreenWidth="Tablet">
+                        <Text text="{i18n>OrderType}" />
+                    </Column>
+                    <Column id="etafrom1"   demandPopin="true" minScreenWidth="Tablet">
+                        <Text text="{i18n>ETAFrom}" />
+                    </Column>
+                    <Column id="etato1"  demandPopin="true" minScreenWidth="Tablet" width="5rem" hAlign="Center">
+                        <Text text="{i18n>ETATo}"  wrapping="true"/>
+                    </Column>
+                     
+                </columns>
+
+                <items>
+                   <ColumnListItem type="Active" press="onRowPress" id="onlinkPress">
+                        <cells>
+       
+                        	
+                           	<Link id="selectId" text="Select" class="link" subtle="true" press="oTradeLinkPress" wrapping="false"/>
+ 
+                           		<Text text="{vehicleSelectTableModel>zzvtn}" wrapping="false" width="11rem" id="zzvtnid"/>
+ 		
+                           		<Text text="{vehicleSelectTableModel>zzseries_desc_en}"   width="7rem" id="seriesr"/>
+                           		
+                                <Text text="{vehicleSelectTableModel>matnr} - {vehicleSelectTableModel>model_desc_en}"  width="14rem" wrapping="false"/>
+                                
+                                <Text text="{vehicleSelectTableModel>zzsuffix}-{vehicleSelectTableModel>suffix_desc_en}/{vehicleSelectTableModel>mrktg_int_desc_en}"   width="8rem" wrapping="false"/>
+                                
+                                <Text text="{vehicleSelectTableModel>zzapx}"   width="3rem" wrapping="false"/>
+                                
+                                <Text text="{vehicleSelectTableModel>zzextcol} - {vehicleSelectTableModel>mktg_desc_en}"   width="10rem" wrapping="false"/>
+                                
+                                 <Text text="{path:'vehicleSelectTableModel>zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}"  width="6rem" wrapping="false"/>
+                                 
+                                  <Text text="{path:'vehicleSelectTableModel>zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate1'}"  width="6rem" wrapping="false"/>   
+                              
+                              <Text text="{path:'vehicleSelectTableModel>pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate1'}" width="6rem" wrapping="false"/>    
+                   
+       <!--                   	<Text text="{path:'vehicleSearchTableModel>kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'} - {vehicleSearchTableModel>name1}" wrapping="true" />-->
+       <!--                   	<Text text="{vehicleSearchTableModel>matnr} - {vehicleSearchTableModel>model_desc_en}" wrapping="true"/>-->
+       <!--                   	<Text text="{vehicleSearchTableModel>zzsuffix} - {vehicleSearchTableModel>suffix_desc_en}/{vehicleSearchTableModel>mrktg_int_desc_en}" wrapping="false"/>-->
+       <!--                  	<Text text="{vehicleSearchTableModel>zzapx}" wrapping="true"/>-->
+       <!--                  	<Text text="{vehicleSearchTableModel>zzextcol} - {vehicleSearchTableModel>mktg_desc_en}" wrapping="true"/>-->
+       <!--         		   	<Text text="{path:'vehicleSearchTableModel>zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" wrapping="false"/>-->
+							<!--<Text text="{path:'vehicleSearchTableModel>zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate1'}" wrapping="false"/>			 -->
+       <!--                   	<Text text="{path:'vehicleSearchTableModel>pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate1'}" wrapping="false"/>-->
+       <!--                   	<Text text="{parts: [{path: 'vehicleSearchTableModel>non_D_flag'},{path: 'vehicleSearchTableModel>pd_flag'}], formatter : 'vehicleLocator.Formatter.Formatter.AccessoryInstall'}"/>-->
+       <!--                  	<Text text="{vehicleSearchTableModel>ort01}" wrapping="false"/>-->
+       <!--                   	<Text text="{vehicleSearchTableModel>bezei}" wrapping="false"/>-->
+                          		
+                            <!--<Text text="{vehicleSearchTableModel>zzsuffix} - {vehicleSearchTableModel>suffix_desc_en}/{vehicleSearchTableModel>mrktg_int_desc_en}" wrapping="false"/>-->
+                            <!--<Text text="{vehicleSearchTableModel>vendorCompanyName}"/>-->
+                            <!--<Text text="{vehicleSearchTableModel>invoiceDate}"/>-->
+                            <!--<Text text="{vehicleSearchTableModel>receiptDate}"/>-->
+                            <!--<Text text="{vehicleSearchTableModel>invoiceAmount}" width="auto" maxLines="1" wrapping="false"-->
+                            <!--      textAlign="Begin" textDirection="Inherit"/>-->
+                            <!--<Text text="{vehicleSearchTableModel>currencyType}"/>-->
+                            <!--<Text text="{vehicleSearchTableModel>paymentTerms}"/>-->
+                            <!--<Text text="{vehicleSearchTableModel>dueDate}"/>-->
+                            <!--<Text text="{vehicleSearchTableModel>blockedAmount}" width="auto" maxLines="1" wrapping="false"-->
+                            <!--      textAlign="Begin" textDirection="Inherit"/>-->
+                            <!--<Text text="{vehicleSearchTableModel>paymentDate}"/>-->
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>			
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							<!--<t:Table id="table" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{/}" visibleRowCount="20" class="sapUiMediumMarginBegin">-->
+							<!--	<t:columns>-->
+							<!--		<t:Column id="TradecolId" width="6rem">-->
+							<!--			<Label text="{i18n>Select}"/>-->
+							<!--			<t:template>-->
+							<!--				<Link id="selectId" text="Select" class="link" subtle="true" press="oTradeLinkPress" wrapping="false"/>-->
+							<!--			</t:template>-->
+							<!--		</t:Column>-->
+							<!--		<t:Column sortProperty="zzvtn" width="11rem" id="zzvtnid">-->
+							<!--			<Label text="{i18n>VehicleTrackingNumber}"/>-->
+							<!--			<t:template>-->
+							<!--				<Text text="{zzvtn}" wrapping="false"/>-->
+							<!--			</t:template>-->
+							<!--		</t:Column>-->
+							<!--		<t:Column sortProperty="zzseries" width="7rem" id="seriesr">-->
+							<!--			<Label text="{i18n>Series}"/>-->
+							<!--			<t:template>-->
+							<!--				<Text text="{zzseries_desc_en}" wrapping="false"/>-->
+							<!--			</t:template>-->
+							<!--		</t:Column>-->
+							<!--		<t:Column sortProperty="matnr" width="14rem" id="matnr">-->
+							<!--			<Label text="{i18n>Model}"/>-->
+							<!--			<t:template>-->
+							<!--				<Text text="{matnr} - {model_desc_en}" wrapping="false"/>-->
+							<!--			</t:template>-->
+							<!--		</t:Column>-->
+							<!--		<t:Column sortProperty="zzsuffix" width="8rem">-->
+							<!--			<Label text="{i18n>Suffix}"/>-->
+							<!--			<t:template>-->
+							<!--				<Text text="{zzsuffix}-{suffix_desc_en}/{mrktg_int_desc_en}" wrapping="false"/>-->
+							<!--			</t:template>-->
+							<!--		</t:Column>-->
+							<!--		<t:Column sortProperty="zzapx" width="3rem">-->
+							<!--			<Label text="{i18n>APX}" wrapping="false"/>-->
+							<!--			<t:template>-->
+							<!--				<Text text="{zzapx}" wrapping="false"/>-->
+							<!--			</t:template>-->
+							<!--		</t:Column>-->
+							<!--		<t:Column id="ID_DealerNet" sortProperty="zzextcol" width="10rem">-->
+							<!--			<Label text="{i18n>Color}" wrapping="false"/>-->
+							<!--			<t:template>-->
+							<!--				<Text text="{zzextcol} - {mktg_desc_en}" wrapping="false"/>-->
+							<!--			</t:template>-->
+							<!--		</t:Column>-->
+							<!--		<t:Column id="ID_Profit" sortProperty="zzordertype" width="6rem">-->
+							<!--			<Label text="{i18n>OrderType}" wrapping="false"/>-->
+							<!--			<t:template>-->
+							<!--				<Text text="{path:'zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" wrapping="false"/>-->
+							<!--			</t:template>-->
+							<!--		</t:Column>-->
+							<!--		<t:Column sortProperty="zzadddata4" width="6rem" id="oETAFromId">-->
+							<!--			<Label text="{i18n>ETAFrom}" wrapping="false"/>-->
+							<!--			<t:template>-->
+							<!--				<Text text="{path:'zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate1'}" wrapping="false"/>-->
+							<!--			</t:template>-->
+							<!--		</t:Column>-->
+							<!--		<t:Column sortProperty="pstsp" width="6rem">-->
+							<!--			<Label text="{i18n>ETATo}" wrapping="false"/>-->
+							<!--			<t:template>-->
+							<!--				<Text text="{path:'pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate1'}" wrapping="false"/>-->
+							<!--			</t:template>-->
+							<!--		</t:Column>-->
+							<!--	</t:columns>-->
+							<!--</t:Table>-->
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
 							<!--		<Table id="table" width="auto" class="sapUiResponsiveMargin" items="{/}" growingThreshold="150">
 								<columns>
 									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">

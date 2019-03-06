@@ -261,11 +261,17 @@ sap.ui.define([
 			var MoyearCombo = this.getOwnerComponent().SelectedMSMData[0].MoyearCombo;
 			/*	var oDealer=sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].DealerCode;*/
 			var oDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerKey;
+			
+			
+			// guna temp change remove later. 
+			// oDealer = "2400042120"// TODO: 
+			
+			
 			var Series = this.getOwnerComponent().SelectedMSMData[0].SeriesCmbo;
 
 			//	var oDealer = this.getView().getModel("TradeModel").getData().kunnr;
 			//	var oDealer ="42120";
-			this.intercolor = "42";
+	//		this.intercolor = "42";
 
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
@@ -333,18 +339,24 @@ sap.ui.define([
 							return objFromA.zzordertype === objFromB;
 						});
 					});*/
-						var oExcludeOrdrtype=[];
-						 for( var i=filtered_ODealer.length-1; i>=0; --i){ 
-      if( ExcludeOrdType.indexOf( (filtered_ODealer[i].zzordertype)) == -1 ){ 
-        ExcludeOrdType.push( filtered_ODealer[i] ); 
-      } 
-    }
+ 
+                    var oExcludeOrdrtype = [];
+                    for (var i = filtered_ODealer.length - 1; i >= 0; --i) {
+                        if (ExcludeOrdType.indexOf((filtered_ODealer[i].zzordertype)) == -1) {
+                            oExcludeOrdrtype.push(filtered_ODealer[i]);
+                        }
+                    }
+
+                    //        var oJsonModel = new sap.ui.model.json.JSONModel(oExcludeOrdrtype);
+                    var IncludeOrdertype = oExcludeOrdrtype.filter(function (x) {
+                        return (x.zzordertype == "SO" || x.zzordertype == "DM");
+                    });
+                    var oJsonModel = new sap.ui.model.json.JSONModel(IncludeOrdertype);		
 					
-					//		var oJsonModel = new sap.ui.model.json.JSONModel(oExcludeOrdrtype);
-					var IncludeOrdertype = oExcludeOrdrtype.filter(function (x) {
-						return (x.zzordertype == "SO" || x.zzordertype == "DM");
-					});
-					var oJsonModel = new sap.ui.model.json.JSONModel(IncludeOrdertype);
+  
+					
+					
+				//	var oJsonModel = new sap.ui.model.json.JSONModel(IncludeOrdertype);
 					/*var includeDnc = oExcludeOrdrtype.filter(function (x) {
 										return x.dnc_ind == "Y";
 									});
@@ -371,152 +383,7 @@ sap.ui.define([
 				}
 			});
 
-			/*	var that = this;
-			var sLocation = window.location.host;
-			var sLocation_conf = sLocation.search("webide");
-
-			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehicleLocatorNode";
-			} else {
-				this.sPrefix = "";
-
-			}
-
-			this.nodeJsUrl = this.sPrefix + "/node";
-			that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_CATALOGUE_SRV";
-			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
-			var SeriesUrl = that.oDataUrl + "/zc_mmfields";
-
-			var ajax1 = $.ajax({
-				dataType: "json",
-				xhrFields: //
-				{
-					withCredentials: true
-				},
-
-				url: SeriesUrl,
-				async: true,
-				success: function (result) {}
-			});
-			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehicleLocatorNode";
-			} else {
-				this.sPrefix = "";
-
-			}
-
-			this.nodeJsUrl = this.sPrefix + "/node";
-			that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_MASTER_SRV";
-			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
-			var ModelUrl = that.oDataUrl + "/zc_c_vehicle?$top=5";
-
 		
-			var ajax2 = $.ajax({
-				dataType: "json",
-				xhrFields: //
-				{
-					withCredentials: true
-				},
-
-				url: ModelUrl,
-				async: true,
-				success: function (result) {}
-			});
-
-			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehicleLocatorNode";
-			} else {
-				this.sPrefix = "";
-
-			}
-
-			this.nodeJsUrl = this.sPrefix + "/node";
-			that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_MASTER_SRV";
-			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
-			var ModelDescUrl = that.oDataUrl + "/zc_model";
-
-			var ajax3 = $.ajax({
-				dataType: "json",
-				xhrFields: //
-				{
-					withCredentials: true
-				}
-				
-				,
-				url: ModelDescUrl,
-				async: true,
-				success: function (result) {}
-			});
-
-			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehicleLocatorNode";
-			} else {
-				this.sPrefix = "";
-
-			}
-
-			this.nodeJsUrl = this.sPrefix + "/node";
-			that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_CATALOGUE_SRV";
-			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
-			var specificationurl = that.oDataUrl + "/zc_specification";
-
-			var ajax4 = $.ajax({
-				dataType: "json",
-				xhrFields: //
-				{
-					withCredentials: true
-				},
-
-				url: specificationurl,
-				async: true,
-				success: function (result) {}
-
-			});
-			this.nodeJsUrl = this.sPrefix + "/node";
-			that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_CATALOGUE_SRV";
-			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
-
-			var SuffixMarktingDesc = that.oDataUrl + "/zc_exterior_trim";
-			var ajax5 = $.ajax({
-				dataType: "json",
-				xhrFields: //
-				{
-					withCredentials: true
-				},
-				url: SuffixMarktingDesc,
-				async: true,
-				success: function (result) {}
-			});
-
-	
-			var that = this;
-			$.when(ajax1, ajax2, ajax3, ajax4, ajax5).done(function (SeriesUrl, ModelUrl, ModelDescUrl, specificationurl, SuffixMarktingDesc) {
-				debugger
-				var SeriesUrl = SeriesUrl[0].d.results;
-				var SeriesUrlModel = new sap.ui.model.json.JSONModel(SeriesUrl);
-				sap.ui.getCore().setModel(SeriesUrlModel, "VehicleSeleSeries");
-
-				var ModelUrl = ModelUrl[0].d.results;
-				var ModelUrlModel = new sap.ui.model.json.JSONModel(ModelUrl);
-				sap.ui.getCore().setModel(ModelUrlModel, "VehicleSeleModel");
-
-				var ModelDescUrl = ModelDescUrl[0].d.results;
-				var ModelDescUrlModel = new sap.ui.model.json.JSONModel(ModelDescUrl);
-				sap.ui.getCore().setModel(ModelDescUrlModel, "VehicleSeleModelDesModel");
-
-				var specificationurl = specificationurl[0].d.results;
-				var specificationurlModel = new sap.ui.model.json.JSONModel(specificationurl);
-				sap.ui.getCore().setModel(specificationurl, "VehicleSelespecificationurl");
-
-				var SuffixMarktingDesc = SuffixMarktingDesc[0].d.results;
-				var SuffixMarktingDescModel = new sap.ui.model.json.JSONModel(SuffixMarktingDesc);
-				sap.ui.getCore().setModel(SuffixMarktingDescModel, "VehicleSeleSuffixMarktingDesc");
-
-				that.getRouter().navTo("VehicleTrade_VehicleSelection");
-
-		
-			});
-*/
 		},
 		onRequestVT: function () {
 			debugger;

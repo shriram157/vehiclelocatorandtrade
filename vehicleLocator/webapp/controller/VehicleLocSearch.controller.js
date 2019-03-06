@@ -50,58 +50,53 @@ sap.ui.define([
 			// }
 			// //that.userType ="vehicelTradeDealerUser";
 			// //this.sPrefix ="";
-			
-			
-				// the business partner oData calls should happen onit.
-				var sLocation = window.location.host;
-				var sLocation_conf = sLocation.search("webide");
-				if (sLocation_conf == 0) {
-					this.sPrefix = "/vehicleLocatorNode"; // the destination
-					this.attributeUrl = "/userDetails/attributesforlocaltesting";
-					this.currentScopeUrl = "/userDetails/currentScopesForUserLocaltesting";
-				} else {
-					this.sPrefix = "";
-					this.attributeUrl = "/userDetails/attributes";
-				 
-					this.currentScopeUrl = "/userDetails/currentScopesForUser";
-		 
-				}
- 
-			
-				//  ajax call to BP Data and Scope Data
-				var oModelDetailview = this.getView().getModel("detailView");
-				var that = this;
-				$.ajax({
-					url: this.sPrefix + this.currentScopeUrl,
-					type: "GET",
-					dataType: "json",
-					success: function (oData) {
-						// var userScopes = oData;
-						// userScopes.forEach(function (data) {
 
-						var userType = oData.loggedUserType[0];
-						switch (userType) {
-						case "vehicelTradeDealerUser":
+			// the business partner oData calls should happen onit.
+			var sLocation = window.location.host;
+			var sLocation_conf = sLocation.search("webide");
+			if (sLocation_conf == 0) {
+				this.sPrefix = "/vehicleLocatorNode"; // the destination
+				this.attributeUrl = "/userDetails/attributesforlocaltesting";
+				this.currentScopeUrl = "/userDetails/currentScopesForUserLocaltesting";
+			} else {
+				this.sPrefix = "";
+				this.attributeUrl = "/userDetails/attributes";
 
- 
+				this.currentScopeUrl = "/userDetails/currentScopesForUser";
 
-							break;
+			}
 
-						case "internalTCIUser":
-						 
-							break;
-						case "ZoneUser":
-						 
-							break;
-						default:
-							// raise a message, because this should not be allowed. 
+			//  ajax call to BP Data and Scope Data
+			var oModelDetailview = this.getView().getModel("detailView");
+			var that = this;
+			$.ajax({
+				url: this.sPrefix + this.currentScopeUrl,
+				type: "GET",
+				dataType: "json",
+				success: function (oData) {
+					// var userScopes = oData;
+					// userScopes.forEach(function (data) {
 
-						}
-						 
+					var userType = oData.loggedUserType[0];
+					switch (userType) {
+					case "vehicelTradeDealerUser":
+
+						break;
+
+					case "internalTCIUser":
+
+						break;
+					case "ZoneUser":
+
+						break;
+					default:
+						// raise a message, because this should not be allowed. 
+
 					}
 
-				});
-			
+				}
+
+			});
 
 			// $.ajax({
 			// 	url: this.sPrefix + "/userDetails/currentScopesForUser",
@@ -141,66 +136,71 @@ sap.ui.define([
 				success: function (oData) {
 					var BpDealer = [];
 					var userAttributes = [];
-/*	BpDealer.push({
-						"BusinessPartnerKey": "2400042120",
-						"BusinessPartner": "42120",
+					/*	BpDealer.push({
+											"BusinessPartnerKey": "2400042120",
+											"BusinessPartner": "42120",
 
-						"BusinessPartnerName": "Don Valley North Toyota...", //item.OrganizationBPName1 //item.BusinessPartnerFullName
-						"Division": "10",
-						"BusinessPartnerType": "Z001",
-						"searchTermReceivedDealerName": "42120",
-						"LoggedinUserFirstName" : "User",
-						"LoggedinUserLastName": "42120"
-					});*/
+											"BusinessPartnerName": "Don Valley North Toyota...", //item.OrganizationBPName1 //item.BusinessPartnerFullName
+											"Division": "10",
+											"BusinessPartnerType": "Z001",
+											"searchTermReceivedDealerName": "42120",
+											"LoggedinUserFirstName" : "User",
+											"LoggedinUserLastName": "42120"
+										});*/
 					$.each(oData.attributes, function (i, item) {
 						var BpLength = item.BusinessPartner.length;
 
-								BpDealer.push({
-									"BusinessPartnerKey": item.BusinessPartnerKey,
-									"BusinessPartner": item.BusinessPartner, //.substring(5, BpLength),
-									"BusinessPartnerName": item.BusinessPartnerName, //item.OrganizationBPName1 //item.BusinessPartnerFullName
-									"Division": item.Division,
-									"BusinessPartnerType": item.BusinessPartnerType,
-									"searchTermReceivedDealerName": item.SearchTerm2,
+						BpDealer.push({
+							"BusinessPartnerKey": item.BusinessPartnerKey,
+							"BusinessPartner": item.BusinessPartner, //.substring(5, BpLength),
+							"BusinessPartnerName": item.BusinessPartnerName, //item.OrganizationBPName1 //item.BusinessPartnerFullName
+							"Division": item.Division,
+							"BusinessPartnerType": item.BusinessPartnerType,
+							"searchTermReceivedDealerName": item.SearchTerm2
 								/*	"LoggedinUserFirstName" : item.FirstName,
 									"LoggedinUserLastname": item.LastName*/
-								});
- 
+						});
 
 					});
-					
-					// 		BpDealer.push({
-					// 	"BusinessPartnerKey": "2400042120",
-					// 	"BusinessPartner": "42120",
 
-					// 	"BusinessPartnerName": "Don Valley North Toyota...", //item.OrganizationBPName1 //item.BusinessPartnerFullName
-					// 	"Division": "10",
-					// 	"BusinessPartnerType": "Z001",
-					// 	"searchTermReceivedDealerName": "42120"
-					// });		
-								
+					var sLocation = window.location.host;
+					var sLocation_conf = sLocation.search("webide");
+					if (sLocation_conf == 0) {
+						var BpDealer = [];
+
+						BpDealer.push({
+							"BusinessPartnerKey": "2400042120",
+							"BusinessPartner": "42120",
+
+							"BusinessPartnerName": "Don Valley North Toyota...", //item.OrganizationBPName1 //item.BusinessPartnerFullName
+							"Division": "10",
+							"BusinessPartnerType": "Z001",
+							"searchTermReceivedDealerName": "42120"
+						});
+					}
+
 					//  set your model or use the model below - // TODO: 
 					that.getView().setModel(new sap.ui.model.json.JSONModel(BpDealer), "BpDealerModel");
 					sap.ui.getCore().setModel(new sap.ui.model.json.JSONModel(BpDealer), "LoginBpDealerModel");
 					var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
 					that.getView().byId("oDealertitle").setText(LoggedInDealer);
-		
+
 					// read the saml attachments the same way 
 					$.each(oData.samlAttributes, function (i, item) {
 						userAttributes.push({
 							"UserType": item.UserType[0],
 							"DealerCode": item.DealerCode[0],
 							"Language": item.Language[0],
-							  "LoggedinUserFirstName":item.FirstName[0],
-							   "LoggedinUserLastName":item.LastName[0]
-							  
+							"LoggedinUserFirstName": item.FirstName[0],
+							"LoggedinUserLastName": item.LastName[0]
+
 							// "Zone": item.Zone[0]   ---    Not yet available
-							
+
 						});
- 
-					 });
-					 
-	 			/*	userAttributes.push({
+
+					});
+
+					/*	userAttributes.push({
 						"UserType": "Dealer",
 						"DealerCode": "42120",
 						"Language": "English",
@@ -208,8 +208,6 @@ sap.ui.define([
 						"LoggedinUserLastName" : "42120"
 
 					});	*/
-					 
-					 
 
 					that.getView().setModel(new sap.ui.model.json.JSONModel(userAttributes), "userAttributesModel");
 					sap.ui.getCore().setModel(new sap.ui.model.json.JSONModel(userAttributes), "LoginuserAttributesModel");
@@ -226,12 +224,12 @@ sap.ui.define([
 
 			//	sap.ui.getCore().LoginDetails = oLoginDealer;
 
-				var isLocaleSent = window.location.search.match(/language=([^&]*)/i);
-				if (isLocaleSent) {
-					var sSelectedLocale = window.location.search.match(/language=([^&]*)/i)[1];
-				} else {
-					var sSelectedLocale = "EN"; // default is english 
-				}
+			var isLocaleSent = window.location.search.match(/language=([^&]*)/i);
+			if (isLocaleSent) {
+				var sSelectedLocale = window.location.search.match(/language=([^&]*)/i)[1];
+			} else {
+				var sSelectedLocale = "EN"; // default is english 
+			}
 			var sSelectedLocale = "EN";
 			//selected language. 
 			// if (window.location.search == "?language=fr") {
@@ -257,16 +255,13 @@ sap.ui.define([
 				/*              var currentImageSource = this.getView().byId("idLexusLogo");
 				                currentImageSource.setProperty("src", "images/Lexus_EN.png");*/
 			}
-			
-/// set the logo and Language. 
 
-				this._setTheLanguage();
+			/// set the logo and Language. 
 
-				this._setTheLogo();
+			this._setTheLanguage();
 
-			 
+			this._setTheLogo();
 
-  
 			this.bindMonthYear();
 		},
 		onAfterRendering: function () {
@@ -286,13 +281,7 @@ sap.ui.define([
 
 			};
 		},
-		
 
-		
-		
-		
-		
-		
 		security: function () {
 			// sap.ui.core.BusyIndicator.show();
 			var that = this;
@@ -315,13 +304,12 @@ sap.ui.define([
 			/*	var userType=sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].UserType[0];*/ ///for local testing/
 			var userType = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].UserType; // for Security*/
 			var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
-			var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
-			this.TruncUserName = LoggedinUserFname+LoggedinUserLname;
-			
-		
-		/*	var oTruncLoggedUser  = [];
-			oTruncLoggedUser.push(TruncUserName);*/
-			
+			var LoggedinUserLname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
+			this.TruncUserName = LoggedinUserFname + LoggedinUserLname;
+
+			/*	var oTruncLoggedUser  = [];
+				oTruncLoggedUser.push(TruncUserName);*/
+
 			switch (userType) {
 				/*	case "vehicelTradeDealerUser":*/
 			case "Dealer":
@@ -349,11 +337,8 @@ sap.ui.define([
 
 					that.Customersales = this.nodeJsUrl + "/A_CustomerSalesArea";
 
-				
-
 					that.BussinesspartnerUrl = that.oDataUrl + "/A_CustomerSalesArea?$filter=Customer eq'" + BusinessPartner + "' and Division eq '" +
 						Division + "'";
-				
 
 					var ajax = $.ajax({
 						dataType: "json",
@@ -1242,22 +1227,22 @@ for(var i=0;i<oResults.length;i++){
 				SelectedZone.push("5000");
 			}
 			this.getOwnerComponent().SelectedZone = SelectedZone;
-			this.getOwnerComponent().suffixSelectedValue=that.getView().byId("SuffCmbo").getSelectedItem().getText();
+			this.getOwnerComponent().suffixSelectedValue = that.getView().byId("SuffCmbo").getSelectedItem().getText();
 			/*this.getRouter().navTo("VehicleSearcResults");*/
 			this.getOwnerComponent().SelectedMSMData = [{
 				"MoyearCombo": MoyearCombo,
 				"SeriesCmbo": SeriesCmbo,
 				"McCmbo": McCmbo,
-				"SuffCmbo":SuffCmbo
+				"SuffCmbo": SuffCmbo
 
 			}];
 			that.getView().getModel("SeriesData").setProperty("/SelectedSeries", that.getView().byId("SeriesCmbo").getSelectedKey());
 			sap.ui.getCore().setModel(that.getView().getModel("SeriesData"), "SelectedSeriesFromScreen1");
 			var LoginUser = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].UserType[0];
 			var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
-			var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
-			this.TruncUserName = LoggedinUserFname+LoggedinUserLname;
-			
+			var LoggedinUserLname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
+			this.TruncUserName = LoggedinUserFname + LoggedinUserLname;
+
 			/*var LoginUser = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].UserType; */ //deployed vesrion latest 
 
 			var sLocation = window.location.host;
@@ -1315,20 +1300,20 @@ for(var i=0;i<oResults.length;i++){
 					/*	var filtered = a.filter(function(item) {
     return SelectedZone.indexOf(item.id) !== -1 && item.gender==='m';
 });*/
-				/*	var filtered_zone = a.filter(function (person) {
-						return SelectedZone.includes(person.vkbur);
-					});*/
-						var filtered_zone = [];
-						for (var i = 0; i < SelectedZone.length; i++) {
-							for (var j = 0; j < a.length; j++) {
-								if (SelectedZone[i] == a[j].vkbur) {
-									filtered_zone.push(a[j]);
-
-								}
+					/*	var filtered_zone = a.filter(function (person) {
+							return SelectedZone.includes(person.vkbur);
+						});*/
+					var filtered_zone = [];
+					for (var i = 0; i < SelectedZone.length; i++) {
+						for (var j = 0; j < a.length; j++) {
+							if (SelectedZone[i] == a[j].vkbur) {
+								filtered_zone.push(a[j]);
 
 							}
 
 						}
+
+					}
 
 					/*	var Dealer = sap.ui.getCore().LoginDetails.DealerCode;*/
 					var userAttributesModellen = that.getView().getModel("userAttributesModel").getData();
@@ -1394,17 +1379,17 @@ for(var i=0;i<oResults.length;i++){
 					];
 
 					//	var FilterDeleade_OrderTypefiltered_zone
-				/*	var oExcludeTci = FilterDeleade_OrderTypefiltered_zone.filter(function (objFromA) {
-						return !oTCIcodes.find(function (objFromB) {
-							return (objFromA.kunnr).slice(-5) === objFromB.slice(-5);
-						});
-					});*/
-					 var oExcludeTci=[];
- for( var i=FilterDeleade_OrderTypefiltered_zone.length-1; i>=0; --i){ 
-      if( oTCIcodes.indexOf( (FilterDeleade_OrderTypefiltered_zone[i].kunnr)) == -1 ){ 
-        oExcludeTci.push( FilterDeleade_OrderTypefiltered_zone[i] ); 
-      } 
-    }
+					/*	var oExcludeTci = FilterDeleade_OrderTypefiltered_zone.filter(function (objFromA) {
+							return !oTCIcodes.find(function (objFromB) {
+								return (objFromA.kunnr).slice(-5) === objFromB.slice(-5);
+							});
+						});*/
+					var oExcludeTci = [];
+					for (var i = FilterDeleade_OrderTypefiltered_zone.length - 1; i >= 0; --i) {
+						if (oTCIcodes.indexOf((FilterDeleade_OrderTypefiltered_zone[i].kunnr)) == -1) {
+							oExcludeTci.push(FilterDeleade_OrderTypefiltered_zone[i]);
+						}
+					}
 
 					var oZoneIncludeData = [
 						"2400507000",
@@ -1437,43 +1422,43 @@ for(var i=0;i<oResults.length;i++){
 						"2400517510"
 					];
 					//Code for Filtering
-				/*	var oZoneInclude=[];
-					for (var n = 0; n < oZoneIncludeData.length; n++) {
-						$.each(oExcludeTci, function (i, item) {
-							if (oZoneIncludeData[n] == item.kunnr && item.zzordertype == "SO") {
-								console.log("match", item.kunnr);
-								oZoneInclude.push(item);
-								console.log("matched Data", oZoneInclude);
-							}
-						});
-					}*/
+					/*	var oZoneInclude=[];
+						for (var n = 0; n < oZoneIncludeData.length; n++) {
+							$.each(oExcludeTci, function (i, item) {
+								if (oZoneIncludeData[n] == item.kunnr && item.zzordertype == "SO") {
+									console.log("match", item.kunnr);
+									oZoneInclude.push(item);
+									console.log("matched Data", oZoneInclude);
+								}
+							});
+						}*/
 					// var oZoneInclude = oExcludeTci.filter(function (objFromA) {
 					// 	return oZoneIncludeData.find(function (objFromB) {
 					// 		return ((objFromA.kunnr).slice(-5) === objFromB.slice(-5) && objFromA.zzordertype == "SO");
 					// 	});
 					// });
-				/*	console.log("oZoneInclude", oZoneInclude);
-					if (oZoneInclude.length != 0) {
-						var FilterZonestock = oZoneInclude.filter(function (x) {
-							return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "SO" && x.zzordertype != "DM")
-						});
+					/*	console.log("oZoneInclude", oZoneInclude);
+						if (oZoneInclude.length != 0) {
+							var FilterZonestock = oZoneInclude.filter(function (x) {
+								return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "SO" && x.zzordertype != "DM")
+							});
 
-					} else {
-						var FilterZonestock = oExcludeTci.filter(function (x) {
-							return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "DM" || x.zzordertype == "SO")
-						});
+						} else {
+							var FilterZonestock = oExcludeTci.filter(function (x) {
+								return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "DM" || x.zzordertype == "SO")
+							});
 
-					}*/
-					
-						var FilterZonestock = oExcludeTci.filter(function (x) {
-							return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "DM" || x.zzordertype == "SO");
-						});
-						var tempTabData = FilterZonestock.filter(function (array_el) {
-							return oZoneIncludeData.filter(function (anotherOne_el) {
-								return (anotherOne_el == array_el.kunnr && array_el.zzordertype == "DM");
-							}).length == 0;
-						});
-						console.log("final searched data", tempTabData);
+						}*/
+
+					var FilterZonestock = oExcludeTci.filter(function (x) {
+						return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "DM" || x.zzordertype == "SO");
+					});
+					var tempTabData = FilterZonestock.filter(function (array_el) {
+						return oZoneIncludeData.filter(function (anotherOne_el) {
+							return (anotherOne_el == array_el.kunnr && array_el.zzordertype == "DM");
+						}).length == 0;
+					});
+					console.log("final searched data", tempTabData);
 
 					/*var SelectedModel=that.getView().byId("McCmbo").getSelectedKey();
 					var SelectedSeries = that.getView().byId("SeriesCmbo").getSelectedKey();
@@ -1517,16 +1502,16 @@ for(var i=0;i<oResults.length;i++){
 					Obj.LoginUser = LoginUser;
 					sap.ui.core.BusyIndicator.hide();
 					that.getRouter().navTo("VehicleSearcResults", {
-						
+
 						LoginUser: JSON.stringify(Obj),
-					
+
 					});
 				},
 				error: function (s, result) {
 					debugger;
-					var a=s;
+					var a = s;
 					sap.ui.core.BusyIndicator.hide();
-				/*	sap.m.MessageBox.warning("No Data");*/
+					/*	sap.m.MessageBox.warning("No Data");*/
 				}
 			});
 
@@ -1883,82 +1868,80 @@ for(var i=0;i<oResults.length;i++){
 				}
 			});
 		},
-	_setTheLanguage: function (oEvent) {
+		_setTheLanguage: function (oEvent) {
 
-				var oI18nModel = new sap.ui.model.resource.ResourceModel({
-					bundleUrl: "i18n/i18n.properties"
+			var oI18nModel = new sap.ui.model.resource.ResourceModel({
+				bundleUrl: "i18n/i18n.properties"
+			});
+			this.getView().setModel(oI18nModel, "i18n");
+
+			//  get the locale to determine the language. 
+			var isLocaleSent = window.location.search.match(/language=([^&]*)/i);
+			if (isLocaleSent) {
+				var sSelectedLocale = window.location.search.match(/language=([^&]*)/i)[1];
+			} else {
+				var sSelectedLocale = "EN"; // default is english 
+			}
+
+			//selected language.	
+			// if (window.location.search == "?language=fr") {
+			if (sSelectedLocale == "fr") {
+				var i18nModel = new sap.ui.model.resource.ResourceModel({
+					bundleUrl: "i18n/i18n.properties",
+					bundleLocale: ("fr")
+
 				});
-				this.getView().setModel(oI18nModel, "i18n");
+				this.getView().setModel(i18nModel, "i18n");
+				this.sCurrentLocale = 'FR';
+				// set the right image for logo	 - french		
+				/*				var currentImageSource = this.getView().byId("idLexusLogo");
+								currentImageSource.setProperty("src", "images/Lexus_FR.png");*/
 
-				//  get the locale to determine the language. 
-				var isLocaleSent = window.location.search.match(/language=([^&]*)/i);
-				if (isLocaleSent) {
-					var sSelectedLocale = window.location.search.match(/language=([^&]*)/i)[1];
-				} else {
-					var sSelectedLocale = "EN"; // default is english 
-				}
+			} else {
+				var i18nModel = new sap.ui.model.resource.ResourceModel({
+					bundleUrl: "i18n/i18n.properties",
+					bundleLocale: ("en")
 
-				//selected language.	
-				// if (window.location.search == "?language=fr") {
-				if (sSelectedLocale == "fr") {
-					var i18nModel = new sap.ui.model.resource.ResourceModel({
-						bundleUrl: "i18n/i18n.properties",
-						bundleLocale: ("fr")
-
-					});
-					this.getView().setModel(i18nModel, "i18n");
-					this.sCurrentLocale = 'FR';
-					// set the right image for logo	 - french		
-					/*				var currentImageSource = this.getView().byId("idLexusLogo");
-									currentImageSource.setProperty("src", "images/Lexus_FR.png");*/
-
-				} else {
-					var i18nModel = new sap.ui.model.resource.ResourceModel({
-						bundleUrl: "i18n/i18n.properties",
-						bundleLocale: ("en")
-
-					});
-					this.getView().setModel(i18nModel, "i18n");
-					this.sCurrentLocale = 'EN';
-					// set the right image for logo			
-					/*				var currentImageSource = this.getView().byId("idLexusLogo");
-									currentImageSource.setProperty("src", "images/Lexus_EN.png");*/
-
-				}
-
-				var oModeli18n = this.getView().getModel("i18n");
-				this._oResourceBundle = oModeli18n.getResourceBundle();
-			},
-		
- 					_setTheLogo: function (oEvent) {
-
-				// if (userDetails[0].UserType == 'Dealer') {
-
-				var isDivisionSent = window.location.search.match(/Division=([^&]*)/i);
-				if (isDivisionSent) {
-					this.sDivision = window.location.search.match(/Division=([^&]*)/i)[1];
-
-					// if (this.sDivision == aDataBP[0].Division) {
-
-					// 	this.getView().byId("messageStripError").setProperty("visible", false);
-
-					if (this.sDivision == '10') // set the toyoto logo
-					{
-						var currentImageSource = this.getView().byId("idLexusLogo");
-						currentImageSource.setProperty("src", "images/toyota_logo_colour.png");
-
-					} else { // set the lexus logo
-						var currentImageSource = this.getView().byId("idLexusLogo");
-						currentImageSource.setProperty("src", "images/i_lexus_black_full.png");
-
-						// }
-					}
-				}
+				});
+				this.getView().setModel(i18nModel, "i18n");
+				this.sCurrentLocale = 'EN';
+				// set the right image for logo			
+				/*				var currentImageSource = this.getView().byId("idLexusLogo");
+								currentImageSource.setProperty("src", "images/Lexus_EN.png");*/
 
 			}
-			
-			
-			
+
+			var oModeli18n = this.getView().getModel("i18n");
+			this._oResourceBundle = oModeli18n.getResourceBundle();
+		},
+
+		_setTheLogo: function (oEvent) {
+
+			// if (userDetails[0].UserType == 'Dealer') {
+
+			var isDivisionSent = window.location.search.match(/Division=([^&]*)/i);
+			if (isDivisionSent) {
+				this.sDivision = window.location.search.match(/Division=([^&]*)/i)[1];
+
+				// if (this.sDivision == aDataBP[0].Division) {
+
+				// 	this.getView().byId("messageStripError").setProperty("visible", false);
+
+				if (this.sDivision == '10') // set the toyoto logo
+				{
+					var currentImageSource = this.getView().byId("idLexusLogo");
+					currentImageSource.setProperty("src", "images/toyota_logo_colour.png");
+
+				} else { // set the lexus logo
+					var currentImageSource = this.getView().byId("idLexusLogo");
+					currentImageSource.setProperty("src", "images/i_lexus_black_full.png");
+
+					// }
+				}
+			}
+
+		}
+
 		/*	onModelSelectionChange: function (oModel) {
             _that.temp = [];
             _that.temp1 = [];
