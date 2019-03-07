@@ -84,10 +84,10 @@
                         <Text text="{i18n>Select}" id="nameColumnTitle2"/>
                     </Column>
                     
-                    <Column id="vehicleTrackNum" demandPopin="true" minScreenWidth="Tablet" hAlign="Center" width="auto">
-                        <Text text="{i18n>VehicleTrackingNumber}"/>
+                    <Column id="vehicleTrackNum" demandPopin="true" minScreenWidth="Tablet" hAlign="Center" width="6rem">
+                        <Text text="{i18n>VehicleTrackingNumber}" wrapping="true"/>
                     </Column>
-                    <Column id="series1" demandPopin="true" minScreenWidth="Tablet"  width="auto"
+                    <Column id="series1" demandPopin="true" minScreenWidth="Tablet"  width="6rem"
                             hAlign="Center">
                         <Text text="{i18n>Series}"/>
                     </Column>
@@ -100,7 +100,7 @@
                         <Text text="{i18n>Suffix}" id="nameColumnTitle1"/>
                     </Column>
                     <Column id="apx1"  demandPopin="true"  
-                            minScreenWidth="Tablet">
+                            minScreenWidth="Tablet" width="3rem">
                         <Text text="{i18n>APX}" />
                     </Column>
                     <Column id="color1"  demandPopin="true" minScreenWidth="Tablet">
@@ -120,23 +120,23 @@
                 </columns>
 
                 <items>
-                   <ColumnListItem type="Active" press="onRowPress" id="onlinkPress">
+                   <ColumnListItem type="Active" press="oTradeLinkPress" id="onlinkPress">
                         <cells>
        
                         	
                            	<Link id="selectId" text="Select" class="link" subtle="true" press="oTradeLinkPress" wrapping="false"/>
  
-                           		<Text text="{vehicleSelectTableModel>zzvtn}" wrapping="false" width="11rem" id="zzvtnid"/>
+                           		<Text text="{vehicleSelectTableModel>zzvtn}" wrapping="false" width="6rem" id="zzvtnid" />
  		
                            		<Text text="{vehicleSelectTableModel>zzseries_desc_en}"   width="7rem" id="seriesr"/>
                            		
-                                <Text text="{vehicleSelectTableModel>matnr} - {vehicleSelectTableModel>model_desc_en}"  width="14rem" wrapping="false"/>
+                                <Text text="{vehicleSelectTableModel>matnr} - {vehicleSelectTableModel>model_desc_en}"  width="auto" wrapping="true"/>
                                 
-                                <Text text="{vehicleSelectTableModel>zzsuffix}-{vehicleSelectTableModel>suffix_desc_en}/{vehicleSelectTableModel>mrktg_int_desc_en}"   width="8rem" wrapping="false"/>
+                                <Text text="{vehicleSelectTableModel>zzsuffix}-{vehicleSelectTableModel>suffix_desc_en}/{vehicleSelectTableModel>mrktg_int_desc_en}"   width="auto" wrapping="true"/>
                                 
                                 <Text text="{vehicleSelectTableModel>zzapx}"   width="3rem" wrapping="false"/>
                                 
-                                <Text text="{vehicleSelectTableModel>zzextcol} - {vehicleSelectTableModel>mktg_desc_en}"   width="10rem" wrapping="false"/>
+                                <Text text="{vehicleSelectTableModel>zzextcol} - {vehicleSelectTableModel>mktg_desc_en}"   width="auto" wrapping="false"/>
                                 
                                  <Text text="{path:'vehicleSelectTableModel>zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}"  width="6rem" wrapping="false"/>
                                  

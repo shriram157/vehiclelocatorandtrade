@@ -181,6 +181,8 @@
 							</form:content>
 						</form:SimpleForm>
 					</VBox>
+					
+					
 					<t:Table id="tableVrade" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" class="sapUiMediumMarginBegin"
 						rows="{ path:'/', sorter : [{ path:'Comment_Date', descending : 'true' }] }">
 						<t:columns>
@@ -204,6 +206,86 @@
 							</t:Column>
 						</t:columns>
 					</t:Table>
+<!--===================================================================================	 New Table				-->
+			<!--<Table id="tableVrade" width="98%" class="sapUiResponsiveMargin"-->
+   <!--                items="{-->
+   <!--                 path: 'commentsModel>/',-->
+   <!--                 sorter: {-->
+   <!--                 path: 'Comment_Date',-->
+   <!--                 descending: true-->
+   <!--                 }-->
+   <!--                 }"-->
+   <!--                    noDataText="{i18n>NoData}"-->
+
+   <!--                updateFinished="onUpdateFinished"-->
+   <!--                mode="None"-->
+   <!--                modeAnimationOn="true">-->
+
+   <!--             <headerToolbar>-->
+                    <!--<OverflowToolbar id="otbSubheader">-->
+
+                       
+                        <!--<ToolbarSpacer/>-->
+                        <!--<SearchField id="searchVehicleList" liveChange="onLiveChange" showSearchButton="true"-->
+                        <!--             placeholder="Search table...">-->
+                        <!--    <layoutData>-->
+                        <!--        <OverflowToolbarLayoutData minWidth="200px" maxWidth="300px" shrinkable="true"/>-->
+                        <!--    </layoutData>-->
+                        <!--</SearchField>-->
+                        <!--<Button text="Reset" type="Transparent" press="onReset"/>-->
+                    <!--    <Button tooltip="Sort table by selected fields" icon="sap-icon://drop-down-list"-->
+                    <!--            press="handleViewSettingsDialogButtonPressed" text="Sorting"/>-->
+                    <!--</OverflowToolbar>-->
+   <!--             </headerToolbar>-->
+
+   <!--             <columns>-->
+
+   <!--                 <Column id="dateId" demandPopin="true" minScreenWidth="Tablet" width="13rem" hAlign="Center">-->
+   <!--                     <Text text="{i18n>Date}" id="date"/>-->
+   <!--                 </Column>-->
+   <!--                 <Column id="userId" demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="14rem">-->
+   <!--                     <Text text="{i18n>User}"/>-->
+   <!--                 </Column>-->
+   <!--                 <Column id="comments"  demandPopin="true"  width="auto"-->
+   <!--                         minScreenWidth="Tablet"  hAlign="Left">-->
+   <!--                     <Text text="{i18n>Comments}"/>-->
+   <!--                 </Column>-->
+
+   <!--             </columns>-->
+
+   <!--             <items>-->
+   <!--                <ColumnListItem  >-->
+   <!--                     <cells>-->
+                          
+   <!--                       	<Text text="{path:'Comment_Date',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}"  wrapping="false" />-->
+   <!--                       	<Text text="{Created_By}" wrapping="false"/>-->
+   <!--                       	<Text text="{Comment_Txt}" wrapping="false"/>-->
+                         	
+                          		
+                            <!--<Text text="{vehicleSearchTableModel>zzsuffix} - {vehicleSearchTableModel>suffix_desc_en}/{vehicleSearchTableModel>mrktg_int_desc_en}" wrapping="false"/>-->
+                            <!--<Text text="{vehicleSearchTableModel>vendorCompanyName}"/>-->
+                            <!--<Text text="{vehicleSearchTableModel>invoiceDate}"/>-->
+                            <!--<Text text="{vehicleSearchTableModel>receiptDate}"/>-->
+                            <!--<Text text="{vehicleSearchTableModel>invoiceAmount}" width="auto" maxLines="1" wrapping="false"-->
+                            <!--      textAlign="Begin" textDirection="Inherit"/>-->
+                            <!--<Text text="{vehicleSearchTableModel>currencyType}"/>-->
+                            <!--<Text text="{vehicleSearchTableModel>paymentTerms}"/>-->
+                            <!--<Text text="{vehicleSearchTableModel>dueDate}"/>-->
+                            <!--<Text text="{vehicleSearchTableModel>blockedAmount}" width="auto" maxLines="1" wrapping="false"-->
+                            <!--      textAlign="Begin" textDirection="Inherit"/>-->
+                            <!--<Text text="{vehicleSearchTableModel>paymentDate}"/>-->
+   <!--                     </cells>-->
+   <!--                 </ColumnListItem>-->
+   <!--             </items>-->
+   <!--         </Table>			-->
+					
+					
+					
+					
+					
+					
+					
+<!--============================================================================================================	New Table End -->
 					<!--	<Table id="tableVrade" width="auto" class="sapUiResponsiveMargin" items="{/}" growingThreshold="150">
 						<columns>
 							<Column minScreenWidth="Desktop" demandPopin="true">

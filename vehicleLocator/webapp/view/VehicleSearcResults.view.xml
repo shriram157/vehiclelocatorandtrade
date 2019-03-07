@@ -277,7 +277,7 @@
                 </columns>
 
                 <items>
-                   <ColumnListItem type="Active" press="onRowPress" id="onlinkPress">
+                   <ColumnListItem type="Active" press="oTradeLinkPress" id="onlinkPress">
                         <cells>
        
                         	

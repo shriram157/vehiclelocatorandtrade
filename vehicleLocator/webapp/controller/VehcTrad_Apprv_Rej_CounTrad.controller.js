@@ -148,7 +148,17 @@ sap.ui.define([
 								return x["Trade_Id.Trade_Id"] == Tradeid;
 							});
 							var oModel = new sap.ui.model.json.JSONModel(Trade_Comment);
-							that.getView().byId("tableVrade").setModel(oModel);
+							
+					//		that.getView().byId("tableVrade").setModel(oModel);
+							
+
+		
+				that.getView().setModel(oModel, "commentsModel");				
+							
+							
+							
+							
+							
 						}
 					});
 				} else if (sap.ui.getCore().getModel("MyTradeRequested") != undefined) {
@@ -254,7 +264,8 @@ sap.ui.define([
 								return x["Trade_Id.Trade_Id"] == Tradeid;
 							});
 							var oModel = new sap.ui.model.json.JSONModel(Trade_Comment);
-							that.getView().byId("tableVrade").setModel(oModel);
+							// that.getView().byId("tableVrade").setModel(oModel);
+							that.getView().setModel(oModel, "commentsModel");	
 						}
 					});
 
@@ -355,8 +366,8 @@ sap.ui.define([
 							return x["Trade_Id.Trade_Id"] == Tradeid;
 						});
 						var oModel = new sap.ui.model.json.JSONModel(Trade_Comment);
-						that.getView().byId("tableVrade").setModel(oModel);
-						
+						// that.getView().byId("tableVrade").setModel(oModel);
+						that.getView().setModel(oModel, "commentsModel");	
 					}
 				});
 
@@ -369,9 +380,10 @@ sap.ui.define([
 				sap.m.MessageBox.error("Please enter comment");
 			} else {
 
-				if (this.getView().byId("tableVrade").getModel() != undefined) {
-					var CommentData = this.getView().byId("tableVrade").getModel().getData();
-
+				// if (this.getView().byId("tableVrade").getModel() != undefined) {
+					// var CommentData = this.getView().byId("tableVrade").getModel().getData();
+									if (this.getView().byId("tableVrade").getModel("commentsModel") != undefined) {
+              	var CommentData = this.getView().byId("tableVrade").getModel("commentsModel").getData();
 					function dynamicSort(property) {
 						var sortOrder = 1;
 						if (property[0] === "-") {
@@ -485,8 +497,8 @@ sap.ui.define([
 						
 					var oModel = new sap.ui.model.json.JSONModel(oComTrade_Comment);
 					/*	oModel.updateBindings(true);*/	
-					that.getView().byId("tableVrade").setModel(oModel);
-				
+					// that.getView().byId("tableVrade").setModel(oModel);
+				that.getView().setModel(oModel, "commentsModel");	
 					}
 				});
 						

@@ -1074,11 +1074,15 @@ if(that.SelectedVehicleFrom=="VehileTrade_CreateSingle"){
 			if (this.sSearchQuery) {
 				var oFilter = new Filter([
 					new Filter("zzvtn", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-					new Filter("zzseries", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("zzseries_desc_en", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("model_desc_en", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("matnr", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("zzsuffix", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("suffix_desc_en", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+			    	new Filter("mrktg_int_desc_en", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),	
 					new Filter("zzapx", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("zzextcol", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("mktg_desc_en", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("zzordertype", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("zzadddata4", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("pstsp", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
