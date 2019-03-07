@@ -485,7 +485,7 @@ sap.ui.define([
 					"Method": "DELETE"
 				});
 				var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
-				that.oDataModel.remove(UpdatedTreadeEntity, null, null, function (s) {
+				that.getView().getModel('TradeRequestModel').remove(UpdatedTreadeEntity, null, null, function (s) {
 
 					},
 					function () {
@@ -527,7 +527,7 @@ sap.ui.define([
 					"Method": "DELETE"
 				});
 				var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
-				that.oDataModel.remove(UpdatedTreadeEntity, null, null, function (s) {
+				that.getView().getModel('TradeRequestModel').remove(UpdatedTreadeEntity, null, null, function (s) {
 
 					},
 					function () {
@@ -809,7 +809,7 @@ sap.ui.define([
 				"Method": "PUT"
 			});
 			var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
-			that.oDataModel.update(UpdatedTreadeEntity, oEntry, null, function (s) {
+			that.getView().getModel('TradeRequestModel').update(UpdatedTreadeEntity, oEntry, null, function (s) {
 				debugger
 
 				that.TradeVehcles(oEntry);
@@ -1080,7 +1080,7 @@ sap.ui.define([
 						"Method": "POST"
 					});
 
-					that.oDataModel.create("/TradeComment", oTradeComment, null, function (s) {
+					that.getView().getModel('TradeRequestModel').create("/TradeComment", oTradeComment, null, function (s) {
 
 						/*	that.TradeComment(oEntry);
 						this.getView().byId("Comment_Txt").setValue("");
@@ -1599,7 +1599,7 @@ sap.ui.define([
 
 			/*	that.oDataModel.create("/TradeVehicles", oEntry1, null, function (s) {*/
 			for (var i = 0; i < oVehicleDetails.length; i++) {
-				that.oDataModel.create("/TradeVehicles", oVehicleDetails[i], null, function (s) {
+				that.getView().getModel('TradeRequestModel').create("/TradeVehicles", oVehicleDetails[i], null, function (s) {
 					/*	alert("ok");*/
 				}, function () {
 
