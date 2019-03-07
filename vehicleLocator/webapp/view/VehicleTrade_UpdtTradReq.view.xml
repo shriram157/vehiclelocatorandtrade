@@ -1,4 +1,4 @@
-<!--<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+<!--/<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
 	controllerName="vehicleLocator.controller.VehicleTrade_UpdtTradReq" 
 	xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form"
 	xmlns:uxap="sap.uxap" xmlns:t="sap.ui.table" xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml">-->

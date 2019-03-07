@@ -1181,7 +1181,7 @@ VehicleDelete:function(){
 				});
 				this.getView().setModel(oI18nModel, "i18n");
 
-				//  get the locale to determine the language. 
+				//  get the locale to determine the language.c 
 				var isLocaleSent = window.location.search.match(/language=([^&]*)/i);
 				if (isLocaleSent) {
 					var sSelectedLocale = window.location.search.match(/language=([^&]*)/i)[1];
