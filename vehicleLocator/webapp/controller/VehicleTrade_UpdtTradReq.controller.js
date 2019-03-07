@@ -197,7 +197,10 @@ sap.ui.define([
 				this.getView().byId("SimpleFormUpdateTrReq").getModel().refresh(true);
 				UpdateTrStatus.push(sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData());
 				var oStatusModel = new sap.ui.model.json.JSONModel(UpdateTrStatus);
-				this.getView().byId("oTradeinRet").setModel(oStatusModel);
+				//============================================================
+				//the below row hashed as there is impact the drop down
+				//==============================================================
+				//this.getView().byId("oTradeinRet").setModel(oStatusModel);
 				/*	var tradeStatus = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Trade_Return;*/
 				var tradeStatus = this.SelectedTradeKey;
 				var tradeId = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Trade_Id.slice(2, 8);
@@ -448,8 +451,14 @@ sap.ui.define([
 			var that = this;
 			var oOfferedVehicle = this.getView().byId("otextId").getText();
 			var SelectedTeade = this.getView().byId("oTradeinRet").getSelectedKey();
+			//================================================================================
+			//=====Yes for offered without select Vehicle======================
+			//=================================================================
 			if (oOfferedVehicle == "YesOffered" && SelectedTeade == "Y") {
 				sap.m.MessageBox.warning("Please select Vechicle");
+				//================================================================================
+				//=====No for offered ======================
+				//=================================================================	
 			} else if (oOfferedVehicle == "RemoveOffered") {
 
 				var Trade_Id = this.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Trade_Id;
@@ -488,6 +497,9 @@ sap.ui.define([
 				//  
 				//write two functions for trade request and vehicle
 				//here left side data only send to backend by taking from simpleform for 'this.getView().byId("").getModel()'
+				//================================================================================
+				//=====No changes======================
+				//=================================================================	
 			} else if (oOfferedVehicle == "") {
 				// for both req and offered vehicle needs to remove from HDB like before Delete operation
 
@@ -527,7 +539,9 @@ sap.ui.define([
 				//  
 				//write two functions for trade request and vehicle
 				//here left side data only send to backend by taking from simpleform for 'this.getView().byId("").getModel()'
-
+				//================================================================================
+				//=====select Vehicle ======================
+				//=================================================================
 			} else if (oOfferedVehicle == "FromFourth") {
 				//delete from both tables and insert new data with updated data (from screen 4)
 
@@ -557,7 +571,10 @@ sap.ui.define([
 					"Method": "DELETE"
 				});
 				var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
-				that.oDataModel.remove(UpdatedTreadeEntity, null, null, function (s) {
+				if (!that.getView().getModel('TradeRequestModel').getSecurityToken()) {
+					that.getView().getModel('TradeRequestModel').refreshSecurityToken();
+				}
+				that.getView().getModel('TradeRequestModel').remove(UpdatedTreadeEntity, null, null, function (s) {
 
 					},
 					function () {
@@ -603,7 +620,7 @@ sap.ui.define([
 			for (var i = 0; i < oVehicleVTN.length; i++) {
 				//	var VehicleUrl=	"/TradeVehicles(Trade_Id.Trade_Id eq'"+Trade_Id+"' and VTN eq'"+oVehicleVTN[i]+ "')";
 				var VehicleUrl = "/TradeVehicles(Trade_Id.Trade_Id='" + Trade_Id + "',VTN='" + oVehicleVTN[i] + "')";
-				that.oDataModel.remove(VehicleUrl, null, null, function (s) {
+				that.getView().getModel('TradeRequestModel').remove(VehicleUrl, null, null, function (s) {
 
 				}, function () {
 
@@ -1472,8 +1489,10 @@ sap.ui.define([
 				"Accept": "application/json",
 				"Method": "POST"
 			});
-
-			that.oDataModel.create("/TradeRequest", oEntry, null, function (s) {
+			if (!that.getView().getModel('TradeRequestModel').getSecurityToken()) {
+				that.getView().getModel('TradeRequestModel').refreshSecurityToken();
+			}
+			that.getView().getModel('TradeRequestModel').create("/TradeRequest", oEntry, null, function (s) {
 				//	that.getView().byId("oTrdareqstat").setText("Request Sent");
 
 			}, function () {
@@ -1813,10 +1832,13 @@ sap.ui.define([
 				"Accept": "application/json",
 				"Method": "POST"
 			});
+			if (!that.getView().getModel('TradeRequestModel').getSecurityToken()) {
+				that.getView().getModel('TradeRequestModel').refreshSecurityToken();
+			}
 
 			/*	that.oDataModel.create("/TradeVehicles", oEntry1, null, function (s) {*/
 			for (var i = 0; i < oVehicleDetails.length; i++) {
-				that.oDataModel.create("/TradeVehicles", oVehicleDetails[i], null, function (s) {
+				that.getView().getModel('TradeRequestModel').create("/TradeVehicles", oVehicleDetails[i], null, function (s) {
 					/*	alert("ok");*/
 				}, function () {
 
