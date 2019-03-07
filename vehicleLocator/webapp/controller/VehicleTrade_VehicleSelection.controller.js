@@ -336,6 +336,9 @@ this.SelectedVehicleFrom=oEvent.getParameter("arguments").SelectedVehicleFrom;
 			// set the model	
 				var model = new sap.ui.model.json.JSONModel(oVehicleModel).getData();
 				model.setSizeLimit(1000);
+				
+				
+				
 				this.getView().setModel(model, "vehicleSelectTableModel");
 				
 										var tableLength = this.getView().getModel("vehicleSelectTableModel").getData().length;
@@ -1083,7 +1086,7 @@ if(that.SelectedVehicleFrom=="VehileTrade_CreateSingle"){
 					new Filter("zzapx", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("zzextcol", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("mktg_desc_en", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-					new Filter("zzordertype", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+				//	new Filter("zzordertype", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("zzadddata4", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("pstsp", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					 
@@ -1092,10 +1095,40 @@ if(that.SelectedVehicleFrom=="VehileTrade_CreateSingle"){
 				aFilters.push(oFilter);
 			}
 
+ 
+
 			this.byId("vehicleSelectTable")
 				.getBinding("items")
 				.filter(aFilters)
 				.sort(aSorters);
+				
+ 
+	// var aFilters = [];
+ //      this.sSearchQuery= oEvt.getSource().getValue();
+ //      if (this.sSearchQuery && this.sSearchQuery.length > 0) {
+ //          var filter = new Filter("vehicleSelectTableModel", sap.ui.model.FilterOperator.Contains, this.sSearchQuery);
+ //          aFilters.push(filter);
+ //      }
+
+ //      // update list binding
+ //      var oTableUpdate = this.getView().byId("vehicleSelectTable");
+ //      var binding = oTableUpdate .getBinding("items");
+ //      binding.filter(aFilters, "Application");
+ //  }			
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 		},
 
 		handleViewSettingsDialogButtonPressed: function (oEvt) {

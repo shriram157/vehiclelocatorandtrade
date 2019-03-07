@@ -18,6 +18,8 @@
 				</customHeader>
 				<content>
 					<tnt:ToolHeader>
+						   <Title id="oDealerCode1" titleStyle="H3" width="auto" textAlign="Left" visible="true" wrapping="false" class="titledealervehiclesearch"/>
+					
 						<Title id="oDealertitle" titleStyle="H3" width="auto" textAlign="Left" visible="true" wrapping="false" class="titledealervehiclesearch"/>
 						<ToolbarSpacer></ToolbarSpacer>
 						<Button text="{i18n>TradeSummary}" type="Transparent" press="TradeSummaryLinkPress"/>

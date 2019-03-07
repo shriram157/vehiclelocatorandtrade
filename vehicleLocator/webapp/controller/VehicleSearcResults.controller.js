@@ -846,7 +846,9 @@ sap.ui.define([
 			var RoutedData = JSON.parse(oEvent.getParameter("arguments").LoginUser);
 			DefaultSuffix = (RoutedData.selectedSuffix).replace(/\//g, "%2F");
 			//	this.getView().byId("VLRSuffix").removeAllItems();
+			var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
 			var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
+		    this.getView().byId("oDealerCode2").setText(LoggedInDealerCode2);                                
 			this.getView().byId("oDealersearchresults").setText(LoggedInDealer);
 
 			var loginUser = oEvent.getParameter("arguments").LoginUser;

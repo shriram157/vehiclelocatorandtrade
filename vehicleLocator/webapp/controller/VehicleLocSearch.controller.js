@@ -182,7 +182,9 @@ sap.ui.define([
 					//  set your model or use the model below - // TODO: 
 					that.getView().setModel(new sap.ui.model.json.JSONModel(BpDealer), "BpDealerModel");
 					sap.ui.getCore().setModel(new sap.ui.model.json.JSONModel(BpDealer), "LoginBpDealerModel");
+					var LoggedInDealerCode1 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
 					var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
+				    that.getView().byId("oDealerCode1").setText(LoggedInDealerCode1); 
 					that.getView().byId("oDealertitle").setText(LoggedInDealer);
 
 					// read the saml attachments the same way 

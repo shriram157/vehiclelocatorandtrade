@@ -65,12 +65,12 @@
                         <Title id="tableHeader1" text="{detailView>/tableCountSelect}"/>
 
                         <ToolbarSpacer/>
-                        <SearchField id="searchVehicleList" liveChange="onLiveChange" showSearchButton="true"
-                                     placeholder="Search table...">
-                            <layoutData>
-                                <OverflowToolbarLayoutData minWidth="200px" maxWidth="300px" shrinkable="true"/>
-                            </layoutData>
-                        </SearchField>
+                        <!--<SearchField id="searchVehicleList" liveChange="onLiveChange" showSearchButton="true"-->
+                        <!--             placeholder="Search table...">-->
+                        <!--    <layoutData>-->
+                        <!--        <OverflowToolbarLayoutData minWidth="200px" maxWidth="300px" shrinkable="true"/>-->
+                        <!--    </layoutData>-->
+                        <!--</SearchField>-->
                         <!--<Button text="Reset" type="Transparent" press="onReset"/>-->
                         <Button tooltip="Sort table by selected fields" icon="sap-icon://drop-down-list"
                                 press="handleViewSettingsDialogButtonPressed" text="Sorting"/>

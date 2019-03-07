@@ -185,10 +185,14 @@
 						<Table id="tableVrade" width="98%" class="sapUiResponsiveMargin"
                    items="{
                     path: 'commentsModel>/',
-                    sorter: {
+                    sorter: [{
                     path: 'Comment_Date',
                     descending: true
-                    }
+                    },
+                    {
+                    path: 'Comment_Id',
+                    descending: true
+                    }]
                     }"
                        noDataText="{i18n>NoData}"
 
@@ -198,6 +202,11 @@
 
                 <!--<headerToolbar>-->
                 <!--    <OverflowToolbar id="otbSubheader">-->
+
+ 
+
+
+
 
                        
                 <!--        <ToolbarSpacer/>-->
@@ -241,15 +250,7 @@
                 </items>
             </Table>			
 				
-				
-				
-				
-				
-				
-				
-				
-				
-				
+
 						<!--<t:Table id="tableVrade" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None"-->
 						<!--		rows="{ path:'/', sorter : [{ path:'Comment_Date', descending : 'true' }] }">-->
 						<!--		<t:columns>-->
@@ -337,49 +338,33 @@
 					</Table>-->
 					<VBox class="sapUiSmallMargin">
 						<form:SimpleForm id="SimpleForrmDisa220" editable="true" layout="ResponsiveGridLayout" labelSpanM="12" adjustLabelSpan="false"
-							emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2">
+							emptySpanL="0" emptySpanM="0" columnsL="3" columnsM="3">
 							<form:content>
 								<core:Title text="" class="Vtaprct1"/>
 								<VBox>
 									<!--	<FlexBox height="100px" alignItems="Start" justifyContent="Start"/>-->
 									<Label text="{i18n>Comments}" class="sapUiSmallMarginBottom"/>
-									<TextArea width="240px" height="100px" id="oComments" value="">
+									<TextArea width="100%" height="100px" id="oComments" value=""
+									showExceededText="false" maxLength="150"   valueState="{= ${/value}.length > 150 ? 'Warning' : 'None' }"	liveChange="handleLiveChangeText" >
 										<layoutData>
 											<l:GridData span="L4 M12 S3"/>
 										</layoutData>
 									</TextArea>
 	<MessageStrip text="{i18n>TradeCreated} {Created_By} {i18n>On} {path:'Created_On',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" class="Messagestrip1"/>
-									<!--<Button text="{i18n>AddComments}" id="oAddbutton" width="142px" enabled="false" press="oAddCommentsArea">
-										<layoutData>
-										<l:GridData span="L5 M12 S3"/>
-									</layoutData>
-								</Button>-->
+ 
 								</VBox>
+ 
+									<VBox>
+								<Text text="{Url}" />
+							    <!--<Label text="" />-->
 								<Button text="{i18n>AddComments}" id="oAddbutton" width="142px" enabled="false" press="oAddCommentsArea">
 									<layoutData>
-										<l:GridData span="L5 M12 S3"/>
+											<l:GridData span="L4 M12 S3"/>
 									</layoutData>
 								</Button>
-								<!--	<FlexBox height="100px" alignItems="End" justifyContent="End">-->
-								<!--	<FlexBox height="200px" alignItems="Start" justifyContent="Start"/>		-->
-								<!--<FlexBox height="200px" alignItems="Start" justifyContent="Start">	-->
-								<!--	<MessageStrip
-									text="{i18n>TradeCreated} {Created_By} {i18n>On} {path:'Created_On',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}"
-									showIcon="false" showCloseButton="false"></MessageStrip>-->
-								<!--</FlexBox>-->
-								<!--<FlexBox height="200px" alignItems="Start" justifyContent="Start">	
-							
-							<Label text="{i18n>TradeCreated}{Created_By} {i18n>On} {path:'Created_On',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}">		
-								
-								</Label>	
-									<layoutData>
-										<l:GridData span="L5 M12 S3"/>
-									</layoutData>
-									</FlexBox>-->
-								<!--<FlexBox height="200px" alignItems="Start" justifyContent="Start">-->
-								<!--	<Text text="Trade Requested Created By {Created_By}" width="100px" id="cretby"/>-->
-								<!--<FlexBox width="7px"></FlexBox>-->
-								<!--	</FlexBox>-->
+									</VBox>
+						 
+		 
 								<core:Title text="" class="Vtaprct1"/>
 								<VBox>
 									<Text

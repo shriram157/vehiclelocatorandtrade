@@ -656,7 +656,7 @@ VehicleDelete:function(){
 
 								}
 
-								Created_By = truncateString(Created_By, 9);
+						Created_By = truncateString(Created_By, 12);
 
 								var Created_On = this.getView().byId("SimpleFormUpdateTrReq").getModel().oData.Created_On;
 
@@ -964,7 +964,7 @@ VehicleDelete:function(){
 
 										}
 
-										Created_By = truncateString(Created_By, 9);
+								Created_By = truncateString(Created_By, 12);
 
 										var oTradeComment = {
 

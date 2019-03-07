@@ -131,8 +131,13 @@ sap.ui.define([
 						this.sPrefix = "";
 
 					}
+					
+	// do not fetch the entire database and changing this to use a filter. 
+	// https://tci-dev-vehiclelocatorandtrade-xsjs.cfapps.us10.hana.ondemand.com/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id.Trade_Id%20eq%20%27TR000245%27
+	// ttps://tci-dev-vehiclelocatorandtrade-xsjs.cfapps.us10.hana.ondemand.com/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id.Trade_Id eq 'TR000245'
+					
 					this.nodeJsUrl = this.sPrefix;
-					that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment";
+					that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id.Trade_Id eq '"+ this.Tradeid +"'";
 
 					$.ajax({
 						url: that.oDataUrl,
@@ -249,7 +254,11 @@ sap.ui.define([
 
 					}
 					this.nodeJsUrl = this.sPrefix;
-					that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment";
+					
+					
+					that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id.Trade_Id eq '"+ this.Tradeid +"'";		
+					
+					// that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment";
 					$.ajax({
 						url: that.oDataUrl,
 						method: "GET",
@@ -351,7 +360,8 @@ sap.ui.define([
 
 				}
 				this.nodeJsUrl = this.sPrefix + "/vehicleTrade";
-				that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment";
+					that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id.Trade_Id eq '"+ this.Tradeid +"'";
+				// that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment";
 				$.ajax({
 					url: that.oDataUrl,
 					method: "GET",
@@ -430,7 +440,7 @@ sap.ui.define([
 
 			}
 
-					Created_By = truncateString(Created_By, 9);
+			Created_By = truncateString(Created_By, 12);
 
 					var oTradeComment = {
 
@@ -476,7 +486,8 @@ sap.ui.define([
 
 				}
 				that.nodeJsUrl = that.sPrefix;
-				that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment";
+		that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id.Trade_Id eq '"+ that.Tradeid +"'";			
+				// that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment";
 				$.ajax({
 					url: that.oDataUrl,
 					method: "GET",
@@ -748,7 +759,7 @@ sap.ui.define([
 
 			}
 
-				Created_By = truncateString(Created_By, 9);
+		Created_By = truncateString(Created_By, 12);
 
 				var oTradeComment = {
 
@@ -843,7 +854,7 @@ sap.ui.define([
 
 			}
 
-			Created_By = truncateString(Created_By, 9);
+	Created_By = truncateString(Created_By, 12);
 
 			var Created_On = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_On;
 			/*	Created_On = this.DatesFormatting(Created_On);*/
@@ -988,7 +999,7 @@ sap.ui.define([
 
 			}
 
-			Created_By = truncateString(Created_By, 9);
+	Created_By = truncateString(Created_By, 12);
 
 			var Created_On = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_On;
 		/*	Created_On = this.DatesFormatting(Created_On);*/
@@ -1147,7 +1158,7 @@ sap.ui.define([
 
 			}
 
-			Created_By = truncateString(Created_By, 9);
+	Created_By = truncateString(Created_By, 12);
 
 			var Created_On = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_On;
 			var Changed_on = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Changed_on;
@@ -1491,7 +1502,7 @@ sap.ui.define([
 
 			}
 
-			Created_By = truncateString(Created_By, 9);
+	Created_By = truncateString(Created_By, 12);
 			var Created_On = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_On;
 		/*	Created_On = this.DatesFormatting(Created_On);*/
 		//	var Changed_on = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Changed_on;
@@ -1639,7 +1650,7 @@ sap.ui.define([
 
 			}
 
-			Created_By = truncateString(Created_By, 9);
+	Created_By = truncateString(Created_By, 12);
 			var Created_On = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_On;
 			/*	Created_On = this.DatesFormatting(Created_On);*/
 		/*	var Changed_on = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Changed_on;*/
@@ -2342,7 +2353,16 @@ sap.ui.define([
 					}
 				}
 
-			}
+			},
+				handleLiveChangeText: function(oEvent) {
+					var oTextArea = oEvent.getSource(),
+							iValueLength = oTextArea.getValue().length,
+							iMaxLength = oTextArea.getMaxLength(),
+							sState = iValueLength > iMaxLength ? "Warning" : "None";
+
+					oTextArea.setValueState(sState);
+				}
+
 	/*	onBack :function()
 		{
 		this.getRouter().navTo("VehicleSearcResults");	
