@@ -531,7 +531,7 @@ sap.ui.define([
 		},
 		oUpdateTradeRequest: function () {
 			var SimpleFormAproveTrReq = this.getView().byId("SimpleFormAproveTrReq").getModel();
-			var CommentTableData = this.getView().byId("tableVrade").getModel();
+			var CommentTableData = this.getView().byId("tableVrade").getModel("commentsModel");
 			sap.ui.getCore().setModel(SimpleFormAproveTrReq, "SelectedSimpleFormAproveTrReq");
 			sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").setProperty("/SelectedTradeComment", CommentTableData);
 			this.getRouter().navTo("VehicleTrade_UpdtTradReq",{
@@ -700,8 +700,8 @@ sap.ui.define([
 			} else {
 */
 			var Comment = Message;
-			if (this.getView().byId("tableVrade").getModel() != undefined) {
-				var CommentData = this.getView().byId("tableVrade").getModel().getData();
+			if (this.getView().byId("tableVrade").getModel("commentsModel") != undefined) {
+				var CommentData = this.getView().byId("tableVrade").getModel("commentsModel").getData();
 
 				function dynamicSort(property) {
 					var sortOrder = 1;
@@ -1359,7 +1359,7 @@ sap.ui.define([
 			var oModelRequested = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Model;
 			var oSeries = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Series;
 
-			var oCommentData = this.getView().byId("tableVrade").getModel().oData;
+			var oCommentData = this.getView().byId("tableVrade").getModel("commentsModel").oData;
 
 			var oComment = [];
 			for (var i = 0; i < oCommentData.length; i++) {
