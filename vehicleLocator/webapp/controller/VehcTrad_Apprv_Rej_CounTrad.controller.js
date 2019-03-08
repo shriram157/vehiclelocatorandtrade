@@ -1365,14 +1365,14 @@ sap.ui.define([
 		BlocIdSuccess: function (ZzblockId) {
 			var that = this;
 			var oBlockId = ZzblockId;
-			var BlockingDealer = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Dealer;
-			var BlockedDealer = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requesting_Dealer;
+			var BlockingDealer = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requesting_Dealer; 
+			var BlockedDealer = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Dealer;
 			var oModelRequested = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Model;
 			var oSeries = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Series;
 
 			var oCommentData = this.getView().byId("tableVrade").getModel("commentsModel").oData;
 
-			var oComment = [];
+		/*	var oComment = [];
 			for (var i = 0; i < oCommentData.length; i++) {
 				oComment.push(oCommentData[i].Comment_Txt);
 			}
@@ -1383,8 +1383,7 @@ sap.ui.define([
 			}
 
 			var BlockStartdate = "\/Date(1543449600000)\/";
-			var Blockenddate = "\/Date(1543536000000)\/";
-			var dncBlockedDays = this.getView().byId("VT_ARCDnc").getValue();
+			var Blockenddate = "\/Date(1543536000000)\/";*/
 			/*	var BlockStartdate = oDateFormat1.format(new Date());
 					var dncBlockedDays = this.getView().byId("VT_ARCDnc").getValue();
 				var someDate = new Date();
@@ -1393,8 +1392,26 @@ sap.ui.define([
 
 				Blockenddate = oDateFormat1.format(new Date(Blockenddate));*/
 			/*	var Createdby = sap.ui.getCore().LoginDetails.Username;*/
-			var Createdby = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
-
+		/*	var Createdby = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');*/
+               var oComment ="Via Trade Request";
+     	       var BlockStartdateval = new Date();
+		       Date.parse(BlockStartdateval);
+		       var BlockStartdate = "/Date(" +Date.parse(BlockStartdateval)+ ")/";
+		 
+		        var dncBlockedDays = this.getView().byId("VT_ARCDnc").getValue();
+		        Date.prototype.addDays = function(days) {
+               this.setDate(this.getDate() + parseInt(days));
+               return this;
+               };
+			     var BlockenddateVal2 = new Date();
+			     BlockenddateVal2.addDays(dncBlockedDays);
+			      Date.parse(BlockenddateVal2);
+			      var Blockenddate = "/Date(" +Date.parse(BlockenddateVal2)+ ")/";
+			     
+		    var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
+			var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
+			var Createdby  = LoggedinUserFname+LoggedinUserLname;
+       
 			function truncateString(str, num) {
 				if (num > str.length) {
 					return str;
@@ -1405,7 +1422,7 @@ sap.ui.define([
 
 			}
 
-			Createdby = truncateString(Createdby, 9);
+			Createdby = truncateString(Createdby, 12);
 
 			/*	var Createdon = oDateFormat.format(new Date());*/
 			var Createdon = "";
