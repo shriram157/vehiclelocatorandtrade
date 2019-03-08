@@ -730,17 +730,15 @@ sap.ui.define([
 
 			var Created_By = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
 
-<<<<<<< HEAD
-						Created_By = truncateString(Created_By, 12);
-=======
+			// << << << < HEAD
+			Created_By = truncateString(Created_By, 12); //=== === =
 			function truncateString(str, num) {
 				if (num > str.length) {
 					return str;
 				} else {
 					str = str.substring(0, num);
 					return str + "...";
-				}
->>>>>>> refs/heads/master
+				}//>>> >>> > refs / heads / master
 
 			}
 
@@ -1053,11 +1051,9 @@ sap.ui.define([
 
 					Created_By = truncateString(Created_By, 9);
 
-<<<<<<< HEAD
-								Created_By = truncateString(Created_By, 12);
-=======
-					var oTradeComment = {
->>>>>>> refs/heads/master
+					// << << << < HEAD
+					Created_By = truncateString(Created_By, 12); //=== === =
+					var oTradeComment = { //>>> >>> > refs / heads / master
 
 						"Trade_Id.Trade_Id": TradeId,
 						"Comment_Id": oComment_Id,
