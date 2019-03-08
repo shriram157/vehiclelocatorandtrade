@@ -44,7 +44,7 @@
 								</FlexBox>
 							</HBox>
 
-		          <Table id="vehicleSelectTable" width="auto" class="sapUiResponsiveMargin"
+		          <Table id="vehicleSelectTable" width="auto" class="sapUiResponsiveMargin" alternateRowColors="true" 
                    items="{
                     path: 'vehicleSelectTableModel>/',
                     sorter: {

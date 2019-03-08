@@ -198,7 +198,7 @@
 					<!--	</t:columns>-->
 					<!--</t:Table>-->
 	
-	            <Table id="table1VSR" width="98%" class="sapUiResponsiveMargin"
+	            <Table id="table1VSR" width="98%" class="sapUiResponsiveMargin" alternateRowColors="true" 
                    items="{
                     path: 'vehicleSearchTableModel>/',
                     sorter: {

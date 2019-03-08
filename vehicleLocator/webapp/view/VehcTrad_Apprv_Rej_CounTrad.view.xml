@@ -182,7 +182,7 @@
 			<f:content>
 				
 				
-						<Table id="tableVrade" width="98%" class="sapUiResponsiveMargin"
+						<Table id="tableVrade" width="98%" class="sapUiResponsiveMargin" alternateRowColors="true" 
                    items="{
                     path: 'commentsModel>/',
                     sorter: [{

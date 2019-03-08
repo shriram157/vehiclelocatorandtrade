@@ -2337,16 +2337,6 @@ if(sap.ui.Device.system.phone){
 				this._sortDialog = sap.ui.xmlfragment("vehicleSortDialog", "vehicleLocator.fragment.vehicleSortDialog", this);
 			}
 			this.getView().addDependent(this._sortDialog);
-			// this._sortDialog.addStyleClass(this.getOwnerComponent().getContentDensityClass());
-			// this._productHierarchyDialog.getBinding("items").filter([
-			//   new Filter({
-
-			//     filters: [
-			//       new Filter("HierarchyType", sap.ui.model.FilterOperator.EQ, "0")
-
-			//     ]
-			//   })
-			// ]);
 
 			this._sortDialog.open();
 

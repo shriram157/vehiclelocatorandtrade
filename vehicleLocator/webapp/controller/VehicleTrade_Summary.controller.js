@@ -72,11 +72,11 @@ sap.ui.define([
 			var that = this;
 
 			that.oTable = that.getView().byId("table1vts");
-			that.oTableSelectObj = oEvt.getSource().getBindingContext().getObject();
+			that.oTableSelectObj = oEvt.getSource().getBindingContext("vehicleTradeSummaryTable").getObject();
     // sap.ui.getCore().VehicheSearcResults=this.getView().byId("table1vts").getModel().getData();
 			if (that.oTableSelectObj != undefined) {
 
-				var SelectedPath = oEvt.getSource().getBindingContext().getPath().split("/")[1];
+				var SelectedPath = oEvt.getSource().getBindingContext("vehicleTradeSummaryTable").getPath().split("/")[1];
              that.oTableSelectObj.FromRequesting=true;
              	var model = new sap.ui.model.json.JSONModel(that.oTableSelectObj);
              	model.setSizeLimit(1000);
@@ -455,12 +455,7 @@ sap.ui.define([
         }
         
 		}
-				
-				
-				
-				
-				
-				
+
 				var oModel = new sap.ui.model.json.JSONModel(filtered);
 				sap.ui.getCore().setModel(oModel, "oVehicleTrade_Summary");
 				//	console(finalArray);
@@ -476,7 +471,13 @@ var  Dealer=userAttributesModellen[0].DealerCode; //security login code
 				var RequesttingDealer=RequesttingDealer1.filter(function(x){return x.Requesting_Dealer.slice(-5)==Dealer &&(x.Trade_Status=="A"||x.Trade_Status=="S"||x.Trade_Status=="C"||x.Trade_Status=="X" ||x.Trade_Status=="R"||x.Trade_Status=="F")});
 				var model= new sap.ui.model.json.JSONModel(RequesttingDealer);
 				model.setSizeLimit(1000);
-				that.getView().byId("table1vts").setModel(model);
+				
+							 
+				that.getView().setModel(model, "vehicleTradeSummaryTable");
+				
+				
+				
+				// that.getView().byId("table1vts").setModel(model);
 			/*	sap.ushell.components.model = this.getView().byId("table1vts");*/
 				var today = new Date();
 var CurrentDate = Date.parse(today);
@@ -490,7 +491,8 @@ lastthirtyDays=Date.parse(lastthirtyDays);
  lastthirtyDays = '/Date(' + lastthirtyDays + ')/';
 var aTableFilters = [];
 var table = that.getView().byId("table1vts");
-var oBinding = table.getBinding("rows");
+// var oBinding = table.getBinding("rows");
+var oBinding = table.getBinding("items");
 var oFilter = new sap.ui.model.Filter('Changed_on',sap.ui.model.FilterOperator.GE,lastthirtyDays);
 // var oFilter = new sap.ui.model.Filter('Changed_on',sap.ui.model.FilterOperator.BT,CurrentDate,lastthirtyDays);
 //var oFilter = new sap.ui.model.Filter('Changed_on',sap.ui.model.FilterOperator.LE,lastthirtyDays);
@@ -502,11 +504,6 @@ oBinding.filter(aTableFilters);
 				that.getView().byId("table1vts").sort(oProductNameColumn, SortOrder.Descending);*/
 //sap.ushell.components.getBinding("rows").filter(aTableFilters);
 
-
- 
- 
- 
- 
 				that.getView().setModel(model, "oVehiclTrade_SummaryRequestingData");
 				var RequestedDealer1=sap.ui.getCore().getModel("oVehicleTrade_Summary").getData().filter(function(x){return x.Requested_Dealer!=null;});
 					var RequestedDealer=RequestedDealer1.filter(function(x){return x.Requested_Dealer.slice(-5)==Dealer&&(x.Trade_Status=="A"||x.Trade_Status=="S"||x.Trade_Status=="C"||x.Trade_Status=="X" ||x.Trade_Status=="R"||x.Trade_Status=="F")});
@@ -603,7 +600,42 @@ oBinding.filter(aTableFilters);
 					}
 				}
 
+			},
+					handleViewSettingsDialogButtonPressed: function (oEvt) {
+			// this._oResponsivePopover = sap.ui.xmlfragment("vehicleLocator.fragment.VehicleSearchResult", this);
+			if (!this._sortDialog) {
+				this._sortDialog = sap.ui.xmlfragment("VehicleTradeSummarySortDialog", "vehicleLocator.fragment.VehicleTradeSummarySortDialog", this);
 			}
+			this.getView().addDependent(this._sortDialog);
+
+			this._sortDialog.open();
+
+		},
+		
+				handleConfirm: function (oEvent) {
+			// This event is triggered when user
+			// clicks on Ok button on
+			// fragment popup
+			var aSorters = [];
+			var oView = this.getView();
+			var oTable = oView
+				.byId("table1vts");
+			// Get the parameters for sorting
+			var mParams = oEvent
+				.getParameters();
+			var oBinding = oTable
+				.getBinding("items");
+			var sPath = mParams.sortItem
+				.getKey();
+			var bDescending = mParams.sortDescending;
+			aSorters.push(new Sorter(sPath,
+				bDescending));
+			oBinding.sort(aSorters);
+
+		},
+		handleCancel: function (oEvent) {
+			// this._sortDialog.destroy(true);
+		},
 
 	});
 });

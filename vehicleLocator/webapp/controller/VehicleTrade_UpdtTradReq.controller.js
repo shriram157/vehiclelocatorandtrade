@@ -730,19 +730,19 @@ sap.ui.define([
 
 			var Created_By = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
 
-			// << << << < HEAD
-			Created_By = truncateString(Created_By, 12); //=== === =
+ 
 			function truncateString(str, num) {
 				if (num > str.length) {
 					return str;
 				} else {
 					str = str.substring(0, num);
 					return str + "...";
-				}//>>> >>> > refs / heads / master
+				}
+ 
 
 			}
 
-			Created_By = truncateString(Created_By, 9);
+			Created_By = truncateString(Created_By, 12);
 
 			var Created_On = this.getView().byId("SimpleFormUpdateTrReq").getModel().oData.Created_On;
 
@@ -866,7 +866,7 @@ sap.ui.define([
 				Status: ostatus,
 				Suffix: Suffix,
 
-				VTN: vtn,
+				VTN: vtn
 			};
 			oEntry1["Trade_Id.Trade_Id"] = oEntry.Trade_Id;
 
@@ -1016,7 +1016,7 @@ sap.ui.define([
 							var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
 							return result * sortOrder;
 						};
-					};
+					}
 
 					CommentData.sort(dynamicSort("Comment_Id"));
 					if (CommentData.length != 0) {
@@ -1049,12 +1049,10 @@ sap.ui.define([
 
 					}
 
-					Created_By = truncateString(Created_By, 9);
 
-					// << << << < HEAD
-					Created_By = truncateString(Created_By, 12); //=== === =
-					var oTradeComment = { //>>> >>> > refs / heads / master
+								Created_By = truncateString(Created_By, 12);
 
+					var oTradeComment = {
 						"Trade_Id.Trade_Id": TradeId,
 						"Comment_Id": oComment_Id,
 						"Comment_Txt": Comment,
@@ -1540,7 +1538,7 @@ sap.ui.define([
 				Series: oSeriesReq,
 				Status: ostatusReq,
 				Suffix: oSuffixReq,
-				VTN: ovtnReq,
+				VTN: ovtnReq
 			};
 			oEntry2["Trade_Id.Trade_Id"] = VehicleTrade_Id;
 			var oVehicleDetails = [];
@@ -1571,7 +1569,7 @@ sap.ui.define([
 					Series: Series,
 					Status: ostatus,
 					Suffix: Suffix,
-					VTN: vtn,
+					VTN: vtn
 				};
 				oEntry1["Trade_Id.Trade_Id"] = VehicleTrade_Id;
 				oVehicleDetails.push(oEntry1);
@@ -1671,7 +1669,7 @@ sap.ui.define([
 				Series: oSeriesReq,
 				Status: ostatusReq,
 				Suffix: oSuffixReq,
-				VTN: ovtnReq,
+				VTN: ovtnReq
 			};
 			oEntry2["Trade_Id.Trade_Id"] = VehicleTrade_Id;
 			var oVehicleDetails = [];
@@ -1701,7 +1699,7 @@ sap.ui.define([
 					Series: Series,
 					Status: ostatus,
 					Suffix: Suffix,
-					VTN: vtn,
+					VTN: vtn
 				};
 				oEntry1["Trade_Id.Trade_Id"] = VehicleTrade_Id;
 				oVehicleDetails.push(oEntry1);
@@ -1777,7 +1775,7 @@ sap.ui.define([
 				Series: oSeriesReq,
 				Status: ostatusReq,
 				Suffix: oSuffixReq,
-				VTN: ovtnReq,
+				VTN: ovtnReq
 			};
 			oEntry2["Trade_Id.Trade_Id"] = VehicleTrade_Id;
 			var oVehicleDetails = [];
@@ -1807,7 +1805,7 @@ sap.ui.define([
 					Series: Series,
 					Status: ostatus,
 					Suffix: Suffix,
-					VTN: vtn,
+					VTN: vtn
 				};
 				oEntry1["Trade_Id.Trade_Id"] = VehicleTrade_Id;
 				oVehicleDetails.push(oEntry1);
