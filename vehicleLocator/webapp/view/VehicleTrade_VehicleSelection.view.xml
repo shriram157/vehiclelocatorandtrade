@@ -72,7 +72,7 @@
                         <!--    </layoutData>-->
                         <!--</SearchField>-->
                         <!--<Button text="Reset" type="Transparent" press="onReset"/>-->
-                        <Button tooltip="Sort table by selected fields" icon="sap-icon://drop-down-list"
+                        <Button tooltip="Sort table by selected fields"  icon="sap-icon://sort"	
                                 press="handleViewSettingsDialogButtonPressed" text="Sorting"/>
                     </OverflowToolbar>
                 </headerToolbar>

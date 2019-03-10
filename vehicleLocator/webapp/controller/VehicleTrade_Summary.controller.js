@@ -99,11 +99,11 @@ sap.ui.define([
 
 			var that = this;
 			that.oRecTable = that.getView().byId("table1Rts");
-			that.oRecTableSelectObj =  oEvent.getSource().getBindingContext().getObject();
+			that.oRecTableSelectObj =  oEvent.getSource().getBindingContext("receivedRequestTable").getObject();
 			
 				if (that.oRecTableSelectObj != undefined) {
 
-				var SelectedPath = oEvent.getSource().getBindingContext().getPath().split("/")[1];
+				var SelectedPath = oEvent.getSource().getBindingContext("receivedRequestTable").getPath().split("/")[1];
               that.oRecTableSelectObj.FromRequesting=false;
              	var model = new sap.ui.model.json.JSONModel(that.oRecTableSelectObj);
              	model.setSizeLimit(1000);
@@ -125,9 +125,7 @@ sap.ui.define([
 				sap.m.MessageBox.warning("Please select the trade");
 				that.oRecTableSelectObj = undefined;
 			}
-			
-			
-			
+
 		},
 		
 
@@ -510,10 +508,14 @@ oBinding.filter(aTableFilters);
 				var model= new sap.ui.model.json.JSONModel(RequestedDealer);
 					model.setSizeLimit(1000);
 				that.getView().setModel(model, "oVehiclTrade_SummaryRequestedData");
-				that.getView().byId("table1Rts").setModel(model);
+				
+				that.getView().setModel(model, "receivedRequestTable");
+				
+				// that.getView().byId("table1Rts").setModel(model);
 				var aTableFilters = [];
 var table = that.getView().byId("table1Rts");
-var oBinding = table.getBinding("rows");
+// var oBinding = table.getBinding("rows");
+  var oBinding = table.getBinding("items");
 var oFilter = new sap.ui.model.Filter('Changed_on',sap.ui.model.FilterOperator.GE,lastthirtyDays);
 // var oFilter = new sap.ui.model.Filter('Changed_on',sap.ui.model.FilterOperator.BT,CurrentDate,lastthirtyDays);
 //var oFilter = new sap.ui.model.Filter('Changed_on',sap.ui.model.FilterOperator.LE,lastthirtyDays);
@@ -636,6 +638,45 @@ oBinding.filter(aTableFilters);
 		handleCancel: function (oEvent) {
 			// this._sortDialog.destroy(true);
 		},
+
+
+					receivedTradeRequestSortDialogButtonPressed: function (oEvt) {
+			// this._oResponsivePopover = sap.ui.xmlfragment("vehicleLocator.fragment.VehicleSearchResult", this);
+			if (!this._sortDialog) {
+				this._sortDialog = sap.ui.xmlfragment("ReceivedTradeRequestSortDialog", "vehicleLocator.fragment.ReceivedTradeRequestSortDialog", this);
+			}
+			this.getView().addDependent(this._sortDialog);
+
+			this._sortDialog.open();
+
+		},
+		
+				handleConfirmReceiveTradeRequest: function (oEvent) {
+			// This event is triggered when user
+			// clicks on Ok button on
+			// fragment popup
+			var aSorters = [];
+			var oView = this.getView();
+			var oTable = oView
+				.byId("table1Rts");
+			// Get the parameters for sorting
+			var mParams = oEvent
+				.getParameters();
+			var oBinding = oTable
+				.getBinding("items");
+			var sPath = mParams.sortItem
+				.getKey();
+			var bDescending = mParams.sortDescending;
+			aSorters.push(new Sorter(sPath,
+				bDescending));
+			oBinding.sort(aSorters);
+
+		},
+ 
+
+
+
+
 
 	});
 });

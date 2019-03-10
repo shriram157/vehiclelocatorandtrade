@@ -1,0 +1,16 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog
+		confirm="handleConfirmReceiveTradeRequest">
+		<sortItems>
+			<ViewSettingsItem selected="true" key="Trade_Id" text="Request" />
+			<ViewSettingsItem key="Requested_Dealer" text="Dealer"  />
+		    <ViewSettingsItem key="Model" text="Model" />
+            <ViewSettingsItem key="Suffix" text="Suffix" />
+            <ViewSettingsItem key="Trade_Return" text="Trade in Return" />
+            <ViewSettingsItem key="Trade_Status" text="Trade Status" />	
+
+		</sortItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>
