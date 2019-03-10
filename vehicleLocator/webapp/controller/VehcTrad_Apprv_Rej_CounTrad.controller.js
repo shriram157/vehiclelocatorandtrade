@@ -682,9 +682,10 @@ sap.ui.define([
 					} else if (a == "S") {
 						var Message = odata.d.results[0].Message.trim();
 							function fnCallbackMessageBox1(oAction) {
-							that.getRouter().navTo("VehicleTrade_Summary", {
+						/*	that.getRouter().navTo("VehicleTrade_Summary", {
 								DataClicked: "Yes"
-							});
+							});*/
+						
 							}
 						sap.m.MessageBox.success(Message, {
 							actions: [sap.m.MessageBox.Action.OK ],
@@ -936,15 +937,19 @@ sap.ui.define([
 			});
 			var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
 			that.oDataModel.update(UpdatedTreadeEntity, oEntry, null, function (s) {
+//	that.VehicleTrade_SummaryData();
+
+that.getView().byId("SimpleFormAproveTrReq").getModel().getData().Trade_Status="A"; 
+that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
 
 				/*	that.TradeComment(oEntry);
 					that.TradeVehcles(oEntry);
 					that.TradeStatus(oEntry);
 					that.VehicleTrade_Summary();
 				*/
-				that.getRouter().navTo("VehicleTrade_Summary", {
+			/*	that.getRouter().navTo("VehicleTrade_Summary", {
 					DataClicked: "Yes"
-				});
+				});*/
 
 				//	that.getRouter().navTo("VehicleTrade_Summary");
 			}, function () {
@@ -2264,6 +2269,7 @@ sap.ui.define([
 				that.getView().byId("SimpleFormAproveTrReq").setModel(sap.ui.getCore().getModel("ApprovRej"));
 				//	that.getView().byId("SimpleFormAproveTrReq").getModel("ApprovRej").setProperty("/OffredVehicle", Offered);
 				that.getView().byId("SimpleFormAproveTrReq").bindElement("/");
+				that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
 				//	sap.ui.getCore().setModel(oModel, "oVehicleTrade_Summary");
 
 				sap.ui.core.BusyIndicator.hide();

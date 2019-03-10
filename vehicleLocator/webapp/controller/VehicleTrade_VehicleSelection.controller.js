@@ -16,7 +16,7 @@ sap.ui.define([
 				this._oResponsivePopover = sap.ui.xmlfragment("vehicleLocator.fragment.VehicleSearchResult", this);
 				this._oResponsivePopover.setModel(this.getView().getModel());
 			}
-			var oTable = this.getView().byId("table");
+			var oTable = this.getView().byId("vehicleSelectTable");
 			var that = this;
 
 			var oViewModel = new sap.ui.model.json.JSONModel({
@@ -167,12 +167,14 @@ sap.ui.define([
 			this.SelectedVehicleFrom = oEvent.getParameter("arguments").SelectedVehicleFrom;
 			var that = this;
 			var Model = sap.ui.getCore().getModel("SelectedSeriesFromScreen1");
-			that.getView().byId("oVt_SeriesCmbo").setModel(Model);
+		that.getView().byId("oVt_SeriesCmbo").setSelectedKey("");
 			if (Model != undefined) {
+					that.getView().byId("oVt_SeriesCmbo").setModel(Model);
 				var SeleKey = Model.getProperty("/SelectedSeries");
 				that.getView().byId("oVt_SeriesCmbo").setSelectedKey(SeleKey);
 				that.handleoVt_SeriesChange();
-			} else {
+			} else if(that.getView().byId("oVt_SeriesCmbo").getModel()==undefined&&Model==undefined) {
+				
 				var that = this;
 				/*var Array = [];*/
 				sap.ui.core.BusyIndicator.show();
@@ -253,6 +255,7 @@ sap.ui.define([
 			debugger
 
 			var that = this;
+			sap.ui.core.BusyIndicator.show();
 			var oDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerKey;
 			var Series = this.getView().byId("oVt_SeriesCmbo").getSelectedKey();
 
@@ -344,10 +347,11 @@ sap.ui.define([
 					sap.ui.getCore().setModel(oJsonModel, "oVehicleSelectionResults");
 					that.SeriesFilteredBinding();
 					/*  sap.ui.core.BusyIndicator.hide();*/
-
+     	sap.ui.core.BusyIndicator.hide();
 				},
 				error: function () {
 					that.SeriesFilteredBindingNodata();
+					sap.ui.core.BusyIndicator.hide();
 					/*	 sap.ui.core.BusyIndicator.hide();*/
 				}
 			});
@@ -381,10 +385,10 @@ sap.ui.define([
 		},
 		SeriesFilteredBindingNodata: function () {
 			var oVehicleModel = new sap.ui.model.json.JSONModel([]);
-			this.getView().byId("table").setModel(oVehicleModel);
+			this.getView().byId("vehicleSelectTable").setModel(oVehicleModel);
 
 			var oProductNameColumn = this.getView().byId("oETAFromId");
-			this.getView().byId("table").sort(oProductNameColumn, SortOrder.Ascending);
+			this.getView().byId("vehicleSelectTable").sort(oProductNameColumn, SortOrder.Ascending);
 		},
 
 		oTradeLinkPress: function (oEvt) {
@@ -453,6 +457,20 @@ sap.ui.define([
 
 						}
 
+if((CurrentETAFrom==""||CurrentETAFrom==null)&&(CurrentETATo!=""&&CurrentETATo!=null)){
+	CurrentETAFrom=CurrentETATo
+}
+else if((CurrentETAFrom!=""&&CurrentETAFrom!=null)&&(CurrentETATo==""||CurrentETATo==null)){
+	CurrentETATo=CurrentETAFrom
+}
+else if((CurrentETAFrom==""||CurrentETAFrom==null)&&(CurrentETATo==""||CurrentETATo==null)){
+	/*CurrentETATo=Data.Calculate.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1')
+	CurrentETAFrom=Data.Calculate.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1')*/
+}
+
+
+
+
 						var date1 = new Date(CurrentETAFrom);
 						var date2 = new Date(CurrentETATo);
 						var timeDiff = Math.abs(date2.getTime() - date1.getTime());
@@ -465,8 +483,14 @@ sap.ui.define([
 						}
 						var Eta = Data.Calculate;
 						var Calculate = Eta.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1');
+						                     
 						var Proposed_ETA_To = addDays(Calculate, CurrentEtadiff);
+						if(Proposed_ETA_To!="Invalid Date"){
 						that.oSelectedItem.Proposed_ETA_To = Proposed_ETA_To;
+						}
+						else{
+							that.oSelectedItem.Proposed_ETA_To ="";
+						}
 						that.oSelectedItem.Proposed_ETA_From = Data.Calculate;
 						that.oSelectedItem.FromFourth = "FromFourth";
 						//that.selectedTrade=escape(JSON.stringify(that.selectedTrade));
@@ -490,25 +514,37 @@ sap.ui.define([
 							that.oSelectedItem.Suffix_Desc = that.oSelectedItem.suffix_desc_en
 							that.oSelectedItem.Int_Colour_Desc = that.oSelectedItem.mrktg_int_desc_en
 							that.oSelectedItem.APX = that.oSelectedItem.zzapx
+								that.oSelectedItem.Ext_Colour = that.oSelectedItem.zzextcol
 							that.oSelectedItem.Ext_Colour_Desc = that.oSelectedItem.mktg_desc_en;
 							that.oSelectedItem.Status = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Status;
 							that.oSelectedItem.Order_Type = that.oSelectedItem.zzordertype;
 							//	var Req_Current_ETA_From=Number(that.oSelectedItem.pstsp);
+						/*	that.oSelectedItem.Req_Current_ETA_From = that.oSelectedItem.pstsp;*/
+							that.oSelectedItem.Off_Current_ETA_To = that.oSelectedItem.pstsp;
+							
 
-							that.oSelectedItem.Off_Current_ETA_From = that.oSelectedItem.pstsp;
 
 							var dateString = that.oSelectedItem.zzadddata4;
+							if(dateString!=""&&dateString!=undefined&&dateString!=null){
+							
 							var year = dateString.substring(0, 4);
 							var month = dateString.substring(4, 6);
 							var day = dateString.substring(6, 8);
 
-							var Req_Current_ETA_To = new Date(year, month - 1, day);
-							Req_Current_ETA_To = new Date(Req_Current_ETA_To);
-							Req_Current_ETA_To = Date.parse(Req_Current_ETA_To);
+							var Off_Current_ETA_From = new Date(year, month - 1, day);
+							Off_Current_ETA_From = new Date(Off_Current_ETA_From);
+							Off_Current_ETA_From = Date.parse(Off_Current_ETA_From);
 
-							that.oSelectedItem.Off_Current_ETA_To = "/Date(" + Req_Current_ETA_To + ")/";
+
+							that.oSelectedItem.Off_Current_ETA_From = "/Date(" + Off_Current_ETA_From + ")/";
+							}
+							else{
+									that.oSelectedItem.Off_Current_ETA_From = "/Date(0)/";
+							}
+
 							//	var Proposed_ETA_From=Number(that.oSelectedItem.Proposed_ETA_From);
 							var dateString = that.oSelectedItem.Proposed_ETA_From;
+								if(dateString!=""&&dateString!=undefined&&dateString!=null){
 							var year = dateString.substring(0, 4);
 							var month = dateString.substring(4, 6);
 							var day = dateString.substring(6, 8);
@@ -518,6 +554,11 @@ sap.ui.define([
 							Proposed_ETA_From = Date.parse(Proposed_ETA_From);
 
 							that.oSelectedItem.Off_Proposed_ETA_From = "/Date(" + Proposed_ETA_From + ")/";
+
+								}else{
+									that.oSelectedItem.Off_Proposed_ETA_From = "/Date(0)/";	
+								}
+
 							var Req_Proposed_ETA_To = Number(that.oSelectedItem.Proposed_ETA_To);
 							Req_Proposed_ETA_To = new Date(Req_Proposed_ETA_To);
 							Req_Proposed_ETA_To = Date.parse(Req_Proposed_ETA_To);
@@ -547,7 +588,71 @@ sap.ui.define([
 								SelectedTrade: "VehicleTradeVehicle"
 							});
 						} else if (that.SelectedVehicleFrom == "VehileTrade_UpdtTradReq") {
-							sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").setProperty("/VehicleTrade_UpdtTradReqVehicle", that.oSelectedItem);
+								that.oSelectedItem.Offered_Vtn = that.oSelectedItem.zzvtn;
+							that.oSelectedItem.Model_Year = that.oSelectedItem.zzmoyr
+							that.oSelectedItem.Series_Desc = that.oSelectedItem.zzseries_desc_en
+							that.oSelectedItem.zzseries_desc_fr = that.oSelectedItem.zzseries_desc_fr
+							that.oSelectedItem.zzseries_desc_en = that.oSelectedItem.zzseries_desc_en
+							that.oSelectedItem.Series = that.oSelectedItem.zzseries
+							that.oSelectedItem.Model = that.oSelectedItem.matnr
+							that.oSelectedItem.Model_Desc = that.oSelectedItem.model_desc_en
+							that.oSelectedItem.Suffix = that.oSelectedItem.zzsuffix
+							that.oSelectedItem.Suffix_Desc = that.oSelectedItem.suffix_desc_en
+							that.oSelectedItem.Int_Colour_Desc = that.oSelectedItem.mrktg_int_desc_en
+							that.oSelectedItem.APX = that.oSelectedItem.zzapx
+								that.oSelectedItem.Ext_Colour = that.oSelectedItem.zzextcol
+							that.oSelectedItem.Ext_Colour_Desc = that.oSelectedItem.mktg_desc_en;
+							that.oSelectedItem.Status = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Status;
+							that.oSelectedItem.Order_Type = that.oSelectedItem.zzordertype;
+							//	var Req_Current_ETA_From=Number(that.oSelectedItem.pstsp);
+
+						/*	that.oSelectedItem.Req_Current_ETA_From = that.oSelectedItem.pstsp;*/
+							that.oSelectedItem.Off_Current_ETA_To = that.oSelectedItem.pstsp;
+							
+
+							var dateString = that.oSelectedItem.zzadddata4;
+							if(dateString!=""&&dateString!=undefined&&dateString!=null){
+							
+							var year = dateString.substring(0, 4);
+							var month = dateString.substring(4, 6);
+							var day = dateString.substring(6, 8);
+
+							var Off_Current_ETA_From = new Date(year, month - 1, day);
+							Off_Current_ETA_From = new Date(Off_Current_ETA_From);
+							Off_Current_ETA_From = Date.parse(Off_Current_ETA_From);
+
+							that.oSelectedItem.Off_Current_ETA_From = "/Date(" + Off_Current_ETA_From + ")/";
+							}
+							else{
+									that.oSelectedItem.Off_Current_ETA_From = "/Date(0)/";
+							}
+							//	var Proposed_ETA_From=Number(that.oSelectedItem.Proposed_ETA_From);
+							var dateString = "";
+								if(dateString!=""&&dateString!=undefined&&dateString!=null){
+							var year = dateString.substring(0, 4);
+							var month = dateString.substring(4, 6);
+							var day = dateString.substring(6, 8);
+
+							var Proposed_ETA_From = new Date(year, month - 1, day);
+							Proposed_ETA_From = new Date(Proposed_ETA_From);
+							Proposed_ETA_From = Date.parse(Proposed_ETA_From);
+
+							that.oSelectedItem.Off_Proposed_ETA_From = "/Date(" + Proposed_ETA_From + ")/";
+								}else{
+									that.oSelectedItem.Off_Proposed_ETA_From = "/Date(0)/";	
+								}
+						/*	var Req_Proposed_ETA_To = Number(that.oSelectedItem.Proposed_ETA_To);
+							Req_Proposed_ETA_To = new Date(Req_Proposed_ETA_To);
+							Req_Proposed_ETA_To = Date.parse(Req_Proposed_ETA_To);*/
+
+							that.oSelectedItem.Off_Proposed_ETA_To = "/Date(0)/";
+							
+							
+							
+							
+							
+							
+							sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").setProperty("/OffredVehicle", that.oSelectedItem);
 							that.getRouter().navTo("VehicleTrade_UpdtTradReq", {
 								SelectedTrade: "VehicleTrade_updateTradeVehicle"
 							});
@@ -573,7 +678,66 @@ sap.ui.define([
 							SelectedTrade: "VehicleTradeVehicle"
 						});
 					} else if (that.SelectedVehicleFrom == "VehileTrade_UpdtTradReq") {
-						sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").setProperty("/VehicleTrade_UpdtTradReqVehicle", that.oSelectedItem);
+							that.oSelectedItem.Offered_Vtn = that.oSelectedItem.zzvtn;
+							that.oSelectedItem.Model_Year = that.oSelectedItem.zzmoyr
+							that.oSelectedItem.Series_Desc = that.oSelectedItem.zzseries_desc_en
+							that.oSelectedItem.zzseries_desc_fr = that.oSelectedItem.zzseries_desc_fr
+							that.oSelectedItem.zzseries_desc_en = that.oSelectedItem.zzseries_desc_en
+							that.oSelectedItem.Series = that.oSelectedItem.zzseries
+							that.oSelectedItem.Model = that.oSelectedItem.matnr
+							that.oSelectedItem.Model_Desc = that.oSelectedItem.model_desc_en
+							that.oSelectedItem.Suffix = that.oSelectedItem.zzsuffix
+							that.oSelectedItem.Suffix_Desc = that.oSelectedItem.suffix_desc_en
+							that.oSelectedItem.Int_Colour_Desc = that.oSelectedItem.mrktg_int_desc_en
+							that.oSelectedItem.APX = that.oSelectedItem.zzapx
+								that.oSelectedItem.Ext_Colour = that.oSelectedItem.zzextcol
+							that.oSelectedItem.Ext_Colour_Desc = that.oSelectedItem.mktg_desc_en;
+							that.oSelectedItem.Status = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Status;
+							that.oSelectedItem.Order_Type = that.oSelectedItem.zzordertype;
+							//	var Req_Current_ETA_From=Number(that.oSelectedItem.pstsp);
+
+						/*	that.oSelectedItem.Req_Current_ETA_From = that.oSelectedItem.pstsp;*/
+							that.oSelectedItem.Off_Current_ETA_To = that.oSelectedItem.pstsp;
+							
+
+							var dateString = that.oSelectedItem.zzadddata4;
+							if(dateString!=""&&dateString!=undefined&&dateString!=null){
+							
+							var year = dateString.substring(0, 4);
+							var month = dateString.substring(4, 6);
+							var day = dateString.substring(6, 8);
+
+							var Off_Current_ETA_From = new Date(year, month - 1, day);
+							Off_Current_ETA_From = new Date(Off_Current_ETA_From);
+							Off_Current_ETA_From = Date.parse(Off_Current_ETA_From);
+
+							that.oSelectedItem.Off_Current_ETA_From = "/Date(" + Off_Current_ETA_From + ")/";
+							}
+							else{
+									that.oSelectedItem.Off_Current_ETA_From = "/Date(0)/";
+							}
+							//	var Proposed_ETA_From=Number(that.oSelectedItem.Proposed_ETA_From);
+							var dateString = "";
+								if(dateString!=""&&dateString!=undefined&&dateString!=null){
+							var year = dateString.substring(0, 4);
+							var month = dateString.substring(4, 6);
+							var day = dateString.substring(6, 8);
+
+							var Proposed_ETA_From = new Date(year, month - 1, day);
+							Proposed_ETA_From = new Date(Proposed_ETA_From);
+							Proposed_ETA_From = Date.parse(Proposed_ETA_From);
+
+							that.oSelectedItem.Off_Proposed_ETA_From = "/Date(" + Proposed_ETA_From + ")/";
+								}else{
+									that.oSelectedItem.Off_Proposed_ETA_From = "/Date(0)/";	
+								}
+						/*	var Req_Proposed_ETA_To = Number(that.oSelectedItem.Proposed_ETA_To);
+							Req_Proposed_ETA_To = new Date(Req_Proposed_ETA_To);
+							Req_Proposed_ETA_To = Date.parse(Req_Proposed_ETA_To);*/
+
+							that.oSelectedItem.Off_Proposed_ETA_To = "/Date(0)/";
+							
+						sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").setProperty("/OffredVehicle", that.oSelectedItem);
 						that.getRouter().navTo("VehicleTrade_UpdtTradReq", {
 							SelectedTrade: "VehicleTrade_updateTradeVehicle"
 						});
@@ -795,193 +959,193 @@ sap.ui.define([
 			/*this._oResponsivePopover.close();*/
 		},
 
-		onDescending: function () {
-			var that = this;
-			//	that.getView().byId("table1VSR").destroyItems();
-			var oTable = this.getView().byId("table");
-			var oItems = oTable.getBinding("items");
-			oTable.getBinding("items").aSorters = null;
-			var oBindingPath = oItems.getModel().getProperty("/bindingValue");
-			var oSorter = new Sorter(oBindingPath, true);
-			oItems.sort(oSorter);
+		// onDescending: function () {
+		// 	var that = this;
+		// 	//	that.getView().byId("table1VSR").destroyItems();
+		// 	var oTable = this.getView().byId("table");
+		// 	var oItems = oTable.getBinding("items");
+		// 	oTable.getBinding("items").aSorters = null;
+		// 	var oBindingPath = oItems.getModel().getProperty("/bindingValue");
+		// 	var oSorter = new Sorter(oBindingPath, true);
+		// 	oItems.sort(oSorter);
 
-			if (this.selooLabelText == "Model") {
-				this.getView().byId("moAsIcon").setVisible(false);
-				this.getView().byId("moDsIcon").setVisible(true);
-				this.getView().byId("senAsIcon").setVisible(false);
-				this.getView().byId("senDsIcon").setVisible(false);
-				this.getView().byId("coAsIcon").setVisible(false);
-				this.getView().byId("coDsIcon").setVisible(false);
-				this.getView().byId("suAsIcon").setVisible(false);
-				this.getView().byId("suDsIcon").setVisible(false);
-				this.getView().byId("apAsIcon").setVisible(false);
-				this.getView().byId("apDsIcon").setVisible(false);
-				this.getView().byId("otAsIcon").setVisible(false);
-				this.getView().byId("otDsIcon").setVisible(false);
-				this.getView().byId("etfAsIcon").setVisible(false);
-				this.getView().byId("etfDsIcon").setVisible(false);
-				this.getView().byId("ettAsIcon").setVisible(false);
-				this.getView().byId("ettDsIcon").setVisible(false);
-				this.getView().byId("vtnAsIcon").setVisible(false);
-				this.getView().byId("vtnDsIcon").setVisible(false);
+		// 	if (this.selooLabelText == "Model") {
+		// 		this.getView().byId("moAsIcon").setVisible(false);
+		// 		this.getView().byId("moDsIcon").setVisible(true);
+		// 		this.getView().byId("senAsIcon").setVisible(false);
+		// 		this.getView().byId("senDsIcon").setVisible(false);
+		// 		this.getView().byId("coAsIcon").setVisible(false);
+		// 		this.getView().byId("coDsIcon").setVisible(false);
+		// 		this.getView().byId("suAsIcon").setVisible(false);
+		// 		this.getView().byId("suDsIcon").setVisible(false);
+		// 		this.getView().byId("apAsIcon").setVisible(false);
+		// 		this.getView().byId("apDsIcon").setVisible(false);
+		// 		this.getView().byId("otAsIcon").setVisible(false);
+		// 		this.getView().byId("otDsIcon").setVisible(false);
+		// 		this.getView().byId("etfAsIcon").setVisible(false);
+		// 		this.getView().byId("etfDsIcon").setVisible(false);
+		// 		this.getView().byId("ettAsIcon").setVisible(false);
+		// 		this.getView().byId("ettDsIcon").setVisible(false);
+		// 		this.getView().byId("vtnAsIcon").setVisible(false);
+		// 		this.getView().byId("vtnDsIcon").setVisible(false);
 
-			} else if (this.selooLabelText == "Color") {
-				this.getView().byId("moAsIcon").setVisible(false);
-				this.getView().byId("moDsIcon").setVisible(false);
-				this.getView().byId("coAsIcon").setVisible(false);
-				this.getView().byId("coDsIcon").setVisible(true);
-				this.getView().byId("suAsIcon").setVisible(false);
-				this.getView().byId("suDsIcon").setVisible(false);
-				this.getView().byId("apAsIcon").setVisible(false);
-				this.getView().byId("apDsIcon").setVisible(false);
-				this.getView().byId("otAsIcon").setVisible(false);
-				this.getView().byId("otDsIcon").setVisible(false);
-				this.getView().byId("etfAsIcon").setVisible(false);
-				this.getView().byId("etfDsIcon").setVisible(false);
-				this.getView().byId("ettAsIcon").setVisible(false);
-				this.getView().byId("ettDsIcon").setVisible(false);
-				this.getView().byId("vtnAsIcon").setVisible(false);
-				this.getView().byId("vtnDsIcon").setVisible(false);
-				this.getView().byId("senAsIcon").setVisible(false);
-				this.getView().byId("senDsIcon").setVisible(false);
+		// 	} else if (this.selooLabelText == "Color") {
+		// 		this.getView().byId("moAsIcon").setVisible(false);
+		// 		this.getView().byId("moDsIcon").setVisible(false);
+		// 		this.getView().byId("coAsIcon").setVisible(false);
+		// 		this.getView().byId("coDsIcon").setVisible(true);
+		// 		this.getView().byId("suAsIcon").setVisible(false);
+		// 		this.getView().byId("suDsIcon").setVisible(false);
+		// 		this.getView().byId("apAsIcon").setVisible(false);
+		// 		this.getView().byId("apDsIcon").setVisible(false);
+		// 		this.getView().byId("otAsIcon").setVisible(false);
+		// 		this.getView().byId("otDsIcon").setVisible(false);
+		// 		this.getView().byId("etfAsIcon").setVisible(false);
+		// 		this.getView().byId("etfDsIcon").setVisible(false);
+		// 		this.getView().byId("ettAsIcon").setVisible(false);
+		// 		this.getView().byId("ettDsIcon").setVisible(false);
+		// 		this.getView().byId("vtnAsIcon").setVisible(false);
+		// 		this.getView().byId("vtnDsIcon").setVisible(false);
+		// 		this.getView().byId("senAsIcon").setVisible(false);
+		// 		this.getView().byId("senDsIcon").setVisible(false);
 
-			} else if (this.selooLabelText == "Series") {
-				this.getView().byId("moAsIcon").setVisible(false);
-				this.getView().byId("moDsIcon").setVisible(false);
-				this.getView().byId("senAsIcon").setVisible(false);
-				this.getView().byId("senDsIcon").setVisible(true);
-				this.getView().byId("coAsIcon").setVisible(false);
-				this.getView().byId("coDsIcon").setVisible(false);
-				this.getView().byId("suAsIcon").setVisible(false);
-				this.getView().byId("suDsIcon").setVisible(false);
-				this.getView().byId("apAsIcon").setVisible(false);
-				this.getView().byId("apDsIcon").setVisible(false);
-				this.getView().byId("otAsIcon").setVisible(false);
-				this.getView().byId("otDsIcon").setVisible(false);
-				this.getView().byId("etfAsIcon").setVisible(false);
-				this.getView().byId("etfDsIcon").setVisible(false);
-				this.getView().byId("ettAsIcon").setVisible(false);
-				this.getView().byId("ettDsIcon").setVisible(false);
-				this.getView().byId("vtnAsIcon").setVisible(false);
-				this.getView().byId("vtnDsIcon").setVisible(false);
+		// 	} else if (this.selooLabelText == "Series") {
+		// 		this.getView().byId("moAsIcon").setVisible(false);
+		// 		this.getView().byId("moDsIcon").setVisible(false);
+		// 		this.getView().byId("senAsIcon").setVisible(false);
+		// 		this.getView().byId("senDsIcon").setVisible(true);
+		// 		this.getView().byId("coAsIcon").setVisible(false);
+		// 		this.getView().byId("coDsIcon").setVisible(false);
+		// 		this.getView().byId("suAsIcon").setVisible(false);
+		// 		this.getView().byId("suDsIcon").setVisible(false);
+		// 		this.getView().byId("apAsIcon").setVisible(false);
+		// 		this.getView().byId("apDsIcon").setVisible(false);
+		// 		this.getView().byId("otAsIcon").setVisible(false);
+		// 		this.getView().byId("otDsIcon").setVisible(false);
+		// 		this.getView().byId("etfAsIcon").setVisible(false);
+		// 		this.getView().byId("etfDsIcon").setVisible(false);
+		// 		this.getView().byId("ettAsIcon").setVisible(false);
+		// 		this.getView().byId("ettDsIcon").setVisible(false);
+		// 		this.getView().byId("vtnAsIcon").setVisible(false);
+		// 		this.getView().byId("vtnDsIcon").setVisible(false);
 
-			} else if (this.selooLabelText == "Suffix") {
-				this.getView().byId("moAsIcon").setVisible(false);
-				this.getView().byId("moDsIcon").setVisible(false);
-				this.getView().byId("senAsIcon").setVisible(false);
-				this.getView().byId("senDsIcon").setVisible(false);
-				this.getView().byId("coAsIcon").setVisible(false);
-				this.getView().byId("coDsIcon").setVisible(false);
-				this.getView().byId("suAsIcon").setVisible(false);
-				this.getView().byId("suDsIcon").setVisible(true);
-				this.getView().byId("apAsIcon").setVisible(false);
-				this.getView().byId("apDsIcon").setVisible(false);
-				this.getView().byId("otAsIcon").setVisible(false);
-				this.getView().byId("otDsIcon").setVisible(false);
-				this.getView().byId("etfAsIcon").setVisible(false);
-				this.getView().byId("etfDsIcon").setVisible(false);
-				this.getView().byId("ettAsIcon").setVisible(false);
-				this.getView().byId("ettDsIcon").setVisible(false);
-				this.getView().byId("vtnAsIcon").setVisible(false);
-				this.getView().byId("vtnDsIcon").setVisible(false);
-			} else if (this.selooLabelText == "APX") {
-				this.getView().byId("moAsIcon").setVisible(false);
-				this.getView().byId("moDsIcon").setVisible(false);
-				this.getView().byId("senAsIcon").setVisible(false);
-				this.getView().byId("senDsIcon").setVisible(false);
-				this.getView().byId("coAsIcon").setVisible(false);
-				this.getView().byId("coDsIcon").setVisible(false);
-				this.getView().byId("suAsIcon").setVisible(false);
-				this.getView().byId("suDsIcon").setVisible(false);
-				this.getView().byId("apAsIcon").setVisible(false);
-				this.getView().byId("apDsIcon").setVisible(true);
-				this.getView().byId("otAsIcon").setVisible(false);
-				this.getView().byId("otDsIcon").setVisible(false);
-				this.getView().byId("etfAsIcon").setVisible(false);
-				this.getView().byId("etfDsIcon").setVisible(false);
-				this.getView().byId("ettAsIcon").setVisible(false);
-				this.getView().byId("ettDsIcon").setVisible(false);
-				this.getView().byId("vtnAsIcon").setVisible(false);
-				this.getView().byId("vtnDsIcon").setVisible(false);
-			} else if (this.selooLabelText == "Order Type") {
-				this.getView().byId("moAsIcon").setVisible(false);
-				this.getView().byId("moDsIcon").setVisible(false);
-				this.getView().byId("senAsIcon").setVisible(false);
-				this.getView().byId("senDsIcon").setVisible(false);
-				this.getView().byId("coAsIcon").setVisible(false);
-				this.getView().byId("coDsIcon").setVisible(false);
-				this.getView().byId("suAsIcon").setVisible(false);
-				this.getView().byId("suDsIcon").setVisible(false);
-				this.getView().byId("apAsIcon").setVisible(false);
-				this.getView().byId("apDsIcon").setVisible(false);
-				this.getView().byId("otAsIcon").setVisible(false);
-				this.getView().byId("otDsIcon").setVisible(true);
-				this.getView().byId("etfAsIcon").setVisible(false);
-				this.getView().byId("etfDsIcon").setVisible(false);
-				this.getView().byId("ettAsIcon").setVisible(false);
-				this.getView().byId("ettDsIcon").setVisible(false);
-				this.getView().byId("vtnAsIcon").setVisible(false);
-				this.getView().byId("vtnDsIcon").setVisible(false);
-			} else if (this.selooLabelText == "ETA From") {
-				this.getView().byId("moAsIcon").setVisible(false);
-				this.getView().byId("moDsIcon").setVisible(false);
-				this.getView().byId("senAsIcon").setVisible(false);
-				this.getView().byId("senDsIcon").setVisible(false);
-				this.getView().byId("coAsIcon").setVisible(false);
-				this.getView().byId("coDsIcon").setVisible(false);
-				this.getView().byId("suAsIcon").setVisible(false);
-				this.getView().byId("suDsIcon").setVisible(false);
-				this.getView().byId("apAsIcon").setVisible(false);
-				this.getView().byId("apDsIcon").setVisible(false);
-				this.getView().byId("otAsIcon").setVisible(false);
-				this.getView().byId("otDsIcon").setVisible(false);
-				this.getView().byId("etfAsIcon").setVisible(false);
-				this.getView().byId("etfDsIcon").setVisible(true);
-				this.getView().byId("ettAsIcon").setVisible(false);
-				this.getView().byId("ettDsIcon").setVisible(false);
-				this.getView().byId("vtnAsIcon").setVisible(false);
-				this.getView().byId("vtnDsIcon").setVisible(false);
-			} else if (this.selooLabelText == "ETA To") {
-				this.getView().byId("moAsIcon").setVisible(false);
-				this.getView().byId("moDsIcon").setVisible(false);
-				this.getView().byId("senAsIcon").setVisible(false);
-				this.getView().byId("senDsIcon").setVisible(false);
-				this.getView().byId("coAsIcon").setVisible(false);
-				this.getView().byId("coDsIcon").setVisible(false);
-				this.getView().byId("suAsIcon").setVisible(false);
-				this.getView().byId("suDsIcon").setVisible(false);
-				this.getView().byId("apAsIcon").setVisible(false);
-				this.getView().byId("apDsIcon").setVisible(false);
-				this.getView().byId("otAsIcon").setVisible(false);
-				this.getView().byId("otDsIcon").setVisible(false);
-				this.getView().byId("etfAsIcon").setVisible(false);
-				this.getView().byId("etfDsIcon").setVisible(false);
-				this.getView().byId("ettAsIcon").setVisible(false);
-				this.getView().byId("ettDsIcon").setVisible(true);
-				this.getView().byId("vtnAsIcon").setVisible(false);
-				this.getView().byId("vtnDsIcon").setVisible(false);
-			} else if (this.selooLabelText == "Vehicle Tracking Number") {
-				this.getView().byId("moAsIcon").setVisible(false);
-				this.getView().byId("moDsIcon").setVisible(false);
-				this.getView().byId("senAsIcon").setVisible(false);
-				this.getView().byId("senDsIcon").setVisible(false);
-				this.getView().byId("coAsIcon").setVisible(false);
-				this.getView().byId("coDsIcon").setVisible(false);
-				this.getView().byId("suAsIcon").setVisible(false);
-				this.getView().byId("suDsIcon").setVisible(false);
-				this.getView().byId("apAsIcon").setVisible(false);
-				this.getView().byId("apDsIcon").setVisible(false);
-				this.getView().byId("otAsIcon").setVisible(false);
-				this.getView().byId("otDsIcon").setVisible(false);
-				this.getView().byId("etfAsIcon").setVisible(false);
-				this.getView().byId("etfDsIcon").setVisible(false);
-				this.getView().byId("ettAsIcon").setVisible(false);
-				this.getView().byId("ettDsIcon").setVisible(false);
-				this.getView().byId("vtnAsIcon").setVisible(false);
-				this.getView().byId("vtnDsIcon").setVisible(true);
-			}
-			/*	this._oResponsivePopover.close();*/
-		},
+		// 	} else if (this.selooLabelText == "Suffix") {
+		// 		this.getView().byId("moAsIcon").setVisible(false);
+		// 		this.getView().byId("moDsIcon").setVisible(false);
+		// 		this.getView().byId("senAsIcon").setVisible(false);
+		// 		this.getView().byId("senDsIcon").setVisible(false);
+		// 		this.getView().byId("coAsIcon").setVisible(false);
+		// 		this.getView().byId("coDsIcon").setVisible(false);
+		// 		this.getView().byId("suAsIcon").setVisible(false);
+		// 		this.getView().byId("suDsIcon").setVisible(true);
+		// 		this.getView().byId("apAsIcon").setVisible(false);
+		// 		this.getView().byId("apDsIcon").setVisible(false);
+		// 		this.getView().byId("otAsIcon").setVisible(false);
+		// 		this.getView().byId("otDsIcon").setVisible(false);
+		// 		this.getView().byId("etfAsIcon").setVisible(false);
+		// 		this.getView().byId("etfDsIcon").setVisible(false);
+		// 		this.getView().byId("ettAsIcon").setVisible(false);
+		// 		this.getView().byId("ettDsIcon").setVisible(false);
+		// 		this.getView().byId("vtnAsIcon").setVisible(false);
+		// 		this.getView().byId("vtnDsIcon").setVisible(false);
+		// 	} else if (this.selooLabelText == "APX") {
+		// 		this.getView().byId("moAsIcon").setVisible(false);
+		// 		this.getView().byId("moDsIcon").setVisible(false);
+		// 		this.getView().byId("senAsIcon").setVisible(false);
+		// 		this.getView().byId("senDsIcon").setVisible(false);
+		// 		this.getView().byId("coAsIcon").setVisible(false);
+		// 		this.getView().byId("coDsIcon").setVisible(false);
+		// 		this.getView().byId("suAsIcon").setVisible(false);
+		// 		this.getView().byId("suDsIcon").setVisible(false);
+		// 		this.getView().byId("apAsIcon").setVisible(false);
+		// 		this.getView().byId("apDsIcon").setVisible(true);
+		// 		this.getView().byId("otAsIcon").setVisible(false);
+		// 		this.getView().byId("otDsIcon").setVisible(false);
+		// 		this.getView().byId("etfAsIcon").setVisible(false);
+		// 		this.getView().byId("etfDsIcon").setVisible(false);
+		// 		this.getView().byId("ettAsIcon").setVisible(false);
+		// 		this.getView().byId("ettDsIcon").setVisible(false);
+		// 		this.getView().byId("vtnAsIcon").setVisible(false);
+		// 		this.getView().byId("vtnDsIcon").setVisible(false);
+		// 	} else if (this.selooLabelText == "Order Type") {
+		// 		this.getView().byId("moAsIcon").setVisible(false);
+		// 		this.getView().byId("moDsIcon").setVisible(false);
+		// 		this.getView().byId("senAsIcon").setVisible(false);
+		// 		this.getView().byId("senDsIcon").setVisible(false);
+		// 		this.getView().byId("coAsIcon").setVisible(false);
+		// 		this.getView().byId("coDsIcon").setVisible(false);
+		// 		this.getView().byId("suAsIcon").setVisible(false);
+		// 		this.getView().byId("suDsIcon").setVisible(false);
+		// 		this.getView().byId("apAsIcon").setVisible(false);
+		// 		this.getView().byId("apDsIcon").setVisible(false);
+		// 		this.getView().byId("otAsIcon").setVisible(false);
+		// 		this.getView().byId("otDsIcon").setVisible(true);
+		// 		this.getView().byId("etfAsIcon").setVisible(false);
+		// 		this.getView().byId("etfDsIcon").setVisible(false);
+		// 		this.getView().byId("ettAsIcon").setVisible(false);
+		// 		this.getView().byId("ettDsIcon").setVisible(false);
+		// 		this.getView().byId("vtnAsIcon").setVisible(false);
+		// 		this.getView().byId("vtnDsIcon").setVisible(false);
+		// 	} else if (this.selooLabelText == "ETA From") {
+		// 		this.getView().byId("moAsIcon").setVisible(false);
+		// 		this.getView().byId("moDsIcon").setVisible(false);
+		// 		this.getView().byId("senAsIcon").setVisible(false);
+		// 		this.getView().byId("senDsIcon").setVisible(false);
+		// 		this.getView().byId("coAsIcon").setVisible(false);
+		// 		this.getView().byId("coDsIcon").setVisible(false);
+		// 		this.getView().byId("suAsIcon").setVisible(false);
+		// 		this.getView().byId("suDsIcon").setVisible(false);
+		// 		this.getView().byId("apAsIcon").setVisible(false);
+		// 		this.getView().byId("apDsIcon").setVisible(false);
+		// 		this.getView().byId("otAsIcon").setVisible(false);
+		// 		this.getView().byId("otDsIcon").setVisible(false);
+		// 		this.getView().byId("etfAsIcon").setVisible(false);
+		// 		this.getView().byId("etfDsIcon").setVisible(true);
+		// 		this.getView().byId("ettAsIcon").setVisible(false);
+		// 		this.getView().byId("ettDsIcon").setVisible(false);
+		// 		this.getView().byId("vtnAsIcon").setVisible(false);
+		// 		this.getView().byId("vtnDsIcon").setVisible(false);
+		// 	} else if (this.selooLabelText == "ETA To") {
+		// 		this.getView().byId("moAsIcon").setVisible(false);
+		// 		this.getView().byId("moDsIcon").setVisible(false);
+		// 		this.getView().byId("senAsIcon").setVisible(false);
+		// 		this.getView().byId("senDsIcon").setVisible(false);
+		// 		this.getView().byId("coAsIcon").setVisible(false);
+		// 		this.getView().byId("coDsIcon").setVisible(false);
+		// 		this.getView().byId("suAsIcon").setVisible(false);
+		// 		this.getView().byId("suDsIcon").setVisible(false);
+		// 		this.getView().byId("apAsIcon").setVisible(false);
+		// 		this.getView().byId("apDsIcon").setVisible(false);
+		// 		this.getView().byId("otAsIcon").setVisible(false);
+		// 		this.getView().byId("otDsIcon").setVisible(false);
+		// 		this.getView().byId("etfAsIcon").setVisible(false);
+		// 		this.getView().byId("etfDsIcon").setVisible(false);
+		// 		this.getView().byId("ettAsIcon").setVisible(false);
+		// 		this.getView().byId("ettDsIcon").setVisible(true);
+		// 		this.getView().byId("vtnAsIcon").setVisible(false);
+		// 		this.getView().byId("vtnDsIcon").setVisible(false);
+		// 	} else if (this.selooLabelText == "Vehicle Tracking Number") {
+		// 		this.getView().byId("moAsIcon").setVisible(false);
+		// 		this.getView().byId("moDsIcon").setVisible(false);
+		// 		this.getView().byId("senAsIcon").setVisible(false);
+		// 		this.getView().byId("senDsIcon").setVisible(false);
+		// 		this.getView().byId("coAsIcon").setVisible(false);
+		// 		this.getView().byId("coDsIcon").setVisible(false);
+		// 		this.getView().byId("suAsIcon").setVisible(false);
+		// 		this.getView().byId("suDsIcon").setVisible(false);
+		// 		this.getView().byId("apAsIcon").setVisible(false);
+		// 		this.getView().byId("apDsIcon").setVisible(false);
+		// 		this.getView().byId("otAsIcon").setVisible(false);
+		// 		this.getView().byId("otDsIcon").setVisible(false);
+		// 		this.getView().byId("etfAsIcon").setVisible(false);
+		// 		this.getView().byId("etfDsIcon").setVisible(false);
+		// 		this.getView().byId("ettAsIcon").setVisible(false);
+		// 		this.getView().byId("ettDsIcon").setVisible(false);
+		// 		this.getView().byId("vtnAsIcon").setVisible(false);
+		// 		this.getView().byId("vtnDsIcon").setVisible(true);
+		// 	}
+		// 	/*	this._oResponsivePopover.close();*/
+		// },
 
 		onOpen: function (oEvent) {
 			//On Popover open focus on Input control
@@ -1089,7 +1253,7 @@ sap.ui.define([
 					new Filter("mktg_desc_en", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 				//	new Filter("zzordertype", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("zzadddata4", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-					new Filter("pstsp", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("pstsp", sap.ui.model.FilterOperator.Contains, this.sSearchQuery)
 
 				], false);
 				// this.sSearchQuery);

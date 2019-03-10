@@ -212,9 +212,8 @@ oTradeStatusBinding:function(Trade_return){
 					
 				} else {
 					dateTo = dateTo;
-				var dataTo1 = dateTo.substring(0, dateTo.length - 5);
-				var ValidTo = new Date(dataTo1 * 1000);
-				ValidTo = ValidTo.toGMTString().substring(4, 16);
+					var dataTo1 =Number(dateTo.replace(/[^A-Z\d\s]/gi, '').replace(/[^0-9\.]+/g, ""));
+				var ValidTo = new Date(dataTo1);
 				var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 					pattern: "yyyy-MM-dd"
 				});
