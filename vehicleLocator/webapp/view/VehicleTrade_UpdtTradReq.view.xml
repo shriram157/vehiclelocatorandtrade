@@ -181,25 +181,26 @@
 							</form:content>
 						</form:SimpleForm>
 					</VBox>
+					<!--,formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}-->
 					<t:Table id="tableVrade" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" class="sapUiMediumMarginBegin"
-						rows="{ path:'/', sorter : [{ path:'Comment_Date', descending : 'true' }] }">
+						rows="{ path:'TradeRequestModel>/TradeComment', sorter : [{ path:'Comment_Date', descending : 'true' }] }">
 						<t:columns>
 							<t:Column id="Comment_Date">
 								<Label text="{i18n>Date}"/>
 								<t:template>
-									<Text text="{path:'Comment_Date',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false"/>
+									<Text text="{path:'TradeRequestModel>Comment_Date',type:'sap.ui.model.type.DateTime', formatOptions: { pattern: 'MMMM d, y', strictParsing: false, relative: false }}" wrapping="false"/>
 								</t:template>
 							</t:Column>
 							<t:Column sortProperty="kunnr">
 								<Label text="{i18n>User}"/>
 								<t:template>
-									<Text text="{Created_By}"/>
+									<Text text="{TradeRequestModel>Created_By}"/>
 								</t:template>
 							</t:Column>
 							<t:Column sortProperty="matnr" id="matnr">
 								<Label text="{i18n>Comments}"/>
 								<t:template>
-									<Text text="{Comment_Txt}" wrapping="false"/>
+									<Text text="{TradeRequestModel>Comment_Txt}" wrapping="false"/>
 								</t:template>
 							</t:Column>
 						</t:columns>
@@ -232,7 +233,7 @@
 							<form:content>
 								<core:Title text="" class="Vtaprct1"/>
 								<Label text="{i18n>Comments}"/>
-								<TextArea width="240px" height="100px" id="oComments">
+								<TextArea width="20rem" height="15rem" id="oComments">
 									<layoutData>
 										<l:GridData span="L5 M12 S3"/>
 									</layoutData>

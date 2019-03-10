@@ -495,7 +495,7 @@ sap.ui.define([
 							that.oSelectedItem.Order_Type = that.oSelectedItem.zzordertype;
 							//	var Req_Current_ETA_From=Number(that.oSelectedItem.pstsp);
 
-							that.oSelectedItem.Req_Current_ETA_From = that.oSelectedItem.pstsp;
+							that.oSelectedItem.Off_Current_ETA_From = that.oSelectedItem.pstsp;
 
 							var dateString = that.oSelectedItem.zzadddata4;
 							var year = dateString.substring(0, 4);
@@ -506,7 +506,7 @@ sap.ui.define([
 							Req_Current_ETA_To = new Date(Req_Current_ETA_To);
 							Req_Current_ETA_To = Date.parse(Req_Current_ETA_To);
 
-							that.oSelectedItem.Req_Current_ETA_To = "/Date(" + Req_Current_ETA_To + ")/";
+							that.oSelectedItem.Off_Current_ETA_To = "/Date(" + Req_Current_ETA_To + ")/";
 							//	var Proposed_ETA_From=Number(that.oSelectedItem.Proposed_ETA_From);
 							var dateString = that.oSelectedItem.Proposed_ETA_From;
 							var year = dateString.substring(0, 4);
@@ -517,12 +517,12 @@ sap.ui.define([
 							Proposed_ETA_From = new Date(Proposed_ETA_From);
 							Proposed_ETA_From = Date.parse(Proposed_ETA_From);
 
-							that.oSelectedItem.Req_Proposed_ETA_From = "/Date(" + Proposed_ETA_From + ")/";
+							that.oSelectedItem.Off_Proposed_ETA_From = "/Date(" + Proposed_ETA_From + ")/";
 							var Req_Proposed_ETA_To = Number(that.oSelectedItem.Proposed_ETA_To);
 							Req_Proposed_ETA_To = new Date(Req_Proposed_ETA_To);
 							Req_Proposed_ETA_To = Date.parse(Req_Proposed_ETA_To);
 
-							that.oSelectedItem.Req_Proposed_ETA_To = "/Date(" + Req_Proposed_ETA_To + ")/";
+							that.oSelectedItem.Off_Proposed_ETA_To = "/Date(" + Req_Proposed_ETA_To + ")/";
 
 							sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").setProperty("/OffredVehicle", that.oSelectedItem);
 							that.getRouter().navTo("VehicleTrade_UpdtTradReq", {
