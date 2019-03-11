@@ -34,19 +34,20 @@
 							<ToolbarSpacer/>
 						</OverflowToolbar>
 					</VBox>
-					<HBox>
-						<FlexBox width="40px"></FlexBox>
-						<FlexBox height="35px" alignItems="Center" justifyContent="Center">
-							<Label text="{i18n>MyTradeRequests}" class="flexdontclabllist"/>
-						</FlexBox>
-					</HBox>
+					<!--<HBox>-->
+					<!--	<FlexBox width="40px"></FlexBox>-->
+						<!--<FlexBox height="35px" alignItems="Center" justifyContent="Center">-->
+						<!--	<Label text="{i18n>MyTradeRequests}" class="flexdontclabllist"/>-->
+						<!--</FlexBox>-->
+					<!--</HBox>-->
 					<VBox>
 						<VBox>
 							<!--==========================  The new Table ========================-->
 							<Table showNoData="false" width="98%" class="sapUiResponsiveMargin">
 								<headerToolbar>
 									<OverflowToolbar id="otbSubheader1">
-										<Title id="tableHeader1" text="{detailView>/tableCount}"/>
+										<!--<Title id="tableHeader1" text="{detailView>/tableCount}"/>-->
+											<Label text="{i18n>MyTradeRequests}" class="flexdontclabllist"/>
 										<ToolbarSpacer/>
 										<Button tooltip="Sort table by selected fields"  icon="sap-icon://sort"	 press="handleViewSettingsDialogButtonPressed"
 											text="Sorting"/>
@@ -229,12 +230,12 @@
 							</FlexBox>
 						</HBox>
 					</VBox>
-					<HBox>
-						<FlexBox width="40px"></FlexBox>
-						<FlexBox height="15px" alignItems="Center" justifyContent="Center">
-							<Label text="{i18n>ReceivedTradeRequests}" class="flexdontclabllist"/>
-						</FlexBox>
-					</HBox>
+					<!--<HBox>-->
+					<!--	<FlexBox width="40px"></FlexBox>-->
+					<!--	<FlexBox height="15px" alignItems="Center" justifyContent="Center">-->
+					<!--		<Label text="{i18n>ReceivedTradeRequests}" class="flexdontclabllist"/>-->
+					<!--	</FlexBox>-->
+					<!--</HBox>-->
 					<HBox>
 						<FlexBox width="40px"></FlexBox>
 						<FlexBox height="20px" alignItems="Center" justifyContent="Center">
@@ -245,7 +246,8 @@
 					<Table showNoData="false" width="98%" class="sapUiResponsiveMargin">
 						<headerToolbar>
 							<OverflowToolbar id="otbSubheader2">
-								<Title id="tableHeader2" text="{detailView>/tableCount}"/>
+								<!--<Title id="tableHeader2" text="{detailView>/tableCount}"/>-->
+										<Label text="{i18n>ReceivedTradeRequests}" class="flexdontclabllist"/>
 								<ToolbarSpacer/>
 								<Button tooltip="Sort table by selected fields"  icon="sap-icon://sort"	 press="receivedTradeRequestSortDialogButtonPressed"
 									text="Sorting"/>

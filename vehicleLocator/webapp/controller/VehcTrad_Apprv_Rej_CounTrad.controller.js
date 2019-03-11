@@ -45,6 +45,7 @@ sap.ui.define([
 					var StatusData = sap.ui.getCore().getModel("MyTradeRequestSelected").getData();
 					var AcceptVisible = StatusData.FromRequesting;
 					var Status = StatusData.Trade_Status;
+					this.dnsStatus = StatusData.Trade_Status;
 					var TradeId = StatusData.Trade_Id;
 					this.VehicleTrade_SummaryData(StatusData);
 
@@ -83,7 +84,7 @@ sap.ui.define([
 					/*	this.getView().byId("VT_ARCTDnc").setModel(oStatusModel);*/
 					this.getView().byId("VT_ARCDnc").setModel(oStatusModel);
 					var Dnc = StatusData.DNC;
-					if (Dnc == "Y" || Dnc == "X") {
+					if ((Dnc == "Y" || Dnc == "X") && (this.dnsStatus != "R")) {
 						this.getView().byId("VT_ARCDnc").setVisible(true);
 						var newItem = new sap.ui.core.Item({
 							key: "0",
@@ -286,7 +287,8 @@ sap.ui.define([
 				Status.push(StatusData);
 				var oStatusModel = new sap.ui.model.json.JSONModel(Status);
 				var Dnc = StatusData.DNC;
-				if (Dnc == "Y" || Dnc == "X") {
+				// if (Dnc == "Y" || Dnc == "X") {
+					if ((Dnc == "Y" || Dnc == "X") && (this.dnsStatus != "R")) {
 					this.getView().byId("VT_ARCDnc").setVisible(true);
 					this.getView().byId("VT_ARCDnc").setEnabled(false);
 					var newItem = new sap.ui.core.Item({
@@ -1422,7 +1424,7 @@ that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
 					return str;
 				} else {
 					str = str.substring(0, num);
-					return str + "...";
+					return str;
 				}
 
 			}

@@ -177,6 +177,18 @@ sap.ui.define([
 							"BusinessPartnerType": "Z001",
 							"searchTermReceivedDealerName": "42120"
 						});
+						
+						// 						BpDealer.push({
+						// 	"BusinessPartnerKey": "2400042193",
+						// 	"BusinessPartner": "42193",
+
+						// 	"BusinessPartnerName": "Bailey toyota...", //item.OrganizationBPName1 //item.BusinessPartnerFullName
+						// 	"Division": "10",
+						// 	"BusinessPartnerType": "Z001",
+						// 	"searchTermReceivedDealerName": "42193"
+						// });
+						
+						
 					}
 
 					//  set your model or use the model below - // TODO: 
