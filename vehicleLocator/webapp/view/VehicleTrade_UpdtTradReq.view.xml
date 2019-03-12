@@ -237,14 +237,13 @@
 								<VBox>
 								<Label text="{i18n>Comments}"/>
 								<TextArea width="100%" height="100px" id="oComments" maxLength="150">
-										<layoutData>
-											<l:GridData span="L4 M12 S3"/>
-										</layoutData>
+									
 								</TextArea>
-								</VBox>
-									<VBox>
 								<Button text="{i18n>AddComments}" id="oAddbutton" width="142px" enabled="true" press="oAddCommentsArea"/>
 								</VBox>
+								<!--	<VBox>-->
+								
+								<!--</VBox>-->
 								<core:Title text="" class="Vtaprct1"/>
 								<!--<Text
 									text="This trade information is a snap shot at the time of trade request creation. This information will be validated once after your input (Accept/Reject/Counter) before the function is completed."
