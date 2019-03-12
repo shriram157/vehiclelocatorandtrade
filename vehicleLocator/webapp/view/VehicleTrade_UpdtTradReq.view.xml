@@ -65,31 +65,31 @@
 									</layoutData>
 								</Label>
 								<Text text="{path:'Req_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="ctqtid">
-									<layoutData>
-										<l:GridData span="L4 M12 S3"/>
-									</layoutData>
+									<!--<layoutData>-->
+									<!--	<l:GridData span="L4 M12 S3"/>-->
+									<!--</layoutData>-->
 								</Text>
 								<Text text="{i18n>From}" id="fromqid"/>
 								<Label text=""></Label>
 								<Text text="{path:'Req_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="txlab">
-									<layoutData>
-										<l:GridData span="L4 M12 S3"/>
-									</layoutData>
+									<!--<layoutData>-->
+									<!--	<l:GridData span="L4 M12 S3"/>-->
+									<!--</layoutData>-->
 								</Text>
 								<Text text="{i18n>To}" id="tobid"/>
 								<Text text="" id="toid"/>
 								<Label text="{i18n>PropsedETAtoNewDealer}" id="prolabid"/>
 								<Text text="{path:'Req_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="prptid">
-									<layoutData>
-										<l:GridData span="L4 M12 S3"/>
-									</layoutData>
+									<!--<layoutData>-->
+									<!--	<l:GridData span="L4 M12 S3"/>-->
+									<!--</layoutData>-->
 								</Text>
 								<Text text="{i18n>From}" id="fmlbid"/>
 								<Label text="" id="fromlbid"></Label>
 								<Text text="{path:'Req_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="otxlabel">
-									<layoutData>
-										<l:GridData span="L4 M12 S3"/>
-									</layoutData>
+									<!--<layoutData>-->
+									<!--	<l:GridData span="L4 M12 S3"/>-->
+									<!--</layoutData>-->
 								</Text>
 								<Text text="{i18n>To}" id="idlto"/>
 								<!--<Label text="{i18n>DonotCall(DNC)Vehicle}"/>
@@ -150,31 +150,31 @@
 									<!--</layoutData>-->
 								</Label>
 								<Text text="{path:'/OffredVehicle/Off_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="ctetid">
-									<layoutData>
-										<l:GridData span="L4 M12 S3"/>
-									</layoutData>
+									<!--<layoutData>-->
+									<!--	<l:GridData span="L4 M12 S3"/>-->
+									<!--</layoutData>-->
 								</Text>
 								<Text text="{i18n>From}" id="frmid"/>
 								<Label text=""></Label>
 								<Text text="{path:'/OffredVehicle/Off_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="txtlab">
-									<layoutData>
-										<l:GridData span="L4 M12 S3"/>
-									</layoutData>
+									<!--<layoutData>-->
+									<!--	<l:GridData span="L4 M12 S3"/>-->
+									<!--</layoutData>-->
 								</Text>
 								<Text text="{i18n>To}" id="tolbid"/>
 								<Text text=""/>
 								<Label text="{i18n>PropsedETAtoNewDealer}" id="prlabid"/>
 								<Text text="{path:'/OffredVehicle/Off_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="prpetid">
-									<layoutData>
-										<l:GridData span="L4 M12 S3"/>
-									</layoutData>
+									<!--<layoutData>-->
+									<!--	<l:GridData span="L4 M12 S3"/>-->
+									<!--</layoutData>-->
 								</Text>
 								<Text text="{i18n>From}" id="fmlabid"/>
 								<Label text=""></Label>
 								<Text text="{path:'/OffredVehicle/Off_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="otxtlabel">
-									<layoutData>
-										<l:GridData span="L4 M12 S3"/>
-									</layoutData>
+									<!--<layoutData>-->
+									<!--	<l:GridData span="L4 M12 S3"/>-->
+									<!--</layoutData>-->
 								</Text>
 								<Text text="{i18n>To}" id="idlbltxt"/>
 								<Text text="{/OffredVehicle/FromFourth}" id="otextId" visible="false"/>
@@ -239,7 +239,10 @@
 								<TextArea width="100%" height="100px" id="oComments" maxLength="150">
 									
 								</TextArea>
+								
+ 
 								<Button text="{i18n>AddComments}" id="oAddbutton" width="142px" enabled="true" press="oAddCommentsArea"/>
+									<MessageStrip text="{i18n>TradeCreated} {Created_By} {i18n>On} {path:'Created_On',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" class="Messagestrip1"/>
 								</VBox>
 								<!--	<VBox>-->
 								
@@ -248,7 +251,7 @@
 								<!--<Text
 									text="This trade information is a snap shot at the time of trade request creation. This information will be validated once after your input (Accept/Reject/Counter) before the function is completed."
 									width=""/>-->
-								<Label text=""/>
+								
 								<!--<HBox>-->
 									<!--	<FlexBox width="10px"></FlexBox>
 									<FlexBox height="50px" alignItems="Start" justifyContent="Start">
@@ -266,8 +269,8 @@
 										<FlexBox width="7px"></FlexBox>
 									</FlexBox>-->
 								<!--</HBox>-->
-								<Label text=""/>
-								<HBox>
+								<!--<Label text=""/>-->
+								<HBox width="100%">
 									<FlexBox width="10px"></FlexBox>
 									<FlexBox height="200px" alignItems="Start" justifyContent="Start">
 										<Button text="{i18n>Updatesubmit}" width="150px" press="oUpdateSubmitbtn"  id="oUpdateSubmitbtn"/>
@@ -288,6 +291,7 @@
 						</form:SimpleForm>
 					</VBox>
 				</content>
+				
 			</Page>
 		</pages>
 	</App>

@@ -1050,7 +1050,8 @@ sap.ui.define([
 			}
 		},
 		onBackpage: function () {
-			this.getRouter().navTo("VehcTrad_Apprv_Rej_CounTrad");
+			// this.getRouter().navTo("VehcTrad_Apprv_Rej_CounTrad");
+			this.getRouter().navTo("VehicleTrade_Summary");
 
 		},
 		onSelectvehcicle: function () {

@@ -52,7 +52,7 @@
 								</Text>
 								<Button text="{i18n>SelectVehicle}" width="60%" press="onSelect"/>
 								<Label text="{i18n>BlockModelNo.ofDays}" required="true"/>
-								<Input value="" id="inputblocknofdays"/>
+								<Input value="15" id="inputblocknofdays"/>
 								<!--	<Select id="VT_MBSbmnd" change="onVT_MBSbnmd" width="76%"   items="{}">
 									<core:ListItem key="{}" text="{jsonDatamodel>Status}"/>
 								</Select>-->
