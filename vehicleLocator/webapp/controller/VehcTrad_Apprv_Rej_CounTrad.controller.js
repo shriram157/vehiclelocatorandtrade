@@ -917,6 +917,7 @@ sap.ui.define([
 					"Requested_Dealer_Name": Requested_Dealer_Name*/
 			};
 
+            
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
 
@@ -939,7 +940,7 @@ sap.ui.define([
 				"Method": "PUT"
 			});
 			var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
-			that.oDataModel.update(UpdatedTreadeEntity, oEntry, null, function (s) {
+			that.oDataModel.update(UpdatedTreadeEntity, oEntry, {merge:true} , function (s) {
 //	that.VehicleTrade_SummaryData();
 
 that.getView().byId("SimpleFormAproveTrReq").getModel().getData().Trade_Status="A"; 
@@ -1090,7 +1091,7 @@ that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
 				"Method": "PUT"
 			});
 			var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
-			that.oDataModel.update(UpdatedTreadeEntity, oEntry, null, function (s) {
+			that.oDataModel.update(UpdatedTreadeEntity, oEntry, {merge:true} ,function (s) {
 
 				/*	that.TradeComment(oEntry);
 					that.TradeVehcles(oEntry);
@@ -1247,7 +1248,7 @@ that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
 				"Method": "PUT"
 			});
 			var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
-			that.oDataModel.update(UpdatedTreadeEntity, oEntry, null, function (s) {
+			that.oDataModel.update(UpdatedTreadeEntity, oEntry, {merge:true} , function (s) {
 				debugger
 
 				if (dncBlockedDays != 0 && dncBlockedDays != "") {
@@ -1611,7 +1612,7 @@ that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
 				"Method": "PUT"
 			});
 			var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
-			that.oDataModel.update(UpdatedTreadeEntity, oEntry, null, function (s) {
+			that.oDataModel.update(UpdatedTreadeEntity, oEntry, {merge:true} , function (s) {
 				debugger
 
 				/*	if(dncBlockedDays!=0&&dncBlockedDays!=""){
@@ -1757,7 +1758,7 @@ that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
 				"Method": "PUT"
 			});
 			var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
-			that.oDataModel.update(UpdatedTreadeEntity, oEntry, null, function (s) {
+			that.oDataModel.update(UpdatedTreadeEntity, oEntry, {merge:true} , function (s) {
 				debugger
 
 				/*	that.TradeComment(oEntry);

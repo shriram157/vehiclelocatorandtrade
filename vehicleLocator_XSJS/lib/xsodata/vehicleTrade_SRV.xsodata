@@ -10,4 +10,6 @@ service {
        association "toVehicleDesc" principal "TradeVehicleDesc"("Trade_Id") multiplicity "1" dependent "TradeRequest"("Trade_Id") multiplicity "*";
 }  
 
-
+settings {
+  support null;
+}
