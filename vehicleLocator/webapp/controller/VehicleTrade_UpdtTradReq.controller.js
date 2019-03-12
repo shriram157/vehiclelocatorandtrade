@@ -31,6 +31,8 @@ sap.ui.define([
 			if (sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq") != undefined && SelectedTrade != "VehicleTrade_updateTradeVehicle" &&
 				SelectedTrade != undefined) {
 				this.getView().byId("SimpleFormUpdateTrReq").setModel(sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq"));
+			this.getView().byId("SimpleForrmDisa220").setModel(sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq"));
+					this.getView().byId("SimpleForrmDisa220").bindElement("/");
 				var UpdateTrStatus = [];
 				this.getView().byId("SimpleFormUpdateTrReq").bindElement("/");
 				this.getView().byId("SimpleFormUpdateTrReq").getModel().refresh(true);
