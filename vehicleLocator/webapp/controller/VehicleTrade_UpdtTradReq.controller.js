@@ -47,7 +47,7 @@ sap.ui.define([
 				//======Filter Trade Request Comments=================
 				//=================================================
 				tradeId_no = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Trade_Id;
-				this.getView().byId("tableVrade").getBinding('rows').filter([new sap.ui.model.Filter("Trade_Id.Trade_Id", sap.ui.model.FilterOperator
+				this.getView().byId("tableVrade").getBinding('items').filter([new sap.ui.model.Filter("Trade_Id.Trade_Id", sap.ui.model.FilterOperator
 					.EQ, sap.ui
 					.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Trade_Id)]);
 				//===============================================	
@@ -991,7 +991,7 @@ sap.ui.define([
 			} else {
 
 				if (this.getView().byId("tableVrade").getModel('TradeRequestModel') != undefined) {
-					var oComment_Id = this.getView().byId("tableVrade").getBinding('rows').getLength().toString();
+					var oComment_Id = this.getView().byId("tableVrade").getBinding('items').getLength().toString();
 					var TradeId = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Trade_Id;
 
 					var that = this;
@@ -1039,7 +1039,7 @@ sap.ui.define([
 
 					that.oDataModel.create("/TradeComment", oTradeComment, null, function (s) {
 						that.getView().byId("oComments").setValue("");
-						that.getView().byId('tableVrade').getBinding('rows').refresh();
+						that.getView().byId('tableVrade').getBinding('items').refresh();
 					}, function () {
 
 					});

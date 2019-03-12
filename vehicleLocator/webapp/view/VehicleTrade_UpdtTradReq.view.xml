@@ -4,7 +4,8 @@
 	xmlns:uxap="sap.uxap" xmlns:t="sap.ui.table" xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml">-->
 <mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
 	controllerName="vehicleLocator.controller.VehicleTrade_UpdtTradReq" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form"
-	xmlns:uxap="sap.uxap" xmlns:t="sap.ui.table" xmlns:u="sap.ui.unified"   xmlns:tnt="sap.tnt" xmlns:f="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml">	
+	xmlns:uxap="sap.uxap" xmlns:t="sap.ui.table" xmlns:u="sap.ui.unified" xmlns:tnt="sap.tnt" xmlns:f="sap.ui.layout.form"
+	xmlns:html="http://www.w3.org/1999/xhtml">
 	<App>
 		<pages class="oImgsampl" height="200px">
 			<Page showNavButton="false" navButtonPress="onBack">
@@ -102,7 +103,7 @@
 									<core:ListItem key="{ZZDuration}" text="{ZZDuration}"/>
 								</ComboBox>-->
 								<Label text="{i18n>TradeinReturn}"/>
-								<ComboBox id="oTradeinRet" selectionChange="onTradeReqStat" width="220px" items="{/}" >
+								<ComboBox id="oTradeinRet" selectionChange="onTradeReqStat" width="220px" items="{/}">
 									<core:ListItem key="{Trade_Return}" text="{path:'Trade_Return',formatter:'vehicleLocator.Formatter.Formatter.TradeReturn'}"/>
 									<layoutData>
 										<l:GridData span="L3 M12 S3"/>
@@ -125,7 +126,6 @@
 								</ComboBox>-->
 								<!--<Text text="Request Sent"/>-->
 								<core:Title text="{i18n>OfferVehicleInformation}" id="offfveh"/>
-								
 								<Label text="{i18n>VehicleTrackingNumber}" id="vehtnum"/>
 								<Text text="{/OffredVehicle/Offered_Vtn}" id="ovtnId"/>
 								<Label text="{i18n>ModelYear}" id="mdlyr"/>
@@ -182,32 +182,44 @@
 						</form:SimpleForm>
 					</VBox>
 					<!--,formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}-->
-					<VBox  class="sapUiSmallMargin">
-					<t:Table id="tableVrade" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" class="sapUiMediumMarginBegin"
-						rows="{ path:'TradeRequestModel>/TradeComment', sorter : [{ path:'Comment_Date', descending : 'true' }] }">
-						<t:columns>
-							<t:Column id="Comment_Date">
-								<Label text="{i18n>Date}"/>
-								<t:template>
-									<Text text="{path:'TradeRequestModel>Comment_Date',type:'sap.ui.model.type.DateTime', formatOptions: { pattern: 'MMMM d, y', strictParsing: false, relative: false }}" wrapping="false"/>
-								</t:template>
-							</t:Column>
-							<t:Column sortProperty="kunnr">
-								<Label text="{i18n>User}"/>
-								<t:template>
-									<Text text="{TradeRequestModel>Created_By}"/>
-								</t:template>
-							</t:Column>
-							<t:Column sortProperty="matnr" id="matnr">
-								<Label text="{i18n>Comments}"/>
-								<t:template>
-									<Text text="{TradeRequestModel>Comment_Txt}" wrapping="false"/>
-								</t:template>
-							</t:Column>
-						</t:columns>
-					</t:Table>
-					</VBox>
-					<!--	<Table id="tableVrade" width="auto" class="sapUiResponsiveMargin" items="{/}" growingThreshold="150">
+					<VBox class="sapUiLargeMargin">
+						<!--cellClick="onRowPress" selectionBehavior="Row" selectionMode="None"-->
+						<Table id="tableVrade" 
+							items="{ path:'TradeRequestModel>/TradeComment', sorter : [{ path:'Comment_Date', descending : 'true' }] }">
+							<columns>
+								<Column id="Comment_Date">
+									<Text text="{i18n>Date}"/>
+									<!--<template>-->
+									<!--	<Text text="{path:'TradeRequestModel>Comment_Date',type:'sap.ui.model.type.DateTime', formatOptions: { pattern: 'MMMM d, y', strictParsing: false, relative: false }}" wrapping="false"/>-->
+									<!--</template>-->
+								</Column>
+								<Column >
+									<Text text="{i18n>User}"/>
+									<!--<template>-->
+									<!--	<Text text="{TradeRequestModel>Created_By}"/>-->
+									<!--</template>-->
+								</Column>
+								<Column id="matnr">
+									<Text text="{i18n>Comments}"/>
+									<!--<template>-->
+									<!--	<Text text="{TradeRequestModel>Comment_Txt}" wrapping="false"/>-->
+									<!--</template>-->
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem id="columnslistmon" type="Inactive" press="detailItems">
+									<cells>
+										<Text
+											text="{path:'TradeRequestModel>Comment_Date',type:'sap.ui.model.type.DateTime', formatOptions: { pattern: 'MMMM d, y', strictParsing: false, relative: false }}"
+											wrapping="false"/>
+										<Text text="{TradeRequestModel>Created_By}"/>
+										<Text text="{TradeRequestModel>Comment_Txt}" wrapping="false"/>
+									</cells>
+								</ColumnListItem>
+								</items>
+							</Table>
+						</VBox>
+						<!--	<Table id="tableVrade" width="auto" class="sapUiResponsiveMargin" items="{/}" growingThreshold="150">
 						<columns>
 							<Column minScreenWidth="Desktop" demandPopin="true">
 								<Text text="{i18n>Date}"/>
@@ -229,30 +241,26 @@
 							</ColumnListItem>
 						</items>
 					</Table>-->
-					<VBox class="sapUiSmallMargin" width="100%">
-						<form:SimpleForm id="SimpleForrmDisa220" editable="true" layout="ResponsiveGridLayout" labelSpanM="12" adjustLabelSpan="false"
-						  emptySpanL="0" emptySpanM="0" columnsL="3" columnsM="3" width="100%">
-							<form:content>
-								<core:Title text="" class="Vtaprct1"/>
-								<VBox>
-								<Label text="{i18n>Comments}"/>
-								<TextArea width="100%" height="100px" id="oComments" maxLength="150">
-									
-								</TextArea>
-								
- 
-								<Button text="{i18n>AddComments}" id="oAddbutton" width="142px" enabled="true" press="oAddCommentsArea"/>
-									<MessageStrip text="{i18n>TradeCreated} {Created_By} {i18n>On} {path:'Created_On',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" class="Messagestrip1"/>
-								</VBox>
-								<!--	<VBox>-->
-								
-								<!--</VBox>-->
-								<core:Title text="" class="Vtaprct1"/>
-								<!--<Text
+						<VBox class="sapUiSmallMargin" width="100%">
+							<form:SimpleForm id="SimpleForrmDisa220" editable="true" layout="ResponsiveGridLayout" labelSpanM="12" adjustLabelSpan="false"
+								emptySpanL="0" emptySpanM="0" columnsL="3" columnsM="3" width="100%">
+								<form:content>
+									<core:Title text="" class="Vtaprct1"/>
+									<VBox>
+										<Label text="{i18n>Comments}"/>
+										<TextArea width="100%" height="100px" id="oComments" maxLength="150"></TextArea>
+										<Button text="{i18n>AddComments}" id="oAddbutton" width="142px" enabled="true" press="oAddCommentsArea"/>
+										<MessageStrip
+											text="{i18n>TradeCreated} {Created_By} {i18n>On} {path:'Created_On',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}"
+											class="Messagestrip1"/>
+									</VBox>
+									<!--	<VBox>-->
+									<!--</VBox>-->
+									<core:Title text="" class="Vtaprct1"/>
+									<!--<Text
 									text="This trade information is a snap shot at the time of trade request creation. This information will be validated once after your input (Accept/Reject/Counter) before the function is completed."
 									width=""/>-->
-								
-								<!--<HBox>-->
+									<!--<HBox>-->
 									<!--	<FlexBox width="10px"></FlexBox>
 									<FlexBox height="50px" alignItems="Start" justifyContent="Start">
 										<Button text="{i18n>Accept}" width="100px"/>
@@ -268,31 +276,30 @@
 										<Button text="{i18n>CounterOffer}" width="150px"/>
 										<FlexBox width="7px"></FlexBox>
 									</FlexBox>-->
-								<!--</HBox>-->
-								<!--<Label text=""/>-->
-								<HBox width="100%">
-									<FlexBox width="10px"></FlexBox>
-									<FlexBox height="200px" alignItems="Start" justifyContent="Start">
-										<Button text="{i18n>Updatesubmit}" width="150px" press="oUpdateSubmitbtn"  id="oUpdateSubmitbtn"/>
-										<FlexBox width="7px"></FlexBox>
-									</FlexBox>
-									<FlexBox width="10px"></FlexBox>
-									<FlexBox height="200px" alignItems="Start" justifyContent="Start">
-										<Button text="{i18n>Update}" width="100px" id="oUpdatePagebtn" press="UpdatePress"/>
-										<FlexBox width="7px"></FlexBox>
-									</FlexBox>
-									<FlexBox width="10px"></FlexBox>
-									<FlexBox height="200px" alignItems="Start" justifyContent="Start">
-										<Button text="{i18n>Back}" width="100px" press="onBackpage" id="oUpdatebackbtn"/>
-										<FlexBox width="7px"></FlexBox>
-									</FlexBox>
-								</HBox>
-							</form:content>
-						</form:SimpleForm>
-					</VBox>
-				</content>
-				
-			</Page>
-		</pages>
-	</App>
-</mvc:View>
+									<!--</HBox>-->
+									<!--<Label text=""/>-->
+									<HBox width="100%">
+										<FlexBox width="10px"></FlexBox>
+										<FlexBox height="200px" alignItems="Start" justifyContent="Start">
+											<Button text="{i18n>Updatesubmit}" width="150px" press="oUpdateSubmitbtn" id="oUpdateSubmitbtn"/>
+											<FlexBox width="7px"></FlexBox>
+										</FlexBox>
+										<FlexBox width="10px"></FlexBox>
+										<FlexBox height="200px" alignItems="Start" justifyContent="Start">
+											<Button text="{i18n>Update}" width="100px" id="oUpdatePagebtn" press="UpdatePress"/>
+											<FlexBox width="7px"></FlexBox>
+										</FlexBox>
+										<FlexBox width="10px"></FlexBox>
+										<FlexBox height="200px" alignItems="Start" justifyContent="Start">
+											<Button text="{i18n>Back}" width="100px" press="onBackpage" id="oUpdatebackbtn"/>
+											<FlexBox width="7px"></FlexBox>
+										</FlexBox>
+									</HBox>
+								</form:content>
+							</form:SimpleForm>
+						</VBox>
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</mvc:View>
