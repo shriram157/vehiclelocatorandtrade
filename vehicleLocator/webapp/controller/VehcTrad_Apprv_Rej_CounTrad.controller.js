@@ -842,10 +842,15 @@ sap.ui.define([
 				Off_Proposed_ETA_From = this.DatesFormatting(Off_Proposed_ETA_From);
 			var Off_Proposed_ETA_To = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Off_Proposed_ETA_To;
 				Off_Proposed_ETA_To = this.DatesFormatting(Off_Proposed_ETA_To);
-			/*	var Created_By = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_By;*/
-			 var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
-			var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
-			var Created_By  = LoggedinUserFname+LoggedinUserLname;
+// when updating a record do not update the created by and created on - GSR					
+			var Created_By = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_By;
+				
+			//  var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
+			// var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
+			// var Created_By  = LoggedinUserFname+LoggedinUserLname;
+			
+			
+			
 
 			function truncateString(str, num) {
 				if (num > str.length) {
@@ -888,9 +893,9 @@ sap.ui.define([
 				"Off_Current_ETA_To": Off_Current_ETA_To,
 				"Off_Proposed_ETA_From": Off_Proposed_ETA_From,
 				"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
-// when updating a record do not update the created by and created on - GSR				
-				// "Created_By": Created_By,
-				// "Created_On":Created_On,
+		
+				"Created_By": Created_By,
+				"Created_On":Created_On,
 				
 				"Changed_on": new Date(Changed_on),
 				"Requested_Dealer": Requested_Dealer,
@@ -991,24 +996,26 @@ that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
 			Off_Proposed_ETA_From = this.DatesFormatting(Off_Proposed_ETA_From);
 			var Off_Proposed_ETA_To = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Off_Proposed_ETA_To;
 			Off_Proposed_ETA_To = this.DatesFormatting(Off_Proposed_ETA_To);
-			/*	var Created_By = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_By;*/
+	// when updating a record do not update the created by and created on - GSR				
+				var Created_By = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_By;
+				
 		/*	var Created_By = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');*/
 
-		 var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
-			var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
-			var Created_By  = LoggedinUserFname+LoggedinUserLname;
+	// 	 var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
+	// 		var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
+	// 		var Created_By  = LoggedinUserFname+LoggedinUserLname;
 
-			function truncateString(str, num) {
-				if (num > str.length) {
-					return str;
-				} else {
-					str = str.substring(0, num);
-					return str;
-				}
+	// 		function truncateString(str, num) {
+	// 			if (num > str.length) {
+	// 				return str;
+	// 			} else {
+	// 				str = str.substring(0, num);
+	// 				return str;
+	// 			}
 
-			}
+	// 		}
 
-	Created_By = truncateString(Created_By, 12);
+	// Created_By = truncateString(Created_By, 12);
 
 			var Created_On = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_On;
 		/*	Created_On = this.DatesFormatting(Created_On);*/
@@ -1041,9 +1048,8 @@ that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
 				"Off_Current_ETA_To": Off_Current_ETA_To,
 				"Off_Proposed_ETA_From": Off_Proposed_ETA_From,
 				"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
-// when updating a record do not update the created by and created on - GSR				
-				// "Created_By": Created_By,
-				// "Created_On":Created_On,
+				"Created_By": Created_By,
+				"Created_On":Created_On,
 				"Changed_on": new Date(Changed_on),
 				"Requested_Dealer": Requested_Dealer,
 				"Requested_Dealer_Name": Requested_Dealer_Name
@@ -1153,22 +1159,23 @@ that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
 			Off_Proposed_ETA_From = that.DatesFormatting(Off_Proposed_ETA_From);
 			var Off_Proposed_ETA_To = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Off_Proposed_ETA_To;
 			Off_Proposed_ETA_To = that.DatesFormatting(Off_Proposed_ETA_To);
-			/*	var Created_By = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_By;*/
-		 var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
-			var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
-			var Created_By  = LoggedinUserFname+LoggedinUserLname;
+			// when updating a record do not update the created by and created on - GSR		
+				var Created_By = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_By;
+		 //var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
+			// var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
+	// 		var Created_By  = LoggedinUserFname+LoggedinUserLname;
 
-			function truncateString(str, num) {
-				if (num > str.length) {
-					return str;
-				} else {
-					str = str.substring(0, num);
-					return str;
-				}
+	// 		function truncateString(str, num) {
+	// 			if (num > str.length) {
+	// 				return str;
+	// 			} else {
+	// 				str = str.substring(0, num);
+	// 				return str;
+	// 			}
 
-			}
+	// 		}
 
-	Created_By = truncateString(Created_By, 12);
+	// Created_By = truncateString(Created_By, 12);
 
 			var Created_On = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_On;
 			var Changed_on = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Changed_on;
@@ -1198,9 +1205,9 @@ that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
 				"Off_Current_ETA_To": Off_Current_ETA_To,
 				"Off_Proposed_ETA_From": Off_Proposed_ETA_From,
 				"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
-// when updating a record do not update the created by and created on - GSR				
-				// "Created_By": Created_By,
-				// "Created_On":Created_On,
+		
+				"Created_By": Created_By,
+				"Created_On":Created_On,
 				"Changed_on": new Date(Changed_on),
 				"Requested_Dealer": Requested_Dealer,
 				"Requested_Dealer_Name": Requested_Dealer_Name
@@ -1515,22 +1522,22 @@ that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
 			Off_Proposed_ETA_From = this.DatesFormatting(Off_Proposed_ETA_From);
 			var Off_Proposed_ETA_To = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Off_Proposed_ETA_To;
 			Off_Proposed_ETA_To = this.DatesFormatting(Off_Proposed_ETA_To);
-			/*	var Created_By = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_By;*/
-		 var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
-			var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
-			var Created_By  = LoggedinUserFname+LoggedinUserLname;
+				var Created_By = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_By;
+	// 	 var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
+	// 		var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
+	// 		var Created_By  = LoggedinUserFname+LoggedinUserLname;
 
-			function truncateString(str, num) {
-				if (num > str.length) {
-					return str;
-				} else {
-					str = str.substring(0, num);
-					return str;
-				}
+	// 		function truncateString(str, num) {
+	// 			if (num > str.length) {
+	// 				return str;
+	// 			} else {
+	// 				str = str.substring(0, num);
+	// 				return str;
+	// 			}
 
-			}
+	// 		}
 
-	Created_By = truncateString(Created_By, 12);
+	// Created_By = truncateString(Created_By, 12);
 			var Created_On = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_On;
 		/*	Created_On = this.DatesFormatting(Created_On);*/
 		//	var Changed_on = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Changed_on;
@@ -1562,9 +1569,9 @@ that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
 				"Off_Current_ETA_To": Off_Current_ETA_To,
 				"Off_Proposed_ETA_From": Off_Proposed_ETA_From,
 				"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
-// when updating a record do not update the created by and created on - GSR				
-				// "Created_By": Created_By,
-				// "Created_On":Created_On,
+
+				"Created_By": Created_By,
+				"Created_On":Created_On,
 				"Changed_on": new Date(Changed_on),
 				"Requested_Dealer": Requested_Dealer,
 				"Requested_Dealer_Name": Requested_Dealer_Name
@@ -1664,22 +1671,23 @@ that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
 			Off_Proposed_ETA_From = this.DatesFormatting(Off_Proposed_ETA_From);
 			var Off_Proposed_ETA_To = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Off_Proposed_ETA_To;
 			Off_Proposed_ETA_To = this.DatesFormatting(Off_Proposed_ETA_To);
-			/*	var Created_By = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_By;*/
-		 var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
-			var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
-			var Created_By  = LoggedinUserFname+LoggedinUserLname;
+			// when updating a record do not update the created by and created on - GSR	
+				var Created_By = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_By;
+	// 	 var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
+	// 		var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
+	// 		var Created_By  = LoggedinUserFname+LoggedinUserLname;
 
-			function truncateString(str, num) {
-				if (num > str.length) {
-					return str;
-				} else {
-					str = str.substring(0, num);
-					return str;
-				}
+	// 		function truncateString(str, num) {
+	// 			if (num > str.length) {
+	// 				return str;
+	// 			} else {
+	// 				str = str.substring(0, num);
+	// 				return str;
+	// 			}
 
-			}
+	// 		}
 
-	Created_By = truncateString(Created_By, 12);
+	// Created_By = truncateString(Created_By, 12);
 			var Created_On = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_On;
 			/*	Created_On = this.DatesFormatting(Created_On);*/
 		/*	var Changed_on = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Changed_on;*/
@@ -1708,9 +1716,9 @@ that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
 				"Off_Current_ETA_To": Off_Current_ETA_To,
 				"Off_Proposed_ETA_From": Off_Proposed_ETA_From,
 				"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
-// when updating a record do not update the created by and created on - GSR				
-				// "Created_By": Created_By,
-				// "Created_On":Created_On,
+			
+				"Created_By": Created_By,
+				"Created_On":Created_On,
 				"Changed_on": new Date(Changed_on),
 				"Requested_Dealer": Requested_Dealer,
 				"Requested_Dealer_Name": Requested_Dealer_Name
