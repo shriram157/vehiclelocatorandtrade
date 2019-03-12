@@ -84,6 +84,8 @@ sap.ui.define([
 										TableData[i].Colour = oData1.results[x].Int_Colour;
 										TableData[i].Ext_Colour = oData1.results[x].Ext_Colour;
 										TableData[i].APX = oData1.results[x].APX;
+										TableData[i].Order_Type = oData1.results[x].Order_Type;
+										TableData[i].Status = oData1.results[x].Status;
 										oModel.read("/TradeVehicleDesc", {
 											filters: [new sap.ui.model.Filter([new sap.ui.model.Filter('Trade_Id.Trade_Id', 'EQ', oData.results[i].Trade_Id),
 												new sap.ui.model.Filter('VTN.VTN', 'EQ', oData1.results[x].VTN),
@@ -103,6 +105,8 @@ sap.ui.define([
 										});
 									} else if (oData.results[i].Offered_Vtn == oData1.results[x].VTN) {
 										TableData[i].OffredVehicle = {};
+										TableData[i].OffredVehicle.Requesting_Dealer = TableData[i].Requesting_Dealer;
+										TableData[i].OffredVehicle.Requesting_Dealer_Name = TableData[i].Requesting_Dealer_Name;
 										TableData[i].OffredVehicle.Model_Year = oData1.results[x].Model_Year;
 										TableData[i].OffredVehicle.Model = oData1.results[x].Model;
 										TableData[i].OffredVehicle.Series = oData1.results[x].Series;
@@ -110,6 +114,8 @@ sap.ui.define([
 										TableData[i].OffredVehicle.Colour = oData1.results[x].Int_Colour;
 										TableData[i].OffredVehicle.Ext_Colour = oData1.results[x].Ext_Colour;
 										TableData[i].OffredVehicle.APX = oData1.results[x].APX;
+										TableData[i].OffredVehicle.Order_Type = oData1.results[x].Order_Type;
+										TableData[i].OffredVehicle.Status = oData1.results[x].Status;
 										oModel.read("/TradeVehicleDesc", {
 											filters: [new sap.ui.model.Filter([new sap.ui.model.Filter('Trade_Id.Trade_Id', 'EQ', oData.results[i].Trade_Id),
 												new sap.ui.model.Filter('VTN.VTN', 'EQ', oData1.results[x].VTN),
