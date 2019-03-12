@@ -27,7 +27,28 @@ sap.ui.define([
 			this.getRouter().getRoute("VehcTrad_Apprv_Rej_CounTrad").attachPatternMatched(this.onRouteMatched, this);
 		},
 		onRouteMatched: function (oEvent) {
-			debugger
+			debugger;
+			
+// on screen refresh disable the buttons. 
+        if (sap.ui.getCore().getModel("MyTradeRequestSelected") == undefined && 
+                      sap.ui.getCore().getModel("MyTradeRequested") == undefined){
+           		this.getView().byId("oAddbutton").setEnabled(false);
+				this.getView().byId("oacceptbtn").setVisible(false);
+				this.getView().byId("oRejectbtn").setVisible(false);
+				this.getView().byId("oCounterofrbtn").setVisible(false);
+				this.getView().byId("oCancelbtn").setVisible(false);
+				this.getView().byId("oUpdatebtn").setVisible(false);
+				this.getView().byId("oBackbtnid").setEnabled(true);
+				this.getView().byId("oBackbtnid").setVisible(true);      	
+   
+                      }
+			
+			
+			
+			
+			
+			
+			
 			var that = this;
 			// local =this;
 			that.oSelectedItems = oEvent.getParameter("arguments").selectedmyTr;
@@ -1160,7 +1181,7 @@ that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
 			var Off_Proposed_ETA_To = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Off_Proposed_ETA_To;
 			Off_Proposed_ETA_To = that.DatesFormatting(Off_Proposed_ETA_To);
 			// when updating a record do not update the created by and created on - GSR		
-				var Created_By = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_By;
+				var Created_By = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_By;
 		 //var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
 			// var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
 	// 		var Created_By  = LoggedinUserFname+LoggedinUserLname;
