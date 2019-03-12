@@ -32,10 +32,10 @@ module.exports = function (log) {
 
 	var xsuaaCredentials = uaaService.uaa;
 	if (!xsuaaCredentials) {
-		logger.error('uaa service not found');
-		res.status(401).json({
-			message: "uaa service not found"
-		});
+		// logger.error('uaa service not found');
+		// res.status(401).json({
+		// 	message: "uaa service not found"
+		// });
 		//util.callback(new Error("uaa service not found"), res, "uaa service not found");
 		return;
 	}
@@ -74,9 +74,94 @@ module.exports = function (log) {
 
 	});
 
-	app.get("/currentScopesForUser", (req, res) => {
-		var xsAppName = xsuaaCredentials.xsappname;
+	// app.get("/currentScopesForUser", (req, res) => {
+	// 	var xsAppName = xsuaaCredentials.xsappname;
 
+	// 	var parsedData = JSON.stringify(req.authInfo.userAttributes);
+	// 	var obj_data = JSON.parse(parsedData);
+
+	// 	let legacyDealerCode;
+	// 	try {
+	// 		legacyDealerCode = obj_data.DealerCode[0];
+	// 		var legacyDealerCodeAvailable = true;
+
+	// 		req.logMessage("info", "currentScopes for User Requested");
+	// 		req.logMessage("info", 'Dealer code from the SAML Token is', legacyDealerCodeAvailable, legacyDealerCode);
+	// 	} catch (e) {
+	// 		req.logMessage("info", "Dealer Code is blank or is a local testing run");
+	// 		// return;
+	// 		var legacyDealerCodeAvailable = false;
+	// 	}
+
+	// 	var scopeData = req.authInfo.scopes;
+
+	// 	var sendUserData = {
+	// 		"loggedUserType": []
+	// 	};
+
+	// 	var SCOPE = xsuaaCredentials.xsappname;
+	// 	req.logMessage("info", 'The app name', SCOPE);
+	// 	req.logMessage("info", 'Scope Data length', scopeData.length);
+	// 	var viewSuggestOrder = false;
+
+	// 	for (var i = 0; i < scopeData.length; i++) {
+	// 		console.log("scope Data to be analyzed", scopeData[i]);
+
+	// 	}
+	// 	for (var i = 0; i < scopeData.length; i++) {
+
+	// 		req.logMessage("info", 'inside For loop with iteration', i, scopeData[i]);
+
+	// 		if (scopeData[i] == xsuaaCredentials.xsappname + '.Manage_Suggest_Order_Requests') {
+	// 			var userType = "DealerUser";
+	// 			sendUserData.loggedUserType.push(userType);
+
+	// 			req.logMessage("info", "usertype", userType);
+	// 			return res.type("text/plain").status(200).send(JSON.stringify(sendUserData));
+	// 			break;
+	// 		}
+	// 		if (scopeData[i] == xsuaaCredentials.xsappname + ".View_Suggest_Order_Requests") {
+	// 			viewSuggestOrder = true;
+	// 		}
+	// 		//suggestOrder!t1188.View_Suggest_Order_Requests
+	// 		// if ((scopeData[i] == xsuaaCredentials.xsappname + '.View_Suggest_Order_Requests') && !(scopeData[i] == xsuaaCredentials.xsappname + '.Manage_Suggest_Order_Requests')) {
+
+	// 		// 	var zone = obj_data.Zone
+	// 		// 	if (zone != null) {
+	// 		// 		sendUserData.loggedUserType.push("Zone_User");
+	// 		// 	} else {
+	// 		// 		sendUserData.loggedUserType.push("TCI_User");
+	// 		// 	}
+
+	// 		// 	// var userType = "internalUser";
+	// 		// 	//sendUserData.loggedUserType.push(userType);
+
+	// 		// 	return res.type("text/plain").status(200).send(JSON.stringify(sendUserData));
+	// 		// 	break;
+
+	// 		// }
+
+	// 	} // enf for for loop. 
+
+	// 	if (viewSuggestOrder == true) {
+
+	// 		var zone = obj_data.Zone;
+	// 		if (zone != null) {
+	// 			sendUserData.loggedUserType.push("Zone_User");
+	// 		} else {
+	// 			sendUserData.loggedUserType.push("TCI_User");
+	// 		}
+
+	// 		sendUserData.loggedUserType.push(userType);
+
+	// 		return res.type("text/plain").status(200).send(JSON.stringify(sendUserData));
+
+	// 	}
+
+	// });
+app.get("/currentScopesForUser", (req, res) => {
+
+ 
 		var parsedData = JSON.stringify(req.authInfo.userAttributes);
 		var obj_data = JSON.parse(parsedData);
 
@@ -84,80 +169,95 @@ module.exports = function (log) {
 		try {
 			legacyDealerCode = obj_data.DealerCode[0];
 			var legacyDealerCodeAvailable = true;
-
-			req.logMessage("info", "currentScopes for User Requested");
-			req.logMessage("info", 'Dealer code from the SAML Token is', legacyDealerCodeAvailable, legacyDealerCode);
+			
+		 		req.logMessage("info", "currentScopes for User Requested");
+			req.logMessage("info", 'Dealer code from the SAML Token is', legacyDealerCodeAvailable, legacyDealerCode);		
+			
+			
+			// req.logMessage("info", Dealer code from the SAML Token is', legacyDealerCodeAvailable, legacyDealerCode)
 		} catch (e) {
 			req.logMessage("info", "Dealer Code is blank or is a local testing run");
-			// return;
+				// return;
 			var legacyDealerCodeAvailable = false;
 		}
 
+		let isItZoneUser;
+		try {
+			isItZoneUser = obj_data.ZONE[0];
+			var zoneUser = true;
+			req.logMessage("info", 'Dealer code from the SAML Token is a zone User', zoneUser, isItZoneUser);
+		} catch (e) {
+			req.logMessage("info", "Not a zone User");
+				// return;
+			var zoneUser = false;
+		}		
+		
+		
+
 		var scopeData = req.authInfo.scopes;
+		var manageVehicles = false;
+ 
+		var viewTradeRequest = false;
+		var viewDNC = false;
 
 		var sendUserData = {
 			"loggedUserType": []
 		};
 
-		var SCOPE = xsuaaCredentials.xsappname;
-		req.logMessage("info", 'The app name', SCOPE);
-		req.logMessage("info", 'Scope Data length', scopeData.length);
-		var viewSuggestOrder = false;
+
+	var SCOPE = xsuaaCredentials.xsappname ;
+          console.log ('The app name', SCOPE);
 
 		for (var i = 0; i < scopeData.length; i++) {
-			console.log("scope Data to be analyzed", scopeData[i])
+			
 
-		}
-		for (var i = 0; i < scopeData.length; i++) {
-
-			req.logMessage("info", 'inside For loop with iteration', i, scopeData[i]);
-
-			if (scopeData[i] == xsuaaCredentials.xsappname + '.Manage_Suggest_Order_Requests') {
-				var userType = "DealerUser";
+			if (scopeData[i] ==  xsuaaCredentials.xsappname + '.Manage_Trade_Request') {
+				var userType = "vehicelTradeDealerUser";
 				sendUserData.loggedUserType.push(userType);
 
-				req.logMessage("info", "usertype", userType)
 				return res.type("text/plain").status(200).send(JSON.stringify(sendUserData));
-				break;
-			}
-			if (scopeData[i] == xsuaaCredentials.xsappname + ".View_Suggest_Order_Requests") {
-				viewSuggestOrder = true;
-			}
-			//suggestOrder!t1188.View_Suggest_Order_Requests
-			// if ((scopeData[i] == xsuaaCredentials.xsappname + '.View_Suggest_Order_Requests') && !(scopeData[i] == xsuaaCredentials.xsappname + '.Manage_Suggest_Order_Requests')) {
-
-			// 	var zone = obj_data.Zone
-			// 	if (zone != null) {
-			// 		sendUserData.loggedUserType.push("Zone_User");
-			// 	} else {
-			// 		sendUserData.loggedUserType.push("TCI_User");
-			// 	}
-
-			// 	// var userType = "internalUser";
-			// 	//sendUserData.loggedUserType.push(userType);
-
-			// 	return res.type("text/plain").status(200).send(JSON.stringify(sendUserData));
-			// 	break;
-
-			// }
-
-		}; // enf for for loop. 
-
-		if (viewSuggestOrder == true) {
-
-			var zone = obj_data.Zone
-			if (zone != null) {
-				sendUserData.loggedUserType.push("Zone_User");
-			} else {
-				sendUserData.loggedUserType.push("TCI_User");
+				// break;
 			}
 
+			if (scopeData[i] == xsuaaCredentials.xsappname + '.Manage_Vehicles') {
+				manageVehicles = true;
+			}
+			if (scopeData[i] == xsuaaCredentials.xsappname + '.View_Trade_Request') {
+				viewTradeRequest = true;
+			}
+			if (scopeData[i] == xsuaaCredentials.xsappname + '.View_DNC') {
+				viewDNC = true;
+			}
+ 
+
+		} // enf for for loop. 
+
+		req.logMessage("info", 'manageVehicles', manageVehicles);
+		req.logMessage("info", 'viewTradeRequest', viewTradeRequest);
+		req.logMessage("info", 'viewDNC', viewDNC);
+ 
+
+		if (manageVehicles == true && viewTradeRequest == true && viewDNC == true && zoneUser == false ) {
+			// this is an internal TCI User
+
+			var userType = "internalTCIUser";
 			sendUserData.loggedUserType.push(userType);
 
 			return res.type("text/plain").status(200).send(JSON.stringify(sendUserData));
 
 		}
 
+		if (manageVehicles == true && viewTradeRequest == true && viewDNC == true && zoneUser == true ) {
+			// this is an internal TCI User
+
+			var userType = "ZoneUser";
+			sendUserData.loggedUserType.push(userType);
+
+			return res.type("text/plain").status(200).send(JSON.stringify(sendUserData));
+
+		}
+
+ 
 	});
 
 	app.get("/currentScopesForUserLocaltesting", (req, res) => {
@@ -281,33 +381,33 @@ module.exports = function (log) {
 					switch (attributeFromSAP) {
 					case "01":
 						receivedData.Division = "10";
-						receivedData.Attribute = "01"
+						receivedData.Attribute = "01";
 						break;
 					case "02":
 						receivedData.Division = "20";
-						receivedData.Attribute = "02"
+						receivedData.Attribute = "02";
 						break;
 					case "03":
 						receivedData.Division = "Dual";
-						receivedData.Attribute = "03"
+						receivedData.Attribute = "03";
 						break;
 					case "04":
 						receivedData.Division = "10";
-						receivedData.Attribute = "04"
+						receivedData.Attribute = "04";
 						break;
 					case "05":
 						receivedData.Division = "Dual";
-						receivedData.Attribute = "05"
+						receivedData.Attribute = "05";
 						break;
 					default:
 						receivedData.Division = "10"; //  lets put that as a toyota dealer
-						receivedData.Attribute = "01"
+						receivedData.Attribute = "01";
 
 					}
 
 					if ((receivedData.BusinessPartner == legacyDealer || receivedData.SearchTerm2 == legacyDealer) && (userType == 'Dealer')) {
 						sendToUi.legacyDealer = receivedData.BusinessPartner,
-							sendToUi.legacyDealerName = receivedData.BusinessPartnerName
+							sendToUi.legacyDealerName = receivedData.BusinessPartnerName;
 						sendToUi.attributes.push(receivedData);
 						break;
 					}
@@ -331,7 +431,7 @@ module.exports = function (log) {
 	});
 
 	app.get("/attributes", (req, res) => {
-		req.logMessage("info", "attributes fetch started")
+		req.logMessage("info", "attributes fetch started");
 
 		var receivedData = {};
 
@@ -362,7 +462,7 @@ module.exports = function (log) {
 		try {
 			checkSAMLDetails = obj_data.DealerCode[0];
 		} catch (e) {
-			req.logMessage("info", "Dealer Code is blank or is a local testing run")
+			req.logMessage("info", "Dealer Code is blank or is a local testing run");
 				// return;
 			var nosamlData = true;
 		}
@@ -495,40 +595,40 @@ module.exports = function (log) {
 						try {
 							attributeFromSAP = json.d.results[i].to_Customer.Attribute1;
 						} catch (e) {
-							req.logMessage("info", "The Data is sent without Attribute value for the BP", json.d.results[i].BusinessPartner)
+							req.logMessage("info", "The Data is sent without Attribute value for the BP", json.d.results[i].BusinessPartner);
 								// return;
 						}
 
 						switch (attributeFromSAP) {
 						case "01":
 							receivedData.Division = "10";
-							receivedData.Attribute = "01"
+							receivedData.Attribute = "01";
 							break;
 						case "02":
 							receivedData.Division = "20";
-							receivedData.Attribute = "02"
+							receivedData.Attribute = "02";
 							break;
 						case "03":
 							receivedData.Division = "Dual";
-							receivedData.Attribute = "03"
+							receivedData.Attribute = "03";
 							break;
 						case "04":
 							receivedData.Division = "10";
-							receivedData.Attribute = "04"
+							receivedData.Attribute = "04";
 							break;
 						case "05":
 							receivedData.Division = "Dual";
-							receivedData.Attribute = "05"
+							receivedData.Attribute = "05";
 							break;
 						default:
 							receivedData.Division = "10"; //  lets put that as a toyota dealer
-							receivedData.Attribute = "01"
+							receivedData.Attribute = "01";
 
 						}
 
 						if ((receivedData.BusinessPartner == legacyDealer || receivedData.SearchTerm2 == legacyDealer) && (userType == 'Dealer')) {
 							sendToUi.legacyDealer = receivedData.BusinessPartner,
-								sendToUi.legacyDealerName = receivedData.BusinessPartnerName
+								sendToUi.legacyDealerName = receivedData.BusinessPartnerName;
 							sendToUi.attributes.push(receivedData);
 							break;
 						}

@@ -256,7 +256,7 @@ sap.ui.define([
 				this.sCurrentLocale = 'FR';
 				// set the right image for logo  - french       
 				/*              var currentImageSource = this.getView().byId("idLexusLogo");
-				                currentImageSource.setProperty("src", "images/Lexus_FR.png");*/
+				                currentImageSource.setProperty("src", "Images/Lexus_FR.png");*/
 			} else {
 				var i18nModel = new sap.ui.model.resource.ResourceModel({
 					bundleUrl: "i18n/i18n_en.properties",
@@ -267,7 +267,7 @@ sap.ui.define([
 				this.sCurrentLocale = 'EN';
 				// set the right image for logo         
 				/*              var currentImageSource = this.getView().byId("idLexusLogo");
-				                currentImageSource.setProperty("src", "images/Lexus_EN.png");*/
+				                currentImageSource.setProperty("src", "Images/Lexus_EN.png");*/
 			}
 
 			/// set the logo and Language. 
@@ -1909,7 +1909,7 @@ for(var i=0;i<oResults.length;i++){
 				this.sCurrentLocale = 'FR';
 				// set the right image for logo	 - french		
 				/*				var currentImageSource = this.getView().byId("idLexusLogo");
-								currentImageSource.setProperty("src", "images/Lexus_FR.png");*/
+								currentImageSource.setProperty("src", "Images/Lexus_FR.png");*/
 
 			} else {
 				var i18nModel = new sap.ui.model.resource.ResourceModel({
@@ -1921,7 +1921,7 @@ for(var i=0;i<oResults.length;i++){
 				this.sCurrentLocale = 'EN';
 				// set the right image for logo			
 				/*				var currentImageSource = this.getView().byId("idLexusLogo");
-								currentImageSource.setProperty("src", "images/Lexus_EN.png");*/
+								currentImageSource.setProperty("src", "Images/Lexus_EN.png");*/
 
 			}
 
@@ -1944,11 +1944,11 @@ for(var i=0;i<oResults.length;i++){
 				if (this.sDivision == '10') // set the toyoto logo
 				{
 					var currentImageSource = this.getView().byId("idLexusLogo");
-					currentImageSource.setProperty("src", "images/toyota_logo_colour.png");
+					currentImageSource.setProperty("src", "Images/toyota_logo_colour.png");
 
 				} else { // set the lexus logo
 					var currentImageSource = this.getView().byId("idLexusLogo");
-					currentImageSource.setProperty("src", "images/i_lexus_black_full.png");
+					currentImageSource.setProperty("src", "Images/i_lexus_black_full.png");
 
 					// }
 				}

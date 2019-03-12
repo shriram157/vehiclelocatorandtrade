@@ -353,7 +353,7 @@
 	<MessageStrip text="{i18n>TradeCreated} {Created_By} {i18n>On} {path:'Created_On',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" class="Messagestrip1"/>
  
 								</VBox>
- 
+ 	                    <core:Title text="" class="Vtaprct1"/>
 									<VBox>
 								<Text text="{Url}" />
 							    <!--<Label text="" />-->

@@ -888,9 +888,10 @@ sap.ui.define([
 				"Off_Current_ETA_To": Off_Current_ETA_To,
 				"Off_Proposed_ETA_From": Off_Proposed_ETA_From,
 				"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
-				"Created_By": Created_By,
-			/*	"Created_On": new Date(Created_On),*/
-				"Created_On":Created_On,
+// when updating a record do not update the created by and created on - GSR				
+				// "Created_By": Created_By,
+				// "Created_On":Created_On,
+				
 				"Changed_on": new Date(Changed_on),
 				"Requested_Dealer": Requested_Dealer,
 				"Requested_Dealer_Name": Requested_Dealer_Name
@@ -1039,8 +1040,9 @@ that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
 				"Off_Current_ETA_To": Off_Current_ETA_To,
 				"Off_Proposed_ETA_From": Off_Proposed_ETA_From,
 				"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
-				"Created_By": Created_By,
-				"Created_On": Created_On,
+// when updating a record do not update the created by and created on - GSR				
+				// "Created_By": Created_By,
+				// "Created_On":Created_On,
 				"Changed_on": new Date(Changed_on),
 				"Requested_Dealer": Requested_Dealer,
 				"Requested_Dealer_Name": Requested_Dealer_Name
@@ -1195,8 +1197,9 @@ that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
 				"Off_Current_ETA_To": Off_Current_ETA_To,
 				"Off_Proposed_ETA_From": Off_Proposed_ETA_From,
 				"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
-				"Created_By": Created_By,
-				"Created_On": Created_On,
+// when updating a record do not update the created by and created on - GSR				
+				// "Created_By": Created_By,
+				// "Created_On":Created_On,
 				"Changed_on": new Date(Changed_on),
 				"Requested_Dealer": Requested_Dealer,
 				"Requested_Dealer_Name": Requested_Dealer_Name
@@ -1558,8 +1561,9 @@ that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
 				"Off_Current_ETA_To": Off_Current_ETA_To,
 				"Off_Proposed_ETA_From": Off_Proposed_ETA_From,
 				"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
-				"Created_By": Created_By,
-				"Created_On": Created_On,
+// when updating a record do not update the created by and created on - GSR				
+				// "Created_By": Created_By,
+				// "Created_On":Created_On,
 				"Changed_on": new Date(Changed_on),
 				"Requested_Dealer": Requested_Dealer,
 				"Requested_Dealer_Name": Requested_Dealer_Name
@@ -1703,8 +1707,9 @@ that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
 				"Off_Current_ETA_To": Off_Current_ETA_To,
 				"Off_Proposed_ETA_From": Off_Proposed_ETA_From,
 				"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
-				"Created_By": Created_By,
-				"Created_On": Created_On,
+// when updating a record do not update the created by and created on - GSR				
+				// "Created_By": Created_By,
+				// "Created_On":Created_On,
 				"Changed_on": new Date(Changed_on),
 				"Requested_Dealer": Requested_Dealer,
 				"Requested_Dealer_Name": Requested_Dealer_Name
@@ -2333,7 +2338,7 @@ that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
 					this.sCurrentLocale = 'FR';
 					// set the right image for logo	 - french		
 					/*				var currentImageSource = this.getView().byId("idLexusLogo");
-									currentImageSource.setProperty("src", "images/Lexus_FR.png");*/
+									currentImageSource.setProperty("src", "Images/Lexus_FR.png");*/
 
 				} else {
 					var i18nModel = new sap.ui.model.resource.ResourceModel({
@@ -2345,7 +2350,7 @@ that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
 					this.sCurrentLocale = 'EN';
 					// set the right image for logo			
 					/*				var currentImageSource = this.getView().byId("idLexusLogo");
-									currentImageSource.setProperty("src", "images/Lexus_EN.png");*/
+									currentImageSource.setProperty("src", "Images/Lexus_EN.png");*/
 
 				}
 

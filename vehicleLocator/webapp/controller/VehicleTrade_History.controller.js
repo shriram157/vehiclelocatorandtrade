@@ -505,7 +505,7 @@ var Accepted=i18n.getText("Accepted");
 					this.sCurrentLocale = 'FR';
 					// set the right image for logo	 - french		
 					/*				var currentImageSource = this.getView().byId("idLexusLogo");
-									currentImageSource.setProperty("src", "images/Lexus_FR.png");*/
+									currentImageSource.setProperty("src", "Images/Lexus_FR.png");*/
 
 				} else {
 					var i18nModel = new sap.ui.model.resource.ResourceModel({
@@ -517,7 +517,7 @@ var Accepted=i18n.getText("Accepted");
 					this.sCurrentLocale = 'EN';
 					// set the right image for logo			
 					/*				var currentImageSource = this.getView().byId("idLexusLogo");
-									currentImageSource.setProperty("src", "images/Lexus_EN.png");*/
+									currentImageSource.setProperty("src", "Images/Lexus_EN.png");*/
 
 				}
 
