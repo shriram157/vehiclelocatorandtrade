@@ -31,15 +31,13 @@ sap.ui.define([
 		onRouteMatched: function (oEvent) {
 			var dataFrom = oEvent.getParameter("arguments").DataClicked;
 			if (dataFrom != undefined) {
+
 				this.VehicleHistory_Summary();
 
 			}
 		},
 
 		VehicleHistory_Summary: function () {
-
-			debugger;
-
 			var that = this;
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
@@ -60,93 +58,102 @@ sap.ui.define([
 			var Filter2 = new sap.ui.model.Filter('Trade_Status', 'EQ', 'A');
 			var Filter = new sap.ui.model.Filter([Filter0, Filter1], false);
 			var Filterall = new sap.ui.model.Filter([Filter, Filter2], true);
+			TableData = [];
 			oModel.read("/TradeRequest", {
 				filters: [Filterall],
+				async: false,
 				success: function (oData, oResponse) {
 					//=====Filter on Vehicles=====================	
 					TableData = oData.results;
-					for (var i = 0; i < oData.results.length; i++) {
-						if (oData.results[i].Requesting_Dealer.slice(-5) == Dealer_No) {
-							TableData[i].RequestingDealerVisible = true;
-						} else {
-							TableData[i].RequestingDealerVisible = false;
-						}
-						oModel.read("/TradeVehicles", {
-							filters: [new sap.ui.model.Filter('Trade_Id.Trade_Id', 'EQ', oData.results[i].Trade_Id)],
-							async: false,
-							success: function (oData1, oResponse1) {
-								for (var x = 0; x < oData1.results.length; x++) {
-									if (oData.results[i].Requested_Vtn == oData1.results[x].VTN) {
-										TableData[i].Model_Year = oData1.results[x].Model_Year;
-										TableData[i].Model = oData1.results[x].Model;
-										TableData[i].Series = oData1.results[x].Series;
-										TableData[i].Suffix = oData1.results[x].Suffix;
-										TableData[i].Colour = oData1.results[x].Int_Colour;
-										TableData[i].Ext_Colour = oData1.results[x].Ext_Colour;
-										TableData[i].APX = oData1.results[x].APX;
-										TableData[i].Order_Type = oData1.results[x].Order_Type;
-										TableData[i].Status = oData1.results[x].Status;
-										oModel.read("/TradeVehicleDesc", {
-											filters: [new sap.ui.model.Filter([new sap.ui.model.Filter('Trade_Id.Trade_Id', 'EQ', oData.results[i].Trade_Id),
-												new sap.ui.model.Filter('VTN.VTN', 'EQ', oData1.results[x].VTN),
-												new sap.ui.model.Filter('SPRAS', 'EQ', lang)
-											], true)],
-											async: false,
-											success: function (oData2, oResponse1) {
-												TableData[i].Model_Desc = oData2.results[0].Model_Desc;
-												TableData[i].Series_Desc = oData2.results[0].Series_Desc;
-												TableData[i].Suffix_Desc = oData2.results[0].Suffix_Desc;
-												TableData[i].Colour = oData2.results[0].Int_Colour;
-												TableData[i].Ext_Colour_Desc = oData2.results[0].Ext_Colour_Desc;
-											},
-											error: function (e) {
-
-											}
-										});
-									} else if (oData.results[i].Offered_Vtn == oData1.results[x].VTN) {
-										TableData[i].OffredVehicle = {};
-										TableData[i].OffredVehicle.Requesting_Dealer = TableData[i].Requesting_Dealer;
-										TableData[i].OffredVehicle.Requesting_Dealer_Name = TableData[i].Requesting_Dealer_Name;
-										TableData[i].OffredVehicle.Model_Year = oData1.results[x].Model_Year;
-										TableData[i].OffredVehicle.Model = oData1.results[x].Model;
-										TableData[i].OffredVehicle.Series = oData1.results[x].Series;
-										TableData[i].OffredVehicle.Suffix = oData1.results[x].Suffix;
-										TableData[i].OffredVehicle.Colour = oData1.results[x].Int_Colour;
-										TableData[i].OffredVehicle.Ext_Colour = oData1.results[x].Ext_Colour;
-										TableData[i].OffredVehicle.APX = oData1.results[x].APX;
-										TableData[i].OffredVehicle.Order_Type = oData1.results[x].Order_Type;
-										TableData[i].OffredVehicle.Status = oData1.results[x].Status;
-										oModel.read("/TradeVehicleDesc", {
-											filters: [new sap.ui.model.Filter([new sap.ui.model.Filter('Trade_Id.Trade_Id', 'EQ', oData.results[i].Trade_Id),
-												new sap.ui.model.Filter('VTN.VTN', 'EQ', oData1.results[x].VTN),
-												new sap.ui.model.Filter('SPRAS', 'EQ', lang)
-											], true)],
-											async: false,
-											success: function (oData2, oResponse1) {
-												TableData[i].OffredVehicle.Model_Desc = oData2.results[0].Model_Desc;
-												TableData[i].OffredVehicle.Series_Desc = oData2.results[0].Series_Desc;
-												TableData[i].OffredVehicle.Suffix_Desc = oData2.results[0].Suffix_Desc;
-												TableData[i].OffredVehicle.Colour = oData2.results[0].Int_Colour;
-												TableData[i].OffredVehicle.Ext_Colour_Desc = oData2.results[0].Ext_Colour_Desc;
-											},
-											error: function (e) {
-
-											}
-										});
-									}
-								}
-							},
-							error: function (e1) {}
-						});
-					}
-					var model = new sap.ui.model.json.JSONModel(TableData);
-					model.setSizeLimit(1000);
-					that.getView().byId("tableVTH").setModel(model);
 				},
 				error: function (e) {
 
 				}
 			});
+			for (var i = 0; i < TableData.length; i++) {
+				if (TableData[i].Requesting_Dealer.slice(-5) == Dealer_No) {
+					TableData[i].RequestingDealerVisible = true;
+				} else {
+					TableData[i].RequestingDealerVisible = false;
+				}
+				oModel.read("/TradeVehicles", {
+					filters: [new sap.ui.model.Filter('Trade_Id.Trade_Id', 'EQ', TableData[i].Trade_Id)],
+					async: false,
+					success: function (oData1, oResponse1) {
+						for (var x = 0; x < oData1.results.length; x++) {
+							if (TableData[i].Requested_Vtn == oData1.results[x].VTN) {
+								TableData[i].Model_Year = oData1.results[x].Model_Year;
+								TableData[i].Model = oData1.results[x].Model;
+								TableData[i].Series = oData1.results[x].Series;
+								TableData[i].Suffix = oData1.results[x].Suffix;
+								TableData[i].Colour = oData1.results[x].Int_Colour;
+								TableData[i].Ext_Colour = oData1.results[x].Ext_Colour;
+								TableData[i].APX = oData1.results[x].APX;
+								TableData[i].Order_Type = oData1.results[x].Order_Type;
+								TableData[i].Status = oData1.results[x].Status;
+
+							} else if (TableData[i].Offered_Vtn == oData1.results[x].VTN) {
+								TableData[i].OffredVehicle = {};
+								TableData[i].OffredVehicle.Requesting_Dealer = TableData[i].Requesting_Dealer;
+								TableData[i].OffredVehicle.Requesting_Dealer_Name = TableData[i].Requesting_Dealer_Name;
+								TableData[i].OffredVehicle.Model_Year = oData1.results[x].Model_Year;
+								TableData[i].OffredVehicle.Model = oData1.results[x].Model;
+								TableData[i].OffredVehicle.Series = oData1.results[x].Series;
+								TableData[i].OffredVehicle.Suffix = oData1.results[x].Suffix;
+								TableData[i].OffredVehicle.Colour = oData1.results[x].Int_Colour;
+								TableData[i].OffredVehicle.Ext_Colour = oData1.results[x].Ext_Colour;
+								TableData[i].OffredVehicle.APX = oData1.results[x].APX;
+								TableData[i].OffredVehicle.Order_Type = oData1.results[x].Order_Type;
+								TableData[i].OffredVehicle.Status = oData1.results[x].Status;
+							}
+						}
+					},
+					error: function (e1) {}
+				});
+			}
+
+			for (var i = 0; i < TableData.length; i++) {
+				if (TableData[i].Requested_Vtn != "") {
+					oModel.read("/TradeVehicleDesc", {
+						filters: [new sap.ui.model.Filter([new sap.ui.model.Filter('Trade_Id.Trade_Id', 'EQ', TableData[i].Trade_Id),
+							new sap.ui.model.Filter('VTN.VTN', 'EQ', TableData[i].Requested_Vtn),
+							new sap.ui.model.Filter('SPRAS', 'EQ', lang)
+						], true)],
+						async: false,
+						success: function (oData2, oResponse1) {
+							TableData[i].Model_Desc = oData2.results[0].Model_Desc;
+							TableData[i].Series_Desc = oData2.results[0].Series_Desc;
+							TableData[i].Suffix_Desc = oData2.results[0].Suffix_Desc;
+							TableData[i].Colour = oData2.results[0].Int_Colour;
+							TableData[i].Ext_Colour_Desc = oData2.results[0].Ext_Colour_Desc;
+						},
+						error: function (e) {
+
+						}
+					});
+				}
+				if (TableData[i].Offered_Vtn != "") {
+					oModel.read("/TradeVehicleDesc", {
+						filters: [new sap.ui.model.Filter([new sap.ui.model.Filter('Trade_Id.Trade_Id', 'EQ', TableData[i].Trade_Id),
+							new sap.ui.model.Filter('VTN.VTN', 'EQ', TableData[i].Offered_Vtn),
+							new sap.ui.model.Filter('SPRAS', 'EQ', lang)
+						], true)],
+						async: false,
+						success: function (oData2, oResponse1) {
+							TableData[i].OffredVehicle.Model_Desc = oData2.results[0].Model_Desc;
+							TableData[i].OffredVehicle.Series_Desc = oData2.results[0].Series_Desc;
+							TableData[i].OffredVehicle.Suffix_Desc = oData2.results[0].Suffix_Desc;
+							TableData[i].OffredVehicle.Colour = oData2.results[0].Int_Colour;
+							TableData[i].OffredVehicle.Ext_Colour_Desc = oData2.results[0].Ext_Colour_Desc;
+						},
+						error: function (e) {
+
+						}
+					});
+				}
+			}
+			var model = new sap.ui.model.json.JSONModel(TableData);
+			that.getView().byId("tableVTH").setModel(model);
 			//==============================================================================================================
 			// that.TradeRequestoDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeRequest";
 			// var ajax1 = $.ajax({
@@ -458,11 +465,11 @@ sap.ui.define([
 					if (arrData[i].WhtCertDate != null) arrData[i].WhtCertDate = arrData[i].WhtCertDate.split("T")[0];
 					else arrData[i].PaymentDate;*/
 				if (arrData[i].RequestingDealerVisible == true) {
-						var RequestingDealerVisible = "To";
+					var RequestingDealerVisible = "To";
 					var SelectedDealer = arrData[i].Requested_Dealer;
 					var SelectedDealerName = arrData[i].Requested_Dealer_Name;
 					var DelearData = SelectedDealer + "-" + SelectedDealerName;
-				
+
 				} else {
 					var RequestingDealerVisible = "From";
 
@@ -654,10 +661,10 @@ sap.ui.define([
 		},
 		formatoDate: function (Created_On) {
 			if (Created_On != null && Created_On != "" && Created_On != "/Date(0)/") {
-			var zdateFormat = sap.ui.core.format.DateFormat.getDateInstance({
-				pattern: "yyyy-MM-dd"
-			});
-			return zdateFormat.format(Created_On)
+				var zdateFormat = sap.ui.core.format.DateFormat.getDateInstance({
+					pattern: "yyyy-MM-dd"
+				});
+				return zdateFormat.format(Created_On)
 
 			} else {
 				return "";

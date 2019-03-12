@@ -9,12 +9,19 @@
 		},
 		"dataSources": {
 			"xsodata": {
-			
-					"uri": "/xsodata/vehicleTrade_SRV.xsodata",
+
+				"uri": "/xsodata/vehicleTrade_SRV.xsodata",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0",
 					"localUri": "localService/metadata.xml"
+				}
+			},
+			"ModelBlockS": {
+				"uri": "/node/Z_DEALER_TRADE_REQUEST_SRV",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
 				}
 			}
 		},
@@ -80,12 +87,27 @@
 					"defaultBindingMode": "OneWay",
 					"defaultCountMode": "Request",
 					"serviceUrlParams": {
-                     "sap-client": "200"
-                  },
-                   "json": true,
-                   "useBatch": false
+						"sap-client": "200"
+					},
+					"json": true,
+					"useBatch": false
 				},
 				"dataSource": "xsodata",
+				"preload": false
+			},
+			"ModelBlock": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request",
+					"serviceUrlParams": {
+						"sap-client": "200"
+					},
+					"json": true,
+					"useBatch": false
+				},
+				"dataSource": "ModelBlockS",
 				"preload": false
 			}
 		},
@@ -99,53 +121,43 @@
 				"controlAggregation": "pages",
 				"transition": "flip"
 			},
-			"routes": [
-				{
-					"pattern": "",
-					"name": "VehicleLocSearch",
-					"target": "VehicleLocSearch"
-				},
-				{
-					"pattern": "VehicleSearcResults/:LoginUser:",
-					"name": "VehicleSearcResults",
-					"target": "VehicleSearcResults"
-				},
-				{
-					"pattern": "VehicleTrade_CreateSingle/:SelectedTrade:",
-					"name": "VehicleTrade_CreateSingle",
-					"target": "VehicleTrade_CreateSingle"
-				},
-				{
-					"pattern": "VehicleTrade_VehicleSelection/:SelectedVehicleFrom:",
-					"name": "VehicleTrade_VehicleSelection",
-					"target": "VehicleTrade_VehicleSelection"
-				},
-				{
-					"pattern": "VehcTrad_Apprv_Rej_CounTrad/:selectedmyTr:",
-					"name": "VehcTrad_Apprv_Rej_CounTrad",
-					"target": "VehcTrad_Apprv_Rej_CounTrad"
-				},
-				{
-					"pattern": "VehicleTrade_UpdtTradReq/:SelectedTrade:",
-					"name": "VehicleTrade_UpdtTradReq",
-					"target": "VehicleTrade_UpdtTradReq"
-				},
-				{
-					"pattern": "VehicleTrade_History/:DataClicked:",
-					"name": "VehicleTrade_History",
-					"target": "VehicleTrade_History"
-				},
-				{
-					"pattern": "VehicleTrade_ModelBlock_Summary/:SelectedTrade:",
-					"name": "VehicleTrade_ModelBlock_Summary",
-					"target": "VehicleTrade_ModelBlock_Summary"
-				},
-				{
-					"pattern": "VehicleTrade_Summary/:DataClicked:",
-					"name": "VehicleTrade_Summary",
-					"target": "VehicleTrade_Summary"
-				}
-			],
+			"routes": [{
+				"pattern": "",
+				"name": "VehicleLocSearch",
+				"target": "VehicleLocSearch"
+			}, {
+				"pattern": "VehicleSearcResults/:LoginUser:",
+				"name": "VehicleSearcResults",
+				"target": "VehicleSearcResults"
+			}, {
+				"pattern": "VehicleTrade_CreateSingle/:SelectedTrade:",
+				"name": "VehicleTrade_CreateSingle",
+				"target": "VehicleTrade_CreateSingle"
+			}, {
+				"pattern": "VehicleTrade_VehicleSelection/:SelectedVehicleFrom:",
+				"name": "VehicleTrade_VehicleSelection",
+				"target": "VehicleTrade_VehicleSelection"
+			}, {
+				"pattern": "VehcTrad_Apprv_Rej_CounTrad/:selectedmyTr:",
+				"name": "VehcTrad_Apprv_Rej_CounTrad",
+				"target": "VehcTrad_Apprv_Rej_CounTrad"
+			}, {
+				"pattern": "VehicleTrade_UpdtTradReq/:SelectedTrade:",
+				"name": "VehicleTrade_UpdtTradReq",
+				"target": "VehicleTrade_UpdtTradReq"
+			}, {
+				"pattern": "VehicleTrade_History/:DataClicked:",
+				"name": "VehicleTrade_History",
+				"target": "VehicleTrade_History"
+			}, {
+				"pattern": "VehicleTrade_ModelBlock_Summary/:SelectedTrade:",
+				"name": "VehicleTrade_ModelBlock_Summary",
+				"target": "VehicleTrade_ModelBlock_Summary"
+			}, {
+				"pattern": "VehicleTrade_Summary/:DataClicked:",
+				"name": "VehicleTrade_Summary",
+				"target": "VehicleTrade_Summary"
+			}],
 			"targets": {
 				"VehicleLocSearch": {
 					"viewName": "VehicleLocSearch",
@@ -195,11 +207,9 @@
 			}
 		},
 		"resources": {
-			"css": [
-				{
-					"uri": "css/style.css"
-				}
-			]
+			"css": [{
+				"uri": "css/style.css"
+			}]
 		}
 	}
 }
