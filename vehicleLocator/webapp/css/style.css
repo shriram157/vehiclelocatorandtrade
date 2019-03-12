@@ -454,5 +454,8 @@ user agent stylesheet table {
     min-height: 2rem;
 }
 
+.sapUiTableTbr
+{height:auto !important;}
+
 
 

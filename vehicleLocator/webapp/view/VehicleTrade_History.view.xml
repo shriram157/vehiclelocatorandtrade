@@ -32,7 +32,7 @@
 							<ToolbarSpacer/>
 							<Button id="openMenVTH" class="VLbtn3" text="{i18n>ExporttoExcel}" type="Accept" press="ExporttoExcellsheet" width="138px"/>
 						</OverflowToolbar>
-						<VBox>
+						<VBox class="sapUiSmallMargin">
 							<!--	<Table id="tableVTH" width="auto" class="sapUiResponsiveMargin" items="{/}" growingThreshold="150">
 								<columns>
 									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
@@ -100,7 +100,7 @@
 									<t:Column sortProperty="">
 										<Label text="{i18n>From_To}"/>
 										<t:template>
-											<Text text="{= ${RequestingDealerVisible} === true ?'From':'To'}" wrapping="false"/>
+											<Text text="{= ${RequestingDealerVisible} === true ?'To':'From'}" wrapping="false"/>
 										</t:template>
 									</t:Column>
 									<t:Column sortProperty="Requesting_Dealer">
@@ -113,7 +113,7 @@
 									<t:Column sortProperty=""  id="matnr">
 										<Label text="{i18n>VehicleTrackingNumber}"/>
 										<t:template>
-											<Text text="{VTN}" wrapping="false"/>
+											<Text text="{Requested_Vtn}" wrapping="false"/>
 										</t:template>
 									</t:Column>
 									<t:Column sortProperty="Model">
@@ -143,7 +143,8 @@
 									<t:Column sortProperty="Changed_on">
 										<Label text="{i18n>Accepted}" wrapping="false"/>
 										<t:template>
-											<Text text="{path:'Changed_on',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false"/>
+											<Text text="{path:'Changed_on', type:'sap.ui.model.type.DateTime', formatOptions: { pattern: 'MMMM d, y', strictParsing: false, relative: false }}" />
+											<!--formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false"-->
 										</t:template>
 									</t:Column>
 								</t:columns>

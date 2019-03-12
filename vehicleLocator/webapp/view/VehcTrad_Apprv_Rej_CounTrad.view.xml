@@ -343,7 +343,7 @@
 								<core:Title text="" class="Vtaprct1"/>
 								<VBox>
 									<!--	<FlexBox height="100px" alignItems="Start" justifyContent="Start"/>-->
-									<Label text="{i18n>Comments}" class="sapUiSmallMarginBottom"/>
+									<Label text="{i18n>Comments}" />
 									<TextArea width="100%" height="100px" id="oComments" value=""
 									showExceededText="false" maxLength="150"   valueState="{= ${/value}.length > 150 ? 'Warning' : 'None' }"	liveChange="handleLiveChangeText" >
 										<layoutData>

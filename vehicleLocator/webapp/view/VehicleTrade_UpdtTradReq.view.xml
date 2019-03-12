@@ -182,6 +182,7 @@
 						</form:SimpleForm>
 					</VBox>
 					<!--,formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}-->
+					<VBox  class="sapUiSmallMargin">
 					<t:Table id="tableVrade" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" class="sapUiMediumMarginBegin"
 						rows="{ path:'TradeRequestModel>/TradeComment', sorter : [{ path:'Comment_Date', descending : 'true' }] }">
 						<t:columns>
@@ -205,6 +206,7 @@
 							</t:Column>
 						</t:columns>
 					</t:Table>
+					</VBox>
 					<!--	<Table id="tableVrade" width="auto" class="sapUiResponsiveMargin" items="{/}" growingThreshold="150">
 						<columns>
 							<Column minScreenWidth="Desktop" demandPopin="true">
@@ -227,24 +229,28 @@
 							</ColumnListItem>
 						</items>
 					</Table>-->
-					<VBox class="sapUiSmallMargin">
+					<VBox class="sapUiSmallMargin" width="100%">
 						<form:SimpleForm id="SimpleForrmDisa220" editable="true" layout="ResponsiveGridLayout" labelSpanM="12" adjustLabelSpan="false"
-							emptySpanL="0" class="simplVTARC" emptySpanM="0" columnsL="2" columnsM="2">
+						  emptySpanL="0" emptySpanM="0" columnsL="3" columnsM="3" width="100%">
 							<form:content>
 								<core:Title text="" class="Vtaprct1"/>
+								<VBox>
 								<Label text="{i18n>Comments}"/>
-								<TextArea width="20rem" height="15rem" id="oComments">
-									<layoutData>
-										<l:GridData span="L5 M12 S3"/>
-									</layoutData>
+								<TextArea width="100%" height="100px" id="oComments" maxLength="150">
+										<layoutData>
+											<l:GridData span="L4 M12 S3"/>
+										</layoutData>
 								</TextArea>
+								</VBox>
+									<VBox>
 								<Button text="{i18n>AddComments}" id="oAddbutton" width="142px" enabled="true" press="oAddCommentsArea"/>
+								</VBox>
 								<core:Title text="" class="Vtaprct1"/>
 								<!--<Text
 									text="This trade information is a snap shot at the time of trade request creation. This information will be validated once after your input (Accept/Reject/Counter) before the function is completed."
 									width=""/>-->
 								<Label text=""/>
-								<HBox>
+								<!--<HBox>-->
 									<!--	<FlexBox width="10px"></FlexBox>
 									<FlexBox height="50px" alignItems="Start" justifyContent="Start">
 										<Button text="{i18n>Accept}" width="100px"/>
@@ -260,7 +266,7 @@
 										<Button text="{i18n>CounterOffer}" width="150px"/>
 										<FlexBox width="7px"></FlexBox>
 									</FlexBox>-->
-								</HBox>
+								<!--</HBox>-->
 								<Label text=""/>
 								<HBox>
 									<FlexBox width="10px"></FlexBox>
