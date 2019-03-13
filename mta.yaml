@@ -15,7 +15,7 @@ modules:
    path: vehicleLocator_Node
    parameters:
       host: tci-dev-vehiclelocatorandtrade-node
-      disk-quota: 256M
+      disk-quota: 512M
       memory: 256M
    properties:
       NODE_TLS_REJECT_UNAUTHORIZED: 0
@@ -35,7 +35,6 @@ modules:
    path: vehicleLocator_XSJS
    parameters:
       host: tci-dev-vehiclelocatorandtrade-xsjs
-      service-url: '${default-url}'
       disk-quota: 512M
       memory: 256M
    provides:
@@ -52,7 +51,7 @@ modules:
    path: vehicleLocator
    parameters:
       host: tci-dev-vehiclelocatorandtrade
-      disk-quota: 256M
+      disk-quota: 512M
       memory: 512M
    build-parameters:
       builder: grunt
@@ -63,22 +62,22 @@ modules:
       group: destinations
       properties:
          name: vehiclelocatorandtrade-node
+         url: ~{url}
          forwardAuthToken: true
          timeout: 60000
-         url: '~{url}'
     - name: vehiclelocatorandtrade-xsjs_api
       group: destinations
       properties:
          name: vehiclelocatorandtrade-xsjs
+         url: ~{url}
          forwardAuthToken: true
-         url: '~{url}'
 
 resources:
  - name: application-logs_vehiclelocatorandtrade
+   type: org.cloudfoundry.managed-service
    parameters:
       service: application-logs
       service-plan: lite
-   type: org.cloudfoundry.managed-service
 
  - name: hdi_vehiclelocatorandtrade
    type: com.sap.xs.hdi-container
@@ -89,13 +88,13 @@ resources:
       hdi-container-name: ${service-name}
 
  - name: uaa_vehiclelocatorandtrade
-   parameters:
-      path: ./xs-security.json
-      service-plan: application
-      service: xsuaa
    type: org.cloudfoundry.managed-service
+   parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
 
  - name: VEHICLE_LOCATOR_AND_TRADE_APIM_CUPS
+   type: org.cloudfoundry.existing-service
    parameters:
       service-name: VEHICLE_LOCATOR_AND_TRADE_APIM_CUPS
-   type: org.cloudfoundry.existing-service
