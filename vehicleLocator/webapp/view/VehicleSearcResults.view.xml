@@ -274,7 +274,7 @@
                     <Column id="Province1"   demandPopin="true" minScreenWidth="Tablet"
                             hAlign="Left">
                         <Text text="{i18n>Province}"/>
-                    
+                         </Column>
                 </columns>
 
                 <items>
