@@ -27,6 +27,9 @@ sap.ui.define([
 			this.getRouter().getRoute("VehcTrad_Apprv_Rej_CounTrad").attachPatternMatched(this.onRouteMatched, this);
 		},
 		onRouteMatched: function (oEvent) {
+			
+				 
+							    this.getView().byId("oComments").setText("");      // 1303
 		
 				if(oEvent.getParameter("arguments").selectedmyTr!=undefined){
 			this.oSelectedItems = oEvent.getParameter("arguments").selectedmyTr;
