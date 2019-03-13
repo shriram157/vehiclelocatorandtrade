@@ -70,7 +70,10 @@ sap.ui.define([
 		
 		oRequestLinkPress: function (oEvt) {
 			var that = this;
-
+            
+            // empty the comments box. 
+            this.getView().byId("zmessagestrip").setText("");      // 1303
+            
 			that.oTable = that.getView().byId("table1vts");
 			that.oTableSelectObj = oEvt.getSource().getBindingContext("vehicleTradeSummaryTable").getObject();
     // sap.ui.getCore().VehicheSearcResults=this.getView().byId("table1vts").getModel().getData();
