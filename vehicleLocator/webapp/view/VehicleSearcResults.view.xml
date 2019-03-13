@@ -23,7 +23,7 @@
 					<tnt:ToolHeader>
 						<!--<OverflowToolbar class="toolbar1">-->
 						<!--<ToolbarSpacer/>-->
-							<Label id="oDealerCode2" width="auto"/>
+						<Label id="oDealerCode2" width="auto"/>
 						<Label id="oDealersearchresults" width="auto"/>
 						<ToolbarSpacer/>
 						<!--	<Button id="openMenu3" class="VLbtn1" text="{i18n>PullVehicles}" type="Transparent" press="handlePressPullvehcls" width="auto"/>-->
