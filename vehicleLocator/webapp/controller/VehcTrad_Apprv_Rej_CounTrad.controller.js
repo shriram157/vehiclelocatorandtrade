@@ -27,8 +27,10 @@ sap.ui.define([
 			this.getRouter().getRoute("VehcTrad_Apprv_Rej_CounTrad").attachPatternMatched(this.onRouteMatched, this);
 		},
 		onRouteMatched: function (oEvent) {
-			debugger;
-			
+		
+				if(oEvent.getParameter("arguments").selectedmyTr!=undefined){
+			this.oSelectedItems = oEvent.getParameter("arguments").selectedmyTr;
+			}
 // on screen refresh disable the buttons. 
         if (sap.ui.getCore().getModel("MyTradeRequestSelected") == undefined && 
                       sap.ui.getCore().getModel("MyTradeRequested") == undefined){
@@ -44,14 +46,9 @@ sap.ui.define([
                       }
 			
 			
-			
-			
-			
-			
-			
 			var that = this;
 			// local =this;
-			that.oSelectedItems = oEvent.getParameter("arguments").selectedmyTr;
+		
 			// local.oViewModel = new sap.ui.model.json.JSONModel({
    //             busy: false,
    //             delay: 0,
@@ -1809,8 +1806,13 @@ that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
 		oBack: function () {
 			var oPage = this.getView().byId("App_Apprvpage"); //Get Hold of page
 			oPage.scrollTo(0, 0);
-			/*	this.getRouter().navTo("VehicleTrade_History");*/
+			//for screen 8
+			if(	this.oSelectedItems=="SelectedFromTradeHistory"){
+		 	this.getRouter().navTo("VehicleTrade_History");  
+		}
+		else{
 			this.getRouter().navTo("VehicleTrade_Summary");
+		}
 		},
 
 		VehicleTrade_SummaryData: function (StatusData) {

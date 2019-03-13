@@ -664,12 +664,15 @@ sap.ui.define([
 				var zdateFormat = sap.ui.core.format.DateFormat.getDateInstance({
 					pattern: "yyyy-MM-dd"
 				});
-				return zdateFormat.format(Created_On)
+				return zdateFormat.format(Created_On);
 
 			} else {
 				return "";
 			}
-		},
+		}
 
 	});
+
 });
+
+
