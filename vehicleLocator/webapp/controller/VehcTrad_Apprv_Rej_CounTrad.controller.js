@@ -29,7 +29,7 @@ sap.ui.define([
 		onRouteMatched: function (oEvent) {
 			
 				 
-							    this.getView().byId("oComments").setText("");      // 1303
+							    // this.getView().byId("oComments").setText("");      // 1303
 		
 				if(oEvent.getParameter("arguments").selectedmyTr!=undefined){
 			this.oSelectedItems = oEvent.getParameter("arguments").selectedmyTr;
