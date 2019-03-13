@@ -40,14 +40,9 @@ sap.ui.define([
 				this.getView().byId("oUpdatebtn").setVisible(false);
 				this.getView().byId("oBackbtnid").setEnabled(true);
 				this.getView().byId("oBackbtnid").setVisible(true);      	
-   
+             	this.getView().byId("oComments").setEnabled(false);
                       }
-			
-			
-			
-			
-			
-			
+
 			
 			var that = this;
 			// local =this;
@@ -94,7 +89,10 @@ sap.ui.define([
 						this.getView().byId("oCounterofrbtn").setVisible(AcceptVisible);
 						this.getView().byId("oCancelbtn").setVisible(!AcceptVisible);
 						this.getView().byId("oUpdatebtn").setVisible(!AcceptVisible);*/
-
+						
+						
+						this.getView().byId("oComments").setEnabled(AcceptVisible);  //GSR  
+						this.getView().byId("oAddbutton").setEnabled(AcceptVisible); //GSR
 					}
 
 					var Status = [];
@@ -401,7 +399,30 @@ sap.ui.define([
 						var oModel = new sap.ui.model.json.JSONModel(Trade_Comment);
 						// that.getView().byId("tableVrade").setModel(oModel);
 						that.getView().setModel(oModel, "commentsModel");	
-					}
+					},
+					
+					
+				error: function(jqXHR, textStatus, errorThrown) {
+					var Trade_Comment = [];
+					 	var oModel = new sap.ui.model.json.JSONModel(Trade_Comment);
+						 
+						that.getView().setModel(oModel, "commentsModel");	
+					
+				 
+				}
+					
+// when there is an error on this xsodata call just reset the data. GSR
+
+						// var oModel = new sap.ui.model.json.JSONModel(Trade_Comment);
+						// // that.getView().byId("tableVrade").setModel(oModel);
+						// that.getView().setModel(oModel, "commentsModel");	
+					
+					
+					
+					
+					
+					
+					
 				});
 
 			}
@@ -833,6 +854,12 @@ sap.ui.define([
 
 		},
 		AcceptSuccess: function () {
+			
+			//  put the accept button to gre mode.  -- GSR
+				this.getView().byId("oacceptbtn").setEnable(false);
+				this.getView().byId("oRejectbtn").setEnable(false);
+				this.getView().byId("oCounterofrbtn").setEnable(false);
+
 
 			var that = this;
 
