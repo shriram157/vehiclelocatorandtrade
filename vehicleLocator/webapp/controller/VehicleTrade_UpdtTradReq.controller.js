@@ -31,8 +31,8 @@ sap.ui.define([
 			if (sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq") != undefined && SelectedTrade != "VehicleTrade_updateTradeVehicle" &&
 				SelectedTrade != undefined) {
 				this.getView().byId("SimpleFormUpdateTrReq").setModel(sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq"));
-			this.getView().byId("SimpleForrmDisa220").setModel(sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq"));
-					this.getView().byId("SimpleForrmDisa220").bindElement("/");
+				this.getView().byId("SimpleForrmDisa220").setModel(sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq"));
+				this.getView().byId("SimpleForrmDisa220").bindElement("/");
 				var UpdateTrStatus = [];
 				this.getView().byId("SimpleFormUpdateTrReq").bindElement("/");
 				this.getView().byId("SimpleFormUpdateTrReq").getModel().refresh(true);
@@ -508,7 +508,7 @@ sap.ui.define([
 
 				// 	});
 				that.VehicleDelete(Offered_V);
-				that.TradeRequestCreate('O', 'U',that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle);
+				that.TradeRequestCreate('O', 'U', that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle);
 
 				//  
 				//write two functions for trade request and vehicle
@@ -566,7 +566,7 @@ sap.ui.define([
 					that.VehicleDesc_delete(Offered_V);
 				}
 				//================<< Update the Trade Req with the new Offered Vehicle >>========
-				that.TradeRequestCreate('X', 'U',that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle); //Update Trade Req
+				that.TradeRequestCreate('X', 'U', that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle); //Update Trade Req
 				//========================<< Create new Vehicle >>=====================
 				that.TradeVehicleCreateFromVehicle_Selection(that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle);
 
@@ -1053,11 +1053,7 @@ sap.ui.define([
 		},
 		onBackpage: function () {
 			// this.getRouter().navTo("VehcTrad_Apprv_Rej_CounTrad");
-			this.getRouter().navTo("VehicleTrade_Summary",
-			{
-				DataClicked:"FromUpdateScreen"
-				
-			});
+			this.getRouter().navTo("VehicleTrade_Summary");
 
 		},
 		onSelectvehcicle: function () {
@@ -1216,7 +1212,7 @@ sap.ui.define([
 
 		},
 
-		TradeRequestCreate: function (I, Type,offeredv) {
+		TradeRequestCreate: function (I, Type, offeredv) {
 			//============================================================
 			//===Update The Trade Request==================
 			//=============================================================
@@ -1823,7 +1819,7 @@ sap.ui.define([
 			}, function () {
 
 			});
-			that.VehicleDesc_create(vtn,offeredv);
+			that.VehicleDesc_create(vtn, offeredv);
 			// }
 
 		},
@@ -1901,7 +1897,7 @@ sap.ui.define([
 			}
 
 		},
-		VehicleDesc_create: function (vin,offeredv) {
+		VehicleDesc_create: function (vin, offeredv) {
 			//===============================================
 			//====<< Save The Desc >>=======================
 			//===========================================
@@ -2092,7 +2088,7 @@ sap.ui.define([
 
 				// 	});
 				that.VehicleDelete(Offered_V);
-				that.TradeRequestCreate('O', 'S',that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle);
+				that.TradeRequestCreate('O', 'S', that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle);
 
 				//  
 				//write two functions for trade request and vehicle
@@ -2129,7 +2125,7 @@ sap.ui.define([
 					that.VehicleDesc_delete(Offered_V);
 				}
 				//================<< Update the Trade Req with the new Offered Vehicle >>========
-				that.TradeRequestCreate('X', 'S',that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle); //Update Trade Req
+				that.TradeRequestCreate('X', 'S', that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle); //Update Trade Req
 				//========================<< Create new Vehicle >>=====================
 				that.TradeVehicleCreateFromVehicle_Selection(that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle);
 
@@ -2156,129 +2152,137 @@ sap.ui.define([
 				this.sPrefix = "";
 
 			}
-// ?$filter=kunnr eq '2400042120' and zzvtn eq '002292' and zzseries eq 'SIE'
-			this.nodeJsUrl = this.sPrefix + "/node";
-			that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_MASTER_SRV";
-			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=zzvtn eq '" + VTN + "' and kunnr eq '" + dealercode + "'&$format=json";
-			var ajax = $.ajax({
-				dataType: "json",
-				xhrFields: //
-				{
-					withCredentials: true
-				},
-				url: SeriesUrl,
-				async: true,
-				success: function (result) {
+			// ?$filter=kunnr eq '2400042120' and zzvtn eq '002292' and zzseries eq 'SIE'
+			var ordertype = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Order_Type ;
+			if (ordertype == "SO" || ordertype == "DM") {
+				this.nodeJsUrl = this.sPrefix + "/node";
+				that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_MASTER_SRV";
+				var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=zzvtn eq '" + VTN + "' and kunnr eq '" + dealercode +
+					"'&$format=json";
+				var ajax = $.ajax({
+					dataType: "json",
+					xhrFields: //
+					{
+						withCredentials: true
+					},
+					url: SeriesUrl,
+					async: true,
+					success: function (result) {
+						if (result.d.results.length > 0) {
+							var Data = result.d.results[0];
+							/*	Data.MessageType="";
+								Data.Calculate="20181126";*/
+							if (Data.MessageType != "E") {
+								var CurrentETAFrom = vehicle_data.zzadddata4;
+								if (CurrentETAFrom != null && CurrentETAFrom != "") {
 
-					var Data = result.d.results[0];
-					/*	Data.MessageType="";
-						Data.Calculate="20181126";*/
-					if (Data.MessageType != "E") {
-						var CurrentETAFrom = vehicle_data.zzadddata4;
-						if (CurrentETAFrom != null && CurrentETAFrom != "") {
+									CurrentETAFrom = CurrentETAFrom.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1');
+								}
+								var CurrentETATo = vehicle_data.pstsp;
 
-							CurrentETAFrom = CurrentETAFrom.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1');
-						}
-						var CurrentETATo = vehicle_data.pstsp;
+								if (CurrentETATo != null && CurrentETATo != "") {
+									var dateTo = CurrentETATo.split("(")[1];
+									if (CurrentETATo.indexOf("+") != -1) {
+										/*dateTo = dateTo.split("+")[0];*/
+										CurrentETATo = new Date(CurrentETATo.split("(")[1].substring(0, 10) * 1000).toDateString().substring(4, 15);
+										var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+											pattern: "MM/dd/yyyy"
+										});
+										CurrentETATo = oDateFormat.format(new Date(CurrentETATo));
 
-						if (CurrentETATo != null && CurrentETATo != "") {
-							var dateTo = CurrentETATo.split("(")[1];
-							if (CurrentETATo.indexOf("+") != -1) {
-								/*dateTo = dateTo.split("+")[0];*/
-								CurrentETATo = new Date(CurrentETATo.split("(")[1].substring(0, 10) * 1000).toDateString().substring(4, 15);
-								var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
-									pattern: "MM/dd/yyyy"
-								});
-								CurrentETATo = oDateFormat.format(new Date(CurrentETATo));
+									} else {
+										dateTo = dateTo;
+										var dataTo1 = dateTo.substring(0, dateTo.length - 5);
+										var ValidTo = new Date(dataTo1 * 1000);
+										ValidTo = ValidTo.toGMTString().substring(4, 16);
+										var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+											pattern: "MM/dd/yyyy"
+										});
+										CurrentETATo = oDateFormat.format(new Date(ValidTo));
+									}
 
-							} else {
-								dateTo = dateTo;
-								var dataTo1 = dateTo.substring(0, dateTo.length - 5);
-								var ValidTo = new Date(dataTo1 * 1000);
-								ValidTo = ValidTo.toGMTString().substring(4, 16);
-								var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
-									pattern: "MM/dd/yyyy"
-								});
-								CurrentETATo = oDateFormat.format(new Date(ValidTo));
+								}
+
+								var date1 = new Date(CurrentETAFrom);
+								var date2 = new Date(CurrentETATo);
+								var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+								var CurrentEtadiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+								function addDays(date, days) {
+									var result = new Date(date);
+									result.setDate(result.getDate() + days);
+									return result;
+								}
+								var Eta = Data.Calculate;
+								var Calculate = Eta.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1');
+								var Proposed_ETA_To = addDays(Calculate, CurrentEtadiff);
+								vehicle_data.Proposed_ETA_To = Proposed_ETA_To;
+								vehicle_data.Proposed_ETA_From = Data.Calculate;
+								vehicle_data.Offered_Vtn = vehicle_data.zzvtn;
+								vehicle_data.Model_Year = vehicle_data.zzmoyr;
+								vehicle_data.Series_Desc = vehicle_data.zzseries_desc_en;
+								vehicle_data.zzseries_desc_fr = vehicle_data.zzseries_desc_fr;
+								vehicle_data.zzseries_desc_en = vehicle_data.zzseries_desc_en;
+								vehicle_data.Series = vehicle_data.zzseries;
+								vehicle_data.Model = vehicle_data.matnr;
+								vehicle_data.Model_Desc = vehicle_data.model_desc_en;
+								vehicle_data.Suffix = vehicle_data.zzsuffix;
+								vehicle_data.Suffix_Desc = vehicle_data.suffix_desc_en;
+								vehicle_data.Int_Colour_Desc = vehicle_data.mrktg_int_desc_en;
+								vehicle_data.APX = vehicle_data.zzapx;
+								vehicle_data.Ext_Colour_Desc = vehicle_data.mktg_desc_en;
+								vehicle_data.Status = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Status;
+								vehicle_data.Order_Type = vehicle_data.zzordertype;
+								//	var Req_Current_ETA_From=Number(vehicle_data.pstsp);
+
+								vehicle_data.Off_Current_ETA_From = vehicle_data.pstsp;
+
+								var dateString = vehicle_data.zzadddata4;
+								var year = dateString.substring(0, 4);
+								var month = dateString.substring(4, 6);
+								var day = dateString.substring(6, 8);
+
+								var Req_Current_ETA_To = new Date(year, month - 1, day);
+								Req_Current_ETA_To = new Date(Req_Current_ETA_To);
+								Req_Current_ETA_To = Date.parse(Req_Current_ETA_To);
+
+								vehicle_data.Off_Current_ETA_To = "/Date(" + Req_Current_ETA_To + ")/";
+								//	var Proposed_ETA_From=Number(vehicle_data.Proposed_ETA_From);
+								var dateString = vehicle_data.Proposed_ETA_From;
+								var year = dateString.substring(0, 4);
+								var month = dateString.substring(4, 6);
+								var day = dateString.substring(6, 8);
+
+								var Proposed_ETA_From = new Date(year, month - 1, day);
+								Proposed_ETA_From = new Date(Proposed_ETA_From);
+								Proposed_ETA_From = Date.parse(Proposed_ETA_From);
+
+								vehicle_data.Off_Proposed_ETA_From = "/Date(" + Proposed_ETA_From + ")/";
+								var Req_Proposed_ETA_To = Number(vehicle_data.Proposed_ETA_To);
+								Req_Proposed_ETA_To = new Date(Req_Proposed_ETA_To);
+								Req_Proposed_ETA_To = Date.parse(Req_Proposed_ETA_To);
+
+								vehicle_data.Off_Proposed_ETA_To = "/Date(" + Req_Proposed_ETA_To + ")/";
+
+								//====================================<< Delete the old data for Vehicle >>=======================================
+								that.VehicleDelete(VTN);
+								that.VehicleDesc_delete(VTN);
+								//================<< Update the Trade Req with the new Offered Vehicle >>========
+								that.TradeRequestCreate('X', type, vehicle_data); //Update Trade Req
+								//========================<< Create new Vehicle with the new data after refresh >>=====================
+								that.TradeVehicleCreateFromVehicle_Selection(vehicle_data);
+
 							}
-
+						}else{
+							that.TradeRequestCreate('X', 'S', that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle);	
 						}
+					},
+					error: function () {}
 
-						var date1 = new Date(CurrentETAFrom);
-						var date2 = new Date(CurrentETATo);
-						var timeDiff = Math.abs(date2.getTime() - date1.getTime());
-						var CurrentEtadiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-
-						function addDays(date, days) {
-							var result = new Date(date);
-							result.setDate(result.getDate() + days);
-							return result;
-						}
-						var Eta = Data.Calculate;
-						var Calculate = Eta.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1');
-						var Proposed_ETA_To = addDays(Calculate, CurrentEtadiff);
-						vehicle_data.Proposed_ETA_To = Proposed_ETA_To;
-						vehicle_data.Proposed_ETA_From = Data.Calculate;
-						vehicle_data.Offered_Vtn = vehicle_data.zzvtn;
-						vehicle_data.Model_Year = vehicle_data.zzmoyr;
-						vehicle_data.Series_Desc = vehicle_data.zzseries_desc_en;
-						vehicle_data.zzseries_desc_fr = vehicle_data.zzseries_desc_fr;
-						vehicle_data.zzseries_desc_en = vehicle_data.zzseries_desc_en;
-						vehicle_data.Series = vehicle_data.zzseries;
-						vehicle_data.Model = vehicle_data.matnr;
-						vehicle_data.Model_Desc = vehicle_data.model_desc_en;
-						vehicle_data.Suffix = vehicle_data.zzsuffix;
-						vehicle_data.Suffix_Desc = vehicle_data.suffix_desc_en;
-						vehicle_data.Int_Colour_Desc = vehicle_data.mrktg_int_desc_en;
-						vehicle_data.APX = vehicle_data.zzapx;
-						vehicle_data.Ext_Colour_Desc = vehicle_data.mktg_desc_en;
-						vehicle_data.Status = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Status;
-						vehicle_data.Order_Type = vehicle_data.zzordertype;
-						//	var Req_Current_ETA_From=Number(vehicle_data.pstsp);
-
-						vehicle_data.Off_Current_ETA_From = vehicle_data.pstsp;
-
-						var dateString = vehicle_data.zzadddata4;
-						var year = dateString.substring(0, 4);
-						var month = dateString.substring(4, 6);
-						var day = dateString.substring(6, 8);
-
-						var Req_Current_ETA_To = new Date(year, month - 1, day);
-						Req_Current_ETA_To = new Date(Req_Current_ETA_To);
-						Req_Current_ETA_To = Date.parse(Req_Current_ETA_To);
-
-						vehicle_data.Off_Current_ETA_To = "/Date(" + Req_Current_ETA_To + ")/";
-						//	var Proposed_ETA_From=Number(vehicle_data.Proposed_ETA_From);
-						var dateString = vehicle_data.Proposed_ETA_From;
-						var year = dateString.substring(0, 4);
-						var month = dateString.substring(4, 6);
-						var day = dateString.substring(6, 8);
-
-						var Proposed_ETA_From = new Date(year, month - 1, day);
-						Proposed_ETA_From = new Date(Proposed_ETA_From);
-						Proposed_ETA_From = Date.parse(Proposed_ETA_From);
-
-						vehicle_data.Off_Proposed_ETA_From = "/Date(" + Proposed_ETA_From + ")/";
-						var Req_Proposed_ETA_To = Number(vehicle_data.Proposed_ETA_To);
-						Req_Proposed_ETA_To = new Date(Req_Proposed_ETA_To);
-						Req_Proposed_ETA_To = Date.parse(Req_Proposed_ETA_To);
-
-						vehicle_data.Off_Proposed_ETA_To = "/Date(" + Req_Proposed_ETA_To + ")/";
-
-					   //====================================<<Delete the old data for Vehicle >>=======================================
-							that.VehicleDelete(VTN);
-							that.VehicleDesc_delete(VTN);
-						//================<< Update the Trade Req with the new Offered Vehicle >>========
-						that.TradeRequestCreate('X',type,vehicle_data); //Update Trade Req
-						//========================<< Create new Vehicle with the new data after refresh >>=====================
-						that.TradeVehicleCreateFromVehicle_Selection(vehicle_data);
-
-					}
-
-				},
-				error: function () {}
-
-			});
+				});
+			}else{
+				that.TradeRequestCreate('X', 'S', that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle);
+			}
 
 		}
 
