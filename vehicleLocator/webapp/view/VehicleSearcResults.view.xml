@@ -274,7 +274,7 @@
                     <Column id="Province1"   demandPopin="true" minScreenWidth="Tablet"
                             hAlign="Left">
                         <Text text="{i18n>Province}"/>
-                    </Column>
+                    
                 </columns>
 
                 <items>
@@ -295,7 +295,9 @@
                           	<Text text="{parts: [{path: 'vehicleSearchTableModel>non_D_flag'},{path: 'vehicleSearchTableModel>pd_flag'}], formatter : 'vehicleLocator.Formatter.Formatter.AccessoryInstall'}"/>
                          	<Text text="{vehicleSearchTableModel>ort01}" wrapping="false"/>
                           	<Text text="{vehicleSearchTableModel>bezei}" wrapping="false"/>
-                          		
+                          	
+                          
+                          	 
                             <!--<Text text="{vehicleSearchTableModel>zzsuffix} - {vehicleSearchTableModel>suffix_desc_en}/{vehicleSearchTableModel>mrktg_int_desc_en}" wrapping="false"/>-->
                             <!--<Text text="{vehicleSearchTableModel>vendorCompanyName}"/>-->
                             <!--<Text text="{vehicleSearchTableModel>invoiceDate}"/>-->
