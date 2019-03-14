@@ -11,6 +11,10 @@ sap.ui.define([
 	return BaseController.extend("vehicleLocator.controller.VehicleTrade_ModelBlock_Summary", {
 
 		onInit: function () {
+			var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
+			var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
+		    this.getView().byId("oDealerCode9").setText(LoggedInDealerCode2);                                
+			this.getView().byId("oDealerMdlBlck").setText(LoggedInDealer);
 			var _that = this;
 			//Global date format
 			jQuery.sap.require("sap.ui.core.format.DateFormat");

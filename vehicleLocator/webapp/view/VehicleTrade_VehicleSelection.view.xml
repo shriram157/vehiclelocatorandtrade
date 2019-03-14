@@ -17,14 +17,20 @@
 					</Bar>
 				</customHeader>
 				<content>
-					<Toolbar class="toolbar1">
+					<tnt:ToolHeader>
+		              	<Label id="oDealerCode4" width="auto"/>
+						<Label id="oDealerOwnVehiSele" width="auto"/>
+					<ToolbarSpacer/>
+					</tnt:ToolHeader>
+					<!--<Toolbar class="toolbar1">
 						<ToolbarSpacer></ToolbarSpacer>
+						</Toolbar>-->
 						<!--	<Button text="Vehicle Locator" press="handleLinkPress"/>
 						<Button text="Sold Order" press="handleLinkPress"/>
 						<Button text="Price Protection" press="handleLinkPress"/>
 						<Button text="Inventory Summary" press="handleLinkPress"/>
 						<Button text="Sujjest Order" press="handleLinkPress"/>-->
-					</Toolbar>
+					
 					<VBox>
 						<OverflowToolbar id="otb1">
 							<Label text="{i18n>VehicleTrade-VehicleSelection}" width="310px" class="vHlabe1clss"/>

@@ -14,6 +14,13 @@ sap.ui.define([
 
 		onInit: function () {
 			var _that = this;
+			
+			
+           var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
+			var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
+		    this.getView().byId("oDealerCode6").setText(LoggedInDealerCode2);                                
+			this.getView().byId("oDealerUpdatescr").setText(LoggedInDealer);
+
 
 			/// set the logo and Language. 
 
@@ -985,6 +992,7 @@ sap.ui.define([
 			});
 
 		},
+	
 
 		oAddCommentsArea: function () {
 			var Comment = this.getView().byId("oComments").getValue();

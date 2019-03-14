@@ -12,6 +12,10 @@ sap.ui.define([
 
 		onInit: function () {
 			debugger;
+			var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
+			var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
+		    this.getView().byId("oDealerCode4").setText(LoggedInDealerCode2);                                
+			this.getView().byId("oDealerOwnVehiSele").setText(LoggedInDealer);
 			if (!this._oResponsivePopover) {
 				this._oResponsivePopover = sap.ui.xmlfragment("vehicleLocator.fragment.VehicleSearchResult", this);
 				this._oResponsivePopover.setModel(this.getView().getModel());

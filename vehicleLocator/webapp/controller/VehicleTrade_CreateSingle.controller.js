@@ -6,7 +6,7 @@ sap.ui.define([
 	'sap/ui/model/resource/ResourceModel',
 	'sap/m/MessageBox',
 	"sap/ui/core/routing/History",
-	"vehicleLocator/Formatter/Formatter",
+	"vehicleLocator/Formatter/Formatter"
 ], function (BaseController, JSONModel, ResourceModel, MessageBox, History, Formatter) {
 	"use strict";
 
@@ -14,6 +14,10 @@ sap.ui.define([
 
 		onInit: function () {
 			var _that = this;
+			var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
+			var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
+		    this.getView().byId("oDealerCode3").setText(LoggedInDealerCode2);                                
+			this.getView().byId("oDealerCreat_singl").setText(LoggedInDealer);
 			//Global date format
 			jQuery.sap.require("sap.ui.core.format.DateFormat");
 			_that.oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
@@ -1047,7 +1051,7 @@ sap.ui.define([
 				Series: oSeriesReq,
 				Status: ostatusReq,
 				Suffix: oSuffixReq,
-				VTN: ovtnReq,
+				VTN: ovtnReq
 			};
 			oEntry2["Trade_Id.Trade_Id"] = oEntry.Trade_Id;
 			var oVehicleDetails = [];
@@ -1077,7 +1081,7 @@ sap.ui.define([
 					Series: Series,
 					Status: ostatus,
 					Suffix: Suffix,
-					VTN: vtn,
+					VTN: vtn
 				};
 				oEntry1["Trade_Id.Trade_Id"] = oEntry.Trade_Id;
 				oVehicleDetails.push(oEntry1);

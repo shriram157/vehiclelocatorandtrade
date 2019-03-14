@@ -17,9 +17,10 @@
 					</Bar>
 				</customHeader>
 				<content>
-				<!--	<Toolbar height="45px" class="toolbar3">-->
-						<!--	<Label text="Vehicle Trade History" width="180px" class="vTlabe1clss"/>-->
+			
 							<tnt:ToolHeader>
+								<Label id="oDealerCode8" width="auto"/>
+						<Label id="oDealerHistory" width="auto"/>
 						<ToolbarSpacer></ToolbarSpacer>
 						<Button text="{i18n>LocateVechicles}" type="Transparent"  press="VehicleLocSearchPressVH"/>
 						<Button text="{i18n>TradeSummary}" type="Transparent" press="TradeSummaryLinkPressTH"/>

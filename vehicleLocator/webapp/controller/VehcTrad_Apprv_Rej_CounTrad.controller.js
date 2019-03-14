@@ -15,6 +15,10 @@ sap.ui.define([
 	var oController;
 	return BaseController.extend("vehicleLocator.controller.VehcTrad_Apprv_Rej_CounTrad", {
 		onInit: function () {
+			var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
+			var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
+		    this.getView().byId("oDealerCode5").setText(LoggedInDealerCode2);                                
+			this.getView().byId("oDealerAprvRejCntoffr").setText(LoggedInDealer);
 			var _that = this;
 			oController = this;
 			
@@ -456,8 +460,7 @@ sap.ui.define([
 					this.sPrefix = "";
 
 				}
-				// this.nodeJsUrl = this.sPrefix + "/vehicleTrade";
-						this.nodeJsUrl = this.sPrefix ;   //"+ "/vehicleTrade";
+				this.nodeJsUrl = this.sPrefix + "/vehicleTrade";
 					that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id.Trade_Id eq '"+ this.Tradeid +"'";
 				// that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment";
 				$.ajax({
@@ -2525,15 +2528,16 @@ that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
 			},
 				handleLiveChangeText: function(oEvent) {
 					var oTextArea = oEvent.getSource(),
-							iValueLength = oTextArea.getValue().length,
-							iMaxLength = oTextArea.getMaxLength(),
+					iValueLength = oTextArea.getValue().length;
+		if(iValueLength>=150) {
+        sap.m.MessageBox.warning("Comments not exceed more than 150 characters");
+        return;
+    } 
+				
+						/*	iMaxLength = oTextArea.getMaxLength(),
 							sState = iValueLength > iMaxLength ? "Warning" : "None";
 
-					oTextArea.setValueState(sState);
-					 //if (iValueLength >= 150) {
-					 	
-					 //}
-					
+					oTextArea.setValueState(sState);*/
 				}
 
 	/*	onBack :function()

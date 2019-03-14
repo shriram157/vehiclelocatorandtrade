@@ -19,8 +19,8 @@
 				</customHeader>
 				<content >
 					<tnt:ToolHeader>
-						<!--	<Toolbar height="45px" class="toolbar3">-->
-						<!--	<Label text="Add Model Block" width="180px" class="vTlabe1clss"/>-->
+					    <Label id="oDealerCode9" width="auto"/>
+						<Label id="oDealerMdlBlck" width="auto"/>
 						<ToolbarSpacer></ToolbarSpacer>
 						<Button text="{i18n>LocateVechicles}" type="Transparent" press="VehicleLocSearchPressMBS"/>
 						<Button text="{i18n>TradeSummary}" type="Transparent" press="TradeSummaryLinkPressMBS"/>

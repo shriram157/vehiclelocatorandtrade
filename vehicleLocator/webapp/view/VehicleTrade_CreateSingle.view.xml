@@ -18,10 +18,15 @@
 					</Bar>
 				</customHeader>
 				<content>
-					<Toolbar height="45px" class="toolbar3">
+					<tnt:ToolHeader>
+			<Label id="oDealerCode3" width="auto"/>
+						<Label id="oDealerCreat_singl" width="auto"/>
+					<ToolbarSpacer/>
+					</tnt:ToolHeader>
+				<!--	<Toolbar height="45px" class="toolbar3">
 						<Label text="" width="180px" class="vTlabe1clss"/>
 						<ToolbarSpacer></ToolbarSpacer>
-					</Toolbar>
+					</Toolbar>-->
 					<VBox class="sapUiSmallMargin">
 						<OverflowToolbar id="otb1">
 							<Label text="{i18n>CreateTradeRequest}" width="250px" class="vHlabe1clss"/>
