@@ -249,7 +249,7 @@
                           
                           	<Text text="{path:'commentsModel>Comment_Date',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}"  wrapping="false" />
                           	<Text text="{commentsModel>Created_By}" wrapping="false"/>
-                          	<Text text="{commentsModel>Comment_Txt}" wrapping="false"/>
+                          	<Text text="{commentsModel>Comment_Txt}" wrapping="true"/>
                  
                         </cells>
                     </ColumnListItem>

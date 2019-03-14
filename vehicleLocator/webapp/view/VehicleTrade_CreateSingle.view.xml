@@ -144,7 +144,14 @@
 								<!--	<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}"/>-->
 								<Text text="" id="oTrdareqstat"/>
 								<Label text="{i18n>Comments}"/>
-								<TextArea id="oTypeHere" value=" " width="387px" height="100px"/>
+							<TextArea width="387px" height="100px" id="oTypeHere" value=""
+									showExceededText="false" maxLength="150"   valueState="{= ${/value}.length > 150 ? 'Warning' : 'None' }"	liveChange="handleLiveChangeText" >
+										<layoutData>
+											<l:GridData span="L4 M12 S3"/>
+										</layoutData>
+									</TextArea>
+		
+								<!--<TextArea id="oTypeHere" value=" " width="387px" height="100px"/>-->
 							</form:content>
 						</form:SimpleForm>
 					</VBox>

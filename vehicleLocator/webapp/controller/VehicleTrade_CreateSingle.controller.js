@@ -607,9 +607,19 @@ sap.ui.define([
 
 						Created_By = truncateString(Created_By, 12);
 						var Created_On = new Date();
-						Created_On = oDateFormat.format(new Date(Created_On));
+						
+						var estTimeZone    = moment.tz(Created_On, "America/New_York");
+							Created_On =   moment(estTimeZone).format( 'YYYY-MM-DD');
+						
+						
+						// Created_On = oDateFormat.format(new Date(Created_On));
+
+						
 						var Changed_on = new Date();
-						Changed_on = oDateFormat.format(new Date(Changed_on));
+						Changed_on =   moment(estTimeZone).format( 'YYYY-MM-DD');
+					
+					//	Changed_on = oDateFormat.format(new Date(Changed_on));
+						
 					/*	var Created_On = new Date();
 						Created_On = new Date(oDateFormat.format(new Date(Created_On)));
 						  Created_On.setDate(Created_On.getDate() + 1);
@@ -1358,7 +1368,15 @@ sap.ui.define([
 					}
 				}
 
-			}
+			},
+						handleLiveChangeText: function(oEvent) {
+					var oTextArea = oEvent.getSource(),
+							iValueLength = oTextArea.getValue().length,
+							iMaxLength = oTextArea.getMaxLength(),
+							sState = iValueLength > iMaxLength ? "Warning" : "None";
+
+					oTextArea.setValueState(sState);
+				}
 
 	});
 });

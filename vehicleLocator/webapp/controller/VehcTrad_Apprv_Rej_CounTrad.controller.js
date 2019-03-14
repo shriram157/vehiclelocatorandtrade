@@ -456,7 +456,8 @@ sap.ui.define([
 					this.sPrefix = "";
 
 				}
-				this.nodeJsUrl = this.sPrefix + "/vehicleTrade";
+				// this.nodeJsUrl = this.sPrefix + "/vehicleTrade";
+						this.nodeJsUrl = this.sPrefix ;   //"+ "/vehicleTrade";
 					that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id.Trade_Id eq '"+ this.Tradeid +"'";
 				// that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment";
 				$.ajax({
@@ -2529,6 +2530,10 @@ that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
 							sState = iValueLength > iMaxLength ? "Warning" : "None";
 
 					oTextArea.setValueState(sState);
+					 //if (iValueLength >= 150) {
+					 	
+					 //}
+					
 				}
 
 	/*	onBack :function()
