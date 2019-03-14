@@ -383,6 +383,71 @@ sap.ui.define([
 				var StatusData = sap.ui.getCore().getModel("TradeRequestedHistory").getData();
 				var Status = [];
 				Status.push(StatusData);
+				
+				    if ( StatusData.Trade_Return == "N" ) {  
+				     	// this.getView().byId("offervehidContent").setVisible(false);
+				   	// Offered = {};
+					that.getView().byId("Offerevehid").setText("");
+					that.getView().byId("offeredDealer").setVisible(false);
+					that.getView().byId("oRequesteddealer").setText("");
+					that.getView().byId("oRequesteddealer").setVisible(false);
+
+					that.getView().byId("ofrModellabl").setVisible(false);
+					that.getView().byId("ofrmodelyeartext").setText("");
+					that.getView().byId("ofrmodelyeartext").setVisible(false);
+
+					that.getView().byId("ofrserieslabl").setVisible(false);
+					that.getView().byId("ofrseriestxt").setText("");
+					that.getView().byId("ofrseriestxt").setVisible(false);
+
+					that.getView().byId("ofrmodllabl").setVisible(false);
+					that.getView().byId("ofrmodltxt").setText("");
+					that.getView().byId("ofrmodltxt").setVisible(false);
+
+					that.getView().byId("ofrsuffixlabl").setVisible(false);
+					that.getView().byId("ofrsuffixstxt").setText("");
+					that.getView().byId("ofrsuffixstxt").setVisible(false);
+
+					that.getView().byId("ofrapxlabl").setVisible(false);
+					that.getView().byId("ofrapxtxt").setText("");
+					that.getView().byId("ofrapxtxt").setVisible(false);
+
+					that.getView().byId("ofrextcolorlabl").setVisible(false);
+					that.getView().byId("ofrexttxt").setText("");
+					that.getView().byId("ofrexttxt").setVisible(false);
+
+					that.getView().byId("ofrstatuslabl").setVisible(false);
+					that.getView().byId("ofrstatustxt").setText("");
+					that.getView().byId("ofrstatustxt").setVisible(false);
+
+					that.getView().byId("ofrordrtypelabl").setVisible(false);
+					that.getView().byId("ofrordtypetxt").setText("");
+					that.getView().byId("ofrordtypetxt").setVisible(false);
+
+					that.getView().byId("cetalaid").setVisible(false);
+					that.getView().byId("ctqtid").setText("");
+					that.getView().byId("ctqtid").setVisible(false);
+
+					that.getView().byId("fromqid").setVisible(false);
+					that.getView().byId("txlab").setText("");
+					that.getView().byId("txlab").setVisible(false);
+					
+					that.getView().byId("prolabid").setVisible(false);	
+					
+
+					that.getView().byId("tobid").setVisible(false);
+					that.getView().byId("prptid").setText("");
+					that.getView().byId("prptid").setVisible(false);
+
+					that.getView().byId("fmlbid").setVisible(false);
+				/*	that.getView().byId("fromlbid").setVisible(false);*/
+					that.getView().byId("otxlabel").setText("");
+					that.getView().byId("otxlabel").setVisible(false);
+
+					that.getView().byId("idlto").setVisible(false);
+
+				     }
+ 
 				var oStatusModel = new sap.ui.model.json.JSONModel(Status);
 				var Dnc = StatusData.DNC;
 				// if (Dnc == "Y" || Dnc == "X") {
