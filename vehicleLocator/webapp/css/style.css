@@ -456,6 +456,8 @@ user agent stylesheet table {
 
 .sapUiTableTbr
 {height:auto !important;}
-
+.sapMListTblCell {
+    vertical-align: middle !important; 
+}
 
 

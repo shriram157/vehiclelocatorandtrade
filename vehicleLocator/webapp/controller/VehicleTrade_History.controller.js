@@ -75,7 +75,9 @@ sap.ui.define([
 				}
 			});
 			for (var i = 0; i < TableData.length; i++) {
-				if (TableData[i].Requesting_Dealer.slice(-5) == Dealer_No) {
+				TableData[i].Requesting_Dealer = TableData[i].Requesting_Dealer.slice(-5);
+				TableData[i].Requested_Dealer = TableData[i].Requested_Dealer.slice(-5);
+				if (TableData[i].Requesting_Dealer == Dealer_No) {
 					TableData[i].RequestingDealerVisible = true;
 				} else {
 					TableData[i].RequestingDealerVisible = false;

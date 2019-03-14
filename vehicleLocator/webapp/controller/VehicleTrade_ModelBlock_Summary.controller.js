@@ -7,14 +7,10 @@ sap.ui.define([
 	"vehicleLocator/Formatter/Formatter",
 ], function (BaseController, JSONModel, ResourceModel, MessageBox, History, Formatter) {
 	"use strict";
-
+	var Dealer_No;
 	return BaseController.extend("vehicleLocator.controller.VehicleTrade_ModelBlock_Summary", {
-
+		formatter: Formatter,
 		onInit: function () {
-			var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
-			var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
-		    this.getView().byId("oDealerCode9").setText(LoggedInDealerCode2);                                
-			this.getView().byId("oDealerMdlBlck").setText(LoggedInDealer);
 			var _that = this;
 			//Global date format
 			jQuery.sap.require("sap.ui.core.format.DateFormat");
@@ -34,8 +30,9 @@ sap.ui.define([
 		},
 
 		onRouteMatched: function (oEvent) {
-			debugger;
+			
 			var that = this;
+			Dealer_No = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
 			var selectedTrade = oEvent.getParameter("arguments").SelectedTrade;
 			if (selectedTrade != undefined && sap.ui.getCore().getModel("VehicleTrade_ModelBlock_SummaryTrade") != undefined) {
 
@@ -43,7 +40,6 @@ sap.ui.define([
 				this.getView().byId("oVtno").setText(Vtn);
 			} else {
 				this.getView().byId("oVtno").setText("");
-
 			}
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
@@ -54,40 +50,56 @@ sap.ui.define([
 				this.sPrefix = "";
 
 			}
-
+			//=================<< Model Dec >>=====================================
 			this.nodeJsUrl = this.sPrefix + "/node";
-			that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_CATALOGUE_SRV";
-			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
-			var ModelUrl = that.oDataUrl + "/zc_model";
+			// that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_CATALOGUE_SRV";
+			// that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
+			// var ModelUrl = that.oDataUrl + "/zc_model";
 			/*	var ModelUrl = that.oDataUrl + "/ZC_MODEL_DETAILS";*/
 
-			var ajax1 = $.ajax({
-				dataType: "json",
-				xhrFields: //
-				{
-					withCredentials: true
-				}
+			// var ajax1 = $.ajax({
+			// 	dataType: "json",
+			// 	xhrFields: //
+			// 	{
+			// 		withCredentials: true
+			// 	}
 
-				,
-				url: ModelUrl,
-				async: true,
-				success: function (result) {}
-			});
+			// 	,
+			// 	url: ModelUrl,
+			// 	async: true,
+			// 	success: function (result) {}
+			// });
 
-			that.oDataUrl1 = this.nodeJsUrl + "/Z_DEALER_TRADE_REQUEST_SRV";
-			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl1, true);
-			var ModelBlockSeturl = that.oDataUrl1 + "/ModelBlockSet?$format=json";
+			// that.oDataUrl1 = this.nodeJsUrl + "/Z_DEALER_TRADE_REQUEST_SRV";
+			// that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl1, true);
+			// var ModelBlockSeturl = that.oDataUrl1 + "/ModelBlockSet";
+			//=============================<< Model Block Reqs >>==========================================
+			var Filter0 = new sap.ui.model.Filter('ZzblockingDlr', 'EQ', "24000" + Dealer_No);
+			that.getView().byId('tableVTMBS').getBinding('items').filter([Filter0]);
+			// var TableData = [];
+			// that.oDataModel.read("/ModelBlockSet", {
+			// 	filters: [Filter0],
+			// 	async: false,
+			// 	success: function (oData, oResponse) {
+			// 		//=====Filter on Vehicles=====================	
+			// 		TableData = oData.results;
+			// 	},
+			// 	error: function (e) {
 
-			var ajax2 = $.ajax({
-				dataType: "json",
-				xhrFields: //
-				{
-					withCredentials: true
-				},
-				url: ModelBlockSeturl,
-				async: true,
-				success: function (result) {}
-			});
+			// 	}
+			// });
+			// var ajax2 = $.ajax({
+			// 	dataType: "json",
+			// 	filters: [Filter0],
+			// 	xhrFields: //
+			// 	{
+			// 		withCredentials: true
+			// 	},
+			// 	url: ModelBlockSeturl,
+			// 	async: true,
+			// 	success: function (result) {}
+			// });
+			//==========================<< Dealers Details >>==========================================
 			var LoginBusinessPartnerCode = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerKey;
 			//var LoginBusinessPartnerCode = sap.ui.getCore().LoginDetails.BussinesspartnerCode;
 			that.oDataUrl2 = this.nodeJsUrl + "/API_BUSINESS_PARTNER";
@@ -105,77 +117,77 @@ sap.ui.define([
 				async: true,
 				success: function (result) {}
 			});
+			//===============<< Series Dec >>================================================================
+			// this.nodeJsUrl = this.sPrefix + "/node";
+			// that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_CATALOGUE_SRV";
+			// that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
+			// /*	var ModelUrl = that.oDataUrl + "/zc_model";*/
+			// var SeriesDescUrl = that.oDataUrl + "/zc_mmfields";
 
-			this.nodeJsUrl = this.sPrefix + "/node";
-			that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_CATALOGUE_SRV";
-			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
-			/*	var ModelUrl = that.oDataUrl + "/zc_model";*/
-			var SeriesDescUrl = that.oDataUrl + "/zc_mmfields";
+			// var ajax4 = $.ajax({
+			// 	dataType: "json",
+			// 	xhrFields: //
+			// 	{
+			// 		withCredentials: true
+			// 	}
 
-			var ajax4 = $.ajax({
-				dataType: "json",
-				xhrFields: //
-				{
-					withCredentials: true
-				}
-
-				,
-				url: SeriesDescUrl,
-				async: true,
-				success: function (result) {}
-			});
+			// 	,
+			// 	url: SeriesDescUrl,
+			// 	async: true,
+			// 	success: function (result) {}
+			// });
 
 			var that = this;
-			$.when(ajax1, ajax2, ajax3, ajax4).done(function (ModelUrl, ModelBlockSeturl, Businesspartnerurl, SeriesDescUrl) {
-				debugger
-				var ModelUrl = ModelUrl[0].d.results;
+			$.when(ajax3).done(function (Businesspartnerurl) {
+				debugger;
+				// var ModelUrl = ModelUrl[0].d.results;
 
-				var ModelBlockSeturl = ModelBlockSeturl[0].d.results;
+				// var ModelBlockSeturl = ModelBlockSeturl[0].d.results;
 
-				var Businesspartnerurl = Businesspartnerurl[0].d.results;
+				var Businesspartnerurl = Businesspartnerurl.d.results;
 
-				var SeriesDescUrl = SeriesDescUrl[0].d.results;
+				// var SeriesDescUrl = SeriesDescUrl[0].d.results;
 
-				function dynamicSort(property) {
-					var sortOrder = 1;
-					if (property[0] === "-") {
-						sortOrder = -1;
-						property = property.substr(1);
-					}
-					return function (a, b) {
-						var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
-						return result * sortOrder;
-					};
-				}
+				// function dynamicSort(property) {
+				// 	var sortOrder = 1;
+				// 	if (property[0] === "-") {
+				// 		sortOrder = -1;
+				// 		property = property.substr(1);
+				// 	}
+				// 	return function (a, b) {
+				// 		var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+				// 		return result * sortOrder;
+				// 	};
+				// }
 
-				ModelBlockSeturl.sort(dynamicSort("ZzblockId"));
-				if (ModelBlockSeturl.length != 0) {
-					var ZzblockId = ModelBlockSeturl[ModelBlockSeturl.length - 1].ZzblockId;
+				// ModelBlockSeturl.sort(dynamicSort("ZzblockId"));
+				// if (ModelBlockSeturl.length != 0) {
+				// 	var ZzblockId = ModelBlockSeturl[ModelBlockSeturl.length - 1].ZzblockId;
 
-					var incrementvalue = (+ZzblockId) + 1;
+				// 	var incrementvalue = (+ZzblockId) + 1;
 
-					// insert leading zeroes with a negative slice
-					that.ZzblockId = incrementvalue = ("0000000" + incrementvalue).slice(-8);
+				// 	// insert leading zeroes with a negative slice
+				// 	that.ZzblockId = incrementvalue = ("0000000" + incrementvalue).slice(-8);
 
-				} else {
-					that.ZzblockId = "00000001";
-				}
+				// } else {
+				// 	that.ZzblockId = "00000001";
+				// }
 				var LoginBusinessPartnerCode = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerKey;
 
-				var FilteredBlockingDlr = ModelBlockSeturl.filter(function (x) {
-					return x.ZzblockingDlr != null;
-				});
+				// var FilteredBlockingDlr = ModelBlockSeturl.filter(function (x) {
+				// 	return x.ZzblockingDlr != null;
+				// });
 
-				var FilteredBlockingDlr = FilteredBlockingDlr.filter(function (x) {
-					return (x.ZzblockingDlr).slice(-5) == (LoginBusinessPartnerCode).slice(-5);
-				});
-				var FiltBusinesspartnerurl = Businesspartnerurl.filter(function (x) {
-					return x.BusinessPartner != null;
-				});
-				var FilterredBusinessUrl = [];
-				for (var k = 0; k < FilteredBlockingDlr.length; k++) {
-					FilterredBusinessUrl.push(FilteredBlockingDlr[k].ZzblockedDlr);
-				}
+				// var FilteredBlockingDlr = FilteredBlockingDlr.filter(function (x) {
+				// 	return (x.ZzblockingDlr).slice(-5) == (LoginBusinessPartnerCode).slice(-5);
+				// });
+				// var FiltBusinesspartnerurl = Businesspartnerurl.filter(function (x) {
+				// 	return x.BusinessPartner != null;
+				// });
+				// var FilterredBusinessUrl = [];
+				// for (var k = 0; k < FilteredBlockingDlr.length; k++) {
+				// 	FilterredBusinessUrl.push(FilteredBlockingDlr[k].ZzblockedDlr);
+				// }
 				/* var FilterredBusinessUrl=FiltBusinesspartnerurl.filter(function (x) {
 					return (x.BusinessPartner).slice(-5) == (LoginBusinessPartnerCode).slice(-5);
 				});*/
@@ -184,117 +196,119 @@ sap.ui.define([
 							return (objFromA.BusinessPartner).slice(-5) === objFromB.slice(-5);
 						});
 					});*/
-				var FilterredBusinessUrl = [];
-				for (var i = FiltBusinesspartnerurl.length - 1; i >= 0; --i) {
-					if (FilterredBusinessUrl.indexOf((FiltBusinesspartnerurl[i].zzordertype)) != -1) {
-						FilterredBusinessUrl.push(FiltBusinesspartnerurl[i]);
-					}
-				}
+				// var FilterredBusinessUrl = [];
+				// for (var i = FiltBusinesspartnerurl.length - 1; i >= 0; --i) {
+				// 	if (FilterredBusinessUrl.indexOf((FiltBusinesspartnerurl[i].zzordertype)) != -1) {
+				// 		FilterredBusinessUrl.push(FiltBusinesspartnerurl[i]);
+				// 	}
+				// }
 
 				/* for(var i=0;len=FilteredBlockingDlr.length;i<len;i++){*/
-				for (var i = 0; i < FilteredBlockingDlr.length; i++) {
-					for (var j = 0; j < FilterredBusinessUrl.length; j++) {
-						if ((FilteredBlockingDlr[i].ZzblockedDlr).slice(-5) == (FilterredBusinessUrl[j].BusinessPartner).slice(-5)) {
-							FilteredBlockingDlr[i].OrganizationBPName1 = FilterredBusinessUrl[j].OrganizationBPName1;
-						}
-					}
-				}
+				// for (var i = 0; i < FilteredBlockingDlr.length; i++) {
+				// 	for (var j = 0; j < FilterredBusinessUrl.length; j++) {
+				// 		if ((FilteredBlockingDlr[i].ZzblockedDlr).slice(-5) == (FilterredBusinessUrl[j].BusinessPartner).slice(-5)) {
+				// 			FilteredBlockingDlr[i].OrganizationBPName1 = FilterredBusinessUrl[j].OrganizationBPName1;
+				// 		}
+				// 	}
+				// }
 
-				var FilterredSeriesUrl = [];
-				for (var k = 0; k < FilteredBlockingDlr.length; k++) {
-					FilterredSeriesUrl.push(FilteredBlockingDlr[k].Zzseries);
-				}
+				// var FilterredSeriesUrl = [];
+				// for (var k = 0; k < FilteredBlockingDlr.length; k++) {
+				// 	FilterredSeriesUrl.push(FilteredBlockingDlr[k].Zzseries);
+				// }
 
 				/*	var FilterredSeriesUrl = SeriesDescUrl.filter(function (objFromA) {
 						return FilterredSeriesUrl.find(function (objFromB) {
 							return (objFromA.ModelSeriesNo) === objFromB;
 						});
 					});*/
-				var FilterredSeriesUrl = [];
-				for (var i = SeriesDescUrl.length - 1; i >= 0; --i) {
-					if (FilterredSeriesUrl.indexOf((SeriesDescUrl[i].zzordertype)) != -1) {
-						FilterredSeriesUrl.push(SeriesDescUrl[i]);
-					}
-				}
-				for (var l = 0; l < FilteredBlockingDlr.length; l++) {
-					for (var m = 0; m < FilterredSeriesUrl.length; m++) {
-						if (FilteredBlockingDlr[l].Zzseries == FilterredSeriesUrl[m].ModelSeriesNo) {
-							FilteredBlockingDlr[l].TCISeriesDescriptionEN = FilterredSeriesUrl[m].TCISeriesDescriptionEN;
-							FilteredBlockingDlr[l].TCISeriesDescriptionFR = FilterredSeriesUrl[m].TCISeriesDescriptionFR;
-						}
-					}
-				}
+				// var FilterredSeriesUrl = [];
+				// for (var i = SeriesDescUrl.length - 1; i >= 0; --i) {
+				// 	if (FilterredSeriesUrl.indexOf((SeriesDescUrl[i].zzordertype)) != -1) {
+				// 		FilterredSeriesUrl.push(SeriesDescUrl[i]);
+				// 	}
+				// }
+				// for (var l = 0; l < FilteredBlockingDlr.length; l++) {
+				// 	for (var m = 0; m < FilterredSeriesUrl.length; m++) {
+				// 		if (FilteredBlockingDlr[l].Zzseries == FilterredSeriesUrl[m].ModelSeriesNo) {
+				// 			FilteredBlockingDlr[l].TCISeriesDescriptionEN = FilterredSeriesUrl[m].TCISeriesDescriptionEN;
+				// 			FilteredBlockingDlr[l].TCISeriesDescriptionFR = FilterredSeriesUrl[m].TCISeriesDescriptionFR;
+				// 		}
+				// 	}
+				// }
 
-				var FilterredModelUrl = [];
-				for (var k = 0; k < FilteredBlockingDlr.length; k++) {
-					FilterredModelUrl.push(FilteredBlockingDlr[k].Zzmodel);
-				}
+				// var FilterredModelUrl = [];
+				// for (var k = 0; k < FilteredBlockingDlr.length; k++) {
+				// 	FilterredModelUrl.push(FilteredBlockingDlr[k].Zzmodel);
+				// }
 
 				/*	var FilterredModelUrl = ModelUrl.filter(function (objFromA) {
 						return FilterredModelUrl.find(function (objFromB) {
 							return (objFromA.Model) === objFromB;
 						});
 					});*/
-				var FilterredModelUrl = [];
-				for (var i = ModelUrl.length - 1; i >= 0; --i) {
-					if (FilterredModelUrl.indexOf((ModelUrl[i].zzordertype)) != -1) {
-						FilterredModelUrl.push(ModelUrl[i]);
-					}
-				}
-				for (var l = 0; l < FilteredBlockingDlr.length; l++) {
-					for (var m = 0; m < FilterredModelUrl.length; m++) {
-						if (FilteredBlockingDlr[l].Zzmodel == FilterredModelUrl[m].Model) {
-							FilteredBlockingDlr[l].ModelDescriptionEN = FilterredModelUrl[m].ModelDescriptionEN;
-							FilteredBlockingDlr[l].ModelDescriptionFR = FilterredModelUrl[m].ModelDescriptionFR;
-						}
-					}
-				}
+				// var FilterredModelUrl = [];
+				// for (var i = ModelUrl.length - 1; i >= 0; --i) {
+				// 	if (FilterredModelUrl.indexOf((ModelUrl[i].zzordertype)) != -1) {
+				// 		FilterredModelUrl.push(ModelUrl[i]);
+				// 	}
+				// }
+				// for (var l = 0; l < FilteredBlockingDlr.length; l++) {
+				// 	for (var m = 0; m < FilterredModelUrl.length; m++) {
+				// 		if (FilteredBlockingDlr[l].Zzmodel == FilterredModelUrl[m].Model) {
+				// 			FilteredBlockingDlr[l].ModelDescriptionEN = FilterredModelUrl[m].ModelDescriptionEN;
+				// 			FilteredBlockingDlr[l].ModelDescriptionFR = FilterredModelUrl[m].ModelDescriptionFR;
+				// 		}
+				// 	}
+				// }
 
-				for (var n = 0; n < FilteredBlockingDlr.length; n++) {
-					if ("OrganizationBPName1" in FilteredBlockingDlr[n]) {
-						FilteredBlockingDlr[n].OrganizationBPName1 = FilteredBlockingDlr[n].OrganizationBPName1;
-					} else {
-						FilteredBlockingDlr[n].OrganizationBPName1 = "";
-					}
+				// for (var n = 0; n < FilteredBlockingDlr.length; n++) {
+				// 	if ("OrganizationBPName1" in FilteredBlockingDlr[n]) {
+				// 		FilteredBlockingDlr[n].OrganizationBPName1 = FilteredBlockingDlr[n].OrganizationBPName1;
+				// 	} else {
+				// 		FilteredBlockingDlr[n].OrganizationBPName1 = "";
+				// 	}
 
-					if ("TCISeriesDescriptionEN" in FilteredBlockingDlr[n]) {
-						FilteredBlockingDlr[n].TCISeriesDescriptionEN = FilteredBlockingDlr[n].TCISeriesDescriptionEN;
-					} else {
-						FilteredBlockingDlr[n].TCISeriesDescriptionEN = "";
-					}
+				// 	if ("TCISeriesDescriptionEN" in FilteredBlockingDlr[n]) {
+				// 		FilteredBlockingDlr[n].TCISeriesDescriptionEN = FilteredBlockingDlr[n].TCISeriesDescriptionEN;
+				// 	} else {
+				// 		FilteredBlockingDlr[n].TCISeriesDescriptionEN = "";
+				// 	}
 
-					if ("TCISeriesDescriptionFR" in FilteredBlockingDlr[n]) {
-						FilteredBlockingDlr[n].TCISeriesDescriptionFR = FilteredBlockingDlr[n].TCISeriesDescriptionFR;
-					} else {
-						FilteredBlockingDlr[n].TCISeriesDescriptionFR = "";
-					}
+				// 	if ("TCISeriesDescriptionFR" in FilteredBlockingDlr[n]) {
+				// 		FilteredBlockingDlr[n].TCISeriesDescriptionFR = FilteredBlockingDlr[n].TCISeriesDescriptionFR;
+				// 	} else {
+				// 		FilteredBlockingDlr[n].TCISeriesDescriptionFR = "";
+				// 	}
 
-					if ("ModelDescriptionFR" in FilteredBlockingDlr[n]) {
-						FilteredBlockingDlr[n].ModelDescriptionFR = FilteredBlockingDlr[n].ModelDescriptionFR;
-					} else {
-						FilteredBlockingDlr[n].ModelDescriptionFR = "";
-					}
+				// 	if ("ModelDescriptionFR" in FilteredBlockingDlr[n]) {
+				// 		FilteredBlockingDlr[n].ModelDescriptionFR = FilteredBlockingDlr[n].ModelDescriptionFR;
+				// 	} else {
+				// 		FilteredBlockingDlr[n].ModelDescriptionFR = "";
+				// 	}
 
-					if ("ModelDescriptionEN" in FilteredBlockingDlr[n]) {
-						FilteredBlockingDlr[n].ModelDescriptionEN = FilteredBlockingDlr[n].ModelDescriptionEN;
-					} else {
-						FilteredBlockingDlr[n].ModelDescriptionEN = "";
-					}
-				}
+				// 	if ("ModelDescriptionEN" in FilteredBlockingDlr[n]) {
+				// 		FilteredBlockingDlr[n].ModelDescriptionEN = FilteredBlockingDlr[n].ModelDescriptionEN;
+				// 	} else {
+				// 		FilteredBlockingDlr[n].ModelDescriptionEN = "";
+				// 	}
+				// }
 
-				var oModel = new sap.ui.model.json.JSONModel(FilteredBlockingDlr);
-				that.getView().byId("tableVTMBS").setModel(oModel);
+				//test
+				// var oModel = new sap.ui.model.json.JSONModel(FilteredBlockingDlr);
+				// that.getView().byId("tableVTMBS").setModel(oModel);
 
-				/*	var Businesspartnerurl = Businesspartnerurl.filter(function (x) {
+				var Businesspartnerurl = Businesspartnerurl.filter(function (x) {
 					return x.BusinessPartner != null;
 				});
-*/
+
 				var oBussinesspartners = Businesspartnerurl.filter(function (value) {
 					return value.Customer.startsWith("24000");
 				});
-
-				var oModel = new sap.ui.model.json.JSONModel(oBussinesspartners);
-				that.getView().byId("VT_MBSdeal").setModel(oModel);
+				if (!that.getView().byId("VT_MBSdeal").getModel()) {
+					var oModel = new sap.ui.model.json.JSONModel(oBussinesspartners);
+					that.getView().byId("VT_MBSdeal").setModel(oModel);
+				}
 
 			});
 		},
@@ -314,55 +328,63 @@ sap.ui.define([
 			that.getRouter().navTo("VehicleTrade_History");
 
 		},
-
-		oDeletepress: function () {
+		//=====================================
+		//====<< Delete Rows >>===============
+		//=====================================
+		onDelete: function (oEvent) {
 			var that = this;
 			//	var oTable = that.getView().byId("tableVTMBS");
 
 			var oTable = this.getView().byId("tableVTMBS");
 
-			var data = oTable.getSelectedIndices();
+			// var data = oTable.getSelectedIndices();
 			var that = this;
 			//.getBindingContext().getObject();
-			if (data.length == 0) {
-				sap.m.MessageBox.warning("Please select atleast one Dealer");
-			} else {
-				var Delete_dialog = new sap.m.Dialog({
-					title: 'Delete',
-					type: 'Message',
-					state: 'Warning',
-					content: new sap.m.Text({
-						text: 'Do you want to delete the selected item?'
-					}),
-					beginButton: new sap.m.Button({
-						text: 'Yes',
-						press: function () {
-							Delete_dialog.close();
-							var oModel = oTable.getModel();
-							var oData = oModel.getProperty('/');
-							var reverse = [].concat(oTable.getSelectedIndices()).reverse();
-							reverse.forEach(function (index) {
-								oData.splice(index, 1);
-							});
-							oModel.refresh();
-							oTable.setSelectedIndex(-1);
+			var itemdelete = oEvent.getParameter('listItem').getBindingContextPath();
+			var Delete_dialog = new sap.m.Dialog({
+				title: 'Delete',
+				type: 'Message',
+				state: 'Warning',
+				content: new sap.m.Text({
+					text: 'Do you want to delete the selected item?'
+				}),
+				beginButton: new sap.m.Button({
+					text: 'Yes',
+					press: function () {
+						Delete_dialog.close();
 
-						}
+						//var oBlockId="/ModelBlockSet";
+						that.getView().getModel('ModelBlock').remove(itemdelete, null, function (s) {
+							that.DncBlockDaysUpdate();
+						}, function () {
 
-					}),
-					endButton: new sap.m.Button({
-						text: 'No',
-						press: function () {
-							Delete_dialog.close();
-						}
-					})
-				});
-				Delete_dialog.open();
-			}
+						});
+						// var oModel = oTable.getModel();
+						// var oData = oModel.getProperty('/');
+						// var reverse = [].concat(oTable.getSelectedIndices()).reverse();
+						// reverse.forEach(function (index) {
+						// 	oData.splice(index, 1);
+						// });
+						// oModel.refresh();
+						// oTable.setSelectedIndex(-1);
+
+					}
+
+				}),
+				endButton: new sap.m.Button({
+					text: 'No',
+					press: function () {
+						Delete_dialog.close();
+					}
+				})
+			});
+			Delete_dialog.open();
 
 		},
-
-		onSubmit: function () {
+		//=====================================
+		//====<< Create >>===============
+		//=====================================
+		onSubmit_old: function () {
 			debugger
 			var that = this;
 			/*	var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
@@ -436,26 +458,26 @@ sap.ui.define([
 			});
 		},
 
-		BlocIdSuccess: function (ZzblockId) {
+		onSubmit: function (oEvent) {
 			debugger
 			var that = this;
-			var oBlockId = ZzblockId;
-			var BlockingDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
+			var oBlockId = 'X';
+			var BlockingDealer = '24000' + sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
 			var BlockedDealer = this.getView().byId("VT_MBSdeal").getSelectedKey();
 			var oModelRequested = sap.ui.getCore().getModel("VehicleTrade_ModelBlock_SummaryTrade").getData().matnr;
 			var oSeries = sap.ui.getCore().getModel("VehicleTrade_ModelBlock_SummaryTrade").getData().zzseries;
 
 			var oCommentData = this.getView().byId("TypeHerid").getValue();
- 
-			var oComment = [];
-			for (var i = 0; i < oCommentData.length; i++) {
-				oComment.push(oCommentData[i].Comment_Txt);
-			}
-			if (oComment.length != 0) {
-				var oComment = oComment.join(".");
-			} else {
-				var oComment = "testing";
-			}
+
+			// var oComment = [];
+			// for (var i = 0; i < oCommentData.length; i++) {
+			// 	oComment.push(oCommentData[i].Comment_Txt);
+			// }
+			// if (oComment.length != 0) {
+			// 	var oComment = oComment.join(".");
+			// } else {
+			// 	var oComment = "testing";
+			// }
 			var stDate = new Date();
 			stDate = Date.parse(stDate);
 
@@ -479,10 +501,10 @@ sap.ui.define([
 				"Zzmodel": oModelRequested,
 				"Zzseries": oSeries,
 				"Zzduration": dncBlockedDays,
-				"Zzcomment": oComment,
+				"Zzcomment": oCommentData,
 				"ZzblkstartDate": BlockStartdate,
 				"ZzblkendDate": Blockenddate,
-				"ZcreatedBy": Createdby.substr(0,12),
+				"ZcreatedBy": Createdby.substr(0, 12),
 				"ZcreatedOn": Createdon
 
 			};
@@ -529,42 +551,42 @@ sap.ui.define([
 				this.sPrefix = "";
 
 			}
+			that.getView().byId('tableVTMBS').getBinding('items').refresh();
+			// this.nodeJsUrl = this.sPrefix + "/node";
 
-			this.nodeJsUrl = this.sPrefix + "/node";
+			// that.oDataUrl1 = this.nodeJsUrl + "/Z_DEALER_TRADE_REQUEST_SRV";
+			// that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl1, true);
+			// var ModelBlockSeturl = that.oDataUrl1 + "/ModelBlockSet?$format=json";
 
-			that.oDataUrl1 = this.nodeJsUrl + "/Z_DEALER_TRADE_REQUEST_SRV";
-			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl1, true);
-			var ModelBlockSeturl = that.oDataUrl1 + "/ModelBlockSet?$format=json";
+			// var ajax2 = $.ajax({
+			// 	dataType: "json",
+			// 	xhrFields: //
+			// 	{
+			// 		withCredentials: true
+			// 	},
+			// 	url: ModelBlockSeturl,
+			// 	async: true,
+			// 	success: function (ModelBlockSeturl) {
 
-			var ajax2 = $.ajax({
-				dataType: "json",
-				xhrFields: //
-				{
-					withCredentials: true
-				},
-				url: ModelBlockSeturl,
-				async: true,
-				success: function (ModelBlockSeturl) {
+			// 		var ModelBlockSeturl = ModelBlockSeturl.d.results;
 
-					var ModelBlockSeturl = ModelBlockSeturl.d.results;
+			// 		var LoginBusinessPartnerCode = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerKey;
 
-					var LoginBusinessPartnerCode = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerKey;
+			// 		var FilteredBlockingDlr = ModelBlockSeturl.filter(function (x) {
+			// 			return x.ZzblockingDlr != null;
+			// 		});
 
-					var FilteredBlockingDlr = ModelBlockSeturl.filter(function (x) {
-						return x.ZzblockingDlr != null;
-					});
+			// 		var FilteredBlockingDlr = FilteredBlockingDlr.filter(function (x) {
+			// 			return (x.ZzblockingDlr).slice(-5) == (LoginBusinessPartnerCode).slice(-5);
+			// 		});
 
-					var FilteredBlockingDlr = FilteredBlockingDlr.filter(function (x) {
-						return (x.ZzblockingDlr).slice(-5) == (LoginBusinessPartnerCode).slice(-5);
-					});
+			// 		// var oModel = new sap.ui.model.json.JSONModel(FilteredBlockingDlr);
+			// 		// that.getView().byId("tableVTMBS").setModel(oModel);
+			// 	},
+			// 	error: function () {
 
-					var oModel = new sap.ui.model.json.JSONModel(FilteredBlockingDlr);
-					that.getView().byId("tableVTMBS").setModel(oModel);
-				},
-				error: function () {
-
-				}
-			});
+			// 	}
+			// });
 
 		},
 
@@ -744,6 +766,33 @@ sap.ui.define([
 				}
 			}
 
+		},
+		onDealernum: function (oEvent) {
+			var oElement = oEvent.getSource();
+			var binding = oElement.getBinding("items");
+			if (binding) {
+				//Binding change event could already be attached
+				var Filter = new sap.ui.model.Filter('Customer', 'EQ', oElement.getSelectedKey());
+				binding.filter([Filter]);
+			}
+		},
+		onSeriesnum: function (oEvent) {
+			var oElement = oEvent.getSource();
+			var binding = oElement.getBinding("items");
+			if (binding) {
+				//Binding change event could already be attached
+				var Filter = new sap.ui.model.Filter('ModelSeriesNo', 'EQ', oElement.getSelectedKey());
+				binding.filter([Filter]);
+			}
+		},
+		onModelnum: function (oEvent) {
+			var oElement = oEvent.getSource();
+			var binding = oElement.getBinding("items");
+			if (binding) {
+				//Binding change event could already be attached
+				var Filter = new sap.ui.model.Filter('Model', 'EQ', oElement.getSelectedKey());
+				binding.filter([Filter]);
+			}
 		}
 
 	});

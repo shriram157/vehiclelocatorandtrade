@@ -23,6 +23,20 @@
 				"settings": {
 					"odataVersion": "2.0"
 				}
+			},
+			"VehicleS": {
+				"uri": "/node/Z_VEHICLE_CATALOGUE_SRV",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			},
+			"DealersS": {
+				"uri": "/node/API_BUSINESS_PARTNER",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
+				}
 			}
 		},
 		"title": "{{appTitle}}",
@@ -108,6 +122,36 @@
 					"useBatch": false
 				},
 				"dataSource": "ModelBlockS",
+				"preload": false
+			},
+			"Vehicles": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request",
+					"serviceUrlParams": {
+						"sap-client": "200"
+					},
+					"json": true,
+					"useBatch": false
+				},
+				"dataSource": "VehicleS",
+				"preload": false
+			},
+			"Dealers": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request",
+					"serviceUrlParams": {
+						"sap-client": "200"
+					},
+					"json": true,
+					"useBatch": false
+				},
+				"dataSource": "DealersS",
 				"preload": false
 			}
 		},
@@ -206,18 +250,10 @@
 				}
 			}
 		},
-     "resources": {
-            "js": [{
-                "uri": "lib/moment-with-locales.js"
-            },
-            {
-                "uri": "lib/moment-timezone-with-data.js"
-            }
-            
-            ],
-             "css": [{
-                "uri": "css/style.css"
-            }]
-        }
+		"resources": {
+			"css": [{
+				"uri": "css/style.css"
+			}]
+		}
 	}
 }
