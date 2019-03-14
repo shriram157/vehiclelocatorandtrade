@@ -206,10 +206,18 @@
 				}
 			}
 		},
-		"resources": {
-			"css": [{
-				"uri": "css/style.css"
-			}]
-		}
+     "resources": {
+            "js": [{
+                "uri": "lib/moment-with-locales.js"
+            },
+            {
+                "uri": "lib/moment-timezone-with-data.js"
+            }
+            
+            ],
+             "css": [{
+                "uri": "css/style.css"
+            }]
+        }
 	}
 }

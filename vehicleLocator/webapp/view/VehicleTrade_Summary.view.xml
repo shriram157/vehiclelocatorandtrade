@@ -137,7 +137,11 @@
 										<ColumnListItem type="Active" press="oTradeLinkPress" id="onlinkPress">
 											<cells>
 												<Link id="otradIdz" text="{vehicleTradeSummaryTable>Trade_Id}" class="link" subtle="true" press="oRequestLinkPress" wrapping="true"/>
-												<Text text="{path:'vehicleTradeSummaryTable>Created_On',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="true"/>
+												<Text text="{path:'vehicleTradeSummaryTable>Created_On',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate' }" wrapping="true"/>
+														<!--<Text text="{path:'vehicleTradeSummaryTable>Created_On', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'yyyy-MM-dd', strictParsing: true , UTC: true } }" wrapping="true" />	-->
+												
+												
+											
 												<Text
 													text="{path:'vehicleTradeSummaryTable>Requested_Dealer',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDealer'}-{vehicleTradeSummaryTable>Requested_Dealer_Name}"
 													wrapping="true"/>
