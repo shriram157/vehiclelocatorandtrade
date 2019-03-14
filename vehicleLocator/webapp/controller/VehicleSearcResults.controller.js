@@ -551,7 +551,10 @@ sap.ui.define([
 			sap.ushell.components.tableSearchResults.getBinding("items").filter(filterArray);
 			// var FilterdedTableData=sap.ushell.components.tableSearchResults.getBinding("rows").aIndices;// guna
 			var FilterdedTableData = sap.ushell.components.tableSearchResults.getBinding("items").aIndices;
-			// var tableData=sap.ushell.components.tableSearchResults.getModel().getData();   // guna
+			
+			 //var tableData=sap.ushell.components.tableSearchResults.getModel("vehicleSearchTableModel").getData();   // guna
+			 
+			 
 
 // also lets try to apply the filter data if the value is not initial in the filter field. 
 
@@ -707,6 +710,7 @@ sap.ui.define([
 		},
 
 		oTradeLinkPress: function (oEvt) {
+			debugger;
 			var that = this;
 			//that.oTableSelectPath = oEvt.getSource().getParent().getBindingContext().getPath().split("/")[1]; //guna
 			that.oTableSelectPath = oEvt.getSource().getParent().getBindingContext("vehicleSearchTableModel").getPath().split("/")[1];

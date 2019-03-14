@@ -717,15 +717,15 @@ sap.ui.define([
 
 			var Created_By = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
 
-			// << << << < HEAD
+		
 			Created_By = truncateString(Created_By, 12); //=== === =
 			function truncateString(str, num) {
 				if (num > str.length) {
 					return str;
 				} else {
 					str = str.substring(0, num);
-					return str + "...";
-				} //>>> >>> > refs / heads / master
+					return str;
+				}
 
 			}
 
@@ -1053,8 +1053,11 @@ sap.ui.define([
 		},
 		onBackpage: function () {
 			// this.getRouter().navTo("VehcTrad_Apprv_Rej_CounTrad");
-			this.getRouter().navTo("VehicleTrade_Summary");
-
+			this.getRouter().navTo("VehicleTrade_Summary",
+			{
+				DataClicked:"FromUpdateScreen"
+				
+			});
 		},
 		onSelectvehcicle: function () {
 			debugger

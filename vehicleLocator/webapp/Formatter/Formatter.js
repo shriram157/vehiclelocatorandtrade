@@ -213,7 +213,8 @@ oTradeStatusBinding:function(Trade_return){
 				} else {
 					dateTo = dateTo;
 					var dataTo1 =Number(dateTo.replace(/[^A-Z\d\s]/gi, '').replace(/[^0-9\.]+/g, ""));
-				var ValidTo = new Date(dataTo1);
+				// var ValidTo = new Date(dataTo1);
+				var ValidTo = new Date(dataTo1).toUTCString();  // the system thinks it is UTC so let be it. 
 				var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 					pattern: "yyyy-MM-dd"
 				});

@@ -106,6 +106,12 @@
 						         </ComboBox>-->
 								<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" id="VT_ARCTtrdinStatus" width="220px"/>
 								<!--<Text text="Request Sent"/>-->
+							</form:content>		
+								
+								
+								
+								
+								<form:content id="offervehidContent">	
 								<core:Title text="{i18n>OfferVehicleInformation}" id="Offerevehid"/>
 								<Label text="Dealer" id="offeredDealer"/>
 								<Text

@@ -37,7 +37,7 @@ sap.ui.define([
 		if(dataFrom!=undefined){
 			this.VehicleTrade_Summary();
 		
-}
+          }
 		},
 		
 			VehicleLocSearchPress : function()
