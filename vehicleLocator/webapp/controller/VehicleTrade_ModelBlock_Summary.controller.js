@@ -15,6 +15,14 @@ sap.ui.define([
 		onInit: function () {
 			var _that = this;
 			this._mViewSettingsDialogs = {};
+			
+			
+			var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
+            var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
+            this.getView().byId("oDealerCode9").setText(LoggedInDealerCode2);
+            this.getView().byId("oDealerMdlBlkSumry").setText(LoggedInDealer);
+
+			
 			//Global date format
 			jQuery.sap.require("sap.ui.core.format.DateFormat");
 			_that.oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({

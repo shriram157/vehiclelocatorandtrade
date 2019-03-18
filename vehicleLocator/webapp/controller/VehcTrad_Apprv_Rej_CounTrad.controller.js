@@ -704,7 +704,7 @@ sap.ui.define([
 						
 						
 					
-						that.getView().byId("oComments").setValue("");
+						// that.getView().byId("oComments").setValue("");
 				/*	var oComModel = new sap.ui.model.json.JSON();*/
 					
 		
@@ -869,7 +869,8 @@ sap.ui.define([
 
 					//	sap.m.MessageBox.error(Message);
 					} else if (a == "S") {
-						var Message = odata.d.results[0].Message.trim();
+						// var Message = odata.d.results[0].Message.trim();
+							var Message =  "Trade" + odata.d.results[0].zzvtn + "has been Accepted Succesfully";
 							function fnCallbackMessageBox1(oAction) {
 						/*	that.getRouter().navTo("VehicleTrade_Summary", {
 								DataClicked: "Yes"
@@ -1001,9 +1002,9 @@ sap.ui.define([
 		AcceptSuccess: function () {
 			
 			//  put the accept button to gre mode.  -- GSR
-				this.getView().byId("oacceptbtn").setEnable(false);
-				this.getView().byId("oRejectbtn").setEnable(false);
-				this.getView().byId("oCounterofrbtn").setEnable(false);
+				// this.getView().byId("oacceptbtn").setEnable(false);
+				// this.getView().byId("oRejectbtn").setEnable(false);
+				// this.getView().byId("oCounterofrbtn").setEnable(false);
 
 
 			var that = this;
