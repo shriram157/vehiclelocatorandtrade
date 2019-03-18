@@ -176,7 +176,7 @@
 										<!--<CheckBox  select="onSelectedLine" />-->
 										<ComboBox editable="false" width="100%"
 											items="{path:'Dealers>/A_BusinessPartner',filters: [ { path: 'Customer', operator: 'StartsWith', value1:'2400000' }]}"
-											selectedKey="{path:'ModelBlock>ZzblockedDlr'}" modelContextChange="onDealernum" class="readonlycombo">
+											selectedKey="{path:'ModelBlock>ZzblockedDlr'}" modelContextChange="onDealernum" class="readonlycombo" >
 											<items>
 												<core:Item key="{Dealers>Customer}"
 													text="{path:'Dealers>Customer',formatter:'vehicleLocator.Formatter.Formatter.DealerNameFormat'}-{Dealers>OrganizationBPName1}"/>

@@ -33,12 +33,12 @@ sap.ui.define([
 			this.getRouter().getRoute("VehicleTrade_History").attachPatternMatched(this.onRouteMatched, this);
 		},
 		onRouteMatched: function (oEvent) {
-			var dataFrom = oEvent.getParameter("arguments").DataClicked;
-			if (dataFrom != undefined) {
+			// var dataFrom = oEvent.getParameter("arguments").DataClicked;
+			// if (dataFrom != undefined) {
 
 				this.VehicleHistory_Summary();
 
-			}
+			// }
 		},
 
 		VehicleHistory_Summary: function () {
