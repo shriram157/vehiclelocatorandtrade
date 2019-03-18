@@ -135,6 +135,7 @@
 									<content>
 										<Title id="title" text="{i18n>DoNotCallBlockList}" titleStyle="H3"></Title>
 										<ToolbarSpacer/>
+										<Button tooltip="View Sort Settings" icon="sap-icon://sort" press="handleSortButtonPressed"/>
 										<!--<ToggleButton text="{i18n>Delete}" icon="sap-icon://delete" tooltip="" press="oDeletepress"/>-->
 									</content>
 								</Toolbar>
@@ -175,17 +176,20 @@
 										<!--<CheckBox  select="onSelectedLine" />-->
 										<ComboBox editable="false" width="100%"
 											items="{path:'Dealers>/A_BusinessPartner',filters: [ { path: 'Customer', operator: 'StartsWith', value1:'2400000' }]}"
-											selectedKey="{path:'ModelBlock>ZzblockedDlr'}" modelContextChange="onDealernum">
+											selectedKey="{path:'ModelBlock>ZzblockedDlr'}" modelContextChange="onDealernum" class="readonlycombo">
 											<items>
-												<core:Item key="{Dealers>Customer}" text="{Dealers>Customer}-{Dealers>OrganizationBPName1}"/>
+												<core:Item key="{Dealers>Customer}"
+													text="{path:'Dealers>Customer',formatter:'vehicleLocator.Formatter.Formatter.DealerNameFormat'}-{Dealers>OrganizationBPName1}"/>
 											</items>
 										</ComboBox>
-										<ComboBox editable="false" width="100%" items="{Vehicles>/zc_mmfields}" selectedKey="{ModelBlock>Zzseries}" modelContextChange="onSeriesnum">
+										<ComboBox editable="false" width="100%" items="{Vehicles>/zc_mmfields}" class="readonlycombo" selectedKey="{ModelBlock>Zzseries}"
+											modelContextChange="onSeriesnum">
 											<items>
-												<core:Item key="{Vehicles>ModelSeriesNo}" text="{Vehicles>ModelSeriesNo}-{Vehicles>TCISeriesDescriptionEN}"/>
+												<core:Item key="{Vehicles>ModelSeriesNo}" text="{Vehicles>TCISeriesDescriptionEN}"/>
 											</items>
 										</ComboBox>
-										<ComboBox editable="false" width="100%" items="{Vehicles>/zc_model}" selectedKey="{ModelBlock>Zzmodel}" modelContextChange="onModelnum">
+										<ComboBox editable="false" width="100%" items="{Vehicles>/zc_model}" class="readonlycombo" selectedKey="{ModelBlock>Zzmodel}"
+											modelContextChange="onModelnum">
 											<items>
 												<core:Item key="{Vehicles>Model}" text="{Vehicles>Model}-{Vehicles>ModelDescriptionEN}"/>
 											</items>

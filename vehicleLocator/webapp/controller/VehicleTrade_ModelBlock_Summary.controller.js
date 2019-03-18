@@ -5,13 +5,16 @@ sap.ui.define([
 	'sap/m/MessageBox',
 	"sap/ui/core/routing/History",
 	"vehicleLocator/Formatter/Formatter",
-], function (BaseController, JSONModel, ResourceModel, MessageBox, History, Formatter) {
+	"sap/ui/Device",
+	"sap/ui/model/Sorter",
+], function (BaseController, JSONModel, ResourceModel, MessageBox, History, Formatter, Device, Sorter) {
 	"use strict";
 	var Dealer_No;
 	return BaseController.extend("vehicleLocator.controller.VehicleTrade_ModelBlock_Summary", {
 		formatter: Formatter,
 		onInit: function () {
 			var _that = this;
+			this._mViewSettingsDialogs = {};
 			//Global date format
 			jQuery.sap.require("sap.ui.core.format.DateFormat");
 			_that.oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
@@ -30,7 +33,7 @@ sap.ui.define([
 		},
 
 		onRouteMatched: function (oEvent) {
-			
+
 			var that = this;
 			Dealer_No = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
 			var selectedTrade = oEvent.getParameter("arguments").SelectedTrade;
@@ -104,7 +107,8 @@ sap.ui.define([
 			//var LoginBusinessPartnerCode = sap.ui.getCore().LoginDetails.BussinesspartnerCode;
 			that.oDataUrl2 = this.nodeJsUrl + "/API_BUSINESS_PARTNER";
 			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl2, true);
-			var Businesspartnerurl = that.oDataUrl2 + "/A_BusinessPartner?$filter=(Customer ne '')&$format=json";
+			var Businesspartnerurl = that.oDataUrl2 + "/A_BusinessPartner?$filter=(Customer ne '' and Customer ne '" + "24000" + Dealer_No +
+				"')&$format=json";
 			/*(BusinessPartner%20ne%20%27%27)&$format=json*/
 			/*/A_BusinessPartner?$filter=(Customer%20ne%20%27%27)&$format=json*/
 			var ajax3 = $.ajax({
@@ -793,6 +797,38 @@ sap.ui.define([
 				var Filter = new sap.ui.model.Filter('Model', 'EQ', oElement.getSelectedKey());
 				binding.filter([Filter]);
 			}
+		},
+		handleSortButtonPressed: function () {
+			this.createViewSettingsDialog("vehicleLocator.fragment.ModelBlockSortDialog").open();
+		},
+		createViewSettingsDialog: function (sDialogFragmentName) {
+			var oDialog = this._mViewSettingsDialogs[sDialogFragmentName];
+
+			if (!oDialog) {
+				oDialog = sap.ui.xmlfragment(sDialogFragmentName, this);
+				this._mViewSettingsDialogs[sDialogFragmentName] = oDialog;
+
+				if (Device.system.desktop) {
+					oDialog.addStyleClass("sapUiSizeCompact");
+				}
+			}
+			return oDialog;
+		},
+		handleSortDialogConfirm: function (oEvent) {
+			var oTable = this.byId("tableVTMBS"),
+				mParams = oEvent.getParameters(),
+				oBinding = oTable.getBinding("items"),
+				sPath,
+				bDescending,
+				aSorters = [];
+
+			sPath = mParams.sortItem.getKey();
+			bDescending = mParams.sortDescending;
+			aSorters.push(new Sorter(sPath, bDescending));
+
+			// apply the selected sort and group settings
+			oBinding.sort(aSorters);
+			oBinding.refresh();
 		}
 
 	});

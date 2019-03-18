@@ -1,0 +1,12 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog
+		confirm="handleSortDialogConfirm">
+		<sortItems>
+			<ViewSettingsItem text="Dealer" key="ZzblockedDlr" selected="true" />
+			<ViewSettingsItem text="Model" key="Zzmodel" />
+			<ViewSettingsItem text="Series" key="Zzseries" />
+		</sortItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

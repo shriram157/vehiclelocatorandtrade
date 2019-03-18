@@ -292,6 +292,14 @@ oTradeStatusBinding:function(Trade_return){
 			}
 
 		},
+		DealerNameFormat:function(Dealer)
+		{
+			if (Dealer != null || Dealer.length >= 5) {
+				return Dealer.substr(Dealer.length - 5) ;
+
+			}
+		
+		}
 
 	};
 
