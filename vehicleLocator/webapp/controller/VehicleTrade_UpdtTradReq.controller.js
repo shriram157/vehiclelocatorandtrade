@@ -2047,7 +2047,14 @@ sap.ui.define([
 				"Method": "DELETE"
 			});
 			var UpdatedTreadeEntity = "/TradeVehicleDesc(Trade_Id.Trade_Id ='" + Trade_Id + "',VTN.VTN ='" + vin +
-				"',SPRAS='" + Spars + "')";
+				"',SPRAS='" + "F" + "')";
+			that.oDataModel.remove(UpdatedTreadeEntity, null, function (s) {
+
+			}, function () {
+
+			});
+				var UpdatedTreadeEntity = "/TradeVehicleDesc(Trade_Id.Trade_Id ='" + Trade_Id + "',VTN.VTN ='" + vin +
+				"',SPRAS='" + "E" + "')";
 			that.oDataModel.remove(UpdatedTreadeEntity, null, function (s) {
 
 			}, function () {
