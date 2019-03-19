@@ -130,7 +130,7 @@ sap.ui.define([
 							return x.kunnr != null;
 						});
 						var FilterDeleade_OrderTypefiltered_zone = FilterDeleade_OrderTypefilteNotnull.filter(function (x) {
-							return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "DM" || x.zzordertype == "SO")
+							return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "DM" || x.zzordertype == "SO");
 						});
 
 						//	var FilterDeleade_OrderTypefiltered_zone
@@ -847,6 +847,8 @@ sap.ui.define([
 		//},
 		onRouteMatched: function (oEvent) {
 			//debugger;
+			
+			
 			var RoutedData = JSON.parse(oEvent.getParameter("arguments").LoginUser);
 			DefaultSuffix = (RoutedData.selectedSuffix).replace(/\//g, "%2F");
 			//	this.getView().byId("VLRSuffix").removeAllItems();

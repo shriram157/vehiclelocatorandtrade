@@ -60,6 +60,8 @@ sap.ui.define([
 			/*this.getRouter().attachRouteMatched(this.onRouteMatched, this);*/
 		},
 		onRouteMatched: function (oEvent) {
+			
+			   this.getView().byId("oTypeHere").setValue(""); //1803
 
 			var oReceivedDataString = oEvent.getParameter("arguments").SelectedTrade;
 			if (oReceivedDataString != undefined) {

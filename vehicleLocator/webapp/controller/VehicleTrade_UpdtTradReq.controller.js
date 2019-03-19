@@ -31,6 +31,10 @@ sap.ui.define([
 			this.getRouter().attachRouteMatched(this.onRouteMatched, this);
 		},
 		onRouteMatched: function (oEvent) {
+			
+			//oComments
+				    this.getView().byId("oComments").setValue(""); //1803
+				    
 			this.i18n = sap.ui.getCore().getModel("i18n").getResourceBundle();
 			var SelectedTrade = oEvent.getParameter("arguments").SelectedTrade;
 			/*	var pardia_title = i18n.getText("ctrl_success_dialog");
