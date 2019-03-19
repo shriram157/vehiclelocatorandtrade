@@ -39,6 +39,7 @@ sap.ui.define([
 		},
 
 		onRouteMatched: function (oEvent) {
+						// this._setTheLogo();
 
 			var that = this;
 			Dealer_No = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
@@ -355,7 +356,7 @@ sap.ui.define([
 
 					}
 
-					if (this.sDivision == sapDivision) {
+					if (that.sDivision == sapDivision) {
 						// check if it is a logged in dealer remove else just return. 
 						if (Businesspartnerurl[n].BusinessPartner == LoginBusinessPartnerCode) {
 							Businesspartnerurl.slice(n, 1);
@@ -367,7 +368,7 @@ sap.ui.define([
 
 					} else {
 
-						if (this.sDivision != undefined) {
+						if (that.sDivision != undefined) {
 							// remove the record
 							Businesspartnerurl.slice(n, 1);
 						}
@@ -385,7 +386,7 @@ sap.ui.define([
 				// });
 				
 				if (!that.getView().byId("VT_MBSdeal").getModel()) {
-					var oModel = new sap.ui.model.json.JSONModel(oBussinesspartners);
+					var oModel = new sap.ui.model.json.JSONModel(Businesspartnerurl);
 					that.getView().byId("VT_MBSdeal").setModel(oModel);
 				}
 
