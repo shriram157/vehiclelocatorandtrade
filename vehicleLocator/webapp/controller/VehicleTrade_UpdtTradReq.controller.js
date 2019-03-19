@@ -31,10 +31,6 @@ sap.ui.define([
 			this.getRouter().attachRouteMatched(this.onRouteMatched, this);
 		},
 		onRouteMatched: function (oEvent) {
-			
-			//oComments
-				    this.getView().byId("oComments").setValue(""); //1803
-				    
 			this.i18n = sap.ui.getCore().getModel("i18n").getResourceBundle();
 			var SelectedTrade = oEvent.getParameter("arguments").SelectedTrade;
 			/*	var pardia_title = i18n.getText("ctrl_success_dialog");
@@ -528,7 +524,7 @@ sap.ui.define([
 				//=====No changes======================
 				//=================================================================	
 			} else if (oOfferedVehicle == "") {
-				var dealer = this.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Requested_Dealer;
+				var dealer = this.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Requesting_Dealer;
 				this.updatewioutchanges(Offered_V, dealer, 'U');
 				//================================================================================
 				//=====select Vehicle ======================
@@ -2112,7 +2108,7 @@ sap.ui.define([
 				//=====No changes======================
 				//=================================================================	
 			} else if (oOfferedVehicle == "") {
-				var dealer = this.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Requested_Dealer;
+				var dealer = this.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Requesting_Dealer;
 				this.updatewioutchanges(Offered_V, dealer, 'S');
 				//================================================================================
 				//=====select Vehicle ======================
@@ -2185,9 +2181,11 @@ sap.ui.define([
 					success: function (result) {
 						if (result.d.results.length > 0) {
 							var Data = result.d.results[0];
+							
 							/*	Data.MessageType="";
 								Data.Calculate="20181126";*/
 							if (Data.MessageType != "E") {
+								vehicle_data = Data;
 								var CurrentETAFrom = vehicle_data.zzadddata4;
 								if (CurrentETAFrom != null && CurrentETAFrom != "") {
 
