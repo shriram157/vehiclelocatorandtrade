@@ -1987,7 +1987,7 @@ sap.ui.define([
 		 	this.getRouter().navTo("VehicleTrade_History");  
 		}
 		else{
-			   this.getRouter().navTo("VehicleTrade_History", {
+			   this.getRouter().navTo("VehicleTrade_Summary", {
 				DataClicked: "Yes"
 			});
 		}

@@ -40,11 +40,13 @@
 							emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2">
 							<form:content>
 								<core:Title text="" class="VTMBSClass"/>
-								<Label text="{i18n>Dealer}" required="true"/>
-								<ComboBox id="VT_MBSdeal" showSecondaryValues="true" selectionChange="onVT_MBSdeal" width="76%" items="{/}">
+								<Label text="{i18n>Dealer}" required="true"/>   
+								<ComboBox id="VT_MBSdeal" showSecondaryValues="true" selectionChange="onBusinessPartnerSelected" width="76%" items="{/}">
 									<core:ListItem key="{Customer}" text="{path:'Customer',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDealer'}"
-										additionalText="{OrganizationBPName1}"/>
+										additionalText="{OrganizationBPName1}"  />
 								</ComboBox>
+								
+								<Text text="{BusinessPartnerModel>/texttoshow}"/>
 								<!--	<SearchField id="Searcid" width="76%"/>-->
 								<Label text="{i18n>VehicleTrackingNumber}" required="true"/>
 								<!--<Text text=""/>-->
@@ -178,13 +180,18 @@
 									<cells>
 										<!--<CheckBox  select="onSelectedLine" />-->
 										<ComboBox editable="false" width="100%"
-											items="{path:'Dealers>/A_BusinessPartner',filters: [ { path: 'Customer', operator: 'StartsWith', value1:'2400000' }],  length:750}"
-											selectedKey="{path:'ModelBlock>ZzblockedDlr'}" modelContextChange="onDealernum" class="readonlycombo" >
+											items="{path:'Dealers>/A_BusinessPartner',filters: [ { path: 'Customer', operator: 'StartsWith', value1:'2400000' }]}"
+											selectedKey="{path:'ModelBlock>ZzblockedDlr'}" modelContextChange="onDealernum"   class="readonlycombo" >
 											<items>
 												<core:Item key="{Dealers>Customer}"
 													text="{path:'Dealers>Customer',formatter:'vehicleLocator.Formatter.Formatter.DealerNameFormat'}-{Dealers>OrganizationBPName1}"/>
 											</items>
 										</ComboBox>
+									
+										
+										
+										
+										
 										<ComboBox editable="false" width="100%" items="{Vehicles>/zc_mmfields}" class="readonlycombo" selectedKey="{ModelBlock>Zzseries}"
 											modelContextChange="onSeriesnum">
 											<items>

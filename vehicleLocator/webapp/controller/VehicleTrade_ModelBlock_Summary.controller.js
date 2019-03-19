@@ -908,7 +908,22 @@ sap.ui.define([
 			// apply the selected sort and group settings
 			oBinding.sort(aSorters);
 			oBinding.refresh();
-		}
+		},
+					onBusinessPartnerSelected: function (oEvent) {
+						var selectedCustomerT = this.getView().byId("VT_MBSdeal").getValue();
+
+				var sSelectedDealer = oEvent.getParameter("\selectedItem").getProperty("key");
+				var sSelectedDealerText = oEvent.getParameter("\selectedItem").getProperty("additionalText");
+				var sSelectedText = oEvent.getParameter("\selectedItem").getProperty("text");	
+						
+									var oViewModelText = new sap.ui.model.json.JSONModel({
+							texttoshow:sSelectedDealerText
+								});
+
+								this .getView().setModel(oViewModelText, "BusinessPartnerModel");
+
+								// <Text text="{BusinessPartnerModel>/texttoshow}"/>
+					}
 
 	});
 });
