@@ -2185,7 +2185,7 @@ sap.ui.define([
 							/*	Data.MessageType="";
 								Data.Calculate="20181126";*/
 							if (Data.MessageType != "E") {
-								vehicle_data = Data;
+							//	vehicle_data = Data;
 								var CurrentETAFrom = vehicle_data.zzadddata4;
 								if (CurrentETAFrom != null && CurrentETAFrom != "") {
 
@@ -2231,26 +2231,26 @@ sap.ui.define([
 								var Proposed_ETA_To = addDays(Calculate, CurrentEtadiff);
 								vehicle_data.Proposed_ETA_To = Proposed_ETA_To;
 								vehicle_data.Proposed_ETA_From = Data.Calculate;
-								vehicle_data.Offered_Vtn = vehicle_data.zzvtn;
-								vehicle_data.Model_Year = vehicle_data.zzmoyr;
-								vehicle_data.Series_Desc = vehicle_data.zzseries_desc_en;
-								vehicle_data.zzseries_desc_fr = vehicle_data.zzseries_desc_fr;
-								vehicle_data.zzseries_desc_en = vehicle_data.zzseries_desc_en;
-								vehicle_data.Series = vehicle_data.zzseries;
-								vehicle_data.Model = vehicle_data.matnr;
-								vehicle_data.Model_Desc = vehicle_data.model_desc_en;
-								vehicle_data.Suffix = vehicle_data.zzsuffix;
-								vehicle_data.Suffix_Desc = vehicle_data.suffix_desc_en;
-								vehicle_data.Int_Colour_Desc = vehicle_data.mrktg_int_desc_en;
-								vehicle_data.APX = vehicle_data.zzapx;
-								vehicle_data.Ext_Colour_Desc = vehicle_data.mktg_desc_en;
+								vehicle_data.Offered_Vtn = Data.zzvtn;
+								vehicle_data.Model_Year = Data.zzmoyr;
+								vehicle_data.Series_Desc = Data.zzseries_desc_en;
+								vehicle_data.zzseries_desc_fr = Data.zzseries_desc_fr;
+								vehicle_data.zzseries_desc_en = Data.zzseries_desc_en;
+								vehicle_data.Series = Data.zzseries;
+								vehicle_data.Model = Data.matnr;
+								vehicle_data.Model_Desc = Data.model_desc_en;
+								vehicle_data.Suffix = Data.zzsuffix;
+								vehicle_data.Suffix_Desc = Data.suffix_desc_en;
+								vehicle_data.Int_Colour_Desc = Data.mrktg_int_desc_en;
+								vehicle_data.APX = Data.zzapx;
+								vehicle_data.Ext_Colour_Desc = Data.mktg_desc_en;
 								vehicle_data.Status = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Status;
-								vehicle_data.Order_Type = vehicle_data.zzordertype;
+								vehicle_data.Order_Type = Data.zzordertype;
 								//	var Req_Current_ETA_From=Number(vehicle_data.pstsp);
 
-								vehicle_data.Off_Current_ETA_From = vehicle_data.pstsp;
+								vehicle_data.Off_Current_ETA_From = Data.pstsp;
 
-								var dateString = vehicle_data.zzadddata4;
+								var dateString = Data.zzadddata4;
 								var year = dateString.substring(0, 4);
 								var month = dateString.substring(4, 6);
 								var day = dateString.substring(6, 8);
