@@ -1765,7 +1765,7 @@ sap.ui.define([
 			var oVehicleDetails = [];
 			oVehicleDetails.push(oEntry2);
 			//==========================================================
-			if (that.getView().byId("otextId").getText() == "FromFourth" && that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().VehicleTradeVehicle != {}) {
+			// if (that.getView().byId("otextId").getText() == "FromFourth" && that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().VehicleTradeVehicle != {}) {
 				var Suffix = offeredv.Suffix;
 
 				var intColor = offeredv.Int_Colour;
@@ -1794,7 +1794,7 @@ sap.ui.define([
 				};
 				oEntry1["Trade_Id.Trade_Id"] = VehicleTrade_Id;
 				oVehicleDetails.push(oEntry1);
-			}
+			// }
 
 			/*	oEntry1["Trade_Id.Trade_Id"] = oEntry.Trade_Id;*/
 			/*	oVehicleDetails["Trade_Id.Trade_Id"] = oEntry.Trade_Id;
