@@ -178,7 +178,7 @@
 									<cells>
 										<!--<CheckBox  select="onSelectedLine" />-->
 										<ComboBox editable="false" width="100%"
-											items="{path:'Dealers>/A_BusinessPartner',filters: [ { path: 'Customer', operator: 'StartsWith', value1:'2400000' }]}"
+											items="{path:'Dealers>/A_BusinessPartner',filters: [ { path: 'Customer', operator: 'StartsWith', value1:'2400000' }],  length:750}"
 											selectedKey="{path:'ModelBlock>ZzblockedDlr'}" modelContextChange="onDealernum" class="readonlycombo" >
 											<items>
 												<core:Item key="{Dealers>Customer}"

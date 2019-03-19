@@ -6,7 +6,7 @@ sap.ui.define([
 	"sap/ui/core/routing/History",
 	"vehicleLocator/Formatter/Formatter",
 	"sap/ui/Device",
-	"sap/ui/model/Sorter",
+	"sap/ui/model/Sorter"
 ], function (BaseController, JSONModel, ResourceModel, MessageBox, History, Formatter, Device, Sorter) {
 	"use strict";
 	var Dealer_No;
@@ -15,14 +15,12 @@ sap.ui.define([
 		onInit: function () {
 			var _that = this;
 			this._mViewSettingsDialogs = {};
-			
-			
-			var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
-            var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
-            this.getView().byId("oDealerCode9").setText(LoggedInDealerCode2);
-            this.getView().byId("oDealerMdlBlkSumry").setText(LoggedInDealer);
 
-			
+			var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
+			var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
+			this.getView().byId("oDealerCode9").setText(LoggedInDealerCode2);
+			this.getView().byId("oDealerMdlBlkSumry").setText(LoggedInDealer);
+
 			//Global date format
 			jQuery.sap.require("sap.ui.core.format.DateFormat");
 			_that.oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
@@ -115,8 +113,13 @@ sap.ui.define([
 			//var LoginBusinessPartnerCode = sap.ui.getCore().LoginDetails.BussinesspartnerCode;
 			that.oDataUrl2 = this.nodeJsUrl + "/API_BUSINESS_PARTNER";
 			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl2, true);
-			var Businesspartnerurl = that.oDataUrl2 + "/A_BusinessPartner?$filter=(Customer ne '' and Customer ne '" + "24000" + Dealer_No +
-				"')&$format=json";
+
+			// var Businesspartnerurl = that.oDataUrl2 + "/A_BusinessPartner?$filter=(Customer ne '' and Customer ne '" + "24000" + Dealer_No +
+			// 	"')&$format=json";
+
+			var Businesspartnerurl = that.oDataUrl2 +
+				"/A_BusinessPartner/?$format=json&$expand=to_Customer&$filter=(BusinessPartnerType eq 'Z001' or BusinessPartnerType eq 'Z004' or BusinessPartnerType eq 'Z005') and zstatus ne 'X' &$orderby=BusinessPartner asc";
+
 			/*(BusinessPartner%20ne%20%27%27)&$format=json*/
 			/*/A_BusinessPartner?$filter=(Customer%20ne%20%27%27)&$format=json*/
 			var ajax3 = $.ajax({
@@ -129,6 +132,7 @@ sap.ui.define([
 				async: true,
 				success: function (result) {}
 			});
+
 			//===============<< Series Dec >>================================================================
 			// this.nodeJsUrl = this.sPrefix + "/node";
 			// that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_CATALOGUE_SRV";
@@ -310,13 +314,76 @@ sap.ui.define([
 				// var oModel = new sap.ui.model.json.JSONModel(FilteredBlockingDlr);
 				// that.getView().byId("tableVTMBS").setModel(oModel);
 
+				//  remove the logged in USEr available LoginBusinessPartnerCode in Businesspartnerurl
+
+				for (var n = 0; n < Businesspartnerurl.length; n++) {
+
+					let attributeFromSAP;
+					try {
+						attributeFromSAP = Businesspartnerurl[n].to_Customer.Attribute1;
+					} catch (e) {
+
+						// return;
+					}
+
+					// var attributeFromSAP =  Businesspartnerurl[n].to_Customer.Attribute1;   // -  this tell the division   	
+					var sapDivision;
+
+					switch (attributeFromSAP) {
+					case "01":
+						sapDivision = "10";
+
+						break;
+					case "02":
+						sapDivision = "20";
+
+						break;
+					case "03":
+						sapDivision = "Dual";
+
+						break;
+					case "04":
+						sapDivision = "10";
+
+						break;
+					case "05":
+						sapDivision = "Dual";
+
+						break;
+					default:
+						sapDivision = "10"; //  lets put that as a toyota dealer
+
+					}
+
+					if (this.sDivision == sapDivision) {
+						// check if it is a logged in dealer remove else just return. 
+						if (Businesspartnerurl[n].BusinessPartner == LoginBusinessPartnerCode) {
+							Businesspartnerurl.slice(n, 1);
+							continue;;
+						} else {
+							// keep the record
+							continue;
+						}
+
+					} else {
+
+						if (this.sDivision != undefined) {
+							// remove the record
+							Businesspartnerurl.slice(n, 1);
+						}
+
+					}
+
+				}
+
 				var Businesspartnerurl = Businesspartnerurl.filter(function (x) {
 					return x.BusinessPartner != null;
 				});
 
-				var oBussinesspartners = Businesspartnerurl.filter(function (value) {
-					return value.Customer.startsWith("24000");
-				});
+				// var oBussinesspartners = Businesspartnerurl.filter(function (value) {
+				// 	return value.Customer.startsWith("24000");
+				// });
+				
 				if (!that.getView().byId("VT_MBSdeal").getModel()) {
 					var oModel = new sap.ui.model.json.JSONModel(oBussinesspartners);
 					that.getView().byId("VT_MBSdeal").setModel(oModel);
@@ -331,8 +398,11 @@ sap.ui.define([
 
 		},
 		TradeSummaryLinkPressMBS: function () {
+
 			var that = this;
-			that.getRouter().navTo("VehicleTrade_Summary");
+			that.getRouter().navTo("VehicleTrade_Summary", {
+				DataClicked: "Yes"
+			});
 
 		},
 		TradeHistoryLinkPressMBS: function () {

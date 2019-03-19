@@ -870,7 +870,7 @@ sap.ui.define([
 					//	sap.m.MessageBox.error(Message);
 					} else if (a == "S") {
 						// var Message = odata.d.results[0].Message.trim();
-							var Message =  "Trade" + odata.d.results[0].zzvtn + "has been Accepted Succesfully";
+							var Message =  "Trade " + that.Tradeid + " has been Accepted Succesfully";
 							function fnCallbackMessageBox1(oAction) {
 						/*	that.getRouter().navTo("VehicleTrade_Summary", {
 								DataClicked: "Yes"
@@ -1142,8 +1142,8 @@ sap.ui.define([
 			that.oDataModel.update(UpdatedTreadeEntity, oEntry, {merge:true} , function (s) {
 //	that.VehicleTrade_SummaryData();
 
-that.getView().byId("SimpleFormAproveTrReq").getModel().getData().Trade_Status="A"; 
-that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
+				that.getView().byId("SimpleFormAproveTrReq").getModel().getData().Trade_Status="A"; 
+				that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
 
 				/*	that.TradeComment(oEntry);
 					that.TradeVehcles(oEntry);
@@ -1987,7 +1987,9 @@ that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
 		 	this.getRouter().navTo("VehicleTrade_History");  
 		}
 		else{
-			this.getRouter().navTo("VehicleTrade_Summary");
+			   this.getRouter().navTo("VehicleTrade_History", {
+				DataClicked: "Yes"
+			});
 		}
 		},
 

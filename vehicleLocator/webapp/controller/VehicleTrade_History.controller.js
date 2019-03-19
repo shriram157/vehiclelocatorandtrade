@@ -583,8 +583,18 @@ sap.ui.define([
 			that.getRouter().navTo("VehicleLocSearch");
 		},
 		TradeSummaryLinkPressTH: function () {
+			// var that = this;
+			// that.getRouter().navTo("VehicleTrade_Summary"){
+				
+				
+			// };
 			var that = this;
-			that.getRouter().navTo("VehicleTrade_Summary");
+            that.getRouter().navTo("VehicleTrade_Summary", {
+                DataClicked: "Yes"
+            });
+			
+			
+			
 
 		},
 		BlockSummarypressTH: function () {
