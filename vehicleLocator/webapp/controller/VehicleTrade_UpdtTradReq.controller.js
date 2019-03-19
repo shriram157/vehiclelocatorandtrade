@@ -2185,52 +2185,53 @@ sap.ui.define([
 							/*	Data.MessageType="";
 								Data.Calculate="20181126";*/
 							if (Data.MessageType != "E") {
-							//	vehicle_data = Data;
-								var CurrentETAFrom = vehicle_data.zzadddata4;
-								if (CurrentETAFrom != null && CurrentETAFrom != "") {
+								vehicle_data = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().OffredVehicle;
+								// var CurrentETAFrom = vehicle_data.zzadddata4;
+								// if (CurrentETAFrom != null && CurrentETAFrom != "") {
 
-									CurrentETAFrom = CurrentETAFrom.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1');
-								}
-								var CurrentETATo = vehicle_data.pstsp;
+								// 	CurrentETAFrom = CurrentETAFrom.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1');
+								// }
+								// var CurrentETATo = vehicle_data.pstsp;
 
-								if (CurrentETATo != null && CurrentETATo != "") {
-									var dateTo = CurrentETATo.split("(")[1];
-									if (CurrentETATo.indexOf("+") != -1) {
-										/*dateTo = dateTo.split("+")[0];*/
-										CurrentETATo = new Date(CurrentETATo.split("(")[1].substring(0, 10) * 1000).toDateString().substring(4, 15);
-										var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
-											pattern: "MM/dd/yyyy"
-										});
-										CurrentETATo = oDateFormat.format(new Date(CurrentETATo));
+								// if (CurrentETATo != null && CurrentETATo != "") {
+								// 	var dateTo = CurrentETATo.split("(")[1];
+								// 	if (CurrentETATo.indexOf("+") != -1) {
+								// 		/*dateTo = dateTo.split("+")[0];*/
+								// 		CurrentETATo = new Date(CurrentETATo.split("(")[1].substring(0, 10) * 1000).toDateString().substring(4, 15);
+								// 		var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+								// 			pattern: "MM/dd/yyyy"
+								// 		});
+								// 		CurrentETATo = oDateFormat.format(new Date(CurrentETATo));
 
-									} else {
-										dateTo = dateTo;
-										var dataTo1 = dateTo.substring(0, dateTo.length - 5);
-										var ValidTo = new Date(dataTo1 * 1000);
-										ValidTo = ValidTo.toGMTString().substring(4, 16);
-										var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
-											pattern: "MM/dd/yyyy"
-										});
-										CurrentETATo = oDateFormat.format(new Date(ValidTo));
-									}
+								// 	} else {
+								// 		dateTo = dateTo;
+								// 		var dataTo1 = dateTo.substring(0, dateTo.length - 5);
+								// 		var ValidTo = new Date(dataTo1 * 1000);
+								// 		ValidTo = ValidTo.toGMTString().substring(4, 16);
+								// 		var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+								// 			pattern: "MM/dd/yyyy"
+								// 		});
+								// 		CurrentETATo = oDateFormat.format(new Date(ValidTo));
+								// 	}
 
-								}
+								// }
 
-								var date1 = new Date(CurrentETAFrom);
-								var date2 = new Date(CurrentETATo);
-								var timeDiff = Math.abs(date2.getTime() - date1.getTime());
-								var CurrentEtadiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+								// var date1 = new Date(CurrentETAFrom);
+								// var date2 = new Date(CurrentETATo);
+								// var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+								// var CurrentEtadiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
-								function addDays(date, days) {
-									var result = new Date(date);
-									result.setDate(result.getDate() + days);
-									return result;
-								}
-								var Eta = Data.Calculate;
-								var Calculate = Eta.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1');
-								var Proposed_ETA_To = addDays(Calculate, CurrentEtadiff);
-								vehicle_data.Proposed_ETA_To = Proposed_ETA_To;
-								vehicle_data.Proposed_ETA_From = Data.Calculate;
+								// function addDays(date, days) {
+								// 	var result = new Date(date);
+								// 	result.setDate(result.getDate() + days);
+								// 	return result;
+								// }
+								// var Eta = Data.Calculate;
+								// var Calculate = Eta.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1');
+								// var Proposed_ETA_To = addDays(Calculate, CurrentEtadiff);
+								// vehicle_data.Proposed_ETA_To = Proposed_ETA_To;
+								// vehicle_data.Proposed_ETA_From = Data.Calculate;
+								// vehicle_data.Off_Current_ETA_From
 								vehicle_data.Offered_Vtn = Data.zzvtn;
 								vehicle_data.Model_Year = Data.zzmoyr;
 								vehicle_data.Series_Desc = Data.zzseries_desc_en;
@@ -2248,34 +2249,34 @@ sap.ui.define([
 								vehicle_data.Order_Type = Data.zzordertype;
 								//	var Req_Current_ETA_From=Number(vehicle_data.pstsp);
 
-								vehicle_data.Off_Current_ETA_From = Data.pstsp;
+								// vehicle_data.Off_Current_ETA_From = Data.pstsp;
 
-								var dateString = Data.zzadddata4;
-								var year = dateString.substring(0, 4);
-								var month = dateString.substring(4, 6);
-								var day = dateString.substring(6, 8);
+								// var dateString = Data.zzadddata4;
+								// var year = dateString.substring(0, 4);
+								// var month = dateString.substring(4, 6);
+								// var day = dateString.substring(6, 8);
 
-								var Req_Current_ETA_To = new Date(year, month - 1, day);
-								Req_Current_ETA_To = new Date(Req_Current_ETA_To);
-								Req_Current_ETA_To = Date.parse(Req_Current_ETA_To);
+								// var Req_Current_ETA_To = new Date(year, month - 1, day);
+								// Req_Current_ETA_To = new Date(Req_Current_ETA_To);
+								// Req_Current_ETA_To = Date.parse(Req_Current_ETA_To);
 
-								vehicle_data.Off_Current_ETA_To = "/Date(" + Req_Current_ETA_To + ")/";
-								//	var Proposed_ETA_From=Number(vehicle_data.Proposed_ETA_From);
-								var dateString = vehicle_data.Proposed_ETA_From;
-								var year = dateString.substring(0, 4);
-								var month = dateString.substring(4, 6);
-								var day = dateString.substring(6, 8);
+								// vehicle_data.Off_Current_ETA_To = "/Date(" + Req_Current_ETA_To + ")/";
+								// //	var Proposed_ETA_From=Number(vehicle_data.Proposed_ETA_From);
+								// var dateString = vehicle_data.Proposed_ETA_From;
+								// var year = dateString.substring(0, 4);
+								// var month = dateString.substring(4, 6);
+								// var day = dateString.substring(6, 8);
 
-								var Proposed_ETA_From = new Date(year, month - 1, day);
-								Proposed_ETA_From = new Date(Proposed_ETA_From);
-								Proposed_ETA_From = Date.parse(Proposed_ETA_From);
+								// var Proposed_ETA_From = new Date(year, month - 1, day);
+								// Proposed_ETA_From = new Date(Proposed_ETA_From);
+								// Proposed_ETA_From = Date.parse(Proposed_ETA_From);
 
-								vehicle_data.Off_Proposed_ETA_From = "/Date(" + Proposed_ETA_From + ")/";
-								var Req_Proposed_ETA_To = Number(vehicle_data.Proposed_ETA_To);
-								Req_Proposed_ETA_To = new Date(Req_Proposed_ETA_To);
-								Req_Proposed_ETA_To = Date.parse(Req_Proposed_ETA_To);
+								// vehicle_data.Off_Proposed_ETA_From = "/Date(" + Proposed_ETA_From + ")/";
+								// var Req_Proposed_ETA_To = Number(vehicle_data.Proposed_ETA_To);
+								// Req_Proposed_ETA_To = new Date(Req_Proposed_ETA_To);
+								// Req_Proposed_ETA_To = Date.parse(Req_Proposed_ETA_To);
 
-								vehicle_data.Off_Proposed_ETA_To = "/Date(" + Req_Proposed_ETA_To + ")/";
+								// vehicle_data.Off_Proposed_ETA_To = "/Date(" + Req_Proposed_ETA_To + ")/";
 
 								//====================================<< Delete the old data for Vehicle >>=======================================
 								that.VehicleDelete(VTN);
