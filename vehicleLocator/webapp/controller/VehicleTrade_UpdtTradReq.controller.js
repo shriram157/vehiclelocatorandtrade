@@ -1774,7 +1774,7 @@ sap.ui.define([
 				var modelYear = offeredv.Model_Year;
 				var Apx = offeredv.APX;
 				var Series = offeredv.Series;
-				var exterior = offeredv.zzextcol; //Ext_Colour;
+				var exterior = offeredv.zzextcol || offeredv.Ext_Colour; //Ext_Colour;
 				var vtn = offeredv.Offered_Vtn;
 				var ostatus = offeredv.Status;
 				var oOrdertype = offeredv.Order_Type;
