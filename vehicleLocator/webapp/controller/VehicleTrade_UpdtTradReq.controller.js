@@ -515,6 +515,7 @@ sap.ui.define([
 
 				// 	});
 				that.VehicleDelete(Offered_V);
+				that.VehicleDesc_delete(Offered_V);
 				that.TradeRequestCreate('O', 'U', that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle);
 
 				//  
@@ -2099,6 +2100,7 @@ sap.ui.define([
 
 				// 	});
 				that.VehicleDelete(Offered_V);
+				
 				that.TradeRequestCreate('O', 'S', that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle);
 
 				//  
