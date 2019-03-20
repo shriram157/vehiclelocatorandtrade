@@ -804,7 +804,7 @@ sap.ui.define([
 			});
 			var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
 			that.getView().getModel('TradeRequestModel').update(UpdatedTreadeEntity, oEntry, null, function (s) {
-				debugger
+				
 
 				that.TradeVehcles(oEntry);
 				that.TradeStatus(oEntry);
@@ -816,7 +816,7 @@ sap.ui.define([
 
 				//	that.getRouter().navTo("VehicleTrade_Summary");
 			}, function () {
-				alert("fail");
+			
 			});
 
 		},
@@ -1064,7 +1064,7 @@ sap.ui.define([
 			});
 		},
 		onSelectvehcicle: function () {
-			debugger
+			
 
 			var that = this;
 			sap.ui.core.BusyIndicator.show();
