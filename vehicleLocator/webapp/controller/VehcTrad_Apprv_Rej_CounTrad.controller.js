@@ -267,6 +267,68 @@ sap.ui.define([
 
 					that.getView().byId("idlto").setVisible(false);
 
+				     } else if(StatusData.Trade_Return == "Y" ) {
+ 
+                
+                    that.getView().byId("offeredDealer").setVisible(true);
+                
+                    that.getView().byId("oRequesteddealer").setVisible(true);
+
+                    that.getView().byId("ofrModellabl").setVisible(true);
+                
+                    that.getView().byId("ofrmodelyeartext").setVisible(true);
+
+                    that.getView().byId("ofrserieslabl").setVisible(true);
+                
+                    that.getView().byId("ofrseriestxt").setVisible(true);
+
+                    that.getView().byId("ofrmodllabl").setVisible(true);
+                    
+                    that.getView().byId("ofrmodltxt").setVisible(true);
+
+                    that.getView().byId("ofrsuffixlabl").setVisible(true);
+                
+                    that.getView().byId("ofrsuffixstxt").setVisible(true);
+
+                    that.getView().byId("ofrapxlabl").setVisible(true);
+                    
+                    that.getView().byId("ofrapxtxt").setVisible(true);
+
+                    that.getView().byId("ofrextcolorlabl").setVisible(true);
+                
+                    that.getView().byId("ofrexttxt").setVisible(true);
+
+                    that.getView().byId("ofrstatuslabl").setVisible(true);
+                    
+                    that.getView().byId("ofrstatustxt").setVisible(true);
+
+                    that.getView().byId("ofrordrtypelabl").setVisible(true);
+                    
+                    that.getView().byId("ofrordtypetxt").setVisible(true);
+
+                    that.getView().byId("cetalaid").setVisible(true);
+                
+                    that.getView().byId("ctqtid").setVisible(true);
+
+                    that.getView().byId("fromqid").setVisible(true);
+                
+                    that.getView().byId("txlab").setVisible(true);
+                    
+                    that.getView().byId("prolabid").setVisible(true);    
+                    
+
+                    that.getView().byId("tobid").setVisible(true);
+                
+                    that.getView().byId("prptid").setVisible(true);
+
+                    that.getView().byId("fmlbid").setVisible(true);
+                
+                
+                    that.getView().byId("otxlabel").setVisible(true);
+
+                    that.getView().byId("idlto").setVisible(true);
+ 
+				     	
 				     }
 
 				
@@ -446,6 +508,69 @@ sap.ui.define([
 
 					that.getView().byId("idlto").setVisible(false);
 
+
+				     } else if(StatusData.Trade_Return == "Y" ) {
+ 
+                
+                    that.getView().byId("offeredDealer").setVisible(true);
+                
+                    that.getView().byId("oRequesteddealer").setVisible(true);
+
+                    that.getView().byId("ofrModellabl").setVisible(true);
+                
+                    that.getView().byId("ofrmodelyeartext").setVisible(true);
+
+                    that.getView().byId("ofrserieslabl").setVisible(true);
+                
+                    that.getView().byId("ofrseriestxt").setVisible(true);
+
+                    that.getView().byId("ofrmodllabl").setVisible(true);
+                    
+                    that.getView().byId("ofrmodltxt").setVisible(true);
+
+                    that.getView().byId("ofrsuffixlabl").setVisible(true);
+                
+                    that.getView().byId("ofrsuffixstxt").setVisible(true);
+
+                    that.getView().byId("ofrapxlabl").setVisible(true);
+                    
+                    that.getView().byId("ofrapxtxt").setVisible(true);
+
+                    that.getView().byId("ofrextcolorlabl").setVisible(true);
+                
+                    that.getView().byId("ofrexttxt").setVisible(true);
+
+                    that.getView().byId("ofrstatuslabl").setVisible(true);
+                    
+                    that.getView().byId("ofrstatustxt").setVisible(true);
+
+                    that.getView().byId("ofrordrtypelabl").setVisible(true);
+                    
+                    that.getView().byId("ofrordtypetxt").setVisible(true);
+
+                    that.getView().byId("cetalaid").setVisible(true);
+                
+                    that.getView().byId("ctqtid").setVisible(true);
+
+                    that.getView().byId("fromqid").setVisible(true);
+                
+                    that.getView().byId("txlab").setVisible(true);
+                    
+                    that.getView().byId("prolabid").setVisible(true);    
+                    
+
+                    that.getView().byId("tobid").setVisible(true);
+                
+                    that.getView().byId("prptid").setVisible(true);
+
+                    that.getView().byId("fmlbid").setVisible(true);
+                
+                
+                    that.getView().byId("otxlabel").setVisible(true);
+
+                    that.getView().byId("idlto").setVisible(true);
+ 
+				     	
 				     }
  
 				var oStatusModel = new sap.ui.model.json.JSONModel(Status);
