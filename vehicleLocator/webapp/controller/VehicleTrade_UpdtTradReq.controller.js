@@ -2046,13 +2046,13 @@ sap.ui.define([
 				"Accept": "application/json",
 				"Method": "DELETE"
 			});
-			var UpdatedTreadeEntity = "/TradeVehicleDesc(Trade_Id.Trade_Id ='" + Trade_Id + "',VTN.VTN ='" + vin +
-				"',SPRAS='" + "F" + "')";
-			that.oDataModel.remove(UpdatedTreadeEntity, null, function (s) {
+			// var UpdatedTreadeEntity = "/TradeVehicleDesc(Trade_Id.Trade_Id ='" + Trade_Id + "',VTN.VTN ='" + vin +
+			// 	"',SPRAS='" + "F" + "')";
+			// that.oDataModel.remove(UpdatedTreadeEntity, null, function (s) {
 
-			}, function () {
+			// }, function () {
 
-			});
+			// });
 				var UpdatedTreadeEntity1 = "/TradeVehicleDesc(Trade_Id.Trade_Id ='" + Trade_Id + "',VTN.VTN ='" + vin +
 				"',SPRAS='" + "E" + "')";
 			that.oDataModel.remove(UpdatedTreadeEntity1, null, function (s) {
