@@ -5,14 +5,16 @@ sap.ui.define([
 	'sap/m/MessageBox',
 	"sap/ui/core/routing/History",
 	"vehicleLocator/Formatter/Formatter",
-
-], function (BaseController, JSONModel, ResourceModel, MessageBox, History, Formatter) {
+	"sap/ui/Device",
+	"sap/ui/model/Sorter"
+], function (BaseController, JSONModel, ResourceModel, MessageBox, History, Formatter,Device,Sorter) {
 	"use strict";
 	var TableData;
 	return BaseController.extend("vehicleLocator.controller.VehicleTrade_History", {
-
+        formatter:Formatter,
 		onInit: function () {
 			var _that = this;
+			this._mViewSettingsDialogs = {};
 			var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
 			var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
 		    this.getView().byId("oDealerCode8").setText(LoggedInDealerCode2);                                
@@ -407,7 +409,7 @@ sap.ui.define([
 		},
 		ExporttoExcellsheet: function () {
 
-			var Context = this.getView().byId("tableVTH").getBinding("rows").getContexts();
+			var Context = this.getView().byId("tableVTH").getBinding("items").getContexts();
 			if (Context.length == 0) {
 				sap.m.MessageBox.warning("No data is available to export");
 				return;
@@ -685,6 +687,38 @@ sap.ui.define([
 			} else {
 				return "";
 			}
+		},
+			handleSortButtonPressed: function () {
+			this.createViewSettingsDialog("vehicleLocator.fragment.TradeHistorySortDialog").open();
+		},
+		createViewSettingsDialog: function (sDialogFragmentName) {
+			var oDialog = this._mViewSettingsDialogs[sDialogFragmentName];
+
+			if (!oDialog) {
+				oDialog = sap.ui.xmlfragment(sDialogFragmentName, this);
+				this._mViewSettingsDialogs[sDialogFragmentName] = oDialog;
+
+				if (Device.system.desktop) {
+					oDialog.addStyleClass("sapUiSizeCompact");
+				}
+			}
+			return oDialog;
+		},
+		handleSortDialogConfirm: function (oEvent) {
+			var oTable = this.byId("tableVTH"),
+				mParams = oEvent.getParameters(),
+				oBinding = oTable.getBinding("items"),
+				sPath,
+				bDescending,
+				aSorters = [];
+
+			sPath = mParams.sortItem.getKey();
+			bDescending = mParams.sortDescending;
+			aSorters.push(new Sorter(sPath, bDescending));
+
+			// apply the selected sort and group settings
+			oBinding.sort(aSorters);
+			oBinding.refresh();
 		}
 
 	});
