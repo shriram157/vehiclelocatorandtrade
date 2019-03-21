@@ -1441,8 +1441,8 @@ sap.ui.define([
 				"Off_Current_ETA_To": Off_Current_ETA_To,
 				"Off_Proposed_ETA_From": Off_Proposed_ETA_From,
 				"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
-				"Created_By": Created_By,
-				"Created_On": Created_On,
+				// "Created_By": Created_By,
+				// "Created_On": Created_On,
 				"Changed_on": new Date(Changed_on),
 				"Requested_Dealer": Requested_Dealer,
 				"Requested_Dealer_Name": Requested_Dealer_Name
