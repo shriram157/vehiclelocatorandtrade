@@ -804,7 +804,6 @@ sap.ui.define([
 			});
 			var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
 			that.getView().getModel('TradeRequestModel').update(UpdatedTreadeEntity, oEntry, null, function (s) {
-				
 
 				that.TradeVehcles(oEntry);
 				that.TradeStatus(oEntry);
@@ -816,7 +815,7 @@ sap.ui.define([
 
 				//	that.getRouter().navTo("VehicleTrade_Summary");
 			}, function () {
-			
+
 			});
 
 		},
@@ -1064,7 +1063,6 @@ sap.ui.define([
 			});
 		},
 		onSelectvehcicle: function () {
-			
 
 			var that = this;
 			sap.ui.core.BusyIndicator.show();
@@ -1441,8 +1439,8 @@ sap.ui.define([
 				"Off_Current_ETA_To": Off_Current_ETA_To,
 				"Off_Proposed_ETA_From": Off_Proposed_ETA_From,
 				"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
-				// "Created_By": Created_By,
-				// "Created_On": Created_On,
+				"Created_By": Created_By,
+				"Created_On": Created_On,
 				"Changed_on": new Date(Changed_on),
 				"Requested_Dealer": Requested_Dealer,
 				"Requested_Dealer_Name": Requested_Dealer_Name
@@ -1763,7 +1761,7 @@ sap.ui.define([
 			// if (that.getView().byId("otextId").getText() == "FromFourth" && that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().VehicleTradeVehicle != {}) {
 			var Suffix = offeredv.Suffix;
 
-			var intColor = offeredv.Int_Colour;
+			var intColor = offeredv.Int_Colour || offeredv.zzintcol;
 
 			var model = offeredv.Model;
 			var modelYear = offeredv.Model_Year;
@@ -1773,7 +1771,7 @@ sap.ui.define([
 			var vtn = offeredv.Offered_Vtn;
 			var ostatus = offeredv.Status;
 			var oOrdertype = offeredv.Order_Type;
-			var DNC = offeredv.DNC;
+			var DNC = offeredv.DNC || offeredv.dnc_ind;
 			var oEntry1 = {
 				APX: Apx,
 				DNC: DNC,
@@ -2226,6 +2224,9 @@ sap.ui.define([
 								// vehicle_data.Off_Current_ETA_From
 								vehicle_data.Offered_Vtn = Data.zzvtn;
 								vehicle_data.Model_Year = Data.zzmoyr;
+								vehicle_data.zzintcol = Data.zzintcol;
+								vehicle_data.zzextcol = Data.zzextcol;
+								vehicle_data.dnc_ind = Data.dnc_ind;
 								vehicle_data.Series_Desc = Data.zzseries_desc_en;
 								vehicle_data.zzseries_desc_fr = Data.zzseries_desc_fr;
 								vehicle_data.zzseries_desc_en = Data.zzseries_desc_en;
