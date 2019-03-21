@@ -1596,13 +1596,33 @@ sap.ui.define([
 
 				} else {
 					dateTo = dateTo;
-					var dataTo1 = dateTo.substring(0, dateTo.length - 5);
-					var ValidTo = new Date(dataTo1 * 1000);
-					ValidTo = ValidTo.toGMTString().substring(4, 16);
-					var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
-						pattern: "yyyy-MM-dd'T'HH:mm:ss"
-					});
-					return new Date(oDateFormat.format(new Date(ValidTo)));
+					// var dataTo1 = dateTo.substring(0, dateTo.length - 5);
+					// var ValidTo = new Date(dataTo1 * 1000);
+					
+					// ValidTo = ValidTo.toGMTString().substring(4, 16);
+
+					// var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+					// 	pattern: "yyyy-MM-dd'T'HH:mm:ss"
+					// });
+					
+					
+					var dataTo1 = dateTo.substring(0, dateTo.length -2 );
+					
+					var  currentTime = new Date(Number(dataTo1));
+					
+					// var  currentTime = new Date(dataTo1);    
+					
+					// var convertTime = moment(currentTime).tz(timezone).format("YYYY-MM-DD HH:mm:ss");
+					var convertTime = moment(currentTime).tz("GMT").format("YYYY-MM-DD HH:mm:ss");
+					
+					var returnThisDate = new Date(convertTime);		
+					
+					return new Date(returnThisDate);
+
+						// return new Date(oDateFormat.format(new Date(returnThisDate)));
+					
+					
+					// return new Date(oDateFormat.format(new Date(ValidTo)));
 				}
 
 			} else {

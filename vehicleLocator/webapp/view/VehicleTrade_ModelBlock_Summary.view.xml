@@ -40,8 +40,8 @@
 							emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2">
 							<form:content>
 								<core:Title text="" class="VTMBSClass"/>
-								<Label text="{i18n>Dealer}" required="true"/>   
-								<ComboBox id="VT_MBSdeal" showSecondaryValues="true" selectionChange="onBusinessPartnerSelected" width="76%" items="{/}">
+								<Label text="{i18n>Dealer}" required="true"/>         
+								<ComboBox id="VT_MBSdeal" showSecondaryValues="true" selectionChange="onBusinessPartnerSelected" width="76%"  items="{path: '/', length:750 }" >
 									<core:ListItem key="{Customer}" text="{path:'Customer',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDealer'}"
 										additionalText="{OrganizationBPName1}"  />
 								</ComboBox>
