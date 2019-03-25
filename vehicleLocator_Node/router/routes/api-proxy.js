@@ -73,7 +73,7 @@ module.exports = function (log) {
 		headOptions.Authorization = auth64;
 
 		let method = req.method;
-		let xurl = url + req.url + clientSap;
+		let xurl = url + req.url;      // + clientSap;
 		console.log('Method', method);
 		console.log('Incoming Url', xurl);
 		console.log('csrfToken before GET&POST', csrfToken);
