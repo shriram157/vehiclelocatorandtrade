@@ -2,15 +2,15 @@
                          xmlns:core="sap.ui.core">
     <ViewSettingsDialog confirm="handleConfirm" cancel="handleCancel" id="vsd1">
         <sortItems>
-            <ViewSettingsItem selected="true" key="zzvtn" text="Vehicle Tracking Number" />
-            <ViewSettingsItem key="zzseries" text="Series" />
-             <ViewSettingsItem key="matnr" text="Model" />
-            <ViewSettingsItem key="zzsuffix" text="Suffix" />
-            <ViewSettingsItem key="zzapx" text="APX" />
-            <ViewSettingsItem key="zzextcol" text="Color" />
-            <ViewSettingsItem key="zzordertype" text="Order Type" />
-            <ViewSettingsItem key="zzadddata4" text="Eta From" />
-            <ViewSettingsItem key="pstsp" text="Eta To" />
+            <ViewSettingsItem selected="true" key="zzvtn" text="{i18n>VehicleTrackingNumber}" />
+            <ViewSettingsItem key="zzseries" text="{i18n>Series}" />
+             <ViewSettingsItem key="matnr" text="{i18n>Model}" />
+            <ViewSettingsItem key="zzsuffix" text="{i18n>Suffix}" />
+            <ViewSettingsItem key="zzapx" text="{i18n>APX}" />
+            <ViewSettingsItem key="zzextcol" text="{i18n>Color}" />
+            <ViewSettingsItem key="zzordertype" text="{i18n>OrderType}" />
+            <ViewSettingsItem key="zzadddata4" text="{i18n>ETAFrom}" />
+            <ViewSettingsItem key="pstsp" text="{i18n>ETATo}" />
         </sortItems>
      </ViewSettingsDialog>
 </core:FragmentDefinition>

@@ -3,7 +3,7 @@
 	xmlns:html="http://www.w3.org/1999/xhtml" controllerName="vehicleLocator.controller.VehicleSearcResults">
 	<App>
 		<pages class="oImgsampl" height="200px">
-			<Page showNavButton="false" enableScrolling="true" 	class="sapUiSizeCompact">
+			<Page showNavButton="true" enableScrolling="true" 	class="sapUiSizeCompact">
 				<customHeader>
 					<Bar class="sapUiSmallPaddingBeginEnd clCustomHeaderBg">
 						<contentLeft>
@@ -228,7 +228,7 @@
                         
                         <!--<Button text="Reset" type="Transparent" press="onReset"/>-->
                         <Button tooltip="Sort table by selected fields" icon="sap-icon://sort"	
-                                press="handleViewSettingsDialogButtonPressed" text="Sorting"/>
+                                press="handleViewSettingsDialogButtonPressed" text="{i18n>Sorting}"/>
                     </OverflowToolbar>
                 </headerToolbar>
 

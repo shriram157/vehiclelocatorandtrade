@@ -145,8 +145,13 @@ sap.ui.define([
 					this.getView().byId("offordetype").setVisible(true);
 					this.getView().byId("oofferedOrdertype").setVisible(true);
 
-					var i18n = sap.ui.getCore().getModel("i18n").getResourceBundle();
-					var OtherVehicleInformation_text = i18n.getText("OfferVehicleInformation");
+					// var i18n = sap.ui.getCore().getModel("i18n").getResourceBundle();
+					// var OtherVehicleInformation_text = i18n.getText("OfferVehicleInformation");
+					
+					var oModeli18n = this.getView().getModel("i18n");
+		     		// this._oResourceBundle = oModeli18n.getResourceBundle();			
+					 var OtherVehicleInformation_text = oModeli18n.getResourceBundle().getText("OfferVehicleInformation");
+					
 					this.getView().byId("oOtherVehInfoid").setText(OtherVehicleInformation_text);
 					this.getView().setModel(sap.ui.getCore().getModel("TradeModel"), "TradeModel");
 
@@ -269,15 +274,11 @@ sap.ui.define([
 			var oDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerKey;
 			
 			
-			// guna temp change remove later. 
-			// oDealer = "2400042120"// TODO: 
 			
 			
 			var Series = this.getOwnerComponent().SelectedMSMData[0].SeriesCmbo;
 
-			//	var oDealer = this.getView().getModel("TradeModel").getData().kunnr;
-			//	var oDealer ="42120";
-	//		this.intercolor = "42";
+
 
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
@@ -358,7 +359,14 @@ sap.ui.define([
                         return (x.zzordertype == "SO" || x.zzordertype == "DM");
                     });
                     var oJsonModel = new sap.ui.model.json.JSONModel(IncludeOrdertype);		
-					
+	// need to change language - 2603				 
+					 //for (var i =0; i< oJsonModel.oData.length; i++) {
+					 //	oJsonModel.oData[i].mktg_desc_en = oJsonModel.oData[i].mktg_desc_fr;  //
+					 //	oJsonModel.oData[i].model_desc_en = oJsonModel.oData[i].model_desc_fr;  //
+					 //	oJsonModel.oData[i].mrktg_int_desc_en = oJsonModel.oData[i].mrktg_int_desc_fr; 
+					 //	oJsonModel.oData[i].suffix_desc_en = oJsonModel.oData[i].suffix_desc_fr; 
+					 //	oJsonModel.oData[i].zzseries_desc_en = oJsonModel.oData[i].zzseries_desc_fr; 
+					 //}
   
 					
 					
@@ -1327,9 +1335,7 @@ sap.ui.define([
 					});
 					this.getView().setModel(i18nModel, "i18n");
 					this.sCurrentLocale = 'FR';
-					// set the right image for logo	 - french		
-					/*				var currentImageSource = this.getView().byId("idLexusLogo");
-									currentImageSource.setProperty("src", "Images/Lexus_FR.png");*/
+					this.sCurrentLocaleD = 'French';
 
 				} else {
 					var i18nModel = new sap.ui.model.resource.ResourceModel({
@@ -1339,9 +1345,7 @@ sap.ui.define([
 					});
 					this.getView().setModel(i18nModel, "i18n");
 					this.sCurrentLocale = 'EN';
-					// set the right image for logo			
-					/*				var currentImageSource = this.getView().byId("idLexusLogo");
-									currentImageSource.setProperty("src", "Images/Lexus_EN.png");*/
+					this.sCurrentLocaleD = 'English';
 
 				}
 

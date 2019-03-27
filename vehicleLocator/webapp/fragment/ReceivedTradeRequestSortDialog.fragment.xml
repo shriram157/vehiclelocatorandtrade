@@ -4,12 +4,12 @@
 	<ViewSettingsDialog
 		confirm="handleConfirmReceiveTradeRequest">
 		<sortItems>
-			<ViewSettingsItem selected="true" key="Trade_Id" text="Request" />
-			<ViewSettingsItem key="Requested_Dealer" text="Dealer"  />
-		    <ViewSettingsItem key="Model" text="Model" />
-            <ViewSettingsItem key="Suffix" text="Suffix" />
-            <ViewSettingsItem key="Trade_Return" text="Trade in Return" />
-            <ViewSettingsItem key="Trade_Status" text="Trade Status" />	
+			<ViewSettingsItem selected="true" key="Trade_Id"  text="{i18n>Request}" />
+			<ViewSettingsItem key="Requested_Dealer" text="{i18n>RequestedDealer}"  />
+		    <ViewSettingsItem key="Model" text="{i18n>Model}"/>
+            <ViewSettingsItem key="Suffix" text="{i18n>Suffix}" />
+            <ViewSettingsItem key="Trade_Return" text="{i18n>TradeinReturn}" />
+            <ViewSettingsItem key="Trade_Status" text="{i18n>Status}" />	
 
 		</sortItems>
 	</ViewSettingsDialog>

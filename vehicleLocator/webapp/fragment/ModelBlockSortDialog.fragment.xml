@@ -4,9 +4,9 @@
 	<ViewSettingsDialog
 		confirm="handleSortDialogConfirm">
 		<sortItems>
-			<ViewSettingsItem text="Dealer" key="ZzblockedDlr" selected="true" />
-			<ViewSettingsItem text="Model" key="Zzmodel" />
-			<ViewSettingsItem text="Series" key="Zzseries" />
+			<ViewSettingsItem text="{i18n>Dealer}" key="ZzblockedDlr" selected="true" />
+			<ViewSettingsItem text="{i18n>Model}" key="Zzmodel" />
+			<ViewSettingsItem text="{i18n>Series}" key="Zzseries" />
 		</sortItems>
 	</ViewSettingsDialog>
 </core:FragmentDefinition>

@@ -154,8 +154,8 @@
 				"async": true,
 				"viewPath": "vehicleLocator.view",
 				"controlId": "idAppControl",
-				"controlAggregation": "pages",
-				"transition": "flip"
+				"controlAggregation": "pages"
+		
 			},
 			"routes": [{
 				"pattern": "",

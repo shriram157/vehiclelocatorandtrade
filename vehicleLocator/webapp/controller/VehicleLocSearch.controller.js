@@ -14,42 +14,14 @@ sap.ui.define([
 
 		onInit: function () {
 
-			/*	var oDealer =  42120;
-				var oZoneUser = 50211;
-				var oTciUser =  61122;
-				var oLanguage = "EN";*/
-			/*	var oLoginDealer = {
-					"Username": "AMRO",
-					"Language": "EN",
-					"BussinesspartnerCode": "2400042176",
-					"Zone": "5000", //we didnt get zone, pass for the loggin dealer 
-					"DealerCode": "42176",
-					"Dealername": "Toyota-Amro",
-					"UserType": "Dealer",
-					"Division": "10"
-
-				
-
-				};*/
+		
 
 			// ========================================== integrating security ==========================================Begin
 
 			//======================================================================================================================//			
 			//  on init method,  get the token attributes and authentication details to the UI from node layer.  - begin
 			//======================================================================================================================//		
-			//  get the Scopes to the UI 
-			// var that = this;
-			// var sLocation = window.location.host;
-			// var sLocation_conf = sLocation.search("webide");
-			// if (sLocation_conf == 0) {
-			// 	this.sPrefix = "/vehicleLocatorNode"; // 
-			// 	this.attributeUrl = "/userDetails/attributesforlocaltesting";
-			// } else {
-			// 	this.sPrefix = "";
-			// 	this.attributeUrl = "/userDetails/attributes";
-			// }
-			// //that.userType ="vehicelTradeDealerUser";
-			// //this.sPrefix ="";
+
 
 			// the business partner oData calls should happen onit.
 			var sLocation = window.location.host;
@@ -98,34 +70,7 @@ sap.ui.define([
 
 			});
 
-			// $.ajax({
-			// 	url: this.sPrefix + "/userDetails/currentScopesForUser",
-			// 	type: "GET",
-			// 	dataType: "json",
-			// 	success: function (oData) {
-			// 		// var userScopes = oData;
-			// 		// userScopes.forEach(function (data) {
-
-			// 		that.userType = oData.loggedUserType[0];
-			// 		switch (that.userType) {
-			// 		case "vehicelTradeDealerUser":
-
-			// 			// add your code here. // TODO: 
-			// 			break;
-
-			// 		case "internalTCIUser":
-			// 			// add your code here. // TODO:  
-			// 			break;
-			// 		case "ZoneUser":
-			// 			// add your code here. // TODO: 	 
-			// 			break;
-			// 		default:
-			// 			// raise a message, because this should not be allowed. 
-			// 			// add your code here. // TODO: 
-			// 		}
-			// 	}
-
-			// });
+		
 
 			// get the attributes and BP Details - 	// TODO: 
 			$.ajax({
@@ -214,19 +159,10 @@ sap.ui.define([
 
 					});
 
-					/*	userAttributes.push({
-						"UserType": "Dealer",
-						"DealerCode": "42120",
-						"Language": "English",
-						"LoggedinUserFirstName" : "User",
-						"LoggedinUserLastName" : "42120"
-
-					});	*/
 
 					that.getView().setModel(new sap.ui.model.json.JSONModel(userAttributes), "userAttributesModel");
 					sap.ui.getCore().setModel(new sap.ui.model.json.JSONModel(userAttributes), "LoginuserAttributesModel");
-					//	that._getTheUserAttributes();
-					// debugger
+				
 					that.security();
 				}.bind(this),
 				error: function (response) {
@@ -254,6 +190,7 @@ sap.ui.define([
 				});
 				sap.ui.getCore().setModel(i18nModel, "i18n");
 				this.sCurrentLocale = 'FR';
+				this.sCurrentLocaleD = 'French';
 				// set the right image for logo  - french       
 				/*              var currentImageSource = this.getView().byId("idLexusLogo");
 				                currentImageSource.setProperty("src", "Images/Lexus_FR.png");*/
@@ -265,6 +202,7 @@ sap.ui.define([
 				sap.ui.getCore().setModel(i18nModel, "i18n");
 				this.getView().setModel(i18nModel, "i18n");
 				this.sCurrentLocale = 'EN';
+				this.sCurrentLocaleD = 'English';
 				// set the right image for logo         
 				/*              var currentImageSource = this.getView().byId("idLexusLogo");
 				                currentImageSource.setProperty("src", "Images/Lexus_EN.png");*/
@@ -521,7 +459,9 @@ sap.ui.define([
 					oResults.push(obj[key]);
 				that.Fullurls = oResults;
 				var SeriesDescription = that.SeriesDescription(oResults);
-				var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language;
+			//	var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language;  //2603
+				var SPRAS = that.sCurrentLocaleD;
+				
 				if (SeriesDescription.length != 0) {
 					for (var a = 0; a < that.Fullurls.length; a++) {
 						for (var b = 0; b < SeriesDescription.length; b++) {
@@ -652,7 +592,9 @@ sap.ui.define([
 					for (var key in obj)
 						oResults.push(obj[key]);
 
-					var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language;
+					// var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language;  //2603
+						var SPRAS = that.sCurrentLocaleD;
+					
 					for (var i = 0; i < oResults.length; i++) {
 						oResults[i].SPRAS = SPRAS;
 					}
@@ -781,7 +723,8 @@ for(var i=0;i<oResults.length;i++){
 				that.Fullurls = oResults;
 
 				var SufixDescription = SuffixDescription;
-				var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language;
+				// var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language;  //2603
+						var SPRAS = that.sCurrentLocaleD;
 				var oCombine = [];
 				for (var a = 0; a < that.Fullurls.length; a++) {
 					for (var b = 0; b < SufixDescription.length; b++) {
@@ -1896,9 +1839,7 @@ for(var i=0;i<oResults.length;i++){
 			} else {
 				var sSelectedLocale = "EN"; // default is english 
 			}
-
-			//selected language.	
-			// if (window.location.search == "?language=fr") {
+ 
 			if (sSelectedLocale == "fr") {
 				var i18nModel = new sap.ui.model.resource.ResourceModel({
 					bundleUrl: "i18n/i18n.properties",
@@ -1907,9 +1848,8 @@ for(var i=0;i<oResults.length;i++){
 				});
 				this.getView().setModel(i18nModel, "i18n");
 				this.sCurrentLocale = 'FR';
-				// set the right image for logo	 - french		
-				/*				var currentImageSource = this.getView().byId("idLexusLogo");
-								currentImageSource.setProperty("src", "Images/Lexus_FR.png");*/
+				this.sCurrentLocaleD = 'French';
+				 
 
 			} else {
 				var i18nModel = new sap.ui.model.resource.ResourceModel({
@@ -1919,10 +1859,7 @@ for(var i=0;i<oResults.length;i++){
 				});
 				this.getView().setModel(i18nModel, "i18n");
 				this.sCurrentLocale = 'EN';
-				// set the right image for logo			
-				/*				var currentImageSource = this.getView().byId("idLexusLogo");
-								currentImageSource.setProperty("src", "Images/Lexus_EN.png");*/
-
+				this.sCurrentLocaleD = 'English';
 			}
 
 			var oModeli18n = this.getView().getModel("i18n");

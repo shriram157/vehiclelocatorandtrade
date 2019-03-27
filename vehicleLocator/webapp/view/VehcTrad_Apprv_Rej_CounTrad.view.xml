@@ -379,9 +379,7 @@
 		 
 								<core:Title text="" class="Vtaprct1"/>
 								<VBox>
-									<Text
-										text="This trade information is a snap shot at the time of trade request creation. This information will be validated once after your input (Accept/Reject/Counter) before the function is completed."
-										width=""/>
+									<Text text="{i18n>disclaimerText}"	width=""/>	
 									<Label text=""/>
 									<HBox>
 										<FlexBox width="10px"></FlexBox>

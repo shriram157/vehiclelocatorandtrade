@@ -171,6 +171,19 @@ sap.ui.define([
 			this.SelectedVehicleFrom = oEvent.getParameter("arguments").SelectedVehicleFrom;
 			var that = this;
 			var Model = sap.ui.getCore().getModel("SelectedSeriesFromScreen1");
+			
+		    if (this.sCurrentLocaleD == "French") {
+		    	for (var i=0; i< Model.oData.length; i++){
+		    		Model.oData[i].ENModelDesc = Model.oData[i].FRModelDesc;
+		    		Model.oData[i].TCISeriesDescriptionEN = Model.oData[i].TCISeriesDescriptionFR;
+		    	}
+		    	
+		    }
+			
+			
+			
+			
+			
 		that.getView().byId("oVt_SeriesCmbo").setSelectedKey("");
 			if (Model != undefined) {
 					that.getView().byId("oVt_SeriesCmbo").setModel(Model);
@@ -231,10 +244,26 @@ sap.ui.define([
 			}
 			if (sap.ui.getCore().getModel("oVehicleSelectionResults") != undefined) {
 				var oVehicleModel = sap.ui.getCore().getModel("oVehicleSelectionResults").getData();
-
+// based on the language set the descriptions. 
+                 if (this.sCurrentLocaleD == "French") {
+                 	for (var i=0; i<oVehicleModel.length; i++ ){
+                 		oVehicleModel[i].mktg_desc_en = oVehicleModel[i].mktg_desc_fr;
+                 		oVehicleModel[i].model_desc_en = oVehicleModel[i].model_desc_fr;
+                 		oVehicleModel[i].zzseries_desc_en = oVehicleModel[i].zzseries_desc_fr;
+                 		oVehicleModel[i].suffix_desc_en  = oVehicleModel[i].suffix_desc_fr; 
+                 			oVehicleModel[i].mrktg_int_desc_en  = oVehicleModel[i].mrktg_int_desc_fr;
+                 		
+                 	}
+                 	
+                 }
+	
 				var model = new sap.ui.model.json.JSONModel(oVehicleModel);
 				model.setSizeLimit(1000);
 				this.getView().setModel(model, "vehicleSelectTableModel");
+
+				// var oModeltemp = 	this.getView().getModel("vehicleSelectTableModel");
+				// oModeltemp.updateBindings(true);
+
 
 				var tableLength = this.getView().getModel("vehicleSelectTableModel").getData().length;
 				var oModelDetail = this.getView().getModel("detailView");
@@ -263,9 +292,7 @@ sap.ui.define([
 			var oDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerKey;
 			var Series = this.getView().byId("oVt_SeriesCmbo").getSelectedKey();
 
-			//	var oDealer = this.getView().getModel("TradeModel").getData().kunnr;
-			//	var oDealer ="42120";// TODO:    guna to remove this before deployment
-			//		this.intercolor="42";
+ 
 
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
@@ -368,11 +395,25 @@ sap.ui.define([
 
 				// set the model	
 				var model = new sap.ui.model.json.JSONModel(oVehicleModel).getData();
+			//    var model = oVehicleModel.getData();
 				model.setSizeLimit(1000);
 				
-				
+				// based on the language set the descriptions. 
+                 if (this.sCurrentLocaleD == "French") {
+                 	for (var i=0; i<model.oData.length; i++ ){
+                 		model.oData[i].mktg_desc_en = model.oData[i].mktg_desc_fr;
+                 		model.oData[i].model_desc_en = model.oData[i].model_desc_fr;
+                 		model.oData[i].zzseries_desc_en = model.oData[i].zzseries_desc_fr;
+                 		model.oData[i].suffix_desc_en  = model.oData[i].suffix_desc_fr;
+                 			model.oData[i].mrktg_int_desc_en  = model.oData[i].mrktg_int_desc_fr;
+                 	}
+                 	
+                 }
 				
 				this.getView().setModel(model, "vehicleSelectTableModel");
+				
+				var oModeltemp = 	this.getView().setModel(model, "vehicleSelectTableModel");
+				oModeltemp.updateBindings(true);
 
 				var tableLength = this.getView().getModel("vehicleSelectTableModel").getData().length;
 				var oModelDetail = this.getView().getModel("detailView");
@@ -507,18 +548,18 @@ else if((CurrentETAFrom==""||CurrentETAFrom==null)&&(CurrentETATo==""||CurrentET
 						} else if (that.SelectedVehicleFrom == "VehileTrade_UpdtTradReq") {
 							//.getProperty("/OffredVehicle")
 							that.oSelectedItem.Offered_Vtn = that.oSelectedItem.zzvtn;
-							that.oSelectedItem.Model_Year = that.oSelectedItem.zzmoyr
-							that.oSelectedItem.Series_Desc = that.oSelectedItem.zzseries_desc_en
-							that.oSelectedItem.zzseries_desc_fr = that.oSelectedItem.zzseries_desc_fr
-							that.oSelectedItem.zzseries_desc_en = that.oSelectedItem.zzseries_desc_en
-							that.oSelectedItem.Series = that.oSelectedItem.zzseries
-							that.oSelectedItem.Model = that.oSelectedItem.matnr
-							that.oSelectedItem.Model_Desc = that.oSelectedItem.model_desc_en
-							that.oSelectedItem.Suffix = that.oSelectedItem.zzsuffix
-							that.oSelectedItem.Suffix_Desc = that.oSelectedItem.suffix_desc_en
-							that.oSelectedItem.Int_Colour_Desc = that.oSelectedItem.mrktg_int_desc_en
-							that.oSelectedItem.APX = that.oSelectedItem.zzapx
-								that.oSelectedItem.Ext_Colour = that.oSelectedItem.zzextcol
+							that.oSelectedItem.Model_Year = that.oSelectedItem.zzmoyr;
+							that.oSelectedItem.Series_Desc = that.oSelectedItem.zzseries_desc_en;
+							that.oSelectedItem.zzseries_desc_fr = that.oSelectedItem.zzseries_desc_fr;
+							that.oSelectedItem.zzseries_desc_en = that.oSelectedItem.zzseries_desc_en;
+							that.oSelectedItem.Series = that.oSelectedItem.zzseries;
+							that.oSelectedItem.Model = that.oSelectedItem.matnr;
+							that.oSelectedItem.Model_Desc = that.oSelectedItem.model_desc_en;
+							that.oSelectedItem.Suffix = that.oSelectedItem.zzsuffix;
+							that.oSelectedItem.Suffix_Desc = that.oSelectedItem.suffix_desc_en;
+							that.oSelectedItem.Int_Colour_Desc = that.oSelectedItem.mrktg_int_desc_en;
+							that.oSelectedItem.APX = that.oSelectedItem.zzapx;
+								that.oSelectedItem.Ext_Colour = that.oSelectedItem.zzextcol;
 							that.oSelectedItem.Ext_Colour_Desc = that.oSelectedItem.mktg_desc_en;
 							that.oSelectedItem.Status = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Status;
 							that.oSelectedItem.Order_Type = that.oSelectedItem.zzordertype;
@@ -593,18 +634,18 @@ else if((CurrentETAFrom==""||CurrentETAFrom==null)&&(CurrentETATo==""||CurrentET
 							});
 						} else if (that.SelectedVehicleFrom == "VehileTrade_UpdtTradReq") {
 								that.oSelectedItem.Offered_Vtn = that.oSelectedItem.zzvtn;
-							that.oSelectedItem.Model_Year = that.oSelectedItem.zzmoyr
-							that.oSelectedItem.Series_Desc = that.oSelectedItem.zzseries_desc_en
-							that.oSelectedItem.zzseries_desc_fr = that.oSelectedItem.zzseries_desc_fr
-							that.oSelectedItem.zzseries_desc_en = that.oSelectedItem.zzseries_desc_en
-							that.oSelectedItem.Series = that.oSelectedItem.zzseries
-							that.oSelectedItem.Model = that.oSelectedItem.matnr
-							that.oSelectedItem.Model_Desc = that.oSelectedItem.model_desc_en
-							that.oSelectedItem.Suffix = that.oSelectedItem.zzsuffix
-							that.oSelectedItem.Suffix_Desc = that.oSelectedItem.suffix_desc_en
-							that.oSelectedItem.Int_Colour_Desc = that.oSelectedItem.mrktg_int_desc_en
-							that.oSelectedItem.APX = that.oSelectedItem.zzapx
-								that.oSelectedItem.Ext_Colour = that.oSelectedItem.zzextcol
+							that.oSelectedItem.Model_Year = that.oSelectedItem.zzmoyr;
+							that.oSelectedItem.Series_Desc = that.oSelectedItem.zzseries_desc_en;
+							that.oSelectedItem.zzseries_desc_fr = that.oSelectedItem.zzseries_desc_fr;
+							that.oSelectedItem.zzseries_desc_en = that.oSelectedItem.zzseries_desc_en;
+							that.oSelectedItem.Series = that.oSelectedItem.zzseries;
+							that.oSelectedItem.Model = that.oSelectedItem.matnr;
+							that.oSelectedItem.Model_Desc = that.oSelectedItem.model_desc_en;
+							that.oSelectedItem.Suffix = that.oSelectedItem.zzsuffix;
+							that.oSelectedItem.Suffix_Desc = that.oSelectedItem.suffix_desc_en;
+							that.oSelectedItem.Int_Colour_Desc = that.oSelectedItem.mrktg_int_desc_en;
+							that.oSelectedItem.APX = that.oSelectedItem.zzapx;
+								that.oSelectedItem.Ext_Colour = that.oSelectedItem.zzextcol;
 							that.oSelectedItem.Ext_Colour_Desc = that.oSelectedItem.mktg_desc_en;
 							that.oSelectedItem.Status = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Status;
 							that.oSelectedItem.Order_Type = that.oSelectedItem.zzordertype;
@@ -683,18 +724,18 @@ else if((CurrentETAFrom==""||CurrentETAFrom==null)&&(CurrentETATo==""||CurrentET
 						});
 					} else if (that.SelectedVehicleFrom == "VehileTrade_UpdtTradReq") {
 							that.oSelectedItem.Offered_Vtn = that.oSelectedItem.zzvtn;
-							that.oSelectedItem.Model_Year = that.oSelectedItem.zzmoyr
-							that.oSelectedItem.Series_Desc = that.oSelectedItem.zzseries_desc_en
-							that.oSelectedItem.zzseries_desc_fr = that.oSelectedItem.zzseries_desc_fr
-							that.oSelectedItem.zzseries_desc_en = that.oSelectedItem.zzseries_desc_en
-							that.oSelectedItem.Series = that.oSelectedItem.zzseries
-							that.oSelectedItem.Model = that.oSelectedItem.matnr
-							that.oSelectedItem.Model_Desc = that.oSelectedItem.model_desc_en
-							that.oSelectedItem.Suffix = that.oSelectedItem.zzsuffix
-							that.oSelectedItem.Suffix_Desc = that.oSelectedItem.suffix_desc_en
-							that.oSelectedItem.Int_Colour_Desc = that.oSelectedItem.mrktg_int_desc_en
-							that.oSelectedItem.APX = that.oSelectedItem.zzapx
-								that.oSelectedItem.Ext_Colour = that.oSelectedItem.zzextcol
+							that.oSelectedItem.Model_Year = that.oSelectedItem.zzmoyr;
+							that.oSelectedItem.Series_Desc = that.oSelectedItem.zzseries_desc_en;
+							that.oSelectedItem.zzseries_desc_fr = that.oSelectedItem.zzseries_desc_fr;
+							that.oSelectedItem.zzseries_desc_en = that.oSelectedItem.zzseries_desc_en;
+							that.oSelectedItem.Series = that.oSelectedItem.zzseries;
+							that.oSelectedItem.Model = that.oSelectedItem.matnr;
+							that.oSelectedItem.Model_Desc = that.oSelectedItem.model_desc_en;
+							that.oSelectedItem.Suffix = that.oSelectedItem.zzsuffix;
+							that.oSelectedItem.Suffix_Desc = that.oSelectedItem.suffix_desc_en;
+							that.oSelectedItem.Int_Colour_Desc = that.oSelectedItem.mrktg_int_desc_en;
+							that.oSelectedItem.APX = that.oSelectedItem.zzapx;
+								that.oSelectedItem.Ext_Colour = that.oSelectedItem.zzextcol;
 							that.oSelectedItem.Ext_Colour_Desc = that.oSelectedItem.mktg_desc_en;
 							that.oSelectedItem.Status = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Status;
 							that.oSelectedItem.Order_Type = that.oSelectedItem.zzordertype;
@@ -749,7 +790,7 @@ else if((CurrentETAFrom==""||CurrentETAFrom==null)&&(CurrentETATo==""||CurrentET
 					} else if (that.SelectedVehicleFrom == "VehicleTrade_ModelBlock_Summary") {
 						//	var Selobj=escape(JSON.stringify(oSelectedItem));
 						var model = new sap.ui.model.json.JSONModel(that.oSelectedItem);
-						sap.ui.getCore().setModel(model, "VehicleTrade_ModelBlock_SummaryTrade")
+						sap.ui.getCore().setModel(model, "VehicleTrade_ModelBlock_SummaryTrade");
 						that.getRouter().navTo("VehicleTrade_ModelBlock_Summary", {
 							SelectedTrade: "VehicleTradeVehicle"
 						});
@@ -1186,9 +1227,7 @@ else if((CurrentETAFrom==""||CurrentETAFrom==null)&&(CurrentETATo==""||CurrentET
 				});
 				this.getView().setModel(i18nModel, "i18n");
 				this.sCurrentLocale = 'FR';
-				// set the right image for logo	 - french		
-				/*				var currentImageSource = this.getView().byId("idLexusLogo");
-								currentImageSource.setProperty("src", "Images/Lexus_FR.png");*/
+						this.sCurrentLocaleD = 'French';
 
 			} else {
 				var i18nModel = new sap.ui.model.resource.ResourceModel({
@@ -1198,9 +1237,7 @@ else if((CurrentETAFrom==""||CurrentETAFrom==null)&&(CurrentETATo==""||CurrentET
 				});
 				this.getView().setModel(i18nModel, "i18n");
 				this.sCurrentLocale = 'EN';
-				// set the right image for logo			
-				/*				var currentImageSource = this.getView().byId("idLexusLogo");
-								currentImageSource.setProperty("src", "Images/Lexus_EN.png");*/
+				this.sCurrentLocaleD = 'English';
 
 			}
 
@@ -1405,7 +1442,8 @@ else if((CurrentETAFrom==""||CurrentETAFrom==null)&&(CurrentETATo==""||CurrentET
 					oResults.push(obj[key]);
 				that.Fullurls = oResults;
 				var SeriesDescription = that.SeriesDescription(oResults);
-				var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language;
+								// var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language;  //2603
+						var SPRAS = that.sCurrentLocaleD;
 				if (SeriesDescription.length != 0) {
 					for (var a = 0; a < that.Fullurls.length; a++) {
 						for (var b = 0; b < SeriesDescription.length; b++) {

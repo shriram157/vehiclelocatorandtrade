@@ -876,52 +876,22 @@ sap.ui.define([
 				/*	this.getView().setModel(sap.ui.getCore().getModel("oSuffieldmodel"),"VehicleLocatorScdScr");*/
 				var Status = sap.ui.getCore().getModel("SearchedData").getData();
 				debugger;
-
-				// lets just do a json model and rebind this to ui. 
-				// var myTempArray = [];
-				// for (var i = 0; i< Status.length; i++){
-				// 	myTempArray.push({
-				//             	Hold_stat: "N",
-				// 				bezei: "Ontario",
-				// 				customer_brand: "10",
-				// 				dnc_ind: "N",
-				// 				kunnr: "2400042120",
-				// 				matnr: "YZ3DCT",
-				// 				mktg_desc_en: "SILVER ME.",
-				// 				mktg_desc_fr: "SILVER ME.",
-				// 				model_desc_en: "SIENNA XLE V6 7-PASS 8XXX",
-				// 				model_desc_fr: "SIENNA SE V6 7-PASS 8A FRENCH DESC",
-				// 				mrktg_int_desc_en: "Black EN",
-				// 				mrktg_int_desc_fr: "Black FR",
-				// 				name1: "Don Valley North Toyota.",
-				// 				name2: "WEINS CANADA",
-				// 				non_D_flag: "X",
-				// 				ort01: "Markham",
-				// 				pd_flag: "",
-				// 				pstsp: "/Date(1554307200000+0000)/",
-				// 				suffix_desc_en: "Gray int",
-				// 				suffix_desc_fr: "GROUPE MOBILITY",
-				// 				vguid: "005056a9-218f-1ee9-83e5-e78f3bbd22d7",
-				// 				vhcex: "J10S011341",
-				// 				vhcle: "0000604026",
-				// 				vhvin: "VIN00000000604026",
-				// 				vin_brand: "10",
-				// 				vkbur: "3000",
-				// 				zz_trading_ind: "2",
-				// 				zzadddata4: "20190205",
-				// 				zzapx: "00",
-				// 				zzextcol: "01D6",
-				// 				zzintcol: "LC14",
-				// 				zzmoyr: "2018",
-				// 				zzordertype: "SO",
-				// 				zzseries: "SIE",
-				// 				zzseries_desc_en: "Sienna-EN",
-				// 				zzseries_desc_fr: "Sienna-FR",
-				// 				zzsuffix: "ML",
-				// 				zzvtn: "002380"
-				// });
-				// }
-
+ 
+ //  based on the logged in language, filter the model to the UI. 
+                if (this.sCurrentLocaleD == "French") {
+   // loop and move the french description to the ui display fields
+                   for (var i = 0; i < Status.length; i++) {
+                   	Status[i].mktg_desc_en = Status[i].mktg_desc_fr;
+                   	Status[i].model_desc_en = Status[i].model_desc_fr;
+                   	Status[i].mrktg_int_desc_en = Status[i].mrktg_int_desc_fr;
+                   	Status[i].zzseries_desc_en = Status[i].zzseries_desc_fr;
+                   	Status[i].suffix_desc_en = Status[i].suffix_desc_fr;
+                   }
+ 
+                }
+ 
+               
+ 
 				var model = new sap.ui.model.json.JSONModel(Status);
 				model.setSizeLimit(1000);
 				this.getView().setModel(model, "vehicleSearchTableModel");
@@ -950,7 +920,13 @@ sap.ui.define([
 				var Dealer = sap.ui.getCore().getModel("SearchedData").getData();
 
 				var Suffix = sap.ui.getCore().getModel("VehicleLocatorSuffix").getData();
-				var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language;
+
+				// var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language; //2603
+				var SPRAS = this.sCurrentLocaleD ;
+				
+				
+				
+				
 				/*for(var i=0;i<Suffix.length;i++){
 					Suffix[i].SPRAS=SPRAS;
 				}*/
@@ -1304,7 +1280,8 @@ if(sap.ui.Device.system.phone){
 					if (arrData[i].WhtCertDate != null) arrData[i].WhtCertDate = arrData[i].WhtCertDate.split("T")[0];
 					else arrData[i].PaymentDate;*/
 				var kunnr = (arrData[i].kunnr).slice(-5) + "-" + arrData[i].name1;
-				var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language;
+					// var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language; //2603
+				var SPRAS = this.sCurrentLocaleD ;
 				if (SPRAS != "English") {
 					var matnr = arrData[i].matnr + "-" + arrData[i].model_desc_fr;
 					var zzextcol = arrData[i].zzextcol + "-" + arrData[i].mktg_desc_fr;
@@ -1879,7 +1856,8 @@ if(sap.ui.Device.system.phone){
 				var Dealer = sap.ui.getCore().getModel("SearchedData").getData();
 
 				var Suffix = sap.ui.getCore().getModel("VehicleLocatorSuffix").getData();
-				var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language;
+				// var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language; //2603
+				var SPRAS = this.sCurrentLocaleD ;
 				/*for(var i=0;i<Suffix.length;i++){
 					Suffix[i].SPRAS=SPRAS;
 				}*/
@@ -2557,6 +2535,7 @@ if(sap.ui.Device.system.phone){
 					var sSelectedLocale = window.location.search.match(/language=([^&]*)/i)[1];
 				} else {
 					var sSelectedLocale = "EN"; // default is english 
+					
 				}
 
 				//selected language.	
@@ -2569,9 +2548,8 @@ if(sap.ui.Device.system.phone){
 					});
 					this.getView().setModel(i18nModel, "i18n");
 					this.sCurrentLocale = 'FR';
-					// set the right image for logo	 - french		
-					/*				var currentImageSource = this.getView().byId("idLexusLogo");
-									currentImageSource.setProperty("src", "Images/Lexus_FR.png");*/
+					this.sCurrentLocaleD = 'French';
+ 
 
 				} else {
 					var i18nModel = new sap.ui.model.resource.ResourceModel({
@@ -2581,9 +2559,8 @@ if(sap.ui.Device.system.phone){
 					});
 					this.getView().setModel(i18nModel, "i18n");
 					this.sCurrentLocale = 'EN';
-					// set the right image for logo			
-					/*				var currentImageSource = this.getView().byId("idLexusLogo");
-									currentImageSource.setProperty("src", "Images/Lexus_EN.png");*/
+					this.sCurrentLocaleD = 'English';
+ 
 
 				}
 

@@ -121,8 +121,9 @@
 									<CheckBox text="{i18n>Pacific}" id="Pacific" selected="false"/>
 									<CheckBox text="{i18n>Prairie}" id="Prairie" selected="false"/>
 									<CheckBox text="{i18n>Central}" id="Central" selected="false"/>
-									<CheckBox text="{i18n>Atlantic}" id="Atlantic" selected="false"/>
 									<CheckBox text="{i18n>Quebec}" id="Quebec" selected="false"/>
+									<CheckBox text="{i18n>Atlantic}" id="Atlantic" selected="false"/>
+							
 								</VBox>
 							</form:content>
 						</form:SimpleForm>
