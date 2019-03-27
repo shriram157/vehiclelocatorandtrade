@@ -3,7 +3,9 @@
 
 var moment = require("moment");
 
-function run(client, log) {
+function run(client, appContext) {
+	var logger = appContext.createLogContext().getLogger("/Application/Core/TradeReqCleanupTask");
+	var tracer = appContext.createLogContext().getTracer(__filename);
 	return new Promise((resolve, reject) => {
 		var today = moment(new Date()).format("YYYY-MM-DD");
 		var selectSql = "SELECT \"Trade_Id\", \"Requested_Dealer\", \"Requested_Vtn\" FROM " +
@@ -19,7 +21,7 @@ function run(client, log) {
 					return;
 				}
 				if (selectResults.length == 0) {
-					log.logMessage("info", "[TRADE_REQ_CLEANUP_TASK] No trade requests accepted today found.");
+					logger.info("[TRADE_REQ_CLEANUP_TASK] No trade requests accepted today found.");
 					resolve();
 					return;
 				}
@@ -45,7 +47,7 @@ function run(client, log) {
 						}));
 					}
 					Promise.all(updatePromises).then(() => {
-						log.logMessage("info", "[TRADE_REQ_CLEANUP_TASK] Cleaned up stale trade requests.");
+						logger.info("[TRADE_REQ_CLEANUP_TASK] Cleaned up stale trade requests.");
 						resolve();
 						return;
 					}).catch(err => {

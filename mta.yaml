@@ -18,6 +18,10 @@ modules:
       disk-quota: 512M
       memory: 256M
    properties:
+      XS_APP_LOG_LEVEL: info
+      XS_LOG_USER: true
+      XS_LOG_REFERER: true
+      XS_LOG_CONNECTION_DATA: true
       NODE_TLS_REJECT_UNAUTHORIZED: 0
       TRADE_REQ_CLEANUP_TASK_SCH: "0 0 * * *"
    provides:
@@ -52,7 +56,9 @@ modules:
    parameters:
       host: tci-dev-vehiclelocatorandtrade
       disk-quota: 512M
-      memory: 512M
+      memory: 256M
+   properties:
+      XS_APP_LOG_LEVEL: info
    build-parameters:
       builder: grunt
    requires:

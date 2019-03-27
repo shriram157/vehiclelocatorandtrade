@@ -3,7 +3,7 @@
 
 "use strict";
 
-module.exports = function (log) {
+module.exports = function (appContext) {
 
 	var express = require('express');
 	var request = require('request');
@@ -12,8 +12,6 @@ module.exports = function (log) {
 	var auth64;
 
 	var app = express.Router();
-	//var express = require('express');
-	// const correlator = require('correlation-id');
 
 	var options = {};
 	options = Object.assign(options, xsenv.getServices({
@@ -32,11 +30,6 @@ module.exports = function (log) {
 
 	var xsuaaCredentials = uaaService.uaa;
 	if (!xsuaaCredentials) {
-		// logger.error('uaa service not found');
-		// res.status(401).json({
-		// 	message: "uaa service not found"
-		// });
-		//util.callback(new Error("uaa service not found"), res, "uaa service not found");
 		return;
 	}
 
@@ -55,12 +48,6 @@ module.exports = function (log) {
 		"x-csrf-token": "Fetch"
 	};
 
-	app.use(function (req, res, next) {
-		res.header("Access-Control-Allow-Origin", "*");
-		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-		next();
-	});
-
 	// session information. 
 	app.get('/sessioninfo', function (req, res) {
 		res.writeHead(200, {
@@ -68,100 +55,13 @@ module.exports = function (log) {
 		});
 
 		return res.type("text/plain").status(200).send(JSON.stringify(req));
-		// res.end(JSON.stringify({
-		// 	userEncoded: encodeURI(JSON.stringify(req))
-		// }));
-
 	});
 
-	// app.get("/currentScopesForUser", (req, res) => {
-	// 	var xsAppName = xsuaaCredentials.xsappname;
 
-	// 	var parsedData = JSON.stringify(req.authInfo.userAttributes);
-	// 	var obj_data = JSON.parse(parsedData);
-
-	// 	let legacyDealerCode;
-	// 	try {
-	// 		legacyDealerCode = obj_data.DealerCode[0];
-	// 		var legacyDealerCodeAvailable = true;
-
-	// 		req.logMessage("info", "currentScopes for User Requested");
-	// 		req.logMessage("info", 'Dealer code from the SAML Token is', legacyDealerCodeAvailable, legacyDealerCode);
-	// 	} catch (e) {
-	// 		req.logMessage("info", "Dealer Code is blank or is a local testing run");
-	// 		// return;
-	// 		var legacyDealerCodeAvailable = false;
-	// 	}
-
-	// 	var scopeData = req.authInfo.scopes;
-
-	// 	var sendUserData = {
-	// 		"loggedUserType": []
-	// 	};
-
-	// 	var SCOPE = xsuaaCredentials.xsappname;
-	// 	req.logMessage("info", 'The app name', SCOPE);
-	// 	req.logMessage("info", 'Scope Data length', scopeData.length);
-	// 	var viewSuggestOrder = false;
-
-	// 	for (var i = 0; i < scopeData.length; i++) {
-	// 		console.log("scope Data to be analyzed", scopeData[i]);
-
-	// 	}
-	// 	for (var i = 0; i < scopeData.length; i++) {
-
-	// 		req.logMessage("info", 'inside For loop with iteration', i, scopeData[i]);
-
-	// 		if (scopeData[i] == xsuaaCredentials.xsappname + '.Manage_Suggest_Order_Requests') {
-	// 			var userType = "DealerUser";
-	// 			sendUserData.loggedUserType.push(userType);
-
-	// 			req.logMessage("info", "usertype", userType);
-	// 			return res.type("text/plain").status(200).send(JSON.stringify(sendUserData));
-	// 			break;
-	// 		}
-	// 		if (scopeData[i] == xsuaaCredentials.xsappname + ".View_Suggest_Order_Requests") {
-	// 			viewSuggestOrder = true;
-	// 		}
-	// 		//suggestOrder!t1188.View_Suggest_Order_Requests
-	// 		// if ((scopeData[i] == xsuaaCredentials.xsappname + '.View_Suggest_Order_Requests') && !(scopeData[i] == xsuaaCredentials.xsappname + '.Manage_Suggest_Order_Requests')) {
-
-	// 		// 	var zone = obj_data.Zone
-	// 		// 	if (zone != null) {
-	// 		// 		sendUserData.loggedUserType.push("Zone_User");
-	// 		// 	} else {
-	// 		// 		sendUserData.loggedUserType.push("TCI_User");
-	// 		// 	}
-
-	// 		// 	// var userType = "internalUser";
-	// 		// 	//sendUserData.loggedUserType.push(userType);
-
-	// 		// 	return res.type("text/plain").status(200).send(JSON.stringify(sendUserData));
-	// 		// 	break;
-
-	// 		// }
-
-	// 	} // enf for for loop. 
-
-	// 	if (viewSuggestOrder == true) {
-
-	// 		var zone = obj_data.Zone;
-	// 		if (zone != null) {
-	// 			sendUserData.loggedUserType.push("Zone_User");
-	// 		} else {
-	// 			sendUserData.loggedUserType.push("TCI_User");
-	// 		}
-
-	// 		sendUserData.loggedUserType.push(userType);
-
-	// 		return res.type("text/plain").status(200).send(JSON.stringify(sendUserData));
-
-	// 	}
-
-	// });
 app.get("/currentScopesForUser", (req, res) => {
+ 		var logger = req.loggingContext.getLogger("/Application/Route/UserDetails/CurrentScopesForUser");
+		var tracer = req.loggingContext.getTracer(__filename);
 
- 
 		var parsedData = JSON.stringify(req.authInfo.userAttributes);
 		var obj_data = JSON.parse(parsedData);
 
@@ -170,13 +70,13 @@ app.get("/currentScopesForUser", (req, res) => {
 			legacyDealerCode = obj_data.DealerCode[0];
 			var legacyDealerCodeAvailable = true;
 			
-		 		req.logMessage("info", "currentScopes for User Requested");
-			req.logMessage("info", 'Dealer code from the SAML Token is', legacyDealerCodeAvailable, legacyDealerCode);		
+		 		logger.info("currentScopes for User Requested");
+			logger.info('Dealer code from the SAML Token is %s %s', legacyDealerCodeAvailable, legacyDealerCode);		
 			
 			
 			// req.logMessage("info", Dealer code from the SAML Token is', legacyDealerCodeAvailable, legacyDealerCode)
 		} catch (e) {
-			req.logMessage("info", "Dealer Code is blank or is a local testing run");
+			logger.info("Dealer Code is blank or is a local testing run");
 				// return;
 			var legacyDealerCodeAvailable = false;
 		}
@@ -185,9 +85,9 @@ app.get("/currentScopesForUser", (req, res) => {
 		try {
 			isItZoneUser = obj_data.ZONE[0];
 			var zoneUser = true;
-			req.logMessage("info", 'Dealer code from the SAML Token is a zone User', zoneUser, isItZoneUser);
+			logger.info('Dealer code from the SAML Token is a zone User', zoneUser, isItZoneUser);
 		} catch (e) {
-			req.logMessage("info", "Not a zone User");
+			logger.info("Not a zone User");
 				// return;
 			var zoneUser = false;
 		}		
@@ -232,9 +132,9 @@ app.get("/currentScopesForUser", (req, res) => {
 
 		} // enf for for loop. 
 
-		req.logMessage("info", 'manageVehicles', manageVehicles);
-		req.logMessage("info", 'viewTradeRequest', viewTradeRequest);
-		req.logMessage("info", 'viewDNC', viewDNC);
+		logger.info('manageVehicles: %s', manageVehicles);
+		logger.info('viewTradeRequest: %s', viewTradeRequest);
+		logger.info('viewDNC: %s', viewDNC);
  
 
 		if (manageVehicles == true && viewTradeRequest == true && viewDNC == true && zoneUser == false ) {
@@ -431,7 +331,9 @@ app.get("/currentScopesForUser", (req, res) => {
 	});
 
 	app.get("/attributes", (req, res) => {
-		req.logMessage("info", "attributes fetch started");
+ 		var logger = req.loggingContext.getLogger("/Application/Route/UserDetails/Attributes");
+		var tracer = req.loggingContext.getTracer(__filename);
+		logger.info("attributes fetch started");
 
 		var receivedData = {};
 
@@ -443,9 +345,9 @@ app.get("/currentScopesForUser", (req, res) => {
 
 		};
 
-		req.logMessage("info", req.authInfo.userAttributes);
+		logger.info(req.authInfo.userAttributes);
 		var parsedData = JSON.stringify(req.authInfo.userAttributes);
-		req.logMessage("info", 'After Json Stringify', parsedData);
+		logger.info('After Json Stringify: %s', parsedData);
 
 		var obj = JSON.stringify(req.authInfo.userAttributes);
 		var obj_parsed = JSON.parse(obj);
@@ -454,15 +356,15 @@ app.get("/currentScopesForUser", (req, res) => {
 		var csrfToken;
 		var samlData = parsedData;
 
-		req.logMessage("info", 'saml data', samlData);
+		logger.info('saml data: %s', samlData);
 
-		req.logMessage("info", 'send to ui data', sendToUi);
+		logger.info('send to ui data: %s', sendToUi);
 
 		let checkSAMLDetails;
 		try {
 			checkSAMLDetails = obj_data.DealerCode[0];
 		} catch (e) {
-			req.logMessage("info", "Dealer Code is blank or is a local testing run");
+			logger.info("Dealer Code is blank or is a local testing run");
 				// return;
 			var nosamlData = true;
 		}
@@ -473,7 +375,7 @@ app.get("/currentScopesForUser", (req, res) => {
 
 		var userType = userAttributes.UserType[0];
 
-		req.logMessage("info", 'after json Parse', obj_data);
+		logger.info('after json Parse: %s', obj_data);
 		//	var userType = obj_data.UserType[0];
 
 		if (userType == 'Dealer') {
@@ -486,7 +388,7 @@ app.get("/currentScopesForUser", (req, res) => {
 			var zoneToWhichUSerBelongs = userAttributes.Zone[0];
 		}
 
-		req.logMessage("info", 'Dealer Number logged in and accessed parts Availability App', legacyDealer);
+		logger.info('Dealer Number logged in and accessed parts Availability App: %s', legacyDealer);
 
 		//	if  usertype eq dealer then just get the details for that dealer,  otherwise get everything else
 
@@ -496,7 +398,7 @@ app.get("/currentScopesForUser", (req, res) => {
 				"' &$expand=to_Customer&$format=json&?sap-client=" + client;
 
 		} else {
-			req.logMessage("info", 'Logged in User Type outside', userType);
+			logger.info('Logged in User Type outside: %s', userType);
 			if (tempUSerType == 'Zone') {
 
 				// he is a zone user.            	
@@ -525,7 +427,7 @@ app.get("/currentScopesForUser", (req, res) => {
 
 				}
 
-				req.logMessage("info", 'Logged in User Zone before the API Url', userZone);
+				logger.info('Logged in User Zone before the API Url: %s', userZone);
 
 				url1 = "/API_BUSINESS_PARTNER/A_BusinessPartner?sap-client=" + client + "&$format=json" +
 					"&$expand=to_Customer/to_CustomerSalesArea&$filter=(BusinessPartnerType eq 'Z001' or BusinessPartnerType eq 'Z004' or BusinessPartnerType eq 'Z005') " +
@@ -536,13 +438,13 @@ app.get("/currentScopesForUser", (req, res) => {
 
 			} else {
 
-				req.logMessage("info", 'Logged in User just before internal user call', userType);
+				logger.info('Logged in User just before internal user call: %s', userType);
 
 				var url1 = "/API_BUSINESS_PARTNER/A_BusinessPartner/?$format=json&$expand=to_Customer&?sap-client=" + client +
 					"&$filter=(BusinessPartnerType eq 'Z001' or BusinessPartnerType eq 'Z004' or BusinessPartnerType eq 'Z005') and zstatus ne 'X' &$orderby=BusinessPartner asc";
 			}
 		}
-		req.logMessage("info", 'Final url being fetched', url + url1);
+		logger.info('Final url being fetched: %s', url + url1);
 		request({
 			url: url + url1,
 			headers: reqHeader
@@ -554,14 +456,8 @@ app.get("/currentScopesForUser", (req, res) => {
 				csrfToken = response.headers['x-csrf-token'];
 
 				var json = JSON.parse(body);
-				// req.logMessage("info", json);  // // TODO: delete it Guna
 
 				for (var i = 0; i < json.d.results.length; i++) {
-
-					// req.logMessage("info", 'Json from SAP sales office', json.d.results[i].SalesOffice); 
-					// req.logMessage("info", 'Business Partner', json.d.results[i].BusinessPartner);
-					// 	req.logMessage("info", 'User Zone from SAML', userZone); 
-					// req.logMessage("info", 'User Type from SAML', userType); 
 
 					if (userType != 'Dealer') {
 						if (json.d.results[i].to_Customer) {
@@ -575,9 +471,7 @@ app.get("/currentScopesForUser", (req, res) => {
 						}
 					}
 
-					// if ( (userType == 'Zone' ) 	&& (json.d.results[i].SalesOffice != userZone) ){
 					if ((userType == 'Zone') && (salesOfficeFromSAP != userZone)) {
-						// if ( (userType == 'Zone' ) 	&& (json.d.results[i].to_Customer.to_CustomerSalesArea.results[0].SalesOffice != userZone) ){			
 
 						continue;
 					} else {
@@ -595,7 +489,7 @@ app.get("/currentScopesForUser", (req, res) => {
 						try {
 							attributeFromSAP = json.d.results[i].to_Customer.Attribute1;
 						} catch (e) {
-							req.logMessage("info", "The Data is sent without Attribute value for the BP", json.d.results[i].BusinessPartner);
+							logger.info("The Data is sent without Attribute value for the BP: %s", json.d.results[i].BusinessPartner);
 								// return;
 						}
 
@@ -641,7 +535,6 @@ app.get("/currentScopesForUser", (req, res) => {
 					}
 				}
 				res.type("application/json").status(200).send(sendToUi);
-				req.logMessage("info", 'Results sent successfully');
 			} else {
 
 				var result = JSON.stringify(body);
