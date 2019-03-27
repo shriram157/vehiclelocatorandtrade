@@ -994,8 +994,12 @@ sap.ui.define([
 
 					//	sap.m.MessageBox.error(Message);
 					} else if (a == "S") {
-						// var Message = odata.d.results[0].Message.trim();
-							var Message =  "Trade " + that.Tradeid + " has been Accepted Succesfully";
+					 
+						
+						
+						var sMessageText = that.getView().getModel("i18n").getResourceBundle().getText("messageTradeAccepted", [that.Tradeid]);
+						var Message = sMessageText;
+							// var Message =  "Trade " + that.Tradeid + " has been Accepted Succesfully";
 							function fnCallbackMessageBox1(oAction) {
 						/*	that.getRouter().navTo("VehicleTrade_Summary", {
 								DataClicked: "Yes"
@@ -1440,11 +1444,13 @@ sap.ui.define([
 				sap.m.MessageBox.warning("Please select a vehicle");
 				return;
            }*/
+           	var textForDialog = this.getView().getModel("i18n").getResourceBundle().getText("rejectTradeRequest");
+   
            
            	var dialog = new Dialog({
 				title: 'Confirm Trade Request Rejection',
 				type: 'Message',
-				content: new Text({ text: 'Are you sure, you would like to Reject trade Request ?' }),
+				content: new Text({ text: textForDialog }),    
 				beginButton: new Button({
 					text: 'Yes',
 					icon : 'sap-icon://message-warning',
