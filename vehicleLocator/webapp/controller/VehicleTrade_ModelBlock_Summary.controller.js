@@ -878,7 +878,10 @@ sap.ui.define([
 			}
 		},
 		handleSortButtonPressed: function () {
+			
+			
 			this.createViewSettingsDialog("vehicleLocator.fragment.ModelBlockSortDialog").open();
+		
 		},
 		createViewSettingsDialog: function (sDialogFragmentName) {
 			var oDialog = this._mViewSettingsDialogs[sDialogFragmentName];
@@ -891,6 +894,7 @@ sap.ui.define([
 					oDialog.addStyleClass("sapUiSizeCompact");
 				}
 			}
+				this.getView().addDependent(oDialog); //GSR
 			return oDialog;
 		},
 		handleSortDialogConfirm: function (oEvent) {
