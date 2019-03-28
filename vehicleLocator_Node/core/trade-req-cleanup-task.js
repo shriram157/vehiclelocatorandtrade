@@ -12,11 +12,15 @@ function run(client, appContext) {
 			"\"vehicleTrade.Trade_Request\" WHERE \"Trade_Status\" = 'A' AND \"Changed_on\" = ?";
 		client.prepare(selectSql, function (err, selectStmt) {
 			if (err) {
+				tracer.error("ERROR preparing SQL statement [ %s ] with error [ %s ].", selectSql, err.toString());
 				reject(new Error(err.toString()));
 				return;
 			}
-			selectStmt.exec([today], function (err, selectResults) {
+			var selectStmtParams = [today];
+			selectStmt.exec(selectStmtParams, function (err, selectResults) {
 				if (err) {
+					tracer.error("ERROR executing SQL statement [ %s ] with parameters [ %s ] and error [ %s ].", selectSql, JSON.stringify(
+						selectStmtParams), err.toString());
 					reject(new Error(err.toString()));
 					return;
 				}
@@ -26,9 +30,10 @@ function run(client, appContext) {
 					return;
 				}
 				var updateSql = "UPDATE \"vehicleTrade.Trade_Request\" SET \"Trade_Status\" = 'R', \"Changed_on\" = ?" +
-					" WHERE \"Requested_Dealer\" = ? AND \"Requested_Vtn\" = ?";
+					" WHERE \"Requested_Dealer\" = ? AND \"Requested_Vtn\" = ? AND \"Trade_Status\" NOT IN ('A', 'R')";
 				client.prepare(updateSql, function (err, updateStmt) {
 					if (err) {
+						tracer.error("ERROR preparing SQL statement [ %s ] with error [ %s ].", updateSql, err.toString());
 						reject(new Error(err.toString()));
 						return;
 					}
@@ -37,8 +42,11 @@ function run(client, appContext) {
 					for (let i = 0; i < selectResults.length; i++) {
 						updatePromises.push(new Promise((resolve, reject) => {
 							var selectResult = selectResults[i];
-							updateStmt.exec([today, selectResult.Requested_Dealer, selectResult.Requested_Vtn], function (err, updateResults) {
+							var updateStmtParams = [today, selectResult.Requested_Dealer, selectResult.Requested_Vtn];
+							updateStmt.exec(updateStmtParams, function (err, updateResults) {
 								if (err) {
+									tracer.error("ERROR executing SQL statement [ %s ] with parameters [ %s ] and error [ %s ].", updateSql, JSON.stringify(
+										updateStmtParams), err.toString());
 									reject(new Error(err.toString()));
 								}
 								resolve();
