@@ -1180,12 +1180,20 @@ sap.ui.define([
 					}*/
 
 			//	var Spars = sap.ui.getCore().getConfiguration().getLanguage();
-			var Spars = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language.slice(0, 1);
-			if (Spars != "E") {
-				Spars = "F";
-			} else {
-				Spars = "E";
-			}
+		//	var Spars = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language.slice(0, 1); //GSR
+		     var Spars;
+		    if (this.sCurrentLocaleD == "French") {
+		    		Spars = "F";
+		    } else {
+		    		Spars = "E"; 
+		    }
+		
+		
+			// if (Spars != "E") {
+			// 	Spars = "F";
+			// } else {
+			// 	Spars = "E";
+			// }
 			//	var oVTN = that.getView().byId("vtnid").getText();
 
 			// ENTRY1 VALUES DESCRIPTION;

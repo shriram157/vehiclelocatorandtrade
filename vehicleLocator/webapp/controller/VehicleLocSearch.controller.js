@@ -724,7 +724,7 @@ for(var i=0;i<oResults.length;i++){
 
 				var SufixDescription = SuffixDescription;
 				// var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language;  //2603
-						var SPRAS = that.sCurrentLocaleD;
+						var SPRAS = that.sCurrentLocaleD; 
 				var oCombine = [];
 				for (var a = 0; a < that.Fullurls.length; a++) {
 					for (var b = 0; b < SufixDescription.length; b++) {
@@ -1716,7 +1716,18 @@ for(var i=0;i<oResults.length;i++){
 					}
 
 				}
-				var Spars = "E";
+				
+				
+				
+				// var Spars = "E";
+			   			     var Spars;
+		    if (this.sCurrentLocaleD == "French") {
+		    		Spars = "F";
+		    } else {
+		    		Spars = "E"; 
+		    }
+
+				
 				var finalArray = [];
 				for (var k = 0; k < filtered.length; k++) {
 					for (var l = 0; l < oTradeVehicleDesc.length; l++) {

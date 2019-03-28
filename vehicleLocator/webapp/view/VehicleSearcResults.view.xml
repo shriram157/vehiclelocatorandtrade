@@ -2,23 +2,24 @@
 	xmlns:form="sap.ui.layout.form" xmlns:uxap="sap.uxap" xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form" xmlns:tnt="sap.tnt"
 	xmlns:html="http://www.w3.org/1999/xhtml" controllerName="vehicleLocator.controller.VehicleSearcResults">
 	<App>
-		<pages class="oImgsampl" height="200px">
-			<Page showNavButton="true" enableScrolling="true" 	class="sapUiSizeCompact">
+		<!--<pages class="oImgsampl" height="200px">-->
+			
+				<Page showHeader="true" title="{i18n>PageTitle}" showFooter="true" showNavButton="true" navButtonPress="_onPageNavButtonPress"	class="sapUiSizeCompact" enableScrolling="true">
+			
+ 
 				<customHeader>
 					<Bar class="sapUiSmallPaddingBeginEnd clCustomHeaderBg">
 						<contentLeft>
-							<!--<Image id="idLexusLogo" src="Images/Lexus.png" width="100px"/>-->
-							<!--<Text text="|" class="sapUiTinyMarginBeginEnd"/>-->
-							<!--<Text class="clCustomFont" text="{i18n>PageTitle}"/>-->
 							<Image id="idLexusLogo" src="Images/toyota_logo_colour.png" width="100px"/>
 							<Text text="|" class="sapUiTinyMarginBeginEnd"/>
 							<Text class="clCustomFont" text="{i18n>PageTitle}"/>
 						</contentLeft>
 						<contentRight>
-							<!--	<Button text="Logout"/>-->
+					
 						</contentRight>
 					</Bar>
 				</customHeader>
+				
 				<content>
 					<tnt:ToolHeader>
 						<!--<OverflowToolbar class="toolbar1">-->
@@ -322,6 +323,6 @@
 	
 				</content>
 			</Page>
-		</pages>
+		<!--</pages>-->
 	</App>
 </mvc:View>

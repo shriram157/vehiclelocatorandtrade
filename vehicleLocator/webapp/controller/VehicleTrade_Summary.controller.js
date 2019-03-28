@@ -294,7 +294,16 @@ sap.ui.define([
 
 				}
 				var filtered = TradeRequest;
-				var Spars = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language.slice(0,1);
+				var Spars;
+				// var Spars = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language.slice(0,1);  //GSR
+			if  (this.sCurrentLocaleD == "French" ){
+				Spars = "F";
+			} else {
+				Spars = "E"	;
+			}	
+				
+				
+				
 			//	var Spars = "E";
 				var finalArray = [];
 				for (var k = 0; k < filtered.length; k++) {
@@ -562,9 +571,7 @@ oBinding.filter(aTableFilters);
 					});
 					this.getView().setModel(i18nModel, "i18n");
 					this.sCurrentLocale = 'FR';
-					// set the right image for logo	 - french		
-					/*				var currentImageSource = this.getView().byId("idLexusLogo");
-									currentImageSource.setProperty("src", "Images/Lexus_FR.png");*/
+					this.sCurrentLocaleD = 'French'; 
 
 				} else {
 					var i18nModel = new sap.ui.model.resource.ResourceModel({
@@ -574,9 +581,7 @@ oBinding.filter(aTableFilters);
 					});
 					this.getView().setModel(i18nModel, "i18n");
 					this.sCurrentLocale = 'EN';
-					// set the right image for logo			
-					/*				var currentImageSource = this.getView().byId("idLexusLogo");
-									currentImageSource.setProperty("src", "Images/Lexus_EN.png");*/
+				    this.sCurrentLocaleD = 'English';
 
 				}
 
