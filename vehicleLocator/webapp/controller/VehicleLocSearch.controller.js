@@ -1721,7 +1721,7 @@ for(var i=0;i<oResults.length;i++){
 				
 				// var Spars = "E";
 			   			     var Spars;
-		    if (this.sCurrentLocaleD == "French") {
+		    if (that.sCurrentLocaleD == "French") {
 		    		Spars = "F";
 		    } else {
 		    		Spars = "E"; 

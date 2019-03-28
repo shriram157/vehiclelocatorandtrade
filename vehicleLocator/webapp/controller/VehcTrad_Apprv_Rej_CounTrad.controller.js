@@ -2277,7 +2277,7 @@ sap.ui.define([
 		//		var Spars = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language.slice(0, 1);
 				//	var Spars = "E";
 			     var Spars;
-		    if (this.sCurrentLocaleD == "French") {
+		    if (that.sCurrentLocaleD == "French") {
 		    		Spars = "F";
 		    } else {
 		    		Spars = "E"; 

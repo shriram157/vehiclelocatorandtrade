@@ -296,7 +296,7 @@ sap.ui.define([
 				var filtered = TradeRequest;
 				var Spars;
 				// var Spars = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language.slice(0,1);  //GSR
-			if  (this.sCurrentLocaleD == "French" ){
+			if  (that.sCurrentLocaleD == "French" ){
 				Spars = "F";
 			} else {
 				Spars = "E"	;
