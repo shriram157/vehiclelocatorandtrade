@@ -79,7 +79,7 @@
                         <!--</SearchField>-->
                         <!--<Button text="Reset" type="Transparent" press="onReset"/>-->
                         <Button tooltip="Sort table by selected fields"  icon="sap-icon://sort"	
-                                press="handleViewSettingsDialogButtonPressed" text="Sorting"/>
+                                press="handleViewSettingsDialogButtonPressed" text="{i18n>Sorting}"/>
                     </OverflowToolbar>
                 </headerToolbar>
 
@@ -134,12 +134,15 @@
  
                            		<Text text="{vehicleSelectTableModel>zzvtn}" wrapping="false" width="6rem" id="zzvtnid" />
  		
-                           		<Text text="{vehicleSelectTableModel>zzseries_desc_en}"   width="7rem" id="seriesr"/>
-                           		
-                                <Text text="{vehicleSelectTableModel>matnr} - {vehicleSelectTableModel>model_desc_en}"  width="auto" wrapping="true"/>
+                           		<!--<Text text="{vehicleSelectTableModel>zzseries_desc_en}"   width="7rem" id="seriesr"/>-->
+                           			<Text text="{=${languageModel>/SPRAS}==='English' ? ${vehicleSelectTableModel>zzseries_desc_en}:${vehicleSelectTableModel>zzseries_desc_fr} }" id="oSeries" />
+                           			
+                                <!--<Text text="{vehicleSelectTableModel>matnr} - {vehicleSelectTableModel>model_desc_en}"  width="auto" wrapping="true"/>-->
+                                		<Text text="{vehicleSelectTableModel>matnr} - {=${languageModel>/SPRAS}==='English' ? ${vehicleSelectTableModel>model_desc_en}:${vehicleSelectTableModel>model_desc_fr} }" id="oZmodel" />
                                 
-                                <Text text="{vehicleSelectTableModel>zzsuffix}-{vehicleSelectTableModel>suffix_desc_en}/{vehicleSelectTableModel>mrktg_int_desc_en}"   width="auto" wrapping="true"/>
+                                <!--<Text text="{vehicleSelectTableModel>zzsuffix}-{vehicleSelectTableModel>suffix_desc_en}/{vehicleSelectTableModel>mrktg_int_desc_en}"   width="auto" wrapping="true"/>-->
                                 
+ <Text text="{vehicleSelectTableModel>zzsuffix} - {=${languageModel>/SPRAS}==='English' ? ${vehicleSelectTableModel>suffix_desc_en}:${vehicleSelectTableModel>suffix_desc_fr} }/{=${languageModel>/SPRAS}==='English' ? ${vehicleSelectTableModel>mrktg_int_desc_en}:${vehicleSelectTableModel>mrktg_int_desc_fr} }" id="oZsuffix"	/>	                               
                                 <Text text="{vehicleSelectTableModel>zzapx}"   width="3rem" wrapping="false"/>
                                 
                                 <Text text="{vehicleSelectTableModel>zzextcol} - {vehicleSelectTableModel>mktg_desc_en}"   width="auto" wrapping="false"/>

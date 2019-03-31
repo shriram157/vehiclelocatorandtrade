@@ -164,11 +164,11 @@ sap.ui.define([
 					}
 					
 	// do not fetch the entire database and changing this to use a filter. 
-	// https://tci-dev-vehiclelocatorandtrade-xsjs.cfapps.us10.hana.ondemand.com/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id.Trade_Id%20eq%20%27TR000245%27
-	// ttps://tci-dev-vehiclelocatorandtrade-xsjs.cfapps.us10.hana.ondemand.com/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id.Trade_Id eq 'TR000245'
+	// https://tci-dev-vehiclelocatorandtrade-xsjs.cfapps.us10.hana.ondemand.com/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id%20eq%20%27TR000245%27
+	// ttps://tci-dev-vehiclelocatorandtrade-xsjs.cfapps.us10.hana.ondemand.com/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id eq 'TR000245'
 					
 					this.nodeJsUrl = this.sPrefix;
-					that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id.Trade_Id eq '"+ this.Tradeid +"'";
+					that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id eq '"+ this.Tradeid +"'";
 
 					$.ajax({
 						url: that.oDataUrl,
@@ -181,7 +181,7 @@ sap.ui.define([
 							debugger;
 							var Data = oData.d.results;
 							var Trade_Comment = Data.filter(function (x) {
-								return x["Trade_Id.Trade_Id"] == Tradeid;
+								return x["Trade_Id"] == Tradeid;
 							});
 							var oModel = new sap.ui.model.json.JSONModel(Trade_Comment);
 							
@@ -417,7 +417,7 @@ sap.ui.define([
 					this.nodeJsUrl = this.sPrefix;
 					
 					
-					that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id.Trade_Id eq '"+ this.Tradeid +"'";		
+					that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id eq '"+ this.Tradeid +"'";		
 					
 					// that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment";
 					$.ajax({
@@ -431,7 +431,7 @@ sap.ui.define([
 							debugger;
 							var Data = oData.d.results;
 							var Trade_Comment = Data.filter(function (x) {
-								return x["Trade_Id.Trade_Id"] == Tradeid;
+								return x["Trade_Id"] == Tradeid;
 							});
 							var oModel = new sap.ui.model.json.JSONModel(Trade_Comment);
 							// that.getView().byId("tableVrade").setModel(oModel);
@@ -651,7 +651,7 @@ sap.ui.define([
 
 				}
 				this.nodeJsUrl = this.sPrefix;
-					that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id.Trade_Id eq '"+ this.Tradeid +"'";
+					that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id eq '"+ this.Tradeid +"'";
 				// that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment";
 				$.ajax({
 					url: that.oDataUrl,
@@ -664,7 +664,7 @@ sap.ui.define([
 						debugger;
 						var Data = oData.d.results;
 					var Trade_Comment = Data.filter(function (x) {
-							return x["Trade_Id.Trade_Id"] == Tradeid;
+							return x["Trade_Id"] == Tradeid;
 						});
 						var oModel = new sap.ui.model.json.JSONModel(Trade_Comment);
 						// that.getView().byId("tableVrade").setModel(oModel);
@@ -758,7 +758,7 @@ sap.ui.define([
 
 					var oTradeComment = {
 
-						"Trade_Id.Trade_Id": TradeId,
+						"Trade_Id": TradeId,
 						"Comment_Id": oComment_Id,
 						"Comment_Txt": Comment,
 						"Comment_Date": oCommentdate,
@@ -800,7 +800,7 @@ sap.ui.define([
 
 				}
 				that.nodeJsUrl = that.sPrefix;
-		that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id.Trade_Id eq '"+ that.Tradeid +"'";			
+		that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id eq '"+ that.Tradeid +"'";			
 				// that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment";
 				$.ajax({
 					url: that.oDataUrl,
@@ -817,7 +817,7 @@ sap.ui.define([
 						console.log("trade id",TradeId);
 						
 					var oComTrade_Comment = Data.filter(function (x) {
-							return x["Trade_Id.Trade_Id"] == TradeId;
+							return x["Trade_Id"] == TradeId;
 						});
 						
 					var oModel = new sap.ui.model.json.JSONModel(oComTrade_Comment);
@@ -1083,7 +1083,7 @@ sap.ui.define([
 
 				var oTradeComment = {
 
-					"Trade_Id.Trade_Id": TradeId,
+					"Trade_Id": TradeId,
 					"Comment_Id": oComment_Id,
 					"Comment_Txt": Comment,
 					"Comment_Date": new Date(oCommentdate),
@@ -2197,14 +2197,14 @@ sap.ui.define([
 
 				var TradeVehicles = TradeVehicles[0].d.results;
 				TradeVehicles = TradeVehicles.filter(function (x) {
-						return x["Trade_Id.Trade_Id"] == Trade_Id
+						return x["Trade_Id"] == Trade_Id
 					})
 					/*	var TradeVehiclesModel = new sap.ui.model.json.JSONModel(TradeVehicles);
 						sap.ui.getCore().setModel(TradeVehiclesModel, "TradeVehiclesModel");*/
 
 				var oTradeVehicleDesc = oTradeVehicleDesc[0].d.results;
 				oTradeVehicleDesc = oTradeVehicleDesc.filter(function (x) {
-						return x["Trade_Id.Trade_Id"] == Trade_Id
+						return x["Trade_Id"] == Trade_Id
 					})
 					/*var oTradeVehicleDescModel = new sap.ui.model.json.JSONModel(oTradeVehicleDesc);
 					sap.ui.getCore().setModel(oTradeVehicleDescModel, "oTradeVehicleDescModel");*/
@@ -2212,7 +2212,7 @@ sap.ui.define([
 				for (var i = 0; i < TradeRequest.length; i++) {
 					for (var j = 0; j < TradeVehicles.length; j++) {
 
-						if (TradeRequest[i].Trade_Id == TradeVehicles[j]["Trade_Id.Trade_Id"]) {
+						if (TradeRequest[i].Trade_Id == TradeVehicles[j]["Trade_Id"]) {
 							/*TradeRequest[i].push(TradeVehicles[j]);*/
 
 							TradeVehicles[j].Requesting_Dealer = TradeRequest[i].Requesting_Dealer;
@@ -2263,7 +2263,7 @@ sap.ui.define([
 								TradeRequest[i].Series = "";
 								TradeRequest[i].Status = "";
 								TradeRequest[i].Suffix = "";
-								TradeRequest[i]["Trade_Id.Trade_Id"] = "";
+								TradeRequest[i]["Trade_Id"] = "";
 								TradeRequest[i].VTN ="";	
 								
 								
@@ -2286,7 +2286,7 @@ sap.ui.define([
 				var finalArray = [];
 				for (var k = 0; k < filtered.length; k++) {
 					for (var l = 0; l < oTradeVehicleDesc.length; l++) {
-						if (filtered[k].Trade_Id == oTradeVehicleDesc[l]["Trade_Id.Trade_Id"] && filtered[k].VTN == oTradeVehicleDesc[l]["VTN.VTN"] &&
+						if (filtered[k].Trade_Id == oTradeVehicleDesc[l]["Trade_Id"] && filtered[k].VTN == oTradeVehicleDesc[l]["VTN"] &&
 							oTradeVehicleDesc[l].SPRAS == Spars) {
 							filtered[k].Ext_Colour_Desc = oTradeVehicleDesc[l].Ext_Colour_Desc;
 							filtered[k].Int_Colour_Desc = oTradeVehicleDesc[l].Int_Colour_Desc;
@@ -2302,8 +2302,8 @@ sap.ui.define([
 							Series_Desc: "50"
 							Suffix_Desc: "30"
 							TradeVehicleDescs: {__deferred: {…}}
-							Trade_Id.Trade_Id: "8"
-							VTN.VTN: "6" */
+							Trade_Id: "8"
+							VTN: "6" */
 
 							/*				var realMerge = function (to, from) {
 

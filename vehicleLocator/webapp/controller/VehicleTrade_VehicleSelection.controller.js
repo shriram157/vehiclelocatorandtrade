@@ -172,16 +172,34 @@ sap.ui.define([
 			var that = this;
 			var Model = sap.ui.getCore().getModel("SelectedSeriesFromScreen1");
 			
-		    if (this.sCurrentLocaleD == "French") {
-		    	for (var i=0; i< Model.oData.length; i++){
-		    		Model.oData[i].ENModelDesc = Model.oData[i].FRModelDesc;
-		    		Model.oData[i].TCISeriesDescriptionEN = Model.oData[i].TCISeriesDescriptionFR;
-		    	}
+		    // if (this.sCurrentLocaleD == "French") {
+		    // 	// for (var i=0; i< Model.oData.length; i++){
+		    // 	// 	// Model.oData[i].ENModelDesc = Model.oData[i].FRModelDesc;
+		    // 	// 	// Model.oData[i].TCISeriesDescriptionEN = Model.oData[i].TCISeriesDescriptionFR;
+		    // 	// }
 		    	
-		    }
+		    // }
 			
 			
 			
+				// language setting for screen is getting complicated, so making use of the below model.  2903
+			if (this.sCurrentLocaleD == "French") {
+
+				var oViewModel = new sap.ui.model.json.JSONModel({
+					SPRAS: "French"
+
+				});
+			} else {
+				var oViewModel = new sap.ui.model.json.JSONModel({
+
+					SPRAS: "English"
+
+				});
+
+			}
+			
+				this.getView().setModel(oViewModel, "languageModel");
+	
 			
 			
 		that.getView().byId("oVt_SeriesCmbo").setSelectedKey("");
@@ -245,17 +263,17 @@ sap.ui.define([
 			if (sap.ui.getCore().getModel("oVehicleSelectionResults") != undefined) {
 				var oVehicleModel = sap.ui.getCore().getModel("oVehicleSelectionResults").getData();
 // based on the language set the descriptions. 
-                 if (this.sCurrentLocaleD == "French") {
-                 	for (var i=0; i<oVehicleModel.length; i++ ){
-                 		oVehicleModel[i].mktg_desc_en = oVehicleModel[i].mktg_desc_fr;
-                 		oVehicleModel[i].model_desc_en = oVehicleModel[i].model_desc_fr;
-                 		oVehicleModel[i].zzseries_desc_en = oVehicleModel[i].zzseries_desc_fr;
-                 		oVehicleModel[i].suffix_desc_en  = oVehicleModel[i].suffix_desc_fr; 
-                 			oVehicleModel[i].mrktg_int_desc_en  = oVehicleModel[i].mrktg_int_desc_fr;
+             //    if (this.sCurrentLocaleD == "French") {
+                 	// for (var i=0; i<oVehicleModel.length; i++ ){
+                 	// 	oVehicleModel[i].mktg_desc_en = oVehicleModel[i].mktg_desc_fr;
+                 	// 	oVehicleModel[i].model_desc_en = oVehicleModel[i].model_desc_fr;
+                 	// 	oVehicleModel[i].zzseries_desc_en = oVehicleModel[i].zzseries_desc_fr;
+                 	// 	oVehicleModel[i].suffix_desc_en  = oVehicleModel[i].suffix_desc_fr; 
+                 	// 		oVehicleModel[i].mrktg_int_desc_en  = oVehicleModel[i].mrktg_int_desc_fr;
                  		
-                 	}
+                 	// }
                  	
-                 }
+             //    }
 	
 				var model = new sap.ui.model.json.JSONModel(oVehicleModel);
 				model.setSizeLimit(1000);
@@ -399,16 +417,16 @@ sap.ui.define([
 				model.setSizeLimit(1000);
 				
 				// based on the language set the descriptions. 
-                 if (this.sCurrentLocaleD == "French") {
-                 	for (var i=0; i<model.oData.length; i++ ){
-                 		model.oData[i].mktg_desc_en = model.oData[i].mktg_desc_fr;
-                 		model.oData[i].model_desc_en = model.oData[i].model_desc_fr;
-                 		model.oData[i].zzseries_desc_en = model.oData[i].zzseries_desc_fr;
-                 		model.oData[i].suffix_desc_en  = model.oData[i].suffix_desc_fr;
-                 			model.oData[i].mrktg_int_desc_en  = model.oData[i].mrktg_int_desc_fr;
-                 	}
+            //     if (this.sCurrentLocaleD == "French") {
+                 	// for (var i=0; i<model.oData.length; i++ ){
+                 	// 	model.oData[i].mktg_desc_en = model.oData[i].mktg_desc_fr;
+                 	// 	model.oData[i].model_desc_en = model.oData[i].model_desc_fr;
+                 	// 	model.oData[i].zzseries_desc_en = model.oData[i].zzseries_desc_fr;
+                 	// 	model.oData[i].suffix_desc_en  = model.oData[i].suffix_desc_fr;
+                 	// 		model.oData[i].mrktg_int_desc_en  = model.oData[i].mrktg_int_desc_fr;
+                 	// }
                  	
-                 }
+             //    }
 				
 				this.getView().setModel(model, "vehicleSelectTableModel");
 				
@@ -1417,7 +1435,7 @@ else if((CurrentETAFrom==""||CurrentETAFrom==null)&&(CurrentETATo==""||CurrentET
 					//	var SelYear = new Date().getFullYear().toString();
 					var SelYear = new Date().getFullYear();
 					//temporary-2018, data avaialable for 2018, before deploying remove this
-					SelYear = "2018"
+				//	SelYear = "2018"
 					that.SeriesBinding(SelYear);
 
 				},

@@ -1694,7 +1694,7 @@ for(var i=0;i<oResults.length;i++){
 				var filtered = [];
 				for (var i = 0; i < TradeRequest.length; i++) {
 					for (var j = 0; j < TradeVehicles.length; j++) {
-						if (TradeRequest[i].Trade_Id == TradeVehicles[j]["Trade_Id.Trade_Id"]) {
+						if (TradeRequest[i].Trade_Id == TradeVehicles[j]["Trade_Id"]) {
 							/*TradeRequest[i].push(TradeVehicles[j]);*/
 
 							var realMerge = function (to, from) {
@@ -1731,7 +1731,7 @@ for(var i=0;i<oResults.length;i++){
 				var finalArray = [];
 				for (var k = 0; k < filtered.length; k++) {
 					for (var l = 0; l < oTradeVehicleDesc.length; l++) {
-						if (filtered[k].Trade_Id == oTradeVehicleDesc[l]["Trade_Id.Trade_Id"] && filtered[k].VTN == oTradeVehicleDesc[l]["VTN.VTN"] &&
+						if (filtered[k].Trade_Id == oTradeVehicleDesc[l]["Trade_Id"] && filtered[k].VTN == oTradeVehicleDesc[l]["VTN"] &&
 							oTradeVehicleDesc[l].SPRAS == Spars) {
 							filtered[k].Ext_Colour_Desc = oTradeVehicleDesc[l].Ext_Colour_Desc;
 							filtered[k].Int_Colour_Desc = oTradeVehicleDesc[l].Int_Colour_Desc;
@@ -1747,8 +1747,8 @@ for(var i=0;i<oResults.length;i++){
 							Series_Desc: "50"
 							Suffix_Desc: "30"
 							TradeVehicleDescs: {__deferred: {…}}
-							Trade_Id.Trade_Id: "8"
-							VTN.VTN: "6" */
+							Trade_Id: "8"
+							VTN: "6" */
 
 							/*				var realMerge = function (to, from) {
 

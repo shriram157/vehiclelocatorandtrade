@@ -52,7 +52,7 @@
 											<Label text="{i18n>MyTradeRequests}" class="flexdontclabllist"/>
 										<ToolbarSpacer/>
 										<Button tooltip="Sort table by selected fields"  icon="sap-icon://sort"	 press="handleViewSettingsDialogButtonPressed"
-											text="Sorting"/>
+											text="{i18n>Sorting}"/>
 									</OverflowToolbar>
 								</headerToolbar>
 								<columns>
@@ -256,7 +256,7 @@
 										<Label text="{i18n>ReceivedTradeRequests}" class="flexdontclabllist"/>
 								<ToolbarSpacer/>
 								<Button tooltip="Sort table by selected fields"  icon="sap-icon://sort"	 press="receivedTradeRequestSortDialogButtonPressed"
-									text="Sorting"/>
+									text="{i18n>Sorting}"/>
 							</OverflowToolbar>
 						</headerToolbar>
 						<columns>

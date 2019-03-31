@@ -140,6 +140,10 @@ sap.ui.define([
 
 			var that = this;
 
+// TODO: GSR - replace the below with one call https://tci-dev-vehiclelocatorandtrade-xsjs.cfapps.us10.hana.ondemand.com/xsodata/vehicleTrade_SRV.xsodata/TradeRequest?&$expand=TradeVehicles,TradeComment,TradeVehicleDesc
+
+
+
 			/*$.ajax({
 				url: that.oDataUrl,
 				method: "GET",
@@ -241,7 +245,7 @@ sap.ui.define([
 				//	var filtered = [];
 				for (var i = 0; i < TradeRequest.length; i++) {
 					for (var j = 0; j < TradeVehicles.length; j++) {
-						if (TradeRequest[i].Trade_Id == TradeVehicles[j]["Trade_Id.Trade_Id"] &&TradeRequest[i].Requested_Vtn==TradeVehicles[j].VTN) {
+						if (TradeRequest[i].Trade_Id == TradeVehicles[j]["Trade_Id"] &&TradeRequest[i].Requested_Vtn==TradeVehicles[j].VTN) {
 							/*TradeRequest[i].push(TradeVehicles[j]);*/
 
 							TradeRequest[i].APX = TradeVehicles[j].APX;
@@ -254,7 +258,7 @@ sap.ui.define([
 							TradeRequest[i].Series = TradeVehicles[j].Series;
 							TradeRequest[i].Status = TradeVehicles[j].Status;
 							TradeRequest[i].Suffix = TradeVehicles[j].Suffix;
-							TradeRequest[i]["Trade_Id.Trade_Id"] = TradeVehicles[j]["Trade_Id.Trade_Id"];
+							TradeRequest[i]["Trade_Id"] = TradeVehicles[j]["Trade_Id"];
 							TradeRequest[i].VTN = TradeVehicles[j].VTN;
 
 							/*var realMerge = function (to, from) {
@@ -283,7 +287,7 @@ sap.ui.define([
 							TradeRequest[i].Series = "";
 							TradeRequest[i].Status = "";
 							TradeRequest[i].Suffix = "";
-							TradeRequest[i]["Trade_Id.Trade_Id"] = "";
+							TradeRequest[i]["Trade_Id"] = "";
 							TradeRequest[i].VTN ="";	
 							
 							
@@ -308,7 +312,7 @@ sap.ui.define([
 				var finalArray = [];
 				for (var k = 0; k < filtered.length; k++) {
 					for (var l = 0; l < oTradeVehicleDesc.length; l++) {
-						if (filtered[k].Trade_Id == oTradeVehicleDesc[l]["Trade_Id.Trade_Id"] && filtered[k].VTN == oTradeVehicleDesc[l]["VTN.VTN"] &&
+						if (filtered[k].Trade_Id == oTradeVehicleDesc[l]["Trade_Id"] && filtered[k].VTN == oTradeVehicleDesc[l]["VTN"] &&
 							oTradeVehicleDesc[l].SPRAS == Spars) {
 							filtered[k].Ext_Colour_Desc = oTradeVehicleDesc[l].Ext_Colour_Desc;
 							filtered[k].Int_Colour_Desc = oTradeVehicleDesc[l].Int_Colour_Desc;
@@ -324,8 +328,8 @@ sap.ui.define([
 							Series_Desc: "50"
 							Suffix_Desc: "30"
 							TradeVehicleDescs: {__deferred: {…}}
-							Trade_Id.Trade_Id: "8"
-							VTN.VTN: "6" */
+							Trade_Id: "8"
+							VTN: "6" */
 
 							/*				var realMerge = function (to, from) {
 
@@ -420,10 +424,10 @@ sap.ui.define([
            filtered[n].Suffix = "";
         }
         
-        	if ("Trade_Id.Trade_Id" in filtered[n]) {
-        filtered[n]["Trade_Id.Trade_Id"]=filtered[n]["Trade_Id.Trade_Id"];
+        	if ("Trade_Id" in filtered[n]) {
+        filtered[n]["Trade_Id"]=filtered[n]["Trade_Id"];
                } else {
-           filtered[n]["Trade_Id.Trade_Id"] = "";
+           filtered[n]["Trade_Id"] = "";
         }
         
         	if ("VTN" in filtered[n]) {

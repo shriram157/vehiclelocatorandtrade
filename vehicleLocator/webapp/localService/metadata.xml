@@ -32,10 +32,10 @@
 			</EntityType>
 			<EntityType Name="TradeVehiclesType">
 				<Key>
-					<PropertyRef Name="Trade_Id.Trade_Id"/>
+					<PropertyRef Name="Trade_Id"/>
 					<PropertyRef Name="VTN"/>
 				</Key>
-				<Property Name="Trade_Id.Trade_Id" Type="Edm.String" Nullable="false" MaxLength="8"/>
+				<Property Name="Trade_Id" Type="Edm.String" Nullable="false" MaxLength="8"/>
 				<Property Name="VTN" Type="Edm.String" Nullable="false" MaxLength="6"/>
 				<Property Name="Model_Year" Type="Edm.String" MaxLength="4"/>
 				<Property Name="Model" Type="Edm.String" MaxLength="40"/>
@@ -50,10 +50,10 @@
 			</EntityType>
 			<EntityType Name="TradeCommentType">
 				<Key>
-					<PropertyRef Name="Trade_Id.Trade_Id"/>
+					<PropertyRef Name="Trade_Id"/>
 					<PropertyRef Name="Comment_Id"/>
 				</Key>
-				<Property Name="Trade_Id.Trade_Id" Type="Edm.String" Nullable="false" MaxLength="8"/>
+				<Property Name="Trade_Id" Type="Edm.String" Nullable="false" MaxLength="8"/>
 				<Property Name="Comment_Id" Type="Edm.String" Nullable="false" MaxLength="2"/>
 				<Property Name="Comment_Txt" Type="Edm.String" MaxLength="1024"/>
 				<Property Name="Comment_Date" Type="Edm.DateTime"/>
@@ -63,12 +63,12 @@
 			</EntityType>
 			<EntityType Name="TradeVehicleDescType">
 				<Key>
-					<PropertyRef Name="Trade_Id.Trade_Id"/>
-					<PropertyRef Name="VTN.VTN"/>
+					<PropertyRef Name="Trade_Id"/>
+					<PropertyRef Name="VTN"/>
 					<PropertyRef Name="SPRAS"/>
 				</Key>
-				<Property Name="Trade_Id.Trade_Id" Type="Edm.String" Nullable="false" MaxLength="8"/>
-				<Property Name="VTN.VTN" Type="Edm.String" Nullable="false" MaxLength="6"/>
+				<Property Name="Trade_Id" Type="Edm.String" Nullable="false" MaxLength="8"/>
+				<Property Name="VTN" Type="Edm.String" Nullable="false" MaxLength="6"/>
 				<Property Name="SPRAS" Type="Edm.String" Nullable="false" MaxLength="2"/>
 				<Property Name="Model_Desc" Type="Edm.String" MaxLength="40"/>
 				<Property Name="Series_Desc" Type="Edm.String" MaxLength="50"/>

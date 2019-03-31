@@ -877,20 +877,42 @@ sap.ui.define([
 				var Status = sap.ui.getCore().getModel("SearchedData").getData();
 				debugger;
  
+                  //var newStatus = jQuery.extend(true, {}, Status);
+                  
+                var newStatus = JSON.parse(JSON.stringify( Status ));
+                  
+                  
  //  based on the logged in language, filter the model to the UI. 
+    // loop and move the french description to the ui display fields  Guna 2903
+    //for (var i = 0; i < Status.length; i++) {
+                  //	newStatus[i].mktg_desc_en = newStatus[i].mktg_desc_fr;
+                  //	newStatus[i].model_desc_en = newStatus[i].model_desc_fr;
+                  //	newStatus[i].mrktg_int_desc_en = newStatus[i].mrktg_int_desc_fr;
+                  //	newStatus[i].zzseries_desc_en = newStatus[i].zzseries_desc_fr;
+                  //	newStatus[i].suffix_desc_en = newStatus[i].suffix_desc_fr;
+                  //}
+                  
+                  // lets set a local model with the langague and use it in formatter. 
+                  
+    
+    
+    
                 if (this.sCurrentLocaleD == "French") {
-   // loop and move the french description to the ui display fields
-                   for (var i = 0; i < Status.length; i++) {
-                   	Status[i].mktg_desc_en = Status[i].mktg_desc_fr;
-                   	Status[i].model_desc_en = Status[i].model_desc_fr;
-                   	Status[i].mrktg_int_desc_en = Status[i].mrktg_int_desc_fr;
-                   	Status[i].zzseries_desc_en = Status[i].zzseries_desc_fr;
-                   	Status[i].suffix_desc_en = Status[i].suffix_desc_fr;
-                   }
+
+                  var oViewModel = new sap.ui.model.json.JSONModel({
+				SPRAS:"French"
+			
+			});
+                } else{
+                	  var oViewModel = new sap.ui.model.json.JSONModel({
+			 
+				SPRAS:"English"
+			
+			});
+
+                 }
  
-                }
- 
-               
+               		this.getView().setModel(oViewModel, "languageModel");
  
 				var model = new sap.ui.model.json.JSONModel(Status);
 				model.setSizeLimit(1000);
@@ -1134,9 +1156,7 @@ sap.ui.define([
 
 				var filterArray = [];
 
-				// guna commenting the below lines till 1795
-
-				//	this.getView().byId("table1VSR").getBinding("rows").filter([]);  //guna
+	 
 
 				var Status = this.getView().byId("VLRStatus").getSelectedKey();
 				if (Status != "") {
@@ -1282,15 +1302,18 @@ if(sap.ui.Device.system.phone){
 				var kunnr = (arrData[i].kunnr).slice(-5) + "-" + arrData[i].name1;
 					// var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language; //2603
 				var SPRAS = this.sCurrentLocaleD ;
-				if (SPRAS != "English") {
-					var matnr = arrData[i].matnr + "-" + arrData[i].model_desc_fr;
-					var zzextcol = arrData[i].zzextcol + "-" + arrData[i].mktg_desc_fr;
-					var zzsuffix = arrData[i].zzsuffix + "-" + arrData[i].suffix_desc_fr + "/" + arrData[i].mrktg_int_desc_fr;
-				} else {
-					var matnr = arrData[i].matnr + "-" + arrData[i].model_desc_en;
-					var zzextcol = arrData[i].zzextcol + "-" + arrData[i].mktg_desc_en;
-					var zzsuffix = arrData[i].zzsuffix + "-" + arrData[i].suffix_desc_en + "/" + arrData[i].mrktg_int_desc_en;
-				}
+				
+				//Guna 2903
+				// if (SPRAS != "English") {
+				// 	var matnr = arrData[i].matnr + "-" + arrData[i].model_desc_fr;
+				// 	var zzextcol = arrData[i].zzextcol + "-" + arrData[i].mktg_desc_fr;
+				// 	var zzsuffix = arrData[i].zzsuffix + "-" + arrData[i].suffix_desc_fr + "/" + arrData[i].mrktg_int_desc_fr;
+				// } else {
+				// 	var matnr = arrData[i].matnr + "-" + arrData[i].model_desc_en;
+				// 	var zzextcol = arrData[i].zzextcol + "-" + arrData[i].mktg_desc_en;
+				// 	var zzsuffix = arrData[i].zzsuffix + "-" + arrData[i].suffix_desc_en + "/" + arrData[i].mrktg_int_desc_en;
+				// }
+
 
 				var zzordertype = "";
 				switch (arrData[i].zzordertype) {
@@ -2265,7 +2288,6 @@ if(sap.ui.Device.system.phone){
 
 		},
 
-		//  guna custom code ==================================
 
 		onLiveChange: function (oEvent) {
 			this.sSearchQuery = oEvent.getSource()

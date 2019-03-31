@@ -54,7 +54,7 @@ sap.ui.define([
 				//======Filter Trade Request Comments=================
 				//=================================================
 				tradeId_no = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Trade_Id;
-				this.getView().byId("tableVrade").getBinding('items').filter([new sap.ui.model.Filter("Trade_Id.Trade_Id", sap.ui.model.FilterOperator
+				this.getView().byId("tableVrade").getBinding('items').filter([new sap.ui.model.Filter("Trade_Id", sap.ui.model.FilterOperator
 					.EQ, sap.ui
 					.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Trade_Id)]);
 				//===============================================	
@@ -611,8 +611,8 @@ sap.ui.define([
 
 			/*	that.oDataModel.create("/TradeVehicles", oEntry1, null, function (s) {*/
 			// for (var i = 0; i < oVehicleVTN.length; i++) {
-			// 	//	var VehicleUrl=	"/TradeVehicles(Trade_Id.Trade_Id eq'"+Trade_Id+"' and VTN eq'"+oVehicleVTN[i]+ "')";
-			var VehicleUrl = "/TradeVehicles(Trade_Id.Trade_Id='" + Trade_Id + "',VTN='" + OfferedVTn + "')";
+			// 	//	var VehicleUrl=	"/TradeVehicles(Trade_Id eq'"+Trade_Id+"' and VTN eq'"+oVehicleVTN[i]+ "')";
+			var VehicleUrl = "/TradeVehicles(Trade_Id='" + Trade_Id + "',VTN='" + OfferedVTn + "')";
 			that.getView().getModel('TradeRequestModel').remove(VehicleUrl, null, null, function (s) {
 
 			}, function () {
@@ -620,7 +620,7 @@ sap.ui.define([
 			});
 			// }
 
-			/*/TradeVehicles(Trade_Id.Trade_Id='TR000001',VTN='002359')*/
+			/*/TradeVehicles(Trade_Id='TR000001',VTN='002359')*/
 
 		},
 		oUpdateSubmitbtn_old: function () {
@@ -859,7 +859,7 @@ sap.ui.define([
 
 				VTN: vtn,
 			};
-			oEntry1["Trade_Id.Trade_Id"] = oEntry.Trade_Id;
+			oEntry1["Trade_Id"] = oEntry.Trade_Id;
 
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
@@ -882,7 +882,7 @@ sap.ui.define([
 				"Accept": "application/json",
 				"Method": "PUT"
 			});
-			var UpdatedTreadeEntity = "/TradeVehicles(Trade_Id.Trade_Id ='" + oEntry.Trade_Id + "',VTN ='" + oEntry1.VTN + "')";
+			var UpdatedTreadeEntity = "/TradeVehicles(Trade_Id ='" + oEntry.Trade_Id + "',VTN ='" + oEntry1.VTN + "')";
 			that.oDataModel.update(UpdatedTreadeEntity, oEntry1, null, function (s) {
 				/*	alert("ok");*/
 			}, function () {
@@ -956,8 +956,8 @@ sap.ui.define([
 				Ext_Colour_Desc: Ext_Colour_Desc
 
 			};
-			oEntry2["Trade_Id.Trade_Id"] = oEntry.Trade_Id;
-			oEntry2["VTN.VTN"] = oVTN;
+			oEntry2["Trade_Id"] = oEntry.Trade_Id;
+			oEntry2["VTN"] = oVTN;
 
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
@@ -980,7 +980,7 @@ sap.ui.define([
 				"Accept": "application/json",
 				"Method": "PUT"
 			});
-			var UpdatedTreadeEntity = "/TradeVehicleDesc(Trade_Id.Trade_Id ='" + oEntry.Trade_Id + "',VTN.VTN ='" + oEntry2["VTN.VTN"] +
+			var UpdatedTreadeEntity = "/TradeVehicleDesc(Trade_Id ='" + oEntry.Trade_Id + "',VTN ='" + oEntry2["VTN"] +
 				"',SPRAS='" + oEntry2.SPRAS + "')";
 			that.oDataModel.update(UpdatedTreadeEntity, oEntry2, null, function (s) {
 
@@ -1014,7 +1014,7 @@ sap.ui.define([
 					Created_By = Created_By.substr(0, 12);
 					var oTradeComment = {
 
-						"Trade_Id.Trade_Id": TradeId,
+						"Trade_Id": TradeId,
 						"Comment_Id": oComment_Id,
 						"Comment_Txt": Comment,
 						"Comment_Date": oCommentdate,
@@ -1515,7 +1515,7 @@ sap.ui.define([
 				Suffix: oSuffixReq,
 				VTN: ovtnReq,
 			};
-			oEntry2["Trade_Id.Trade_Id"] = VehicleTrade_Id;
+			oEntry2["Trade_Id"] = VehicleTrade_Id;
 			var oVehicleDetails = [];
 			oVehicleDetails.push(oEntry2);
 			if (that.getView().byId("otextId").getText() != "RemoveOffered") {
@@ -1546,12 +1546,12 @@ sap.ui.define([
 					Suffix: Suffix,
 					VTN: vtn,
 				};
-				oEntry1["Trade_Id.Trade_Id"] = VehicleTrade_Id;
+				oEntry1["Trade_Id"] = VehicleTrade_Id;
 				oVehicleDetails.push(oEntry1);
 			}
 
-			/*	oEntry1["Trade_Id.Trade_Id"] = oEntry.Trade_Id;*/
-			/*	oVehicleDetails["Trade_Id.Trade_Id"] = oEntry.Trade_Id;
+			/*	oEntry1["Trade_Id"] = oEntry.Trade_Id;*/
+			/*	oVehicleDetails["Trade_Id"] = oEntry.Trade_Id;
 			 */
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
@@ -1696,7 +1696,7 @@ sap.ui.define([
 				Suffix: oSuffixReq,
 				VTN: ovtnReq,
 			};
-			oEntry2["Trade_Id.Trade_Id"] = VehicleTrade_Id;
+			oEntry2["Trade_Id"] = VehicleTrade_Id;
 			var oVehicleDetails = [];
 			oVehicleDetails.push(oEntry2);
 			if (that.getView().byId("otextId").getText() == "" && that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().VehicleTradeVehicle != {}) {
@@ -1726,12 +1726,12 @@ sap.ui.define([
 					Suffix: Suffix,
 					VTN: vtn,
 				};
-				oEntry1["Trade_Id.Trade_Id"] = VehicleTrade_Id;
+				oEntry1["Trade_Id"] = VehicleTrade_Id;
 				oVehicleDetails.push(oEntry1);
 			}
 
-			/*	oEntry1["Trade_Id.Trade_Id"] = oEntry.Trade_Id;*/
-			/*	oVehicleDetails["Trade_Id.Trade_Id"] = oEntry.Trade_Id;
+			/*	oEntry1["Trade_Id"] = oEntry.Trade_Id;*/
+			/*	oVehicleDetails["Trade_Id"] = oEntry.Trade_Id;
 			 */
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
@@ -1804,7 +1804,7 @@ sap.ui.define([
 				Suffix: oSuffixReq,
 				VTN: ovtnReq,
 			};
-			oEntry2["Trade_Id.Trade_Id"] = VehicleTrade_Id;
+			oEntry2["Trade_Id"] = VehicleTrade_Id;
 			var oVehicleDetails = [];
 			oVehicleDetails.push(oEntry2);
 			//==========================================================
@@ -1835,12 +1835,12 @@ sap.ui.define([
 				Suffix: Suffix,
 				VTN: vtn,
 			};
-			oEntry1["Trade_Id.Trade_Id"] = VehicleTrade_Id;
+			oEntry1["Trade_Id"] = VehicleTrade_Id;
 			oVehicleDetails.push(oEntry1);
 			// }
 
-			/*	oEntry1["Trade_Id.Trade_Id"] = oEntry.Trade_Id;*/
-			/*	oVehicleDetails["Trade_Id.Trade_Id"] = oEntry.Trade_Id;
+			/*	oEntry1["Trade_Id"] = oEntry.Trade_Id;*/
+			/*	oVehicleDetails["Trade_Id"] = oEntry.Trade_Id;
 			 */
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
@@ -1992,8 +1992,8 @@ sap.ui.define([
 				Ext_Colour_Desc: offeredv.mktg_desc_en
 
 			};
-			oEntry1["Trade_Id.Trade_Id"] = tradeId_no;
-			oEntry1["VTN.VTN"] = oVTN;
+			oEntry1["Trade_Id"] = tradeId_no;
+			oEntry1["VTN"] = oVTN;
 
 			var oEntry2 = {
 
@@ -2005,8 +2005,8 @@ sap.ui.define([
 				Ext_Colour_Desc: offeredv.mktg_desc_fr
 
 			};
-			oEntry2["Trade_Id.Trade_Id"] = tradeId_no;
-			oEntry2["VTN.VTN"] = oVTN;
+			oEntry2["Trade_Id"] = tradeId_no;
+			oEntry2["VTN"] = oVTN;
 
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
@@ -2029,7 +2029,7 @@ sap.ui.define([
 				"Accept": "application/json",
 				"Method": "POST"
 			});
-			// var UpdatedTreadeEntity = "/TradeVehicleDesc(Trade_Id.Trade_Id ='" + oEntry.Trade_Id + "',VTN.VTN ='" + oEntry2["VTN.VTN"] +
+			// var UpdatedTreadeEntity = "/TradeVehicleDesc(Trade_Id ='" + oEntry.Trade_Id + "',VTN ='" + oEntry2["VTN"] +
 			// 	"',SPRAS='" + oEntry2.SPRAS + "')";
 			that.oDataModel.create("/TradeVehicleDesc", oEntry2, null, function (s) {
 
@@ -2077,14 +2077,14 @@ sap.ui.define([
 				"Accept": "application/json",
 				"Method": "DELETE"
 			});
-			var UpdatedTreadeEntity = "/TradeVehicleDesc(Trade_Id.Trade_Id ='" + Trade_Id + "',VTN.VTN ='" + vin +
+			var UpdatedTreadeEntity = "/TradeVehicleDesc(Trade_Id ='" + Trade_Id + "',VTN ='" + vin +
 				"',SPRAS='" + "F" + "')";
 			that.oDataModel.remove(UpdatedTreadeEntity, null, function (s) {
 
 			}, function () {
 
 			});
-			var UpdatedTreadeEntity1 = "/TradeVehicleDesc(Trade_Id.Trade_Id ='" + Trade_Id + "',VTN.VTN ='" + vin +
+			var UpdatedTreadeEntity1 = "/TradeVehicleDesc(Trade_Id ='" + Trade_Id + "',VTN ='" + vin +
 				"',SPRAS='" + "E" + "')";
 			that.oDataModel.remove(UpdatedTreadeEntity1, null, function (s) {
 

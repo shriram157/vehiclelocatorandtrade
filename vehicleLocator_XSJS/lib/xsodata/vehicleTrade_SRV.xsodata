@@ -1,15 +1,22 @@
-service { 
 
-      "vehicleTrade.Trade_Request"    as "TradeRequest"     navigates ( "toVehicles"   as "TradeVehicles" );
-      "vehicleTrade.Vehicle"          as "TradeVehicles";
-      "vehicleTrade.Trade_Comment"    as "TradeComment"     navigates ( "toComments"   as "TradeComments");
-      "vehicleTrade.Vehicle_Desc"     as "TradeVehicleDesc" navigates ( "toVehicleDesc" as "TradeVehicleDescs");
+ service  { 
 
-       association "toVehicles" principal "TradeVehicles"("Trade_Id") multiplicity "1" dependent "TradeRequest"("Trade_Id") multiplicity "*"; 
-       association "toComments" principal "TradeComment"("Trade_Id") multiplicity "1" dependent "TradeRequest"("Trade_Id") multiplicity "*";
-       association "toVehicleDesc" principal "TradeVehicleDesc"("Trade_Id") multiplicity "1" dependent "TradeRequest"("Trade_Id") multiplicity "*";
-}  
+"vehicleTrade.Trade_Request"    as "TradeRequest" 
+ 
+navigates ( "toVehicles"   as "TradeVehicles", "toComments"   as "TradeComment", "toVehicleDesc"   as "TradeVehicleDesc" );
+	
+"vehicleTrade.Vehicle"          as "TradeVehicles" ;
 
+ "vehicleTrade.Trade_Comment"    as "TradeComment" 	;
+	
+ "vehicleTrade.Vehicle_Desc"     as "TradeVehicleDesc" ;
+ 
+ association "toVehicles"    principal "TradeVehicles"("Trade_Id") multiplicity "*" dependent "TradeRequest"("Trade_Id") multiplicity "1"; 
+       association "toComments"    principal "TradeComment"("Trade_Id") multiplicity "*" dependent "TradeRequest"("Trade_Id") multiplicity "1";
+       association "toVehicleDesc" principal "TradeVehicleDesc"("Trade_Id") multiplicity "*" dependent "TradeRequest"("Trade_Id") multiplicity "1";	
+ 
+ 
+}
 settings {
   support null;
   content cache-control "no-store"; 

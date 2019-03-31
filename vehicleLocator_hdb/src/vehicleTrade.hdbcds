@@ -67,7 +67,7 @@ context vehicleTrade {
 
     @Comment : 'Trade Comments'
     entity Trade_Comment {
-        key Trade_Id     : association[*, 0..1] to Trade_Request { Trade_Id };
+        key Trade_Id     :   String(8);
 
             @Comment : 'Comment ID'
         key Comment_Id   : String(2);
@@ -87,7 +87,7 @@ context vehicleTrade {
 
     @Comment : 'Vehicle'
     entity Vehicle {
-        key Trade_Id   : association[*, 0..1] to Trade_Request { Trade_Id };
+        key Trade_Id    : String(8);
 
             @Comment : 'Vehicle VTN'
         key VTN        : String(7);
@@ -128,8 +128,8 @@ context vehicleTrade {
 
     @Comment : 'Vehicle Descriptions'
     entity Vehicle_Desc {
-        key Trade_Id        : association[*, 0..1] to Trade_Request { Trade_Id };
-        key VTN             : association[*, 0..1] to Vehicle { VTN };
+        key Trade_Id         : String(8);
+        key VTN                : String(7);
 
             @Comment : 'Language'
         key SPRAS           : String(2);

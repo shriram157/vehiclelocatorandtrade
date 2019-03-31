@@ -41,11 +41,16 @@
 								<Label text="{i18n>ModelYear}"/>
 								<Text text="{TradeModel>zzmoyr}" id="zzMoyr"/>
 								<Label text="{i18n>Series}"/>
-								<Text text="{TradeModel>zzseries_desc_en}" id="oSeries"/>
+								<!--<Text text="{TradeModel>zzseries_desc_en}" id="oSeries"/>-->
+								<Text text="{=${languageModel>/SPRAS}==='English' ? ${TradeModel>zzseries_desc_en}:${TradeModel>zzseries_desc_fr} }" id="oSeries" />
 								<Label text="{i18n>Model}"/>
-								<Text text="{TradeModel>matnr}-{TradeModel>model_desc_en}" id="oZmodel"/>
+								<!--<Text text="{TradeModel>matnr}-{TradeModel>model_desc_en}" id="oZmodel"/>-->
+									<Text text="{TradeModel>matnr} - {=${languageModel>/SPRAS}==='English' ? ${TradeModel>model_desc_en}:${TradeModel>model_desc_fr} }" id="oZmodel" />
 								<Label text="{i18n>Suffix}"/>
-								<Text text="{TradeModel>zzsuffix}-{TradeModel>suffix_desc_en}/{TradeModel>mrktg_int_desc_en}" id="oZsuffix"/>
+								<!--<Text text="{TradeModel>zzsuffix}-{TradeModel>suffix_desc_en}/{TradeModel>mrktg_int_desc_en}" id="oZsuffix"/>-->
+<Text text="{TradeModel>zzsuffix} - {=${languageModel>/SPRAS}==='English' ? ${TradeModel>suffix_desc_en}:${TradeModel>suffix_desc_fr} }/{=${languageModel>/SPRAS}==='English' ? ${TradeModel>mrktg_int_desc_en}:${TradeModel>mrktg_int_desc_fr} }" id="oZsuffix"	/>							
+								
+								
 								<Label text="{i18n>APX}"/>
 								<Text text="{TradeModel>zzapx}" id="oApx"/>
 								<Label text="{i18n>Status}"/>
@@ -53,7 +58,10 @@
 								<Label text="{i18n>OrderType}"/>
 								<Text text="{path:'TradeModel>zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" id="oOrdertype"/>
 								<Label text="{i18n>ExteriorColor}"/>
-								<Text text="{TradeModel>zzextcol}-{TradeModel>mktg_desc_en}" id="Zextcolo"/>
+								<!--<Text text="{TradeModel>zzextcol}-{TradeModel>mktg_desc_en}" id="Zextcolo"/>-->
+								
+									<Text text="{TradeModel>zzextcol} - {=${languageModel>/SPRAS}==='English' ? ${TradeModel>mktg_desc_en}:${TradeModel>mktg_desc_fr} }" id="Zextcolo" />
+		
 								<Label text="{i18n>CurrentETA}" id="cetalabelid"/>
 								<VBox>
 									<HBox>
@@ -89,13 +97,23 @@
 								<Label text="{i18n>ModelYear}" id="moylablid" visible="false"/>
 								<Text text="{TradeModel>/VehicleTradeVehicle/zzmoyr}" id="yearid" visible="false"/>
 								<Label text="{i18n>Series}" id="serielabelid" visible="false"/>
-								<Text text="{TradeModel>/VehicleTradeVehicle/zzseries_desc_en}" id="seiresid" visible="false"/>
+								<!--<Text text="{TradeModel>/VehicleTradeVehicle/zzseries_desc_en}" id="seiresid" visible="false"/>-->
+							<Text text="{=${languageModel>/SPRAS}==='English' ? ${TradeModel>/VehicleTradeVehicle/zzseries_desc_en}:${TradeModel>VehicleTradeVehicle/zzseries_desc_fr} }" id="seiresid" />		
+								
+								
+								
 								<Label text="{i18n>Model}" id="modlabelid" visible="false"/>
-								<Text text="{TradeModel>/VehicleTradeVehicle/matnr} - {TradeModel>/VehicleTradeVehicle/model_desc_en}" id="modlid" visible="false"/>
+								<!--<Text text="{TradeModel>/VehicleTradeVehicle/matnr} - {TradeModel>/VehicleTradeVehicle/model_desc_en}" id="modlid" visible="false"/>-->
+								<Text text="{TradeModel>/VehicleTradeVehicle/matnr} - {=${languageModel>/SPRAS}==='English' ? ${TradeModel>/VehicleTradeVehicle/model_desc_en}:${TradeModel>/VehicleTradeVehicle/model_desc_fr} }" id="modlid" visible="false"/>
+								
 								<Label text="{i18n>Suffix}" id="sufflabeid" visible="false"/>
-								<Text
-									text="{TradeModel>/VehicleTradeVehicle/zzsuffix} - {TradeModel>/VehicleTradeVehicle/suffix_desc_en}/{TradeModel>/VehicleTradeVehicle/mrktg_int_desc_en}"
-									id="suffid" visible="false"/>
+								<!--<Text-->
+								<!--	text="{TradeModel>/VehicleTradeVehicle/zzsuffix} - {TradeModel>/VehicleTradeVehicle/suffix_desc_en}/{TradeModel>/VehicleTradeVehicle/mrktg_int_desc_en}"-->
+								<!--	id="suffid" visible="false"/>-->
+								
+<Text text="{TradeModel>/VehicleTradeVehicle/zzsuffix} - {=${languageModel>/SPRAS}==='English' ? ${TradeModel>/VehicleTradeVehicle/suffix_desc_en}:${TradeModel>/VehicleTradeVehicle/suffix_desc_fr} }/{=${languageModel>/SPRAS}==='English' ? ${TradeModel>/VehicleTradeVehicle/mrktg_int_desc_en}:${TradeModel>/VehicleTradeVehicle/mrktg_int_desc_fr} }" id="suffid" visible="false"	/>							
+	
+								
 								<Label text="{i18n>APX}" id="apxlabelid" visible="false"/>
 								<Text text="{TradeModel>/VehicleTradeVehicle/zzapx}" id="apxid" visible="false"/>
 								<Label text="{i18n>Status}" visible="false" id="ofvestats"/>
@@ -106,7 +124,12 @@
 									id="oofferedOrdertype" visible="false"/>
 								<!--	<Text text="{TradeModel>/VehicleTradeVehicle/ZZAPX}" id="apxid" visible="false"/>-->
 								<Label text="{i18n>ExteriorColor}" id="extcollabelid" visible="false"/>
-								<Text text="{TradeModel>/VehicleTradeVehicle/zzextcol}-{TradeModel>/VehicleTradeVehicle/mktg_desc_en}" id="extcolod" visible="false"/>
+								<!--<Text text="{TradeModel>/VehicleTradeVehicle/zzextcol}-{TradeModel>/VehicleTradeVehicle/mktg_desc_en}" id="extcolod" visible="false"/>-->
+			<Text text="{TradeModel>/VehicleTradeVehicle/zzextcol} - {=${languageModel>/SPRAS}==='English' ? ${TradeModel>/VehicleTradeVehicle/mktg_desc_en}:${TradeModel>/VehicleTradeVehicle/mktg_desc_fr} }" id="extcolod" visible="false" />						
+								
+								
+								
+								
 								<Label text="{i18n>CurrentETA}" id="ctrtaid" visible="false"/>
 								<VBox>
 									<HBox>

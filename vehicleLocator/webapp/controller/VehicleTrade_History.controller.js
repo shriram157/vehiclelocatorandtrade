@@ -85,7 +85,7 @@ sap.ui.define([
 					TableData[i].RequestingDealerVisible = false;
 				}
 				oModel.read("/TradeVehicles", {
-					filters: [new sap.ui.model.Filter('Trade_Id.Trade_Id', 'EQ', TableData[i].Trade_Id)],
+					filters: [new sap.ui.model.Filter('Trade_Id', 'EQ', TableData[i].Trade_Id)],
 					async: false,
 					success: function (oData1, oResponse1) {
 						for (var x = 0; x < oData1.results.length; x++) {
@@ -123,8 +123,8 @@ sap.ui.define([
 			for (var i = 0; i < TableData.length; i++) {
 				if (TableData[i].Requested_Vtn != "") {
 					oModel.read("/TradeVehicleDesc", {
-						filters: [new sap.ui.model.Filter([new sap.ui.model.Filter('Trade_Id.Trade_Id', 'EQ', TableData[i].Trade_Id),
-							new sap.ui.model.Filter('VTN.VTN', 'EQ', TableData[i].Requested_Vtn),
+						filters: [new sap.ui.model.Filter([new sap.ui.model.Filter('Trade_Id', 'EQ', TableData[i].Trade_Id),
+							new sap.ui.model.Filter('VTN', 'EQ', TableData[i].Requested_Vtn),
 							new sap.ui.model.Filter('SPRAS', 'EQ', lang)
 						], true)],
 						async: false,
@@ -142,8 +142,8 @@ sap.ui.define([
 				}
 				if (TableData[i].Offered_Vtn != "") {
 					oModel.read("/TradeVehicleDesc", {
-						filters: [new sap.ui.model.Filter([new sap.ui.model.Filter('Trade_Id.Trade_Id', 'EQ', TableData[i].Trade_Id),
-							new sap.ui.model.Filter('VTN.VTN', 'EQ', TableData[i].Offered_Vtn),
+						filters: [new sap.ui.model.Filter([new sap.ui.model.Filter('Trade_Id', 'EQ', TableData[i].Trade_Id),
+							new sap.ui.model.Filter('VTN', 'EQ', TableData[i].Offered_Vtn),
 							new sap.ui.model.Filter('SPRAS', 'EQ', lang)
 						], true)],
 						async: false,
@@ -218,7 +218,7 @@ sap.ui.define([
 			// 	//	var filtered = [];
 			// 	for (var i = 0; i < TradeRequest.length; i++) {
 			// 		for (var j = 0; j < TradeVehicles.length; j++) {
-			// 			if (TradeRequest[i].Trade_Id == TradeVehicles[j]["Trade_Id.Trade_Id"]) {
+			// 			if (TradeRequest[i].Trade_Id == TradeVehicles[j]["Trade_Id"]) {
 
 			// 				TradeRequest[i].APX = TradeVehicles[j].APX;
 			// 				TradeRequest[i].DNC = TradeVehicles[j].DNC;
@@ -230,7 +230,7 @@ sap.ui.define([
 			// 				TradeRequest[i].Series = TradeVehicles[j].Series;
 			// 				TradeRequest[i].Status = TradeVehicles[j].Status;
 			// 				TradeRequest[i].Suffix = TradeVehicles[j].Suffix;
-			// 				TradeRequest[i]["Trade_Id.Trade_Id"] = TradeVehicles[j]["Trade_Id.Trade_Id"];
+			// 				TradeRequest[i]["Trade_Id"] = TradeVehicles[j]["Trade_Id"];
 			// 				TradeRequest[i].VTN = TradeVehicles[j].VTN;
 
 			// 			}
@@ -244,7 +244,7 @@ sap.ui.define([
 			// 	var finalArray = [];
 			// 	for (var k = 0; k < filtered.length; k++) {
 			// 		for (var l = 0; l < oTradeVehicleDesc.length; l++) {
-			// 			if (filtered[k].Trade_Id == oTradeVehicleDesc[l]["Trade_Id.Trade_Id"] && filtered[k].VTN == oTradeVehicleDesc[l]["VTN.VTN"] &&
+			// 			if (filtered[k].Trade_Id == oTradeVehicleDesc[l]["Trade_Id"] && filtered[k].VTN == oTradeVehicleDesc[l]["VTN"] &&
 			// 				oTradeVehicleDesc[l].SPRAS == Spars) {
 			// 				filtered[k].Ext_Colour_Desc = oTradeVehicleDesc[l].Ext_Colour_Desc;
 			// 				filtered[k].Int_Colour_Desc = oTradeVehicleDesc[l].Int_Colour_Desc;
@@ -320,10 +320,10 @@ sap.ui.define([
 			// 			filtered[n].Suffix = "";
 			// 		}
 
-			// 		if ("Trade_Id.Trade_Id" in filtered[n]) {
-			// 			filtered[n]["Trade_Id.Trade_Id"] = filtered[n]["Trade_Id.Trade_Id"];
+			// 		if ("Trade_Id" in filtered[n]) {
+			// 			filtered[n]["Trade_Id"] = filtered[n]["Trade_Id"];
 			// 		} else {
-			// 			filtered[n]["Trade_Id.Trade_Id"] = "";
+			// 			filtered[n]["Trade_Id"] = "";
 			// 		}
 
 			// 		if ("VTN" in filtered[n]) {
