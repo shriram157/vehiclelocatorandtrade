@@ -40,6 +40,27 @@ sap.ui.define([
 
 		onRouteMatched: function (oEvent) {
 						// this._setTheLogo();
+						
+						
+ 		
+                if 	(this.sCurrentLocale = 'FR') {
+
+                  var oViewModel = new sap.ui.model.json.JSONModel({
+				SPRAS:"French"
+			
+			});
+                } else{
+                	  var oViewModel = new sap.ui.model.json.JSONModel({
+			 
+				SPRAS:"English"
+			
+			});
+
+                 }		
+		
+		
+			this.getView().setModel(oViewModel, "languageModel");
+ 
 
 			var that = this;
 			Dealer_No = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
@@ -424,12 +445,13 @@ sap.ui.define([
 			var that = this;
 			//.getBindingContext().getObject();
 			var itemdelete = oEvent.getParameter('listItem').getBindingContextPath();
+			var textFromi18n = this.getView().getModel("i18n").getResourceBundle().getText("DoyouwanttoDelete");
 			var Delete_dialog = new sap.m.Dialog({
 				title: 'Delete',
 				type: 'Message',
 				state: 'Warning',
 				content: new sap.m.Text({
-					text: 'Do you want to delete the selected item?'
+					text: textFromi18n
 				}),
 				beginButton: new sap.m.Button({
 					text: 'Yes',

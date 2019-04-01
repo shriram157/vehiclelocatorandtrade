@@ -195,13 +195,14 @@
 										<ComboBox editable="false" width="100%" items="{Vehicles>/zc_mmfields}" class="readonlycombo" selectedKey="{ModelBlock>Zzseries}"
 											modelContextChange="onSeriesnum">
 											<items>
-												<core:Item key="{Vehicles>ModelSeriesNo}" text="{Vehicles>TCISeriesDescriptionEN}"/>
+							 					
+												<core:Item key="{Vehicles>ModelSeriesNo}" text="{=${languageModel>/SPRAS}==='English' ? ${Vehicles>TCISeriesDescriptionEN}:${Vehicles>TCISeriesDescriptionFR} }" />
 											</items>
 										</ComboBox>
 										<ComboBox editable="false" width="100%" items="{Vehicles>/zc_model}" class="readonlycombo" selectedKey="{ModelBlock>Zzmodel}"
 											modelContextChange="onModelnum">
 											<items>
-												<core:Item key="{Vehicles>Model}" text="{Vehicles>Model}-{Vehicles>ModelDescriptionEN}"/>
+											     <core:Item key="{Vehicles>Model}" text="{Vehicles>Model} - {=${languageModel>/SPRAS}==='English' ? ${Vehicles>ModelDescriptionEN}:${Vehicles>ModelDescriptionFR} }" />
 											</items>
 										</ComboBox>
 										<Text text="{ModelBlock>Zzduration}" wrapping="true" textAlign="Center"/>

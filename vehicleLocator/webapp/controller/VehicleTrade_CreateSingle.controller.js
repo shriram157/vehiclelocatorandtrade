@@ -418,7 +418,10 @@ sap.ui.define([
 					return;
 				}*/
 			if (this.getView().byId("VT_CStradinRet").getSelectedKey() == "Yes" && this.getView().byId("FromFourth").getText() == "") {
-				sap.m.MessageBox.warning("Please select a vehicle");
+				var sTextFromi18n = this.getView().getModel("i18n").getResourceBundle().getText("pleaseSelectVehicle");
+				
+					sap.m.MessageBox.warning(sTextFromi18n);
+				// sap.m.MessageBox.warning("Please select a vehicle");
 
 				return;
 

@@ -749,6 +749,37 @@ for(var i=0;i<oResults.length;i++){
 					}
 
 				}
+				
+// add an entry called ALL
+
+      						oCombine.push({
+							"Suffix": '',
+							"SuffixDescriptionEN": 'ALL',
+							"SuffixDescriptionFR": 'ALL',  // to be replaced with French description from i18n
+							/* "MarktgIntDescEN": SufixDescription[b].int_desc_en,*/
+							// "mrktg_int_desc_en": '',
+							// "mrktg_int_desc_fr": '',
+
+							"SPRAS": SPRAS
+							// "int_c":''
+								/*"compareField":_that.temp[n].Suffix+_that.temp1[m].int_desc_en*/
+						});
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				/*	for (var i = 0; i < SufixDescription.length; i++) {
 					if("SuffixDescriptionEN" in SufixDescription[i]){
 						SufixDescription[i].SuffixDescriptionEN=SufixDescription[i].SuffixDescriptionEN;
@@ -1070,6 +1101,14 @@ for(var i=0;i<oResults.length;i++){
 			var McCmbo = that.getView().byId("McCmbo").getSelectedKey();
 			//	var oMcCmbo  = that.getView().byId("McCmbo").getSelectedKey();
 			var SuffCmbo = that.getView().byId("SuffCmbo").getSelectedKey();
+			
+			
+			if (SuffCmbo == 'undefined' || SuffCmbo == ""){
+				var SuffCmbo = that.getView().byId("SuffCmbo").getValue();
+				if (SuffCmbo == " - ALL/") {
+					 SuffCmbo = "ALL";
+				}
+			}
 
 			//	var suffix = that.getView().byId("SuffCmbo").getSelectedKey();
 
@@ -1232,8 +1271,29 @@ for(var i=0;i<oResults.length;i++){
 			/*	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '"+McCmbo+"' and endswith (zzintcol,'"+this.intercolor+"') and zzsuffix eq '"+SuffCmbo+"' and zzmoyr eq '"+MoyearCombo+
 						"'&$format=json";*/
 			/*new url*****/
-			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '" + McCmbo + "' and endswith (zzintcol,'" + this.intercolor +
+			
+			if (SuffCmbo == 'ALL') {
+							var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '" + McCmbo + "' and endswith (zzintcol,'" + '' +
+				"') and zzmoyr eq '" + MoyearCombo + "'&$format=json";
+				
+			} else {
+							var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '" + McCmbo + "' and endswith (zzintcol,'" + this.intercolor +
 				"') and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + MoyearCombo + "'&$format=json";
+				
+			}
+			
+			
+			
+			
+			// var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '" + McCmbo + "' and endswith (zzintcol,'" + this.intercolor +
+			// 	"') and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + MoyearCombo + "'&$format=json";
+			
+			
+			
+			
+			
+			
+			
 			/*new url*/
 
 			/*	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq'" + McCmbo + "' and zzextcol eq '" + this.SelectedExteriorColorCode +
@@ -1544,7 +1604,7 @@ for(var i=0;i<oResults.length;i++){
 				arr.push(allItem[i].getText());
 			}
 			var that = this;
-			if (arr.indexOf(that.value) < 0 && combo_IdSel == "") {
+			if ((arr.indexOf(that.value) < 0 && combo_IdSel == "") && (that.value != "- ALL/") ) {
 				combo_Id.setValueState("Error");
 				combo_Id.setValue();
 				that.getView().byId("SeriesErrMsgStrip").setText("select mandetory fields");
