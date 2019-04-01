@@ -1838,10 +1838,10 @@ for(var i=0;i<oResults.length;i++){
 		},
 		_setTheLanguage: function (oEvent) {
 
-			var oI18nModel = new sap.ui.model.resource.ResourceModel({
-				bundleUrl: "i18n/i18n.properties"
-			});
-			this.getView().setModel(oI18nModel, "i18n");
+			// var oI18nModel = new sap.ui.model.resource.ResourceModel({
+			// 	bundleUrl: "i18n/i18n.properties"
+			// });
+			// this.getView().setModel(oI18nModel, "i18n");
 
 			//  get the locale to determine the language. 
 			var isLocaleSent = window.location.search.match(/language=([^&]*)/i);

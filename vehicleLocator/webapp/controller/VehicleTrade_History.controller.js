@@ -56,7 +56,23 @@ sap.ui.define([
 			}
 			this.nodeJsUrl = this.sPrefix;
 			var Dealer_No = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].DealerCode;
-			var lang = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language.slice(0, 1);
+			// var lang = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language.slice(0, 1);  //0104
+			var lang;
+		                if (this.sCurrentLocaleD == "French") {
+
+                 lang = 'F';
+			
+	 
+                } else{
+                 
+                   lang = 'E';
+
+                 }
+			
+			
+			
+			
+			
 			var oModel = new sap.ui.model.odata.ODataModel(this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata", true);
 
 			var Filter0 = new sap.ui.model.Filter('Requesting_Dealer', 'EndsWith', Dealer_No);
@@ -606,10 +622,10 @@ sap.ui.define([
 		},
 		_setTheLanguage: function (oEvent) {
 
-			var oI18nModel = new sap.ui.model.resource.ResourceModel({
-				bundleUrl: "i18n/i18n.properties"
-			});
-			this.getView().setModel(oI18nModel, "i18n");
+			// var oI18nModel = new sap.ui.model.resource.ResourceModel({
+			// 	bundleUrl: "i18n/i18n.properties"
+			// });
+			// this.getView().setModel(oI18nModel, "i18n");
 
 			//  get the locale to determine the language. 
 			var isLocaleSent = window.location.search.match(/language=([^&]*)/i);
@@ -629,10 +645,8 @@ sap.ui.define([
 				});
 				this.getView().setModel(i18nModel, "i18n");
 				this.sCurrentLocale = 'FR';
-				// set the right image for logo	 - french		
-				/*				var currentImageSource = this.getView().byId("idLexusLogo");
-								currentImageSource.setProperty("src", "images/Lexus_FR.png");*/
-
+					this.sCurrentLocaleD = 'French';
+			 
 			} else {
 				var i18nModel = new sap.ui.model.resource.ResourceModel({
 					bundleUrl: "i18n/i18n.properties",
@@ -641,9 +655,7 @@ sap.ui.define([
 				});
 				this.getView().setModel(i18nModel, "i18n");
 				this.sCurrentLocale = 'EN';
-				// set the right image for logo			
-				/*				var currentImageSource = this.getView().byId("idLexusLogo");
-								currentImageSource.setProperty("src", "images/Lexus_EN.png");*/
+			 	this.sCurrentLocaleD = 'English';
 
 			}
 
