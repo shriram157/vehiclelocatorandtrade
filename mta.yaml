@@ -1,5 +1,5 @@
 ID: vehiclelocatorandtrade
-_schema-version: '2.1'
+_schema-version: '3.1'
 description: Vehicle locator and trade consolidated app
 version: 0.0.1
 
@@ -18,6 +18,7 @@ modules:
       disk-quota: 512M
       memory: 256M
    properties:
+      UPS_NAME: VEHICLE_LOCATOR_AND_TRADE_APIM_CUPS
       XS_APP_LOG_LEVEL: info
       XS_LOG_USER: true
       XS_LOG_REFERER: true

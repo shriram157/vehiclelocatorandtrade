@@ -13,10 +13,12 @@ module.exports = function (appContext) {
 
 	var app = express.Router();
 
+	// Get UPS name from env var UPS_NAME
+	var apimServiceName = process.env.UPS_NAME;
 	var options = {};
 	options = Object.assign(options, xsenv.getServices({
 		api: {
-			name: "VEHICLE_LOCATOR_AND_TRADE_APIM_CUPS"
+			name: apimServiceName
 		}
 	}));
 
