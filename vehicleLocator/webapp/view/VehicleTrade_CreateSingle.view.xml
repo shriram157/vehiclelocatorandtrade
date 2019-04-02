@@ -4,19 +4,40 @@
 	xmlns:html="http://www.w3.org/1999/xhtml">
 	<App>
 		<pages class="oImgsampl" height="200px">
-			<Page showNavButton="false" navButtonPress="onBack">
-				<customHeader>
+			<Page  >
+	
+	 				<customHeader>
 					<Bar class="sapUiSmallPaddingBeginEnd clCustomHeaderBg">
 						<contentLeft>
+						
 							<Image id="idLexusLogo" src="Images/toyota_logo_colour.png" width="100px"/>
 							<Text text="|" class="sapUiTinyMarginBeginEnd"/>
 							<Text class="clCustomFont" text="{i18n>PageTitle}"/>
 						</contentLeft>
 						<contentRight>
-							<Button text="Logout"/>
+						 
+									<Button   class="VLbtn2" text="{i18n>Back}" type="Transparent" press="onNavBack" width="auto"/>
+						<!--<Link text="{i18n>Back}" class="clCustomFont sapUiSmallMargin" press="handlebacksearch"/>-->
 						</contentRight>
 					</Bar>
 				</customHeader>
+				
+ 			<!--	<customHeader>-->
+				<!--	<Bar class="sapUiSmallPaddingBeginEnd clCustomHeaderBg">-->
+				<!--		<contentLeft>-->
+						
+				<!--			<Image id="idLexusLogo" src="Images/toyota_logo_colour.png" width="100px"/>-->
+				<!--			<Text text="|" class="sapUiTinyMarginBeginEnd"/>-->
+				<!--			<Text class="clCustomFont" text="{i18n>PageTitle}"/>-->
+				<!--		</contentLeft>-->
+				<!--		<contentRight>-->
+						 
+				<!--					<Button   class="VLbtn2" text="{i18n>Back}" type="Transparent" press="onNavBackToSearchResult" width="auto"/>-->
+						<!--<Link text="{i18n>Back}" class="clCustomFont sapUiSmallMargin" press="handlebacksearch"/>-->
+				<!--		</contentRight>-->
+				<!--	</Bar>-->
+				<!--</customHeader>-->
+				
 				<content>
 					<tnt:ToolHeader>
 			<Label id="oDealerCode3" width="auto"/>
@@ -48,7 +69,7 @@
 									<Text text="{TradeModel>matnr} - {=${languageModel>/SPRAS}==='English' ? ${TradeModel>model_desc_en}:${TradeModel>model_desc_fr} }" id="oZmodel" />
 								<Label text="{i18n>Suffix}"/>
 								<!--<Text text="{TradeModel>zzsuffix}-{TradeModel>suffix_desc_en}/{TradeModel>mrktg_int_desc_en}" id="oZsuffix"/>-->
-<Text text="{TradeModel>zzsuffix} - {=${languageModel>/SPRAS}==='English' ? ${TradeModel>suffix_desc_en}:${TradeModel>suffix_desc_fr} }/{=${languageModel>/SPRAS}==='English' ? ${TradeModel>mrktg_int_desc_en}:${TradeModel>mrktg_int_desc_fr} }" id="oZsuffix"	/>							
+							<Text text="{TradeModel>zzsuffix} - {=${languageModel>/SPRAS}==='English' ? ${TradeModel>suffix_desc_en}:${TradeModel>suffix_desc_fr} }/{=${languageModel>/SPRAS}==='English' ? ${TradeModel>mrktg_int_desc_en}:${TradeModel>mrktg_int_desc_fr} }" id="oZsuffix"	/>							
 								
 								
 								<Label text="{i18n>APX}"/>

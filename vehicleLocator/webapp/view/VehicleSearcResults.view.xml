@@ -4,21 +4,52 @@
 	<App>
 		<!--<pages class="oImgsampl" height="200px">-->
 			
-				<Page showHeader="true" title="{i18n>PageTitle}" showFooter="true" showNavButton="true" navButtonPress="_onPageNavButtonPress"	class="sapUiSizeCompact" enableScrolling="true">
+				<Page showHeader="true" title="{i18n>PageTitle}" showFooter="true" showNavButton="true" navButtonPress="handlebacksearch"	class="sapUiSizeCompact" enableScrolling="true">
 			
  
-				<customHeader>
+ 				<customHeader>
 					<Bar class="sapUiSmallPaddingBeginEnd clCustomHeaderBg">
 						<contentLeft>
+						
 							<Image id="idLexusLogo" src="Images/toyota_logo_colour.png" width="100px"/>
 							<Text text="|" class="sapUiTinyMarginBeginEnd"/>
 							<Text class="clCustomFont" text="{i18n>PageTitle}"/>
 						</contentLeft>
 						<contentRight>
-					
+						 
+									<Button   class="VLbtn2" text="{i18n>Back}" type="Transparent" press="onNavBack" width="auto"/>
+						<!--<Link text="{i18n>Back}" class="clCustomFont sapUiSmallMargin" press="handlebacksearch"/>-->
 						</contentRight>
 					</Bar>
 				</customHeader>
+				<!--<tnt:ToolHeader>-->
+				<!--	<Link text="{i18n>PageTitle}" class="clCustomFont sapUiSmallMargin" press="onMenuLinkPress"/>-->
+				<!--	<Link text="{i18n>VehicleDetails}" class="clCustomFont sapUiSmallMargin" press="onMenuLinkPress"/>-->
+				<!--	<Link text="{i18n>ChangeHistory}" class="clCustomFont sapUiSmallMargin" press="onMenuLinkPress"/>-->
+				<!--	<ToolbarSpacer>-->
+				<!--		<layoutData>-->
+				<!--			<OverflowToolbarLayoutData priority="NeverOverflow" minWidth="20px"/>-->
+				<!--		</layoutData>-->
+				<!--	</ToolbarSpacer>-->
+					<!--<Link text="{i18n>Back}" class="clCustomFont sapUiSmallMargin" press="onMenuLinkPress"/>-->
+				<!--</tnt:ToolHeader>-->
+ 
+ 
+ 
+ 
+ 
+				<!--	<customHeader showNavButton="true">-->
+				<!--	<Bar class="sapUiSmallPaddingBeginEnd clCustomHeaderBg">-->
+				<!--		<contentLeft>-->
+				<!--			<Image id="idLexusLogo" src="Images/toyota_logo_colour.png" width="100px"/>-->
+				<!--			<Text text="|" class="sapUiTinyMarginBeginEnd"/>-->
+				<!--			<Text class="clCustomFont" text="{i18n>PageTitle}"/>-->
+				<!--		</contentLeft>-->
+				<!--		<contentRight>-->
+					
+				<!--		</contentRight>-->
+				<!--	</Bar>-->
+				<!--</customHeader>-->
 				
 				<content>
 					<tnt:ToolHeader>
@@ -283,7 +314,7 @@
                          
                       <Column id="zzvtn1"   demandPopin="true" minScreenWidth="Tablet"
                             hAlign="Left">
-                        <Text text="VTN For Local Testing"/>
+                        <Text text="VTN"/>
                          </Column>                       
                          
                          
@@ -325,9 +356,7 @@
                 </items>
             </Table>
 	
-<!--============================ use the below	-->
-	
-	
+
 				</content>
 			</Page>
 		<!--</pages>-->

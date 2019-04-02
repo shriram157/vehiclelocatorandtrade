@@ -47,7 +47,7 @@ sap.ui.define([
 
 				this._setTheLanguage();
 
-				this._setTheLogo();	
+				 this._setTheLogo();	
 
 
 
@@ -237,7 +237,7 @@ sap.ui.define([
 						});
 						console.log("final searched data", tempTabData);
 
-						console.log("final searched data", tempTabData);
+			
 
 						var suffixField = that.value;
 						var oSuffmodel = new sap.ui.model.json.JSONModel(suffixField);
@@ -862,7 +862,7 @@ sap.ui.define([
 				var oTradecolId = this.getView().byId('TradecolId');
 				oTradecolId.setVisible(oTradecolId.getVisible());
 
-				this.getView().byId('table1VSR').setSelectionMode("None");
+				this.getView().byId("table1VSR").setSelectionMode("None");
 
 				/*	var oIncsoldve = this.getView().byId('chkmov');
 					oIncsoldve.setVisible(!oIncsoldve.getVisible());
@@ -913,10 +913,15 @@ sap.ui.define([
                  }
  
                		this.getView().setModel(oViewModel, "languageModel");
+            		
+               		
  
 				var model = new sap.ui.model.json.JSONModel(Status);
 				model.setSizeLimit(1000);
 				this.getView().setModel(model, "vehicleSearchTableModel");
+				
+				
+				
 
 				var tableLength = this.getView().getModel("vehicleSearchTableModel").getData().length;
 				var oModelDetail = this.getView().getModel("detailView");

@@ -116,9 +116,21 @@ sap.ui.define([
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 				oRouter.navTo("VehicleLocSearch", {}, true);
 			}
-		}
+		},
 		
-		
+
+		onNavBack2: function() {
+		/*	debugger*/
+			var oHistory = History.getInstance();
+			var sPreviousHash = oHistory.getPreviousHash();
+
+			if (sPreviousHash !== undefined) {
+				window.history.go(-2);
+			} else {
+				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+				oRouter.navTo("VehicleLocSearch", {}, true);
+			}
+		}		
 
 		/**
 		 * Event handler for navigating back.

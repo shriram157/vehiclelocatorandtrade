@@ -1260,7 +1260,25 @@ sap.ui.define([
 				sState = iValueLength > iMaxLength ? "Warning" : "None";
 
 			oTextArea.setValueState(sState);
+		},
+		onNavBackToSearchResult: function (oEvent) {
+				// var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+				// oRouter.navTo("VehicleSearcResults", true);	
+							var Obj = {};
+					Obj.selectedSuffix = "";
+					Obj.LoginUser = "";
+					sap.ui.core.BusyIndicator.hide();
+					this.getRouter().navTo("VehicleSearcResults", {
+
+						LoginUser: JSON.stringify(Obj)
+
+					});		
+				
+				
+				
+				
 		}
+
 
 	});
 });
