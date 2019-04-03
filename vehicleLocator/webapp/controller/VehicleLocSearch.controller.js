@@ -750,20 +750,20 @@ for(var i=0;i<oResults.length;i++){
 
 				}
 				
-// add an entry called ALL
+// add an entry called ALL// TODO: to be confirmed, if really needed we should proceed. 
 
-      						oCombine.push({
-							"Suffix": '',
-							"SuffixDescriptionEN": 'ALL',
-							"SuffixDescriptionFR": 'ALL',  // to be replaced with French description from i18n
-							/* "MarktgIntDescEN": SufixDescription[b].int_desc_en,*/
-							// "mrktg_int_desc_en": '',
-							// "mrktg_int_desc_fr": '',
+      //						oCombine.push({
+						// 	"Suffix": '',
+						// 	"SuffixDescriptionEN": 'ALL',
+						// 	"SuffixDescriptionFR": 'ALL',  // to be replaced with French description from i18n
+						// 	/* "MarktgIntDescEN": SufixDescription[b].int_desc_en,*/
+						// 	// "mrktg_int_desc_en": '',
+						// 	// "mrktg_int_desc_fr": '',
 
-							"SPRAS": SPRAS
-							// "int_c":''
-								/*"compareField":_that.temp[n].Suffix+_that.temp1[m].int_desc_en*/
-						});
+						// 	"SPRAS": SPRAS
+						// 	// "int_c":''
+						// 		/*"compareField":_that.temp[n].Suffix+_that.temp1[m].int_desc_en*/
+						// });
 				
 				
 				
