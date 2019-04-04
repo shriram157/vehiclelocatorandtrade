@@ -187,7 +187,7 @@
 											<Text text="{Suffix} - {Suffix_Desc}/{Int_Colour_Desc}" />
 											<Text text="{APX}" />
 											<Text text="{Ext_Colour}-{Ext_Colour_Desc}"/>
-											<Text text="{path:'Changed_on', formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false"/>
+											<Text text="{path:'Changed_on', formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDateTradeHistory'}" wrapping="false"/>
 										</cells>
 									</ColumnListItem>
 								</items>

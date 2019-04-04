@@ -14,14 +14,11 @@ sap.ui.define([
 
 		onInit: function () {
 
-		
-
 			// ========================================== integrating security ==========================================Begin
 
 			//======================================================================================================================//			
 			//  on init method,  get the token attributes and authentication details to the UI from node layer.  - begin
 			//======================================================================================================================//		
-
 
 			// the business partner oData calls should happen onit.
 			var sLocation = window.location.host;
@@ -69,8 +66,6 @@ sap.ui.define([
 				}
 
 			});
-
-		
 
 			// get the attributes and BP Details - 	// TODO: 
 			$.ajax({
@@ -122,7 +117,7 @@ sap.ui.define([
 							"BusinessPartnerType": "Z001",
 							"searchTermReceivedDealerName": "42120"
 						});
-						
+
 						// 						BpDealer.push({
 						// 	"BusinessPartnerKey": "2400042193",
 						// 	"BusinessPartner": "42193",
@@ -132,8 +127,7 @@ sap.ui.define([
 						// 	"BusinessPartnerType": "Z001",
 						// 	"searchTermReceivedDealerName": "42193"
 						// });
-						
-						
+
 					}
 
 					//  set your model or use the model below - // TODO: 
@@ -141,7 +135,7 @@ sap.ui.define([
 					sap.ui.getCore().setModel(new sap.ui.model.json.JSONModel(BpDealer), "LoginBpDealerModel");
 					var LoggedInDealerCode1 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
 					var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
-				    that.getView().byId("oDealerCode1").setText(LoggedInDealerCode1); 
+					that.getView().byId("oDealerCode1").setText(LoggedInDealerCode1);
 					that.getView().byId("oDealertitle").setText(LoggedInDealer);
 
 					// read the saml attachments the same way 
@@ -159,10 +153,9 @@ sap.ui.define([
 
 					});
 
-
 					that.getView().setModel(new sap.ui.model.json.JSONModel(userAttributes), "userAttributesModel");
 					sap.ui.getCore().setModel(new sap.ui.model.json.JSONModel(userAttributes), "LoginuserAttributesModel");
-				
+
 					that.security();
 				}.bind(this),
 				error: function (response) {
@@ -459,9 +452,9 @@ sap.ui.define([
 					oResults.push(obj[key]);
 				that.Fullurls = oResults;
 				var SeriesDescription = that.SeriesDescription(oResults);
-			//	var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language;  //2603
+				//	var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language;  //2603
 				var SPRAS = that.sCurrentLocaleD;
-				
+
 				if (SeriesDescription.length != 0) {
 					for (var a = 0; a < that.Fullurls.length; a++) {
 						for (var b = 0; b < SeriesDescription.length; b++) {
@@ -593,8 +586,8 @@ sap.ui.define([
 						oResults.push(obj[key]);
 
 					// var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language;  //2603
-						var SPRAS = that.sCurrentLocaleD;
-					
+					var SPRAS = that.sCurrentLocaleD;
+
 					for (var i = 0; i < oResults.length; i++) {
 						oResults[i].SPRAS = SPRAS;
 					}
@@ -724,7 +717,7 @@ for(var i=0;i<oResults.length;i++){
 
 				var SufixDescription = SuffixDescription;
 				// var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language;  //2603
-						var SPRAS = that.sCurrentLocaleD; 
+				var SPRAS = that.sCurrentLocaleD;
 				var oCombine = [];
 				for (var a = 0; a < that.Fullurls.length; a++) {
 					for (var b = 0; b < SufixDescription.length; b++) {
@@ -749,37 +742,22 @@ for(var i=0;i<oResults.length;i++){
 					}
 
 				}
-				
-// add an entry called ALL// TODO: to be confirmed, if really needed we should proceed. 
 
-      //						oCombine.push({
-						// 	"Suffix": '',
-						// 	"SuffixDescriptionEN": 'ALL',
-						// 	"SuffixDescriptionFR": 'ALL',  // to be replaced with French description from i18n
-						// 	/* "MarktgIntDescEN": SufixDescription[b].int_desc_en,*/
-						// 	// "mrktg_int_desc_en": '',
-						// 	// "mrktg_int_desc_fr": '',
+				// add an entry called ALL// TODO: to be confirmed, if really needed we should proceed. 
 
-						// 	"SPRAS": SPRAS
-						// 	// "int_c":''
-						// 		/*"compareField":_that.temp[n].Suffix+_that.temp1[m].int_desc_en*/
-						// });
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
+				//						oCombine.push({
+				// 	"Suffix": '',
+				// 	"SuffixDescriptionEN": 'ALL',
+				// 	"SuffixDescriptionFR": 'ALL',  // to be replaced with French description from i18n
+				// 	/* "MarktgIntDescEN": SufixDescription[b].int_desc_en,*/
+				// 	// "mrktg_int_desc_en": '',
+				// 	// "mrktg_int_desc_fr": '',
+
+				// 	"SPRAS": SPRAS
+				// 	// "int_c":''
+				// 		/*"compareField":_that.temp[n].Suffix+_that.temp1[m].int_desc_en*/
+				// });
+
 				/*	for (var i = 0; i < SufixDescription.length; i++) {
 					if("SuffixDescriptionEN" in SufixDescription[i]){
 						SufixDescription[i].SuffixDescriptionEN=SufixDescription[i].SuffixDescriptionEN;
@@ -1101,12 +1079,11 @@ for(var i=0;i<oResults.length;i++){
 			var McCmbo = that.getView().byId("McCmbo").getSelectedKey();
 			//	var oMcCmbo  = that.getView().byId("McCmbo").getSelectedKey();
 			var SuffCmbo = that.getView().byId("SuffCmbo").getSelectedKey();
-			
-			
-			if (SuffCmbo == 'undefined' || SuffCmbo == ""){
+
+			if (SuffCmbo == 'undefined' || SuffCmbo == "") {
 				var SuffCmbo = that.getView().byId("SuffCmbo").getValue();
-				if (SuffCmbo == " - ALL/") {
-					 SuffCmbo = "ALL";
+				if (SuffCmbo == " - ALL/") { //gsr
+					SuffCmbo = "ALL";
 				}
 			}
 
@@ -1271,29 +1248,20 @@ for(var i=0;i<oResults.length;i++){
 			/*	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '"+McCmbo+"' and endswith (zzintcol,'"+this.intercolor+"') and zzsuffix eq '"+SuffCmbo+"' and zzmoyr eq '"+MoyearCombo+
 						"'&$format=json";*/
 			/*new url*****/
-			
+
 			if (SuffCmbo == 'ALL') {
-							var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '" + McCmbo + "' and endswith (zzintcol,'" + '' +
-				"') and zzmoyr eq '" + MoyearCombo + "'&$format=json";
-				
+				var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '" + McCmbo + "' and endswith (zzintcol,'" + '' +
+					"') and zzmoyr eq '" + MoyearCombo + "'&$format=json";
+
 			} else {
-							var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '" + McCmbo + "' and endswith (zzintcol,'" + this.intercolor +
-				"') and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + MoyearCombo + "'&$format=json";
-				
+				var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '" + McCmbo + "' and endswith (zzintcol,'" + this.intercolor +
+					"') and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + MoyearCombo + "'&$format=json";
+
 			}
-			
-			
-			
-			
+
 			// var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '" + McCmbo + "' and endswith (zzintcol,'" + this.intercolor +
 			// 	"') and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + MoyearCombo + "'&$format=json";
-			
-			
-			
-			
-			
-			
-			
+
 			/*new url*/
 
 			/*	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq'" + McCmbo + "' and zzextcol eq '" + this.SelectedExteriorColorCode +
@@ -1325,8 +1293,11 @@ for(var i=0;i<oResults.length;i++){
 						for (var j = 0; j < a.length; j++) {
 							if (SelectedZone[i] == a[j].vkbur) {
 								filtered_zone.push(a[j]);
-
 							}
+					    	if (a[i].dnc_ind == "Y") { // Defect 11177
+									a[i].zzordertype = "";
+								}
+		
 
 						}
 
@@ -1604,7 +1575,7 @@ for(var i=0;i<oResults.length;i++){
 				arr.push(allItem[i].getText());
 			}
 			var that = this;
-			if ((arr.indexOf(that.value) < 0 && combo_IdSel == "") && (that.value != "- ALL/") ) {
+			if ((arr.indexOf(that.value) < 0 && combo_IdSel == "") && (that.value != "- ALL/")) {
 				combo_Id.setValueState("Error");
 				combo_Id.setValue();
 				that.getView().byId("SeriesErrMsgStrip").setText("select mandetory fields");
@@ -1776,18 +1747,15 @@ for(var i=0;i<oResults.length;i++){
 					}
 
 				}
-				
-				
-				
-				// var Spars = "E";
-			   			     var Spars;
-		    if (that.sCurrentLocaleD == "French") {
-		    		Spars = "F";
-		    } else {
-		    		Spars = "E"; 
-		    }
 
-				
+				// var Spars = "E";
+				var Spars;
+				if (that.sCurrentLocaleD == "French") {
+					Spars = "F";
+				} else {
+					Spars = "E";
+				}
+
 				var finalArray = [];
 				for (var k = 0; k < filtered.length; k++) {
 					for (var l = 0; l < oTradeVehicleDesc.length; l++) {
@@ -1910,7 +1878,7 @@ for(var i=0;i<oResults.length;i++){
 			} else {
 				var sSelectedLocale = "EN"; // default is english 
 			}
- 
+
 			if (sSelectedLocale == "fr") {
 				var i18nModel = new sap.ui.model.resource.ResourceModel({
 					bundleUrl: "i18n/i18n.properties",
@@ -1920,7 +1888,6 @@ for(var i=0;i<oResults.length;i++){
 				this.getView().setModel(i18nModel, "i18n");
 				this.sCurrentLocale = 'FR';
 				this.sCurrentLocaleD = 'French';
-				 
 
 			} else {
 				var i18nModel = new sap.ui.model.resource.ResourceModel({

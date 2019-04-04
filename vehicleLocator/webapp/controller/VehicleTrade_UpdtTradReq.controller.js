@@ -1645,7 +1645,7 @@ sap.ui.define([
 					
 					var convertTime = moment(currentTime).format("YYYY-MM-DD HH:mm:ss");
 					
-					var returnThisDate = new Date(convertTime);		
+						var returnThisDate = new Date(convertTime);		
 					
 					return new Date(returnThisDate);
 

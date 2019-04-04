@@ -43,7 +43,7 @@ sap.ui.define([
 						
 						
  		
-                if 	(this.sCurrentLocale = 'FR') {
+                if 	(this.sCurrentLocale == 'FR') {
 
                   var oViewModel = new sap.ui.model.json.JSONModel({
 				SPRAS:"French"

@@ -266,7 +266,46 @@ sap.ui.define(function () {
 
 		},
 
-		TradeSummaryoDate: function (Created_On) {
+		TradeSummaryoDateTradeHistory: function (Created_On) {
+			if (Created_On != null && Created_On != "" && Created_On != "/Date(0)/" && !Created_On.getMonth) {
+				var dateTo = Created_On.split("(")[1];
+				if (Created_On.indexOf("+") != -1) {
+					/*dateTo = dateTo.split("+")[0];*/
+					Created_On = new Date(Created_On.split("(")[1].substring(0, 10) * 1000).toDateString().substring(4, 15);
+					var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+						pattern: "yyyy-MM-dd"
+					});
+					return oDateFormat.format(new Date(Created_On));
+
+				} else {
+					dateTo = dateTo;
+					var dataTo1 = Number(dateTo.replace(/[^A-Z\d\s]/gi, '').replace(/[^0-9\.]+/g, ""));
+					 var ValidTo = new Date(dataTo1);
+ 
+				var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+					pattern: "yyyy-MM-dd"
+				});
+				return oDateFormat.format(new Date(ValidTo));
+ 
+				}
+
+			} else if (Created_On != null && Created_On.getMonth) {
+				
+				
+				var dateAsReceived = moment.tz(Created_On, "GMT");
+				var returnThisDate = moment(dateAsReceived).format('YYYY-MM-DD');
+				
+				// var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+				// 	pattern: "yyyy-MM-dd"
+				// });
+			
+					return returnThisDate;
+			} else {
+				return "";
+			}
+		},
+		
+			TradeSummaryoDate: function (Created_On) {
 			if (Created_On != null && Created_On != "" && Created_On != "/Date(0)/" && !Created_On.getMonth) {
 				var dateTo = Created_On.split("(")[1];
 				if (Created_On.indexOf("+") != -1) {

@@ -216,7 +216,8 @@ sap.ui.define([
 
 				that.oSelectedYear = new Date().getFullYear();
 				//for temporary year 2018-data available for 2018 
-				that.oSelectedYear = "2018";
+				// that.oSelectedYear = "2018"; 
+				// that.oSelectedYear = new Date().getFullYear();
 				/*	that.getView().byId("Pacific").setSelected(false);
 					that.getView().byId("Prairie").setSelected(false);
 					that.getView().byId("Central").setSelected(false);

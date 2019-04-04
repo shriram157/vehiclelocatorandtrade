@@ -600,6 +600,15 @@ sap.ui.define([
 			oModelDetail.setProperty("/tableCount", sExpectedText);
 
 			var tableData = sap.ushell.components.tableSearchResults.getModel("vehicleSearchTableModel").getData();
+			
+			
+			for (var i=0; i< tableData.length; i++) {
+					    if (tableData[i].dnc_ind == "Y") {    
+					    	tableData[i].zzordertype = "";
+					    	
+					  }
+			}
+			
 
 		},
 
@@ -847,6 +856,16 @@ sap.ui.define([
 		//},
 		onRouteMatched: function (oEvent) {
 			//debugger;
+			// if the user is retruning by pressing the back button,  then it is better, that we dont refresh the data again. 
+			var oModelForSearch = this.getView().getModel("vehicleSearchTableModel");
+			if (oModelForSearch != undefined){
+			var searchTableAlreadsyBuilt = this.getView().getModel("vehicleSearchTableModel").getData().length;
+			 if (searchTableAlreadsyBuilt != 0) {
+			 	return;
+			 }
+			}
+			
+			
 			
 			
 			var RoutedData = JSON.parse(oEvent.getParameter("arguments").LoginUser);
@@ -879,7 +898,7 @@ sap.ui.define([
  
                   //var newStatus = jQuery.extend(true, {}, Status);
                   
-                var newStatus = JSON.parse(JSON.stringify( Status ));
+                // var newStatus = JSON.parse(JSON.stringify( Status ));
                   
                   
  //  based on the logged in language, filter the model to the UI. 
@@ -914,7 +933,17 @@ sap.ui.define([
  
                		this.getView().setModel(oViewModel, "languageModel");
             		
-               		
+  //  if the flag is DNC then 
+               //check if the flag is dnc_ind = y then clear the value from the model zzordertype: "SO"// TODO: Guna
+               
+               //for (var i=0; i<Status.length; i++){
+               //	    if (Status[i].dnc_ind == "Y") {
+               //	    	Status[i].zzordertype = "";
+               //	    }
+               	
+               //}
+               
+   
  
 				var model = new sap.ui.model.json.JSONModel(Status);
 				model.setSizeLimit(1000);
@@ -1861,6 +1890,14 @@ if(sap.ui.Device.system.phone){
 			this.getView().byId("chkexi").setSelected(false);
 			this.getRouter().navTo("VehicleLocSearch");
 			this.getView().byId("VLRSuffix").updateBindings();
+	//when the back button is presssed, lets reset the existing model. 
+	            var Status = [];
+	       	    var model = new sap.ui.model.json.JSONModel(Status);
+				this.getView().setModel(model, "vehicleSearchTableModel");
+			
+			
+			
+			
 		},
 		SuffixFilter: function () {
 

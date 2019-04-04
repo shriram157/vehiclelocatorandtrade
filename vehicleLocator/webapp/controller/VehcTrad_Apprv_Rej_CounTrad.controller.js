@@ -1188,6 +1188,12 @@ sap.ui.define([
 	Created_By = truncateString(Created_By, 12);
 
 			var Created_On = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_On;
+			
+				Created_On = this.DatesFormattingCreatedOnDate(Created_On);
+			
+			
+			
+			
 			/*	Created_On = this.DatesFormatting(Created_On);*/
 		//	var Changed_on = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Changed_on;
 			var Requested_Dealer = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Dealer;
@@ -2740,7 +2746,58 @@ sap.ui.define([
 							sState = iValueLength > iMaxLength ? "Warning" : "None";
 
 					oTextArea.setValueState(sState);*/
+				},
+				
+				DatesFormattingCreatedOnDate: function (Created_On) {
+			if (Created_On != null && Created_On != "" && Created_On != "/Date(0)/") {
+				var dateTo = Created_On.split("(")[1];
+				if (Created_On.indexOf("+") != -1) {
+					/*dateTo = dateTo.split("+")[0];*/
+					Created_On = new Date(Created_On.split("(")[1].substring(0, 10) * 1000).toDateString().substring(4, 15);
+					var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+						pattern: "yyyy-MM-dd'T'HH:mm:ss"
+					});
+					return new Date(oDateFormat.format(new Date(Created_On)));
+
+				} else {
+					dateTo = dateTo;
+					// var dataTo1 = dateTo.substring(0, dateTo.length - 5);
+					// var ValidTo = new Date(dataTo1 * 1000);
+					
+					// ValidTo = ValidTo.toGMTString().substring(4, 16);
+
+					// var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+					// 	pattern: "yyyy-MM-dd'T'HH:mm:ss"
+					// });
+					
+					
+					var dataTo1 = dateTo.substring(0, dateTo.length -2 );
+					
+					var  currentTime = new Date(Number(dataTo1));
+					
+					// var  currentTime = new Date(dataTo1);    
+					
+					// var convertTime = moment(currentTime).tz(timezone).format("YYYY-MM-DD HH:mm:ss");
+					// var convertTime = moment(currentTime).tz("GMT").format("YYYY-MM-DD HH:mm:ss");
+					
+					var convertTime = moment(currentTime).format("YYYY-MM-DD HH:mm:ss");
+					
+						var returnThisDate = new Date(convertTime);		
+					
+					return new Date(returnThisDate);
+
+						// return new Date(oDateFormat.format(new Date(returnThisDate)));
+					
+					
+					// return new Date(oDateFormat.format(new Date(ValidTo)));
 				}
+
+			} else {
+				return "0000-00-00T00:00:00";
+			}
+		},				
+				
+				
 
 	/*	onBack :function()
 		{
