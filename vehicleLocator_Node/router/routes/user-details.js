@@ -67,6 +67,9 @@ app.get("/currentScopesForUser", (req, res) => {
 		var parsedData = JSON.stringify(req.authInfo.userAttributes);
 		var obj_data = JSON.parse(parsedData);
 
+         console.log(parsedData);  //// TODO: tobe removed
+
+
 		let legacyDealerCode;
 		try {
 			legacyDealerCode = obj_data.DealerCode[0];
@@ -123,6 +126,7 @@ app.get("/currentScopesForUser", (req, res) => {
 
 			if (scopeData[i] == xsuaaCredentials.xsappname + '.Manage_Vehicles') {
 				manageVehicles = true;
+				   
 			}
 			if (scopeData[i] == xsuaaCredentials.xsappname + '.View_Trade_Request') {
 				viewTradeRequest = true;
@@ -332,7 +336,7 @@ app.get("/currentScopesForUser", (req, res) => {
 
 	});
 
-	app.get("/attributes", (req, res) => {
+app.get("/attributes", (req, res) => {
  		var logger = req.loggingContext.getLogger("/Application/Route/UserDetails/Attributes");
 		var tracer = req.loggingContext.getTracer(__filename);
 		logger.info("attributes fetch started");
@@ -432,7 +436,7 @@ app.get("/currentScopesForUser", (req, res) => {
 				logger.info('Logged in User Zone before the API Url: %s', userZone);
 
 				url1 = "/API_BUSINESS_PARTNER/A_BusinessPartner?sap-client=" + client + "&$format=json" +
-					"&$expand=to_Customer/to_CustomerSalesArea&$filter=(BusinessPartnerType eq 'Z001' or BusinessPartnerType eq 'Z004' or BusinessPartnerType eq 'Z005') " +
+					"&$expand=to_Customer/to_CustomerSalesArea&$filter=(BusinessPartnerType eq 'Z001' or BusinessPartnerType eq 'Z004' or BusinessPartnerType eq 'Z005') and zstatus ne 'X'" +
 					"&$orderby=BusinessPartner asc";
 
 				// var url1 = "/API_BUSINESS_PARTNER/A_BusinessPartner/?$format=json&$expand=to_Customer&?sap-client=" + client +
@@ -458,13 +462,26 @@ app.get("/currentScopesForUser", (req, res) => {
 				csrfToken = response.headers['x-csrf-token'];
 
 				var json = JSON.parse(body);
-
+	
 				for (var i = 0; i < json.d.results.length; i++) {
+
 
 					if (userType != 'Dealer') {
 						if (json.d.results[i].to_Customer) {
 							if (json.d.results[i].to_Customer.to_CustomerSalesArea.results) {
-								var salesOfficeFromSAP = json.d.results[i].to_Customer.to_CustomerSalesArea.results[0].SalesOffice;
+								var salesOfficeFromSAP;
+							try {
+								 salesOfficeFromSAP = json.d.results[i].to_Customer.to_CustomerSalesArea.results[0].SalesOffice;
+							} catch (e) {
+								logger.info("Sales Office is Blank");
+									// return;
+							 
+							}
+	
+								
+								
+								
+								// var salesOfficeFromSAP = json.d.results[i].to_Customer.to_CustomerSalesArea.results[0].SalesOffice;
 							}
 						} else {
 
@@ -537,6 +554,7 @@ app.get("/currentScopesForUser", (req, res) => {
 					}
 				}
 				res.type("application/json").status(200).send(sendToUi);
+				logger.info('Results sent successfully');
 			} else {
 
 				var result = JSON.stringify(body);

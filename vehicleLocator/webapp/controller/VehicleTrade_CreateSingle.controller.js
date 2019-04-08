@@ -122,10 +122,14 @@ sap.ui.define([
 
 					var oReceivedData = sap.ui.getCore().SelectedTrade;
 					var oModel = new sap.ui.model.json.JSONModel(oReceivedData);
-
+					
+			
 					this.getView().setModel(oModel, "TradeModel");
 					sap.ui.getCore().setModel(oModel, "TradeModel");
 					this.getView().byId("SimpleFormDispla20").bindElement("TradeModel>/");
+					
+					
+					
 
 				} else if (oReceivedDataString == "VehicleTradeVehicle") {
 
@@ -177,6 +181,16 @@ sap.ui.define([
 
 				}
 			}
+// defect 11177 -  do not show 	dnc indicator based on order type		
+			var oModelData=this.getView().getModel("TradeModel").getData();
+			if (oModelData.dnc_ind == "Y") {
+			 	this.getView().byId("oOrdertype").setVisible(false);
+			} else {
+					this.getView().byId("oOrdertype").setVisible(true);
+			}
+			
+			
+			
 			var oArray = [{
 					"Trade_return": "Yes",
 					"State": "Yes"
@@ -186,6 +200,9 @@ sap.ui.define([
 				}
 
 			];
+			
+			
+			
 			var oModel = new sap.ui.model.json.JSONModel(oArray);
 			this.getView().byId("VT_CStradinRet").setModel(oModel);
 			//	this.getView().byId("VT_CStradinRet").setSeletedKey("Yes");
@@ -913,6 +930,7 @@ sap.ui.define([
 			var ointeriorReq = that.getView().getModel("TradeModel").oData.zzintcol;
 			var ovtnReq = that.getView().getModel("TradeModel").oData.zzvtn;
 			var ostatusReq = that.getView().getModel("TradeModel").getData().zz_trading_ind;
+			
 			var oOrdertypeReq = that.getView().getModel("TradeModel").getData().zzordertype;
 			var oDNCreq = that.getView().getModel("TradeModel").getData().dnc_ind;
 

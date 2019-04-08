@@ -205,6 +205,11 @@
 					"async": true,
 					"clearControlAggregation": false
 				},
+				"VehicleSearcResultsForZoneUser": {
+				"viewName": "VehicleSearcResultsForZoneUser",
+					"async": true,
+					"clearControlAggregation": false
+				},
 				"VehicleTrade_CreateSingle": {
 					"viewName": "VehicleTrade_CreateSingle",
 					"async": true,

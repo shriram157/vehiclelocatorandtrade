@@ -167,7 +167,7 @@
       
                                 <!--<Text text="{vehicleSelectTableModel>zzextcol} - {vehicleSelectTableModel>mktg_desc_en}"   width="auto" wrapping="false"/>-->
                                 
-                                 <Text text="{path:'vehicleSelectTableModel>zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}"  width="6rem" wrapping="false"/>
+                                 <Text text="{path:'vehicleSelectTableModel>zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}"  width="6rem" wrapping="false" visible="{vehicleSelectTableModel>/noDisplayOrderType}"/>
                                  
                                   <Text text="{path:'vehicleSelectTableModel>zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate1'}"  width="6rem" wrapping="false"/>   
                               

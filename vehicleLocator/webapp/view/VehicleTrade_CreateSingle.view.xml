@@ -83,32 +83,45 @@
 								
 									<Text text="{TradeModel>zzextcol} - {=${languageModel>/SPRAS}==='English' ? ${TradeModel>mktg_desc_en}:${TradeModel>mktg_desc_fr} }" id="Zextcolo" />
 		
-								<Label text="{i18n>CurrentETA}" id="cetalabelid"/>
+								<Label text="{i18n>CurrentETA} - {i18n>From}"  id="cetalabelid"/>
 								<VBox>
 									<HBox>
 										<Text text="{path:'TradeModel>zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate'}"
-											class="sapUiSmallMarginEnd" id="ctaid" width="4.5rem" ></Text>
-										<Text text="{i18n>From}" id="fromid" wrapping='true'/>
-									</HBox>
-									<HBox>
-										<Text text="{path:'TradeModel>pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="totxtid" width="4.5rem"
+											class="sapUiSmallMarginEnd" id="ctaid"   ></Text>
+										<!--<Text text="{i18n>From}" id="fromid" wrapping='true'/>-->
+									
+										<!--<Text text="{i18n>To} " id="tolabid" wrapping='true'/>-->
+										<Text text=" {i18n>To} : {path:'TradeModel>pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="totxtid" 
 											class="sapUiSmallMarginEnd"></Text>
 										<!--	<Label text="" width="3rem"/>-->
-										<Text text="{i18n>To}" id="tolabid" wrapping='true'/>
+										<!--<Text text="{i18n>To}" id="tolabid" wrapping='true'/>								-->
+								
+								
+								
 									</HBox>
+									<!--<HBox>-->
+									<!--	<Text text="{path:'TradeModel>pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="totxtid" width="4.5rem"-->
+									<!--		class="sapUiSmallMarginEnd"></Text>-->
+										<!--	<Label text="" width="3rem"/>-->
+									<!--	<Text text="{i18n>To}" id="tolabid" wrapping='true'/>-->
+									<!--</HBox>-->
 								</VBox>
-								<Label text="{i18n>PropsedETAtoNewDealer}" id="prpdlabid"/>
+								<Label text="{i18n>PropsedETAtoNewDealer} - {i18n>From}" id="prpdlabid"/>
 								<VBox>
 									<HBox>
-										<Text text="{path:'TradeModel>Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate'}" id="prpid" width="4.5rem"
+										<Text text="{path:'TradeModel>Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate'}" id="prpid"  
 											class="sapUiSmallMarginEnd"></Text>
-										<Text text="{i18n>From}" id="fromlabid" wrapping='true'/>
-									</HBox>
-									<HBox>
-										<Text text="{path:'TradeModel>Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.ProposedEtaToDate'}" id="otextlabel" width="4.5rem"
+										<!--<Text text="{i18n>From}" id="fromlabid" wrapping='true'/>-->
+										<!--<Text text="{i18n>To}"  id="idlabltxt" wrapping='true'/>	-->
+										<Text text="{i18n>To} : {path:'TradeModel>Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.ProposedEtaToDate'}" id="otextlabel"  
 											class="sapUiSmallMarginEnd" maxLines='1'></Text>
-										<Text text="{i18n>To}" id="idlabltxt" wrapping='true'/>
+										<!--<Text text="{i18n>To}" id="idlabltxt" wrapping='true'/>		-->
 									</HBox>
+									<!--<HBox>-->
+									<!--	<Text text="{path:'TradeModel>Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.ProposedEtaToDate'}" id="otextlabel" width="4.5rem"-->
+									<!--		class="sapUiSmallMarginEnd" maxLines='1'></Text>-->
+									<!--	<Text text="{i18n>To}" id="idlabltxt" wrapping='true'/>-->
+									<!--</HBox>-->
 								</VBox>
 								<core:Title text="{i18n>OfferVehicleInformation}" id="oOtherVehInfoid"/>
 								<!--	<VBox id="oVboxOtherVehicleInformation" visible="false">-->

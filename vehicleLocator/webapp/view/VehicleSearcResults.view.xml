@@ -1,6 +1,6 @@
 <mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:t="sap.ui.table" xmlns:l="sap.ui.layout"
 	xmlns:form="sap.ui.layout.form" xmlns:uxap="sap.uxap" xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form" xmlns:tnt="sap.tnt"
-	xmlns:html="http://www.w3.org/1999/xhtml" controllerName="vehicleLocator.controller.VehicleSearcResults">
+	xmlns:html="http://www.w3.org/1999/xhtml" controllerName="vehicleLocator.controller.VehicleSearcResultsForZoneUser">
 	<App>
 		<!--<pages class="oImgsampl" height="200px">-->
 			
@@ -22,35 +22,7 @@
 						</contentRight>
 					</Bar>
 				</customHeader>
-				<!--<tnt:ToolHeader>-->
-				<!--	<Link text="{i18n>PageTitle}" class="clCustomFont sapUiSmallMargin" press="onMenuLinkPress"/>-->
-				<!--	<Link text="{i18n>VehicleDetails}" class="clCustomFont sapUiSmallMargin" press="onMenuLinkPress"/>-->
-				<!--	<Link text="{i18n>ChangeHistory}" class="clCustomFont sapUiSmallMargin" press="onMenuLinkPress"/>-->
-				<!--	<ToolbarSpacer>-->
-				<!--		<layoutData>-->
-				<!--			<OverflowToolbarLayoutData priority="NeverOverflow" minWidth="20px"/>-->
-				<!--		</layoutData>-->
-				<!--	</ToolbarSpacer>-->
-					<!--<Link text="{i18n>Back}" class="clCustomFont sapUiSmallMargin" press="onMenuLinkPress"/>-->
-				<!--</tnt:ToolHeader>-->
- 
- 
- 
- 
- 
-				<!--	<customHeader showNavButton="true">-->
-				<!--	<Bar class="sapUiSmallPaddingBeginEnd clCustomHeaderBg">-->
-				<!--		<contentLeft>-->
-				<!--			<Image id="idLexusLogo" src="Images/toyota_logo_colour.png" width="100px"/>-->
-				<!--			<Text text="|" class="sapUiTinyMarginBeginEnd"/>-->
-				<!--			<Text class="clCustomFont" text="{i18n>PageTitle}"/>-->
-				<!--		</contentLeft>-->
-				<!--		<contentRight>-->
-					
-				<!--		</contentRight>-->
-				<!--	</Bar>-->
-				<!--</customHeader>-->
-				
+			 
 				<content>
 					<tnt:ToolHeader>
 						<!--<OverflowToolbar class="toolbar1">-->
@@ -246,7 +218,7 @@
        
                         	
                             <Link id="tradeId1" text="{i18n>Trade}" class="link" subtle="true" press="oTradeLinkPress" wrapping="false"/>
-                   
+                 
                           	<Text text="{path:'vehicleSearchTableModel>kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'} - {vehicleSearchTableModel>name1}" wrapping="true" />
                           	<!--<Text text="{vehicleSearchTableModel>matnr} - {vehicleSearchTableModel>model_desc_en}" wrapping="true"/>-->
                           	<Text text="{vehicleSearchTableModel>matnr} - {=${languageModel>/SPRAS}==='English' ? ${vehicleSearchTableModel>model_desc_en}:${vehicleSearchTableModel>model_desc_fr} }" wrapping="true"/>
@@ -259,7 +231,7 @@
                          	<Text text="{vehicleSearchTableModel>zzextcol} - {=${languageModel>/SPRAS}==='English' ? ${vehicleSearchTableModel>mktg_desc_en}:${vehicleSearchTableModel>mktg_desc_fr} }" wrapping="true"/>
                          	
                          	
-                		   	<Text text="{path:'vehicleSearchTableModel>zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" wrapping="false"/>
+                		   	<Text text="{path:'vehicleSearchTableModel>zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" wrapping="false" visible="{vehicleSearchTableModel>visibleOrderType}"/>
 							<Text text="{path:'vehicleSearchTableModel>zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate1'}" wrapping="false"/>			 
                           	<Text text="{path:'vehicleSearchTableModel>pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate1'}" wrapping="false"/>
                           	<Text text="{parts: [{path: 'vehicleSearchTableModel>non_D_flag'},{path: 'vehicleSearchTableModel>pd_flag'}], formatter : 'vehicleLocator.Formatter.Formatter.AccessoryInstall'}"/>

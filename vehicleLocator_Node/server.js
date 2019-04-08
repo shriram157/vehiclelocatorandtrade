@@ -44,7 +44,7 @@ passport.use("JWT", new xssec.JWTStrategy(xsenv.getServices({
 	}
 }).uaa));
 app.use(passport.initialize());
-app.use(passport.authenticate("JWT", {
+app.use(passport.authenticate("JWT", {   
 	session: false
 }));
 

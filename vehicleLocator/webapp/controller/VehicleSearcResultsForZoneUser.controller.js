@@ -12,7 +12,7 @@ sap.ui.define([
 ], function (Controller, BaseController, ResourceModel, JSONModel, Sorter, Filter, Formatter, SortOrder) {
 	"use strict";
 
-	return BaseController.extend("vehicleLocator.controller.VehicleSearcResults", {
+	return BaseController.extend("vehicleLocator.controller.VehicleSearcResultsForZoneUser", {
 
 		onInit: function () {
 			//define JSON model oDealersearchresults
