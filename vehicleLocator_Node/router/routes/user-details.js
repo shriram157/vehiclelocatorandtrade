@@ -211,6 +211,20 @@ app.get("/currentScopesForUser", (req, res) => {
 			FirstName: ['firstName'],
 			LastName: ['LastName']
 		};
+		
+	// The below for Zone User	
+		// var obj_temp = {	
+		// FirstName: ["Vehicle Locator Trade"],
+		// Language: ["English"],
+		// LastName: ["Zone Pacific"],
+		// UserType: ["Zone"],
+		// Zone: ["1"]
+		// };				
+		
+		
+		
+		
+		
 		// req.logMessage("info", req.authInfo.userAttributes);
 		var parsedData = JSON.stringify(obj_temp);
 		//		 req.logMessage("info", 'After Json Stringify', parsedData);
@@ -487,10 +501,7 @@ app.get("/attributes", (req, res) => {
 									// return;
 							 
 							}
-	
-								
-								
-								
+
 								// var salesOfficeFromSAP = json.d.results[i].to_Customer.to_CustomerSalesArea.results[0].SalesOffice;
 							}
 						} else {

@@ -166,6 +166,10 @@
 				"name": "VehicleSearcResults",
 				"target": "VehicleSearcResults"
 			}, {
+				"pattern": "VehicleSearcResultsForZoneUser/:LoginUser:",
+				"name": "VehicleSearcResultsForZoneUser",
+				"target": "VehicleSearcResultsForZoneUser"	
+			}, {
 				"pattern": "VehicleTrade_CreateSingle/:SelectedTrade:",
 				"name": "VehicleTrade_CreateSingle",
 				"target": "VehicleTrade_CreateSingle"

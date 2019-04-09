@@ -122,9 +122,9 @@
 						</OverflowToolbar>
 					</headerToolbar>
 					<columns>
-						<Column id="tradeText1" demandPopin="true" minScreenWidth="Tablet" width="6rem" hAlign="Left">
-							<Text text="{i18n>Trade}" id="nameColumnTitle2"/>
-						</Column>
+						<!--<Column id="tradeText1" demandPopin="true" minScreenWidth="Tablet" width="6rem" hAlign="Left">-->
+						<!--	<Text text="{i18n>Trade}" id="nameColumnTitle2"/>-->
+						<!--</Column>-->
 						<Column id="dealerId1" demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="14rem">
 							<Text text="{i18n>Dealer}"/>
 						</Column>
@@ -163,9 +163,9 @@
 						</Column>
 					</columns>
 					<items>
-						<ColumnListItem type="Active" press="oTradeLinkPress" id="onlinkPress">
+						<ColumnListItem  id="onlinkPress">
 							<cells>
-								<Link id="tradeId1" text="{i18n>Trade}" class="link" subtle="true" press="oTradeLinkPress" wrapping="false"/>
+								<!--<Link id="tradeId1" text="{i18n>Trade}" class="link" subtle="true" press="oTradeLinkPress" wrapping="false"/>-->
 								<Text text="{path:'vehicleSearchTableModel>kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'} - {vehicleSearchTableModel>name1}"
 									wrapping="true"/>
 								<!--<Text text="{vehicleSearchTableModel>matnr} - {vehicleSearchTableModel>model_desc_en}" wrapping="true"/>-->
