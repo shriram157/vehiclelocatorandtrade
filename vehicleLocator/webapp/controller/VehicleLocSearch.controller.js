@@ -48,7 +48,11 @@ sap.ui.define([
 
 					var userType = oData.loggedUserType[0];
 
+<<<<<<< Upstream, based on origin/master
 					var userType = "ZoneUser"; // TODO: Remove before deployment locatyest only - GSR
+=======
+					// var userType = "ZoneUser"; // TODO: Remove before deployment locatyest only - GSR
+>>>>>>> d7222c6 Continuing the Changes for pull Vehicles for Zone user functionality Day 2
 
 					switch (userType) {
 					case "vehicelTradeDealerUser":
