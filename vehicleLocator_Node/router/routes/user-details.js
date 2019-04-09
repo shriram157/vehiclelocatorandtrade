@@ -65,7 +65,9 @@ app.get("/currentScopesForUser", (req, res) => {
 		var tracer = req.loggingContext.getTracer(__filename);
 
 		var parsedData = JSON.stringify(req.authInfo.userAttributes);
+		
 		var obj_data = JSON.parse(parsedData);
+		
 
          console.log(parsedData);  //// TODO: tobe removed
 
@@ -86,10 +88,18 @@ app.get("/currentScopesForUser", (req, res) => {
 			var legacyDealerCodeAvailable = false;
 		}
 
+		var userAttributes = req.authInfo.userAttributes;
+
+
 		let isItZoneUser;
 		try {
-			isItZoneUser = obj_data.ZONE[0];
-			var zoneUser = true;
+			isItZoneUser =  userAttributes.UserType[0];
+			if (isItZoneUser == "Zone"){
+			var zoneUser = true;	
+			} else {
+		   	var zoneUser = false;		
+			}
+			
 			logger.info('Dealer code from the SAML Token is a zone User', zoneUser, isItZoneUser);
 		} catch (e) {
 			logger.info("Not a zone User");
