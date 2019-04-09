@@ -235,7 +235,7 @@ sap.ui.define([
 								"Language": item.Language[0],
 								"LoggedinUserFirstName": item.FirstName[0],
 								"LoggedinUserLastName": item.LastName[0],
-								"Zone": item.Zone[0]
+								"Zone": Zone   //item.Zone[0]
 
 								// "Zone": item.Zone[0]   ---    Not yet available
 
