@@ -113,7 +113,7 @@
 				</f:SimpleForm>
 				<Table id="table1VSR" width="98%" class="sapUiResponsiveMargin" alternateRowColors="true"
 					items="{ path: 'vehicleSearchTableModel>/', sorter: { path: 'pstsp', descending: false } }" noDataText="{i18n>NoData}"
-					updateFinished="onUpdateFinished" mode="MultiSelect" modeAnimationOn="true">
+					updateFinished="onUpdateFinished" mode="MultiSelect" modeAnimationOn="true" growing="true" 	growingThreshold="200" >
 					<headerToolbar>
 						<OverflowToolbar id="otbSubheader">
 							<Title id="tableHeader" text="{detailView>/tableCount}"/>

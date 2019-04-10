@@ -22,6 +22,11 @@ sap.ui.define([
 			var _that = this;
 			oController = this;
 			
+					this._oViewModel = new sap.ui.model.json.JSONModel({
+				visibleForZoneUser: false,
+			});
+
+			this.getView().setModel(this._oViewModel, "detailView");	
 					/// set the logo and Language. 
 
 				this._setTheLanguage();
@@ -34,13 +39,14 @@ sap.ui.define([
 			
 			    this.getView().byId("oComments").setValue(""); //1803
 				 
+
 		
 				if(oEvent.getParameter("arguments").selectedmyTr!=undefined){
 			this.oSelectedItems = oEvent.getParameter("arguments").selectedmyTr;
 			}
 // on screen refresh disable the buttons. 
         if (sap.ui.getCore().getModel("MyTradeRequestSelected") == undefined && 
-                      sap.ui.getCore().getModel("MyTradeRequested") == undefined){
+                 sap.ui.getCore().getModel("MyTradeRequested") == undefined){
            		this.getView().byId("oAddbutton").setEnabled(false);
 				this.getView().byId("oacceptbtn").setVisible(false);
 				this.getView().byId("oRejectbtn").setVisible(false);
@@ -696,6 +702,15 @@ sap.ui.define([
 				});
 
 			}
+			
+			// for zone user. 
+				var confirmZoneUser = sap.ui.getCore().getModel("LoginBpDealerModel").oData["0"].BusinessPartnerName;	
+			  if (confirmZoneUser == "Zone User"){
+		// just disable all the buttons
+           		this.getView().byId("oAddbutton").setEnabled(false);
+				 //this.getView().byId("oUpdatePagebtn").setEnabled(false);
+			  }		
+
 		},
 		
 		oAddCommentsArea: function () {

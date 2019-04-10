@@ -133,7 +133,7 @@
 
                    updateFinished="onUpdateFinished"
                    mode="None"
-                   modeAnimationOn="true">
+                   modeAnimationOn="true" growing="true" 	growingThreshold="200" >
 
                 <headerToolbar>
                     <OverflowToolbar id="otbSubheader">

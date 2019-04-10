@@ -407,6 +407,30 @@ sap.ui.define([
 				// this.getView().byId("tableVrade").setModel(SelectedTradeComment);
 				/*	this.getView().byId("VT_ARCTtrdinRet").setModel(oStatusModel);*/
 			}
+				var confirmZoneUser = sap.ui.getCore().getModel("LoginBpDealerModel").oData["0"].BusinessPartnerName;	
+			  if (confirmZoneUser == "Zone User"){
+		// just disable all the buttons
+           		this.getView().byId("oAddbutton").setEnabled(false);
+				this.getView().byId("oacceptbtn").setVisible(false);
+				this.getView().byId("oRejectbtn").setVisible(false);
+				this.getView().byId("oCounterofrbtn").setVisible(false);
+				this.getView().byId("oCancelbtn").setVisible(false);
+				this.getView().byId("oUpdatebtn").setVisible(false);
+				this.getView().byId("oBackbtnid").setEnabled(true);
+				this.getView().byId("oBackbtnid").setVisible(true);      	
+             	this.getView().byId("oComments").setEnabled(false);
+			  	
+			  }		
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		},
 
 		onTradeReqStat: function () {

@@ -48,7 +48,7 @@ sap.ui.define([
 
 					var userType = oData.loggedUserType[0];
 
-			// var userType = "ZoneUser"; // TODO: Remove before deployment locatyest only - GSR
+	//		 var userType = "ZoneUser"; // TODO: Remove before deployment locatyest only - GSR
 			
 					switch (userType) {
 					case "vehicelTradeDealerUser":
@@ -286,9 +286,7 @@ sap.ui.define([
 			that._oResourceBundle = that.getOwnerComponent().getModel("i18n").getResourceBundle(); // instantiate the resource 
 
 			var userType = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].UserType; // for Security*/
-			// if ( that.userTypeReceived == "ZoneUser" ) {
-			// 	userType ="Zone";
-			// };
+
 
 			var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
 			var LoggedinUserLname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
@@ -452,7 +450,7 @@ sap.ui.define([
 				}
 
 				var allow = {
-					allow: false
+					allow: true
 				};
 				that.getView().setModel(new sap.ui.model.json.JSONModel(allow), "editZoneProperty");
 

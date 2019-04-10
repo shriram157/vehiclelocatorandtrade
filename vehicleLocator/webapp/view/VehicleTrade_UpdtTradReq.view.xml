@@ -293,7 +293,7 @@
 									<FlexBox width="10px"></FlexBox>
 									<FlexBox height="50px" alignItems="Start" justifyContent="Start">
 										<Button text="{i18n>CounterOffer}" width="150px"/>
-										<FlexBox width="7px"></FlexBox>
+										<FlexBox width="7px"></FlexBox>oUpdatebackbtn
 									</FlexBox>-->
 									<!--</HBox>-->
 									<!--<Label text=""/>-->
@@ -303,14 +303,14 @@
 											<Button text="{i18n>Updatesubmit}" width="150px" press="oUpdateSubmitbtn" id="oUpdateSubmitbtn"/>
 											<FlexBox width="7px"></FlexBox>
 										</FlexBox>
+										<!--<FlexBox width="10px"></FlexBox>-->
+										<!--<FlexBox height="200px" alignItems="Start" justifyContent="Start">-->
+										<!--	<Button text="{i18n>Update}" width="100px" id="oUpdatePagebtn" press="UpdatePress"/>-->
+										<!--	<FlexBox width="7px"></FlexBox>-->
+										<!--</FlexBox>-->
 										<FlexBox width="10px"></FlexBox>
 										<FlexBox height="200px" alignItems="Start" justifyContent="Start">
-											<Button text="{i18n>Update}" width="100px" id="oUpdatePagebtn" press="UpdatePress"/>
-											<FlexBox width="7px"></FlexBox>
-										</FlexBox>
-										<FlexBox width="10px"></FlexBox>
-										<FlexBox height="200px" alignItems="Start" justifyContent="Start">
-											<Button text="{i18n>Back}" width="100px" press="onBackpage" id="oUpdatebackbtn"/>
+											<Button text="{i18n>Back}" width="100px" press="onBackpage" id=""/>
 											<FlexBox width="7px"></FlexBox>
 										</FlexBox>
 									</HBox>

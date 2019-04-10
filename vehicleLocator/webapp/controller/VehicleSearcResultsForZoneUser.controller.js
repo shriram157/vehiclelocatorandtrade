@@ -827,24 +827,41 @@ sap.ui.define([
 						}
 						if (userZoneRaw != undefined) {
 
-							var sapUserZone;
+							var sapUserZone, zoneStockCode,lexusZoneStockCode;
 							switch (userZoneRaw) {
-							case "1":
+							case "1": 
+								//Pacific
 								sapUserZone = "1000";
+								zoneStockCode = "2400507000";
+								lexusZoneStockCode = "2400507100";
 								break;
 							case "2":
+								//Prarie
 								sapUserZone = "2000";
+								zoneStockCode = "2400517000";
+								lexusZoneStockCode = "2400517100";
 								break;
 							case "3":
+								//Central
 								sapUserZone = "3000";
+								zoneStockCode = "2400547000";
+								lexusZoneStockCode = "2400547100";	
+								
 								break;
 							case "4":
+								//Atlantic
 								sapUserZone = "5000";
+								zoneStockCode = "2400577000";
+								lexusZoneStockCode = "2400577100";	
 								break;
 							case "5":
+								//Quebec
 								sapUserZone = "4000";
+								zoneStockCode = "2400557000";
+								lexusZoneStockCode = "2400557100";							
 								break;
 							case "7":
+								//nothing for vehicle locator with 9000
 								sapUserZone = "9000";
 								break;
 
@@ -855,13 +872,15 @@ sap.ui.define([
 						}
 
 						this.sapUserZoneDetermined = sapUserZone;
+						this.zoneStockCode = zoneStockCode;
+						this.lexusZoneStockCode = lexusZoneStockCode;
 						// use the above to send to SAP along with pulled vehicles. 
 
 						// if the user is retruning by pressing the back button,  then it is better, that we dont refresh the data again. 
 						var oModelForSearch = this.getView().getModel("vehicleSearchTableModel");
 						if (oModelForSearch != undefined) {
 							var searchTableAlreadsyBuilt = this.getView().getModel("vehicleSearchTableModel").getData().length;
-							if (searchTableAlreadsyBuilt != 0) {
+							if (searchTableAlreadsyBuilt > "0") {
 								return;
 							}
 						}
@@ -909,7 +928,7 @@ sap.ui.define([
 							this.getView().setModel(oViewModel, "languageModel");
 
 							var model = new sap.ui.model.json.JSONModel(Status);
-							model.setSizeLimit(1000);
+							// model.setSizeLimit(10000);
 							this.getView().setModel(model, "vehicleSearchTableModel");
 
 							var tableLength = this.getView().getModel("vehicleSearchTableModel").getData().length;
@@ -1207,9 +1226,9 @@ sap.ui.define([
 									// 	var zzextcol = arrData[i].zzextcol + "-" + arrData[i].mktg_desc_fr;
 									// 	var zzsuffix = arrData[i].zzsuffix + "-" + arrData[i].suffix_desc_fr + "/" + arrData[i].mrktg_int_desc_fr;
 									// } else {
-									// 	var matnr = arrData[i].matnr + "-" + arrData[i].model_desc_en;
-									// 	var zzextcol = arrData[i].zzextcol + "-" + arrData[i].mktg_desc_en;
-									// 	var zzsuffix = arrData[i].zzsuffix + "-" + arrData[i].suffix_desc_en + "/" + arrData[i].mrktg_int_desc_en;
+										var matnr = arrData[i].matnr + "-" + arrData[i].model_desc_en;
+										var zzextcol = arrData[i].zzextcol + "-" + arrData[i].mktg_desc_en;
+										var zzsuffix = arrData[i].zzsuffix + "-" + arrData[i].suffix_desc_en + "/" + arrData[i].mrktg_int_desc_en;
 									// }
 
 									var zzordertype = "";
@@ -1379,7 +1398,7 @@ sap.ui.define([
 
 									var Status = sap.ui.getCore().getModel("SearchedData").getData();
 									var model = new sap.ui.model.json.JSONModel(Status);
-									model.setSizeLimit(1000);
+									// model.setSizeLimit(1000);
 									// this.getView().byId("table1VSR").setModel(model); //guna
 									this.getView().setModel(model, "vehicleSearchTableModel");
 
@@ -1557,7 +1576,7 @@ sap.ui.define([
 
 								//	var Status = sap.ui.getCore().getModel("SearchedData").getData();
 								var model = new sap.ui.model.json.JSONModel([]);
-								model.setSizeLimit(1000);
+								// model.setSizeLimit(1000);
 								// this.getView().byId("table1VSR").setModel(model); //guna
 								this.getView().setModel(model, "vehicleSearchTableModel");
 
@@ -2079,24 +2098,44 @@ sap.ui.define([
 								} else {
 
 									var pullDataToSAP = [];
+									var errored = false;
 									for (var i = 0; i < aContexts.length; i++) {
 										var path = aContexts[i].sPath;
 										var value = oModel.getProperty(path);
 										// check to see if there are any validations needed. 
 										if (value.zz_trading_ind == "2" || value.zz_trading_ind == "3") {
+										
+									// check for zone	
+									      if (value.vkbur == this.sapUserZoneDetermined ) {
 											// build a model to send the data to be sent to sap
+											// build the model with the values. the zone stock codes for lexus/toyota are available in the below vairables,.
+											
+						// 						this.sapUserZoneDetermined = sapUserZone;
+						// this.zoneStockCode = zoneStockCode;
+						// this.lexusZoneStockCode = lexusZoneStockCode;
+											
 											pullDataToSAP.push({
 												"pullData": value
 
 											});
+									      } else {
+									      	// do not allow pull. 
+									      	sap.m.MessageBox.warning("The vehicle belongs to a different zone and is not allowed, Please unselect this Vehicle" + value.zzvtn); // TODO: french text needed. 
+									         errored = true;
+									      	
+									      }
 										} else {
-											// do not allow trade.
-											sap.m.MessageBox.warning("one of the selections have a wrong trading indicator so no pull allowed", value.zzvtn); // TODO: french text needed. 
-
+											// do not allow pull.
+											sap.m.MessageBox.warning("one of the selections have a wrong trading indicator so no pull allowed" + value.zzvtn); // TODO: french text needed. 
+											  errored = true;
 										}
 
 									}
+									if (errored == true){
+										
+									} else {
 									sap.m.MessageBox.information("Soon the Pull Vehicle Data will be sent to SAP.... ");
+									}
 								}
 							}
 
