@@ -1,6 +1,6 @@
 <mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:t="sap.ui.table" xmlns:l="sap.ui.layout"
 	xmlns:form="sap.ui.layout.form" xmlns:uxap="sap.uxap" xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form" xmlns:tnt="sap.tnt"
-	xmlns:html="http://www.w3.org/1999/xhtml" controllerName="vehicleLocator.controller.VehicleSearcResultsForZoneUser">
+	xmlns:html="http://www.w3.org/1999/xhtml" controllerName="vehicleLocator.controller.VehicleSearcResults">
 	<App>
 		<!--<pages class="oImgsampl" height="200px">-->
 			

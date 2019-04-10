@@ -1147,7 +1147,7 @@ sap.ui.define([
 
 				  var userType = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].UserType; 
 				  
-				  if (userType = "Zone"){
+				  if (userType == "Zone"){
 				  	var FilterZonestockData = FilterDeleade_OrderTypefilteNotnull.filter(function (x) {
 						return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "DM" || x.zzordertype == "SO" || x.zzordertype == "RS" || x.zzordertype == "F1" || x.zzordertype == "F2" || x.zzordertype == "F3" || x.zzordertype == "F4" || x.zzordertype == "F5");
 					});
@@ -1252,7 +1252,7 @@ sap.ui.define([
 
 
 				  
-				  if (userType = "Zone"){
+				  if (userType == "Zone"){
 				   				  	var FilterZonestock = oExcludeTci.filter(function (x) {
 						return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "DM" || x.zzordertype == "SO" || x.zzordertype == "RS" || x.zzordertype == "F1" || x.zzordertype == "F2" || x.zzordertype == "F3" || x.zzordertype == "F4" || x.zzordertype == "F5");
 					});
