@@ -88,13 +88,7 @@
                         <Title id="tableHeader1" text="{detailView>/tableCountSelect}"/>
 
                         <ToolbarSpacer/>
-                        <!--<SearchField id="searchVehicleList" liveChange="onLiveChange" showSearchButton="true"-->
-                        <!--             placeholder="Search table...">-->
-                        <!--    <layoutData>-->
-                        <!--        <OverflowToolbarLayoutData minWidth="200px" maxWidth="300px" shrinkable="true"/>-->
-                        <!--    </layoutData>-->
-                        <!--</SearchField>-->
-                        <!--<Button text="Reset" type="Transparent" press="onReset"/>-->
+                       
                         <Button tooltip="Sort table by selected fields"  icon="sap-icon://sort"	
                                 press="handleViewSettingsDialogButtonPressed" text="{i18n>Sorting}"/>
                     </OverflowToolbar>
@@ -151,252 +145,32 @@
  
                            		<Text text="{vehicleSelectTableModel>zzvtn}" wrapping="false" width="6rem" id="zzvtnid" />
  		
-                           		<!--<Text text="{vehicleSelectTableModel>zzseries_desc_en}"   width="7rem" id="seriesr"/>-->
+
                            			<Text text="{=${languageModel>/SPRAS}==='English' ? ${vehicleSelectTableModel>zzseries_desc_en}:${vehicleSelectTableModel>zzseries_desc_fr} }" id="oSeries" />
-                           			
-                                <!--<Text text="{vehicleSelectTableModel>matnr} - {vehicleSelectTableModel>model_desc_en}"  width="auto" wrapping="true"/>-->
+
                                 		<Text text="{vehicleSelectTableModel>matnr} - {=${languageModel>/SPRAS}==='English' ? ${vehicleSelectTableModel>model_desc_en}:${vehicleSelectTableModel>model_desc_fr} }" id="oZmodel" />
                                 
-                                <!--<Text text="{vehicleSelectTableModel>zzsuffix}-{vehicleSelectTableModel>suffix_desc_en}/{vehicleSelectTableModel>mrktg_int_desc_en}"   width="auto" wrapping="true"/>-->
-                                
+                              
  <Text text="{vehicleSelectTableModel>zzsuffix} - {=${languageModel>/SPRAS}==='English' ? ${vehicleSelectTableModel>suffix_desc_en}:${vehicleSelectTableModel>suffix_desc_fr} }/{=${languageModel>/SPRAS}==='English' ? ${vehicleSelectTableModel>mrktg_int_desc_en}:${vehicleSelectTableModel>mrktg_int_desc_fr} }" id="oZsuffix"	/>	                               
                                 <Text text="{vehicleSelectTableModel>zzapx}"   width="3rem" wrapping="false"/>
                   
                   
                		<Text text="{vehicleSelectTableModel>zzextcol} - {=${languageModel>/SPRAS}==='English' ? ${vehicleSelectTableModel>mktg_desc_en}:${vehicleSelectTableModel>mktg_desc_fr} }" width="auto" wrapping="false"   />   
       
-                                <!--<Text text="{vehicleSelectTableModel>zzextcol} - {vehicleSelectTableModel>mktg_desc_en}"   width="auto" wrapping="false"/>-->
+    
                                 
                                  <Text text="{path:'vehicleSelectTableModel>zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}"  width="6rem" wrapping="false" visible="{vehicleSelectTableModel>/noDisplayOrderType}"/>
                                  
                                   <Text text="{path:'vehicleSelectTableModel>zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate1'}"  width="6rem" wrapping="false"/>   
                               
                               <Text text="{path:'vehicleSelectTableModel>pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate1'}" width="6rem" wrapping="false"/>    
-                   
-       <!--                   	<Text text="{path:'vehicleSearchTableModel>kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'} - {vehicleSearchTableModel>name1}" wrapping="true" />-->
-       <!--                   	<Text text="{vehicleSearchTableModel>matnr} - {vehicleSearchTableModel>model_desc_en}" wrapping="true"/>-->
-       <!--                   	<Text text="{vehicleSearchTableModel>zzsuffix} - {vehicleSearchTableModel>suffix_desc_en}/{vehicleSearchTableModel>mrktg_int_desc_en}" wrapping="false"/>-->
-       <!--                  	<Text text="{vehicleSearchTableModel>zzapx}" wrapping="true"/>-->
-       <!--                  	<Text text="{vehicleSearchTableModel>zzextcol} - {vehicleSearchTableModel>mktg_desc_en}" wrapping="true"/>-->
-       <!--         		   	<Text text="{path:'vehicleSearchTableModel>zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" wrapping="false"/>-->
-							<!--<Text text="{path:'vehicleSearchTableModel>zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate1'}" wrapping="false"/>			 -->
-       <!--                   	<Text text="{path:'vehicleSearchTableModel>pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate1'}" wrapping="false"/>-->
-       <!--                   	<Text text="{parts: [{path: 'vehicleSearchTableModel>non_D_flag'},{path: 'vehicleSearchTableModel>pd_flag'}], formatter : 'vehicleLocator.Formatter.Formatter.AccessoryInstall'}"/>-->
-       <!--                  	<Text text="{vehicleSearchTableModel>ort01}" wrapping="false"/>-->
-       <!--                   	<Text text="{vehicleSearchTableModel>bezei}" wrapping="false"/>-->
-                          		
-                            <!--<Text text="{vehicleSearchTableModel>zzsuffix} - {vehicleSearchTableModel>suffix_desc_en}/{vehicleSearchTableModel>mrktg_int_desc_en}" wrapping="false"/>-->
-                            <!--<Text text="{vehicleSearchTableModel>vendorCompanyName}"/>-->
-                            <!--<Text text="{vehicleSearchTableModel>invoiceDate}"/>-->
-                            <!--<Text text="{vehicleSearchTableModel>receiptDate}"/>-->
-                            <!--<Text text="{vehicleSearchTableModel>invoiceAmount}" width="auto" maxLines="1" wrapping="false"-->
-                            <!--      textAlign="Begin" textDirection="Inherit"/>-->
-                            <!--<Text text="{vehicleSearchTableModel>currencyType}"/>-->
-                            <!--<Text text="{vehicleSearchTableModel>paymentTerms}"/>-->
-                            <!--<Text text="{vehicleSearchTableModel>dueDate}"/>-->
-                            <!--<Text text="{vehicleSearchTableModel>blockedAmount}" width="auto" maxLines="1" wrapping="false"-->
-                            <!--      textAlign="Begin" textDirection="Inherit"/>-->
-                            <!--<Text text="{vehicleSearchTableModel>paymentDate}"/>-->
+
                         </cells>
                     </ColumnListItem>
                 </items>
             </Table>			
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							<!--<t:Table id="table" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None" rows="{/}" visibleRowCount="20" class="sapUiMediumMarginBegin">-->
-							<!--	<t:columns>-->
-							<!--		<t:Column id="TradecolId" width="6rem">-->
-							<!--			<Label text="{i18n>Select}"/>-->
-							<!--			<t:template>-->
-							<!--				<Link id="selectId" text="Select" class="link" subtle="true" press="oTradeLinkPress" wrapping="false"/>-->
-							<!--			</t:template>-->
-							<!--		</t:Column>-->
-							<!--		<t:Column sortProperty="zzvtn" width="11rem" id="zzvtnid">-->
-							<!--			<Label text="{i18n>VehicleTrackingNumber}"/>-->
-							<!--			<t:template>-->
-							<!--				<Text text="{zzvtn}" wrapping="false"/>-->
-							<!--			</t:template>-->
-							<!--		</t:Column>-->
-							<!--		<t:Column sortProperty="zzseries" width="7rem" id="seriesr">-->
-							<!--			<Label text="{i18n>Series}"/>-->
-							<!--			<t:template>-->
-							<!--				<Text text="{zzseries_desc_en}" wrapping="false"/>-->
-							<!--			</t:template>-->
-							<!--		</t:Column>-->
-							<!--		<t:Column sortProperty="matnr" width="14rem" id="matnr">-->
-							<!--			<Label text="{i18n>Model}"/>-->
-							<!--			<t:template>-->
-							<!--				<Text text="{matnr} - {model_desc_en}" wrapping="false"/>-->
-							<!--			</t:template>-->
-							<!--		</t:Column>-->
-							<!--		<t:Column sortProperty="zzsuffix" width="8rem">-->
-							<!--			<Label text="{i18n>Suffix}"/>-->
-							<!--			<t:template>-->
-							<!--				<Text text="{zzsuffix}-{suffix_desc_en}/{mrktg_int_desc_en}" wrapping="false"/>-->
-							<!--			</t:template>-->
-							<!--		</t:Column>-->
-							<!--		<t:Column sortProperty="zzapx" width="3rem">-->
-							<!--			<Label text="{i18n>APX}" wrapping="false"/>-->
-							<!--			<t:template>-->
-							<!--				<Text text="{zzapx}" wrapping="false"/>-->
-							<!--			</t:template>-->
-							<!--		</t:Column>-->
-							<!--		<t:Column id="ID_DealerNet" sortProperty="zzextcol" width="10rem">-->
-							<!--			<Label text="{i18n>Color}" wrapping="false"/>-->
-							<!--			<t:template>-->
-							<!--				<Text text="{zzextcol} - {mktg_desc_en}" wrapping="false"/>-->
-							<!--			</t:template>-->
-							<!--		</t:Column>-->
-							<!--		<t:Column id="ID_Profit" sortProperty="zzordertype" width="6rem">-->
-							<!--			<Label text="{i18n>OrderType}" wrapping="false"/>-->
-							<!--			<t:template>-->
-							<!--				<Text text="{path:'zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" wrapping="false"/>-->
-							<!--			</t:template>-->
-							<!--		</t:Column>-->
-							<!--		<t:Column sortProperty="zzadddata4" width="6rem" id="oETAFromId">-->
-							<!--			<Label text="{i18n>ETAFrom}" wrapping="false"/>-->
-							<!--			<t:template>-->
-							<!--				<Text text="{path:'zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate1'}" wrapping="false"/>-->
-							<!--			</t:template>-->
-							<!--		</t:Column>-->
-							<!--		<t:Column sortProperty="pstsp" width="6rem">-->
-							<!--			<Label text="{i18n>ETATo}" wrapping="false"/>-->
-							<!--			<t:template>-->
-							<!--				<Text text="{path:'pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate1'}" wrapping="false"/>-->
-							<!--			</t:template>-->
-							<!--		</t:Column>-->
-							<!--	</t:columns>-->
-							<!--</t:Table>-->
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							<!--		<Table id="table" width="auto" class="sapUiResponsiveMargin" items="{/}" growingThreshold="150">
-								<columns>
-									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
-										<Text text="{i18n>Select}" design="Bold"/>
-									</Column>
-									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
-										<HBox>
-											<Text text="{i18n>VehicleTrackingNumber}" design="Bold"/>
-											<core:Icon src="sap-icon://sort-ascending" width="" id="vtnAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="true"/>
-											<core:Icon src="sap-icon://sort-descending" width="" id="vtnDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-										</HBox>
-									</Column>
-									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
-										<HBox>
-											<Text text="{i18n>Series}" design="Bold"/>
-										<core:Icon src="sap-icon://sort-ascending" width="" id="senAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-											<core:Icon src="sap-icon://sort-descending" width="" id="senDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-										</HBox>
-									</Column>
-									<Column minScreenWidth="Desktop" demandPopin="true">
-										<HBox>
-											<Text text="{i18n>Model}" design="Bold"/>
-											<core:Icon src="sap-icon://sort-ascending" width="" id="moAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-											<core:Icon src="sap-icon://sort-descending" width="" id="moDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-										</HBox>
-									</Column>
-									<Column minScreenWidth="Desktop" demandPopin="true">
-										<HBox>
-											<Text text="{i18n>Suffix}" design="Bold"/>
-											<core:Icon src="sap-icon://sort-ascending" width="" id="suAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-											<core:Icon src="sap-icon://sort-descending" width="" id="suDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-										</HBox>
-									</Column>
-									<Column minScreenWidth="Desktop" demandPopin="true">
-										<HBox>
-											<Text text="{i18n>APX}" design="Bold"/>
-											<core:Icon src="sap-icon://sort-ascending" width="" id="apAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-											<core:Icon src="sap-icon://sort-descending" width="" id="apDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-										</HBox>
-									</Column>
-									<Column minScreenWidth="Desktop" demandPopin="true">
-										<HBox>
-											<Text text="{i18n>Color}" design="Bold"/>
-											<core:Icon src="sap-icon://sort-ascending" width="" id="coAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-											<core:Icon src="sap-icon://sort-descending" width="" id="coDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-										</HBox>
-									</Column>
-									<Column minScreenWidth="Desktop" demandPopin="true">
-										<HBox>
-										<Text text="{i18n>OrderType}" design="Bold"/>
-										<core:Icon src="sap-icon://sort-ascending" width="" id="otAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-											<core:Icon src="sap-icon://sort-descending" width="" id="otDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-										</HBox>	
-									</Column>
-									<Column minScreenWidth="Desktop" demandPopin="true">
-										<HBox>
-										<Text text="{i18n>ETAFrom}" design="Bold"/>
-									<core:Icon src="sap-icon://sort-ascending" width="" id="etfAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-											<core:Icon src="sap-icon://sort-descending" width="" id="etfDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-										</HBox>		
-									</Column>
-									<Column minScreenWidth="Desktop" demandPopin="true">
-										<HBox>
-										<Text text="{i18n>ETATo}" design="Bold"/>
-										<core:Icon src="sap-icon://sort-ascending" width="" id="ettAsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-											<core:Icon src="sap-icon://sort-descending" width="" id="ettDsIcon" size="1.3em" class="sapUiTinyMarginBegin" visible="false"/>
-										</HBox>		
-									</Column>
-									
-								</columns>
-								<items>
-									<ColumnListItem press="onLineItemPressedtree1" type="Active">
-										<cells>
-											<HBox class="sapUiMediumMarginBegin">
-												<Link id="oSelectId" text="Select" class="sapUiSmallMarginTop link" subtle="true" press="onSelectLink"/>
-											</HBox>
-											<Text text="{ZZVTN}"/>
-											<Text text="{TCISeries}{TCISeriesDescriptionEN}"/>
-											<Text text="{Model}-{ENModelDesc}"/>
-											<Text text="{Suffix}-{SuffixDescriptionEN}"/>
-											<Text text="{ZZAPX}"/>
-											<Text text="{ZZEXTCOL}-{MKTG_DESC_EN}"/>
-											<Text text="{ZZORDERTYPE}"/>
-											<Text text="{ZZADDDATA4}"/>
-											<Text text="{PSTSP}"/>
-									
-										</cells>
-									</ColumnListItem>
-								</items>
-							</Table>-->
+	
+		
 					
 					</VBox>
 					<FlexBox height="100px" id="PagintionFlexId" alignItems="Center" justifyContent="End">

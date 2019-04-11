@@ -28,7 +28,7 @@
 						 <Label id="oDealerCode9" width="auto"/>
                          <Label id="oDealerMdlBlkSumry" width="auto"/>
 						
-										    <Label text="{i18n>Dealer}" required="true"/>   
+										    <Label text="{i18n>Dealer}" required="true" visible="{detailView>/visibleByDefault}"/>   
 											    
 												<ComboBox showSecondaryValues="true" required="true" visible="{detailView>/visibleByDefault}" fieldGroupIds="requiredField"
 													editable="{detailView>/editAllowed}" width="20rem"   value="{BpDealerModelZone>/BusinessPartnerKey}"
