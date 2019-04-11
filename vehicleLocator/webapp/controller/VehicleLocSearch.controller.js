@@ -156,6 +156,10 @@ sap.ui.define([
 							});
 						}
 
+                        // for toyota login show only toyota dealers, for lexus show only lexus. 
+                        
+                        if (item.Division == that.sDivision || item.Division == "Dual") {
+
 						BpDealer.push({
 							"BusinessPartnerKey": item.BusinessPartnerKey,
 							"BusinessPartner": item.BusinessPartner, //.substring(5, BpLength),
@@ -165,6 +169,7 @@ sap.ui.define([
 							"searchTermReceivedDealerName": item.SearchTerm2
 
 						});
+					}
 
 					});
 
