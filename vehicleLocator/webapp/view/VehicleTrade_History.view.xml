@@ -36,6 +36,28 @@
 					<tnt:ToolHeader>
 						<Label id="oDealerCode8" width="auto"/>
 						<Label id="oDealerHistory" width="auto"/>
+						
+										    <Label text="{i18n>Dealer}" required="true"/>   
+											    
+												<ComboBox showSecondaryValues="true" required="true" visible="{detailView>/visibleByDefault}" fieldGroupIds="requiredField"
+													editable="{detailView>/editAllowed}" width="20rem"   value="{BpDealerModelZone>/BusinessPartnerKey}"
+													filterSecondaryValues="true" id="dealerID" enabled="{detailView>/onlyShownoEditForChange}"
+													items="{path: 'BpDealerModelZone>/', sorter: { path: 'BusinessPartner' }, length:750 }" selectedKey="{BusinessPartnerKey}"
+													selectionChange="onBusinessPartnerSelected" showValueStateMessage="false" textAlign="Begin">
+													<core:ListItem key="{BpDealerModelZone>BusinessPartnerKey}" text="{BpDealerModelZone>BusinessPartner}"
+														additionalText="{BpDealerModelZone>BusinessPartnerName}"/>
+						
+												</ComboBox>
+											    
+										   <Label text="{detailView>/DealerName}" />    
+						
+						
+						
+						
+						
+						
+						
+						
 						<ToolbarSpacer></ToolbarSpacer>
 						<Button text="{i18n>LocateVechicles}" type="Transparent" press="VehicleLocSearchPressVH"/>
 						<Button text="{i18n>TradeSummary}" type="Transparent" press="TradeSummaryLinkPressTH"/>

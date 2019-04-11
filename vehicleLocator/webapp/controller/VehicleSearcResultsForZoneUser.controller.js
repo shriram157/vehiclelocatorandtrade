@@ -180,12 +180,7 @@ sap.ui.define([
 										"2400500078"
 									];
 
-									//	var FilterDeleade_OrderTypefiltered_zone
-									/*	var oExcludeTci = FilterDeleade_OrderTypefiltered_zone.filter(function (objFromA) {
-											return !oTCIcodes.find(function (objFromB) {
-												return (objFromA.kunnr).slice(-5) === objFromB.slice(-5);
-											});
-										});*/
+
 
 									var oExcludeTci = [];
 									for (var i = FilterDeleade_OrderTypefiltered_zone.length - 1; i >= 0; --i) {

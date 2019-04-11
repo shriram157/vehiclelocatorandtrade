@@ -155,7 +155,7 @@ sap.ui.define([
 			
 			
 		    
-		    var confirmZoneUser = sap.ui.getCore().getModel("LoginBpDealerModel").oData["0"].BusinessPartnerName;
+		   // var confirmZoneUser = sap.ui.getCore().getModel("LoginBpDealerModel").oData["0"].BusinessPartnerName;
  
 			var that = this;
 			var sLocation = window.location.host;

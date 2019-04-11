@@ -21,24 +21,30 @@
 						</contentRight>
 					</Bar>
 				</customHeader>
-				<!--<customHeader>-->
-				<!--	<Bar class="sapUiSmallPaddingBeginEnd clCustomHeaderBg">-->
-				<!--		<contentLeft>-->
-				<!--			<Image id="idLexusLogo" src="Images/toyota_logo_colour.png" width="100px"/>-->
-				<!--			<Text text="|" class="sapUiTinyMarginBeginEnd"/>-->
-				<!--			<Text class="clCustomFont" text="{i18n>PageTitle}"/>-->
-				<!--		</contentLeft>-->
-				<!--		<contentRight>-->
-				<!--			<Button text="{i18n>Logout}"/>-->
-				<!--		</contentRight>-->
-				<!--	</Bar>-->
-				<!--</customHeader>-->
+
 				<content >
 					<tnt:ToolHeader>
-						<!--	<Toolbar height="45px" class="toolbar3">-->
-						<!--	<Label text="Add Model Block" width="180px" class="vTlabe1clss"/>-->
+
 						 <Label id="oDealerCode9" width="auto"/>
                          <Label id="oDealerMdlBlkSumry" width="auto"/>
+						
+										    <Label text="{i18n>Dealer}" required="true"/>   
+											    
+												<ComboBox showSecondaryValues="true" required="true" visible="{detailView>/visibleByDefault}" fieldGroupIds="requiredField"
+													editable="{detailView>/editAllowed}" width="20rem"   value="{BpDealerModelZone>/BusinessPartnerKey}"
+													filterSecondaryValues="true" id="dealerID" enabled="{detailView>/onlyShownoEditForChange}"
+													items="{path: 'BpDealerModelZone>/', sorter: { path: 'BusinessPartner' }, length:750 }" selectedKey="{BusinessPartnerKey}"
+													selectionChange="onBusinessPartnerSelected" showValueStateMessage="false" textAlign="Begin">
+													<core:ListItem key="{BpDealerModelZone>BusinessPartnerKey}" text="{BpDealerModelZone>BusinessPartner}"
+														additionalText="{BpDealerModelZone>BusinessPartnerName}"/>
+						
+												</ComboBox>
+											    
+										   <Label text="{detailView>/DealerName}" />    	
+						
+						
+						
+						
 						
 						<ToolbarSpacer></ToolbarSpacer>
 						<Button text="{i18n>LocateVechicles}" type="Transparent" press="VehicleLocSearchPressMBS"/>
@@ -53,7 +59,7 @@
 					</VBox>
 					<VBox class="sapUiSmallMargin">
 						<form:SimpleForm id="SimpleFormDisplay480_12dg0" editable="true" layout="ResponsiveGridLayout" labelSpanM="12" adjustLabelSpan="false"
-							emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2">
+							emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2" visible="{detailView>/zoneUserDisplay}">
 							<form:content>
 								<core:Title text="" class="VTMBSClass"/>
 								<Label text="{i18n>Dealer}" required="true"/>         
@@ -99,58 +105,10 @@
 							</form:content>
 						</form:SimpleForm>
 					</VBox>
-					<!--<HBox>-->
-					<!--	<FlexBox width="40px"></FlexBox>-->
-					<!--	<FlexBox height="25px" alignItems="Center" justifyContent="Center">-->
-					<!--		<Label text="{i18n>DoNotCallBlockList}" class="flexdontclabllist"/>-->
-					<!--		<FlexBox width="960px"></FlexBox>-->
-					<!--		<Button text="{i18n>Delete}" id="oDeleteid" press="oDeletepress"/>-->
-					<!--	</FlexBox>-->
-					<!--</HBox>-->
-					<!--				<Table id="tableVTMBS" width="auto" class="sapUiResponsiveMargin" mode="MultiSelect" items="{/}" growingThreshold="150">
-						<columns>
-							<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
-								<Text text="{i18n>Dealer}"/>
-							</Column>
-							<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
-								<Text text="{i18n>Series}"/>
-							</Column>
-							<Column minScreenWidth="Desktop" demandPopin="true">
-								<Text text="Model"/>
-							</Column>
-							<Column minScreenWidth="Desktop" demandPopin="true">
-								<Text text="{i18n>BlockDuration}"/>
-							</Column>
-							<Column minScreenWidth="Desktop" demandPopin="true">
-								<Text text="{i18n>FromDate}"/>
-							</Column>
-							<Column minScreenWidth="Desktop" demandPopin="true">
-								<Text text="{i18n>ToDate}"/>
-							</Column>
-							<Column minScreenWidth="Desktop" demandPopin="true">
-								<Text text="{i18n>Comments}"/>
-							</Column>
-						</columns>
-						<items>
-							<ColumnListItem press="onLineItemPressedtree1" type="Navigation">
-								<cells>
-									<ObjectIdentifier title="{}"/>
-									<Text text="{}"/>
-									<Text text="{}"/>
-									<Text text="{}"/>
-									<Text text="{}"/>
-									<Text text="{}"/>
-									<Text text="{}"/>
-									<Text text="{}"/>
-									<Text text="{}"/>
-									<Text text="{}"/>
-								</cells>
-							</ColumnListItem>
-						</items>
-					</Table>-->
+				
 					<VBox class="sapUiSmallMargin">
 						<Table id="tableVTMBS" items="{ModelBlock>/ModelBlockSet}" class="sapUiContentPadding" ariaLabelledBy="title" delete="onDelete"
-							mode="Delete">
+						 mode="{detailView>/zoneUserDelete}">
 							<headerToolbar>
 								<Toolbar>
 									<content>
