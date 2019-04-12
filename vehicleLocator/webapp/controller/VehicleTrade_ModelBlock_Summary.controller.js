@@ -99,6 +99,12 @@ sap.ui.define([
 					var Dealer_No = this.theFirstDefaultDealerSelected;
 
 				}
+			
+			 	if(Dealer_No.length == 10){
+					Dealer_No=Dealer_No.slice(-5);
+				}
+
+				
 			} else { // this is a dealer login, the existing logic as is. 
 				this._oViewModel.setProperty("/visibleByDefault", false); // no combobox to be displayed. 
 				this._oViewModel.setProperty("/zoneUserDisplay", true); //zoneUserDelete

@@ -69,9 +69,7 @@ app.get("/currentScopesForUser", (req, res) => {
 		var obj_data = JSON.parse(parsedData);
 		
 
-         console.log(parsedData);  //// TODO: tobe removed
-
-
+     
 		let legacyDealerCode;
 		try {
 			legacyDealerCode = obj_data.DealerCode[0];
@@ -182,7 +180,7 @@ app.get("/currentScopesForUser", (req, res) => {
 			"loggedUserType": []
 		};
 
-		var userType = "TCI_User";
+		var userType = "ZoneUser";
 		sendUserData.loggedUserType.push(userType);
 
 		return res.type("text/plain").status(200).send(JSON.stringify(sendUserData));

@@ -78,11 +78,7 @@ sap.ui.define([
 			var that = this;
 			that.getRouter().navTo("VehicleTrade_ModelBlock_Summary");	
 			},
-			
-			
-			
-		
-		
+
 		
 		oRequestLinkPress: function (oEvt) {
 			var that = this;

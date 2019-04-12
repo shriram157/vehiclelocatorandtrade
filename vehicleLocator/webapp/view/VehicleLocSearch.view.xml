@@ -103,6 +103,8 @@
 									id="SeriesCmbo" items="{path:'/', sorter : [{ path:'TCISeriesDescriptionEN', ascending : 'true' } ]}" change="handleSeriesChange">
 									<core:ListItem text="{=${SPRAS}==='English' ? ${TCISeriesDescriptionEN}:${TCISeriesDescriptionFR} }" key="{TCISeries}" additionalText=""/>
 								</ComboBox>
+								
+								
 								<Label text="{i18n>ModelCode}" required="true"/>
 								<ComboBox placeholder="" selectedKey="" showSecondaryValues="true" width="90%" selectionChange="MCClickedVLS11" id="McCmbo"
 									change="handleModelChange" items="{ path:'ModelCode>/', sorter : [{ path:'Model', ascending : 'true' } ] }">

@@ -121,7 +121,7 @@
 									</ColumnListItem>
 								</items>
 							</Table>-->
-							<Table id="tableVTH" items="{/}" class="sapUiContentPadding" ariaLabelledBy="title">
+							<Table id="tableVTH" items="{ path: '/', sorter: { path: 'Changed_on', descending: true } }" class="sapUiContentPadding" ariaLabelledBy="title">
 								<headerToolbar>
 									<Toolbar>
 										<content>

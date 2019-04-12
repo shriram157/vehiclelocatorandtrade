@@ -255,23 +255,23 @@ sap.ui.define([
 					that.getView().byId("ctqtid").setText("");
 					that.getView().byId("ctqtid").setVisible(false);
 
-					that.getView().byId("fromqid").setVisible(false);
+					// that.getView().byId("fromqid").setVisible(false);
 					that.getView().byId("txlab").setText("");
 					that.getView().byId("txlab").setVisible(false);
 					
 					that.getView().byId("prolabid").setVisible(false);	
 					
 
-					that.getView().byId("tobid").setVisible(false);
+					// that.getView().byId("tobid").setVisible(false);
 					that.getView().byId("prptid").setText("");
 					that.getView().byId("prptid").setVisible(false);
 
-					that.getView().byId("fmlbid").setVisible(false);
+					// that.getView().byId("fmlbid").setVisible(false);
 				/*	that.getView().byId("fromlbid").setVisible(false);*/
 					that.getView().byId("otxlabel").setText("");
 					that.getView().byId("otxlabel").setVisible(false);
 
-					that.getView().byId("idlto").setVisible(false);
+					// that.getView().byId("idlto").setVisible(false);
 
 				     } else if(StatusData.Trade_Return == "Y" ) {
  
@@ -316,23 +316,23 @@ sap.ui.define([
                 
                     that.getView().byId("ctqtid").setVisible(true);
 
-                    that.getView().byId("fromqid").setVisible(true);
+                    // that.getView().byId("fromqid").setVisible(true);
                 
                     that.getView().byId("txlab").setVisible(true);
                     
                     that.getView().byId("prolabid").setVisible(true);    
                     
 
-                    that.getView().byId("tobid").setVisible(true);
+                    // that.getView().byId("tobid").setVisible(true);
                 
                     that.getView().byId("prptid").setVisible(true);
 
-                    that.getView().byId("fmlbid").setVisible(true);
+                    // that.getView().byId("fmlbid").setVisible(true);
                 
                 
                     that.getView().byId("otxlabel").setVisible(true);
 
-                    that.getView().byId("idlto").setVisible(true);
+                    // that.getView().byId("idlto").setVisible(true);
  
 				     	
 				     }
@@ -496,23 +496,23 @@ sap.ui.define([
 					that.getView().byId("ctqtid").setText("");
 					that.getView().byId("ctqtid").setVisible(false);
 
-					that.getView().byId("fromqid").setVisible(false);
+					// that.getView().byId("fromqid").setVisible(false);
 					that.getView().byId("txlab").setText("");
 					that.getView().byId("txlab").setVisible(false);
 					
 					that.getView().byId("prolabid").setVisible(false);	
 					
 
-					that.getView().byId("tobid").setVisible(false);
+					// that.getView().byId("tobid").setVisible(false);
 					that.getView().byId("prptid").setText("");
 					that.getView().byId("prptid").setVisible(false);
 
-					that.getView().byId("fmlbid").setVisible(false);
+					// that.getView().byId("fmlbid").setVisible(false);
 				/*	that.getView().byId("fromlbid").setVisible(false);*/
 					that.getView().byId("otxlabel").setText("");
 					that.getView().byId("otxlabel").setVisible(false);
 
-					that.getView().byId("idlto").setVisible(false);
+					// that.getView().byId("idlto").setVisible(false);
 
 
 				     } else if(StatusData.Trade_Return == "Y" ) {
@@ -558,23 +558,23 @@ sap.ui.define([
                 
                     that.getView().byId("ctqtid").setVisible(true);
 
-                    that.getView().byId("fromqid").setVisible(true);
+                    // that.getView().byId("fromqid").setVisible(true);
                 
                     that.getView().byId("txlab").setVisible(true);
                     
                     that.getView().byId("prolabid").setVisible(true);    
                     
 
-                    that.getView().byId("tobid").setVisible(true);
+                    // that.getView().byId("tobid").setVisible(true);
                 
                     that.getView().byId("prptid").setVisible(true);
 
-                    that.getView().byId("fmlbid").setVisible(true);
+                    // that.getView().byId("fmlbid").setVisible(true);
                 
                 
                     that.getView().byId("otxlabel").setVisible(true);
 
-                    that.getView().byId("idlto").setVisible(true);
+                    // that.getView().byId("idlto").setVisible(true);
  
 				     	
 				     }
@@ -710,6 +710,23 @@ sap.ui.define([
            		this.getView().byId("oAddbutton").setEnabled(false);
 				 //this.getView().byId("oUpdatePagebtn").setEnabled(false);
 			  }		
+
+// for zone user. 
+
+   				var confirmZoneUser = sap.ui.getCore().getModel("LoginBpDealerModel").oData["0"].BusinessPartnerName;	
+			  if (confirmZoneUser == "Zone User"){
+		// just disable all the buttons
+           		this.getView().byId("oAddbutton").setEnabled(false); 
+				this.getView().byId("oacceptbtn").setVisible(false); 
+				this.getView().byId("oRejectbtn").setVisible(false);
+				this.getView().byId("oCounterofrbtn").setVisible(false); 
+				this.getView().byId("oCancelbtn").setVisible(false); 
+				this.getView().byId("oUpdatebtn").setVisible(false); 
+				this.getView().byId("oBackbtnid").setEnabled(true);
+             	this.getView().byId("oComments").setEnabled(false);
+			  	
+			  }	
+
 
 		},
 		
@@ -2555,11 +2572,11 @@ sap.ui.define([
 					that.getView().byId("ofrstatuslabl").setVisible(true);
 					that.getView().byId("ofrordrtypelabl").setVisible(true);
 					that.getView().byId("cetalaid").setVisible(true);
-					that.getView().byId("fromqid").setVisible(true);
+					// that.getView().byId("fromqid").setVisible(true);
 				/*	that.getView().byId("fromlbid").setVisible(true);*/
-					that.getView().byId("idlto").setVisible(true);
-					that.getView().byId("tobid").setVisible(true);
-					that.getView().byId("fmlbid").setVisible(true);
+					// that.getView().byId("idlto").setVisible(true);
+					// that.getView().byId("tobid").setVisible(true);
+					// that.getView().byId("fmlbid").setVisible(true);
 
 					that.getView().byId("oRequesteddealer").setVisible(true);
 					that.getView().byId("ofrmodelyeartext").setVisible(true);
@@ -2619,23 +2636,23 @@ sap.ui.define([
 					that.getView().byId("ctqtid").setText("");
 					that.getView().byId("ctqtid").setVisible(false);
 
-					that.getView().byId("fromqid").setVisible(false);
+					// that.getView().byId("fromqid").setVisible(false);
 					that.getView().byId("txlab").setText("");
 					that.getView().byId("txlab").setVisible(false);
 					
 					that.getView().byId("prolabid").setVisible(false);	
 					
 
-					that.getView().byId("tobid").setVisible(false);
+					// that.getView().byId("tobid").setVisible(false);
 					that.getView().byId("prptid").setText("");
 					that.getView().byId("prptid").setVisible(false);
 
-					that.getView().byId("fmlbid").setVisible(false);
+					// that.getView().byId("fmlbid").setVisible(false);
 				/*	that.getView().byId("fromlbid").setVisible(false);*/
 					that.getView().byId("otxlabel").setText("");
 					that.getView().byId("otxlabel").setVisible(false);
 
-					that.getView().byId("idlto").setVisible(false);
+					// that.getView().byId("idlto").setVisible(false);
 
 				}
 

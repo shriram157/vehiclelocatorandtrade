@@ -689,7 +689,7 @@ sap.ui.define([
 			for (var key in obj)
 				Color.push(obj[key]);
 			var Model = new sap.ui.model.json.JSONModel(Color);
-			Model.setSizeLimit(1000);
+			// Model.setSizeLimit(1000);
 			this.getView().byId("VLRColor").setModel(Model);
 			if (Color.length != 0) {
 				if (this.getView().byId("VLRColor").getItems().filter(function (x) {
@@ -884,11 +884,7 @@ sap.ui.define([
 
 				this.getView().byId("table1VSR").setSelectionMode("None");
 
-				/*	var oIncsoldve = this.getView().byId('chkmov');
-					oIncsoldve.setVisible(!oIncsoldve.getVisible());
-					var oIncFleetveh = this.getView().byId('chkadd');
-					oIncFleetveh.setVisible(!oIncFleetveh.getVisible());*/
-
+	
 			}
 			if (sap.ui.getCore().getModel("SearchedData") && sap.ui.getCore().getModel("oSuffieldmodel") != undefined) {
 				this.getView().setModel(sap.ui.getCore().getModel("SearchedData"), "VehicleLocatorScdScr");
@@ -916,7 +912,7 @@ sap.ui.define([
                		this.getView().setModel(oViewModel, "languageModel");
             		
 				var model = new sap.ui.model.json.JSONModel(Status);
-				model.setSizeLimit(1000);
+				// model.setSizeLimit(1000);
 				this.getView().setModel(model, "vehicleSearchTableModel");
 				
 				
@@ -965,7 +961,7 @@ sap.ui.define([
 				for (var key in obj)
 					Color.push(obj[key]);
 				var Model = new sap.ui.model.json.JSONModel(Color);
-				Model.setSizeLimit(1000);
+				// Model.setSizeLimit(1000);
 				this.getView().byId("VLRColor").setModel(Model);
 				if (Color.length != 0) {
 					if (this.getView().byId("VLRColor").getItems().filter(function (x) {
@@ -995,7 +991,7 @@ sap.ui.define([
 			}
 
 			var Model = new sap.ui.model.json.JSONModel(SuffixData);
-			Model.setSizeLimit(1000);
+			// Model.setSizeLimit(1000);
 			this.getView().byId("VLRSuffix").setModel(Model);
 			for (var s = 0; s < SuffixData.length; s++) {
 				if (DefaultSuffix == SuffixData[s].zzsuffix + "-" + SuffixData[s].suffix_desc_en + "/" + SuffixData[s].mrktg_int_desc_en) {
@@ -1041,7 +1037,7 @@ sap.ui.define([
 			}
 			/*Status.splice(-1,1);*/
 			var Model = new sap.ui.model.json.JSONModel(StatusDataFilter);
-			Model.setSizeLimit(1000);
+			// Model.setSizeLimit(1000);
 
 			var StatusFilter = StatusDataFilter.filter(function (x) {
 				return (x.zz_trading_ind == "2" || x.zz_trading_ind == "3");
@@ -1409,7 +1405,7 @@ sap.ui.define([
 
 				var Status = sap.ui.getCore().getModel("SearchedData").getData();
 				var model = new sap.ui.model.json.JSONModel(Status);
-				model.setSizeLimit(1000);
+				// model.setSizeLimit(1000);
 				// this.getView().byId("table1VSR").setModel(model); //guna
 				this.getView().setModel(model, "vehicleSearchTableModel");
 
@@ -1449,7 +1445,7 @@ sap.ui.define([
 				for (var key in obj)
 					Color.push(obj[key]);
 				var Model = new sap.ui.model.json.JSONModel(Color);
-				Model.setSizeLimit(1000);
+				// Model.setSizeLimit(1000);
 				this.getView().byId("VLRColor").setModel(Model);
 				if (Color.length != 0) {
 					if (this.getView().byId("VLRColor").getItems().filter(function (x) {
@@ -1542,7 +1538,7 @@ sap.ui.define([
 				}];
 			}
 			var Model = new sap.ui.model.json.JSONModel(StatusDataFilter);
-			Model.setSizeLimit(1000);
+			// Model.setSizeLimit(1000);
 
 			var StatusFilter = StatusDataFilter.filter(function (x) {
 				return (x.zz_trading_ind == "2" || x.zz_trading_ind == "3");
@@ -1647,7 +1643,7 @@ sap.ui.define([
 
 			//	var Status = sap.ui.getCore().getModel("SearchedData").getData();
 			var model = new sap.ui.model.json.JSONModel([]);
-			model.setSizeLimit(1000);
+			// model.setSizeLimit(1000);
 			// this.getView().byId("table1VSR").setModel(model); //guna
 			this.getView().setModel(model, "vehicleSearchTableModel");
 
@@ -1658,7 +1654,7 @@ sap.ui.define([
 			oModelDetail.setProperty("/tableCount", sExpectedText);
 
 			var Model = new sap.ui.model.json.JSONModel([]);
-			Model.setSizeLimit(1000);
+			// Model.setSizeLimit(1000);
 			this.getView().byId("VLRColor").setModel(Model);
 			if (this.getView().byId("VLRColor").getItems().filter(function (x) {
 					return x.mProperties.key == "all"
@@ -1683,7 +1679,7 @@ sap.ui.define([
 
 			/*Status.splice(-1,1);*/
 			var Model = new sap.ui.model.json.JSONModel(StatusDataFilter);
-			Model.setSizeLimit(1000);
+			// Model.setSizeLimit(1000);
 
 			this.getView().byId("VLRStatus").setModel(Model);
 
@@ -1789,7 +1785,7 @@ sap.ui.define([
 			for (var key in obj)
 				Color.push(obj[key]);
 			var Model = new sap.ui.model.json.JSONModel(Color);
-			Model.setSizeLimit(1000);
+			// Model.setSizeLimit(1000);
 			var selctedColor = this.getView().byId("VLRColor").getSelectedKey();
 			this.getView().byId("VLRColor").setModel(Model);
 			if (Color.length != 0) {
@@ -2048,7 +2044,7 @@ sap.ui.define([
 			for (var key in obj)
 				Color.push(obj[key]);
 			var Model = new sap.ui.model.json.JSONModel(Color);
-			Model.setSizeLimit(1000);
+			// Model.setSizeLimit(1000);
 			var selctedColor = this.getView().byId("VLRColor").getSelectedKey();
 			this.getView().byId("VLRColor").setModel(Model);
 			if (Color.length != 0) {

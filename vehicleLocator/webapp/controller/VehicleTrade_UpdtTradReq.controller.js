@@ -109,9 +109,9 @@ sap.ui.define([
 					this.getView().byId("prlabid").setVisible(true);
 
 					this.getView().byId("prpetid").setVisible(true);
-					this.getView().byId("fmlabid").setVisible(true);
+					// this.getView().byId("fmlabid").setVisible(true);
 					this.getView().byId("otxtlabel").setVisible(true);
-					this.getView().byId("idlbltxt").setVisible(true);
+					// this.getView().byId("idlbltxt").setVisible(true);
 
 					/*	this.getView().byId("vehtnum").setVisible(false); */
 
@@ -183,11 +183,11 @@ sap.ui.define([
 
 					this.getView().byId("prpetid").setVisible(false);
 
-					this.getView().byId("fmlabid").setVisible(false);
+					// this.getView().byId("fmlabid").setVisible(false);
 
 					this.getView().byId("otxtlabel").setVisible(false);
 
-					this.getView().byId("idlbltxt").setVisible(false);
+					// this.getView().byId("idlbltxt").setVisible(false);
 
 				}
 
@@ -291,9 +291,9 @@ sap.ui.define([
 					this.getView().byId("prlabid").setVisible(true);
 
 					this.getView().byId("prpetid").setVisible(true);
-					this.getView().byId("fmlabid").setVisible(true);
+					// this.getView().byId("fmlabid").setVisible(true);
 					this.getView().byId("otxtlabel").setVisible(true);
-					this.getView().byId("idlbltxt").setVisible(true);
+					// this.getView().byId("idlbltxt").setVisible(true);
 
 					/*	this.getView().byId("vehtnum").setVisible(false); */
 
@@ -378,11 +378,11 @@ sap.ui.define([
 
 					this.getView().byId("prpetid").setVisible(false);
 
-					this.getView().byId("fmlabid").setVisible(false);
+					// this.getView().byId("fmlabid").setVisible(false);
 
 					this.getView().byId("otxtlabel").setVisible(false);
 
-					this.getView().byId("idlbltxt").setVisible(false);
+					// this.getView().byId("idlbltxt").setVisible(false);
 
 				}
 
@@ -421,15 +421,7 @@ sap.ui.define([
              	this.getView().byId("oComments").setEnabled(false);
 			  	
 			  }		
-			
-			
-			
-			
-			
-			
-			
-			
-			
+
 			
 		},
 
@@ -485,8 +477,8 @@ sap.ui.define([
 			this.getView().byId("prlabid").setVisible(false);
 			this.getView().byId("prpetid").setVisible(false);
 			//	this.getView().byId("prpetid").setText("");
-			this.getView().byId("idlbltxt").setVisible(false);
-			this.getView().byId("fmlabid").setVisible(false);
+			// this.getView().byId("idlbltxt").setVisible(false);
+			// this.getView().byId("fmlabid").setVisible(false);
 			/*	this.getView().byId("fromlabid").setVisible(false);*/
 			this.getView().byId("otxtlabel").setVisible(false);
 

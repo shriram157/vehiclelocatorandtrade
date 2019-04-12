@@ -160,36 +160,35 @@
 								<Label text="{i18n>ExteriorColor}" id="extcollabelid" visible="false"/>
 								<!--<Text text="{TradeModel>/VehicleTradeVehicle/zzextcol}-{TradeModel>/VehicleTradeVehicle/mktg_desc_en}" id="extcolod" visible="false"/>-->
 			<Text text="{TradeModel>/VehicleTradeVehicle/zzextcol} - {=${languageModel>/SPRAS}==='English' ? ${TradeModel>/VehicleTradeVehicle/mktg_desc_en}:${TradeModel>/VehicleTradeVehicle/mktg_desc_fr} }" id="extcolod" visible="false" />						
+ 
 								
-								
-								
-								
-								<Label text="{i18n>CurrentETA}" id="ctrtaid" visible="false"/>
+								<!--<Label text="{i18n>CurrentETA}" id="ctrtaid" visible="false"/>-->
+								<Label text="{i18n>CurrentETA} - {i18n>From}" id="ctrtaid" visible="false"/>
 								<VBox>
 									<HBox>
-										<Text text="{path:'TradeModel>/VehicleTradeVehicle/zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate'}" width="4.5rem"
+										<Text text="{path:'TradeModel>/VehicleTradeVehicle/zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate'}"  
 											id="oCtraid" visible="false" class="sapUiSmallMarginEnd"></Text>
-										<Text text="{i18n>From}" id="fromLabeeid" visible="false"/>
-									</HBox>
-									<HBox>
-										<Text text="{path:'TradeModel>/VehicleTradeVehicle/pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="labetxteid" width="4.5rem"
+										<!--<Text text="{i18n>From}" id="fromLabeeid" visible="false"/>-->
+									<!--</HBox>-->
+									<!--<HBox>-->
+										<Text text="{i18n>To} : {path:'TradeModel>/VehicleTradeVehicle/pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="labetxteid" 
 											visible="false" class="sapUiSmallMarginEnd"/>
-										<Text text="{i18n>To}" id="ototid" visible="false"/>
+										<!--<Text text="{i18n>To}" id="ototid" visible="false"/>-->
 									</HBox>
 								</VBox>
-								<Label text="{i18n>PropsedETAtoNewDealer}" id="propetid" visible="false"/>
+								<Label text="{i18n>PropsedETAtoNewDealer}- {i18n>From}" id="propetid" visible="false"/>
 								<VBox>
 									<HBox>
 										<Text
-											text="{path:'TradeModel>/VehicleTradeVehicle/Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate'}" width="4.5rem"
+											text="{path:'TradeModel>/VehicleTradeVehicle/Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate'}"  
 											id="perpid" visible="false" class="sapUiSmallMarginEnd"/>
-										<Text text="{i18n>From}" id="frlabid" visible="false"/>
-									</HBox>
-									<HBox>
+										<!--<Text text="{i18n>From}" id="frlabid" visible="false"/>-->
+									<!--</HBox>-->
+									<!--<HBox>-->
 										<Label text="" id="fmlabid" visible="false"></Label>
-										<Text text="{path:'TradeModel>/VehicleTradeVehicle/Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.ProposedEtaToDate'}" width="4.5rem"
+										<Text text="{i18n>To} : {path:'TradeModel>/VehicleTradeVehicle/Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.ProposedEtaToDate'}"  
 											id="idlabeal" visible="false" class="sapUiSmallMarginEnd"/>
-										<Text text="{i18n>To}" id="textide" visible="false"/>
+										<!--<Text text="{i18n>To}" id="textide" visible="false"/>-->
 									</HBox>
 								</VBox>
 								<core:Title text="{i18n>TradeDetails}"/>

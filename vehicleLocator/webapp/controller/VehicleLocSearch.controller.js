@@ -49,7 +49,8 @@ sap.ui.define([
 					var userType = oData.loggedUserType[0];
 
 			 //var userType = "ZoneUser"; // TODO: Remove before deployment locatyest only - GSR
-			
+			 //var userType = "vehicelTradeDealerUser"; // TODO: Remove before deployment locatyest only - GSR
+			 
 					switch (userType) {
 					case "vehicelTradeDealerUser":
 						that.userTypeReceived = "vehicelTradeDealerUser";
@@ -158,7 +159,7 @@ sap.ui.define([
 
                         // for toyota login show only toyota dealers, for lexus show only lexus. 
                         
-                        if (item.Division == that.sDivision || item.Division == "Dual") {
+                         //if (item.Division == that.sDivision || item.Division == "Dual") {    // TODO: enable this before migration
 
 						BpDealer.push({
 							"BusinessPartnerKey": item.BusinessPartnerKey,
@@ -169,7 +170,7 @@ sap.ui.define([
 							"searchTermReceivedDealerName": item.SearchTerm2
 
 						});
-					}
+					 //}      // TODO: enable this before migration
 
 					});
 
@@ -179,13 +180,13 @@ sap.ui.define([
 						var BpDealer = [];
 
 						BpDealer.push({
-							"BusinessPartnerKey": "2400024015",
-							"BusinessPartner": "24015",
+							"BusinessPartnerKey": "2400042120",
+							"BusinessPartner": "42120",
 
 							"BusinessPartnerName": "Don Valley North Toyota...", //item.OrganizationBPName1 //item.BusinessPartnerFullName
 							"Division": "10",
 							"BusinessPartnerType": "Z001",
-							"searchTermReceivedDealerName": "24015"
+							"searchTermReceivedDealerName": "42120"
 						});
 
 						BpDealer.push({
@@ -199,6 +200,11 @@ sap.ui.define([
 						});
 
 					}
+
+                     if (BpDealer.length == 0){
+                     	sap.m.MessageBox.error("The Dealer is not found,  check the URL Division, Logged in ID, Pick the Right ID and Retry");
+                     }
+
 
 					//  set your model or use the model below - // TODO: 
 					that.getView().setModel(new sap.ui.model.json.JSONModel(BpDealer), "BpDealerModel");
@@ -223,6 +229,9 @@ sap.ui.define([
 						var sLocation = window.location.host;
 						var sLocation_conf = sLocation.search("webide");
 						if (sLocation_conf == 0) {
+							
+							
+							if (that.userTypeReceived == "ZoneUser") {
 
 							userAttributes.push({
 								// "DealerCode": dealerCode,
@@ -232,7 +241,25 @@ sap.ui.define([
 								"UserType": "Zone",
 								"Zone": "1"
 							});
-
+							} else {
+								userAttributes.push({
+								// "UserType": item.UserType[0],
+								// "DealerCode": "42120",
+								// "Language": "EN",
+								// "LoggedinUserFirstName": "on Valley North Toyota",
+								
+								
+								DealerCode: "42120",
+								Language: "English",
+								LoggedinUserFirstName: "User",
+								LoggedinUserLastName: "42120",
+								UserType: "Dealer",
+								Zone: undefined
+																
+,
+								
+								});
+							}
 						} else {
 							userAttributes.push({
 								"UserType": item.UserType[0],
@@ -828,8 +855,19 @@ sap.ui.define([
 			that.getView().byId("SeriesCmbo").setSelectedKey("");
 			//	 that.getView().byId("SeriesCmbo").setSelectedItem("");
 			that.getView().byId("McCmbo").setSelectedKey("");
-
+            
+            if (that.getView().byId("MoyearCombo").getSelectedItem() != null) {
 			that.oSelectedYear = that.getView().byId("MoyearCombo").getSelectedItem().getText();
+			that.getView().byId("MoyearCombo").setValueState("None");
+            }
+
+            if (that.getView().byId("SeriesCmbo").getSelectedItem() != null) {
+			that.oSelectedYear = that.getView().byId("SeriesCmbo").getSelectedItem().getText();
+			that.getView().byId("SeriesCmbo").setValueState("None");
+            }
+
+
+
 
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");

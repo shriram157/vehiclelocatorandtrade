@@ -108,17 +108,17 @@ sap.ui.define([
 					/*	this.getView().byId("crtslabeid").setVisible(false);*/
 					this.getView().byId("ctrtaid").setVisible(false);
 					this.getView().byId("oCtraid").setVisible(false);
-					this.getView().byId("fromLabeeid").setVisible(false);
+					// this.getView().byId("fromLabeeid").setVisible(false);
 					/*	this.getView().byId("labidtxt").setVisible(false);  ===del===*/
 					this.getView().byId("labetxteid").setVisible(false);
-					this.getView().byId("ototid").setVisible(false);
+					// this.getView().byId("ototid").setVisible(false);
 					/*	this.getView().byId("otitxt").setVisible(false);  ===del===*/
 					this.getView().byId("propetid").setVisible(false);
 					this.getView().byId("perpid").setVisible(false);
-					this.getView().byId("frlabid").setVisible(false);
+					// this.getView().byId("frlabid").setVisible(false);
 					this.getView().byId("fmlabid").setVisible(false);
 					this.getView().byId("idlabeal").setVisible(false);
-					this.getView().byId("textide").setVisible(false);
+					// this.getView().byId("textide").setVisible(false);
 
 					var oReceivedData = sap.ui.getCore().SelectedTrade;
 					var oModel = new sap.ui.model.json.JSONModel(oReceivedData);
@@ -150,17 +150,17 @@ sap.ui.define([
 
 					this.getView().byId("oCtraid").setVisible(true);
 					this.getView().byId("ctrtaid").setVisible(true);
-					this.getView().byId("fromLabeeid").setVisible(true);
+					// this.getView().byId("fromLabeeid").setVisible(true);
 					/*	this.getView().byId("labidtxt").setVisible(true);*/
 					this.getView().byId("labetxteid").setVisible(true);
-					this.getView().byId("ototid").setVisible(true);
+					// this.getView().byId("ototid").setVisible(true);
 					/*	this.getView().byId("otitxt").setVisible(true);*/
 					this.getView().byId("propetid").setVisible(true);
 					this.getView().byId("perpid").setVisible(true);
-					this.getView().byId("frlabid").setVisible(true);
+					// this.getView().byId("frlabid").setVisible(true);
 					this.getView().byId("fmlabid").setVisible(true);
 					this.getView().byId("idlabeal").setVisible(true);
-					this.getView().byId("textide").setVisible(true);
+					// this.getView().byId("textide").setVisible(true);
 
 					this.getView().byId("ofvestats").setVisible(true);
 					this.getView().byId("offeredStatus").setVisible(true);
@@ -257,17 +257,17 @@ sap.ui.define([
 
 				this.getView().byId("ctrtaid").setVisible(false);
 				this.getView().byId("oCtraid").setVisible(false);
-				this.getView().byId("fromLabeeid").setVisible(false);
+				// this.getView().byId("fromLabeeid").setVisible(false);
 				/*	this.getView().byId("labidtxt").setVisible(false);*/
 				this.getView().byId("labetxteid").setVisible(false);
-				this.getView().byId("ototid").setVisible(false);
+				// this.getView().byId("ototid").setVisible(false);
 				/*	this.getView().byId("otitxt").setVisible(false);*/
 				this.getView().byId("propetid").setVisible(false);
 				this.getView().byId("perpid").setVisible(false);
-				this.getView().byId("frlabid").setVisible(false);
+				// this.getView().byId("frlabid").setVisible(false);
 				this.getView().byId("fmlabid").setVisible(false);
 				this.getView().byId("idlabeal").setVisible(false);
-				this.getView().byId("textide").setVisible(false);
+				// this.getView().byId("textide").setVisible(false);
 
 				/*var oReceivedData = sap.ui.getCore().VehicheSearcResults[this.oReceivedDataString];
 				var oModel = new sap.ui.model.json.JSONModel(oReceivedData);

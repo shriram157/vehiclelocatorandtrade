@@ -2115,13 +2115,13 @@ sap.ui.define([
 											});
 									      } else {
 									      	// do not allow pull. 
-									      	sap.m.MessageBox.warning("The vehicle belongs to a different zone and is not allowed, Please unselect this Vehicle" + value.zzvtn); // TODO: french text needed. 
+									      	sap.m.MessageBox.warning("The vehicle belongs to a different zone and is not allowed, Please unselect this Vehicle " + value.zzvtn); // TODO: french text needed. 
 									         errored = true;
 									      	
 									      }
 										} else {
 											// do not allow pull.
-											sap.m.MessageBox.warning("one of the selections have a wrong trading indicator so no pull allowed" + value.zzvtn); // TODO: french text needed. 
+											sap.m.MessageBox.warning("one of the selections have a wrong trading indicator so no pull allowed " + value.zzvtn); // TODO: french text needed. 
 											  errored = true;
 										}
 
