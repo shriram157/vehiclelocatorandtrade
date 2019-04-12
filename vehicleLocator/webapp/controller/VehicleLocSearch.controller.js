@@ -159,7 +159,7 @@ sap.ui.define([
 
                         // for toyota login show only toyota dealers, for lexus show only lexus. 
                         
-                         //if (item.Division == that.sDivision || item.Division == "Dual") {    // TODO: enable this before migration
+                         if (item.Division == that.sDivision || item.Division == "Dual") {    // TODO: enable this before migration
 
 						BpDealer.push({
 							"BusinessPartnerKey": item.BusinessPartnerKey,
@@ -170,7 +170,7 @@ sap.ui.define([
 							"searchTermReceivedDealerName": item.SearchTerm2
 
 						});
-					 //}      // TODO: enable this before migration
+					 }      // TODO: enable this before migration
 
 					});
 
