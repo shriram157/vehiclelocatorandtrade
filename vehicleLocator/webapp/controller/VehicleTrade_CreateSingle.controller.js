@@ -479,28 +479,7 @@ sap.ui.define([
 
 						debugger;
 						var Data = oData.d.results;
-						/*	var that = this;
-							var sLocation = window.location.host;
-							var sLocation_conf = sLocation.search("webide");
-
-							if (sLocation_conf == 0) {
-								this.sPrefix = "/VehicleLocator_Xsodata";
-							} else {
-								this.sPrefix = "";
-
-							}
-							this.nodeJsUrl = this.sPrefix ;
-							that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeRequest";
-							$.ajax({
-								url: that.oDataUrl,
-								method: "GET",
-								async: false,
-								dataType: "json",
-
-								success: function (oData) {
-
-									debugger;
-									var Data = oData.d.results;*/
+					 
 
 						function dynamicSort(property) {
 							var sortOrder = 1;
@@ -533,12 +512,9 @@ sap.ui.define([
 						}
 
 						var Trade_Status = "S";
-						/*	var Requesting_Dealer = that.getView().byId("dealrid").getText().substr(0, that.getView().byId("dealrid").getText().indexOf(
-								"-"));*/
-						var Requesting_Dealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerKey;
 
-						/*	var Requesting_Dealer_Name = that.getView().byId("dealrid").getText().substr(that.getView().byId("dealrid").getText().indexOf(
-								"-") + 1);*/
+						var Requesting_Dealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerKey;
+ 
 						var Requesting_Dealer_Name = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName;
 
 						//var Requested_Vtn = that.getView().byId("vtnid").getText();
@@ -547,54 +523,23 @@ sap.ui.define([
 						var DateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 							pattern: "yyyy-MM-dd"
 						});
-						/*	var Req_Current_ETA_FromData =  that.getView().byId("ctaid").getText();
-								if (Req_Current_ETA_FromData != "") {
-								var Req_Current_ETA_From = DateFormat.format(new Date(Req_Current_ETA_FromData));
-							} else {
-								var Req_Current_ETA_From = "0000-00-00T00:00:00";
-							}*/
-						/*	/  sssssssss  /*/
+ 
 						var Req_Current_ETA_FromData = that.getView().byId("ctaid").getText();
 						if (Req_Current_ETA_FromData != "") {
 							var Req_Current_ETA_From = new Date(oDateFormat.format(new Date(Req_Current_ETA_FromData)));
 						} else {
 							var Req_Current_ETA_From = "0000-00-00T00:00:00";
 						}
-						/*	/  sssssssss  /*/
-
-						/*	that.getView().byId("ctaid").getText();*/
-						/*	if (Req_Current_ETA_FromData != "") {
-								var Req_Current_ETA_From = oDateFormat.format(new Date(Req_Current_ETA_FromData));
-							} else {
-								var Req_Current_ETA_From = oDateFormat.format(new Date());
-							}*/
-						/*old working				
-						var Req_Current_ETA_To =  that.getView().byId("totxtid").getText();
-								if (Req_Current_ETA_To != "") {
-								var Req_Current_ETA_To = DateFormat.format(new Date(Req_Current_ETA_To));
-							} else {
-								var Req_Current_ETA_To = "0000-00-00T00:00:00";
-							}*/
+					 
 						var Req_Current_ETA_ToDate = that.getView().byId("totxtid").getText();
+							var Req_Current_ETA_ToDate = Req_Current_ETA_ToDate.replace("To : ", "");
+						
 						if (Req_Current_ETA_ToDate != "") {
 							var Req_Current_ETA_To = new Date(oDateFormat.format(new Date(Req_Current_ETA_ToDate)));
 						} else {
 							var Req_Current_ETA_To = "0000-00-00T00:00:00";
 						}
-						/*	var Req_Current_ETA_To =  that.getView().byId("totxtid").getText();
-								if (Req_Current_ETA_To != "") {
-								var Req_Current_ETA_To = DateFormat.format(new Date(Req_Current_ETA_To));
-							} else {
-								var Req_Current_ETA_To = "0000-00-00T00:00:00";
-							}*/
-						/*	that.getView().byId("totxtid").getText();*/
-
-						/*	if (Req_Current_ETA_To != "") {
-							var Req_Current_ETA_To = oDateFormat.format(new Date(Req_Current_ETA_To));
-						} else {
-							var Req_Current_ETA_To = oDateFormat.format(new Date());
-						}
-*/
+	 
 						var Req_Proposed_ETA_FromDate = that.getView().byId("prpid").getText();
 
 						if (Req_Proposed_ETA_FromDate != "") {
@@ -603,6 +548,7 @@ sap.ui.define([
 							var Req_Proposed_ETA_From = "0000-00-00T00:00:00";
 						}
 						var Req_Proposed_ETA_ToDate = that.getView().byId("otextlabel").getText();
+									var Req_Proposed_ETA_ToDate = Req_Proposed_ETA_ToDate.replace("To : ", "");
 						if (Req_Proposed_ETA_ToDate != "") {
 							var Req_Proposed_ETA_To = new Date(oDateFormat.format(new Date(Req_Proposed_ETA_ToDate)));
 						} else {
@@ -616,6 +562,8 @@ sap.ui.define([
 							var Off_Current_ETA_From = "0000-00-00T00:00:00";
 						}
 						var Off_Current_ETA_ToDate = that.getView().byId("labetxteid").getText();
+						var Off_Current_ETA_ToDate = Off_Current_ETA_ToDate.replace("To : ", "");
+
 						if (Off_Current_ETA_ToDate != "") {
 							var Off_Current_ETA_To = new Date(oDateFormat.format(new Date(Off_Current_ETA_ToDate)));
 						} else {
@@ -630,6 +578,8 @@ sap.ui.define([
 						}
 
 						var Off_Proposed_ETA_ToDate = that.getView().byId("idlabeal").getText();
+						var Off_Proposed_ETA_ToDate = Off_Proposed_ETA_ToDate.replace("To : ", "");
+						
 						if (Off_Proposed_ETA_ToDate != "") {
 							var Off_Proposed_ETA_To = new Date(oDateFormat.format(new Date(Off_Proposed_ETA_ToDate)));
 						} else {
@@ -660,26 +610,7 @@ sap.ui.define([
 						var Changed_on = new Date();
 						Changed_on = moment(estTimeZone).format('YYYY-MM-DD');
 
-						//	Changed_on = oDateFormat.format(new Date(Changed_on));
-
-						/*	var Created_On = new Date();
-						Created_On = new Date(oDateFormat.format(new Date(Created_On)));
-						  Created_On.setDate(Created_On.getDate() + 1);
-						var Changed_on = new Date();
-						Changed_on = new Date(oDateFormat.format(new Date(Changed_on)));
-                       Changed_on.setDate(Changed_on.getDate() + 1);*/
-						/*	var Created_On = that.getView().byId("idlabeal").getText();
-							if (Created_On != "") {
-								var Created_On = oDateFormat.format(new Date(Created_On));
-							} else {
-								var Created_On = oDateFormat.format(new Date());
-							}
-							var Changed_on = that.getView().byId("idlabeal").getText();;
-							if (Changed_on != "") {
-								var Changed_on = oDateFormat.format(new Date(Changed_on));
-							} else {
-								var Changed_on = oDateFormat.format(new Date());
-							}*/
+			 
 						var Requested_Dealer = that.getView().getModel("TradeModel").oData.kunnr;
 						var Requested_Dealer_Name = that.getView().byId("dealrid").getText().substr(that.getView().byId("dealrid").getText().indexOf(
 							"-") + 1);
