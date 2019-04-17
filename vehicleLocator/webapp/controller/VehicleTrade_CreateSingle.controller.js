@@ -538,7 +538,7 @@ sap.ui.define([
 						var Req_Current_ETA_ToDate = that.getView().byId("totxtid").getText();
 							var Req_Current_ETA_ToDate = Req_Current_ETA_ToDate.replace("To : ", "");
 						
-						if (Req_Current_ETA_ToDate != "" || Req_Current_ETA_ToDate != " ") {
+						if (Req_Current_ETA_ToDate != "" && Req_Current_ETA_ToDate != " ") {
 							var Req_Current_ETA_To = new Date(oDateFormat.format(new Date(Req_Current_ETA_ToDate)));
 						} else {
 							var Req_Current_ETA_To = "0000-00-00T00:00:00";
