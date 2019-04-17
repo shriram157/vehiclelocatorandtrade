@@ -56,7 +56,7 @@ sap.ui.define([
 
 			var that = this;
 			var confirmZoneUser = sap.ui.getCore().getModel("LoginBpDealerModel").oData["0"].BusinessPartnerName;
-			if (confirmZoneUser == "Zone User") {
+		 if (confirmZoneUser.includes("Zone User")) {
 				this.userType = "Zone";
 
 				this._oViewModel.setProperty("/visibleByDefault", true);
@@ -576,8 +576,16 @@ sap.ui.define([
 			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
 
 			/*	var SeriesUrl= that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq 'YZ3DCT' and zzextcol eq '01D6' and zzintcol eq 'LC14' and zzsuffix eq 'AB' and zzmoyr eq '2018'";*/
+//1704 requesting dealer is introduced. 
 
-			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=kunnr eq '" + oDealer + "'";
+	        var userAttributesModellen =  sap.ui.getCore().getModel("LoginuserAttributesModel").getData();
+			var oDealer = userAttributesModellen[0].DealerCode;
+			if (oDealer == undefined){
+				oDealer = "";
+			}
+
+			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=kunnr eq '" + oDealer + "'";
+  
 
 			$.ajax({
 				url: SeriesUrl,

@@ -71,7 +71,7 @@ sap.ui.define([
 // for zone user functionality ---------------------			
 			
 			 var confirmZoneUser = sap.ui.getCore().getModel("LoginBpDealerModel").oData["0"].BusinessPartnerName;	
-			  if (confirmZoneUser == "Zone User"){
+			   if (confirmZoneUser.includes("Zone User")) {
 			  	   this.userType = "Zone";
 			  	   
 			  	   		this._oViewModel.setProperty("/visibleByDefault", true);

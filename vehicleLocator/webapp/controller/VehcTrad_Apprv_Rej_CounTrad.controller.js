@@ -705,7 +705,7 @@ sap.ui.define([
 			
 			// for zone user. 
 				var confirmZoneUser = sap.ui.getCore().getModel("LoginBpDealerModel").oData["0"].BusinessPartnerName;	
-			  if (confirmZoneUser == "Zone User"){
+			   if (confirmZoneUser.includes("Zone User")) {
 		// just disable all the buttons
            		this.getView().byId("oAddbutton").setEnabled(false);
 				 //this.getView().byId("oUpdatePagebtn").setEnabled(false);
@@ -714,7 +714,7 @@ sap.ui.define([
 // for zone user. 
 
    				var confirmZoneUser = sap.ui.getCore().getModel("LoginBpDealerModel").oData["0"].BusinessPartnerName;	
-			  if (confirmZoneUser == "Zone User"){
+			   if (confirmZoneUser.includes("Zone User")) {
 		// just disable all the buttons
            		this.getView().byId("oAddbutton").setEnabled(false); 
 				this.getView().byId("oacceptbtn").setVisible(false); 

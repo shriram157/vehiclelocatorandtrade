@@ -331,7 +331,16 @@ sap.ui.define([
 				"' and zzmoyr eq '" + MoyearCombo + "' and kunnr eq '" + oDealer +
 				"'";*/
 			/*	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '"+McCmbo+"' and endswith (zzintcol,'"+this.intercolor+"') and zzsuffix eq '"+SuffCmbo+"' and zzmoyr eq '"+MoyearCombo+"'&$format=json";	*/
-			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=zzseries eq'" + Series + "'and kunnr eq '" + oDealer +
+
+
+//on 1704 oData introduced the requesting dealer. 
+		var userAttributesModellen =  sap.ui.getCore().getModel("LoginuserAttributesModel").getData();
+			var oDealer = userAttributesModellen[0].DealerCode;
+			if (oDealer == undefined){
+				oDealer = "";
+			}
+
+			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=zzseries eq'" + Series + "'and kunnr eq '" + oDealer +
 				"'&$format=json";
 
 			$.ajax({
@@ -428,17 +437,12 @@ sap.ui.define([
 		},
 		onRequestVT: function () {
 			debugger;
-			/*	var that = this;*/
-			/*	if (this.getView().byId("VT_CStradinRet").getSelectedKey() == "Yes" && this.getView().byId("FromFourth").getText() == "") 
-				{
-					sap.m.MessageBox.warning("Please select VehicleList");
-					return;
-				}*/
+
 			if (this.getView().byId("VT_CStradinRet").getSelectedKey() == "Yes" && this.getView().byId("FromFourth").getText() == "") {
 				var sTextFromi18n = this.getView().getModel("i18n").getResourceBundle().getText("pleaseSelectVehicle");
 				
 					sap.m.MessageBox.warning(sTextFromi18n);
-				// sap.m.MessageBox.warning("Please select a vehicle");
+
 
 				return;
 
@@ -830,28 +834,11 @@ sap.ui.define([
 
 			var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 				pattern: "yyyy-MM-dd'T'HH:mm:ss"
-					/*	pattern: "yyyy-MM-dd"*/
+		
 			});
 			var oCommentdate = new Date(oDateFormat.format(new Date()));
 			oCommentdate.setDate(oCommentdate.getDate() + 1);
 
-			/*	var Suffix = that.getView().byId("oZsuffix").getText().split("-")[0];*/
-
-			/*	var modelYear = that.getView().byId("zzMoyr").getText();
-				var Apx = that.getView().byId("oApx").getText();
-				var Series =that.getView().getModel("TradeModel").getData().zzseries;
-				var exterior = that.getView().byId("Zextcolo").getText().split("-")[0];
-				var vtn = that.getView().byId("vtnid").getText();
-				var ostatus = that.getView().getModel("TradeModel").getData().zz_trading_ind;*/
-			/*	if(ostatus=="Pipeline – non-Routable"){
-					ostatus="2";
-				}
-				else if(ostatus=="Pipeline - Routable"){
-					ostatus="1";
-				}*/
-
-			/*	var oOrdertype = that.getView().getModel("TradeModel").getData().zzordertype;
-				var DNC = that.getView().getModel("TradeModel").getData().dnc_ind;*/
 			var oSuffixReq = that.getView().byId("oZsuffix").getText().split("-")[0].trim();
 			var omodelReq = that.getView().byId("oZmodel").getText().split("-")[0].trim();
 			var omodelYearReq = that.getView().byId("zzMoyr").getText();
@@ -912,9 +899,7 @@ sap.ui.define([
 				oVehicleDetails.push(oEntry1);
 			}
 
-			/*	oEntry1["Trade_Id"] = oEntry.Trade_Id;*/
-			/*	oVehicleDetails["Trade_Id"] = oEntry.Trade_Id;
-			 */
+ 
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
 
@@ -956,43 +941,7 @@ sap.ui.define([
 					/*pattern: "yyyy-MM-dd"*/
 			});
 			var oCommentdate = oDateFormat.format(new Date());
-			/*	var oCommentdate = new Date(oDateFormat.format(new Date()));
-				 oCommentdate.setDate(oCommentdate.getDate() + 1);*/
-			/*		var Suffix = that.getView().byId("oZsuffix").getText().split("-")[0];
-					if (Suffix != "") {
-						var Suffix = that.getView().byId("oZsuffix").getText();
-						var intColor = Suffix.substr(Suffix.indexOf("/") + 1);
-					
-					} else {
-						var intColor = "";
-					}
-					
-					var Model_Description = that.getView().byId("oZmodel").getText().split("-")[1];
-					var Series_Desc = that.getView().byId("oSeries").getText().split("-")[0];
-					if (Series_Desc != "") {
-						var Series_Desc = that.getView().byId("oSeries").getText();
-						Series_Desc = Series_Desc.substr(Series_Desc.indexOf("-") + 1);
-					} else {
-						Series_Desc = "";
-					}
-					var Suffix_Desc = that.getView().byId("oZsuffix").getText().split("-")[0];
-					if (Suffix_Desc != "") {
-						var Suffix_Desc = that.getView().byId("oZsuffix").getText();
-					
-						Suffix_Desc = Suffix_Desc.substr(Suffix_Desc.indexOf("-") + 1);
-						Suffix_Desc = Suffix_Desc.substring(0, Suffix_Desc.indexOf('/'));
-					} else {
-						Suffix_Desc = "";
-					}
-				
-					var Ext_Colour_Desc = that.getView().byId("Zextcolo").getText().split("-")[0];
-					if (Ext_Colour_Desc != "") {
-						var Ext_Colour_Desc = that.getView().byId("Zextcolo").getText();
-						Ext_Colour_Desc = Ext_Colour_Desc.substr(Ext_Colour_Desc.indexOf("-") + 1);
-					
-					} else {
-						Ext_Colour_Desc = "";
-					}*/
+
 
 			//	var Spars = sap.ui.getCore().getConfiguration().getLanguage();
 			//	var Spars = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language.slice(0, 1); //GSR
@@ -1184,10 +1133,6 @@ sap.ui.define([
 			if (isDivisionSent) {
 				this.sDivision = window.location.search.match(/Division=([^&]*)/i)[1];
 
-				// if (this.sDivision == aDataBP[0].Division) {
-
-				// 	this.getView().byId("messageStripError").setProperty("visible", false);
-
 				if (this.sDivision == '10') // set the toyoto logo
 				{
 					var currentImageSource = this.getView().byId("idLexusLogo");
@@ -1211,8 +1156,7 @@ sap.ui.define([
 			oTextArea.setValueState(sState);
 		},
 		onNavBackToSearchResult: function (oEvent) {
-				// var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-				// oRouter.navTo("VehicleSearcResults", true);	
+
 							var Obj = {};
 					Obj.selectedSuffix = "";
 					Obj.LoginUser = "";

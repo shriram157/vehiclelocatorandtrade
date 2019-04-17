@@ -84,9 +84,20 @@ sap.ui.define([
 
 				that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
 
-				var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '" + SelectedMSMData[0].McCmbo +
+				// var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '" + SelectedMSMData[0].McCmbo +
+				// 	"' and endswith (zzintcol,'" + this.intercolor + "') and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + SelectedMSMData[0].MoyearCombo +
+				// 	"'&$format=json";
+				
+			var userAttributesModellen = that.getView().getModel("userAttributesModel").getData();
+			var oDealer = userAttributesModellen[0].DealerCode;
+			if (oDealer == undefined){
+				oDealer = "";
+			}
+  
+				var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=matnr eq '" + SelectedMSMData[0].McCmbo +
 					"' and endswith (zzintcol,'" + this.intercolor + "') and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + SelectedMSMData[0].MoyearCombo +
 					"'&$format=json";
+ 
 
 				$.ajax({
 					url: SeriesUrl,
@@ -284,10 +295,20 @@ sap.ui.define([
 
 				that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
 
-				var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '" + SelectedMSMData[0].McCmbo +
+				// var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '" + SelectedMSMData[0].McCmbo +
+				// 	"' and endswith (zzintcol,'" + this.intercolor + "') and zzseries eq '" + SelectedMSMData[0].SeriesCmbo + "' and zzmoyr eq '" +
+				// 	SelectedMSMData[0].MoyearCombo + "'&$format=json";
+	        var userAttributesModellen =  sap.ui.getCore().getModel("LoginuserAttributesModel").getData();
+			var oDealer = userAttributesModellen[0].DealerCode;
+			if (oDealer == undefined){
+				oDealer = "";
+			}
+			
+ 	
+           var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=matnr eq '" + SelectedMSMData[0].McCmbo +
 					"' and endswith (zzintcol,'" + this.intercolor + "') and zzseries eq '" + SelectedMSMData[0].SeriesCmbo + "' and zzmoyr eq '" +
-					SelectedMSMData[0].MoyearCombo + "'&$format=json";
-
+					SelectedMSMData[0].MoyearCombo + "'&$format=json";	
+					
 				$.ajax({
 					url: SeriesUrl,
 					type: "GET",

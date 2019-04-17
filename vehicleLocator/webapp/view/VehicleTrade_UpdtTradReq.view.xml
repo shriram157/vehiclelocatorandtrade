@@ -76,51 +76,33 @@
 								<Text text="{Ext_Colour}-{Ext_Colour_Desc}"/>
 								<Label text="{i18n>Status}"/>
 								<Text text="{path:'Status',formatter:'vehicleLocator.Formatter.Formatter.Status'}"/>
-								<Label text="{i18n>OrderType}"/>
-								<Text text="{path:'Order_Type',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}"/>
-								<Label text="{i18n>CurrentETA}" id="cetalaid">
-									<!--<layoutData>-->
-									<!--	<l:GridData span="L4 M12 S3"/>-->
-									<!--</layoutData>-->
+								<Label text="{i18n>OrderType}" visible="{detailView>/showOrderType}"/>
+								<Text text="{path:'Order_Type',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" visible="{detailView>/showOrderType}"/>
+								<Label text="{i18n>CurrentETA} - {i18n>From}" id="cetalaid">
+	 
 								</Label>
 								
-								<Text text="{path:'Req_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'} {i18n>From}" class="sapUiSmallMarginEnd" id="ctqtid">
-									<!--<layoutData>-->
-									<!--	<l:GridData span="L4 M12 S3"/>-->
-									<!--</layoutData>-->
+								<Text text="{path:'Req_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}  {i18n>To} : {path:'Req_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" class="sapUiSmallMarginEnd" id="ctqtid">
+	 
 								</Text>
-								<Text text="" id="fromqid"/>
-								<Label text=""></Label>
-								<Text text="{path:'Req_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'} {i18n>To}" id="txlab">
-									<!--<layoutData>-->
-									<!--	<l:GridData span="L4 M12 S3"/>-->
-									<!--</layoutData>-->
-								</Text>
-								<Text text="" id="tobid"/>
-								<Text text="" id="toid"/>
-								<Label text="{i18n>PropsedETAtoNewDealer}" id="prolabid"/>
-								<Text text="{path:'Req_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'} {i18n>From}" id="prptid">
-									<!--<layoutData>-->
-									<!--	<l:GridData span="L4 M12 S3"/>-->
-									<!--</layoutData>-->
-								</Text>
-								<Text text="" id="fmlbid"/>
-								<Label text="" id="fromlbid"></Label>
-								<Text text="{path:'Req_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'} {i18n>To}" id="otxlabel">
-									<!--<layoutData>-->
-									<!--	<l:GridData span="L4 M12 S3"/>-->
-									<!--</layoutData>-->
+								<!--<Text text="" id="fromqid"/>-->
+								<!--<Label text=""></Label>-->
+								<!--<Text text="{path:'Req_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'} {i18n>To}" id="txlab">-->
+				 
+								<!--</Text>-->
+								<!--<Text text="" id="tobid"/>-->
+								<!--<Text text="" id="toid"/>-->
+								<Label text="{i18n>PropsedETAtoNewDealer} - {i18n>From}" id="prolabid"/>
+								<Text text="{path:'Req_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}  {i18n>To} : {path:'Req_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="prptid">
+		 
+								<!--</Text>-->
+								<!--<Text text="" id="fmlbid"/>-->
+								<!--<Label text="" id="fromlbid"></Label>-->
+								<!--<Text text="{path:'Req_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'} {i18n>To}" id="otxlabel">-->
+			 
 								</Text>
 								<Text text="" id="idlto"/>
-								<!--<Label text="{i18n>DonotCall(DNC)Vehicle}"/>
-								<ComboBox id="VT_ARCTDnc" selectionChange="onVTARCTdnc" width="220px" items="{/}">
-									<core:ListItem key="{DNC}" text="{path:'DNC',formatter:'vehicleLocator.Formatter.Formatter.DNC'}"/>
-								</ComboBox>
-								<Label text="{i18n>DNCBlockout(Days)}"/>
-								<ComboBox id="VT_ARCDnc" selectionChange="ondncblckoutchnage" width="220px" items="{/}"
-									visible="{path:'DNC',formatter:'vehicleLocator.Formatter.Formatter.DNCBlockout'}">
-									<core:ListItem key="{ZZDuration}" text="{ZZDuration}"/>
-								</ComboBox>-->
+ 
 								<Label text="{i18n>TradeinReturn}"/>
 								<ComboBox id="oTradeinRet" selectionChange="onTradeReqStat" width="220px" items="{/}">
 									<core:ListItem key="{Trade_Return}" text="{path:'Trade_Return',formatter:'vehicleLocator.Formatter.Formatter.TradeReturn'}"/>
@@ -135,15 +117,8 @@
 								</Button>
 								<Label text="{i18n>Status}"/>
 								<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}"/>
-								<!--	<Label text="{i18n>TradeinReturn}"/>
-								<ComboBox id="VT_ARCTtrdinRet" selectionChange="onTradeReqStat" width="220px" items="{/}" selectedKey="{/0/Trade_Return}" editable="false">
-									<core:ListItem key="{Trade_Return}" text="{path:'Trade_Return',formatter:'vehicleLocator.Formatter.Formatter.TradeReturn'}"/>
-								</ComboBox>
-								<Label text="{i18n>Status}"/>
-								<ComboBox id="VT_ARCTtrdinStatus" selectionChange="onVTARctstats" width="220px" items="{/}" selectedKey="{/0/Trade_Status}" editable="false">
-									<core:ListItem key="{Trade_Status}" text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}"/>
-								</ComboBox>-->
-								<!--<Text text="Request Sent"/>-->
+	 
+						 
 								<core:Title text="{i18n>OfferVehicleInformation}" id="offfveh"/>
 								<Label text="{i18n>VehicleTrackingNumber}" id="vehtnum"/>
 								<Text text="{/OffredVehicle/Offered_Vtn}" id="ovtnId"/>
@@ -163,37 +138,27 @@
 								<Text text="{path:'/OffredVehicle/Status',formatter:'vehicleLocator.Formatter.Formatter.Status'}" id="stdId"/>
 								<Label text="{i18n>OrderType}" id="ordtyp"/>
 								<Text text="{path:'/OffredVehicle/Order_Type',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" id="ortype"/>
-								<Label text="{i18n>CurrentETA}" id="cetalabid">
-									<!--<layoutData>-->
-									<!--	<l:GridData span="L4 M12 S3"/>-->
-									<!--</layoutData>-->
+								<Label text="{i18n>CurrentETA} - {i18n>From}" id="cetalabid">
+			 
 								</Label>
-								<Text text="{path:'/OffredVehicle/Off_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'} {i18n>From}" id="ctetid">
-									<!--<layoutData>-->
-									<!--	<l:GridData span="L4 M12 S3"/>-->
-									<!--</layoutData>-->
+								<Text text="{path:'/OffredVehicle/Off_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}  {i18n>To} : {path:'/OffredVehicle/Off_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="ctetid">
+ 
+								<!--</Text>-->
+								<!--<Text text="" id="frmid"/>-->
+								<!--<Label text=""></Label>-->
+								<!--<Text text="{path:'/OffredVehicle/Off_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'} {i18n>To} " id="txtlab">-->
+					 
 								</Text>
-								<Text text="" id="frmid"/>
-								<Label text=""></Label>
-								<Text text="{path:'/OffredVehicle/Off_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'} {i18n>To}" id="txtlab">
-									<!--<layoutData>-->
-									<!--	<l:GridData span="L4 M12 S3"/>-->
-									<!--</layoutData>-->
-								</Text>
-								<Text text="" id="tolbid"/>
-								<Text text=""/>
-								<Label text="{i18n>PropsedETAtoNewDealer}" id="prlabid"/>
-								<Text text="{path:'/OffredVehicle/Off_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'} {i18n>From}" id="prpetid">
-									<!--<layoutData>-->
-									<!--	<l:GridData span="L4 M12 S3"/>-->
-									<!--</layoutData>-->
-								</Text>
-								<Text text="" id="fmlabid"/>
-								<Label text=""></Label>
-								<Text text="{path:'/OffredVehicle/Off_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'} {i18n>To}" id="otxtlabel">
-									<!--<layoutData>-->
-									<!--	<l:GridData span="L4 M12 S3"/>-->
-									<!--</layoutData>-->
+								<!--<Text text="" id="tolbid"/>-->
+								<!--<Text text=""/>-->
+								<Label text="{i18n>PropsedETAtoNewDealer} -  {i18n>From}" id="prlabid"/>
+								<Text text="{path:'/OffredVehicle/Off_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'} {i18n>To} : {path:'/OffredVehicle/Off_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="prpetid">
+	 
+								<!--</Text>-->
+								<!--<Text text="" id="fmlabid"/>-->
+								<!--<Label text=""></Label>-->
+								<!--<Text text="{path:'/OffredVehicle/Off_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'} {i18n>To}" id="otxtlabel">-->
+ 
 								</Text>
 								<Text text="" id="idlbltxt"/>
 								<Text text="{/OffredVehicle/FromFourth}" id="otextId" visible="false"/>
@@ -238,28 +203,7 @@
 								</items>
 							</Table>
 						</VBox>
-						<!--	<Table id="tableVrade" width="auto" class="sapUiResponsiveMargin" items="{/}" growingThreshold="150">
-						<columns>
-							<Column minScreenWidth="Desktop" demandPopin="true">
-								<Text text="{i18n>Date}"/>
-							</Column>
-							<Column minScreenWidth="Desktop" demandPopin="true">
-								<Text text="{i18n>User}"/>
-							</Column>
-							<Column minScreenWidth="Desktop" demandPopin="true">
-								<Text text="{i18n>Comments}"/>
-							</Column>
-						</columns>
-						<items>
-							<ColumnListItem press="onLineItemPressedtree1" type="Navigation">
-								<cells>
-									<Text text="{Created_On}"/>
-									<Text text="{Created_By}"/>
-									<Text text="{Comment_Txt}"/>
-								</cells>
-							</ColumnListItem>
-						</items>
-					</Table>-->
+ 
 						<VBox class="sapUiSmallMargin" width="100%">
 							<form:SimpleForm id="SimpleForrmDisa220" editable="true" layout="ResponsiveGridLayout" labelSpanM="12" adjustLabelSpan="false"
 								emptySpanL="0" emptySpanM="0" columnsL="3" columnsM="3" width="100%">
@@ -273,30 +217,9 @@
 											text="{i18n>TradeCreated} {Created_By} {i18n>On} {path:'Created_On',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}"
 											class="Messagestrip1"/>
 									</VBox>
-									<!--	<VBox>-->
-									<!--</VBox>-->
+			 
 									<core:Title text="" class="Vtaprct1"/>
-									<!--<Text
-									text="This trade information is a snap shot at the time of trade request creation. This information will be validated once after your input (Accept/Reject/Counter) before the function is completed."
-									width=""/>-->
-									<!--<HBox>-->
-									<!--	<FlexBox width="10px"></FlexBox>
-									<FlexBox height="50px" alignItems="Start" justifyContent="Start">
-										<Button text="{i18n>Accept}" width="100px"/>
-										<FlexBox width="7px"></FlexBox>
-									</FlexBox>
-									<FlexBox width="10px"></FlexBox>
-									<FlexBox height="50px" alignItems="Start" justifyContent="Start">
-										<Button text="{i18n>Reject}" width="100px"/>
-										<FlexBox width="7px"></FlexBox>
-									</FlexBox>
-									<FlexBox width="10px"></FlexBox>
-									<FlexBox height="50px" alignItems="Start" justifyContent="Start">
-										<Button text="{i18n>CounterOffer}" width="150px"/>
-										<FlexBox width="7px"></FlexBox>oUpdatebackbtn
-									</FlexBox>-->
-									<!--</HBox>-->
-									<!--<Label text=""/>-->
+								 
 									<HBox width="100%">
 										<FlexBox width="10px"></FlexBox>
 										<FlexBox height="200px" alignItems="Start" justifyContent="Start">

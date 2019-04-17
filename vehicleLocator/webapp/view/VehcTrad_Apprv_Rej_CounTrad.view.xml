@@ -86,7 +86,7 @@
 										<!--<Text text="{i18n>From}" id="frmid"/>-->
 									<!--</HBox>-->
 									<!--<HBox>-->
-										<Text text="{i18n>To} - {path:'Req_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="txtlab"
+										<Text text="{i18n>To} : {path:'Req_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="txtlab"
 											class="sapUiSmallMarginEnd"></Text>
 										<!--<Text text="{i18n>To}" id="tolbid"/>-->
 									 

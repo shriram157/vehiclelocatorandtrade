@@ -295,20 +295,23 @@ sap.ui.define([
 
 			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
 
-			/*	var SeriesUrl= that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq 'YZ3DCT' and zzextcol eq '01D6' and zzintcol eq 'LC14' and zzsuffix eq 'AB' and zzmoyr eq '2018'";*/
+ 
 
-			/*var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq'" + McCmbo + "' and zzsuffix eq '" + SuffCmbo +
-				"' and zzmoyr eq '" + MoyearCombo + "' and kunnr eq '" + oDealer +
-				"'";*/
-			/*	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq'" + McCmbo + "' and zzsuffix eq '" + SuffCmbo +
-				"' and zzmoyr eq '" + MoyearCombo + "' and kunnr eq '" + oDealer +
-				"'and zzseries eq '" +Series+"'";*/
+			// var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=zzseries eq'" + Series + "'and kunnr eq '" + oDealer +
+			// 	"'&$format=json"
 
-			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=zzseries eq'" + Series + "'and kunnr eq '" + oDealer +
-				"'&$format=json"
-
-			/*	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '"+McCmbo+"' and endswith (zzintcol,'"+this.intercolor+"') and zzsuffix eq '"+SuffCmbo+"' and zzmoyr eq '"+MoyearCombo+"'&$format=json";	*/
-
+		 //1704 requesting dealer is introduced. 		 
+			var userAttributesModellen =  sap.ui.getCore().getModel("LoginuserAttributesModel").getData();
+			var oDealer = userAttributesModellen[0].DealerCode;
+			if (oDealer == undefined){
+				oDealer = "";
+			}
+		 
+		  var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=zzseries eq'" + Series + "'and kunnr eq '" + oDealer +
+			 	"'&$format=json";
+		 
+		 
+		 
 			$.ajax({
 				url: SeriesUrl,
 				type: "GET",
