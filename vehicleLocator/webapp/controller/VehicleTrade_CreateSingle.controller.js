@@ -335,12 +335,12 @@ sap.ui.define([
 
 //on 1704 oData introduced the requesting dealer. 
 		var userAttributesModellen =  sap.ui.getCore().getModel("LoginuserAttributesModel").getData();
-			var oDealer = userAttributesModellen[0].DealerCode;
-			if (oDealer == undefined){
-				oDealer = "";
-			}
-
-			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=zzseries eq'" + Series + "'and kunnr eq '" + oDealer +
+			// var oDealer1 = userAttributesModellen[0].DealerCode;
+			// if (oDealer1 == undefined){
+			// 	oDealer1 = "";
+			// }
+            var oDealer1 = "";
+			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer1 + "')/Set?$filter=zzseries eq'" + Series + "'and kunnr eq '" + oDealer +
 				"'&$format=json";
 
 			$.ajax({

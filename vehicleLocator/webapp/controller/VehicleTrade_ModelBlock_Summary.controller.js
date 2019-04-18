@@ -578,13 +578,13 @@ sap.ui.define([
 			/*	var SeriesUrl= that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq 'YZ3DCT' and zzextcol eq '01D6' and zzintcol eq 'LC14' and zzsuffix eq 'AB' and zzmoyr eq '2018'";*/
 //1704 requesting dealer is introduced. 
 
-	        var userAttributesModellen =  sap.ui.getCore().getModel("LoginuserAttributesModel").getData();
-			var oDealer = userAttributesModellen[0].DealerCode;
-			if (oDealer == undefined){
-				oDealer = "";
-			}
+			// var oDealer1 = userAttributesModellen[0].DealerCode;
+			// if (oDealer1 == undefined){
+			// 	oDealer1 = "";
+			// }
+            var oDealer1 = "";
 
-			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=kunnr eq '" + oDealer + "'";
+			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer1 + "')/Set?$filter=kunnr eq '" + oDealer + "'";
   
 
 			$.ajax({

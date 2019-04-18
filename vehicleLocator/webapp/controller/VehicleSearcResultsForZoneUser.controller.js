@@ -892,16 +892,16 @@ sap.ui.define([
 			// use the above to send to SAP along with pulled vehicles. 
 
 			// if the user is retruning by pressing the back button,  then it is better, that we dont refresh the data again. 
-			var oModelForSearch = this.getView().getModel("vehicleSearchTableModel");
-			if (oModelForSearch != undefined) {
-				var searchTableAlreadsyBuilt = this.getView().getModel("vehicleSearchTableModel").getData().length;
-				if (searchTableAlreadsyBuilt > "0") {
-					return;
-				}
-			}
+			// var oModelForSearch = this.getView().getModel("vehicleSearchTableModel");
+			// if (oModelForSearch != undefined) {
+			// 	var searchTableAlreadsyBuilt = this.getView().getModel("vehicleSearchTableModel").getData().length;
+			// 	if (searchTableAlreadsyBuilt > "0") {
+			// 		return;
+			// 	}
+			// }
 
-			var RoutedData = JSON.parse(oEvent.getParameter("arguments").LoginUser);
-			DefaultSuffix = (RoutedData.selectedSuffix).replace(/\//g, "%2F");
+			// var RoutedData = JSON.parse(oEvent.getParameter("arguments").LoginUser);
+			// DefaultSuffix = (RoutedData.selectedSuffix).replace(/\//g, "%2F");
 			//	this.getView().byId("VLRSuffix").removeAllItems();
 			var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
 			var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
@@ -2260,12 +2260,15 @@ sap.ui.define([
 									// oMessagesFromSAPModel.setData(sapMessage);
 									// this.getView().setModel(oMessagesFromSAPModel, "messagesReceivedFromSAP");
                           
-                          	var oModel = new sap.ui.model.odata.ODataModel(sapMessage, true);
-									sap.ui.getCore().setModel(oModel);
+         //                 	var oModel = new sap.ui.model.odata.ODataModel(sapMessage, true);
+									// sap.ui.getCore().setModel(oModel);
+									
+									
+									
                           // lets use this core model to display messages if needed. 
                           
                                   
-									that._reloadThePageWithnewData();
+									that._reloadThePageWithnewData(sapMessage);
 
 								}
 
@@ -2282,13 +2285,54 @@ sap.ui.define([
 			}
 		}, // end of handlePressPullVehicle. 
 
-		_reloadThePageWithnewData: function () {
+		_reloadThePageWithnewData: function (sapMessage) {
+			
+				var showRecordSaved = this._oResourceBundle.getText("RECORD_PULL_SUCCESS");
+				var errorExist = false;
+			   for (var i=0; i<sapMessage.length; i++) {
+			   	if ( sapMessage[i].messsageType == "Error" ) {
+			   		var showRecordSaved = this._oResourceBundle.getText("RECORD_PULL_ERROR");
+			   		var errorExist = true;
+			   		break;
+			   	} 
+			   	
+			   }
+              
+              
 
+			sap.m.MessageToast.show(showRecordSaved, {
+				duration: 3000, // default
+				width: "15em", // default
+				my: "center middle",
+				at: "center middle",
+				of: window, // default
+				offset: "0 0", // default
+				collision: "fit fit", // default
+				onClose: null, // default
+				autoClose: true, // default
+				animationTimingFunction: "ease", // default
+				animationDuration: 1000, // default
+				closeOnBrowserNavigation: false // default
+			});
+			    if (errorExist == true) {
+              	this._showColor("Red", '#cc1919');
+			    }
+              
+              
 			this.getRouter().navTo("VehicleSearcResultsForZoneUser", {
 				DataClicked: "Yes"
 			});
 
-		}
+		},
+			_showColor: function (Flag, color) {
+				var oContentDOM = $('#content'); //Pass div Content ID
+				var oParent = $('#content').parent(); //Get Parent
+				//Find for MessageToast class
+				var oMessageToastDOM = $('#content').parent().find('.sapMMessageToast');
+				oMessageToastDOM.css('background', color); //Apply css
+
+			}
+
 
 	});
 });

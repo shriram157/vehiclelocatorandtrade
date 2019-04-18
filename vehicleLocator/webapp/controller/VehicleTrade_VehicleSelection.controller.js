@@ -301,13 +301,13 @@ sap.ui.define([
 			// 	"'&$format=json"
 
 		 //1704 requesting dealer is introduced. 		 
-			var userAttributesModellen =  sap.ui.getCore().getModel("LoginuserAttributesModel").getData();
-			var oDealer = userAttributesModellen[0].DealerCode;
-			if (oDealer == undefined){
-				oDealer = "";
-			}
-		 
-		  var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=zzseries eq'" + Series + "'and kunnr eq '" + oDealer +
+			// var userAttributesModellen =  sap.ui.getCore().getModel("LoginuserAttributesModel").getData();
+			// var oDealer1 = userAttributesModellen[0].DealerCode;
+			// if (oDealer1 == undefined){
+			// 	oDealer1 = "";
+			// }
+		    var oDealer1 = "" ; 
+		  var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer1 + "')/Set?$filter=zzseries eq'" + Series + "'and kunnr eq '" + oDealer +
 			 	"'&$format=json";
 		 
 		 
@@ -339,8 +339,12 @@ sap.ui.define([
 
 					//	var FilterDeleade_OrderTypefiltered_zone
 					var filtered_ODealer = FilterDelearNotnull.filter(function (x) {
-						return x.kunnr.slice(-5) == Dealer;
+					     //return x.kunnr.slice(-5) == Dealer;  // GSR To be confirmed
+					       return x.kunnr.slice(-5) == Dealer;  // GSR To be confirmed
+					 
 					});
+					
+					
 					var ExcludeOrdType = [
 						"RS",
 						"F1",
@@ -421,8 +425,8 @@ sap.ui.define([
 			var oVehicleModel = new sap.ui.model.json.JSONModel([]);
 			this.getView().byId("vehicleSelectTable").setModel(oVehicleModel);
 
-			var oProductNameColumn = this.getView().byId("oETAFromId");
-			this.getView().byId("vehicleSelectTable").sort(oProductNameColumn, SortOrder.Ascending);
+			// var oProductNameColumn = this.getView().byId("oETAFromId");
+			// this.getView().byId("vehicleSelectTable").sort(oProductNameColumn, SortOrder.Ascending);
 		},
 
 		oTradeLinkPress: function (oEvt) {

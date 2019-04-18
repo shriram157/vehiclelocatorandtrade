@@ -50,8 +50,8 @@ sap.ui.define([
 
 					var userType = oData.loggedUserType[0];
 
-				//	var userType = "ZoneUser"; // TODO: Remove before deployment locatyest only - GSR
-					var userType = "vehicelTradeDealerUser"; // TODO: Remove before deployment locatyest only - GSR
+					var userType = "ZoneUser"; // TODO: Remove before deployment locatyest only - GSR
+				//	var userType = "vehicelTradeDealerUser"; // TODO: Remove before deployment locatyest only - GSR
 
 					switch (userType) {
 					case "vehicelTradeDealerUser":

@@ -39,6 +39,9 @@ sap.ui.define([
 			this.getRouter().attachRouteMatched(this.onRouteMatched, this);
 		},
 		onRouteMatched: function (oEvent) {
+			
+			  this.getView().byId("oComments").setValue(""); //1804
+			
 			this.i18n = sap.ui.getCore().getModel("i18n").getResourceBundle();
 			var SelectedTrade = oEvent.getParameter("arguments").SelectedTrade;
 			/*	var pardia_title = i18n.getText("ctrl_success_dialog");
@@ -984,7 +987,12 @@ sap.ui.define([
 			} else {
 
 				if (this.getView().byId("tableVrade").getModel('TradeRequestModel') != undefined) {
+					
+	// the comment id should always come from HDB. 1804 GSR// TODO: 
+	
 					var oComment_Id = this.getView().byId("tableVrade").getBinding('items').getLength().toString();
+					
+					
 					var TradeId = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Trade_Id;
 
 					var that = this;
@@ -1087,13 +1095,15 @@ sap.ui.define([
 
 			// var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=kunnr eq '" + oDealer +
 			// 	"'&$format=json";
+
 //1704 requesting dealer is introduced. 
-	 			var userAttributesModellen =  sap.ui.getCore().getModel("LoginuserAttributesModel").getData();
-			var oDealer = userAttributesModellen[0].DealerCode;
-			if (oDealer == undefined){
-				oDealer = "";
-			}
-			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=kunnr eq '" + oDealer + "'&$format=json";		
+
+			// var oDealer1 = userAttributesModellen[0].DealerCode;
+			// if (oDealer1 == undefined){
+			// 	oDealer1 = "";
+			// }
+            var oDealer1 = "";
+			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer1 + "')/Set?$filter=kunnr eq '" + oDealer + "'&$format=json";		
           
 			$.ajax({
 				url: SeriesUrl,
@@ -2145,15 +2155,15 @@ sap.ui.define([
 				this.nodeJsUrl = this.sPrefix + "/node";
 				that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_MASTER_SRV";
 //1704 requesting dealer is introduced. 
-			var userAttributesModellen =  sap.ui.getCore().getModel("LoginuserAttributesModel").getData();
-			var oDealer = userAttributesModellen[0].DealerCode;
-			if (oDealer == undefined){
-				oDealer = "";
-			}
+			// var oDealer1 = userAttributesModellen[0].DealerCode;
+			// if (oDealer1 == undefined){
+			// 	oDealer1 = "";
+			// }
+            var oDealer1 = "";
   
 				// var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=zzvtn eq '" + VTN + "' and kunnr eq '" + dealercode +
 				// 	"'&$format=json";
-				var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=zzvtn eq '" + VTN + "' and kunnr eq '" + dealercode +
+				var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer1 + "')/Set?$filter=zzvtn eq '" + VTN + "' and kunnr eq '" + dealercode +
 					"'&$format=json";
 
 

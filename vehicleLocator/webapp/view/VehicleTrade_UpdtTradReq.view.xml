@@ -117,8 +117,7 @@
 								</Button>
 								<Label text="{i18n>Status}"/>
 								<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}"/>
-	 
-						 
+ 
 								<core:Title text="{i18n>OfferVehicleInformation}" id="offfveh"/>
 								<Label text="{i18n>VehicleTrackingNumber}" id="vehtnum"/>
 								<Text text="{/OffredVehicle/Offered_Vtn}" id="ovtnId"/>
