@@ -901,12 +901,13 @@ sap.ui.define([
 
 			var that = this;
 			
-			
-			
+			//2204 - 
+				var RequstingDealer_Actual = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requesting_Dealer; // new changes
+				var RequstedDealer = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Dealer;
 			
 			/*	var OwningDealer = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Dealer;*/
 
-			var RequstedDealer = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Dealer;
+			// var RequstedDealer = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Dealer;
 			/*var oVehTrano = this.getView().byId("ovtnId").getText();*/
 			var oVehTrano = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.VTN;
 
@@ -985,7 +986,7 @@ sap.ui.define([
 				"') and ( Exteriorcolorcode eq '" + oExtcolorcode + "' or Exteriorcolorcode eq '" + oWnoExtcolorcode + "' ) and ( APX eq '" + oApx +
 				"' or APX eq '" + oWnoApx + "' ) and  ( VTN eq '" + oVehTrano + "' or VTN eq '" + oWningVTN + "')&$format=json";*/
 				
-			var AcceptUrl = that.oDataUrl + "/ApproveTradeReqSet?$filter=RequestingDel eq '" + RequstedDealer +
+			var AcceptUrl = that.oDataUrl + "/ApproveTradeReqSet?$filter=RequestingDel eq '" + RequstingDealer_Actual +
 				"' and (VehiclesOwningDelear eq '" + RequstedDealer + "'or VehiclesOwningDelear eq '" + RequestingDealer +
 				"' ) and (Suffixcode eq '" + oSuffixcode + "' or Suffixcode eq '" + oWnSuffixcode + "' )and (Modelyear eq '" + oModelyear +
 				"' or Modelyear eq '" + oWnModelyear + "')  and (Modelcode eq '" + oModelcode + "' or Modelcode eq '" + oWnModelcode +
