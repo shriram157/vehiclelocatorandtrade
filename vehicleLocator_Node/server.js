@@ -4,12 +4,12 @@
 "use strict";
 
 var cors = require("cors");
+var CronJob = require("cron").CronJob;
 var express = require("express");
 var hdbext = require("@sap/hdbext");
 var https = require("https");
 var logging = require("@sap/logging");
 var passport = require("passport");
-var schedule = require("node-schedule");
 var tradeReqCleanUpTask = require("./core/trade-req-cleanup-task");
 var xsenv = require("@sap/xsenv");
 var xssec = require("@sap/xssec");
@@ -44,7 +44,7 @@ passport.use("JWT", new xssec.JWTStrategy(xsenv.getServices({
 	}
 }).uaa));
 app.use(passport.initialize());
-app.use(passport.authenticate("JWT", {   
+app.use(passport.authenticate("JWT", {
 	session: false
 }));
 
@@ -52,8 +52,9 @@ app.use(passport.authenticate("JWT", {
 app.use(cors());
 
 // Scheduler
-var tradeReqCleanUpTaskSchSpec = process.env.TRADE_REQ_CLEANUP_TASK_SCH || "0 0 * * *";
-var job = schedule.scheduleJob(tradeReqCleanUpTaskSchSpec, function () {
+var tradeReqCleanUpTaskCronTime = process.env.TRADE_REQ_CLEANUP_TASK_CRON_TIME || "0 0 0 * * *";
+var tradeReqCleanUpTaskTimeZone = process.env.TRADE_REQ_CLEANUP_TASK_TIME_ZONE || "America/Toronto";
+var job = new CronJob(tradeReqCleanUpTaskCronTime, function () {
 	hdbPool.acquire(function (err, client) {
 		if (err) {
 			logger.error(err.toString());
@@ -67,7 +68,7 @@ var job = schedule.scheduleJob(tradeReqCleanUpTaskSchSpec, function () {
 			hdbPool.release(client);
 		});
 	});
-});
+}, null, true, tradeReqCleanUpTaskTimeZone);
 
 // Router
 var router = require("./router")(app, appContext);
