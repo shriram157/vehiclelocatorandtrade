@@ -88,20 +88,32 @@ sap.ui.define([
 				// 	"' and endswith (zzintcol,'" + this.intercolor + "') and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + SelectedMSMData[0].MoyearCombo +
 				// 	"'&$format=json";
 
-//1704 introudcing the requesting dealer. 
-     
- 	       var userAttributesModellen = that.getView().getModel("userAttributesModel").getData();
-			var oDealer = userAttributesModellen[0].DealerCode;
-			if (oDealer == undefined){
-				oDealer = "";
-			}
-  
-				var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=matnr eq '" + SelectedMSMData[0].McCmbo +
+				//1704 introudcing the requesting dealer. 
+
+				var userAttributesModellen = that.getView().getModel("userAttributesModel").getData();
+				var oDealer = userAttributesModellen[0].DealerCode;
+				if (oDealer == undefined) {
+					// for zone users this will be blank,  so lets send the zone code to fetch the zone inventory. 
+
+					if (this.sDivision == '10') {
+						oDealer = that.zoneStockCode;
+					} else {
+
+						oDealer = that.lexusZoneStockCode;
+					}
+
+					if (oDealer.length == 10) {
+						// oDealer=oDealer.slice(-6); 
+						oDealer = oDealer.slice(-5); // just to make it work temporary to // TODO: 
+					}
+
+				}
+
+				var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=matnr eq '" + SelectedMSMData[
+						0].McCmbo +
 					"' and endswith (zzintcol,'" + this.intercolor + "') and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + SelectedMSMData[0].MoyearCombo +
 					"'&$format=json";
-  
-	
-	           
+
 				$.ajax({
 					url: SeriesUrl,
 					type: "GET",
@@ -289,20 +301,31 @@ sap.ui.define([
 				// var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '" + SelectedMSMData[0].McCmbo +
 				// 	"' and endswith (zzintcol,'" + this.intercolor + "') and zzseries eq '" + SelectedMSMData[0].SeriesCmbo + "' and zzmoyr eq '" +
 				// 	SelectedMSMData[0].MoyearCombo + "'&$format=json";
-// the requesting dealer is introudced.  17-04
- 
-  	       var userAttributesModellen =  sap.ui.getCore().getModel("LoginuserAttributesModel").getData();
-			var oDealer = userAttributesModellen[0].DealerCode;
-			if (oDealer == undefined){
-				oDealer = "";
-			}
-			
- 	
-           var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=matnr eq '" + SelectedMSMData[0].McCmbo +
+				// the requesting dealer is introudced.  17-04
+
+				var userAttributesModellen = sap.ui.getCore().getModel("LoginuserAttributesModel").getData();
+				var oDealer = userAttributesModellen[0].DealerCode;
+				if (oDealer == undefined) {
+					// for zone users this will be blank,  so lets send the zone code to fetch the zone inventory. 
+
+					if (this.sDivision == '10') {
+						oDealer = that.zoneStockCode;
+					} else {
+
+						oDealer = that.lexusZoneStockCode;
+					}
+
+					if (oDealer.length == 10) {
+						// oDealer=oDealer.slice(-6); 
+						oDealer = oDealer.slice(-5); // just to make it work temporary // TODO: 
+					}
+
+				}
+
+				var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=matnr eq '" + SelectedMSMData[
+						0].McCmbo +
 					"' and endswith (zzintcol,'" + this.intercolor + "') and zzseries eq '" + SelectedMSMData[0].SeriesCmbo + "' and zzmoyr eq '" +
-					SelectedMSMData[0].MoyearCombo + "'&$format=json";		
-			
- 
+					SelectedMSMData[0].MoyearCombo + "'&$format=json";
 
 				$.ajax({
 					url: SeriesUrl,
@@ -317,7 +340,6 @@ sap.ui.define([
 						//debugger;
 						var a = odata.d.results;
 
-	
 						var filtered_zone = [];
 						for (var i = 0; i < SelectedZone.length; i++) {
 							for (var j = 0; j < a.length; j++) {
@@ -1812,8 +1834,6 @@ sap.ui.define([
 				.sort(aSorters);
 		},
 
-
-
 		handleViewSettingsDialogButtonPressed: function (oEvt) {
 			// this._oResponsivePopover = sap.ui.xmlfragment("vehicleLocator.fragment.VehicleSearchResult", this);
 			if (!this._sortDialog) {
@@ -1824,8 +1844,6 @@ sap.ui.define([
 			this._sortDialog.open();
 
 		},
-
-  
 
 		handleConfirm: function (oEvent) {
 			// This event is triggered when user
@@ -2138,7 +2156,7 @@ sap.ui.define([
 							sap.m.MessageBox.warning("The vehicle belongs to a different zone and is not allowed, Please unselect this Vehicle " + value.zzvtn); // TODO: french text needed. 
 							errored = true;
 							break;
-                           
+
 						}
 					} else {
 						// do not allow pull.
@@ -2180,7 +2198,7 @@ sap.ui.define([
 					for (var i = 0; i < pullDataToSAP.length; i++) {
 
 						var AcceptUrl = that.oDataUrl + "/ApproveTradeReqSet?$filter=RequestingDel eq '" + pullDataToSAP[i].RequstedDealer +
-							"' and (VehiclesOwningDelear eq '" + pullDataToSAP[i].RequstedDealer + "'or VehiclesOwningDelear eq '" + pullDataToSAP[i].RequestingDealer +
+							"' and (VehiclesOwningDelear eq '" + pullDataToSAP[i].RequestingDealer +
 							"' ) and (Suffixcode eq '" + pullDataToSAP[i].oSuffixcode + "' or Suffixcode eq '" + pullDataToSAP[i].oWnSuffixcode +
 							"' )and (Modelyear eq '" + pullDataToSAP[i].oModelyear +
 							"' or Modelyear eq '" + pullDataToSAP[i].oWnModelyear + "')  and (Modelcode eq '" + pullDataToSAP[i].oModelcode +
@@ -2245,29 +2263,24 @@ sap.ui.define([
 								}
 								//put the above information to a model. 
 								sapMessage.push({
-									message : Message,
-									messsageType : messsageType
+									message: Message,
+									messsageType: messsageType
 								});
-									
-									 
-								
+
 								// if all the records are received,  update the status to the ui and reload the page. 
 
 								if (that.totalRecordsUpdated == that.responseReceived) {
-                                  // add the messages to the model. 
-                                    					 		
+									// add the messages to the model. 
+
 									// var oMessagesFromSAPModel = new sap.ui.model.json.JSONModel();
 									// oMessagesFromSAPModel.setData(sapMessage);
 									// this.getView().setModel(oMessagesFromSAPModel, "messagesReceivedFromSAP");
-                          
-         //                 	var oModel = new sap.ui.model.odata.ODataModel(sapMessage, true);
+
+									//                 	var oModel = new sap.ui.model.odata.ODataModel(sapMessage, true);
 									// sap.ui.getCore().setModel(oModel);
-									
-									
-									
-                          // lets use this core model to display messages if needed. 
-                          
-                                  
+
+									// lets use this core model to display messages if needed. 
+
 									that._reloadThePageWithnewData(sapMessage);
 
 								}
@@ -2286,19 +2299,17 @@ sap.ui.define([
 		}, // end of handlePressPullVehicle. 
 
 		_reloadThePageWithnewData: function (sapMessage) {
-			
-				var showRecordSaved = this._oResourceBundle.getText("RECORD_PULL_SUCCESS");
-				var errorExist = false;
-			   for (var i=0; i<sapMessage.length; i++) {
-			   	if ( sapMessage[i].messsageType == "Error" ) {
-			   		var showRecordSaved = this._oResourceBundle.getText("RECORD_PULL_ERROR");
-			   		var errorExist = true;
-			   		break;
-			   	} 
-			   	
-			   }
-              
-              
+
+			var showRecordSaved = this._oResourceBundle.getText("RECORD_PULL_SUCCESS");
+			var errorExist = false;
+			for (var i = 0; i < sapMessage.length; i++) {
+				if (sapMessage[i].messsageType == "Error") {
+					var showRecordSaved = this._oResourceBundle.getText("RECORD_PULL_ERROR");
+					var errorExist = true;
+					break;
+				}
+
+			}
 
 			sap.m.MessageToast.show(showRecordSaved, {
 				duration: 3000, // default
@@ -2314,25 +2325,23 @@ sap.ui.define([
 				animationDuration: 1000, // default
 				closeOnBrowserNavigation: false // default
 			});
-			    if (errorExist == true) {
-              	this._showColor("Red", '#cc1919');
-			    }
-              
-              
+			if (errorExist == true) {
+				this._showColor("Red", '#cc1919');
+			}
+
 			this.getRouter().navTo("VehicleSearcResultsForZoneUser", {
 				DataClicked: "Yes"
 			});
 
 		},
-			_showColor: function (Flag, color) {
-				var oContentDOM = $('#content'); //Pass div Content ID
-				var oParent = $('#content').parent(); //Get Parent
-				//Find for MessageToast class
-				var oMessageToastDOM = $('#content').parent().find('.sapMMessageToast');
-				oMessageToastDOM.css('background', color); //Apply css
+		_showColor: function (Flag, color) {
+			var oContentDOM = $('#content'); //Pass div Content ID
+			var oParent = $('#content').parent(); //Get Parent
+			//Find for MessageToast class
+			var oMessageToastDOM = $('#content').parent().find('.sapMMessageToast');
+			oMessageToastDOM.css('background', color); //Apply css
 
-			}
-
+		}
 
 	});
 });

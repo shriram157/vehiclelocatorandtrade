@@ -50,8 +50,8 @@ sap.ui.define([
 
 					var userType = oData.loggedUserType[0];
 
-				//	var userType = "ZoneUser"; // TODO: Remove before deployment locatyest only - GSR
-				//	var userType = "vehicelTradeDealerUser"; // TODO: Remove before deployment locatyest only - GSR
+						var userType = "ZoneUser"; // TODO: Remove before deployment locatyest only - GSR
+					//	var userType = "vehicelTradeDealerUser"; // TODO: Remove before deployment locatyest only - GSR
 
 					switch (userType) {
 					case "vehicelTradeDealerUser":
@@ -208,7 +208,7 @@ sap.ui.define([
 						);
 					}
 
-					//  set your model or use the model below - // TODO: 
+					//  set your model or use the model below - 
 					that.getView().setModel(new sap.ui.model.json.JSONModel(BpDealer), "BpDealerModel");
 					sap.ui.getCore().setModel(new sap.ui.model.json.JSONModel(BpDealer), "LoginBpDealerModel");
 					var LoggedInDealerCode1 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
@@ -238,9 +238,9 @@ sap.ui.define([
 									// "DealerCode": dealerCode,
 									"LoggedinUserFirstName": "Vehicle Locator Trade",
 									"Language": "English",
-									"LoggedinUserLastName": "Zone Pacific",
+									"LoggedinUserLastName": "Zone Central",
 									"UserType": "Zone",
-									"Zone": "1"
+									"Zone": "3"
 								});
 							} else {
 								userAttributes.push({
@@ -450,22 +450,37 @@ sap.ui.define([
 					case "1": // 1=1000
 						that.getView().byId("Pacific").setSelected(true);
 						that.zoneDescription = "Pacific";
+						that.sapUserZone = "1000";
+						that.zoneStockCode = "2400507000";
+						that.lexusZoneStockCode = "2400507100";
 						break;
 					case "2": // 2=2000
 						that.getView().byId("Prairie").setSelected(true);
 						that.zoneDescription = "Prairie";
+						that.sapUserZone = "2000";
+						that.zoneStockCode = "2400517000";
+						that.lexusZoneStockCode = "2400517100";
 						break;
 					case "3": // 3=3000
 						that.getView().byId("Central").setSelected(true);
 						that.zoneDescription = "Central";
+						that.sapUserZone = "3000";
+						that.zoneStockCode = "2400547000";
+						that.lexusZoneStockCode = "2400547100";
 						break;
 					case "5": // 5=4000 
 						that.getView().byId("Quebec").setSelected(true);
 						that.zoneDescription = "Quebec";
+						that.sapUserZone = "4000";
+						that.zoneStockCode = "2400557000";
+						that.lexusZoneStockCode = "2400557100";
 						break;
 					case "4": //4 =5000  
 						that.getView().byId("Atlantic").setSelected(true);
 						that.zoneDescription = "Atlantic";
+						that.sapUserZone = "5000";
+						that.zoneStockCode = "2400577000";
+						that.lexusZoneStockCode = "2400577100";
 						break;
 					case "6000": //Update this
 						/*	that.getView().byId("Atlantic").setSelected(true);*/
@@ -561,9 +576,9 @@ sap.ui.define([
 						that.Fullurls[i].SPRAS = that.Fullurls[i].SPRAS;
 					} else {
 						that.Fullurls[i].SPRAS = SPRAS;
-					
+
 					}
-				
+
 				}
 
 				if (that.sDivision == "10") {
@@ -1123,8 +1138,8 @@ sap.ui.define([
 			that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_MASTER_SRV";
 
 			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
-//  the requested dealer is made as a mandatory parameter, so the beloow changes. 
-		 //1704 requesting dealer is introduced. 
+			//  the requested dealer is made as a mandatory parameter, so the beloow changes. 
+			//1704 requesting dealer is introduced. 
 			// if (SuffCmbo == 'ALL') {
 			// 	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '" + McCmbo + "' and endswith (zzintcol,'" + '' +
 			// 		"') and zzmoyr eq '" + MoyearCombo + "'&$format=json";
@@ -1134,22 +1149,34 @@ sap.ui.define([
 			// 		"') and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + MoyearCombo + "'&$format=json";
 
 			// }
-			
-				// 		 	if(Dealer_No.length == 10){
-				// 	Dealer_No=Dealer_No.slice(-5);
-				// }		
-			
-	
-	       var userAttributesModellen = that.getView().getModel("userAttributesModel").getData();
+
+			// 		 	if(Dealer_No.length == 10){
+			// 	Dealer_No=Dealer_No.slice(-5);
+			// }		
+
+			var userAttributesModellen = that.getView().getModel("userAttributesModel").getData();
 			var oDealer = userAttributesModellen[0].DealerCode;
-			if (oDealer == undefined){
-				oDealer = "";
+			if (oDealer == undefined) {
+				// for zone users this will be blank,  so lets send the zone code to fetch the zone inventory. 
+
+				if (this.sDivision == '10') {
+					oDealer = that.zoneStockCode;
+				} else {
+
+					oDealer = that.lexusZoneStockCode;
+				}
+				
+		 	if(oDealer.length == 10){
+				// oDealer=oDealer.slice(-6); 
+						oDealer=oDealer.slice(-5); // just to make it work temporary // TODO: 
+		         	}	
+				
+
 			}
-  
-				var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=matnr eq '" + McCmbo + "' and endswith (zzintcol,'" + this.intercolor +
-					"') and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + MoyearCombo + "'&$format=json";
-		
-			
+
+			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=matnr eq '" + McCmbo +
+				"' and endswith (zzintcol,'" + this.intercolor +
+				"') and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + MoyearCombo + "'&$format=json";
 
 			$.ajax({
 				url: SeriesUrl,
