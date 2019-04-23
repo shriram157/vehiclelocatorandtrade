@@ -7,9 +7,12 @@ sap.ui.define([
 	"sap/ui/model/Sorter",
 	"sap/ui/model/Filter",
 	"vehicleLocator/Formatter/Formatter",
-	"sap/ui/table/SortOrder"
+	"sap/ui/table/SortOrder",
+		'sap/m/MessageView',
+	'sap/m/MessagePopoverItem',
+	'sap/m/Dialog',
 
-], function (Controller, BaseController, ResourceModel, JSONModel, Sorter, Filter, Formatter, SortOrder) {
+], function (Controller, BaseController, ResourceModel, JSONModel, Sorter, Filter, Formatter, SortOrder, MessageView, MessagePopoverItem, Dialog) {
 	"use strict";
 
 	return BaseController.extend("vehicleLocator.controller.VehicleSearcResultsForZoneUser", {
@@ -20,6 +23,8 @@ sap.ui.define([
 
 			this._oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle(); // instantiate the resource 
 
+            this.returningFromPull = false;
+            
 			var that = this;
 
 			if (!this._oResponsivePopover) {
@@ -60,7 +65,15 @@ sap.ui.define([
 			this.getOwnerComponent().suffixSelectedValue = this.getView().byId("VLRSuffix").getSelectedItem().getText();
 			var SuffCmbo = this.getView().byId("VLRSuffix").getSelectedKey();
 			if (SuffCmbo != "all") {
+				
+			 
+				if (oEvent != undefined) {
 				this.intercolor = oEvent.getParameter("selectedItem").getBindingContext().getObject().int_c;
+				} else {
+					this.intercolor = "";	
+				}
+				
+				
 				var that = this;
 				that.value = this.getView().byId("VLRSuffix").getSelectedItem().getText();
 				var SelectedMSMData = this.getOwnerComponent().SelectedMSMData;
@@ -611,6 +624,11 @@ sap.ui.define([
 					tableData[i].visibleOrderType = true;
 				}
 			}
+			
+			// lets update the screen bindings. 
+						this.byId("table1VSR")
+				.getBinding("items").refresh();
+                      
 
 		},
 
@@ -930,6 +948,7 @@ sap.ui.define([
 			this.getView().byId("oDealerCode2").setText(LoggedInDealerCode2);
 			this.getView().byId("oDealersearchresults").setText(LoggedInDealer);
 
+		    if (oEvent !== undefined){
 			var loginUser = oEvent.getParameter("arguments").LoginUser;
 			if (loginUser == "vehicelTradeDealerUser") {
 				var oTradecolId = this.getView().byId('TradecolId');
@@ -938,6 +957,33 @@ sap.ui.define([
 				this.getView().byId("table1VSR").setSelectionMode("None");
 
 			}
+		    }
+			
+			
+// after pull we have to make a call to the SAP to get the records. 
+// ------------------------------------------------------------------
+              if (this.returningFromPull == true) {
+              	this.returningFromPull = false;
+  
+  // populate the messages to the screen. after closing the message window reload the page. 
+  
+                this.populateTheMessageToScreen();
+  
+  
+              	
+                 this.reloadTheDataFromSAP();
+                
+                 
+                 
+                 
+              	
+              }
+			
+			
+			
+			
+			
+//--------------------------------------------------------------------			
 			if (sap.ui.getCore().getModel("SearchedData") && sap.ui.getCore().getModel("oSuffieldmodel") != undefined) {
 				this.getView().setModel(sap.ui.getCore().getModel("SearchedData"), "VehicleLocatorScdScr");
 
@@ -2101,7 +2147,7 @@ sap.ui.define([
 
 		},
 		handlePressPullvehcls: function (oEvent) {
-
+        	sap.ui.core.BusyIndicator.show();
 			var oModel = this.getView().getModel("vehicleSearchTableModel");
 			var aTable = this.getView().byId("table1VSR");
 			var aContexts = aTable.getSelectedContexts();
@@ -2174,6 +2220,10 @@ sap.ui.define([
 				// }
 				// check if no error then send the details to SAP. 
 				if (pullDataToSAP.length > 0) {
+					
+					
+						this.sapMessage = [];
+					
 					var that = this;
 					var sLocation = window.location.host;
 					var sLocation_conf = sLocation.search("webide");
@@ -2223,7 +2273,7 @@ sap.ui.define([
 								that.responseReceived = that.responseReceived + 1;
 
 								var a = odata.d.results[0].MessageType;
-								var sapMessage = [];
+							
 
 								if (a == "E") { // errored from SAP 
 									var Message = odata.d.results[0].Message.trim();
@@ -2244,7 +2294,7 @@ sap.ui.define([
 									//	sap.m.MessageBox.error(Message);
 								} else if (a == "S") {
 									var Message = odata.d.results[0].Message.trim();
-									var messsageType = "Successful";
+									var messsageType = "Success";
 									// var sMessageText = that.getView().getModel("i18n").getResourceBundle().getText("messageTradeAccepted", [that.Tradeid]);
 									// var sMessageText = "The vehicles are successfully pulled into the Zone "// TODO: French Translation
 									// var Message = sMessageText;
@@ -2262,7 +2312,7 @@ sap.ui.define([
 
 								}
 								//put the above information to a model. 
-								sapMessage.push({
+								that.sapMessage.push({
 									message: Message,
 									messsageType: messsageType
 								});
@@ -2281,13 +2331,14 @@ sap.ui.define([
 
 									// lets use this core model to display messages if needed. 
 
-									that._reloadThePageWithnewData(sapMessage);
+									that._reloadThePageWithnewData(that.sapMessage);
 
 								}
 
 							},
 							error: function () {
 								/*	alert("Error");*/
+								sap.ui.core.BusyIndicator.hide();
 							}
 
 						});
@@ -2299,39 +2350,54 @@ sap.ui.define([
 		}, // end of handlePressPullVehicle. 
 
 		_reloadThePageWithnewData: function (sapMessage) {
+			
+				sap.ui.core.BusyIndicator.hide();
+				
+				
+				
+			// 				var oViewModel = new sap.ui.model.json.JSONModel({
+			// 	busy: false,
+			// 	delay: 0,
+			// 	tableCount: 40
 
-			var showRecordSaved = this._oResourceBundle.getText("RECORD_PULL_SUCCESS");
-			var errorExist = false;
-			for (var i = 0; i < sapMessage.length; i++) {
-				if (sapMessage[i].messsageType == "Error") {
-					var showRecordSaved = this._oResourceBundle.getText("RECORD_PULL_ERROR");
-					var errorExist = true;
-					break;
-				}
+			// });
 
-			}
+			this.getView().setModel(sapMessage, "messagesFromSAP");
+				
 
-			sap.m.MessageToast.show(showRecordSaved, {
-				duration: 3000, // default
-				width: "15em", // default
-				my: "center middle",
-				at: "center middle",
-				of: window, // default
-				offset: "0 0", // default
-				collision: "fit fit", // default
-				onClose: null, // default
-				autoClose: true, // default
-				animationTimingFunction: "ease", // default
-				animationDuration: 1000, // default
-				closeOnBrowserNavigation: false // default
-			});
-			if (errorExist == true) {
-				this._showColor("Red", '#cc1919');
-			}
+			// var showRecordSaved = this._oResourceBundle.getText("RECORD_PULL_SUCCESS");
+			// var errorExist = false;
+			// for (var i = 0; i < sapMessage.length; i++) {
+			// 	if (sapMessage[i].messsageType == "Error") {
+			// 		var showRecordSaved = this._oResourceBundle.getText("RECORD_PULL_ERROR");
+			// 		var errorExist = true;
+			// 		break;
+			// 	}
 
-			this.getRouter().navTo("VehicleSearcResultsForZoneUser", {
-				DataClicked: "Yes"
-			});
+			// }
+
+			// sap.m.MessageToast.show(showRecordSaved, {
+			// 	duration: 3000, // default
+			// 	width: "15em", // default
+			// 	my: "center middle",
+			// 	at: "center middle",
+			// 	of: window, // default
+			// 	offset: "0 0", // default
+			// 	collision: "fit fit", // default
+			// 	onClose: null, // default
+			// 	autoClose: true, // default
+			// 	animationTimingFunction: "ease", // default
+			// 	animationDuration: 1000, // default
+			// 	closeOnBrowserNavigation: false // default
+			// });
+			// if (errorExist == true) {
+			// 	this._showColor("Red", '#cc1919');
+			// }
+            this.returningFromPull = true;
+            this.onRouteMatched();
+			// this.getRouter().navTo("VehicleSearcResultsForZoneUser", {
+			// 	DataClicked: "Yes"
+			// });
 
 		},
 		_showColor: function (Flag, color) {
@@ -2340,6 +2406,101 @@ sap.ui.define([
 			//Find for MessageToast class
 			var oMessageToastDOM = $('#content').parent().find('.sapMMessageToast');
 			oMessageToastDOM.css('background', color); //Apply css
+
+		},
+		
+		reloadTheDataFromSAP: function (oEvent){
+			
+			this.onSuffixChange(); //  this is same like onSuffixChange,  lets try this. 
+			
+		},
+		populateTheMessageToScreen: function (oEvent) {
+			debugger;
+			var oMessageTemplate = new sap.m.MessageItem({
+				type: '{type}',
+				title: '{title}',
+				description: '{description}',
+				subtitle: '{subtitle}',
+				counter: '{counter}',
+				markupDescription: "{markupDescription}"
+				// link: oLink
+			});
+			
+			var aMockMessages = [];
+			var oModelMessageData = this.getView().getModel("messagesFromSAP");
+			
+			
+														$.each(oModelMessageData, function (i, receivedData) {
+													           if (receivedData.messsageType == "Error") {
+													           	   var locTitle = "Error Message";
+													           } else {
+													           	   var locTitle = 'Success message';
+													           }
+													        
+																aMockMessages.push
+																({
+																type: receivedData.messsageType,
+																title: locTitle,
+																subtitle: receivedData.message
+																});
+													});			
+														
+					var oModel = new JSONModel(),
+				that = this;
+			
+			 oModel.setData(aMockMessages);
+
+			var viewModel = new JSONModel();
+			viewModel.setData({
+				messagesLength: aMockMessages.length + ''
+			});
+
+			this.getView().setModel(viewModel);
+
+			this.oMessageView = new MessageView({
+					showDetailsPageHeader: false,
+					itemSelect: function () {
+						oBackButton.setVisible(true);
+					},
+					items: {
+						path: '/',
+						template: oMessageTemplate
+					},
+					groupItems: true
+				});
+			var oBackButton = new sap.m.Button({
+					icon: sap.ui.core.IconPool.getIconURI("nav-back"),
+					visible: false,
+					press: function () {
+						that.oMessageView.navigateBack();
+						this.setVisible(false);
+					}
+				});
+
+			this.oMessageView.setModel(oModel);
+
+			this.oDialog = new Dialog({
+				content: this.oMessageView,
+				contentHeight: "440px",
+				contentWidth: "640px",
+				endButton: new sap.m.Button({
+					text: "Close",
+					press: function() {
+						this.getParent().close();
+					}
+				}),
+				customHeader: new sap.m.Bar({
+					contentMiddle: [
+						new sap.m.Text({ text: "Messages"})
+					],
+					contentLeft: [oBackButton]
+				}),
+				verticalScrolling: false
+			});	
+		 
+		 
+					this.oDialog.open();
+			
 
 		}
 
