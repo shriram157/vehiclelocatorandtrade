@@ -2214,7 +2214,7 @@ sap.ui.define([
 				}
 			}
 			if (errored == true) {
-
+                  	sap.ui.core.BusyIndicator.hide();
 			} else {
 				// sap.m.MessageBox.information("Soon the Pull Vehicle Data will be sent to SAP.... ");
 				// }
