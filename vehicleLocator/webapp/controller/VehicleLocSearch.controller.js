@@ -51,7 +51,7 @@ sap.ui.define([
 					var userType = oData.loggedUserType[0];
 
 					//	var userType = "ZoneUser"; // TODO: Remove before deployment locatyest only - GSR
-					//	var userType = "vehicelTradeDealerUser"; // TODO: Remove before deployment locatyest only - GSR
+						var userType = "vehicelTradeDealerUser"; // TODO: Remove before deployment locatyest only - GSR
 
 					switch (userType) {
 					case "vehicelTradeDealerUser":
@@ -1168,7 +1168,7 @@ sap.ui.define([
 				
 		 	if(oDealer.length == 10){
 				// oDealer=oDealer.slice(-6); 
-						oDealer=oDealer.slice(-5); // just to make it work temporary // TODO: 
+						oDealer=oDealer.slice(-5);  
 		         	}	
 				
 

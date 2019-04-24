@@ -14,7 +14,7 @@ sap.ui.define([
 			debugger;
 			var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
 			var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
-		    this.getView().byId("oDealerCode4").setText(LoggedInDealerCode2);                                
+			this.getView().byId("oDealerCode4").setText(LoggedInDealerCode2);
 			this.getView().byId("oDealerOwnVehiSele").setText(LoggedInDealer);
 			if (!this._oResponsivePopover) {
 				this._oResponsivePopover = sap.ui.xmlfragment("vehicleLocator.fragment.VehicleSearchResult", this);
@@ -40,17 +40,14 @@ sap.ui.define([
 
 			this.getRouter().getRoute("VehicleTrade_VehicleSelection").attachPatternMatched(this.onRouteMatched, this);
 
-
-
 		},
 
 		onRouteMatched: function (oEvent) {
 			debugger;
 			this.SelectedVehicleFrom = oEvent.getParameter("arguments").SelectedVehicleFrom;
 			var that = this;
-	
-			
-				// language setting for screen is getting complicated, so making use of the below model.  2903
+
+			// language setting for screen is getting complicated, so making use of the below model.  2903
 			if (this.sCurrentLocaleD == "French") {
 
 				var oViewModel = new sap.ui.model.json.JSONModel({
@@ -65,26 +62,24 @@ sap.ui.define([
 				});
 
 			}
-			
-				this.getView().setModel(oViewModel, "languageModel");
-	
-			
-			
-		that.getView().byId("oVt_SeriesCmbo").setSelectedKey("");
+
+			this.getView().setModel(oViewModel, "languageModel");
+
+			that.getView().byId("oVt_SeriesCmbo").setSelectedKey("");
 			// if (Model != undefined) {
 			// 		that.getView().byId("oVt_SeriesCmbo").setModel(Model);
 			// 	var SeleKey = Model.getProperty("/SelectedSeries");
 			// 	that.getView().byId("oVt_SeriesCmbo").setSelectedKey(SeleKey);
 			// 	that.handleoVt_SeriesChange();
 			// } else if(that.getView().byId("oVt_SeriesCmbo").getModel()==undefined&&Model==undefined) {
-		
-		if (that.getView().byId("oVt_SeriesCmbo").getModel()==undefined)		{
+
+			if (that.getView().byId("oVt_SeriesCmbo").getModel() == undefined) {
 				var that = this;
 				/*var Array = [];*/
 				sap.ui.core.BusyIndicator.show();
 
 				that.oSelectedYear = new Date().getFullYear();
-			
+
 				//for temporary year 2018-data available for 2018 
 				// that.oSelectedYear = "2018"; 
 				// that.oSelectedYear = new Date().getFullYear();
@@ -105,93 +100,86 @@ sap.ui.define([
 
 				this.nodeJsUrl = this.sPrefix + "/node";
 				that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_CATALOGUE_SRV";
- 
-				that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
-			
-  				        var i = 0;
-  				        		var modelData = [];
-  				        		that.oSelectedYearTemp = that.oSelectedYear - 2;
-					    do {
-					    	
-					    	       that.oSelectedYear = that.oSelectedYearTemp + i;
-					    	
-					               	that.receivedCounter = 0;
-									var SeriesUrl = that.oDataUrl + "/ZC_MODEL_DETAILS?$filter=Modelyear eq '" + that.oSelectedYear + "'";
-						
-											var ajax1 = $.ajax({
-												dataType: "json",
-												xhrFields: //
-												{
-													withCredentials: true
-												},
-							
-												// beforeSend: function (request) {
-												// 	request.setRequestHeader('Authorization', 'Basic ' + btoa('anisetc:anisetc'));
-												// },
-												url: SeriesUrl,
-												async: true,
-												success: function (result) {
-													// var receivedData = result.d.results;
-														
-														that.receivedCounter = that.receivedCounter + 1;		
-													$.each(result.d.results, function (i, receivedData) {
-													
-																modelData.push
-																({
-																	
-																ENModelDesc: receivedData.ENModelDesc,
-																FRModelDesc: receivedData.FRModelDesc,
-																Model: receivedData.Model,
-																Modelyear: receivedData.Modelyear,
-																TCISeries: receivedData.TCISeries,
-																suffix: receivedData.suffix
-				 									 
-																});
-													});			
-																
-																
-													if (that.receivedCounter == 4) {   // all the data received. 
-													
-											 //console.log([...new Set(modelData)]) 
-													// var modelDataNoDuplicates = uniq(modelData);
-													
-													var modelDataNoDuplicates = that.removeDuplicates(modelData, "ENModelDesc");
-													
-													// modelDataNoDuplicates = Array.from(new Set(modelData.map(JSON.stringify))).map(JSON.parse);
-													
-													
-												    var SeriesModel = new sap.ui.model.json.JSONModel(modelDataNoDuplicates);
-													sap.ui.getCore().setModel(SeriesModel, "SeriesModel");
-													that.SuffixDescrioptionBinding();		
-														
-														
-													}
-												}
-											});
-								 
- 
-						     i++;
-						  
-					       	}
-						while (i < 4);		
-						 								
-// function uniqBy(a, key) {
-//     var seen = {};
-//     return a.filter(function(item) {
-//         var k = key(item);
-//         return seen.hasOwnProperty(k) ? false : (seen[k] = true);
-//     });
-// },
-				
-// function uniq(a) {
-//   //return Array.from(new Set(a));
-   
-//   return ([...new Set(a)]) ;
-   
-   
-// },
 
- 
+				that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
+
+				var i = 0;
+				var modelData = [];
+				that.oSelectedYearTemp = that.oSelectedYear - 2;
+				do {
+
+					that.oSelectedYear = that.oSelectedYearTemp + i;
+
+					that.receivedCounter = 0;
+					var SeriesUrl = that.oDataUrl + "/ZC_MODEL_DETAILS?$filter=Modelyear eq '" + that.oSelectedYear + "'";
+
+					var ajax1 = $.ajax({
+						dataType: "json",
+						xhrFields: //
+						{
+							withCredentials: true
+						},
+
+						// beforeSend: function (request) {
+						// 	request.setRequestHeader('Authorization', 'Basic ' + btoa('anisetc:anisetc'));
+						// },
+						url: SeriesUrl,
+						async: true,
+						success: function (result) {
+							// var receivedData = result.d.results;
+
+							that.receivedCounter = that.receivedCounter + 1;
+							$.each(result.d.results, function (i, receivedData) {
+
+								modelData.push({
+
+									ENModelDesc: receivedData.ENModelDesc,
+									FRModelDesc: receivedData.FRModelDesc,
+									Model: receivedData.Model,
+									Modelyear: receivedData.Modelyear,
+									TCISeries: receivedData.TCISeries,
+									suffix: receivedData.suffix
+
+								});
+							});
+
+							if (that.receivedCounter == 4) { // all the data received. 
+
+								//console.log([...new Set(modelData)]) 
+								// var modelDataNoDuplicates = uniq(modelData);
+
+								var modelDataNoDuplicates = that.removeDuplicates(modelData, "ENModelDesc");
+
+								// modelDataNoDuplicates = Array.from(new Set(modelData.map(JSON.stringify))).map(JSON.parse);
+
+								var SeriesModel = new sap.ui.model.json.JSONModel(modelDataNoDuplicates);
+								sap.ui.getCore().setModel(SeriesModel, "SeriesModel");
+								that.SuffixDescrioptionBinding();
+
+							}
+						}
+					});
+
+					i++;
+
+				}
+				while (i < 4);
+
+				// function uniqBy(a, key) {
+				//     var seen = {};
+				//     return a.filter(function(item) {
+				//         var k = key(item);
+				//         return seen.hasOwnProperty(k) ? false : (seen[k] = true);
+				//     });
+				// },
+
+				// function uniq(a) {
+				//   //return Array.from(new Set(a));
+
+				//   return ([...new Set(a)]) ;
+
+				// },
+
 				// var SeriesUrl = that.oDataUrl + "/ZC_MODEL_DETAILS?$filter=Modelyear eq '" + that.oSelectedYear + "'";
 				// var ajax1 = $.ajax({
 				// 	dataType: "json",
@@ -218,26 +206,25 @@ sap.ui.define([
 			}
 			if (sap.ui.getCore().getModel("oVehicleSelectionResults") != undefined) {
 				var oVehicleModel = sap.ui.getCore().getModel("oVehicleSelectionResults").getData();
-// based on the language set the descriptions.  // GSR 0804
-                 //if (this.sCurrentLocaleD == "French") {
-                 //	for (var i=0; i<oVehicleModel.length; i++ ){
-                 //		oVehicleModel[i].mktg_desc_en = oVehicleModel[i].mktg_desc_fr;
-                 //		oVehicleModel[i].model_desc_en = oVehicleModel[i].model_desc_fr;
-                 //		oVehicleModel[i].zzseries_desc_en = oVehicleModel[i].zzseries_desc_fr;
-                 //		oVehicleModel[i].suffix_desc_en  = oVehicleModel[i].suffix_desc_fr; 
-                 //			oVehicleModel[i].mrktg_int_desc_en  = oVehicleModel[i].mrktg_int_desc_fr;
-                 		
-                 //	}
-                 	
-                 //}
-	
+				// based on the language set the descriptions.  // GSR 0804
+				//if (this.sCurrentLocaleD == "French") {
+				//	for (var i=0; i<oVehicleModel.length; i++ ){
+				//		oVehicleModel[i].mktg_desc_en = oVehicleModel[i].mktg_desc_fr;
+				//		oVehicleModel[i].model_desc_en = oVehicleModel[i].model_desc_fr;
+				//		oVehicleModel[i].zzseries_desc_en = oVehicleModel[i].zzseries_desc_fr;
+				//		oVehicleModel[i].suffix_desc_en  = oVehicleModel[i].suffix_desc_fr; 
+				//			oVehicleModel[i].mrktg_int_desc_en  = oVehicleModel[i].mrktg_int_desc_fr;
+
+				//	}
+
+				//}
+
 				var model = new sap.ui.model.json.JSONModel(oVehicleModel);
 				model.setSizeLimit(1000);
 				this.getView().setModel(model, "vehicleSelectTableModel");
 
 				// var oModeltemp = 	this.getView().getModel("vehicleSelectTableModel");
 				// oModeltemp.updateBindings(true);
-
 
 				var tableLength = this.getView().getModel("vehicleSelectTableModel").getData().length;
 				var oModelDetail = this.getView().getModel("detailView");
@@ -253,19 +240,19 @@ sap.ui.define([
 
 			}
 		},
-  removeDuplicates: function(originalArray, prop) {
-     var newArray = [];
-     var lookupObject  = {};
+		removeDuplicates: function (originalArray, prop) {
+			var newArray = [];
+			var lookupObject = {};
 
-     for(var i in originalArray) {
-        lookupObject[originalArray[i][prop]] = originalArray[i];
-     }
+			for (var i in originalArray) {
+				lookupObject[originalArray[i][prop]] = originalArray[i];
+			}
 
-     for(i in lookupObject) {
-         newArray.push(lookupObject[i]);
-     }
-      return newArray;
- },
+			for (i in lookupObject) {
+				newArray.push(lookupObject[i]);
+			}
+			return newArray;
+		},
 		onDescending: function () {
 
 		},
@@ -277,8 +264,6 @@ sap.ui.define([
 			sap.ui.core.BusyIndicator.show();
 			var oDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerKey;
 			var Series = this.getView().byId("oVt_SeriesCmbo").getSelectedKey();
-
- 
 
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
@@ -295,23 +280,45 @@ sap.ui.define([
 
 			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
 
- 
-
 			// var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=zzseries eq'" + Series + "'and kunnr eq '" + oDealer +
 			// 	"'&$format=json"
 
-		 //1704 requesting dealer is introduced. 		 
+			//1704 requesting dealer is introduced. 		 
 			// var userAttributesModellen =  sap.ui.getCore().getModel("LoginuserAttributesModel").getData();
 			// var oDealer1 = userAttributesModellen[0].DealerCode;
 			// if (oDealer1 == undefined){
 			// 	oDealer1 = "";
 			// }
-		    var oDealer1 = "" ; 
-		  var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer1 + "')/Set?$filter=zzseries eq'" + Series + "'and kunnr eq '" + oDealer +
-			 	"'&$format=json";
-		 
-		 
-		 
+
+			var oReceivedData = sap.ui.getCore().SelectedTrade;
+			if (oReceivedData !== undefined) {
+				var requestDealerToSAP = oReceivedData.kunnr;
+				var oDealer1 = requestDealerToSAP;
+
+			} else {
+				// may be from block summary. 
+				// var oDropDownSelectedDealer = sap.ui.getCore().dropDownSelectionData;
+				var oDropDownSelectedDealer = sap.ui.getCore().getModel("dropDownSelectionData").getData();
+				if (oDropDownSelectedDealer !== undefined) {
+					var requestDealerToSAP = oDropDownSelectedDealer.dropDownSelectedBP;
+					var oDealer1 = requestDealerToSAP;
+				}
+			}
+			if (oDealer1 !== undefined) {
+				if (oDealer1.length == 10) {
+
+					oDealer1 = oDealer1.slice(-5);
+				} else {
+					oDealer1 = "";
+				}
+			} else {
+				oDealer1 = "";
+			}
+
+			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer1 + "')/Set?$filter=zzseries eq'" + Series +
+				"'and kunnr eq '" + oDealer +
+				"'&$format=json";
+
 			$.ajax({
 				url: SeriesUrl,
 				type: "GET",
@@ -339,12 +346,11 @@ sap.ui.define([
 
 					//	var FilterDeleade_OrderTypefiltered_zone
 					var filtered_ODealer = FilterDelearNotnull.filter(function (x) {
-					     //return x.kunnr.slice(-5) == Dealer;  // GSR To be confirmed
-					       return x.kunnr.slice(-5) == Dealer;  // GSR To be confirmed
-					 
+						//return x.kunnr.slice(-5) == Dealer;  
+						return x.kunnr.slice(-5) == Dealer;
+
 					});
-					
-					
+
 					var ExcludeOrdType = [
 						"RS",
 						"F1",
@@ -371,7 +377,7 @@ sap.ui.define([
 					sap.ui.getCore().setModel(oJsonModel, "oVehicleSelectionResults");
 					that.SeriesFilteredBinding();
 					/*  sap.ui.core.BusyIndicator.hide();*/
-     	sap.ui.core.BusyIndicator.hide();
+					sap.ui.core.BusyIndicator.hide();
 				},
 				error: function () {
 					that.SeriesFilteredBindingNodata();
@@ -388,24 +394,24 @@ sap.ui.define([
 
 				// set the model	
 				var model = new sap.ui.model.json.JSONModel(oVehicleModel).getData();
-			//    var model = oVehicleModel.getData();
+				//    var model = oVehicleModel.getData();
 				model.setSizeLimit(1000);
-				
+
 				// based on the language set the descriptions. 
-            //     if (this.sCurrentLocaleD == "French") {
-                 	// for (var i=0; i<model.oData.length; i++ ){
-                 	// 	model.oData[i].mktg_desc_en = model.oData[i].mktg_desc_fr;
-                 	// 	model.oData[i].model_desc_en = model.oData[i].model_desc_fr;
-                 	// 	model.oData[i].zzseries_desc_en = model.oData[i].zzseries_desc_fr;
-                 	// 	model.oData[i].suffix_desc_en  = model.oData[i].suffix_desc_fr;
-                 	// 		model.oData[i].mrktg_int_desc_en  = model.oData[i].mrktg_int_desc_fr;
-                 	// }
-                 	
-             //    }
-				
+				//     if (this.sCurrentLocaleD == "French") {
+				// for (var i=0; i<model.oData.length; i++ ){
+				// 	model.oData[i].mktg_desc_en = model.oData[i].mktg_desc_fr;
+				// 	model.oData[i].model_desc_en = model.oData[i].model_desc_fr;
+				// 	model.oData[i].zzseries_desc_en = model.oData[i].zzseries_desc_fr;
+				// 	model.oData[i].suffix_desc_en  = model.oData[i].suffix_desc_fr;
+				// 		model.oData[i].mrktg_int_desc_en  = model.oData[i].mrktg_int_desc_fr;
+				// }
+
+				//    }
+
 				this.getView().setModel(model, "vehicleSelectTableModel");
-				
-				var oModeltemp = 	this.getView().setModel(model, "vehicleSelectTableModel");
+
+				var oModeltemp = this.getView().setModel(model, "vehicleSelectTableModel");
 				oModeltemp.updateBindings(true);
 
 				var tableLength = this.getView().getModel("vehicleSelectTableModel").getData().length;
@@ -495,19 +501,14 @@ sap.ui.define([
 
 						}
 
-if((CurrentETAFrom==""||CurrentETAFrom==null)&&(CurrentETATo!=""&&CurrentETATo!=null)){
-	CurrentETAFrom=CurrentETATo
-}
-else if((CurrentETAFrom!=""&&CurrentETAFrom!=null)&&(CurrentETATo==""||CurrentETATo==null)){
-	CurrentETATo=CurrentETAFrom
-}
-else if((CurrentETAFrom==""||CurrentETAFrom==null)&&(CurrentETATo==""||CurrentETATo==null)){
-	/*CurrentETATo=Data.Calculate.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1')
-	CurrentETAFrom=Data.Calculate.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1')*/
-}
-
-
-
+						if ((CurrentETAFrom == "" || CurrentETAFrom == null) && (CurrentETATo != "" && CurrentETATo != null)) {
+							CurrentETAFrom = CurrentETATo
+						} else if ((CurrentETAFrom != "" && CurrentETAFrom != null) && (CurrentETATo == "" || CurrentETATo == null)) {
+							CurrentETATo = CurrentETAFrom
+						} else if ((CurrentETAFrom == "" || CurrentETAFrom == null) && (CurrentETATo == "" || CurrentETATo == null)) {
+							/*CurrentETATo=Data.Calculate.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1')
+							CurrentETAFrom=Data.Calculate.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1')*/
+						}
 
 						var date1 = new Date(CurrentETAFrom);
 						var date2 = new Date(CurrentETATo);
@@ -521,13 +522,12 @@ else if((CurrentETAFrom==""||CurrentETAFrom==null)&&(CurrentETATo==""||CurrentET
 						}
 						var Eta = Data.Calculate;
 						var Calculate = Eta.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1');
-						                     
+
 						var Proposed_ETA_To = addDays(Calculate, CurrentEtadiff);
-						if(Proposed_ETA_To!="Invalid Date"){
-						that.oSelectedItem.Proposed_ETA_To = Proposed_ETA_To;
-						}
-						else{
-							that.oSelectedItem.Proposed_ETA_To ="";
+						if (Proposed_ETA_To != "Invalid Date") {
+							that.oSelectedItem.Proposed_ETA_To = Proposed_ETA_To;
+						} else {
+							that.oSelectedItem.Proposed_ETA_To = "";
 						}
 						that.oSelectedItem.Proposed_ETA_From = Data.Calculate;
 						that.oSelectedItem.FromFourth = "FromFourth";
@@ -552,50 +552,46 @@ else if((CurrentETAFrom==""||CurrentETAFrom==null)&&(CurrentETATo==""||CurrentET
 							that.oSelectedItem.Suffix_Desc = that.oSelectedItem.suffix_desc_en;
 							that.oSelectedItem.Int_Colour_Desc = that.oSelectedItem.mrktg_int_desc_en;
 							that.oSelectedItem.APX = that.oSelectedItem.zzapx;
-								that.oSelectedItem.Ext_Colour = that.oSelectedItem.zzextcol;
+							that.oSelectedItem.Ext_Colour = that.oSelectedItem.zzextcol;
 							that.oSelectedItem.Ext_Colour_Desc = that.oSelectedItem.mktg_desc_en;
 							that.oSelectedItem.Status = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Status;
 							that.oSelectedItem.Order_Type = that.oSelectedItem.zzordertype;
 							//	var Req_Current_ETA_From=Number(that.oSelectedItem.pstsp);
-						/*	that.oSelectedItem.Req_Current_ETA_From = that.oSelectedItem.pstsp;*/
+							/*	that.oSelectedItem.Req_Current_ETA_From = that.oSelectedItem.pstsp;*/
 							that.oSelectedItem.Off_Current_ETA_To = that.oSelectedItem.pstsp;
-							
-
 
 							var dateString = that.oSelectedItem.zzadddata4;
-							if(dateString!=""&&dateString!=undefined&&dateString!=null){
-							
-							var year = dateString.substring(0, 4);
-							var month = dateString.substring(4, 6);
-							var day = dateString.substring(6, 8);
+							if (dateString != "" && dateString != undefined && dateString != null) {
 
-							var Off_Current_ETA_From = new Date(year, month - 1, day);
-							Off_Current_ETA_From = new Date(Off_Current_ETA_From);
-							Off_Current_ETA_From = Date.parse(Off_Current_ETA_From);
+								var year = dateString.substring(0, 4);
+								var month = dateString.substring(4, 6);
+								var day = dateString.substring(6, 8);
 
+								var Off_Current_ETA_From = new Date(year, month - 1, day);
+								Off_Current_ETA_From = new Date(Off_Current_ETA_From);
+								Off_Current_ETA_From = Date.parse(Off_Current_ETA_From);
 
-							that.oSelectedItem.Off_Current_ETA_From = "/Date(" + Off_Current_ETA_From + ")/";
-							}
-							else{
-									that.oSelectedItem.Off_Current_ETA_From = "/Date(0)/";
+								that.oSelectedItem.Off_Current_ETA_From = "/Date(" + Off_Current_ETA_From + ")/";
+							} else {
+								that.oSelectedItem.Off_Current_ETA_From = "/Date(0)/";
 							}
 
 							//	var Proposed_ETA_From=Number(that.oSelectedItem.Proposed_ETA_From);
 							var dateString = that.oSelectedItem.Proposed_ETA_From;
-								if(dateString!=""&&dateString!=undefined&&dateString!=null){
-							var year = dateString.substring(0, 4);
-							var month = dateString.substring(4, 6);
-							var day = dateString.substring(6, 8);
+							if (dateString != "" && dateString != undefined && dateString != null) {
+								var year = dateString.substring(0, 4);
+								var month = dateString.substring(4, 6);
+								var day = dateString.substring(6, 8);
 
-							var Proposed_ETA_From = new Date(year, month - 1, day);
-							Proposed_ETA_From = new Date(Proposed_ETA_From);
-							Proposed_ETA_From = Date.parse(Proposed_ETA_From);
+								var Proposed_ETA_From = new Date(year, month - 1, day);
+								Proposed_ETA_From = new Date(Proposed_ETA_From);
+								Proposed_ETA_From = Date.parse(Proposed_ETA_From);
 
-							that.oSelectedItem.Off_Proposed_ETA_From = "/Date(" + Proposed_ETA_From + ")/";
+								that.oSelectedItem.Off_Proposed_ETA_From = "/Date(" + Proposed_ETA_From + ")/";
 
-								}else{
-									that.oSelectedItem.Off_Proposed_ETA_From = "/Date(0)/";	
-								}
+							} else {
+								that.oSelectedItem.Off_Proposed_ETA_From = "/Date(0)/";
+							}
 
 							var Req_Proposed_ETA_To = Number(that.oSelectedItem.Proposed_ETA_To);
 							Req_Proposed_ETA_To = new Date(Req_Proposed_ETA_To);
@@ -626,7 +622,7 @@ else if((CurrentETAFrom==""||CurrentETAFrom==null)&&(CurrentETATo==""||CurrentET
 								SelectedTrade: "VehicleTradeVehicle"
 							});
 						} else if (that.SelectedVehicleFrom == "VehileTrade_UpdtTradReq") {
-								that.oSelectedItem.Offered_Vtn = that.oSelectedItem.zzvtn;
+							that.oSelectedItem.Offered_Vtn = that.oSelectedItem.zzvtn;
 							that.oSelectedItem.Model_Year = that.oSelectedItem.zzmoyr;
 							that.oSelectedItem.Series_Desc = that.oSelectedItem.zzseries_desc_en;
 							that.oSelectedItem.zzseries_desc_fr = that.oSelectedItem.zzseries_desc_fr;
@@ -638,58 +634,51 @@ else if((CurrentETAFrom==""||CurrentETAFrom==null)&&(CurrentETATo==""||CurrentET
 							that.oSelectedItem.Suffix_Desc = that.oSelectedItem.suffix_desc_en;
 							that.oSelectedItem.Int_Colour_Desc = that.oSelectedItem.mrktg_int_desc_en;
 							that.oSelectedItem.APX = that.oSelectedItem.zzapx;
-								that.oSelectedItem.Ext_Colour = that.oSelectedItem.zzextcol;
+							that.oSelectedItem.Ext_Colour = that.oSelectedItem.zzextcol;
 							that.oSelectedItem.Ext_Colour_Desc = that.oSelectedItem.mktg_desc_en;
 							that.oSelectedItem.Status = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Status;
 							that.oSelectedItem.Order_Type = that.oSelectedItem.zzordertype;
 							//	var Req_Current_ETA_From=Number(that.oSelectedItem.pstsp);
 
-						/*	that.oSelectedItem.Req_Current_ETA_From = that.oSelectedItem.pstsp;*/
+							/*	that.oSelectedItem.Req_Current_ETA_From = that.oSelectedItem.pstsp;*/
 							that.oSelectedItem.Off_Current_ETA_To = that.oSelectedItem.pstsp;
-							
 
 							var dateString = that.oSelectedItem.zzadddata4;
-							if(dateString!=""&&dateString!=undefined&&dateString!=null){
-							
-							var year = dateString.substring(0, 4);
-							var month = dateString.substring(4, 6);
-							var day = dateString.substring(6, 8);
+							if (dateString != "" && dateString != undefined && dateString != null) {
 
-							var Off_Current_ETA_From = new Date(year, month - 1, day);
-							Off_Current_ETA_From = new Date(Off_Current_ETA_From);
-							Off_Current_ETA_From = Date.parse(Off_Current_ETA_From);
+								var year = dateString.substring(0, 4);
+								var month = dateString.substring(4, 6);
+								var day = dateString.substring(6, 8);
 
-							that.oSelectedItem.Off_Current_ETA_From = "/Date(" + Off_Current_ETA_From + ")/";
-							}
-							else{
-									that.oSelectedItem.Off_Current_ETA_From = "/Date(0)/";
+								var Off_Current_ETA_From = new Date(year, month - 1, day);
+								Off_Current_ETA_From = new Date(Off_Current_ETA_From);
+								Off_Current_ETA_From = Date.parse(Off_Current_ETA_From);
+
+								that.oSelectedItem.Off_Current_ETA_From = "/Date(" + Off_Current_ETA_From + ")/";
+							} else {
+								that.oSelectedItem.Off_Current_ETA_From = "/Date(0)/";
 							}
 							//	var Proposed_ETA_From=Number(that.oSelectedItem.Proposed_ETA_From);
 							var dateString = "";
-								if(dateString!=""&&dateString!=undefined&&dateString!=null){
-							var year = dateString.substring(0, 4);
-							var month = dateString.substring(4, 6);
-							var day = dateString.substring(6, 8);
+							if (dateString != "" && dateString != undefined && dateString != null) {
+								var year = dateString.substring(0, 4);
+								var month = dateString.substring(4, 6);
+								var day = dateString.substring(6, 8);
 
-							var Proposed_ETA_From = new Date(year, month - 1, day);
-							Proposed_ETA_From = new Date(Proposed_ETA_From);
-							Proposed_ETA_From = Date.parse(Proposed_ETA_From);
+								var Proposed_ETA_From = new Date(year, month - 1, day);
+								Proposed_ETA_From = new Date(Proposed_ETA_From);
+								Proposed_ETA_From = Date.parse(Proposed_ETA_From);
 
-							that.oSelectedItem.Off_Proposed_ETA_From = "/Date(" + Proposed_ETA_From + ")/";
-								}else{
-									that.oSelectedItem.Off_Proposed_ETA_From = "/Date(0)/";	
-								}
-						/*	var Req_Proposed_ETA_To = Number(that.oSelectedItem.Proposed_ETA_To);
-							Req_Proposed_ETA_To = new Date(Req_Proposed_ETA_To);
-							Req_Proposed_ETA_To = Date.parse(Req_Proposed_ETA_To);*/
+								that.oSelectedItem.Off_Proposed_ETA_From = "/Date(" + Proposed_ETA_From + ")/";
+							} else {
+								that.oSelectedItem.Off_Proposed_ETA_From = "/Date(0)/";
+							}
+							/*	var Req_Proposed_ETA_To = Number(that.oSelectedItem.Proposed_ETA_To);
+								Req_Proposed_ETA_To = new Date(Req_Proposed_ETA_To);
+								Req_Proposed_ETA_To = Date.parse(Req_Proposed_ETA_To);*/
 
 							that.oSelectedItem.Off_Proposed_ETA_To = "/Date(0)/";
-							
-							
-							
-							
-							
-							
+
 							sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").setProperty("/OffredVehicle", that.oSelectedItem);
 							that.getRouter().navTo("VehicleTrade_UpdtTradReq", {
 								SelectedTrade: "VehicleTrade_updateTradeVehicle"
@@ -716,31 +705,30 @@ else if((CurrentETAFrom==""||CurrentETAFrom==null)&&(CurrentETATo==""||CurrentET
 							SelectedTrade: "VehicleTradeVehicle"
 						});
 					} else if (that.SelectedVehicleFrom == "VehileTrade_UpdtTradReq") {
-							that.oSelectedItem.Offered_Vtn = that.oSelectedItem.zzvtn;
-							that.oSelectedItem.Model_Year = that.oSelectedItem.zzmoyr;
-							that.oSelectedItem.Series_Desc = that.oSelectedItem.zzseries_desc_en;
-							that.oSelectedItem.zzseries_desc_fr = that.oSelectedItem.zzseries_desc_fr;
-							that.oSelectedItem.zzseries_desc_en = that.oSelectedItem.zzseries_desc_en;
-							that.oSelectedItem.Series = that.oSelectedItem.zzseries;
-							that.oSelectedItem.Model = that.oSelectedItem.matnr;
-							that.oSelectedItem.Model_Desc = that.oSelectedItem.model_desc_en;
-							that.oSelectedItem.Suffix = that.oSelectedItem.zzsuffix;
-							that.oSelectedItem.Suffix_Desc = that.oSelectedItem.suffix_desc_en;
-							that.oSelectedItem.Int_Colour_Desc = that.oSelectedItem.mrktg_int_desc_en;
-							that.oSelectedItem.APX = that.oSelectedItem.zzapx;
-								that.oSelectedItem.Ext_Colour = that.oSelectedItem.zzextcol;
-							that.oSelectedItem.Ext_Colour_Desc = that.oSelectedItem.mktg_desc_en;
-							that.oSelectedItem.Status = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Status;
-							that.oSelectedItem.Order_Type = that.oSelectedItem.zzordertype;
-							//	var Req_Current_ETA_From=Number(that.oSelectedItem.pstsp);
+						that.oSelectedItem.Offered_Vtn = that.oSelectedItem.zzvtn;
+						that.oSelectedItem.Model_Year = that.oSelectedItem.zzmoyr;
+						that.oSelectedItem.Series_Desc = that.oSelectedItem.zzseries_desc_en;
+						that.oSelectedItem.zzseries_desc_fr = that.oSelectedItem.zzseries_desc_fr;
+						that.oSelectedItem.zzseries_desc_en = that.oSelectedItem.zzseries_desc_en;
+						that.oSelectedItem.Series = that.oSelectedItem.zzseries;
+						that.oSelectedItem.Model = that.oSelectedItem.matnr;
+						that.oSelectedItem.Model_Desc = that.oSelectedItem.model_desc_en;
+						that.oSelectedItem.Suffix = that.oSelectedItem.zzsuffix;
+						that.oSelectedItem.Suffix_Desc = that.oSelectedItem.suffix_desc_en;
+						that.oSelectedItem.Int_Colour_Desc = that.oSelectedItem.mrktg_int_desc_en;
+						that.oSelectedItem.APX = that.oSelectedItem.zzapx;
+						that.oSelectedItem.Ext_Colour = that.oSelectedItem.zzextcol;
+						that.oSelectedItem.Ext_Colour_Desc = that.oSelectedItem.mktg_desc_en;
+						that.oSelectedItem.Status = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Status;
+						that.oSelectedItem.Order_Type = that.oSelectedItem.zzordertype;
+						//	var Req_Current_ETA_From=Number(that.oSelectedItem.pstsp);
 
 						/*	that.oSelectedItem.Req_Current_ETA_From = that.oSelectedItem.pstsp;*/
-							that.oSelectedItem.Off_Current_ETA_To = that.oSelectedItem.pstsp;
-							
+						that.oSelectedItem.Off_Current_ETA_To = that.oSelectedItem.pstsp;
 
-							var dateString = that.oSelectedItem.zzadddata4;
-							if(dateString!=""&&dateString!=undefined&&dateString!=null){
-							
+						var dateString = that.oSelectedItem.zzadddata4;
+						if (dateString != "" && dateString != undefined && dateString != null) {
+
 							var year = dateString.substring(0, 4);
 							var month = dateString.substring(4, 6);
 							var day = dateString.substring(6, 8);
@@ -750,13 +738,12 @@ else if((CurrentETAFrom==""||CurrentETAFrom==null)&&(CurrentETATo==""||CurrentET
 							Off_Current_ETA_From = Date.parse(Off_Current_ETA_From);
 
 							that.oSelectedItem.Off_Current_ETA_From = "/Date(" + Off_Current_ETA_From + ")/";
-							}
-							else{
-									that.oSelectedItem.Off_Current_ETA_From = "/Date(0)/";
-							}
-							//	var Proposed_ETA_From=Number(that.oSelectedItem.Proposed_ETA_From);
-							var dateString = "";
-								if(dateString!=""&&dateString!=undefined&&dateString!=null){
+						} else {
+							that.oSelectedItem.Off_Current_ETA_From = "/Date(0)/";
+						}
+						//	var Proposed_ETA_From=Number(that.oSelectedItem.Proposed_ETA_From);
+						var dateString = "";
+						if (dateString != "" && dateString != undefined && dateString != null) {
 							var year = dateString.substring(0, 4);
 							var month = dateString.substring(4, 6);
 							var day = dateString.substring(6, 8);
@@ -766,15 +753,15 @@ else if((CurrentETAFrom==""||CurrentETAFrom==null)&&(CurrentETATo==""||CurrentET
 							Proposed_ETA_From = Date.parse(Proposed_ETA_From);
 
 							that.oSelectedItem.Off_Proposed_ETA_From = "/Date(" + Proposed_ETA_From + ")/";
-								}else{
-									that.oSelectedItem.Off_Proposed_ETA_From = "/Date(0)/";	
-								}
+						} else {
+							that.oSelectedItem.Off_Proposed_ETA_From = "/Date(0)/";
+						}
 						/*	var Req_Proposed_ETA_To = Number(that.oSelectedItem.Proposed_ETA_To);
 							Req_Proposed_ETA_To = new Date(Req_Proposed_ETA_To);
 							Req_Proposed_ETA_To = Date.parse(Req_Proposed_ETA_To);*/
 
-							that.oSelectedItem.Off_Proposed_ETA_To = "/Date(0)/";
-							
+						that.oSelectedItem.Off_Proposed_ETA_To = "/Date(0)/";
+
 						sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").setProperty("/OffredVehicle", that.oSelectedItem);
 						that.getRouter().navTo("VehicleTrade_UpdtTradReq", {
 							SelectedTrade: "VehicleTrade_updateTradeVehicle"
@@ -1220,7 +1207,7 @@ else if((CurrentETAFrom==""||CurrentETAFrom==null)&&(CurrentETATo==""||CurrentET
 				});
 				this.getView().setModel(i18nModel, "i18n");
 				this.sCurrentLocale = 'FR';
-						this.sCurrentLocaleD = 'French';
+				this.sCurrentLocaleD = 'French';
 
 			} else {
 				var i18nModel = new sap.ui.model.resource.ResourceModel({
@@ -1285,7 +1272,7 @@ else if((CurrentETAFrom==""||CurrentETAFrom==null)&&(CurrentETATo==""||CurrentET
 					new Filter("zzapx", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("zzextcol", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("mktg_desc_en", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-				//	new Filter("zzordertype", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					//	new Filter("zzordertype", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("zzadddata4", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("pstsp", sap.ui.model.FilterOperator.Contains, this.sSearchQuery)
 
@@ -1294,40 +1281,24 @@ else if((CurrentETAFrom==""||CurrentETAFrom==null)&&(CurrentETATo==""||CurrentET
 				aFilters.push(oFilter);
 			}
 
- 
-
 			this.byId("vehicleSelectTable")
 				.getBinding("items")
 				.filter(aFilters)
 				.sort(aSorters);
-				
- 
-	// var aFilters = [];
- //      this.sSearchQuery= oEvt.getSource().getValue();
- //      if (this.sSearchQuery && this.sSearchQuery.length > 0) {
- //          var filter = new Filter("vehicleSelectTableModel", sap.ui.model.FilterOperator.Contains, this.sSearchQuery);
- //          aFilters.push(filter);
- //      }
 
- //      // update list binding
- //      var oTableUpdate = this.getView().byId("vehicleSelectTable");
- //      var binding = oTableUpdate .getBinding("items");
- //      binding.filter(aFilters, "Application");
- //  }			
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
+			// var aFilters = [];
+			//      this.sSearchQuery= oEvt.getSource().getValue();
+			//      if (this.sSearchQuery && this.sSearchQuery.length > 0) {
+			//          var filter = new Filter("vehicleSelectTableModel", sap.ui.model.FilterOperator.Contains, this.sSearchQuery);
+			//          aFilters.push(filter);
+			//      }
+
+			//      // update list binding
+			//      var oTableUpdate = this.getView().byId("vehicleSelectTable");
+			//      var binding = oTableUpdate .getBinding("items");
+			//      binding.filter(aFilters, "Application");
+			//  }			
+
 		},
 
 		handleViewSettingsDialogButtonPressed: function (oEvt) {
@@ -1410,7 +1381,7 @@ else if((CurrentETAFrom==""||CurrentETAFrom==null)&&(CurrentETATo==""||CurrentET
 					//	var SelYear = new Date().getFullYear().toString();
 					var SelYear = new Date().getFullYear();
 					//temporary-2018, data avaialable for 2018, before deploying remove this
-				//	SelYear = "2018"
+					//	SelYear = "2018"
 					that.SeriesBinding(SelYear);
 
 				},
@@ -1423,11 +1394,11 @@ else if((CurrentETAFrom==""||CurrentETAFrom==null)&&(CurrentETATo==""||CurrentET
 
 				var oResults = sap.ui.getCore().getModel("SeriesModel").getData();
 				// the series should show all the 4 years included in here. 
-							// that.oSelectedYear = SelectedYear;   //GSR  Defect 11177
-							// var oResults = oResults.filter(function (x) {
-							// 	return x.Modelyear == that.oSelectedYear;
-			
-							// });
+				// that.oSelectedYear = SelectedYear;   //GSR  Defect 11177
+				// var oResults = oResults.filter(function (x) {
+				// 	return x.Modelyear == that.oSelectedYear;
+
+				// });
 				var obj = {};
 				for (var i = 0, len = oResults.length; i < len; i++)
 					obj[oResults[i]['TCISeries']] = oResults[i];
@@ -1436,8 +1407,8 @@ else if((CurrentETAFrom==""||CurrentETAFrom==null)&&(CurrentETATo==""||CurrentET
 					oResults.push(obj[key]);
 				that.Fullurls = oResults;
 				var SeriesDescription = that.SeriesDescription(oResults);
-								// var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language;  //2603
-						var SPRAS = that.sCurrentLocaleD;
+				// var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language;  //2603
+				var SPRAS = that.sCurrentLocaleD;
 				if (SeriesDescription.length != 0) {
 					for (var a = 0; a < that.Fullurls.length; a++) {
 						for (var b = 0; b < SeriesDescription.length; b++) {
@@ -1482,33 +1453,30 @@ else if((CurrentETAFrom==""||CurrentETAFrom==null)&&(CurrentETATo==""||CurrentET
 					} else {
 						that.Fullurls[i].SPRAS = SPRAS;
 					}
-				
+
 				}
 
-
 				// if (sap.ui.getCore().getModel("LoginBpDealerModel") != undefined) {
-					// if (sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].Division == "10") {
-					if (that.sDivision == "10"){	
-						that.Division = "TOY";
+				// if (sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].Division == "10") {
+				if (that.sDivision == "10") {
+					that.Division = "TOY";
 					// } else if (sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].Division == "20") {
-					} else if (that.sDivision == "20"){
-						that.Division = "LEX";
-					}
+				} else if (that.sDivision == "20") {
+					that.Division = "LEX";
+				}
 				// }
 
 				that.Fullurls = that.Fullurls.filter(function (x) {
 					return x.Division == that.Division;
 				});
-// remove the duplicates also from here. 				
-				var SeriesModelData = new sap.ui.model.json.JSONModel(that.Fullurls).getData();  //TCISeriesDescriptionEN
+				// remove the duplicates also from here. 				
+				var SeriesModelData = new sap.ui.model.json.JSONModel(that.Fullurls).getData(); //TCISeriesDescriptionEN
 				var modelDataNoDuplicates = that.removeDuplicates(SeriesModelData, "TCISeriesDescriptionEN");
-				
+
 				var SeriesModel = new sap.ui.model.json.JSONModel(modelDataNoDuplicates);
 				that.getView().setModel(SeriesModel, "SeriesData");
 				that.getView().byId("oVt_SeriesCmbo").setModel(SeriesModel);
 
-				
-				
 				// var SeriesModel = new sap.ui.model.json.JSONModel(that.Fullurls);
 				// that.getView().setModel(SeriesModel, "SeriesData");
 				// that.getView().byId("oVt_SeriesCmbo").setModel(SeriesModel);

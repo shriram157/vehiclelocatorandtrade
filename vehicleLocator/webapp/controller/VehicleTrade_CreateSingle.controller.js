@@ -128,6 +128,7 @@ sap.ui.define([
 					sap.ui.getCore().setModel(oModel, "TradeModel");
 					this.getView().byId("SimpleFormDispla20").bindElement("TradeModel>/");
 					
+				    this.RequestingDealerToSendToSAP = oReceivedData.kunnr; // New Changes
 					
 					
 
@@ -339,7 +340,11 @@ sap.ui.define([
 			// if (oDealer1 == undefined){
 			// 	oDealer1 = "";
 			// }
-            var oDealer1 = "";
+            var oDealer1 = this.RequestingDealerToSendToSAP;
+                       // var oDealer1 = this.requestedDealerToSAP;
+        		 	if(oDealer1.length == 10){
+		 	oDealer1=oDealer1.slice(-5);
+					 }	
 			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer1 + "')/Set?$filter=zzseries eq'" + Series + "'and kunnr eq '" + oDealer +
 				"'&$format=json";
 

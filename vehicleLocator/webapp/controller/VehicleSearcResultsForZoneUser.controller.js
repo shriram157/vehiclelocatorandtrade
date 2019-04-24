@@ -116,8 +116,8 @@ sap.ui.define([
 					}
 
 					if (oDealer.length == 10) {
-						// oDealer=oDealer.slice(-6); 
-						oDealer = oDealer.slice(-5); // just to make it work temporary to // TODO: 
+						 
+						oDealer = oDealer.slice(-5);  
 					}
 
 				}
@@ -329,8 +329,8 @@ sap.ui.define([
 					}
 
 					if (oDealer.length == 10) {
-						// oDealer=oDealer.slice(-6); 
-						oDealer = oDealer.slice(-5); // just to make it work temporary // TODO: 
+						 
+						oDealer = oDealer.slice(-5);  
 					}
 
 				}

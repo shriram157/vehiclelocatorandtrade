@@ -965,9 +965,7 @@ sap.ui.define([
 
 			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
 
-			/*var AcceptUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq'" + McCmbo + "' and zzextcol eq '" + this.SelectedExteriorColorCode +
-				"' and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + MoyearCombo +
-				"'";*/
+ 
 			//https://TCID1GWAPP1.tci.internal.toyota.ca:44300/sap/opu/odata/sap/Z_DEALER_TRADE_REQUEST_SRV/ApproveTradeReqSet?$filter=VehiclesOwningDelear eq '2400042176' and Suffixcode eq 'ML' and Modelyear eq '2018' and Modelcode eq 'YZ3DCT' and Interiorcolorcode eq 'LC14' and Exteriorcolorcode eq '01D6' and APX eq '0' and VTN eq '7'&$format=json
 			/*	oVehTrano = "000828";
 				oWningVTN = "000826";*/

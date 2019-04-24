@@ -582,7 +582,25 @@ sap.ui.define([
 			// if (oDealer1 == undefined){
 			// 	oDealer1 = "";
 			// }
-            var oDealer1 = "";
+            var oDealer1 = this.requestedDealerToSAP;
+             if ( oDealer1 !== undefined) {
+            
+        		 	if(oDealer1.length == 10){
+		 	oDealer1=oDealer1.slice(-5);
+					 } else {
+					 	oDealer1 = "";
+					 }		
+             } else {
+             		oDealer1 = "";
+             }
+ // if there is a series change, this needs to be accomodated. 
+    			var oViewModel = new sap.ui.model.json.JSONModel({
+				dropDownSelectedBP: this.requestedDealerToSAP
+
+			});
+
+			sap.ui.getCore().setModel(oViewModel, "dropDownSelectionData");
+  
 
 			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer1 + "')/Set?$filter=kunnr eq '" + oDealer + "'";
   
@@ -796,6 +814,9 @@ sap.ui.define([
 		onBusinessPartnerSelected: function (oEvent) {
 
 			var sSelectedDealer = oEvent.getParameter("\selectedItem").getProperty("key");
+			
+			
+			this.requestedDealerToSAP = sSelectedDealer;
 			var sSelectedDealerText = oEvent.getParameter("\selectedItem").getProperty("additionalText");
 			var sSelectedText = oEvent.getParameter("\selectedItem").getProperty("text");
 

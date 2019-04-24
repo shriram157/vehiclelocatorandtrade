@@ -1098,11 +1098,19 @@ sap.ui.define([
 
 //1704 requesting dealer is introduced. 
 
+           this.RequestingDealerToSAP = this.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Requested_Dealer;
+
 			// var oDealer1 = userAttributesModellen[0].DealerCode;
 			// if (oDealer1 == undefined){
 			// 	oDealer1 = "";
 			// }
-            var oDealer1 = "";
+            var oDealer1 = this.RequestingDealerToSAP;
+            
+            	if (oDealer1.length == 10) {
+						 
+						oDealer1 = oDealer1.slice(-5);  
+					}
+            
 			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer1 + "')/Set?$filter=kunnr eq '" + oDealer + "'&$format=json";		
           
 			$.ajax({
@@ -2159,6 +2167,24 @@ sap.ui.define([
 			// if (oDealer1 == undefined){
 			// 	oDealer1 = "";
 			// }
+			
+           this.RequestingDealerToSAP = this.getView().byId("SelectedSimpleFormAproveTrReq").getModel().getData().Requested_Dealer;
+
+			// var oDealer1 = userAttributesModellen[0].DealerCode;
+			// if (oDealer1 == undefined){
+			// 	oDealer1 = "";
+			// }
+            var oDealer1 = this.RequestingDealerToSAP;
+            
+            	if (oDealer1.length == 10) {
+						 
+						oDealer1 = oDealer1.slice(-5);  
+					}			
+			
+			
+			
+			
+			
             var oDealer1 = "";
   
 				// var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=zzvtn eq '" + VTN + "' and kunnr eq '" + dealercode +
