@@ -383,8 +383,7 @@
 									</layoutData>
 								</Button>
 									</VBox>
-						 
-		 
+	
 								<core:Title text="" class="Vtaprct1"/>
 								<VBox>
 									<Text text="{i18n>disclaimerText}"	width=""/>	
