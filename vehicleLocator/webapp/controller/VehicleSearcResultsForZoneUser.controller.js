@@ -950,7 +950,7 @@ sap.ui.define([
 
 		    if (oEvent !== undefined){
 			var loginUser = oEvent.getParameter("arguments").LoginUser;
-			if (loginUser == "vehicelTradeDealerUser") {
+			if (loginUser == "Dealer_User") {
 				var oTradecolId = this.getView().byId('TradecolId');
 				oTradecolId.setVisible(oTradecolId.getVisible());
 

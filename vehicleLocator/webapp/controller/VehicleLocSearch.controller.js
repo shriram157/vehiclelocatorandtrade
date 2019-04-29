@@ -50,19 +50,19 @@ sap.ui.define([
 
 					var userType = oData.loggedUserType[0];
 
-					//	var userType = "ZoneUser"; // TODO: Remove before deployment locatyest only - GSR
-					//	var userType = "vehicelTradeDealerUser"; // TODO: Remove before deployment locatyest only - GSR
+					//	var userType = "Zone_User"; // TODO: Remove before deployment locatyest only - GSR
+					//	var userType = "Dealer_User"; // TODO: Remove before deployment locatyest only - GSR
 
 					switch (userType) {
-					case "vehicelTradeDealerUser":
-						that.userTypeReceived = "vehicelTradeDealerUser";
+					case "Dealer_User":
+						that.userTypeReceived = "Dealer_User";
 						break;
 
-					case "internalTCIUser":
-						that.userTypeReceived = "internalTCIUser";
+					case "TCI_User":
+						that.userTypeReceived = "TCI_User";
 						break;
-					case "ZoneUser":
-						that.userTypeReceived = "ZoneUser";
+					case "Zone_User":
+						that.userTypeReceived = "Zone_User";
 						break;
 					default:
 						// raise a message, because this should not be allowed. 
@@ -146,7 +146,7 @@ sap.ui.define([
 						var BpLength = item.BusinessPartner.length;
 
 						//if it is a zone user, then put the first record as Zone User	
-						if (i == 0 && that.userTypeReceived == "ZoneUser") {
+						if (i == 0 && that.userTypeReceived == "Zone_User") {
 							BpDealer.push({
 								// "BusinessPartnerKey": item.BusinessPartnerKey,
 								// "BusinessPartner": item.BusinessPartner, 
@@ -177,7 +177,7 @@ sap.ui.define([
 
 					var sLocation = window.location.host;
 					var sLocation_conf = sLocation.search("webide");
-					if (sLocation_conf == 0 && that.userTypeReceived != "ZoneUser") {
+					if (sLocation_conf == 0 && that.userTypeReceived != "Zone_User") {
 						var BpDealer = [];
 
 						BpDealer.push({
@@ -232,7 +232,7 @@ sap.ui.define([
 						var sLocation_conf = sLocation.search("webide");
 						if (sLocation_conf == 0) {
 
-							if (that.userTypeReceived == "ZoneUser") {
+							if (that.userTypeReceived == "Zone_User") {
 
 								userAttributes.push({
 									// "DealerCode": dealerCode,
@@ -320,7 +320,7 @@ sap.ui.define([
 			this.TruncUserName = LoggedinUserFname + LoggedinUserLname;
 
 			switch (userType) {
-				/*	case "vehicelTradeDealerUser":*/
+				/*	case "Dealer_User":*/
 			case "Dealer":
 
 				var sLocation = window.location.host;
@@ -438,7 +438,7 @@ sap.ui.define([
 
 				break;
 
-			case "internalTCIUser":
+			case "TCI_User":
 				// add your code here. // TODO:  
 				break;
 			case "Zone":
@@ -1356,7 +1356,7 @@ sap.ui.define([
 					Obj.LoginUser = LoginUser;
 					sap.ui.core.BusyIndicator.hide();
 
-					if (that.userTypeReceived == "ZoneUser") {
+					if (that.userTypeReceived == "Zone_User") {
 
 						that.getRouter().navTo("VehicleSearcResultsForZoneUser", {
 							LoginUser: JSON.stringify(Obj)
