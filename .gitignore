@@ -1,4 +1,3 @@
-project.json
-.che/modules
-/.mta/
 /*.mtar
+/.mta/
+/mta_archives/
