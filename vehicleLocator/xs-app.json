@@ -8,30 +8,86 @@
 		"source": "^/vehiclelocatorandtrade/index.html$",
 		"target": "index.html",
 		"localDir": "webapp",
-		"cacheControl": "no-cache, no-store, must-revalidate"
+		"cacheControl": "no-cache, no-store, must-revalidate",
+		"scope": [
+			"$XSAPPNAME.Manage_DNC",
+			"$XSAPPNAME.Manage_Trade_Requests",
+			"$XSAPPNAME.Manage_Vehicles",
+			"$XSAPPNAME.View_DNC",
+			"$XSAPPNAME.View_Trade_Requests",
+			"$XSAPPNAME.View_Vehicles"
+		]
 	}, {
 		"source": "^/vehiclelocatorandtrade/(.*)$",
 		"target": "$1",
-		"localDir": "webapp"
+		"localDir": "webapp",
+		"scope": [
+			"$XSAPPNAME.Manage_DNC",
+			"$XSAPPNAME.Manage_Trade_Requests",
+			"$XSAPPNAME.Manage_Vehicles",
+			"$XSAPPNAME.View_DNC",
+			"$XSAPPNAME.View_Trade_Requests",
+			"$XSAPPNAME.View_Vehicles"
+		]
 	}, {
 		"source": "/node(.*)",
 		"destination": "vehiclelocatorandtrade-node",
-		"csrfProtection": false
+		"csrfProtection": false,
+		"scope": [
+			"$XSAPPNAME.Manage_DNC",
+			"$XSAPPNAME.Manage_Trade_Requests",
+			"$XSAPPNAME.Manage_Vehicles",
+			"$XSAPPNAME.View_DNC",
+			"$XSAPPNAME.View_Trade_Requests",
+			"$XSAPPNAME.View_Vehicles"
+		]
 	}, {
 		"source": "/userDetails(.*)",
 		"destination": "vehiclelocatorandtrade-node",
-		"csrfProtection": false
+		"csrfProtection": false,
+		"scope": [
+			"$XSAPPNAME.Manage_DNC",
+			"$XSAPPNAME.Manage_Trade_Requests",
+			"$XSAPPNAME.Manage_Vehicles",
+			"$XSAPPNAME.View_DNC",
+			"$XSAPPNAME.View_Trade_Requests",
+			"$XSAPPNAME.View_Vehicles"
+		]
 	}, {
 		"source": "(.*)(.xsjs)",
 		"destination": "vehiclelocatorandtrade-xsjs",
-		"csrfProtection": false
+		"csrfProtection": false,
+		"scope": [
+			"$XSAPPNAME.Manage_DNC",
+			"$XSAPPNAME.Manage_Trade_Requests",
+			"$XSAPPNAME.Manage_Vehicles",
+			"$XSAPPNAME.View_DNC",
+			"$XSAPPNAME.View_Trade_Requests",
+			"$XSAPPNAME.View_Vehicles"
+		]
 	}, {
 		"source": "(.*)(.xsodata)",
 		"destination": "vehiclelocatorandtrade-xsjs",
-		"authenticationType": "none"
+		"authenticationType": "none",
+		"scope": [
+			"$XSAPPNAME.Manage_DNC",
+			"$XSAPPNAME.Manage_Trade_Requests",
+			"$XSAPPNAME.Manage_Vehicles",
+			"$XSAPPNAME.View_DNC",
+			"$XSAPPNAME.View_Trade_Requests",
+			"$XSAPPNAME.View_Vehicles"
+		]
 	}, {
 		"source": "/xsodata/(.*)",
 		"destination": "vehiclelocatorandtrade-xsjs",
-		"authenticationType": "none"
+		"authenticationType": "none",
+		"scope": [
+			"$XSAPPNAME.Manage_DNC",
+			"$XSAPPNAME.Manage_Trade_Requests",
+			"$XSAPPNAME.Manage_Vehicles",
+			"$XSAPPNAME.View_DNC",
+			"$XSAPPNAME.View_Trade_Requests",
+			"$XSAPPNAME.View_Vehicles"
+		]
 	}]
 }
