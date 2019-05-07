@@ -50,8 +50,13 @@ sap.ui.define([
 
 					var userType = oData.loggedUserType[0];
 
+<<<<<<< Upstream, based on origin/master
 					//	var userType = "Zone_User"; // TODO: Remove before deployment locatyest only - GSR
 					//	var userType = "Dealer_User"; // TODO: Remove before deployment locatyest only - GSR
+=======
+					//	 var userType = "ZoneUser"; // TODO: Remove before deployment locatyest only - GSR
+						//var userType = "vehicelTradeDealerUser"; // TODO: Remove before deployment locatyest only - GSR
+>>>>>>> 09e2184 Multiple Changes requested by Business
 
 					switch (userType) {
 					case "Dealer_User":
@@ -180,15 +185,15 @@ sap.ui.define([
 					if (sLocation_conf == 0 && that.userTypeReceived != "Zone_User") {
 						var BpDealer = [];
 
-						BpDealer.push({
-							"BusinessPartnerKey": "2400042120",
-							"BusinessPartner": "42120",
+						// BpDealer.push({
+						// 	"BusinessPartnerKey": "2400042120",
+						// 	"BusinessPartner": "42120",
 
-							"BusinessPartnerName": "Don Valley North Toyota...", //item.OrganizationBPName1 //item.BusinessPartnerFullName
-							"Division": "10",
-							"BusinessPartnerType": "Z001",
-							"searchTermReceivedDealerName": "42120"
-						});
+						// 	"BusinessPartnerName": "Don Valley North Toyota...", //item.OrganizationBPName1 //item.BusinessPartnerFullName
+						// 	"Division": "10",
+						// 	"BusinessPartnerType": "Z001",
+						// 	"searchTermReceivedDealerName": "42120"
+						// });
 
 						BpDealer.push({
 							"BusinessPartnerKey": "2400042193",
@@ -496,8 +501,7 @@ sap.ui.define([
 
 				break;
 			default:
-				// raise a message, because this should not be allowed. 
-				// add your code here. // TODO: 
+		               // this may not happen
 			}
 
 			//  try to append the zone user with the zone data to which he belons 
@@ -702,7 +706,11 @@ sap.ui.define([
 				url: Suffix,
 				async: true,
 				success: function (result) {
+ 
+					
 					var Suffix = result.d.results;
+
+
 
 					var SuffixModel = new sap.ui.model.json.JSONModel(Suffix);
 					sap.ui.getCore().setModel(SuffixModel, "SuffixModel");
@@ -736,9 +744,13 @@ sap.ui.define([
 				// var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language;  //2603
 				var SPRAS = that.sCurrentLocaleD;
 				var oCombine = [];
+ 
 				for (var a = 0; a < that.Fullurls.length; a++) {
 					for (var b = 0; b < SufixDescription.length; b++) {
+ 
+						
 						oCombine.push({
+ 
 							"Suffix": that.Fullurls[a].Suffix,
 							"SuffixDescriptionEN": that.Fullurls[a].SuffixDescriptionEN,
 							"SuffixDescriptionFR": that.Fullurls[a].SuffixDescriptionFR,
@@ -759,6 +771,23 @@ sap.ui.define([
 					}
 
 				}
+				
+// need to add ALL
+        // var allText = that._oResourceBundle.getText("ALL");
+
+ 	    //      oCombine.push({
+						// 	Suffix: allText,
+						// 		"SuffixDescriptionEN": allText,
+						// 	"SuffixDescriptionFR": allText,
+						// 	// SuffixDescriptionEN: "",
+						// 	// SuffixDescriptionFR:""
+						// 	//	sEtaToData: item.zzprod_month
+						// });
+
+
+
+
+				
 
 				var Suffix = new sap.ui.model.json.JSONModel(oCombine);
 				that.getView().setModel(Suffix, "Suffix");
@@ -766,6 +795,26 @@ sap.ui.define([
 				sap.ui.core.BusyIndicator.hide();
 				/*	var oJsonModelVLS = new sap.ui.model.json.JSONModel(oResults);
 					that.getView().byId("SuffCmbo").setModel(oJsonModelVLS);*/
+					
+					
+					
+					
+		if (oCombine.length != 0) {
+
+				var allText = that._oResourceBundle.getText("ALL");
+				// if (this.getView().byId("VLRSuffix").getItems().filter(function (x) {
+				// 		return x.mProperties.key == "all"
+				// 	}).length == 0) {
+					var newItem = new sap.ui.core.Item({
+						key: allText,
+						text: allText
+					});
+					
+					this.getView().byId("SuffCmbo").insertItem(newItem);
+				}
+	
+					
+					
 
 			} else {
 				sap.ui.core.BusyIndicator.hide();
@@ -1140,15 +1189,7 @@ sap.ui.define([
 			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
 			//  the requested dealer is made as a mandatory parameter, so the beloow changes. 
 			//1704 requesting dealer is introduced. 
-			// if (SuffCmbo == 'ALL') {
-			// 	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '" + McCmbo + "' and endswith (zzintcol,'" + '' +
-			// 		"') and zzmoyr eq '" + MoyearCombo + "'&$format=json";
-
-			// } else {
-			// 	var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '" + McCmbo + "' and endswith (zzintcol,'" + this.intercolor +
-			// 		"') and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + MoyearCombo + "'&$format=json";
-
-			// }
+	
 
 			// 		 	if(Dealer_No.length == 10){
 			// 	Dealer_No=Dealer_No.slice(-5);
@@ -1174,9 +1215,36 @@ sap.ui.define([
 
 			}
 
-			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=matnr eq '" + McCmbo +
-				"' and endswith (zzintcol,'" + this.intercolor +
-				"') and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + MoyearCombo + "'&$format=json";
+		if (SuffCmbo == 'ALL') {
+				// var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '" + McCmbo + "' and endswith (zzintcol,'" + '' +
+				// 	"') and zzmoyr eq '" + MoyearCombo + "'&$format=json";
+				
+				
+						var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=matnr eq '" + McCmbo +
+				"' and endswith (zzintcol,'" + "" + 	"') and zzseries eq '" + SeriesCmbo + "' and zzmoyr eq '" + MoyearCombo + "'&$format=json";
+				
+				
+
+			} else {
+				// var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '" + McCmbo + "' and endswith (zzintcol,'" + this.intercolor +
+				// 	"') and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + MoyearCombo + "'&$format=json";
+		
+				
+				
+	           var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=matnr eq '" + McCmbo +
+					"' and endswith (zzintcol,'" + this.intercolor + "') and zzseries eq '" + SeriesCmbo + "' and zzmoyr eq '" +
+					MoyearCombo + "'&$format=json";			
+				
+				
+
+			}
+
+
+
+
+			// var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=matnr eq '" + McCmbo +
+			// 	"' and endswith (zzintcol,'" + this.intercolor +
+			// 	"') and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + MoyearCombo + "'&$format=json";
 
 			$.ajax({
 				url: SeriesUrl,
@@ -1393,7 +1461,7 @@ sap.ui.define([
 			if (arr.indexOf(value) < 0 && combo_IdKey == "") {
 				combo_Id.setValueState("Error");
 				combo_Id.setValue();
-				that.getView().byId("SeriesErrMsgStrip").setText("select mandetory fields");
+				that.getView().byId("SeriesErrMsgStrip").setText("select mandatory fields");
 				that.getView().byId("SeriesErrMsgStrip").setProperty("visible", true);
 			} else {
 				combo_Id.setValueState("None");
@@ -1412,7 +1480,7 @@ sap.ui.define([
 			var that = this;
 			if (arr.indexOf(value) < 0 && combo_IdSel == "") {
 				combo_Id.setValueState("Error");
-				that.getView().byId("SeriesErrMsgStrip").setText("select mandetory fields");
+				that.getView().byId("SeriesErrMsgStrip").setText("select mandatory fields");
 				that.getView().byId("SeriesErrMsgStrip").setProperty("visible", true);
 				combo_Id.setValue();
 			} else {
@@ -1434,7 +1502,7 @@ sap.ui.define([
 			if ((arr.indexOf(that.value) < 0 && combo_IdSel == "") && (that.value != "- ALL/")) {
 				combo_Id.setValueState("Error");
 				combo_Id.setValue();
-				that.getView().byId("SeriesErrMsgStrip").setText("select mandetory fields");
+				that.getView().byId("SeriesErrMsgStrip").setText("select mandatory fields");
 				that.getView().byId("SeriesErrMsgStrip").setProperty("visible", true);
 			} else {
 				combo_Id.setValueState("None");
@@ -1447,7 +1515,11 @@ sap.ui.define([
 				if(SPRAS!="English"){*/
 			/*this.SelectedExteriorColorCode = oEvent.getParameter("selectedItem").oBindingContexts.Suffix.getObject().ExteriorColorCode;
 			this.SelectedTrimInteriorColor = oEvent.getParameter("selectedItem").oBindingContexts.Suffix.getObject().TrimInteriorColor;*/
+			
+			
+			if ( oEvent.getParameter("selectedItem").getText() != "ALL") {
 			this.intercolor = oEvent.getParameter("selectedItem").oBindingContexts.Suffix.getObject().int_c;
+			}
 			sap.ui.getCore().SuffixSelectedKey = this.getView().byId("SuffCmbo").getSelectedKey();
 			sap.ui.getCore().SuffixSelectedItem = this.getView().byId("SuffCmbo").getSelectedItem().getText();
 			selectedSuffix = this.getView().byId("SuffCmbo").getSelectedItem().getText();
@@ -1466,8 +1538,11 @@ sap.ui.define([
 			that.getView().byId("Atlantic").setSelected(false);
 			that.getView().byId("Quebec").setSelected(false);*/
 			//By Sun
-			this.getOwnerComponent().suffixSelectedIndex = this.getView().byId("SuffCmbo").getSelectedItem().getBindingContext("Suffix").getPath()
-				.split("/")[1] - 0;
+			
+			
+			//GSR 0505
+			// this.getOwnerComponent().suffixSelectedIndex = this.getView().byId("SuffCmbo").getSelectedItem().getBindingContext("Suffix").getPath()
+			// 	.split("/")[1] - 0;
 			this.getOwnerComponent().suffixSelectedValue = this.getView().byId("SuffCmbo").getSelectedItem().getText();
 		},
 		//	}

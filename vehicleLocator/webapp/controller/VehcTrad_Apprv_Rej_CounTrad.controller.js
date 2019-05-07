@@ -28,7 +28,31 @@ sap.ui.define([
 
 			this.getView().setModel(this._oViewModel, "detailView");	
 					/// set the logo and Language. 
+            //  set the model on DNC days combobox Model
+         
+                var modelDNCDays = [];
+					modelDNCDays.push({
+						"key": "0",
+						"text": "0"
+					});
+				 	modelDNCDays.push({
+						"key": "10",
+						"text": "10"
+					});
+						modelDNCDays.push({
+						"key": "20",
+						"text": "20"
+					});
+					modelDNCDays.push({
+						"key": "40",
+						"text": "40"
+					});	
+   //        	var sComboboxModel = new sap.ui.model.json.JSONModel({
+				 
+			// });
 
+			this.getView().setModel(modelDNCDays, "comboBoxModelDncDays");
+            
 				this._setTheLanguage();
 
 				this._setTheLogo();	
@@ -210,6 +234,13 @@ sap.ui.define([
 					this.VehicleTrade_SummaryData(StatusData);
 					var AcceptVisible = StatusData.FromRequesting;
 					var Status = StatusData.Trade_Status;
+					
+					//  for a rejected trade request do not show the VTN on the screen. 
+					 if (Status == "R") {
+					 			that.getView().byId("ovtnId").setVisible(false);
+					 			that.getView().byId("ovtnIdText").setVisible(false);
+					 }
+					
 				
 				     if ( StatusData.Trade_Return == "N" ) {  
 				     	// this.getView().byId("offervehidContent").setVisible(false);
@@ -366,7 +397,12 @@ sap.ui.define([
 					/*	this.getView().byId("VT_ARCTtrdinStatus").setModel(oStatusModel);*/
 					this.getView().byId("VT_ARCTtrdinRet").setModel(oStatusModel);
 					/*this.getView().byId("VT_ARCTDnc").setModel(oStatusModel);*/
-					this.getView().byId("VT_ARCDnc").setModel(oStatusModel);
+					
+					
+					//this.getView().byId("VT_ARCDnc").setModel(oStatusModel);  GSR0605
+					
+					
+					
 					//	this.getView().byId("oAddbutton").setModel(oStatusModel);	
 					//	this.getView().byId("SimpleFormAproveTrReq").bindElement("/");
 
@@ -612,7 +648,12 @@ sap.ui.define([
 				/*	this.getView().byId("VT_ARCTtrdinStatus").setModel(oStatusModel);*/
 				this.getView().byId("VT_ARCTtrdinRet").setModel(oStatusModel);
 				/*this.getView().byId("VT_ARCTDnc").setModel(oStatusModel);*/
-				this.getView().byId("VT_ARCDnc").setModel(oStatusModel);
+				
+				// this.getView().byId("VT_ARCDnc").setModel(oStatusModel);  GSR0605
+				
+				
+				
+				
 				this.getView().byId("SimpleFormAproveTrReq").bindElement("/");
 				this.getView().byId("SimpleForrmDisa220").setModel(sap.ui.getCore().getModel("TradeRequestedHistory"));
 				this.getView().byId("SimpleForrmDisa220").bindElement("/");
@@ -693,11 +734,7 @@ sap.ui.define([
 						// // that.getView().byId("tableVrade").setModel(oModel);
 						// that.getView().setModel(oModel, "commentsModel");	
 					
-					
-					
-					
-					
-					
+
 					
 				});
 
@@ -859,7 +896,8 @@ sap.ui.define([
 					}
 				});
 						
-						
+			  //we need the comments to be cleared after database save. 		
+				  that.getView().byId("oComments").setValue(""); //1804			
 					
 						// that.getView().byId("oComments").setValue("");
 				/*	var oComModel = new sap.ui.model.json.JSON();*/
@@ -898,6 +936,13 @@ sap.ui.define([
 		},
 		oAccept: function () {
 			debugger;
+			
+			
+		// 05-05 if an Update has been pressed just take the comments to HDB
+	 	var Comment = this.getView().byId("oComments").getValue();
+			if (Comment !== "") {
+				 this.oAddCommentsArea();
+			}	
 
 			var that = this;
 			
@@ -1477,6 +1522,9 @@ sap.ui.define([
 		onReject: function () {
 
 			var that = this;
+	
+			
+			
 		/*	if (this.getView().byId("VT_CStradinRet").getSelectedKey() == "Yes" && this.getView().byId("FromFourth").getText() == "") {
 				sap.m.MessageBox.warning("Please select a vehicle");
 				return;
@@ -1494,6 +1542,16 @@ sap.ui.define([
 					type : 'Accept',
 					id : 'oYes',
 					press: function () {
+						
+						
+			
+			// 05-05 if an reject has been pressed just take the comments to HDB
+				 	var Comment = that.getView().byId("oComments").getValue();
+						if (Comment !== "") {
+							 that.oAddCommentsArea();
+						}	
+ 
+						
 						/*sap.m.MessageBox.warning('Yes');*/
 			var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 				pattern: "yyyy-MM-dd'T'HH:mm:ss"
@@ -1845,18 +1903,28 @@ sap.ui.define([
 			});
 			//var oBlockId="/ModelBlockSet";
 			that.oDataModel.create("/ModelBlockSet", oDNSBlock, null, function (s) {
-				alert("ok");
+				// alert("ok");
 			}, function () {
 
 			});
 
 		},
 
-		onCounterTrade: function ()
+		onCounterTrade: function () {
 
-		{
+	
 
 			var that = this;
+			
+				// 05-05 if an oncountertrade has been pressed just take the comments to HDB
+	 	var Comment = this.getView().byId("oComments").getValue();
+			if (Comment !== "") {
+				 this.oAddCommentsArea();
+			}	
+	
+			
+			
+			
 
 			var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 				pattern: "yyyy-MM-dd'T'HH:mm:ss"

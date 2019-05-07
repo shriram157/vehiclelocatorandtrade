@@ -16,7 +16,7 @@
 						</contentLeft>
 						<contentRight>
 						 
-									<Button   class="VLbtn2" text="{i18n>Back}" type="Transparent" press="onNavBack" width="auto"/>
+									<!--<Button   class="VLbtn2" text="{i18n>Back}" type="Transparent" press="onNavBack" width="auto"/>-->
 						<!--<Link text="{i18n>Back}" class="clCustomFont sapUiSmallMargin" press="handlebacksearch"/>-->
 						</contentRight>
 					</Bar>
@@ -58,6 +58,10 @@
 						<Button text="{i18n>LocateVechicles}" type="Transparent" press="VehicleLocSearchPress"/>
 						<Button text="{i18n>TradeHistory}" type="Transparent" press="TradeHistoryLinkPressTS"/>
 						<Button text="{i18n>ModelBlock}" type="Transparent" press="BlockSummarypressTS"/>
+						
+							<Button   class="VLbtn2" text="{i18n>Back}" type="Transparent" press="onNavBack" width="auto"/>
+						
+						
 						<!--<Button text="Vehicle Locator" press="handleLinkPress"/>
 						<Button text="Sold Order" press="handleLinkPress"/>
 						<Button text="Price Protection" press="handleLinkPress"/>
@@ -78,7 +82,97 @@
 					<!--</HBox>-->
 					<VBox>
 						<VBox>
-							<!--==========================  The new Table ========================-->
+							<!--========================Begin of new table ====================================Received Trade Request Begin-->
+					<Table showNoData="false" width="98%" class="sapUiResponsiveMargin">
+						<headerToolbar>
+							<OverflowToolbar id="otbSubheader2">
+								<!--<Title id="tableHeader2" text="{detailView>/tableCount}"/>-->
+										<Label text="{i18n>ReceivedTradeRequests}" class="flexdontclabllist"/>
+								<ToolbarSpacer/>
+								<Button tooltip="Sort table by selected fields"  icon="sap-icon://sort"	 press="receivedTradeRequestSortDialogButtonPressed"
+									text="{i18n>Sorting}"/>
+							</OverflowToolbar>
+						</headerToolbar>
+						<columns>
+							<Column id="ORequlinlId1" demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="5%" >
+								<Text text="{i18n>Request}"/>
+							</Column>
+							<!--<Column demandPopin="true" minScreenWidth="Tablet" hAlign="Left">-->
+							<!--	<Text text="{i18n>Created}"/>-->
+							<!--</Column>-->
+							<Column demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="15%">
+								<Text text="{i18n>Dealer}"/>
+							</Column>
+							<Column demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="25%">
+								<Text text="{i18n>Model}"/>
+							</Column>
+							<Column id="oSuffixVT1" demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="15%">
+								<Text text="{i18n>Suffix}"/>
+							</Column>
+							<Column demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="5%">
+								<Text text="{i18n>TradeinReturn}"/>
+							</Column>
+							<Column demandPopin="true" minScreenWidth="Tablet" width="10%">
+								<Text text="{i18n>Status}"/>
+							</Column>
+							<!--<Column demandPopin="true" minScreenWidth="Tablet">-->
+							<!--	<Text text="{i18n>StatusUpdatedDate}" wrapping="true"/>-->
+							<!--</Column>-->
+						</columns>
+					</Table>
+					<ScrollContainer height="325px" vertical="true" focusable="true">
+						<Table id="table1Rts" width="98%" class="sapUiResponsiveMargin" alternateRowColors="true"
+							items="{ path: 'receivedRequestTable>/', sorter : [ { path:'Trade_Id', descending : 'true' }]}" noDataText="{i18n>NoData}" 
+							mode="None" modeAnimationOn="true">
+							<columns>
+								<Column width="5%"></Column>
+								<Column width="15%"></Column>
+								<Column width="25%"></Column>
+								<Column width="15%"></Column>
+								<Column width="5%"></Column>
+								<Column width="10%"></Column>
+								
+							</columns>
+							<items>
+								<ColumnListItem type="Active" press="oMyRequestLinkPress" id="onlinkPress2">
+									<cells>
+										<Link id="otradIdz2" text="{receivedRequestTable>Trade_Id}" class="link" subtle="true" press="oMyRequestLinkPress" wrapping="true"/>
+										<Text text="{path:'receivedRequestTable>Requesting_Dealer',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDealer'}-{receivedRequestTable>Requesting_Dealer_Name}"></Text>
+										<Text text="{receivedRequestTable>Model}-{receivedRequestTable>Model_Desc}" wrapping="true"/>
+										<Text text="{receivedRequestTable>Suffix}-{receivedRequestTable>Suffix_Desc}/{receivedRequestTable>Int_Colour_Desc}" wrapping="true"/>
+										<Text text="{path:'receivedRequestTable>Trade_Return',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryTrdReturn'}" wrapping="true"/>
+										<Text text="{path:'receivedRequestTable>Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="true"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</ScrollContainer>
+					<!--========================End of new table ====================================Received Trade Request End-->					
+							
+
+						
+						</VBox>
+						<HBox>
+							<FlexBox width="40px"></FlexBox>
+							<FlexBox height="30px" alignItems="Center" justifyContent="Center">
+								<Label text=" " class="flexdontclabllist"/>
+							</FlexBox>
+						</HBox>
+					</VBox>
+					<!--<HBox>-->
+					<!--	<FlexBox width="40px"></FlexBox>-->
+					<!--	<FlexBox height="15px" alignItems="Center" justifyContent="Center">-->
+					<!--		<Label text="{i18n>ReceivedTradeRequests}" class="flexdontclabllist"/>-->
+					<!--	</FlexBox>-->
+					<!--</HBox>-->
+					<HBox>
+						<FlexBox width="40px"></FlexBox>
+						<FlexBox height="20px" alignItems="Center" justifyContent="Center">
+							<Label text=" " class="flexdontclabllist"/>
+						</FlexBox>
+					</HBox>
+					
+											<!--==========================  The new Table ========================-->
 							<Table showNoData="false" width="98%" class="sapUiResponsiveMargin">
 								<headerToolbar>
 									<OverflowToolbar id="otbSubheader1">
@@ -193,207 +287,11 @@
 										</ColumnListItem>
 									</items>
 								</Table>
-							</ScrollContainer>
-							<!--=========================   the new table end===========================-->
-							<!--<t:Table id="table1vts" cellClick="onRowPress" selectionBehavior="Row" class="sapUiResponsiveMargin" selectionMode="None" rows="{-->
-							<!-- path:'/',-->
-							<!-- sorter : [{-->
-							<!--   path:'Changed_on',-->
-							<!--descending : 'true'-->
-							<!-- },-->
-							<!-- {-->
-							<!--   path:'Trade_Id',-->
-							<!--descending : 'true'-->
-							<!-- }]-->
-							<!-- 		    }"   	alternateRowColors="true" -->
-							<!--				width="auto">-->
-							<!--	<t:columns>-->
-							<!--		<t:Column id="ORequlinlId"  sortProperty="Trade_Id">-->
-							<!--			<Label text="{i18n>Request}"/>-->
-							<!--			<t:template>-->
-							<!--				<Link id="otradIdz" text="{Trade_Id}" class="link" subtle="true" press="oRequestLinkPress" wrapping="true"/>-->
-							<!--			</t:template>-->
-							<!--		</t:Column>-->
-							<!--		<t:Column sortProperty="Created_On">-->
-							<!--			<Label text="{i18n>Created}"/>-->
-							<!--			<t:template>-->
-							<!--				<Text text="{path:'Created_On',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="true"/>-->
-							<!--			</t:template>-->
-							<!--		</t:Column>-->
-							<!--<t:Column sortProperty="Requested_Dealer">-->
-							<!--	<Label text="{i18n>Dealer}"/>-->
-							<!--	<t:template>-->
-							<!--		<Text text="{path:'Requested_Dealer',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDealer'}-{Requested_Dealer_Name}"-->
-							<!--			wrapping="true"/>-->
-							<!--		</t:template>-->
-							<!--</t:Column>-->
-							<!--		<t:Column sortProperty="Model"  id="omodelvsr">-->
-							<!--			<Label text="{i18n>Model}"/>-->
-							<!--			<t:template>-->
-							<!--				<Text text="{Model}-{Model_Desc}" wrapping="true"/>-->
-							<!--			</t:template>-->
-							<!--		</t:Column>-->
-							<!--		<t:Column sortProperty="Suffix"  id="oSuffixVT">-->
-							<!--			<Label text="{i18n>Suffix}" wrapping="true"/>-->
-							<!--			<t:template>-->
-							<!--				<Text text="{Suffix}-{Suffix_Desc}/{Int_Colour_Desc}"-->
-							<!--					wrapping="true"/>-->
-							<!--			</t:template>-->
-							<!--		</t:Column>-->
-							<!--		<t:Column sortProperty="Trade_Return">-->
-							<!--			<Label text="{i18n>TradeinReturn}" wrapping="true"/>-->
-							<!--			<t:template>-->
-							<!--				<Text text="{path:'Trade_Return',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryTrdReturn'}"-->
-							<!--					wrapping="false"/>-->
-							<!--			</t:template>-->
-							<!--		</t:Column>-->
-							<!--		<t:Column sortProperty="Trade_Status">-->
-							<!--			<Label text="{i18n>Status}" wrapping="false"/>-->
-							<!--			<t:template>-->
-							<!--				<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}"-->
-							<!--					wrapping="true"/>-->
-							<!--			</t:template>-->
-							<!--		</t:Column>-->
-							<!--		<t:Column sortProperty="Changed_on">-->
-							<!--			<Label text="{i18n>StatusUpdatedDate}" wrapping="true"/>-->
-							<!--			<t:template>-->
-							<!--				<Text text="{path:'Changed_on',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="true"/>-->
-							<!--			</t:template>-->
-							<!--		</t:Column>-->
-							<!--	</t:columns>-->
-							<!--</t:Table>-->
-						</VBox>
-						<HBox>
-							<FlexBox width="40px"></FlexBox>
-							<FlexBox height="30px" alignItems="Center" justifyContent="Center">
-								<Label text=" " class="flexdontclabllist"/>
-							</FlexBox>
-						</HBox>
-					</VBox>
-					<!--<HBox>-->
-					<!--	<FlexBox width="40px"></FlexBox>-->
-					<!--	<FlexBox height="15px" alignItems="Center" justifyContent="Center">-->
-					<!--		<Label text="{i18n>ReceivedTradeRequests}" class="flexdontclabllist"/>-->
-					<!--	</FlexBox>-->
-					<!--</HBox>-->
-					<HBox>
-						<FlexBox width="40px"></FlexBox>
-						<FlexBox height="20px" alignItems="Center" justifyContent="Center">
-							<Label text=" " class="flexdontclabllist"/>
-						</FlexBox>
-					</HBox>
-					<!--========================Begin of new table ====================================Received Trade Request Begin-->
-					<Table showNoData="false" width="98%" class="sapUiResponsiveMargin">
-						<headerToolbar>
-							<OverflowToolbar id="otbSubheader2">
-								<!--<Title id="tableHeader2" text="{detailView>/tableCount}"/>-->
-										<Label text="{i18n>ReceivedTradeRequests}" class="flexdontclabllist"/>
-								<ToolbarSpacer/>
-								<Button tooltip="Sort table by selected fields"  icon="sap-icon://sort"	 press="receivedTradeRequestSortDialogButtonPressed"
-									text="{i18n>Sorting}"/>
-							</OverflowToolbar>
-						</headerToolbar>
-						<columns>
-							<Column id="ORequlinlId1" demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="5%" >
-								<Text text="{i18n>Request}"/>
-							</Column>
-							<!--<Column demandPopin="true" minScreenWidth="Tablet" hAlign="Left">-->
-							<!--	<Text text="{i18n>Created}"/>-->
-							<!--</Column>-->
-							<Column demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="15%">
-								<Text text="{i18n>Dealer}"/>
-							</Column>
-							<Column demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="25%">
-								<Text text="{i18n>Model}"/>
-							</Column>
-							<Column id="oSuffixVT1" demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="15%">
-								<Text text="{i18n>Suffix}"/>
-							</Column>
-							<Column demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="5%">
-								<Text text="{i18n>TradeinReturn}"/>
-							</Column>
-							<Column demandPopin="true" minScreenWidth="Tablet" width="10%">
-								<Text text="{i18n>Status}"/>
-							</Column>
-							<!--<Column demandPopin="true" minScreenWidth="Tablet">-->
-							<!--	<Text text="{i18n>StatusUpdatedDate}" wrapping="true"/>-->
-							<!--</Column>-->
-						</columns>
-					</Table>
-					<ScrollContainer height="325px" vertical="true" focusable="true">
-						<Table id="table1Rts" width="98%" class="sapUiResponsiveMargin" alternateRowColors="true"
-							items="{ path: 'receivedRequestTable>/', sorter : [ { path:'Trade_Id', descending : 'true' }]}" noDataText="{i18n>NoData}" 
-							mode="None" modeAnimationOn="true">
-							<columns>
-								<Column width="5%"></Column>
-								<Column width="15%"></Column>
-								<Column width="25%"></Column>
-								<Column width="15%"></Column>
-								<Column width="5%"></Column>
-								<Column width="10%"></Column>
-								
-							</columns>
-							<items>
-								<ColumnListItem type="Active" press="oMyRequestLinkPress" id="onlinkPress2">
-									<cells>
-										<Link id="otradIdz2" text="{receivedRequestTable>Trade_Id}" class="link" subtle="true" press="oMyRequestLinkPress" wrapping="true"/>
-										<Text text="{path:'receivedRequestTable>Requesting_Dealer',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDealer'}-{receivedRequestTable>Requesting_Dealer_Name}"></Text>
-										<Text text="{receivedRequestTable>Model}-{receivedRequestTable>Model_Desc}" wrapping="true"/>
-										<Text text="{receivedRequestTable>Suffix}-{receivedRequestTable>Suffix_Desc}/{receivedRequestTable>Int_Colour_Desc}" wrapping="true"/>
-										<Text text="{path:'receivedRequestTable>Trade_Return',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryTrdReturn'}" wrapping="true"/>
-										<Text text="{path:'receivedRequestTable>Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="true"/>
-									</cells>
-								</ColumnListItem>
-							</items>
-						</Table>
-					</ScrollContainer>
-					<!--========================End of new table ====================================Received Trade Request End-->
-					<!--<t:Table id="table1Rts" cellClick="onRowPress" selectionBehavior="Row" class="sapUiResponsiveMargin" selectionMode="None" rows="{  path:'/',-->
-					<!--		 		    sorter : [ -->
-					<!--		 		    {-->
-					<!--		 		      path:'Trade_Id',-->
-					<!--		 		   descending : 'true'-->
-					<!--		 		    }]}"-->
-					<!--	visibleRowCount="10" width="auto">-->
-					<!--	<t:columns>-->
-					<!--		<t:Column id="ORequlinl" sortProperty="Trade_Id">-->
-					<!--			<Label text="{i18n>Request}"/>-->
-					<!--			<t:template>-->
-					<!--				<Link id="otradIdz2" text="{Trade_Id}" class="link" subtle="true" press="oMyRequestLinkPress" wrapping="true"/>-->
-					<!--			</t:template>-->
-					<!--		</t:Column>-->
-					<!--		<t:Column sortProperty="Requesting_Dealer" id="matnr">-->
-					<!--			<Label text="{i18n>FromDealer}"/>-->
-					<!--			<t:template>-->
-					<!--				<Text text="{path:'Requesting_Dealer',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDealer'}-{Requesting_Dealer_Name}"></Text>-->
-					<!--			</t:template>-->
-					<!--		</t:Column>-->
-					<!--		<t:Column sortProperty="Model" id="oMdlvsr">-->
-					<!--			<Label text="{i18n>Model}"/>-->
-					<!--			<t:template>-->
-					<!--				<Text text="{Model}-{Model_Desc}" wrapping="true"/>-->
-					<!--			</t:template>-->
-					<!--		</t:Column>-->
-					<!--		<t:Column sortProperty="Suffix" id="oSufixVT">-->
-					<!--			<Label text="{i18n>Suffix}" wrapping="true"/>-->
-					<!--			<t:template>-->
-					<!--				<Text text="{Suffix}-{Suffix_Desc}/{Int_Colour_Desc}" wrapping="true"/>-->
-					<!--			</t:template>-->
-					<!--		</t:Column>-->
-					<!--		<t:Column sortProperty="Trade_Return">-->
-					<!--			<Label text="{i18n>TradeinReturn}" wrapping="true"/>-->
-					<!--			<t:template>-->
-					<!--				<Text text="{path:'Trade_Return',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryTrdReturn'}" wrapping="true"/>-->
-					<!--			</t:template>-->
-					<!--		</t:Column>-->
-					<!--		<t:Column sortProperty="Trade_Status">-->
-					<!--			<Label text="{i18n>Status}" wrapping="true"/>-->
-					<!--			<t:template>-->
-					<!--				<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="true"/>-->
-					<!--			</t:template>-->
-					<!--		</t:Column>-->
-					<!--	</t:columns>-->
-					<!--</t:Table>-->
+							</ScrollContainer>	
+					
+					
+
+				
 				</content>
 			</Page>
 		</pages>

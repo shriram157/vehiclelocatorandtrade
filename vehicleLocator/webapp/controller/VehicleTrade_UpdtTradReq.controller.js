@@ -507,6 +507,16 @@ sap.ui.define([
 
 		UpdatePress: function () {
 			var that = this;
+			
+		this.Tradeid = this.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Trade_Id;
+// 05-05 if an Update has been pressed just take the comments to HDB
+	 	var Comment = this.getView().byId("oComments").getValue();
+			if (Comment !== "") {
+			this.getTheLatestCommentId();	
+		   this.oAddCommentsArea();
+			}		
+ 
+			
 			var oOfferedVehicle = this.getView().byId("otextId").getText();
 			var SelectedTeade = this.getView().byId("oTradeinRet").getSelectedKey();
 			//================================================================================
@@ -980,33 +990,134 @@ sap.ui.define([
 
 		},
 
-		oAddCommentsArea: function () {
+		// oAddCommentsArea: function () {
+		// 	var Comment = this.getView().byId("oComments").getValue();
+		// 	if (Comment == "") {
+		// 		sap.m.MessageBox.error("Please enter comment");
+		// 	} else {
+
+		// 		if (this.getView().byId("tableVrade").getModel('TradeRequestModel') != undefined) {
+					
+
+		// 			var oComment_Id = this.getView().byId("tableVrade").getBinding('items').getLength().toString();
+					
+					
+		// 			var TradeId = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Trade_Id;
+
+		// 			var that = this;
+
+		// 			var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+		// 				pattern: "yyyy-MM-dd'T'HH:mm:ss"
+		// 			});
+		// 			var oCommentdate = new Date(oDateFormat.format(new Date()));
+		// 			oCommentdate.setDate(oCommentdate.getDate());
+
+		// 			var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
+		// 			var LoggedinUserLname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
+		// 			var Created_By = LoggedinUserFname + LoggedinUserLname;
+		// 			Created_By = Created_By.substr(0, 12);
+		// 			var oTradeComment = {
+
+		// 				"Trade_Id": TradeId,
+		// 				"Comment_Id": oComment_Id,
+		// 				"Comment_Txt": Comment,
+		// 				"Comment_Date": oCommentdate,
+		// 				"Created_By": Created_By
+
+		// 			};
+
+		// 			var sLocation = window.location.host;
+		// 			var sLocation_conf = sLocation.search("webide");
+
+		// 			if (sLocation_conf == 0) {
+		// 				that.sPrefix = "/VehicleLocator_Xsodata";
+		// 			} else {
+		// 				that.sPrefix = "";
+
+		// 			}
+		// 			that.nodeJsUrl = that.sPrefix;
+		// 			that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
+
+		// 			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
+		// 			that.oDataModel.setHeaders({
+		// 				"Content-Type": "application/json",
+		// 				"X-Requested-With": "XMLHttpRequest",
+		// 				"DataServiceVersion": "2.0",
+		// 				"Accept": "application/json",
+		// 				"Method": "POST"
+		// 			});
+
+		// 			that.oDataModel.create("/TradeComment", oTradeComment, null, function (s) {
+		// 				that.getView().byId("oComments").setValue("");
+		// 				that.getView().byId('tableVrade').getBinding('items').refresh();
+		// 			}, function () {
+
+		// 			});
+
+		// 			/*	this.getView().byId("Comment_Txt").setValue("");	
+		// 			 */
+		// 		}
+		// 	}
+		// },
+		
+			oAddCommentsArea: function () {
 			var Comment = this.getView().byId("oComments").getValue();
 			if (Comment == "") {
 				sap.m.MessageBox.error("Please enter comment");
 			} else {
 
-				if (this.getView().byId("tableVrade").getModel('TradeRequestModel') != undefined) {
-					
-	// the comment id should always come from HDB. 1804 GSR// TODO: 
-	
-					var oComment_Id = this.getView().byId("tableVrade").getBinding('items').getLength().toString();
-					
-					
-					var TradeId = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Trade_Id;
+				// if (this.getView().byId("tableVrade").getModel() != undefined) {
+					// var CommentData = this.getView().byId("tableVrade").getModel().getData();
+									if (this.getView().byId("tableVrade").getModel("commentsModel") != undefined) {
+              	var CommentData = this.getView().byId("tableVrade").getModel("commentsModel").getData();
+					function dynamicSort(property) {
+						var sortOrder = 1;
+						if (property[0] === "-") {
+							sortOrder = -1;
+							property = property.substr(1);
+						}
+						return function (a, b) {
+							var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+							return result * sortOrder;
+						};
+					};
 
+					CommentData.sort(dynamicSort("Comment_Id"));
+					if (CommentData.length != 0) {
+						var databasevalue = CommentData[CommentData.length - 1].Comment_Id;
+						var incrementvalue = (+databasevalue) + 1;
+
+						// insert leading zeroes with a negative slice
+						var oComment_Id = incrementvalue = ("00" + incrementvalue).slice(-2);
+					} else {
+						var oComment_Id = "01";
+					}
+					var TradeId = this.Tradeid;
+						console.log("TradeId",TradeId);
 					var that = this;
 
 					var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 						pattern: "yyyy-MM-dd'T'HH:mm:ss"
 					});
 					var oCommentdate = new Date(oDateFormat.format(new Date()));
-					oCommentdate.setDate(oCommentdate.getDate());
+					 oCommentdate.setDate(oCommentdate.getDate());
+					/*	var oCreatedby = this.getView().byId("SimpleFormAproveTrReq").getModel().getData().Created_By;*/
+		    var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
+			var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
+			var Created_By  = LoggedinUserFname+LoggedinUserLname;
 
-					var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
-					var LoggedinUserLname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
-					var Created_By = LoggedinUserFname + LoggedinUserLname;
-					Created_By = Created_By.substr(0, 12);
+			function truncateString(str, num) {
+				if (num > str.length) {
+					return str;
+				} else {
+					str = str.substring(0, num);
+					return str;
+				}
+
+			}
+
+			Created_By = truncateString(Created_By, 12);
+
 					var oTradeComment = {
 
 						"Trade_Id": TradeId,
@@ -1038,10 +1149,54 @@ sap.ui.define([
 						"Method": "POST"
 					});
 
-					that.oDataModel.create("/TradeComment", oTradeComment, null, function (s) {
-						that.getView().byId("oComments").setValue("");
-						that.getView().byId('tableVrade').getBinding('items').refresh();
-					}, function () {
+					that.oDataModel.create("/TradeComment", oTradeComment, null, function (s) 
+					{
+			/*	var that = this;*/
+				var sLocation = window.location.host;
+				var sLocation_conf = sLocation.search("webide");
+
+				if (sLocation_conf == 0) {
+					that.sPrefix = "/VehicleLocator_Xsodata";
+				} else {
+					that.sPrefix = "";
+
+				}
+				that.nodeJsUrl = that.sPrefix;
+		that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id eq '"+ that.Tradeid +"'";			
+				// that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment";
+				$.ajax({
+					url: that.oDataUrl,
+					method: "GET",
+					async: false,
+					dataType: "json",
+
+					success: function (oData) {
+
+						debugger;
+						var Data = oData.d.results;
+						
+						// console.log("additional Comment", 	local.oViewModel);
+						// console.log("trade id",TradeId);
+						
+					var oComTrade_Comment = Data.filter(function (x) {
+							return x["Trade_Id"] == TradeId;
+						});
+						
+					var oModel = new sap.ui.model.json.JSONModel(oComTrade_Comment);
+					/*	oModel.updateBindings(true);*/	
+					// that.getView().byId("tableVrade").setModel(oModel);
+				that.getView().setModel(oModel, "commentsModel");	
+					}
+				});
+				//  we need the comments to be cleared after database save. 		
+				  that.getView().byId("oComments").setValue(""); //1804		
+					
+						// that.getView().byId("oComments").setValue("");
+				/*	var oComModel = new sap.ui.model.json.JSON();*/
+					
+		
+					}, function ()
+					{
 
 					});
 
@@ -1049,7 +1204,64 @@ sap.ui.define([
 					 */
 				}
 			}
+		},	
+		
+		getTheLatestCommentId: function () {
+			
+					var that = this;
+					
+				var Tradeid = this.Tradeid;		
+				var sLocation = window.location.host;
+				var sLocation_conf = sLocation.search("webide");
+
+				if (sLocation_conf == 0) {
+					this.sPrefix = "/VehicleLocator_Xsodata";
+				} else {
+					this.sPrefix = "";
+
+				}
+				this.nodeJsUrl = this.sPrefix;
+					that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id eq '"+ this.Tradeid +"'";
+				// that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment";
+				$.ajax({
+					url: that.oDataUrl,
+					method: "GET",
+					async: false,
+					dataType: "json",
+
+					success: function (oData) {
+
+				
+						var Data = oData.d.results;
+					var Trade_Comment = Data.filter(function (x) {
+							return x["Trade_Id"] == Tradeid;
+						});
+						var oModel = new sap.ui.model.json.JSONModel(Trade_Comment);
+						// that.getView().byId("tableVrade").setModel(oModel);
+						that.getView().setModel(oModel, "commentsModel");	
+					},
+					
+					
+				error: function(jqXHR, textStatus, errorThrown) {
+					var Trade_Comment = [];
+					 	var oModel = new sap.ui.model.json.JSONModel(Trade_Comment);
+						 
+						that.getView().setModel(oModel, "commentsModel");	
+ 
+				}
+					
+// when there is an error on this xsodata call just reset the data. GSR
+
+						// var oModel = new sap.ui.model.json.JSONModel(Trade_Comment);
+						// // that.getView().byId("tableVrade").setModel(oModel);
+						// that.getView().setModel(oModel, "commentsModel");	
+ 
+				});
+
+			
+			
 		},
+		
 		onBackpage: function () {
 			// this.getRouter().navTo("VehcTrad_Apprv_Rej_CounTrad");
 			this.getRouter().navTo("VehicleTrade_Summary", {
@@ -2080,7 +2292,18 @@ sap.ui.define([
 		},
 		oUpdateSubmitbtn: function (oEvent) {
 			debugger;
+ 
 			var that = this;
+		// 05-05 if an Update has been pressed just take the comments to HDB
+	
+				this.Tradeid = this.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Trade_Id;
+		
+	 	var Comment = this.getView().byId("oComments").getValue();
+			if (Comment !== "") {
+					this.getTheLatestCommentId();	
+		   this.oAddCommentsArea();
+			}		
+
 			var oOfferedVehicle = this.getView().byId("otextId").getText();
 			var SelectedTeade = this.getView().byId("oTradeinRet").getSelectedKey();
 			//================================================================================

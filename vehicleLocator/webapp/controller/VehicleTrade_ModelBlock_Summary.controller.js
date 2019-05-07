@@ -821,8 +821,12 @@ sap.ui.define([
 			var sSelectedText = oEvent.getParameter("\selectedItem").getProperty("text");
 
 			this.theFirstDefaultDealerSelected = sSelectedDealer;
-			this._oViewModel.setProperty("/DealerName", sSelectedDealerText);
+			// this._oViewModel.setProperty("/DealerName", sSelectedDealerText);
 			// call the function to get the relevant data to screen again. 
+			
+						this._oViewModel.setProperty("/texttoshow", sSelectedDealerText);
+			
+			
 			this.onRouteMatched();
 
 		}

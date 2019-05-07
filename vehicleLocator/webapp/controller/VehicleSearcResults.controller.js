@@ -244,7 +244,7 @@ sap.ui.define([
 								return (anotherOne_el == array_el.kunnr && array_el.zzordertype == "DM");
 							}).length == 0;
 						});
-						console.log("final searched data", tempTabData);
+					//	console.log("final searched data", tempTabData);
 
 			
 
@@ -879,12 +879,15 @@ sap.ui.define([
 		onRouteMatched: function (oEvent) {
 			//debugger;
 			// if the user is retruning by pressing the back button,  then it is better, that we dont refresh the data again. 
+			var Status = sap.ui.getCore().getModel("SearchedData").getData();
+			
 			var oModelForSearch = this.getView().getModel("vehicleSearchTableModel");
 			if (oModelForSearch != undefined){
 			var searchTableAlreadsyBuilt = this.getView().getModel("vehicleSearchTableModel").getData().length;
-			 if (searchTableAlreadsyBuilt != 0) {
+			 if ( (searchTableAlreadsyBuilt != 0) && ( Status.length == searchTableAlreadsyBuilt ) ){
 			 	return;
 			 }
+			 
 			}
 			
 			
@@ -911,7 +914,7 @@ sap.ui.define([
 				this.getView().setModel(sap.ui.getCore().getModel("SearchedData"), "VehicleLocatorScdScr");
 
 				/*	this.getView().setModel(sap.ui.getCore().getModel("oSuffieldmodel"),"VehicleLocatorScdScr");*/
-				var Status = sap.ui.getCore().getModel("SearchedData").getData();
+			
 				debugger;
  
                 
@@ -1243,15 +1246,15 @@ sap.ui.define([
 					// var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language; //2603
 				var SPRAS = this.sCurrentLocaleD ;
 				
-				//Guna 2903
+				// 
 				// if (SPRAS != "English") {
 				// 	var matnr = arrData[i].matnr + "-" + arrData[i].model_desc_fr;
 				// 	var zzextcol = arrData[i].zzextcol + "-" + arrData[i].mktg_desc_fr;
 				// 	var zzsuffix = arrData[i].zzsuffix + "-" + arrData[i].suffix_desc_fr + "/" + arrData[i].mrktg_int_desc_fr;
 				// } else {
-				// 	var matnr = arrData[i].matnr + "-" + arrData[i].model_desc_en;
-				// 	var zzextcol = arrData[i].zzextcol + "-" + arrData[i].mktg_desc_en;
-				// 	var zzsuffix = arrData[i].zzsuffix + "-" + arrData[i].suffix_desc_en + "/" + arrData[i].mrktg_int_desc_en;
+					var matnr = arrData[i].matnr + "-" + arrData[i].model_desc_en;
+					var zzextcol = arrData[i].zzextcol + "-" + arrData[i].mktg_desc_en;
+					var zzsuffix = arrData[i].zzsuffix + "-" + arrData[i].suffix_desc_en + "/" + arrData[i].mrktg_int_desc_en;
 				// }
 
 
