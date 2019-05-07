@@ -239,6 +239,10 @@ sap.ui.define([
 					 if (Status == "R") {
 					 			that.getView().byId("ovtnId").setVisible(false);
 					 			that.getView().byId("ovtnIdText").setVisible(false);
+					 } else {
+					 	
+					 			that.getView().byId("ovtnId").setVisible(true);
+					 			that.getView().byId("ovtnIdText").setVisible(true);
 					 }
 					
 				
