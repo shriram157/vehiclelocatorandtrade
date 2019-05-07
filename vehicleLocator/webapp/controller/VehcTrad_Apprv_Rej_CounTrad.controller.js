@@ -901,7 +901,9 @@ sap.ui.define([
 				});
 						
 			  //we need the comments to be cleared after database save. 		
-				  that.getView().byId("oComments").setValue(""); //1804			
+				  that.getView().byId("oComments").setValue(""); //1804	
+				  
+			 
 					
 						// that.getView().byId("oComments").setValue("");
 				/*	var oComModel = new sap.ui.model.json.JSON();*/
@@ -915,6 +917,12 @@ sap.ui.define([
 					/*	this.getView().byId("Comment_Txt").setValue("");	
 					 */
 				}
+	//update the bindings. 
+	    var oModelData = this.getView().getModel("commentsModel");
+ 
+	    	oModelData.updateBindings(true);
+				
+				
 			}
 		},
 
@@ -2075,9 +2083,18 @@ sap.ui.define([
 
 		},
 		onCancel: function () {
+			
+			
+			
+			
 			var that = this;
 
-			var that = this;
+			// 05-05 if an Update has been pressed just take the comments to HDB
+	 	var Comment = this.getView().byId("oComments").getValue();
+			if (Comment !== "") {
+				 this.oAddCommentsArea();
+			}	
+
 
 			var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 				pattern: "yyyy-MM-dd'T'HH:mm:ss"

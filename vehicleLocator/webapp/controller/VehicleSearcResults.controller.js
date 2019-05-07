@@ -48,7 +48,7 @@ sap.ui.define([
 				this._setTheLanguage();
 
 				 this._setTheLogo();	
- 
+			 this.comingFromSuffixChange = false;
 			//	this.getRouter().attachRouteMatched(this.onRouteMatched, this);
 			this.getRouter().getRoute("VehicleSearcResults").attachPatternMatched(this.onRouteMatched, this);
 		},
@@ -259,8 +259,9 @@ sap.ui.define([
 						var oDumModel = new sap.ui.model.json.JSONModel(tempTabData);
 						oDumModel.setSizeLimit(100000);
 						sap.ui.getCore().setModel(oDumModel, "SearchedData");
+						that.comingFromSuffixChange = true;
 						that.SuffixFilter();
-						that.onStatusChange();
+						// that.onStatusChange();  // this is called inside the suffix filter so commenting out 
 
 					},
 					error: function (s, result) {
@@ -467,6 +468,8 @@ sap.ui.define([
 						var oDumModel = new sap.ui.model.json.JSONModel(filteredArray);
 						oDumModel.setSizeLimit(100000);
 						sap.ui.getCore().setModel(oDumModel, "SearchedData");
+						
+							that.comingFromSuffixChange = true;
 						that.SuffixFilter();
 
 					},
@@ -610,14 +613,25 @@ sap.ui.define([
 
 // filter array end --------------------------------------------------------------------
  
-			// set the count to screen. 
+			// set the count to screen. But do not do this when we are navigating from suffix change. 
+			
+            if (	this.comingFromSuffixChange == true ) {
+            		// this.comingFromSuffixChange = false;
+            	var tableData = sap.ushell.components.tableSearchResults.getModel("vehicleSearchTableModel").getData();		
+            			var tableLength = tableData.length;
+			var oModelDetail = this.getView().getModel("detailView");
 
+			var sExpectedText = this.getView().getModel("i18n").getResourceBundle().getText("tableCount", [tableLength]);
+			oModelDetail.setProperty("/tableCount", sExpectedText);
+            		
+            } else {
 			var tableLength = FilterdedTableData.length;
 			var oModelDetail = this.getView().getModel("detailView");
 
 			var sExpectedText = this.getView().getModel("i18n").getResourceBundle().getText("tableCount", [tableLength]);
 			oModelDetail.setProperty("/tableCount", sExpectedText);
 
+            }
 			var tableData = sap.ushell.components.tableSearchResults.getModel("vehicleSearchTableModel").getData();
 			
 			
@@ -1193,14 +1207,33 @@ sap.ui.define([
 
 			// var Context = this.getView().byId("table1VSR").getBinding("rows").getContexts(); //guna
 			var Context = this.getView().byId("table1VSR").getBinding("items").getContexts();
+						var SelectedDealer = this.getView().byId("VLRDealer").getSelectedKey();
+			var SelectedColor = this.getView().byId("VLRColor").getSelectedKey();
+			var Status = this.getView().byId("VLRStatus").getSelectedKey();
+			var selectedSuffix = this.getView().byId("VLRSuffix").getSelectedKey();
+			
 			if (Context.length == 0) {
 				sap.m.MessageBox.warning("No data is available to export");
 				return;
 			} else {
-				var items = Context.map(function (oEvent) {
+				// var items = Context.map(function (oEvent) {
+				// 	return oEvent.getObject();
+				// });
+				
+			if ( SelectedDealer == "all"  && SelectedColor == "all" && Status == "2" && selectedSuffix == "all" ) {
+					var items = this.getView().getModel("vehicleSearchTableModel").getData();
+			} else {
+					var items = Context.map(function (oEvent) {
 					return oEvent.getObject();
-				});
-				this.JSONToCSVConvertor(items, "ExportGreen", true);
+			    	});
+			}
+
+
+ 
+				
+			
+				
+				this.JSONToCSVConvertor(items, "Vehicle Trade History", true);
 			}
 		},
 		JSONToCSVConvertor: function (JSONData, ReportTitle, ShowLabel) {
@@ -1351,9 +1384,15 @@ sap.ui.define([
 					var pstsp = "";
 				}
 
-				if (arrData[i].z_pd_flag == false) {
+				// if (arrData[i].z_pd_flag == false) {
+				// 	var z_pd_flag = "No";
+				// } else if (arrData[i].z_pd_flag == true) {
+				// 	var z_pd_flag = "Yes";
+				// }
+				
+				if ((arrData[i].pd_flag == false) || (arrData[i].pd_flag == "")) {
 					var z_pd_flag = "No";
-				} else if (arrData[i].z_pd_flag == true) {
+				} else if ((arrData[i].pd_flag == true) || (arrData[i].pd_flag == "D")) {
 					var z_pd_flag = "Yes";
 				}
 
@@ -1726,6 +1765,7 @@ sap.ui.define([
 		},
 
 		onStatusChangeMultiple: function () {
+			this.comingFromSuffixChange = false;
 			var Status = this.getView().byId("VLRStatus").getSelectedKey();
 			if (Status == "1") {
 
@@ -1952,6 +1992,7 @@ sap.ui.define([
 		onColourChange: function () {
 			var Status = this.getView().byId("VLRStatus").getSelectedKey();
 			var ColorSel = this.getView().byId("VLRColor").getSelectedKey();
+			this.comingFromSuffixChange = false;
 			if (ColorSel == "all") {
 				if (Status == "1") {
 
@@ -2030,7 +2071,7 @@ sap.ui.define([
 
 		},
 		onDealerChange: function () {
-
+			this.comingFromSuffixChange = false;
 			var Status = this.getView().byId("VLRStatus").getSelectedKey();
 			var DealerSel = this.getView().byId("VLRDealer").getSelectedKey();
 			if (DealerSel == "all") {
