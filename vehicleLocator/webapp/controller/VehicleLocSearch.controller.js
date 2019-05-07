@@ -50,13 +50,8 @@ sap.ui.define([
 
 					var userType = oData.loggedUserType[0];
 
-<<<<<<< Upstream, based on origin/master
 					//	var userType = "Zone_User"; // TODO: Remove before deployment locatyest only - GSR
 					//	var userType = "Dealer_User"; // TODO: Remove before deployment locatyest only - GSR
-=======
-					//	 var userType = "ZoneUser"; // TODO: Remove before deployment locatyest only - GSR
-						//var userType = "vehicelTradeDealerUser"; // TODO: Remove before deployment locatyest only - GSR
->>>>>>> 09e2184 Multiple Changes requested by Business
 
 					switch (userType) {
 					case "Dealer_User":
