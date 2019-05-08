@@ -1221,8 +1221,8 @@ sap.ui.define([
 				}
 			}
 			// just run the status change filter one time on every route matched. 
-
-			this.onStatusChange();
+             this.comingFromRoutematchedEvent = true;
+			this.onStatusChange(); 
 
 		},
 
