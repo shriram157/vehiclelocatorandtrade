@@ -103,6 +103,16 @@ sap.ui.define([
 					this.dnsStatus = StatusData.Trade_Status;
 					var TradeId = StatusData.Trade_Id;
 					this.VehicleTrade_SummaryData(StatusData);
+//
+					//  for a rejected trade request do not show the VTN on the screen. 
+					 if (Status == "R") {
+					 			that.getView().byId("ovtnId").setVisible(false);
+					 			that.getView().byId("ovtnIdText").setVisible(false);
+					 } else {
+					 	
+					 			that.getView().byId("ovtnId").setVisible(true);
+					 			that.getView().byId("ovtnIdText").setVisible(true);
+					 }
 
 				
 					if (AcceptVisible == false && (Status == "S")) {
