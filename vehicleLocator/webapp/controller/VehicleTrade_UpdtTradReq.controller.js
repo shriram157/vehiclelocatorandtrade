@@ -1208,6 +1208,8 @@ sap.ui.define([
 				//update the bindings. 
 	    var oModelData = this.getView().getModel("commentsModel");   //TradeRequestModel
 	    this.getView().byId("tableVrade").setModel(oModelData);
+ // if this is not working then reload the page calling the navto. 
+	    
   				// oModelData.refresh(true);
 			   //	oModelData.updateBindings(true);
 		},	
@@ -1672,7 +1674,7 @@ sap.ui.define([
 			// that.getView().getModel('TradeRequestModel')
 			that.oDataModel.update(UpdatedTreadeEntity, oEntry, null, function (s) {
 				//	that.getView().byId("oTrdareqstat").setText("Request Sent");
-						sap.m.MessageBox.information("Update Successful, Navigate back using the Back Buttons");
+						sap.m.MessageBox.information("Update Successful, Navigate back using the Back Buttons");   //GSR0805
 			}, function () {
 				
 			

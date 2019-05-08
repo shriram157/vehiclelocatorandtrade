@@ -1053,7 +1053,7 @@ sap.ui.define([
 				Status.push(obj[key]);
 			var StatusDataFilter = [];
 			for (var i = 0; i < Status.length; i++) {
-				if (Status[i].zz_trading_ind == "1" || Status[i].zz_trading_ind == "2" || Status[i].zz_trading_ind == "3") {
+				if (Status[i].zz_trading_ind == "1" || Status[i].zz_trading_ind == "2" ) {
 					StatusDataFilter.push(Status[i]);
 				}
 			}
