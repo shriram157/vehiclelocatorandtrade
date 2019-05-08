@@ -568,9 +568,14 @@ sap.ui.define([
 			// this.getView().byId("table1VSR").getBinding("rows").filter(filterArray);
 
 			// sap.ushell.components.tableSearchResults.getBinding("rows").filter(filterArray);  // guna
-			sap.ushell.components.tableSearchResults.getBinding("items").filter(filterArray);
+			// sap.ushell.components.tableSearchResults.getBinding("items").filter(filterArray);  //0805
+			
 			// var FilterdedTableData=sap.ushell.components.tableSearchResults.getBinding("rows").aIndices;// guna
-			var FilterdedTableData = sap.ushell.components.tableSearchResults.getBinding("items").aIndices;
+			
+			
+			
+			
+			// var FilterdedTableData = sap.ushell.components.tableSearchResults.getBinding("items").aIndices;  //0805
 
 			//var tableData=sap.ushell.components.tableSearchResults.getModel("vehicleSearchTableModel").getData();   // guna
 
@@ -599,12 +604,12 @@ sap.ui.define([
 			// 	filterArray.push(oFilter);
 			// }
 
-			// this.byId("table1VSR")
-			// 	.getBinding("items")
-			// 	.filter(aFilters)
-			// 	.sort(aSorters);
+			this.byId("table1VSR")
+				.getBinding("items")
+				.filter(filterArray);
+				// .sort(aSorters);
 
-			sap.ushell.components.tableSearchResults.getBinding("items").filter(filterArray);
+			// sap.ushell.components.tableSearchResults.getBinding("items").filter(filterArray); //0805
 
 			// filter array end --------------------------------------------------------------------
 
@@ -620,11 +625,19 @@ sap.ui.define([
 			// oModelDetail.setProperty("/tableCount", sExpectedText);
 
 			//         } else {
-			var tableLength = FilterdedTableData.length;
-			var oModelDetail = this.getView().getModel("detailView");
+			
+			//0805 - Begin
+			
+			// var tableLength = FilterdedTableData.length;
+			// var oModelDetail = this.getView().getModel("detailView");
 
-			var sExpectedText = this.getView().getModel("i18n").getResourceBundle().getText("tableCount", [tableLength]);
-			oModelDetail.setProperty("/tableCount", sExpectedText);
+			// var sExpectedText = this.getView().getModel("i18n").getResourceBundle().getText("tableCount", [tableLength]);
+			// oModelDetail.setProperty("/tableCount", sExpectedText);
+
+		//0805 - End
+
+
+
 
 			// }
 			var tableData = sap.ushell.components.tableSearchResults.getModel("vehicleSearchTableModel").getData();
@@ -639,6 +652,29 @@ sap.ui.define([
 				}
 			}
 
+		},
+		
+		onUpdateFinished: function (oEvent) {
+			
+			var oTable = this.getView().byId("table1VSR");
+				
+				if(oTable.getBinding("items").isLengthFinal()) {
+					var iCount = oEvent.getParameter("total");
+						// iItems = oTable.getItems().length;
+						// sTitle += "(" + iItems + "/" + iCount + ")";
+			      	}
+			// this.getView().byId("title").setText(sTitle);
+			
+	
+		        			var tableLength = iCount;      //tableData.length;
+			var oModelDetail = this.getView().getModel("detailView");
+
+			var sExpectedText = this.getView().getModel("i18n").getResourceBundle().getText("tableCount", [tableLength]);
+			oModelDetail.setProperty("/tableCount", sExpectedText);
+	
+	
+			
+			
 		},
 
 		DealarandColorBinding: function () {
