@@ -1204,6 +1204,11 @@ sap.ui.define([
 					 */
 				}
 			}
+			
+				//update the bindings. 
+	    var oModelData = this.getView().getModel("commentsModel");
+ 
+	    	oModelData.updateBindings(true);
 		},	
 		
 		getTheLatestCommentId: function () {
