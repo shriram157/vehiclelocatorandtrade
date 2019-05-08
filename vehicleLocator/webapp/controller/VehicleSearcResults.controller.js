@@ -498,7 +498,7 @@ sap.ui.define([
 				if (Status == "1") {
 					filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.Contains, Status));
 				} else {
-					filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.NE, Status));
+					filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.NE, "1"));
 					// filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.Contains, "2"));
 					// filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.Contains, "3"));
 				}
@@ -1142,14 +1142,13 @@ sap.ui.define([
 
 				var Status = this.getView().byId("VLRStatus").getSelectedKey();
 				if (Status != "") {
-                    if ( Status == "2" ) {
-					// filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.Contains, "2"));
-					// filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.Contains, "3"));
-						filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.NE, Status));	
-                    } else {
-                    	filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.Contains, Status));	
-                    	
-                    }
+							if (Status == "1") {
+								filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.Contains, Status));
+							} else {
+								filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.NE, "1"));
+								// filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.Contains, "2"));
+								// filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.Contains, "3"));
+							}
 				}
 				var Dealer = this.getView().byId("VLRDealer").getSelectedKey();
 
@@ -1576,7 +1575,7 @@ sap.ui.define([
 			/*Status.splice(-1,1);*/
 			var StatusDataFilter = [];
 			for (var i = 0; i < Status.length; i++) {
-				if (Status[i].zz_trading_ind == "1" || Status[i].zz_trading_ind == "2" || Status[i].zz_trading_ind == "3") {
+				if (Status[i].zz_trading_ind == "1" || Status[i].zz_trading_ind == "2" ) {
 					StatusDataFilter.push(Status[i]);
 				}
 			}
@@ -1726,8 +1725,6 @@ sap.ui.define([
 
 			}, {
 				"zz_trading_ind": "2"
-			}, {
-				"zz_trading_ind": "3"
 			}];
 
 			/*Status.splice(-1,1);*/
