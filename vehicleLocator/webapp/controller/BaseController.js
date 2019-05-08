@@ -119,13 +119,14 @@ sap.ui.define([
 		},
 		
 
-		onNavBack2: function() {
-		/*	debugger*/
+		onNavBack3: function() {
+			var oModel = [];
+          	// this.getView().byId("VLRSuffix").setModel(oModel);
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
 
 			if (sPreviousHash !== undefined) {
-				window.history.go(-2);
+				window.history.go(-1);
 			} else {
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 				oRouter.navTo("VehicleLocSearch", {}, true);

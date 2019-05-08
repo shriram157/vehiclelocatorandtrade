@@ -615,23 +615,23 @@ sap.ui.define([
  
 			// set the count to screen. But do not do this when we are navigating from suffix change. 
 			
-            if (	this.comingFromSuffixChange == true ) {
-            		// this.comingFromSuffixChange = false;
-            	var tableData = sap.ushell.components.tableSearchResults.getModel("vehicleSearchTableModel").getData();		
-            			var tableLength = tableData.length;
-			var oModelDetail = this.getView().getModel("detailView");
+   //         if (	this.comingFromSuffixChange == true ) {
+   //         		// this.comingFromSuffixChange = false;
+   //         	var tableData = sap.ushell.components.tableSearchResults.getModel("vehicleSearchTableModel").getData();		
+   //         			var tableLength = tableData.length;
+			// var oModelDetail = this.getView().getModel("detailView");
 
-			var sExpectedText = this.getView().getModel("i18n").getResourceBundle().getText("tableCount", [tableLength]);
-			oModelDetail.setProperty("/tableCount", sExpectedText);
+			// var sExpectedText = this.getView().getModel("i18n").getResourceBundle().getText("tableCount", [tableLength]);
+			// oModelDetail.setProperty("/tableCount", sExpectedText);
             		
-            } else {
+   //         } else {
 			var tableLength = FilterdedTableData.length;
 			var oModelDetail = this.getView().getModel("detailView");
 
 			var sExpectedText = this.getView().getModel("i18n").getResourceBundle().getText("tableCount", [tableLength]);
 			oModelDetail.setProperty("/tableCount", sExpectedText);
 
-            }
+            // }
 			var tableData = sap.ushell.components.tableSearchResults.getModel("vehicleSearchTableModel").getData();
 			
 			
@@ -929,7 +929,7 @@ sap.ui.define([
 
 				/*	this.getView().setModel(sap.ui.getCore().getModel("oSuffieldmodel"),"VehicleLocatorScdScr");*/
 			
-				debugger;
+	
  
                 
                 if (this.sCurrentLocaleD == "French") {
@@ -1028,17 +1028,23 @@ sap.ui.define([
 				}
 			}
 
+             var oModel = [];  // lets reset the model to initial before setting
+             	var oModel = new sap.ui.model.json.JSONModel(oModel);
+             	this.getView().byId("VLRSuffix").setModel(oModel);
+
 			var Model = new sap.ui.model.json.JSONModel(SuffixData);
 			// Model.setSizeLimit(1000);
 			this.getView().byId("VLRSuffix").setModel(Model);
-			for (var s = 0; s < SuffixData.length; s++) {
-				if (DefaultSuffix == SuffixData[s].zzsuffix + "-" + SuffixData[s].suffix_desc_en + "/" + SuffixData[s].mrktg_int_desc_en) {
-					this.getView().byId("VLRSuffix").setSelectedItem(SuffixData[s].zzsuffix + "-" + SuffixData[s].suffix_desc_en + "/" + SuffixData[s]
-						.mrktg_int_desc_en);
+			
+			// this.getView().byId("VLRSuffix").setSelectedItem(DefaultSuffix);
+			// for (var s = 0; s < SuffixData.length; s++) {
+			// 	if (DefaultSuffix == SuffixData[s].zzsuffix + "-" + SuffixData[s].suffix_desc_en + "/" + SuffixData[s].mrktg_int_desc_en) {
+			// 		this.getView().byId("VLRSuffix").setSelectedItem(SuffixData[s].zzsuffix + "-" + SuffixData[s].suffix_desc_en + "/" + SuffixData[s]
+			// 			.mrktg_int_desc_en);
 					
-				}
-			}
-		
+			// 	}
+			// }
+		    debugger;
 			if (SuffixData.length != 0) {
 
 				
@@ -1052,6 +1058,15 @@ sap.ui.define([
 					this.getView().byId("VLRSuffix").insertItem(newItem);
 				}
 			}
+			
+			for (var s = 0; s < SuffixData.length; s++) {
+				if (DefaultSuffix == SuffixData[s].zzsuffix + "-" + SuffixData[s].suffix_desc_en + "/" + SuffixData[s].mrktg_int_desc_en) {
+					this.getView().byId("VLRSuffix").setSelectedItem(SuffixData[s].zzsuffix + "-" + SuffixData[s].suffix_desc_en + "/" + SuffixData[s]
+						.mrktg_int_desc_en);
+					
+				}
+			}
+
 
 			var obj = {};
 			for (var i = 0, len = Status.length; i < len; i++)
@@ -1185,10 +1200,17 @@ sap.ui.define([
 				if (this.getOwnerComponent().suffixSelectedValue == suffixDropDown.getItems()[i].getText()) {
 					//suffixDropDown.setSelectedKey(suffixDropDown.getItems()[i].getKey());
 					this.suffixSelectedKey = suffixDropDown.getItems()[i].getKey();
-					suffixDropDown.setSelectedItem(suffixDropDown.getItems()[i]);
+					 suffixDropDown.setSelectedItem(suffixDropDown.getItems()[i]);
+					 
+					 //this.textToSetForDropdown = suffixDropDown.getItems()[i];
+							// suffixDropDown.setSelectedItem(this.getOwnerComponent().suffixSelectedValue);
 
 				}
 			}
+		// just run the status change filter one time on every route matched. 
+		
+			this.onStatusChange();
+			
 			
 		},
 
@@ -1451,7 +1473,7 @@ sap.ui.define([
 			this.getView().byId("chknew").setSelected(false);
 			this.getView().byId("chkexi").setSelected(false);
 			this.getRouter().navTo("VehicleLocSearch");
-			this.getView().byId("VLRSuffix").updateBindings();
+			// this.getView().byId("VLRSuffix").updateBindings();
 	//when the back button is presssed, lets reset the existing model. 
 	            var Status = [];
 	       	    var model = new sap.ui.model.json.JSONModel(Status);
@@ -2221,7 +2243,19 @@ sap.ui.define([
 					}
 				}
 
+			},
+				onNavBack2: function() {
+		/*	debugger*/
+			var oHistory = History.getInstance();
+			var sPreviousHash = oHistory.getPreviousHash();
+
+			if (sPreviousHash !== undefined) {
+				window.history.go(-1);
+			} else {
+				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+				oRouter.navTo("VehicleLocSearch", {}, true);
 			}
+		}		
 
  
 

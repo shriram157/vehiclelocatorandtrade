@@ -51,7 +51,7 @@ sap.ui.define([
 					var userType = oData.loggedUserType[0];
 
 					//	var userType = "Zone_User"; // TODO: Remove before deployment locatyest only - GSR
-					//	var userType = "Dealer_User"; // TODO: Remove before deployment locatyest only - GSR
+						// var userType = "Dealer_User"; // TODO: Remove before deployment locatyest only - GSR
 
 					switch (userType) {
 					case "Dealer_User":
@@ -180,15 +180,15 @@ sap.ui.define([
 					if (sLocation_conf == 0 && that.userTypeReceived != "Zone_User") {
 						var BpDealer = [];
 
-						// BpDealer.push({
-						// 	"BusinessPartnerKey": "2400042120",
-						// 	"BusinessPartner": "42120",
+						BpDealer.push({
+							"BusinessPartnerKey": "2400042120",
+							"BusinessPartner": "42120",
 
-						// 	"BusinessPartnerName": "Don Valley North Toyota...", //item.OrganizationBPName1 //item.BusinessPartnerFullName
-						// 	"Division": "10",
-						// 	"BusinessPartnerType": "Z001",
-						// 	"searchTermReceivedDealerName": "42120"
-						// });
+							"BusinessPartnerName": "Don Valley North Toyota...", //item.OrganizationBPName1 //item.BusinessPartnerFullName
+							"Division": "10",
+							"BusinessPartnerType": "Z001",
+							"searchTermReceivedDealerName": "42120"
+						});
 
 						BpDealer.push({
 							"BusinessPartnerKey": "2400042193",
@@ -442,8 +442,7 @@ sap.ui.define([
 				// add your code here. // TODO:  
 				break;
 			case "Zone":
-				// add your code here. // TODO: 
-
+			 
 				{
 					var SelectedZone = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].Zone;
 					switch (SelectedZone) {

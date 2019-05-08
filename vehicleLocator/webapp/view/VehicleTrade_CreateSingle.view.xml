@@ -54,21 +54,36 @@
 								<Label text="{i18n>Model}"/>
 								<!--<Text text="{TradeModel>matnr}-{TradeModel>model_desc_en}" id="oZmodel"/>-->
 									<Text text="{TradeModel>matnr} - {=${languageModel>/SPRAS}==='English' ? ${TradeModel>model_desc_en}:${TradeModel>model_desc_fr} }" id="oZmodel" />
+						
 								<Label text="{i18n>Suffix}"/>
 								<!--<Text text="{TradeModel>zzsuffix}-{TradeModel>suffix_desc_en}/{TradeModel>mrktg_int_desc_en}" id="oZsuffix"/>-->
-							<Text text="{TradeModel>zzsuffix} - {=${languageModel>/SPRAS}==='English' ? ${TradeModel>suffix_desc_en}:${TradeModel>suffix_desc_fr} }/{=${languageModel>/SPRAS}==='English' ? ${TradeModel>mrktg_int_desc_en}:${TradeModel>mrktg_int_desc_fr} }" id="oZsuffix"	/>							
-								
+						     	<Text text="{TradeModel>zzsuffix} - {=${languageModel>/SPRAS}==='English' ? ${TradeModel>suffix_desc_en}:${TradeModel>suffix_desc_fr} }/{=${languageModel>/SPRAS}==='English' ? ${TradeModel>mrktg_int_desc_en}:${TradeModel>mrktg_int_desc_fr} }" id="oZsuffix"	/>							
+							
+	
 								
 								<Label text="{i18n>APX}"/>
 								<Text text="{TradeModel>zzapx}" id="oApx"/>
+								
+								<Label text="{i18n>ExteriorColor}"/>
+							 
+								
+									<Text text="{TradeModel>zzextcol} - {=${languageModel>/SPRAS}==='English' ? ${TradeModel>mktg_desc_en}:${TradeModel>mktg_desc_fr} }" id="Zextcolo" />
+		
+						
+														
+								
+								
+								
+								
+								
 								<Label text="{i18n>Status}"/>
 								<Text text="{path:'TradeModel>zz_trading_ind',formatter:'vehicleLocator.Formatter.Formatter.Status'}" id="oStatus"/>
 								<Label text="{i18n>OrderType}"/>
 								<Text text="{path:'TradeModel>zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" id="oOrdertype"/>
-								<Label text="{i18n>ExteriorColor}"/>
-								<!--<Text text="{TradeModel>zzextcol}-{TradeModel>mktg_desc_en}" id="Zextcolo"/>-->
+								<!--<Label text="{i18n>ExteriorColor}"/>-->
+							 
 								
-									<Text text="{TradeModel>zzextcol} - {=${languageModel>/SPRAS}==='English' ? ${TradeModel>mktg_desc_en}:${TradeModel>mktg_desc_fr} }" id="Zextcolo" />
+								<!--	<Text text="{TradeModel>zzextcol} - {=${languageModel>/SPRAS}==='English' ? ${TradeModel>mktg_desc_en}:${TradeModel>mktg_desc_fr} }" id="Zextcolo" />-->
 		
 								<Label text="{i18n>CurrentETA} - {i18n>From}"  id="cetalabelid"/>
 								<VBox>
