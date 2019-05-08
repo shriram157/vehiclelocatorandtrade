@@ -929,10 +929,9 @@ sap.ui.define([
 				}
 	//update the bindings. 
 	    var oModelData = this.getView().getModel("commentsModel");
- 
-	    	oModelData.updateBindings(true);
-				
-				
+  
+				oModelData.refresh(true);
+			   	oModelData.updateBindings(true);
 			}
 		},
 
