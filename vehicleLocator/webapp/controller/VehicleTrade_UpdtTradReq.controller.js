@@ -2390,9 +2390,13 @@ sap.ui.define([
 			// if (oDealer1 == undefined){
 			// 	oDealer1 = "";
 			// }
-			
+			var tempVar = this.getView().byId("SelectedSimpleFormAproveTrReq");
+			if (tempVar != undefined ){
            this.RequestingDealerToSAP = this.getView().byId("SelectedSimpleFormAproveTrReq").getModel().getData().Requested_Dealer;
-
+			} else {
+				
+			this.RequestingDealerToSAP =	sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Requesting_Dealer;
+			}
 			// var oDealer1 = userAttributesModellen[0].DealerCode;
 			// if (oDealer1 == undefined){
 			// 	oDealer1 = "";
