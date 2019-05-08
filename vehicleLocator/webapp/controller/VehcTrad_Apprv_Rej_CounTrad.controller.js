@@ -928,6 +928,11 @@ sap.ui.define([
 					 */
 				}
 	//update the bindings. 
+	
+	
+	
+	
+	 
 	    var oModelData = this.getView().getModel("commentsModel");
   
 				oModelData.refresh(true);
