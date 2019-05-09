@@ -498,11 +498,24 @@ sap.ui.define([
 				if (Status == "1") {
 					filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.Contains, Status));
 				} else {
-					filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.NE, "1"));
+					 filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.NE, "1"));
 					// filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.Contains, "2"));
-					// filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.Contains, "3"));
+					 //filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.Contains, "3"));
+					
+					 //filterArray.push(new sap.ui.model.Filter({
+				  //       and: false,
+				  //       filters: [
+				  //          new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.EQ, "2"),
+				  //          new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.EQ, "3")
+				  //       ]})
+						//  );			
+					
 				}
 			}
+			
+			
+			
+			
 			var Dealer = this.getView().byId("VLRDealer").getSelectedKey();
 
 			if (Dealer != "" && Dealer != "all") {
@@ -517,7 +530,7 @@ sap.ui.define([
 					filterArray.push(new sap.ui.model.Filter("kunnr", sap.ui.model.FilterOperator.Contains, SelDealers[i].kunnr));
 				}
 
-			}
+			 }
 			var Suffix = this.suffixSelectedKey;
 			if (Suffix != this.getView().byId("VLRSuffix").getSelectedKey()) {
 				Suffix = this.getView().byId("VLRSuffix").getSelectedKey();
@@ -544,7 +557,8 @@ sap.ui.define([
 					filterArray.push(new sap.ui.model.Filter("zzextcol", sap.ui.model.FilterOperator.Contains, SelColor[i].zzextcol));
 				}
 
-			}
+			  }
+			  
 			var ShowDoNotCallVehicles = this.getView().byId("chknew").getSelected();
 			if (ShowDoNotCallVehicles == true) {
 
@@ -555,6 +569,7 @@ sap.ui.define([
 				/*	filterArray.push(new sap.ui.model.Filter("dnc_ind", sap.ui.model.FilterOperator.EQ, "Y"));*/
 				filterArray.push(new sap.ui.model.Filter("dnc_ind", sap.ui.model.FilterOperator.EQ, "N"));
 			}
+			
 			var ShowHoldVehicles = this.getView().byId("chkexi").getSelected();
 			if (ShowHoldVehicles == true) {
 
@@ -565,6 +580,14 @@ sap.ui.define([
 				/*filterArray.push(new sap.ui.model.Filter("Hold_stat", sap.ui.model.FilterOperator.EQ, "Y"));*/
 				filterArray.push(new sap.ui.model.Filter("Hold_stat", sap.ui.model.FilterOperator.EQ, "N"));
 			}
+			
+			
+			
+			
+			
+			
+			
+			
 			// this.getView().byId("table1VSR").getBinding("rows").filter(filterArray);
 
 			// sap.ushell.components.tableSearchResults.getBinding("rows").filter(filterArray);  // guna
@@ -1181,7 +1204,24 @@ sap.ui.define([
 							if (Status == "1") {
 								filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.Contains, Status));
 							} else {
-								filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.NE, "1"));
+								
+						 //filterArray.push(new sap.ui.model.Filter({
+				   //      and: false,
+				   //      filters: [
+				   //         new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.EQ, "2"),
+				   //         new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.EQ, "3")
+				   //      ]})
+						 //);						
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								 filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.NE, "1"));
 								// filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.Contains, "2"));
 								// filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.Contains, "3"));
 							}
