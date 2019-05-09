@@ -1210,7 +1210,7 @@ sap.ui.define([
 			var suffixDropDown = this.getView().byId("VLRSuffix");
 			//	this.getOwnerComponent().suffixSelectedValue;
 			for (var i = 0; i < suffixDropDown.getItems().length; i++) {
-				if (this.getOwnerComponent().suffixSelectedValue == suffixDropDown.getItems()[i].getText()) {
+				if (this.getOwnerComponent().suffixSelectedValue === suffixDropDown.getItems()[i].getText()) {
 					//suffixDropDown.setSelectedKey(suffixDropDown.getItems()[i].getKey());
 					this.suffixSelectedKey = suffixDropDown.getItems()[i].getKey();
 					suffixDropDown.setSelectedItem(suffixDropDown.getItems()[i]);
@@ -1221,8 +1221,8 @@ sap.ui.define([
 				}
 			}
 			// just run the status change filter one time on every route matched. 
-             this.comingFromRoutematchedEvent = true;
-			this.onStatusChange(); 
+   //          this.comingFromRoutematchedEvent = true;
+			// this.onStatusChange();  
 
 		},
 
