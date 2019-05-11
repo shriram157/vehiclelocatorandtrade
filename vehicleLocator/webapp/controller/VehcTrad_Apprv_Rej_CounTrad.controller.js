@@ -43,7 +43,7 @@ sap.ui.define([
 			
 			/*Status.splice(-1,1);*/
 			var oModel = new sap.ui.model.json.JSONModel(modelDNCDays);
-					this.getView().byId("VLRStatus").setModel(oModel);
+					// this.getView().byId("VLRStatus").setModel(oModel);
 			// Model.setSizeLimit(1000);
 
      
