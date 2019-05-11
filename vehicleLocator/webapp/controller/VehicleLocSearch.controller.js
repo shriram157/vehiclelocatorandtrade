@@ -119,7 +119,26 @@ sap.ui.define([
 			this._setTheLogo();
 
 			this.bindMonthYear();
+			
+			this.getRouter().getRoute("VehicleLocSearch").attachPatternMatched(this.onRouteMatched, this);	
+			
+			
+			
 		},
+
+
+       		onRouteMatched: function (oEvent) {
+       			
+             //resetting the data to its initial state.	
+       			             var tempTabData =[];
+       						var oDumModel = new sap.ui.model.json.JSONModel(tempTabData);
+					oDumModel.setSizeLimit(100000);
+					sap.ui.getCore().setModel(oDumModel, "SearchedData");	
+       			
+       			
+       			
+       		},
+
 
 		_makeTheSecondCallForBPDetails: function () {
 			var that = this;

@@ -111,9 +111,14 @@
 								<Text text="{path:'DNC',formatter:'vehicleLocator.Formatter.Formatter.DNC'}" id="VT_ARCTDnc"/>
 			 
 								<Label text="{i18n>DNCBlockout(Days)}"/>
-								<ComboBox id="VT_ARCDnc" selectionChange="ondncblckoutchnage" width="220px" items="{/}">
+								<!--<ComboBox id="VT_ARCDnc" selectionChange="ondncblckoutchnage" width="220px" items="{/}">-->
+								<!--	<core:ListItem key="{Zzduration}" text="{Zzduration}"/>-->
+								<!--</ComboBox>-->
+								
+							
+											<ComboBox id="VT_ARCDnc1" selectionChange="ondncblckoutchnage" width="220px" items="{/}">
 									<core:ListItem key="{Zzduration}" text="{Zzduration}"/>
-								</ComboBox>
+								</ComboBox>	
 								
 							 <!--   <ComboBox id="VT_ARCDnc" selectionChange="ondncblckoutchnage" width="220px" 	items="{path: 'comboBoxModelDncDays>/' }">-->
 								<!--	<core:ListItem key="{key}" text="{text}"/>-->

@@ -30,28 +30,30 @@ sap.ui.define([
 					/// set the logo and Language. 
             //  set the model on DNC days combobox Model
          
-                var modelDNCDays = [];
-					modelDNCDays.push({
-						"key": "0",
-						"text": "0"
-					});
-				 	modelDNCDays.push({
-						"key": "10",
-						"text": "10"
-					});
-						modelDNCDays.push({
-						"key": "20",
-						"text": "20"
-					});
-					modelDNCDays.push({
-						"key": "40",
-						"text": "40"
-					});	
+         
+         var modelDNCDays = [{
+					"Zzduration": "0"
+				},{
+					"Zzduration": "10"
+				}, {
+					"Zzduration": "20"
+				}, {
+					"Zzduration": "40"
+				}];
+			
+			/*Status.splice(-1,1);*/
+			var oModel = new sap.ui.model.json.JSONModel(modelDNCDays);
+					this.getView().byId("VLRStatus").setModel(oModel);
+			// Model.setSizeLimit(1000);
+
+     
+         
+  
    //        	var sComboboxModel = new sap.ui.model.json.JSONModel({
 				 
 			// });
 
-			this.getView().setModel(modelDNCDays, "comboBoxModelDncDays");
+	
             
 				this._setTheLanguage();
 

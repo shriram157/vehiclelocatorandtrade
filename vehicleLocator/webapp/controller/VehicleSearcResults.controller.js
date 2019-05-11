@@ -946,6 +946,14 @@ sap.ui.define([
 			//debugger;
 			// if the user is retruning by pressing the back button,  then it is better, that we dont refresh the data again. 
 			var Status = sap.ui.getCore().getModel("SearchedData").getData();
+			
+			// 10th May,  if the Hold_stat is received as blank make it "N"
+			
+			for ( var i = 0; i< Status.length; i++ ) {
+				if (Status[i].Hold_stat == ""){
+					  Status[i].Hold_stat = "N" ;
+					}
+			}
 
 			var oModelForSearch = this.getView().getModel("vehicleSearchTableModel");
 			if (oModelForSearch != undefined) {
@@ -1262,7 +1270,7 @@ sap.ui.define([
 			}
 			// just run the status change filter one time on every route matched. 
    //          this.comingFromRoutematchedEvent = true;
-			// this.onStatusChange();  
+			  this.onStatusChange();  
 
 		},
 

@@ -989,8 +989,15 @@ sap.ui.define([
 
 				/*	this.getView().setModel(sap.ui.getCore().getModel("oSuffieldmodel"),"VehicleLocatorScdScr");*/
 				var Status = sap.ui.getCore().getModel("SearchedData").getData();
-				debugger;
-
+				
+				// 10th May,  if the Hold_stat is received as blank make it "N"		
+		 			for ( var i = 0; i< Status.length; i++ ) {
+				if (Status[i].Hold_stat == ""){
+					  Status[i].Hold_stat = "N" ;
+					}
+			}
+				
+	
 				// lets set a local model with the langague and use it in formatter. 
 
 				if (this.sCurrentLocaleD == "French") {
@@ -1231,6 +1238,10 @@ sap.ui.define([
 
 				}
 			}
+				// just run the status change filter one time on every route matched. 
+   //          this.comingFromRoutematchedEvent = true;
+			  this.onStatusChange();  		
+			
 
 		},
 
@@ -1248,16 +1259,30 @@ sap.ui.define([
 		},
 		handleExporttohecls: function () {
 
-			// var Context = this.getView().byId("table1VSR").getBinding("rows").getContexts(); //guna
+					// var Context = this.getView().byId("table1VSR").getBinding("rows").getContexts(); //guna
 			var Context = this.getView().byId("table1VSR").getBinding("items").getContexts();
+			var SelectedDealer = this.getView().byId("VLRDealer").getSelectedKey();
+			var SelectedColor = this.getView().byId("VLRColor").getSelectedKey();
+			var Status = this.getView().byId("VLRStatus").getSelectedKey();
+			var selectedSuffix = this.getView().byId("VLRSuffix").getSelectedKey();
+
 			if (Context.length == 0) {
 				sap.m.MessageBox.warning("No data is available to export");
 				return;
 			} else {
-				var items = Context.map(function (oEvent) {
-					return oEvent.getObject();
-				});
-				this.JSONToCSVConvertor(items, "ExportGreen", true);
+				// var items = Context.map(function (oEvent) {
+				// 	return oEvent.getObject();
+				// });
+
+				if (SelectedDealer == "all" && SelectedColor == "all" && Status == "2" && selectedSuffix == "all") {
+					var items = this.getView().getModel("vehicleSearchTableModel").getData();
+				} else {
+					var items = Context.map(function (oEvent) {
+						return oEvent.getObject();
+					});
+				}
+
+				this.JSONToCSVConvertor(items, "Vehicle Trade History", true);
 			}
 		},
 		JSONToCSVConvertor: function (JSONData, ReportTitle, ShowLabel) {
