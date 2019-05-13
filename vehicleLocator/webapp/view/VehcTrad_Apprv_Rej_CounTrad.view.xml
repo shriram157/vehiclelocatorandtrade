@@ -111,30 +111,19 @@
 								<Text text="{path:'DNC',formatter:'vehicleLocator.Formatter.Formatter.DNC'}" id="VT_ARCTDnc"/>
 			 
 								<Label text="{i18n>DNCBlockout(Days)}"/>
-								<ComboBox id="VT_ARCDnc" selectionChange="ondncblckoutchnage" width="220px" items="{/}">
+								<ComboBox id="VT_ARCDnc" selectionChange="ondncblckoutchnage" width="220px" items="{/}" visible= "false">
 									<core:ListItem key="{Zzduration}" text="{Zzduration}"/>
 								</ComboBox>
-								
 							
-								<!--			<ComboBox id="VT_ARCDnc1" selectionChange="ondncblckoutchnage" width="220px" items="{/}">-->
-								<!--	<core:ListItem key="{Zzduration}" text="{Zzduration}"/>-->
-								<!--</ComboBox>	-->
-								
-							 <!--   <ComboBox id="VT_ARCDnc" selectionChange="ondncblckoutchnage" width="220px" 	items="{path: 'comboBoxModelDncDays>/' }">-->
-								<!--	<core:ListItem key="{key}" text="{text}"/>-->
-								<!--</ComboBox>-->
-								
-					<!--			<ComboBox id="VT_ARCDnc" showSecondaryValues="false"   -->
-					<!--             width="220px" -->
-					            
-					<!--                items="{path: 'comboBoxModelDncDays>/modelDNCDays', sorter: { path: 'key' }, length:5}" -->
-					<!--                selectionChange="ondncblckoutchnage" -->
-					<!--                textAlign="Begin">-->
-					<!--				<core:ListItem key="{comboBoxModelDncDays>key}" text="{comboBoxModelDncDays>text}" />-->
-					<!--</ComboBox>-->
-							
-			
-								
+								    <ComboBox id="VT_ARCDnc_New"
+										items="{
+											path: 'dncDays>/'
+										}">
+										<core:Item key="{key}" text="{text}" />
+									</ComboBox>
+													
+													
+		
 								<Label text="{i18n>TradeinReturn}"/>
 			
 								<ComboBox id="VT_ARCTtrdinRet" selectionChange="onTradeReqStat" width="220px" items="{/}" selectedKey="{/0/Trade_Return}" editable="false">

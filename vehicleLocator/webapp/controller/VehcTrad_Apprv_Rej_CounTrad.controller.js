@@ -32,28 +32,8 @@ sap.ui.define([
             //  set the model on DNC days combobox Model
          
          
-         var modelDNCDays = [{
-					"Zzduration": "0"
-				},{
-					"Zzduration": "10"
-				}, {
-					"Zzduration": "20"
-				}, {
-					"Zzduration": "40"
-				}];
-			
-			/*Status.splice(-1,1);*/
-			var oModel = new sap.ui.model.json.JSONModel(modelDNCDays);
-					// this.getView().byId("VLRStatus").setModel(oModel);
-			// Model.setSizeLimit(1000);
-
-     
-         
-  
-   //        	var sComboboxModel = new sap.ui.model.json.JSONModel({
-				 
-			// });
-
+               this.idCb = this.byId("VT_ARCDnc_New");     ///VT_ARCDnc
+               this.bindCombo();
 	
             
 				this._setTheLanguage();
@@ -3016,7 +2996,46 @@ sap.ui.define([
 				return "0000-00-00T00:00:00";
 			}
 		},				
-				
+// ----------------------------
+
+    bindCombo: function() {
+        var data = [{
+            "key": "0",
+            "text": "0"
+        }, {
+            "key": "10",
+            "text": "10"
+        }, {
+            "key": "20",
+            "text": "20"
+        }, {
+            "key": "40",
+            "text": "40"
+        }];
+
+        var oModel = new sap.ui.model.json.JSONModel(data);
+        this.getView().setModel(oModel, "dncDays");
+        
+        this.idCb.attachBrowserEvent("keyup", function(event) {            
+            var len = this.getItems().length;
+            var enteredText = this.getValue();
+            var bExists = false;
+            for(var i=0;i<len;i++){
+            	var itemText = this.getItems()[i].getProperty("text");              
+              if(itemText == enteredText || itemText.startsWith(enteredText)){
+              	bExists = true;
+                break;
+							}
+            }
+            if(bExists){
+              this.setValueState(sap.ui.core.ValueState.None);
+            }else{
+              this.setValueState(sap.ui.core.ValueState.Error);
+              this.setValue("");
+            }
+            
+        });
+    }
 				
 
 	/*	onBack :function()
