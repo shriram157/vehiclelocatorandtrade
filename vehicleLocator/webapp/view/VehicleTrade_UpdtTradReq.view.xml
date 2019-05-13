@@ -73,7 +73,7 @@
 								<Text text="{Suffix}-{Suffix_Desc}/{Int_Colour_Desc}"/>
 								<Label text="{i18n>APX}"/>
 								<Text text="{APX}"/>
-								<Label text="{i18n>Color}"/>
+								<Label text="{i18n>ExteriorColor}"/>
 								<Text text="{Ext_Colour}-{Ext_Colour_Desc}"/>
 								<Label text="{i18n>Status}"/>
 								<Text text="{path:'Status',formatter:'vehicleLocator.Formatter.Formatter.Status'}"/>
@@ -132,7 +132,7 @@
 								<Text text="{/OffredVehicle/Suffix}-{/OffredVehicle/Suffix_Desc}/{/OffredVehicle/Int_Colour_Desc}" id="suffxidt"/>
 								<Label text="{i18n>APX}" id="apxid"/>
 								<Text text="{/OffredVehicle/APX}" id="apxTid"/>
-								<Label text="{i18n>Color}" id="extco"/>
+								<Label text="{i18n>ExteriorColor}" id="extco"/>
 								<Text text="{/OffredVehicle/Ext_Colour}-{/OffredVehicle/Ext_Colour_Desc}" id="extclod"/>
 								<Label text="{i18n>Status}" id="sttid"/>
 								<Text text="{path:'/OffredVehicle/Status',formatter:'vehicleLocator.Formatter.Formatter.Status'}" id="stdId"/>

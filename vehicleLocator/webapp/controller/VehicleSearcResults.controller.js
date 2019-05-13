@@ -461,10 +461,24 @@ sap.ui.define([
 						/*var SuffixDataValue*/
 
 						var SuffixDesc = sap.ui.getCore().getModel("VehicleLocatorSuffix").getData();
-
+ 
 						var oDumModel = new sap.ui.model.json.JSONModel(filteredArray);
 						oDumModel.setSizeLimit(100000);
 						sap.ui.getCore().setModel(oDumModel, "SearchedData");
+
+	var Status = sap.ui.getCore().getModel("SearchedData").getData();
+			
+			// 10th May,  if the Hold_stat is received as blank make it "N"
+			
+			for ( var i = 0; i< Status.length; i++ ) {
+				if (Status[i].Hold_stat == ""){
+					  Status[i].Hold_stat = "N" ;
+					}
+			}
+
+
+
+
 
 						that.comingFromSuffixChange = true;
 						that.SuffixFilter();
@@ -2301,7 +2315,29 @@ sap.ui.define([
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 				oRouter.navTo("VehicleLocSearch", {}, true);
 			}
-		}
+		},
+			BlockSummarypress: function () {
+			// debugger;
+
+			var that = this;
+			that.getRouter().navTo("VehicleTrade_ModelBlock_Summary");
+
+		},
+		TradeSummaryLinkPress: function () {
+			// debugger;
+			var that = this;
+			that.getRouter().navTo("VehicleTrade_Summary", {
+				DataClicked: "Yes"
+			});
+
+		},
+
+		TradeHistoryLinkPress: function () {
+			var that = this;
+			that.getRouter().navTo("VehicleTrade_History", {
+				DataClicked: "Yes"
+			});
+		},
 
 	});
 });
