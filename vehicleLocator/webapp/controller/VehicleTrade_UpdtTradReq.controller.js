@@ -43,7 +43,20 @@ sap.ui.define([
 			  this.getView().byId("oComments").setValue(""); //1804
 			
 			this.i18n = sap.ui.getCore().getModel("i18n").getResourceBundle();
+			
+			
+			if (oEvent != undefined) {
+			
 			var SelectedTrade = oEvent.getParameter("arguments").SelectedTrade;
+			this.SelectedTrade = SelectedTrade;
+			
+			} else {
+				
+				var SelectedTrade = 	this.SelectedTrade ;	
+			}
+			
+			
+			
 			/*	var pardia_title = i18n.getText("ctrl_success_dialog");
 				var succdia_text = i18n.getText("ctrl_successdialog_text");*/
 			if (sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq") != undefined && SelectedTrade != "VehicleTrade_updateTradeVehicle" &&
@@ -209,6 +222,8 @@ sap.ui.define([
 	    //         	this.getView().byId("ordtyp").setVisible(false);
 					// this.getView().byId("ortype").setVisible(false);
 					this._oViewModel.setProperty("/showOrderType", false);
+	          } else {
+	          		this._oViewModel.setProperty("/showOrderType", true);
 	          }
 				
 
@@ -1206,12 +1221,13 @@ sap.ui.define([
 			}
 			
 				//update the bindings. 
-	    var oModelData = this.getView().getModel("commentsModel");   //TradeRequestModel
-	    this.getView().byId("tableVrade").setModel(oModelData);
+	    // var oModelData = this.getView().getModel("commentsModel");   //TradeRequestModel
+	    // this.getView().byId("tableVrade").setModel(oModelData);
  // if this is not working then reload the page calling the navto. 
 	    
   				// oModelData.refresh(true);
 			   //	oModelData.updateBindings(true);
+ 
 		},	
 		
 		getTheLatestCommentId: function () {
@@ -1675,6 +1691,11 @@ sap.ui.define([
 			that.oDataModel.update(UpdatedTreadeEntity, oEntry, null, function (s) {
 				//	that.getView().byId("oTrdareqstat").setText("Request Sent");
 						sap.m.MessageBox.information("Update Successful, Navigate back using the Back Buttons");   //GSR0805
+						
+						
+	//  after the comments are updated in order for the screen to refresh lets call the route matched again. 
+              that.onRouteMatched();
+
 			}, function () {
 				
 			
@@ -2370,6 +2391,19 @@ sap.ui.define([
 				//here left side data only send to backend by taking from simpleform for 'this.getView().byId("").getModel()'
 
 			}
+			
+			
+		 //  this.getRouter().navTo("VehicleTrade_UpdtTradReq",{
+			// 	SelectedTrade : "VehicleTrade_ApprvTradeVehicle"
+			// });		
+			
+			
+			
+			
+			
+			
+			
+			
 		},
 		//===============================================================
 		//====Update Witout Changes=====================================

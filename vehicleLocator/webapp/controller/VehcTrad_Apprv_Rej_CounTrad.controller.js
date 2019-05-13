@@ -24,6 +24,7 @@ sap.ui.define([
 			
 					this._oViewModel = new sap.ui.model.json.JSONModel({
 				visibleForZoneUser: false,
+				 showOrderType: true
 			});
 
 			this.getView().setModel(this._oViewModel, "detailView");	
@@ -105,6 +106,18 @@ sap.ui.define([
 					this.dnsStatus = StatusData.Trade_Status;
 					var TradeId = StatusData.Trade_Id;
 					this.VehicleTrade_SummaryData(StatusData);
+//  for the DNC = Y do not show order type. 
+                if (this.dnsStatus == "Y") {
+                	
+                this._oViewModel.setProperty("/showOrderType", false);
+                	
+                } else {
+                	
+                	this._oViewModel.setProperty("/showOrderType", true);
+                	
+                }
+ 
+					
 //
 					//  for a rejected trade request do not show the VTN on the screen. 
 					 if (Status == "R") {
@@ -243,6 +256,17 @@ sap.ui.define([
 
 					//	this.getView().byId("SimpleFormAproveTrReq").setModel(sap.ui.getCore().getModel("MyTradeRequested"));
 					var StatusData = sap.ui.getCore().getModel("MyTradeRequested").getData();
+					
+					if ( StatusData.DNC == "Y" ) {
+						
+							this._oViewModel.setProperty("/showOrderType", false);
+					} else {
+						
+							this._oViewModel.setProperty("/showOrderType", true);
+					}
+					
+					
+					
 					this.VehicleTrade_SummaryData(StatusData);
 					var AcceptVisible = StatusData.FromRequesting;
 					var Status = StatusData.Trade_Status;

@@ -75,8 +75,8 @@
 								<Text text="{Ext_Colour}-{Ext_Colour_Desc}" id="extco"/>
 								<Label text="{i18n>Status}"/>
 								<Text text="{path:'Status',formatter:'vehicleLocator.Formatter.Formatter.Status'}" id="ostatus"/>
-								<Label text="{i18n>OrderType}"/>
-								<Text text="{path:'Order_Type',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" id="oOdrtype"/>
+								<Label text="{i18n>OrderType}" visible="{detailView>/showOrderType}" />
+								<Text text="{path:'Order_Type',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" id="oOdrtype" visible="{detailView>/showOrderType}"/>
 								<Label text="{i18n>CurrentETA} - {i18n>From}" id="cetalabid"/>
 								<VBox>
 									<HBox>
