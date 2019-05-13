@@ -215,7 +215,7 @@
                    items="{
                     path: 'commentsModel>/',
                     sorter: [{
-                    path: 'Comment_Date',
+                    path: 'Comment_Id',
                     descending: true
                     },
                     {
