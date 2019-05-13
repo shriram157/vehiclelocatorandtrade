@@ -169,7 +169,7 @@
 					<VBox class="sapUiLargeMargin">
 						<!--cellClick="onRowPress" selectionBehavior="Row" selectionMode="None"-->
 						<Table id="tableVrade" 
-							items="{ path:'TradeRequestModel>/TradeComment', sorter : [{ path:'Comment_Date', descending : 'true' }] }">
+							items="{ path:'TradeRequestModel>/TradeComment', sorter : [{ path:'Trade_Id', descending : 'true' }] }">
 							<columns>
 								<Column id="Comment_Date">
 									<Text text="{i18n>Date}"/>

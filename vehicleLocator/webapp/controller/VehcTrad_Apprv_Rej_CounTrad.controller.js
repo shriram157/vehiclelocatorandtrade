@@ -174,6 +174,22 @@ sap.ui.define([
 							text: "0"
 						});
 						this.getView().byId("VT_ARCDnc").insertItem(newItem);
+						var newItem = new sap.ui.core.Item({
+							key: "10",
+							text: "10"
+						});
+						this.getView().byId("VT_ARCDnc").insertItem(newItem);
+						var newItem = new sap.ui.core.Item({
+							key: "20",
+							text: "20"
+						});
+						this.getView().byId("VT_ARCDnc").insertItem(newItem);						
+						var newItem = new sap.ui.core.Item({
+							key: "40",
+							text: "40"
+						});
+						this.getView().byId("VT_ARCDnc").insertItem(newItem);						
+
 						this.getView().byId("VT_ARCDnc").setSelectedKey("0");
 						this.getView().byId("VT_ARCDnc").setSelectedItem("0");
 
@@ -453,6 +469,24 @@ sap.ui.define([
 								key: "0",
 								text: "0"
 							});
+									this.getView().byId("VT_ARCDnc").insertItem(newItem);
+														var newItem = new sap.ui.core.Item({
+								key: "10",
+								text: "10"
+							});
+									this.getView().byId("VT_ARCDnc").insertItem(newItem);
+							
+														var newItem = new sap.ui.core.Item({
+								key: "20",
+								text: "20"
+							});
+									this.getView().byId("VT_ARCDnc").insertItem(newItem);
+														var newItem = new sap.ui.core.Item({
+								key: "40",
+								text: "40"
+							});
+									this.getView().byId("VT_ARCDnc").insertItem(newItem);									
+									
 							this.getView().byId("VT_ARCDnc").insertItem(newItem);
 							this.getView().byId("VT_ARCDnc").setSelectedKey("0");
 							this.getView().byId("VT_ARCDnc").setSelectedItem("0");
@@ -661,11 +695,37 @@ sap.ui.define([
 					if ((Dnc == "Y" || Dnc == "X") && (this.dnsStatus != "R")) {
 					this.getView().byId("VT_ARCDnc").setVisible(true);
 					this.getView().byId("VT_ARCDnc").setEnabled(false);
+					
 					var newItem = new sap.ui.core.Item({
-						key: "0",
-						text: "0"
-					});
-					this.getView().byId("VT_ARCDnc").insertItem(newItem);
+								key: "0",
+								text: "0"
+							});
+									this.getView().byId("VT_ARCDnc").insertItem(newItem);
+														var newItem = new sap.ui.core.Item({
+								key: "10",
+								text: "10"
+							});
+									this.getView().byId("VT_ARCDnc").insertItem(newItem);
+							
+														var newItem = new sap.ui.core.Item({
+								key: "20",
+								text: "20"
+							});
+									this.getView().byId("VT_ARCDnc").insertItem(newItem);
+														var newItem = new sap.ui.core.Item({
+								key: "40",
+								text: "40"
+							});
+									this.getView().byId("VT_ARCDnc").insertItem(newItem);	
+					
+					
+					
+					
+					
+					
+					
+					
+					
 					this.getView().byId("VT_ARCDnc").setSelectedKey("0");
 					this.getView().byId("VT_ARCDnc").setSelectedItem("0");
 

@@ -219,8 +219,7 @@ sap.ui.define([
 	//based on the DNC Indicator turn off the order status field. 
 	         var oDataModelData = sap.ui.getCore().getModel("MyTradeRequested").getData();
 	          if (oDataModelData.DNC == "Y"){
-	    //         	this.getView().byId("ordtyp").setVisible(false);
-					// this.getView().byId("ortype").setVisible(false);
+ 
 					this._oViewModel.setProperty("/showOrderType", false);
 	          } else {
 	          		this._oViewModel.setProperty("/showOrderType", true);
