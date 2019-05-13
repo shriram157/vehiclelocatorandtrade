@@ -1,13 +1,14 @@
 /*eslint no-console: 0, no-shadow: 0, new-cap: 0, quotes: 0*/
 "use strict";
 
-var moment = require("moment");
+var moment = require("moment-timezone");
 
 function run(client, appContext) {
 	var logger = appContext.createLogContext().getLogger("/Application/Core/TradeReqCleanupTask");
 	var tracer = appContext.createLogContext().getTracer(__filename);
 	return new Promise((resolve, reject) => {
-		var today = moment(new Date()).format("YYYY-MM-DD");
+		var timeZone = process.env.TRADE_REQ_CLEANUP_TASK_TIME_ZONE || "America/Toronto";
+		var today = moment.tz(new Date(), timeZone).format("YYYY-MM-DD");
 		var selectSql = "SELECT \"Trade_Id\", \"Requested_Dealer\", \"Requested_Vtn\", \"Requesting_Dealer\", " +
 			"\"Offered_Vtn\" FROM \"vehicleTrade.Trade_Request\" WHERE \"Trade_Status\" = 'A' AND \"Changed_on\" = ?";
 		client.prepare(selectSql, function (err, selectStmt) {

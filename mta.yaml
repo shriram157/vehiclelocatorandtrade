@@ -23,7 +23,7 @@ modules:
       XS_LOG_REFERER: true
       XS_LOG_CONNECTION_DATA: true
       NODE_TLS_REJECT_UNAUTHORIZED: 0
-      TRADE_REQ_CLEANUP_TASK_CRON_TIME: "0 0 0 * * *"
+      TRADE_REQ_CLEANUP_TASK_CRON_TIME: "0 59 23 * * *"
       TRADE_REQ_CLEANUP_TASK_TIME_ZONE: America/Toronto
    provides:
     - name: vehiclelocatorandtrade-node_api

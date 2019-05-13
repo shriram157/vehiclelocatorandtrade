@@ -52,7 +52,7 @@ app.use(passport.authenticate("JWT", {
 app.use(cors());
 
 // Scheduler
-var tradeReqCleanUpTaskCronTime = process.env.TRADE_REQ_CLEANUP_TASK_CRON_TIME || "0 0 0 * * *";
+var tradeReqCleanUpTaskCronTime = process.env.TRADE_REQ_CLEANUP_TASK_CRON_TIME || "0 59 23 * * *";
 var tradeReqCleanUpTaskTimeZone = process.env.TRADE_REQ_CLEANUP_TASK_TIME_ZONE || "America/Toronto";
 var job = new CronJob(tradeReqCleanUpTaskCronTime, function () {
 	hdbPool.acquire(function (err, client) {
