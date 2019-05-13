@@ -111,15 +111,15 @@
 								<Text text="{path:'DNC',formatter:'vehicleLocator.Formatter.Formatter.DNC'}" id="VT_ARCTDnc"/>
 			 
 								<Label text="{i18n>DNCBlockout(Days)}"/>
-								<ComboBox id="VT_ARCDnc" selectionChange="ondncblckoutchnage" width="220px" items="{/}" visible= "false">
-									<core:ListItem key="{Zzduration}" text="{Zzduration}"/>
-								</ComboBox>
+								<!--<ComboBox id="VT_ARCDnc" selectionChange="ondncblckoutchnage" width="220px" items="{/}" visible= "false">-->
+								<!--	<core:ListItem key="{Zzduration}" text="{Zzduration}"/>-->
+								<!--</ComboBox>-->
 							
-								    <ComboBox id="VT_ARCDnc_New"
+								    <ComboBox id="VT_ARCDnc" width="220px" selectionChange="ondncblckoutchnage"
 										items="{
 											path: 'dncDays>/'
 										}">
-										<core:Item key="{key}" text="{text}" />
+										<core:Item key="{dncDays>key}" text="{dncDays>text}" />
 									</ComboBox>
 													
 													
@@ -134,10 +134,7 @@
 								<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" id="VT_ARCTtrdinStatus" width="220px"/>
 						 
 							</form:content>		
-								
-								
-								
-								
+
 								<form:content id="offervehidContent">	
 								<core:Title text="{i18n>OfferVehicleInformation}" id="Offerevehid"/>
 								<Label text="Dealer" id="offeredDealer"/>
@@ -234,13 +231,7 @@
 
                 <!--<headerToolbar>-->
                 <!--    <OverflowToolbar id="otbSubheader">-->
-
  
-
-
-
-
-                       
                 <!--        <ToolbarSpacer/>-->
                 <!--        <SearchField id="searchVehicleList" liveChange="onLiveChange" showSearchButton="true"-->
                 <!--                     placeholder="Search table...">-->
