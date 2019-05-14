@@ -26,6 +26,9 @@ sap.ui.define([
 			_that.oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 				pattern: "yyyy-MM-dd'T'HH:mm:ss"
 			});
+			
+			   this.idCb = this.byId("inputblocknofdays");     ///VT_ARCDnc
+               this.bindCombo();
 			//***********Language translator functionality**********//
 			/// set the logo and Language. 
 
@@ -829,7 +832,48 @@ sap.ui.define([
 			
 			this.onRouteMatched();
 
-		}
+		},
+		// ----------------------------
+
+    bindCombo: function() {
+        var data = [{
+            "key": "0",
+            "text": "0"
+        }, {
+            "key": "10",
+            "text": "10"
+        }, {
+            "key": "20",
+            "text": "20"
+        }, {
+            "key": "40",
+            "text": "40"
+        }];
+
+        var oModel = new sap.ui.model.json.JSONModel(data);
+        this.getView().setModel(oModel, "dncDays");
+        
+        this.idCb.attachBrowserEvent("keyup", function(event) {            
+            var len = this.getItems().length;
+            var enteredText = this.getValue();
+            var bExists = false;
+            for(var i=0;i<len;i++){
+            	var itemText = this.getItems()[i].getProperty("text");              
+              if(itemText == enteredText || itemText.startsWith(enteredText)){
+              	bExists = true;
+                break;
+							}
+            }
+            if(bExists){
+              this.setValueState(sap.ui.core.ValueState.None);
+            }else{
+              this.setValueState(sap.ui.core.ValueState.Error);
+              this.setValue("");
+            }
+            
+        });
+    }
+				
 
 	});
 });

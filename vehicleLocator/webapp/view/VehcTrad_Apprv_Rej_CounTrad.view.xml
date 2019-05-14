@@ -115,7 +115,7 @@
 								<!--	<core:ListItem key="{Zzduration}" text="{Zzduration}"/>-->
 								<!--</ComboBox>-->
 							
-								    <ComboBox id="VT_ARCDnc" width="220px" selectionChange="ondncblckoutchnage"
+								    <ComboBox id="VT_ARCDnc" width="220px" 
 										items="{
 											path: 'dncDays>/'
 										}">
