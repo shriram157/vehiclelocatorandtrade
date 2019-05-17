@@ -132,7 +132,7 @@
                    items="{
                     path: 'vehicleSearchTableModel>/',
                     sorter: {
-                    path: 'zzadddata4',
+                    path: 'pstsp',
                     descending: true
                     }
                     }"
