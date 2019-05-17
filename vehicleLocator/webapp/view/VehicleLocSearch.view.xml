@@ -100,7 +100,7 @@
 									<core:ListItem   text="{ModelSeriesNo}"      key="{ModelSeriesNo}"  additionalText =""/>
 				   	</ComboBox>-->
 								<ComboBox placeholder="" width="70%" showSecondaryValues="true" filterSecondaryValues="true" selectionChange="SeriesClickedVLS11"
-									id="SeriesCmbo" items="{path:'/', sorter : [{ path:'TCISeriesDescriptionEN', ascending : 'true' } ]}" change="handleSeriesChange">
+									id="SeriesCmbo" items="{path:'/'}" change="handleSeriesChange">
 									<core:ListItem text="{=${SPRAS}==='English' ? ${TCISeriesDescriptionEN}:${TCISeriesDescriptionFR} }" key="{TCISeries}" additionalText=""/>
 								</ComboBox>
 								

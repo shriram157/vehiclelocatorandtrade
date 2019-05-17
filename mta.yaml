@@ -46,6 +46,7 @@ modules:
       properties:
          url: ${default-url}
    requires:
+    - name: application-logs_vehiclelocatorandtrade
     - name: vehiclelocatorandtrade-hdb
     - name: hdi_vehiclelocatorandtrade
     - name: uaa_vehiclelocatorandtrade

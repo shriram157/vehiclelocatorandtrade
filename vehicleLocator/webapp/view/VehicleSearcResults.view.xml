@@ -133,7 +133,7 @@
                     path: 'vehicleSearchTableModel>/',
                     sorter: {
                     path: 'pstsp',
-                    descending: true
+                    descending: false
                     }
                     }"
                        noDataText="{i18n>NoData}"
