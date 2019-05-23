@@ -1,0 +1,15 @@
+
+_schema-version: "3.1"
+ID: vehiclelocatorandtrade.uat
+extends: vehiclelocatorandtrade
+
+modules:
+ - name: vehiclelocatorandtrade-node
+   parameters:
+      host: tci-uat-${app-name}
+ - name: vehiclelocatorandtrade-xsjs
+   parameters:
+      host: tci-uat-${app-name}
+ - name: vehiclelocatorandtrade
+   parameters:
+      host: tci-uat-${app-name}

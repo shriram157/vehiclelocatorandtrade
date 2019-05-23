@@ -35,10 +35,7 @@ sap.ui.define([
 
 			}
  
-
-
-
-
+ 
 			//  ajax call to BP Data and Scope Data
 			var oModelDetailview = this.getView().getModel("detailView");
 			var that = this;
@@ -55,7 +52,7 @@ sap.ui.define([
 					var userType = oData.loggedUserType[0];
 
 					//	var userType = "Zone_User"; // TODO: Remove before deployment locatyest only - GSR
-						 //var userType = "Dealer_User"; // TODO: Remove before deployment locatyest only - GSR
+						 var userType = "Dealer_User"; // TODO: Remove before deployment locatyest only - GSR
 
 					switch (userType) {
 					case "Dealer_User":
@@ -183,7 +180,7 @@ sap.ui.define([
 
 						// for toyota login show only toyota dealers, for lexus show only lexus. 
 
-						if (item.Division == that.sDivision || item.Division == "Dual") { // TODO: enable this before migration
+						if (item.Division == that.sDivision || item.Division == "Dual") {  
 
 							BpDealer.push({
 								"BusinessPartnerKey": item.BusinessPartnerKey,
@@ -1036,7 +1033,8 @@ sap.ui.define([
 				function () {
 					var SeriesCmbo = that.getView().byId("SeriesCmbo").getSelectedKey();
 					if (SeriesCmbo == "") {
-						sap.m.MessageBox.warning("Please select Series");
+					    var plsSelectSeries = that.getModel("i18n").getResourceBundle().getText("PlsSelectSeries");
+						sap.m.MessageBox.warning(plsSelectSeries);
 						return;
 					}
 				});
@@ -1045,10 +1043,14 @@ sap.ui.define([
 					var McCmbo = that.getView().byId("McCmbo").getSelectedKey();
 					var SeriesCmbo = that.getView().byId("SeriesCmbo").getSelectedKey();
 					if (SeriesCmbo == "") {
-						sap.m.MessageBox.warning("Please select Series");
+					    var plsSelectSeries = that.getModel("i18n").getResourceBundle().getText("PlsSelectSeries");
+						sap.m.MessageBox.warning(plsSelectSeries);
+						// sap.m.MessageBox.warning("Please select Series");
 						return;
 					} else if (McCmbo == "") {
-						sap.m.MessageBox.warning("Please select Model Code");
+			           var PlsSelectModel = that.getModel("i18n").getResourceBundle().getText("PlsSelectModel");
+						sap.m.MessageBox.warning(PlsSelectModel);	
+						// sap.m.MessageBox.warning("Please select Model Code");
 						return;
 					}
 				});
@@ -1076,11 +1078,15 @@ sap.ui.define([
 			//	var suffix = that.getView().byId("SuffCmbo").getSelectedKey();
 
 			/*var vZone = that.getView().byId("Pacific").getSelected();*/
+		    var selectMandtFields = that.getModel("i18n").getResourceBundle().getText("selectMandtFields");
+ 
 
 			if (MoyearCombo == "" || MoyearCombo == undefined || MoyearCombo == null) {
 				//	sap.m.MessageBox.error("Please select ModelYear");
 				that.getView().byId("MoyearCombo").setValueState("Error");
-				that.getView().byId("SeriesErrMsgStrip").setText("select mandetory fields");
+				
+				
+				that.getView().byId("SeriesErrMsgStrip").setText(selectMandtFields);  //selectMandtFields  "select mandetory fields"
 				that.getView().byId("SeriesErrMsgStrip").setProperty("visible", true);
 				sap.ui.core.BusyIndicator.hide();
 				return;
@@ -1092,7 +1098,7 @@ sap.ui.define([
 			if (SeriesCmbo == "" || SeriesCmbo == undefined || SeriesCmbo == null) {
 				//	sap.m.MessageBox.error("Please select Series");
 				that.getView().byId("SeriesCmbo").setValueState("Error");
-				that.getView().byId("SeriesErrMsgStrip").setText("select mandetory fields");
+				that.getView().byId("SeriesErrMsgStrip").setText(selectMandtFields);
 				that.getView().byId("SeriesErrMsgStrip").setProperty("visible", true);
 				sap.ui.core.BusyIndicator.hide();
 				return;
@@ -1105,7 +1111,7 @@ sap.ui.define([
 				//	sap.m.MessageBox.error("Please select Model");
 
 				that.getView().byId("McCmbo").setValueState("Error");
-				that.getView().byId("SeriesErrMsgStrip").setText("select mandetory fields");
+				that.getView().byId("SeriesErrMsgStrip").setText(selectMandtFields);
 				that.getView().byId("SeriesErrMsgStrip").setProperty("visible", true);
 				sap.ui.core.BusyIndicator.hide();
 				return;
@@ -1120,7 +1126,7 @@ sap.ui.define([
 				//	sap.m.MessageBox.error("Please select Suffix");
 
 				that.getView().byId("SuffCmbo").setValueState("Error");
-				that.getView().byId("SeriesErrMsgStrip").setText("select mandetory fields");
+				that.getView().byId("SeriesErrMsgStrip").setText(selectMandtFields);
 				that.getView().byId("SeriesErrMsgStrip").setProperty("visible", true);
 				sap.ui.core.BusyIndicator.hide();
 				return;
@@ -1133,7 +1139,7 @@ sap.ui.define([
 				.byId("Central").getSelected() == false && that.getView().byId("Atlantic").getSelected() == false && that.getView().byId("Quebec")
 				.getSelected() == false) {
 				//	sap.m.MessageBox.error("Please select Zone");
-				that.getView().byId("SeriesErrMsgStrip").setText("select mandetory fields");
+				that.getView().byId("SeriesErrMsgStrip").setText(selectMandtFields);
 				that.getView().byId("SeriesErrMsgStrip").setProperty("visible", true);
 				sap.ui.core.BusyIndicator.hide();
 				return;
@@ -1475,10 +1481,12 @@ sap.ui.define([
 			for (var i = 0; i < allItem.length; i++) {
 				arr.push(allItem[i].getText());
 			}
+			    var selectMandtFields = that.getModel("i18n").getResourceBundle().getText("selectMandtFields");
+			
 			if (arr.indexOf(value) < 0 && combo_IdKey == "") {
 				combo_Id.setValueState("Error");
 				combo_Id.setValue();
-				that.getView().byId("SeriesErrMsgStrip").setText("select mandatory fields");
+				that.getView().byId("SeriesErrMsgStrip").setText(selectMandtFields);
 				that.getView().byId("SeriesErrMsgStrip").setProperty("visible", true);
 			} else {
 				combo_Id.setValueState("None");
@@ -1497,7 +1505,7 @@ sap.ui.define([
 			var that = this;
 			if (arr.indexOf(value) < 0 && combo_IdSel == "") {
 				combo_Id.setValueState("Error");
-				that.getView().byId("SeriesErrMsgStrip").setText("select mandatory fields");
+				that.getView().byId("SeriesErrMsgStrip").setText(selectMandtFields);
 				that.getView().byId("SeriesErrMsgStrip").setProperty("visible", true);
 				combo_Id.setValue();
 			} else {
@@ -1519,7 +1527,7 @@ sap.ui.define([
 			if ((arr.indexOf(that.value) < 0 && combo_IdSel == "") && (that.value != "- ALL/")) {
 				combo_Id.setValueState("Error");
 				combo_Id.setValue();
-				that.getView().byId("SeriesErrMsgStrip").setText("select mandatory fields");
+				that.getView().byId("SeriesErrMsgStrip").setText(selectMandtFields);
 				that.getView().byId("SeriesErrMsgStrip").setProperty("visible", true);
 			} else {
 				combo_Id.setValueState("None");

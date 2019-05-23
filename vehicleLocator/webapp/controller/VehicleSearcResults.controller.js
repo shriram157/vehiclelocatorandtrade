@@ -452,7 +452,7 @@ sap.ui.define([
 								return (anotherOne_el == array_el.kunnr && array_el.zzordertype == "DM");
 							}).length == 0;
 						});
-						console.log("final searched data", filteredArray);
+						// console.log("final searched data", filteredArray);
 
 						var suffixField = that.value;
 						var oSuffmodel = new sap.ui.model.json.JSONModel(suffixField);
@@ -830,7 +830,14 @@ sap.ui.define([
 			// that.selectedTrade = oEvt.getSource().getParent().getBindingContext().getObject(); //guna
 			that.selectedTrade = oEvt.getSource().getParent().getBindingContext("vehicleSearchTableModel").getObject();
 			var VTN = that.selectedTrade.zzvtn;
-			var dealercode = that.selectedTrade.kunnr.slice(-5);
+			
+		//  this should be the logged in dealer code. 23rd May
+		
+			// var dealercode = that.selectedTrade.kunnr.slice(-5);
+				var userAttributesModellen = that.getView().getModel("userAttributesModel").getData();			
+				var dealercode = userAttributesModellen[0].DealerCode;
+
+
 
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
@@ -917,12 +924,14 @@ sap.ui.define([
 							});
 							that.oTableSelect = undefined;
 						} else {
-							sap.m.MessageBox.warning("Please select the trade");
+						  var plsSelectTrade = that.getModel("i18n").getResourceBundle().getText("plsSelectTrade");	
+								sap.m.MessageBox.warning(plsSelectTrade);
 							that.oTableSelect = undefined;
 						}
 
 					} else {
 						sap.ui.getCore().SelectedTrade = that.selectedTrade;
+						 var plsSelectTrade = that.getModel("i18n").getResourceBundle().getText("plsSelectTrade");		 
 						sap.ui.getCore().SelectedTradeStatus = "";
 						if (that.oTableSelectPath != undefined) {
 							that.getRouter().navTo("VehicleTrade_CreateSingle", {
@@ -930,7 +939,7 @@ sap.ui.define([
 							});
 							that.oTableSelect = undefined;
 						} else {
-							sap.m.MessageBox.warning("Please select the trade");
+							sap.m.MessageBox.warning(plsSelectTrade);
 							that.oTableSelect = undefined;
 						}
 					}
@@ -939,13 +948,16 @@ sap.ui.define([
 				error: function () {
 					sap.ui.getCore().SelectedTrade = that.selectedTrade;
 					sap.ui.getCore().SelectedTradeStatus = "";
+					
+					
+					  var plsSelectTrade = that.getModel("i18n").getResourceBundle().getText("plsSelectTrade");
 					if (that.oTableSelectPath != undefined) {
 						that.getRouter().navTo("VehicleTrade_CreateSingle", {
 							SelectedTrade: that.oTableSelectPath
 						});
 						that.oTableSelect = undefined;
 					} else {
-						sap.m.MessageBox.warning("Please select the trade");
+						sap.m.MessageBox.warning(plsSelectTrade);  //"Please select the trade"
 						that.oTableSelect = undefined;
 					}
 				}
@@ -1306,9 +1318,10 @@ sap.ui.define([
 			var SelectedColor = this.getView().byId("VLRColor").getSelectedKey();
 			var Status = this.getView().byId("VLRStatus").getSelectedKey();
 			var selectedSuffix = this.getView().byId("VLRSuffix").getSelectedKey();
-
+         var exportNoDataToExcel = this.getModel("i18n").getResourceBundle().getText("exportNoDataToExcel");
 			if (Context.length == 0) {
-				sap.m.MessageBox.warning("No data is available to export");
+				// sap.m.MessageBox.warning("No data is available to export");
+					sap.m.MessageBox.warning(exportNoDataToExcel);//"No data is available to export to excel"
 				return;
 			} else {
 				// var items = Context.map(function (oEvent) {

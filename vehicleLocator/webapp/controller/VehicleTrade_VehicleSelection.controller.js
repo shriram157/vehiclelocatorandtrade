@@ -442,7 +442,11 @@ sap.ui.define([
 			that.oSelectedItem = oEvt.getSource().getBindingContext("vehicleSelectTableModel").getObject();
 			that.oSelectedItem.FromFourth = "FromFourth";
 			var VTN = that.oSelectedItem.zzvtn;
-			var dealercode = that.oSelectedItem.kunnr.slice(-5);
+			
+//  the offered vehicle should send the dealer code of login dealer. 	 23rd MAy. 
+			// var dealercode = that.oSelectedItem.kunnr.slice(-5);
+	             var oReceivedData = sap.ui.getCore().SelectedTrade;
+	             var dealercode = oReceivedData.kunnr.slice(-5);
 
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");

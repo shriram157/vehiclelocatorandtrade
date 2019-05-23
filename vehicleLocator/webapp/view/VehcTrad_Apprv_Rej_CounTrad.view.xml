@@ -69,10 +69,11 @@
 								<Text text="{Model}-{Model_Desc}" id="oModel"/>
 								<Label text="{i18n>Suffix}"/>
 								<Text text="{Suffix}-{Suffix_Desc}/{Int_Colour_Desc}" id="intdesr"/>
+								<Label text="{i18n>ExteriorColor}"/>
+								<Text text="{Ext_Colour}-{Ext_Colour_Desc}" id="extco"/>							
 								<Label text="{i18n>APX}"/>
 								<Text text="{APX}" id="oapx"/>
-								<Label text="{i18n>ExteriorColor}"/>
-								<Text text="{Ext_Colour}-{Ext_Colour_Desc}" id="extco"/>
+
 								<Label text="{i18n>Status}"/>
 								<Text text="{path:'Status',formatter:'vehicleLocator.Formatter.Formatter.Status'}" id="ostatus"/>
 								<Label text="{i18n>OrderType}" visible="{detailView>/showOrderType}" />
@@ -150,10 +151,14 @@
 								<Text text="{/OffredVehicle/Model}-{/OffredVehicle/Model_Desc}" id="ofrmodltxt"/>
 								<Label text="{i18n>Suffix}" id="ofrsuffixlabl"/>
 								<Text text="{/OffredVehicle/Suffix}-{/OffredVehicle/Suffix_Desc}/{/OffredVehicle/Int_Colour_Desc}" id="ofrsuffixstxt"/>
+						
+							<Label text="{i18n>ExteriorColor}" id="ofrextcolorlabl"/>
+								<Text text="{/OffredVehicle/Ext_Colour}-{/OffredVehicle/Ext_Colour_Desc}" id="ofrexttxt"/>
+							
+							
 								<Label text="{i18n>APX}" id="ofrapxlabl"/>
 								<Text text="{/OffredVehicle/APX}" id="ofrapxtxt"/>
-								<Label text="{i18n>ExteriorColor}" id="ofrextcolorlabl"/>
-								<Text text="{/OffredVehicle/Ext_Colour}-{/OffredVehicle/Ext_Colour_Desc}" id="ofrexttxt"/>
+
 								<Label text="{i18n>Status}" id="ofrstatuslabl"/>
 								<Text text="{path:'/OffredVehicle/Status',formatter:'vehicleLocator.Formatter.Formatter.Status'}" id="ofrstatustxt"/>
 								<Label text="{i18n>OrderType}" id="ofrordrtypelabl"/>

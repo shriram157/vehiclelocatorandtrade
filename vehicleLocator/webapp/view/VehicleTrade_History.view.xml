@@ -179,17 +179,20 @@
 										<!--</t:template>-->
 									</Column>
 									<Column >
+										<Text text="{i18n>ExteriorColor}" />
+										<!--<t:template>-->
+										<!--	<Text text="{Ext_Colour}-{Ext_Colour_Desc}" wrapping="false"/>-->
+										<!--</t:template>-->
+									</Column>				
+ 
+				
+									<Column >
 										<Text text="{i18n>APX}" width="auto"/>
 										<!--<t:template>-->
 										<!--	<Text text="{APX}" wrapping="false"/>-->
 										<!--</t:template>-->
 									</Column>
-									<Column >
-										<Text text="{i18n>ExteriorColor}" />
-										<!--<t:template>-->
-										<!--	<Text text="{Ext_Colour}-{Ext_Colour_Desc}" wrapping="false"/>-->
-										<!--</t:template>-->
-									</Column>
+
 									<Column >
 										<Text text="{i18n>Accepted}" />
 										<!--<t:template>-->
@@ -209,8 +212,9 @@
 											<Text text="{Requested_Vtn}" wrapping="false"/>
 											<Text text="{Model}-{Model_Desc}" />
 											<Text text="{Suffix} - {Suffix_Desc}/{Int_Colour_Desc}" />
-											<Text text="{APX}" />
 											<Text text="{Ext_Colour}-{Ext_Colour_Desc}"/>
+											<Text text="{APX}" />
+									
 											<Text text="{path:'Changed_on', formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDateTradeHistory'}" wrapping="false"/>
 										</cells>
 									</ColumnListItem>

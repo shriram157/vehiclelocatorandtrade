@@ -738,139 +738,139 @@ sap.ui.define([
 
 		},
 
-		oTradeLinkPress: function (oEvt) {
-			debugger;
-			var that = this;
-			//that.oTableSelectPath = oEvt.getSource().getParent().getBindingContext().getPath().split("/")[1]; //guna
-			that.oTableSelectPath = oEvt.getSource().getParent().getBindingContext("vehicleSearchTableModel").getPath().split("/")[1];
-			// sap.ui.getCore().VehicheSearcResults = this.getView().byId("table1VSR").getModel().getData(); //guna
-			sap.ui.getCore().VehicheSearcResults = this.getView().byId("table1VSR").getModel("vehicleSearchTableModel").getData();
-			// that.selectedTrade = oEvt.getSource().getParent().getBindingContext().getObject(); //guna
-			that.selectedTrade = oEvt.getSource().getParent().getBindingContext("vehicleSearchTableModel").getObject();
-			var VTN = that.selectedTrade.zzvtn;
-			var dealercode = that.selectedTrade.kunnr.slice(-5);
+		// oTradeLinkPress: function (oEvt) {
+		// 	debugger;
+		// 	var that = this;
+		// 	//that.oTableSelectPath = oEvt.getSource().getParent().getBindingContext().getPath().split("/")[1]; //guna
+		// 	that.oTableSelectPath = oEvt.getSource().getParent().getBindingContext("vehicleSearchTableModel").getPath().split("/")[1];
+		// 	// sap.ui.getCore().VehicheSearcResults = this.getView().byId("table1VSR").getModel().getData(); //guna
+		// 	sap.ui.getCore().VehicheSearcResults = this.getView().byId("table1VSR").getModel("vehicleSearchTableModel").getData();
+		// 	// that.selectedTrade = oEvt.getSource().getParent().getBindingContext().getObject(); //guna
+		// 	that.selectedTrade = oEvt.getSource().getParent().getBindingContext("vehicleSearchTableModel").getObject();
+		// 	var VTN = that.selectedTrade.zzvtn;
+		// 	var dealercode = that.selectedTrade.kunnr.slice(-5);
 
-			var sLocation = window.location.host;
-			var sLocation_conf = sLocation.search("webide");
+		// 	var sLocation = window.location.host;
+		// 	var sLocation_conf = sLocation.search("webide");
 
-			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehicleLocatorNode";
-			} else {
-				this.sPrefix = "";
+		// 	if (sLocation_conf == 0) {
+		// 		this.sPrefix = "/vehicleLocatorNode";
+		// 	} else {
+		// 		this.sPrefix = "";
 
-			}
-			/*VTN="000571";
-			 dealercode="53170";*/
-			this.nodeJsUrl = this.sPrefix + "/node";
-			that.oDataUrl = this.nodeJsUrl + "/Z_DEALER_TRADE_REQUEST_SRV";
-			var SeriesUrl = that.oDataUrl + "/CalculateETASet?$filter=VTN eq '" + VTN + "' and DelearCode eq '" + dealercode + "'&$format=json";
-			/* /CalculateETASet?$filter=VTN eq '000571' and DelearCode eq '53170'&$format=json*/
-			var ajax = $.ajax({
-				dataType: "json",
-				xhrFields: //
-				{
-					withCredentials: true
-				},
-				url: SeriesUrl,
-				async: true,
-				success: function (result) {
-					//debugger;
-					var Data = result.d.results[0];
-					/*	if (Data.MessageType == "E") {
-							Data.MessageType = "";
-							Data.Calculate = "20181126";
-						}*/
-					if (Data.MessageType != "E") {
-						var CurrentETAFrom = that.selectedTrade.zzadddata4;
-						if (CurrentETAFrom != null && CurrentETAFrom != "") {
+		// 	}
+		// 	/*VTN="000571";
+		// 	 dealercode="53170";*/
+		// 	this.nodeJsUrl = this.sPrefix + "/node";
+		// 	that.oDataUrl = this.nodeJsUrl + "/Z_DEALER_TRADE_REQUEST_SRV";
+		// 	var SeriesUrl = that.oDataUrl + "/CalculateETASet?$filter=VTN eq '" + VTN + "' and DelearCode eq '" + dealercode + "'&$format=json";
+		// 	/* /CalculateETASet?$filter=VTN eq '000571' and DelearCode eq '53170'&$format=json*/
+		// 	var ajax = $.ajax({
+		// 		dataType: "json",
+		// 		xhrFields: //
+		// 		{
+		// 			withCredentials: true
+		// 		},
+		// 		url: SeriesUrl,
+		// 		async: true,
+		// 		success: function (result) {
+		// 			//debugger;
+		// 			var Data = result.d.results[0];
+		// 			/*	if (Data.MessageType == "E") {
+		// 					Data.MessageType = "";
+		// 					Data.Calculate = "20181126";
+		// 				}*/
+		// 			if (Data.MessageType != "E") {
+		// 				var CurrentETAFrom = that.selectedTrade.zzadddata4;
+		// 				if (CurrentETAFrom != null && CurrentETAFrom != "") {
 
-							CurrentETAFrom = CurrentETAFrom.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1');
-						}
-						var CurrentETATo = that.selectedTrade.pstsp;
+		// 					CurrentETAFrom = CurrentETAFrom.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1');
+		// 				}
+		// 				var CurrentETATo = that.selectedTrade.pstsp;
 
-						if (CurrentETATo != null && CurrentETATo != "") {
-							var dateTo = CurrentETATo.split("(")[1];
-							if (CurrentETATo.indexOf("+") != -1) {
-								/*dateTo = dateTo.split("+")[0];*/
-								CurrentETATo = new Date(CurrentETATo.split("(")[1].substring(0, 10) * 1000).toDateString().substring(4, 15);
-								var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
-									pattern: "MM/dd/yyyy"
-								});
-								CurrentETATo = oDateFormat.format(new Date(CurrentETATo));
+		// 				if (CurrentETATo != null && CurrentETATo != "") {
+		// 					var dateTo = CurrentETATo.split("(")[1];
+		// 					if (CurrentETATo.indexOf("+") != -1) {
+		// 						/*dateTo = dateTo.split("+")[0];*/
+		// 						CurrentETATo = new Date(CurrentETATo.split("(")[1].substring(0, 10) * 1000).toDateString().substring(4, 15);
+		// 						var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+		// 							pattern: "MM/dd/yyyy"
+		// 						});
+		// 						CurrentETATo = oDateFormat.format(new Date(CurrentETATo));
 
-							} else {
-								dateTo = dateTo;
-								var dataTo1 = dateTo.substring(0, dateTo.length - 5);
-								var ValidTo = new Date(dataTo1 * 1000);
-								ValidTo = ValidTo.toGMTString().substring(4, 16);
-								var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
-									pattern: "MM/dd/yyyy"
-								});
-								CurrentETATo = oDateFormat.format(new Date(ValidTo));
-							}
+		// 					} else {
+		// 						dateTo = dateTo;
+		// 						var dataTo1 = dateTo.substring(0, dateTo.length - 5);
+		// 						var ValidTo = new Date(dataTo1 * 1000);
+		// 						ValidTo = ValidTo.toGMTString().substring(4, 16);
+		// 						var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+		// 							pattern: "MM/dd/yyyy"
+		// 						});
+		// 						CurrentETATo = oDateFormat.format(new Date(ValidTo));
+		// 					}
 
-						}
+		// 				}
 
-						var date1 = new Date(CurrentETAFrom);
-						var date2 = new Date(CurrentETATo);
-						var timeDiff = Math.abs(date2.getTime() - date1.getTime());
-						var CurrentEtadiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+		// 				var date1 = new Date(CurrentETAFrom);
+		// 				var date2 = new Date(CurrentETATo);
+		// 				var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+		// 				var CurrentEtadiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
-						function addDays(date, days) {
-							var result = new Date(date);
-							result.setDate(result.getDate() + days);
-							return result;
-						}
-						var Eta = Data.Calculate;
-						var Calculate = Eta.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1');
-						var Proposed_ETA_To = addDays(Calculate, CurrentEtadiff);
-						that.selectedTrade.Proposed_ETA_To = Proposed_ETA_To;
-						that.selectedTrade.Proposed_ETA_From = Data.Calculate;
-						//that.selectedTrade=escape(JSON.stringify(that.selectedTrade));
-						sap.ui.getCore().SelectedTrade = that.selectedTrade;
-						sap.ui.getCore().SelectedTradeStatus = "";
-						if (that.oTableSelectPath != undefined) {
-							that.getRouter().navTo("VehicleTrade_CreateSingle", {
-								SelectedTrade: that.oTableSelectPath
-							});
-							that.oTableSelect = undefined;
-						} else {
-							sap.m.MessageBox.warning("Please select the trade");
-							that.oTableSelect = undefined;
-						}
+		// 				function addDays(date, days) {
+		// 					var result = new Date(date);
+		// 					result.setDate(result.getDate() + days);
+		// 					return result;
+		// 				}
+		// 				var Eta = Data.Calculate;
+		// 				var Calculate = Eta.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1');
+		// 				var Proposed_ETA_To = addDays(Calculate, CurrentEtadiff);
+		// 				that.selectedTrade.Proposed_ETA_To = Proposed_ETA_To;
+		// 				that.selectedTrade.Proposed_ETA_From = Data.Calculate;
+		// 				//that.selectedTrade=escape(JSON.stringify(that.selectedTrade));
+		// 				sap.ui.getCore().SelectedTrade = that.selectedTrade;
+		// 				sap.ui.getCore().SelectedTradeStatus = "";
+		// 				if (that.oTableSelectPath != undefined) {
+		// 					that.getRouter().navTo("VehicleTrade_CreateSingle", {
+		// 						SelectedTrade: that.oTableSelectPath
+		// 					});
+		// 					that.oTableSelect = undefined;
+		// 				} else {
+		// 					sap.m.MessageBox.warning("Please select the trade");
+		// 					that.oTableSelect = undefined;
+		// 				}
 
-					} else {
-						sap.ui.getCore().SelectedTrade = that.selectedTrade;
-						sap.ui.getCore().SelectedTradeStatus = "";
-						if (that.oTableSelectPath != undefined) {
-							that.getRouter().navTo("VehicleTrade_CreateSingle", {
-								SelectedTrade: that.oTableSelectPath
-							});
-							that.oTableSelect = undefined;
-						} else {
-							sap.m.MessageBox.warning("Please select the trade");
-							that.oTableSelect = undefined;
-						}
-					}
+		// 			} else {
+		// 				sap.ui.getCore().SelectedTrade = that.selectedTrade;
+		// 				sap.ui.getCore().SelectedTradeStatus = "";
+		// 				if (that.oTableSelectPath != undefined) {
+		// 					that.getRouter().navTo("VehicleTrade_CreateSingle", {
+		// 						SelectedTrade: that.oTableSelectPath
+		// 					});
+		// 					that.oTableSelect = undefined;
+		// 				} else {
+		// 					sap.m.MessageBox.warning("Please select the trade");
+		// 					that.oTableSelect = undefined;
+		// 				}
+		// 			}
 
-				},
-				error: function () {
-					sap.ui.getCore().SelectedTrade = that.selectedTrade;
-					sap.ui.getCore().SelectedTradeStatus = "";
-					if (that.oTableSelectPath != undefined) {
-						that.getRouter().navTo("VehicleTrade_CreateSingle", {
-							SelectedTrade: that.oTableSelectPath
-						});
-						that.oTableSelect = undefined;
-					} else {
-						sap.m.MessageBox.warning("Please select the trade");
-						that.oTableSelect = undefined;
-					}
-				}
+		// 		},
+		// 		error: function () {
+		// 			sap.ui.getCore().SelectedTrade = that.selectedTrade;
+		// 			sap.ui.getCore().SelectedTradeStatus = "";
+		// 			if (that.oTableSelectPath != undefined) {
+		// 				that.getRouter().navTo("VehicleTrade_CreateSingle", {
+		// 					SelectedTrade: that.oTableSelectPath
+		// 				});
+		// 				that.oTableSelect = undefined;
+		// 			} else {
+		// 				sap.m.MessageBox.warning("Please select the trade");
+		// 				that.oTableSelect = undefined;
+		// 			}
+		// 		}
 
-			});
+		// 	});
 
-		},
+		// },
 
 		onRouteMatched: function (oEvent) {
 			debugger;
@@ -1266,8 +1266,9 @@ sap.ui.define([
 			var Status = this.getView().byId("VLRStatus").getSelectedKey();
 			var selectedSuffix = this.getView().byId("VLRSuffix").getSelectedKey();
 
+               var exportNoDataToExcel = this.getModel("i18n").getResourceBundle().getText("exportNoDataToExcel");
 			if (Context.length == 0) {
-				sap.m.MessageBox.warning("No data is available to export");
+				sap.m.MessageBox.warning(exportNoDataToExcel);//"No data is available to export to excel"
 				return;
 			} else {
 				// var items = Context.map(function (oEvent) {
@@ -2177,6 +2178,8 @@ sap.ui.define([
 			var aTable = this.getView().byId("table1VSR");
 			var aContexts = aTable.getSelectedContexts();
 			// based onthe divisino pick the stock code. 
+			            var pullbackErrorMessage = this.getModel("i18n").getResourceBundle().getText("pullbackErrorMessage");
+			exportNoDataToExcel
 			if (this.sDivision == "10") {
 				var zoneStockCode = this.zoneStockCode;
 			} else if (this.sDivision == "20") {
@@ -2185,7 +2188,7 @@ sap.ui.define([
 
 			if (aContexts.length === 0) {
 				// raise an error message.  
-				sap.m.MessageBox.error("Please select a vehicle to pull back to Zone Stock"); // TODO: french text needed. 
+				sap.m.MessageBox.error(pullbackErrorMessage); // "Please select a vehicle to pull back to Zone Stock"
 			} else {
 
 				var pullDataToSAP = [];
@@ -2223,15 +2226,17 @@ sap.ui.define([
 
 							});
 						} else {
-							// do not allow pull. 
-							sap.m.MessageBox.warning("The vehicle belongs to a different zone and is not allowed, Please unselect this Vehicle " + value.zzvtn); // TODO: french text needed. 
+							// do not allow pull. "The vehicle belongs to a different zone, pull is not allowed "
+							var vehicleBelongstoDifferentZone = this.getModel("i18n").getResourceBundle().getText("vehicleBelongstoDifferentZone");
+							sap.m.MessageBox.warning( vehicleBelongstoDifferentZone + value.zzmoyr + " " + value.matnr  );  
 							errored = true;
 							break;
 
 						}
 					} else {
 						// do not allow pull.
-						sap.m.MessageBox.warning("The selected Vehichle has wrong trading indicator so no pull allowed " + value.zzvtn); // TODO: french text needed. 
+							var selectedVehicleTradingIndicator = this.getModel("i18n").getResourceBundle().getText("selectedVehicleTradingIndicator");
+						sap.m.MessageBox.warning(selectedVehicleTradingIndicator + value.zzmoyr + " " + value.matnr ); // "The selected Vehichle has wrong trading indicator, pull is not allowed " 
 						errored = true;
 						break;
 					}
@@ -2390,39 +2395,10 @@ sap.ui.define([
 			this.getView().setModel(sapMessage, "messagesFromSAP");
 				
 
-			// var showRecordSaved = this._oResourceBundle.getText("RECORD_PULL_SUCCESS");
-			// var errorExist = false;
-			// for (var i = 0; i < sapMessage.length; i++) {
-			// 	if (sapMessage[i].messsageType == "Error") {
-			// 		var showRecordSaved = this._oResourceBundle.getText("RECORD_PULL_ERROR");
-			// 		var errorExist = true;
-			// 		break;
-			// 	}
-
-			// }
-
-			// sap.m.MessageToast.show(showRecordSaved, {
-			// 	duration: 3000, // default
-			// 	width: "15em", // default
-			// 	my: "center middle",
-			// 	at: "center middle",
-			// 	of: window, // default
-			// 	offset: "0 0", // default
-			// 	collision: "fit fit", // default
-			// 	onClose: null, // default
-			// 	autoClose: true, // default
-			// 	animationTimingFunction: "ease", // default
-			// 	animationDuration: 1000, // default
-			// 	closeOnBrowserNavigation: false // default
-			// });
-			// if (errorExist == true) {
-			// 	this._showColor("Red", '#cc1919');
-			// }
+ 
             this.returningFromPull = true;
             this.onRouteMatched();
-			// this.getRouter().navTo("VehicleSearcResultsForZoneUser", {
-			// 	DataClicked: "Yes"
-			// });
+ 
 
 		},
 		_showColor: function (Flag, color) {
@@ -2440,7 +2416,7 @@ sap.ui.define([
 			
 		},
 		populateTheMessageToScreen: function (oEvent) {
-			debugger;
+	 
 			var oMessageTemplate = new sap.m.MessageItem({
 				type: '{type}',
 				title: '{title}',
@@ -2457,9 +2433,10 @@ sap.ui.define([
 			
 														$.each(oModelMessageData, function (i, receivedData) {
 													           if (receivedData.messsageType == "Error") {
-													           	   var locTitle = "Error Message";
+													           	   //var locTitle = "Error Message";
+													           	   var locTitle = this.getModel("i18n").getResourceBundle().getText("errorMesagePull");
 													           } else {
-													           	   var locTitle = 'Success message';
+													           	   var locTitle = this.getModel("i18n").getResourceBundle().getText("successMessagePull");
 													           }
 													        
 																aMockMessages.push

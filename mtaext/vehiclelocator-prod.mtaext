@@ -1,0 +1,14 @@
+_schema-version: "3.1"
+ID: vehiclelocatorandtrade.prod
+extends: vehiclelocatorandtrade
+
+modules:
+ - name: vehiclelocatorandtrade-node
+   parameters:
+      host: tci-${app-name}
+ - name: vehiclelocatorandtrade-xsjs
+   parameters:
+      host: tci-${app-name}
+ - name: vehiclelocatorandtrade
+   parameters:
+      host: tci-${app-name}
