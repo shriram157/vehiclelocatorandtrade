@@ -708,9 +708,18 @@ sap.ui.define([
 			var Model = that.getView().byId("McCmbo").getSelectedKey();
 			var Model_Year = that.getView().byId("MoyearCombo").getSelectedKey();
 			this.nodeJsUrl = this.sPrefix + "/node";
-			that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_CATALOGUE_SRV";
-			var Suffix = that.oDataUrl + "/zc_configuration?$filter=Model eq '" + Model +
+			
+			
+			// that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_CATALOGUE_SRV";
+			// var Suffix = that.oDataUrl + "/zc_configuration?$filter=Model eq '" + Model +
+			// 	"'and ModelYear eq '" + Model_Year + "'";
+				
+			// new suffixes. 23rd May 
+			
+						that.oDataUrl = this.nodeJsUrl + "/Z_DEALER_TRADE_REQUEST_SRV";
+			var Suffix = that.oDataUrl + "/ZC_suffix_VL?$filter=Model eq '" + Model +
 				"'and ModelYear eq '" + Model_Year + "'";
+				
 			var ajax3 = $.ajax({
 				dataType: "json",
 				xhrFields: //
