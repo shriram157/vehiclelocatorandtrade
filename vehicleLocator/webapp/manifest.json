@@ -100,9 +100,11 @@
 					"defaultOperationMode": "Server",
 					"defaultBindingMode": "OneWay",
 					"defaultCountMode": "Request",
-				 
 					"json": true,
-					"useBatch": false
+					"useBatch": false,
+					"headers": {
+						"X-Requested-With": "XMLHttpRequest"
+					}
 				},
 				"dataSource": "xsodata",
 				"preload": false
@@ -113,9 +115,11 @@
 					"defaultOperationMode": "Server",
 					"defaultBindingMode": "OneWay",
 					"defaultCountMode": "Request",
-				 
 					"json": true,
-					"useBatch": false
+					"useBatch": false,
+					"headers": {
+						"X-Requested-With": "XMLHttpRequest"
+					}
 				},
 				"dataSource": "ModelBlockS",
 				"preload": false
@@ -126,9 +130,11 @@
 					"defaultOperationMode": "Server",
 					"defaultBindingMode": "OneWay",
 					"defaultCountMode": "Request",
-				 
 					"json": true,
-					"useBatch": false
+					"useBatch": false,
+					"headers": {
+						"X-Requested-With": "XMLHttpRequest"
+					}
 				},
 				"dataSource": "VehicleS",
 				"preload": false
@@ -139,9 +145,11 @@
 					"defaultOperationMode": "Server",
 					"defaultBindingMode": "OneWay",
 					"defaultCountMode": "Request",
-				 
 					"json": true,
-					"useBatch": false
+					"useBatch": false,
+					"headers": {
+						"X-Requested-With": "XMLHttpRequest"
+					}
 				},
 				"dataSource": "DealersS",
 				"preload": false
