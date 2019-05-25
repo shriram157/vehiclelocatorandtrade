@@ -5,13 +5,24 @@ extends: vehiclelocatorandtrade
 modules:
  - name: vehiclelocatorandtrade-node
    parameters:
-      host: tci-dev-${app-name}
+      host: dev-vehiclelocatorandtrade-node
+      domain: scp.toyota.ca
    properties:
       MOCK_USER_MODE: true
       MOCK_USER_ORIGIN: d36z7bqhz1-GSR-Neo-to-CF
  - name: vehiclelocatorandtrade-xsjs
    parameters:
-      host: tci-dev-${app-name}
+      host: dev-vehiclelocatorandtrade-xsjs
+      domain: scp.toyota.ca
  - name: vehiclelocatorandtrade
    parameters:
-      host: tci-dev-${app-name}
+      host: dev-vehiclelocatorandtrade
+      domain: scp.toyota.ca
+
+resources:
+ - name: uaa_vehiclelocatorandtrade
+   parameters:
+      config:
+         oauth2-configuration:
+            redirect-uris:
+               - https://dev-vehiclelocatorandtrade.scp.toyota.ca/login/callback
