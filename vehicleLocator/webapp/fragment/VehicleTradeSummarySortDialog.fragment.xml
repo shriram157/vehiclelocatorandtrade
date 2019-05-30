@@ -1,6 +1,6 @@
  <core:FragmentDefinition xmlns="sap.m"
                          xmlns:core="sap.ui.core">
-    <ViewSettingsDialog confirm="handleConfirm" cancel="handleCancel" id="vsd4">
+    <ViewSettingsDialog confirm="handleConfirm" cancel="handleCancel" id="vsd4" title="{i18n>sortBy}">
         <sortItems>
             <ViewSettingsItem selected="true" key="Trade_Id" text="{i18n>Request}" />
             

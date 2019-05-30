@@ -103,7 +103,7 @@
 									<!--	<Text text="{i18n>To}" id="tolabid" wrapping='true'/>-->
 									<!--</HBox>-->
 								</VBox>
-								<Label text="{i18n>PropsedETAtoNewDealer} - {i18n>From}" id="prpdlabid"/>
+								<Label text="{i18n>PropsedETAtoNewDealer} - {i18n>From}" id="prpdlabid" wrapping="true"/>
 								<VBox>
 									<HBox>
 										<Text text="{path:'TradeModel>Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate'}" id="prpid"  
@@ -173,7 +173,7 @@
 										<!--<Text text="{i18n>To}" id="ototid" visible="false"/>-->
 									</HBox>
 								</VBox>
-								<Label text="{i18n>PropsedETAtoNewDealer}- {i18n>From}" id="propetid" visible="false"/>
+								<Label text="{i18n>PropsedETAtoNewDealer}- {i18n>From}" id="propetid" visible="false"  wrapping="true"/>
 								<VBox>
 									<HBox>
 										<Text

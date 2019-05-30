@@ -1,0 +1,25 @@
+_schema-version: "3.1"
+ID: vehiclelocatorandtrade.prod
+extends: vehiclelocatorandtrade
+
+modules:
+ - name: vehiclelocatorandtrade-node
+   parameters:
+      host: vehiclelocatorandtrade-node
+      domain: scp.toyota.ca
+ - name: vehiclelocatorandtrade-xsjs
+   parameters:
+      host: vehiclelocatorandtrade-xsjs
+      domain: scp.toyota.ca
+ - name: vehiclelocatorandtrade
+   parameters:
+      host: vehiclelocatorandtrade
+      domain: scp.toyota.ca
+
+resources:
+ - name: uaa_vehiclelocatorandtrade
+   parameters:
+      config:
+         oauth2-configuration:
+            redirect-uris:
+               - https://vehiclelocatorandtrade.scp.toyota.ca/login/callback

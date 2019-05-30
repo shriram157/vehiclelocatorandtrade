@@ -1077,7 +1077,8 @@ sap.ui.define([
 			oAddCommentsArea: function () {
 			var Comment = this.getView().byId("oComments").getValue();
 			if (Comment == "") {
-				sap.m.MessageBox.error("Please enter comment");
+						var sTextFromi18n = this.getView().getModel("i18n").getResourceBundle().getText("pleaseEnterComment");
+				sap.m.MessageBox.error(sTextFromi18n);   //"Please enter comment"
 			} else {
 
 				// if (this.getView().byId("tableVrade").getModel() != undefined) {
@@ -1687,9 +1688,10 @@ sap.ui.define([
 			});
 			var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
 			// that.getView().getModel('TradeRequestModel')
+						var sTextFromi18n = that.getView().getModel("i18n").getResourceBundle().getText("updateSuccessfulNavigateBack");
 			that.oDataModel.update(UpdatedTreadeEntity, oEntry, null, function (s) {
-				//	that.getView().byId("oTrdareqstat").setText("Request Sent");
-						sap.m.MessageBox.information("Update Successful, Navigate back using the Back Buttons");   //GSR0805
+				//	that.getView().byId("oTrdareqstat").setText("Request Sent");"Update Successful, Navigate back using the Back Buttons"
+						sap.m.MessageBox.information(sTextFromi18n);   //GSR0805
 						
 						
 	//  after the comments are updated in order for the screen to refresh lets call the route matched again. 

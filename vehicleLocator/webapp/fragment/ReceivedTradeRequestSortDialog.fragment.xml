@@ -2,7 +2,7 @@
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core">
 	<ViewSettingsDialog
-		confirm="handleConfirmReceiveTradeRequest">
+		confirm="handleConfirmReceiveTradeRequest" title="{i18n>sortBy}">
 		<sortItems>
 			<ViewSettingsItem selected="true" key="Trade_Id"  text="{i18n>Request}" />
 			<ViewSettingsItem key="Requested_Dealer" text="{i18n>RequestedDealer}"  />

@@ -98,7 +98,11 @@
 											</layoutData>
 										</Label>
 										<ComboBox id="VLRColor" selectionChange="onColourChange" class="sapUiTinyMarginBegin" items="{/}" width="300px">
-											<core:ListItem text="{zzextcol} - {mktg_desc_en}" key="{zzextcol}"/>
+											<core:ListItem 
+										
+											 text = "{zzextcol} - {=${languageModel>/SPRAS}==='English' ? ${mktg_desc_en}:${mktg_desc_fr} }"
+
+											key="{zzextcol}"/>
 											<layoutData>
 												<l:GridData span="L2 M2 S8"/>
 											</layoutData>
@@ -162,9 +166,9 @@
 						<Column id="Province1" demandPopin="true" minScreenWidth="Tablet" hAlign="Left">
 							<Text text="{i18n>Province}"/>
 						</Column>
-						<Column id="zzvtn1" demandPopin="true" minScreenWidth="Tablet" hAlign="Left">
-							<Text text="VTN"/>
-						</Column>
+						<!--<Column id="zzvtn1" demandPopin="true" minScreenWidth="Tablet" hAlign="Left">-->
+						<!--	<Text text="VTN"/>-->
+						<!--</Column>-->
 					</columns>
 					<items>
 						<ColumnListItem  id="onlinkPress">
@@ -193,7 +197,7 @@
 									text="{parts: [{path: 'vehicleSearchTableModel>non_D_flag'},{path: 'vehicleSearchTableModel&gt;pd_flag'}], formatter : 'vehicleLocator.Formatter.Formatter.AccessoryInstall'}"/>
 								<Text text="{vehicleSearchTableModel>ort01}" wrapping="false"/>
 								<Text text="{vehicleSearchTableModel>bezei}" wrapping="false"/>
-								<Text text="{vehicleSearchTableModel>zzvtn}" wrapping="false"/>
+								<!--<Text text="{vehicleSearchTableModel>zzvtn}" wrapping="false"/>-->
 							</cells>
 						</ColumnListItem>
 					</items>

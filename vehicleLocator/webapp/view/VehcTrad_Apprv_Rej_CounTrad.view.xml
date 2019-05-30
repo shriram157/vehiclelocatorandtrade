@@ -94,7 +94,7 @@
 									 
 									</HBox>
 								</VBox>
-								<Label text="{i18n>PropsedETAtoNewDealer} - {i18n>From}" id="prlabid"/>
+								<Label text="{i18n>PropsedETAtoNewDealer} - {i18n>From}" id="prlabid"  wrapping="true"/>
 								<VBox>
 									<HBox>
 										<Text text="{path:'Req_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="prpetid"
@@ -178,7 +178,7 @@
 									</HBox>
 								</VBox>
 					 
-								<Label text="{i18n>PropsedETAtoNewDealer} - {i18n>From}" id="prolabid"/>
+								<Label text="{i18n>PropsedETAtoNewDealer} - {i18n>From}" id="prolabid"  wrapping="true"/>
 								<VBox>
 									<HBox>
 										<Text text="{path:'Off_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="prptid"
@@ -385,7 +385,7 @@
 									<VBox>
 								<Text text="{Url}" />
 							    <!--<Label text="" />-->
-								<Button text="{i18n>AddComments}" id="oAddbutton" width="142px" enabled="false" press="oAddCommentsArea">
+								<Button text="{i18n>AddComments}" id="oAddbutton" width="auto" enabled="false" press="oAddCommentsArea">
 									<layoutData>
 											<l:GridData span="L4 M12 S3"/>
 									</layoutData>

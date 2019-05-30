@@ -446,7 +446,7 @@ sap.ui.define([
 			if (this.getView().byId("VT_CStradinRet").getSelectedKey() == "Yes" && this.getView().byId("FromFourth").getText() == "") {
 				var sTextFromi18n = this.getView().getModel("i18n").getResourceBundle().getText("pleaseSelectVehicle");
 				
-					sap.m.MessageBox.warning(sTextFromi18n);
+					sap.m.MessageBox.error(sTextFromi18n);
 
 
 				return;
@@ -462,8 +462,10 @@ sap.ui.define([
 
 			//------ requested dealer info//
 			var TradeRequest = this.getView().byId("VT_CStradinRet").getSelectedKey();
+			//pleaseSelectTradeInReturn
+				var sTextFromi18nError = this.getView().getModel("i18n").getResourceBundle().getText("pleaseSelectTradeInReturn");
 			if (TradeRequest == "") {
-				sap.m.MessageBox.warning("Please select Trade in Return");
+				sap.m.MessageBox.error(sTextFromi18nError);    //"Please select Trade in Return"
 				return;
 			} else {
 				var that = this;
@@ -542,7 +544,8 @@ sap.ui.define([
 					 
 						var Req_Current_ETA_ToDate = that.getView().byId("totxtid").getText();
 							var Req_Current_ETA_ToDate = Req_Current_ETA_ToDate.replace("To : ", "");
-						
+							
+							var Req_Current_ETA_ToDate = Req_Current_ETA_ToDate.replace("À : ", "");
 						if (Req_Current_ETA_ToDate != "" && Req_Current_ETA_ToDate != " ") {
 							var Req_Current_ETA_To = new Date(oDateFormat.format(new Date(Req_Current_ETA_ToDate)));
 						} else {
@@ -558,6 +561,7 @@ sap.ui.define([
 						}
 						var Req_Proposed_ETA_ToDate = that.getView().byId("otextlabel").getText();
 									var Req_Proposed_ETA_ToDate = Req_Proposed_ETA_ToDate.replace("To : ", "");
+									var Req_Proposed_ETA_ToDate = Req_Proposed_ETA_ToDate.replace("À : ", "");
 						if (Req_Proposed_ETA_ToDate != "") {
 							var Req_Proposed_ETA_To = new Date(oDateFormat.format(new Date(Req_Proposed_ETA_ToDate)));
 						} else {
@@ -572,6 +576,7 @@ sap.ui.define([
 						}
 						var Off_Current_ETA_ToDate = that.getView().byId("labetxteid").getText();
 						var Off_Current_ETA_ToDate = Off_Current_ETA_ToDate.replace("To : ", "");
+							var Off_Current_ETA_ToDate = Off_Current_ETA_ToDate.replace("À : ", "");
 
 						if (Off_Current_ETA_ToDate != "") {
 							var Off_Current_ETA_To = new Date(oDateFormat.format(new Date(Off_Current_ETA_ToDate)));
@@ -588,6 +593,7 @@ sap.ui.define([
 
 						var Off_Proposed_ETA_ToDate = that.getView().byId("idlabeal").getText();
 						var Off_Proposed_ETA_ToDate = Off_Proposed_ETA_ToDate.replace("To : ", "");
+						var Off_Proposed_ETA_ToDate = Off_Proposed_ETA_ToDate.replace("À : ", "");
 						
 						if (Off_Proposed_ETA_ToDate != "") {
 							var Off_Proposed_ETA_To = new Date(oDateFormat.format(new Date(Off_Proposed_ETA_ToDate)));
@@ -629,7 +635,7 @@ sap.ui.define([
 							"Trade_Id": Trade_Id,
 							"Trade_Status": Trade_Status,
 							"Requesting_Dealer": Requesting_Dealer,
-							"Requesting_Dealer_Name": Requesting_Dealer_Name,
+							"Requesting_Dealer_Name": Requesting_Dealer_Name.substring(0, 35),        //str.substring(0, 10);
 							"Requested_Vtn": Requested_Vtn,
 							"Offered_Vtn": Offered_Vtn,
 							"Trade_Return": Trade_Return,
@@ -646,7 +652,7 @@ sap.ui.define([
 							"Created_On": new Date(Created_On),
 							"Changed_on": new Date(Changed_on),
 							"Requested_Dealer": Requested_Dealer,
-							"Requested_Dealer_Name": Requested_Dealer_Name
+							"Requested_Dealer_Name": Requested_Dealer_Name.substring(0, 35)
 
 						};
 
@@ -977,11 +983,11 @@ sap.ui.define([
 			var Entry1 = {
 
 				SPRAS: "E",
-				Model_Desc: oModel_DescReq,
-				Series_Desc: oSeries_DescReq,
-				Suffix_Desc: oSuffix_DescReq,
-				Int_Colour_Desc: oInt_Colour_DescReq,
-				Ext_Colour_Desc: oExt_Colour_DescReq
+				Model_Desc: oModel_DescReq.substring(0, 40),
+				Series_Desc: oSeries_DescReq.substring(0, 50),
+				Suffix_Desc: oSuffix_DescReq.substring(0, 30),
+				Int_Colour_Desc: oInt_Colour_DescReq.substring(0, 30),
+				Ext_Colour_Desc: oExt_Colour_DescReq.substring(0, 50),
 
 			};
 			Entry1["Trade_Id"] = oEntry.Trade_Id;
@@ -998,11 +1004,11 @@ sap.ui.define([
 			var Entry2 = {
 
 				SPRAS: "F",
-				Model_Desc: oModel_DescReqF,
-				Series_Desc: oSeries_Desc1ReqF,
-				Suffix_Desc: oSuffix_Desc1ReqF,
-				Int_Colour_Desc: oInt_Colour_Desc1ReqF,
-				Ext_Colour_Desc: oExt_Colour_Desc1ReqF
+				Model_Desc: oModel_DescReqF.substring(0, 40),
+				Series_Desc: oSeries_Desc1ReqF.substring(0, 50),
+				Suffix_Desc: oSuffix_Desc1ReqF.substring(0, 30),
+				Int_Colour_Desc: oInt_Colour_Desc1ReqF.substring(0, 30),
+				Ext_Colour_Desc: oExt_Colour_Desc1ReqF.substring(0, 50)
 
 			};
 			Entry2["Trade_Id"] = oEntry.Trade_Id;
@@ -1020,11 +1026,11 @@ sap.ui.define([
 				var Entry3 = {
 
 					SPRAS: "E",
-					Model_Desc: oModel_Desc,
-					Series_Desc: oSeries_Desc,
-					Suffix_Desc: oSuffix_Desc,
-					Int_Colour_Desc: oInt_Colour_Desc,
-					Ext_Colour_Desc: oExt_Colour_Desc
+					Model_Desc: oModel_Desc.substring(0, 40),
+					Series_Desc: oSeries_Desc.substring(0, 50),
+					Suffix_Desc: oSuffix_Desc.substring(0, 30),
+					Int_Colour_Desc: oInt_Colour_Desc.substring(0, 30),
+					Ext_Colour_Desc: oExt_Colour_Desc.substring(0, 50)
 
 				};
 				Entry3["Trade_Id"] = oEntry.Trade_Id;
@@ -1039,11 +1045,11 @@ sap.ui.define([
 				var Entry4 = {
 
 					SPRAS: "F",
-					Model_Desc: oModel_Desc1,
-					Series_Desc: oSeries_Desc1,
-					Suffix_Desc: oSuffix_Desc1,
-					Int_Colour_Desc: oInt_Colour_Desc1,
-					Ext_Colour_Desc: oExt_Colour_Desc1
+					Model_Desc: oModel_Desc1.substring(0, 40),
+					Series_Desc: oSeries_Desc1.substring(0, 50),
+					Suffix_Desc: oSuffix_Desc1.substring(0, 30),
+					Int_Colour_Desc: oInt_Colour_Desc1.substring(0, 30),
+					Ext_Colour_Desc: oExt_Colour_Desc1.substring(0, 50)
 
 				};
 				Entry4["Trade_Id"] = oEntry.Trade_Id;
@@ -1171,10 +1177,7 @@ sap.ui.define([
 						LoginUser: JSON.stringify(Obj)
 
 					});		
-				
-				
-				
-				
+ 
 		}
 
 

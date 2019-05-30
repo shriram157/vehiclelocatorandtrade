@@ -34,8 +34,7 @@ sap.ui.define([
 				this.currentScopeUrl = "/userDetails/currentScopesForUser";
 
 			}
- 
- 
+
 			//  ajax call to BP Data and Scope Data
 			var oModelDetailview = this.getView().getModel("detailView");
 			var that = this;
@@ -51,8 +50,8 @@ sap.ui.define([
 
 					var userType = oData.loggedUserType[0];
 
-					//	var userType = "Zone_User"; // TODO: Remove before deployment locatyest only - GSR
-						 var userType = "Dealer_User"; // TODO: Remove before deployment locatyest only - GSR
+					 //var userType = "Zone_User"; // TODO: Remove before deployment locatyest only - GSR
+					//var userType = "Dealer_User"; // TODO: Remove before deployment locatyest only - GSR
 
 					switch (userType) {
 					case "Dealer_User":
@@ -86,12 +85,8 @@ sap.ui.define([
 			var isLocaleSent = window.location.search.match(/language=([^&]*)/i);
 			if (isLocaleSent) {
 				var sSelectedLocale = window.location.search.match(/language=([^&]*)/i)[1];
-			} else {
-				var sSelectedLocale = "EN"; // default is english 
 			}
-			var sSelectedLocale = "EN";
-			//selected language. 
-			// if (window.location.search == "?language=fr") {
+
 			if (sSelectedLocale == "fr") {
 				var i18nModel = new sap.ui.model.resource.ResourceModel({
 					bundleUrl: "i18n/i18n_fr.properties",
@@ -120,26 +115,21 @@ sap.ui.define([
 			this._setTheLogo();
 
 			this.bindMonthYear();
-			
-			this.getRouter().getRoute("VehicleLocSearch").attachPatternMatched(this.onRouteMatched, this);	
-			
-			
-			
+
+			this.getRouter().getRoute("VehicleLocSearch").attachPatternMatched(this.onRouteMatched, this);
+
 		},
 
+		onRouteMatched: function (oEvent) {
 
-       		onRouteMatched: function (oEvent) {
-       			
-             //resetting the data to its initial state.	
-       			             var tempTabData =[];
-       						var oDumModel = new sap.ui.model.json.JSONModel(tempTabData);
-					oDumModel.setSizeLimit(100000);
-					sap.ui.getCore().setModel(oDumModel, "SearchedData");	
-       			
-       			
-       			
-       		},
+			this._setTheLanguage();
+			//resetting the data to its initial state.	
+			var tempTabData = [];
+			var oDumModel = new sap.ui.model.json.JSONModel(tempTabData);
+			oDumModel.setSizeLimit(100000);
+			sap.ui.getCore().setModel(oDumModel, "SearchedData");
 
+		},
 
 		_makeTheSecondCallForBPDetails: function () {
 			var that = this;
@@ -180,7 +170,7 @@ sap.ui.define([
 
 						// for toyota login show only toyota dealers, for lexus show only lexus. 
 
-						if (item.Division == that.sDivision || item.Division == "Dual") {  
+						if (item.Division == that.sDivision || item.Division == "Dual") {
 
 							BpDealer.push({
 								"BusinessPartnerKey": item.BusinessPartnerKey,
@@ -308,6 +298,8 @@ sap.ui.define([
 		onAfterRendering: function () {
 
 			var that = this;
+
+			this._setTheLanguage();
 			var comBoboxName = this.getView().byId("MoyearCombo");
 			var MoyearComboId = (this.getView().byId("MoyearCombo").getId()) + "-inner";
 			comBoboxName.onAfterRendering = function () {
@@ -462,7 +454,7 @@ sap.ui.define([
 				// add your code here. // TODO:  
 				break;
 			case "Zone":
-			 
+
 				{
 					var SelectedZone = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].Zone;
 					switch (SelectedZone) {
@@ -515,7 +507,7 @@ sap.ui.define([
 
 				break;
 			default:
-		               // this may not happen
+				// this may not happen
 			}
 
 			//  try to append the zone user with the zone data to which he belons 
@@ -556,10 +548,14 @@ sap.ui.define([
 						for (var b = 0; b < SeriesDescription.length; b++) {
 
 							if (that.Fullurls[a].TCISeries == SeriesDescription[b].ModelSeriesNo) {
-								that.Fullurls[a].TCISeriesDescriptionEN = SeriesDescription[b].TCISeriesDescriptionEN;
-								that.Fullurls[a].TCISeriesDescriptionFR = SeriesDescription[b].TCISeriesDescriptionFR;
-								that.Fullurls[a].Division = SeriesDescription[b].Division;
-								that.Fullurls[a].SPRAS = SPRAS;
+								// exclude landcruiser 26th May
+								if (that.Fullurls[a].TCISeries != "L/C") {
+									that.Fullurls[a].TCISeriesDescriptionEN = SeriesDescription[b].TCISeriesDescriptionEN;
+									that.Fullurls[a].TCISeriesDescriptionFR = SeriesDescription[b].TCISeriesDescriptionFR;
+									that.Fullurls[a].Division = SeriesDescription[b].Division;
+									that.Fullurls[a].SPRAS = SPRAS;
+									that.Fullurls[a].zzzadddata4 = Number(SeriesDescription[b].zzzadddata4);
+								}
 
 							}
 						}
@@ -597,6 +593,7 @@ sap.ui.define([
 
 					}
 
+					that.Fullurls[i].zzzadddata4 = Number(that.Fullurls[i].zzzadddata4); //GSR2405
 				}
 
 				if (that.sDivision == "10") {
@@ -612,6 +609,11 @@ sap.ui.define([
 				that.Fullurls = that.Fullurls.filter(function (x) {
 					return x.Division == that.Division;
 				});
+
+				/*global  _:true*/
+				// that.Fullurls = _.sortBy(that.Fullurls, "zzzadddata1"); // this is the sort
+				that.Fullurls = _.sortBy(that.Fullurls, "zzzadddata4");
+
 				var SeriesModel = new sap.ui.model.json.JSONModel(that.Fullurls);
 				that.getView().setModel(SeriesModel, "SeriesData");
 				that.getView().byId("SeriesCmbo").setModel(SeriesModel);
@@ -708,18 +710,17 @@ sap.ui.define([
 			var Model = that.getView().byId("McCmbo").getSelectedKey();
 			var Model_Year = that.getView().byId("MoyearCombo").getSelectedKey();
 			this.nodeJsUrl = this.sPrefix + "/node";
-			
-			
+
 			// that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_CATALOGUE_SRV";
 			// var Suffix = that.oDataUrl + "/zc_configuration?$filter=Model eq '" + Model +
 			// 	"'and ModelYear eq '" + Model_Year + "'";
-				
+
 			// new suffixes. 23rd May 
-			
-						that.oDataUrl = this.nodeJsUrl + "/Z_DEALER_TRADE_REQUEST_SRV";
+
+			that.oDataUrl = this.nodeJsUrl + "/Z_DEALER_TRADE_REQUEST_SRV";
 			var Suffix = that.oDataUrl + "/ZC_suffix_VL?$filter=Model eq '" + Model +
 				"'and ModelYear eq '" + Model_Year + "'";
-				
+
 			var ajax3 = $.ajax({
 				dataType: "json",
 				xhrFields: //
@@ -729,11 +730,8 @@ sap.ui.define([
 				url: Suffix,
 				async: true,
 				success: function (result) {
- 
-					
+
 					var Suffix = result.d.results;
-
-
 
 					var SuffixModel = new sap.ui.model.json.JSONModel(Suffix);
 					sap.ui.getCore().setModel(SuffixModel, "SuffixModel");
@@ -767,25 +765,25 @@ sap.ui.define([
 				// var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language;  //2603
 				var SPRAS = that.sCurrentLocaleD;
 				var oCombine = [];
- 
+
 				for (var a = 0; a < that.Fullurls.length; a++) {
 					for (var b = 0; b < SufixDescription.length; b++) {
- 
-						
-						oCombine.push({
- 
-							"Suffix": that.Fullurls[a].Suffix,
-							"SuffixDescriptionEN": that.Fullurls[a].SuffixDescriptionEN,
-							"SuffixDescriptionFR": that.Fullurls[a].SuffixDescriptionFR,
-							/* "MarktgIntDescEN": SufixDescription[b].int_desc_en,*/
-							"mrktg_int_desc_en": SufixDescription[b].mrktg_int_desc_en,
-							"mrktg_int_desc_fr": SufixDescription[b].mrktg_int_desc_fr,
 
-							"SPRAS": SPRAS,
-							"int_c": SufixDescription[b].int_c
-								/*"compareField":_that.temp[n].Suffix+_that.temp1[m].int_desc_en*/
-						});
+						if (that.Fullurls[a].int_trim.substr(2) == SuffixDescription[b].int_c) {
+							oCombine.push({
 
+								"Suffix": that.Fullurls[a].Suffix,
+								"SuffixDescriptionEN": that.Fullurls[a].SuffixDescriptionEN,
+								"SuffixDescriptionFR": that.Fullurls[a].SuffixDescriptionFR,
+								/* "MarktgIntDescEN": SufixDescription[b].int_desc_en,*/
+								"mrktg_int_desc_en": SufixDescription[b].mrktg_int_desc_en,
+								"mrktg_int_desc_fr": SufixDescription[b].mrktg_int_desc_fr,
+
+								"SPRAS": SPRAS,
+								"int_c": SufixDescription[b].int_c
+									/*"compareField":_that.temp[n].Suffix+_that.temp1[m].int_desc_en*/
+							});
+						}
 						/*	if (that.Fullurls[a].Suffix == SufixDescription[b].Suffix) {
 							SufixDescription[b].SuffixDescriptionEN = that.Fullurls[a].SuffixDescriptionEN;
 							SufixDescription[b].SuffixDescriptionFR = that.Fullurls[a].SuffixDescriptionFR;
@@ -794,23 +792,18 @@ sap.ui.define([
 					}
 
 				}
-				
-// need to add ALL
-        // var allText = that._oResourceBundle.getText("ALL");
 
- 	    //      oCombine.push({
-						// 	Suffix: allText,
-						// 		"SuffixDescriptionEN": allText,
-						// 	"SuffixDescriptionFR": allText,
-						// 	// SuffixDescriptionEN: "",
-						// 	// SuffixDescriptionFR:""
-						// 	//	sEtaToData: item.zzprod_month
-						// });
+				// need to add ALL
+				// var allText = that._oResourceBundle.getText("ALL");
 
-
-
-
-				
+				//      oCombine.push({
+				// 	Suffix: allText,
+				// 		"SuffixDescriptionEN": allText,
+				// 	"SuffixDescriptionFR": allText,
+				// 	// SuffixDescriptionEN: "",
+				// 	// SuffixDescriptionFR:""
+				// 	//	sEtaToData: item.zzprod_month
+				// });
 
 				var Suffix = new sap.ui.model.json.JSONModel(oCombine);
 				that.getView().setModel(Suffix, "Suffix");
@@ -818,26 +811,27 @@ sap.ui.define([
 				sap.ui.core.BusyIndicator.hide();
 				/*	var oJsonModelVLS = new sap.ui.model.json.JSONModel(oResults);
 					that.getView().byId("SuffCmbo").setModel(oJsonModelVLS);*/
-					
-					
-					
-					
-		if (oCombine.length != 0) {
 
-				var allText = that._oResourceBundle.getText("ALL");
-				// if (this.getView().byId("VLRSuffix").getItems().filter(function (x) {
-				// 		return x.mProperties.key == "all"
-				// 	}).length == 0) {
+				if (oCombine.length != 0) {
+					if (this.sCurrentLocale == 'EN') {
+						var allText = 'ALL';
+
+					} else {
+						var allText = 'TOUS';
+
+					}
+
+					// var allText = that._oResourceBundle.getText("ALL");
+					// if (this.getView().byId("VLRSuffix").getItems().filter(function (x) {
+					// 		return x.mProperties.key == "all"
+					// 	}).length == 0) {
 					var newItem = new sap.ui.core.Item({
 						key: allText,
 						text: allText
 					});
-					
+
 					this.getView().byId("SuffCmbo").insertItem(newItem);
 				}
-	
-					
-					
 
 			} else {
 				sap.ui.core.BusyIndicator.hide();
@@ -1042,7 +1036,7 @@ sap.ui.define([
 				function () {
 					var SeriesCmbo = that.getView().byId("SeriesCmbo").getSelectedKey();
 					if (SeriesCmbo == "") {
-					    var plsSelectSeries = that.getModel("i18n").getResourceBundle().getText("PlsSelectSeries");
+						var plsSelectSeries = that._oResourceBundle.getText("PlsSelectSeries");
 						sap.m.MessageBox.warning(plsSelectSeries);
 						return;
 					}
@@ -1052,13 +1046,13 @@ sap.ui.define([
 					var McCmbo = that.getView().byId("McCmbo").getSelectedKey();
 					var SeriesCmbo = that.getView().byId("SeriesCmbo").getSelectedKey();
 					if (SeriesCmbo == "") {
-					    var plsSelectSeries = that.getModel("i18n").getResourceBundle().getText("PlsSelectSeries");
+						var plsSelectSeries = that._oResourceBundle.getText("PlsSelectSeries");
 						sap.m.MessageBox.warning(plsSelectSeries);
 						// sap.m.MessageBox.warning("Please select Series");
 						return;
 					} else if (McCmbo == "") {
-			           var PlsSelectModel = that.getModel("i18n").getResourceBundle().getText("PlsSelectModel");
-						sap.m.MessageBox.warning(PlsSelectModel);	
+						var PlsSelectModel = that._oResourceBundle.getText("PlsSelectModel");
+						sap.m.MessageBox.warning(PlsSelectModel);
 						// sap.m.MessageBox.warning("Please select Model Code");
 						return;
 					}
@@ -1069,6 +1063,7 @@ sap.ui.define([
 		onSePress: function () {
 
 			var that = this;
+			this._setTheLanguage();
 			sap.ui.core.BusyIndicator.show();
 			var MoyearCombo = that.getView().byId("MoyearCombo").getSelectedKey();
 			var SeriesCmbo = that.getView().byId("SeriesCmbo").getSelectedKey();
@@ -1087,15 +1082,13 @@ sap.ui.define([
 			//	var suffix = that.getView().byId("SuffCmbo").getSelectedKey();
 
 			/*var vZone = that.getView().byId("Pacific").getSelected();*/
-		    var selectMandtFields = that.getModel("i18n").getResourceBundle().getText("selectMandtFields");
- 
+			var selectMandtFields = that._oResourceBundle.getText("selectMandtFields");
 
 			if (MoyearCombo == "" || MoyearCombo == undefined || MoyearCombo == null) {
 				//	sap.m.MessageBox.error("Please select ModelYear");
 				that.getView().byId("MoyearCombo").setValueState("Error");
-				
-				
-				that.getView().byId("SeriesErrMsgStrip").setText(selectMandtFields);  //selectMandtFields  "select mandetory fields"
+
+				that.getView().byId("SeriesErrMsgStrip").setText(selectMandtFields); //selectMandtFields  "select mandetory fields"
 				that.getView().byId("SeriesErrMsgStrip").setProperty("visible", true);
 				sap.ui.core.BusyIndicator.hide();
 				return;
@@ -1221,7 +1214,6 @@ sap.ui.define([
 			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
 			//  the requested dealer is made as a mandatory parameter, so the beloow changes. 
 			//1704 requesting dealer is introduced. 
-	
 
 			// 		 	if(Dealer_No.length == 10){
 			// 	Dealer_No=Dealer_No.slice(-5);
@@ -1238,41 +1230,30 @@ sap.ui.define([
 
 					oDealer = that.lexusZoneStockCode;
 				}
-				
-		 	if(oDealer.length == 10){
-				// oDealer=oDealer.slice(-6); 
-						oDealer=oDealer.slice(-5);  
-		         	}	
-				
+
+				if (oDealer.length == 10) {
+					// oDealer=oDealer.slice(-6); 
+					oDealer = oDealer.slice(-5);
+				}
 
 			}
 
-		if (SuffCmbo == 'ALL') {
+			if (SuffCmbo == 'ALL' || SuffCmbo == 'TOUS') {
 				// var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '" + McCmbo + "' and endswith (zzintcol,'" + '' +
 				// 	"') and zzmoyr eq '" + MoyearCombo + "'&$format=json";
-				
-				
-						var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=matnr eq '" + McCmbo +
-				"' and endswith (zzintcol,'" + "" + 	"') and zzseries eq '" + SeriesCmbo + "' and zzmoyr eq '" + MoyearCombo + "'&$format=json";
-				
-				
+
+				var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=matnr eq '" + McCmbo +
+					"' and endswith (zzintcol,'" + "" + "') and zzseries eq '" + SeriesCmbo + "' and zzmoyr eq '" + MoyearCombo + "'&$format=json";
 
 			} else {
 				// var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '" + McCmbo + "' and endswith (zzintcol,'" + this.intercolor +
 				// 	"') and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + MoyearCombo + "'&$format=json";
-		
-				
-				
-	           var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=matnr eq '" + McCmbo +
+
+				var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=matnr eq '" + McCmbo +
 					"' and endswith (zzintcol,'" + this.intercolor + "') and zzseries eq '" + SeriesCmbo + "' and zzmoyr eq '" +
-					MoyearCombo + "'&$format=json";			
-				
-				
+					MoyearCombo + "'&$format=json";
 
 			}
-
-
-
 
 			// var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=matnr eq '" + McCmbo +
 			// 	"' and endswith (zzintcol,'" + this.intercolor +
@@ -1490,8 +1471,8 @@ sap.ui.define([
 			for (var i = 0; i < allItem.length; i++) {
 				arr.push(allItem[i].getText());
 			}
-			    var selectMandtFields = that.getModel("i18n").getResourceBundle().getText("selectMandtFields");
-			
+			var selectMandtFields = that._oResourceBundle.getText("selectMandtFields");
+
 			if (arr.indexOf(value) < 0 && combo_IdKey == "") {
 				combo_Id.setValueState("Error");
 				combo_Id.setValue();
@@ -1549,10 +1530,9 @@ sap.ui.define([
 				if(SPRAS!="English"){*/
 			/*this.SelectedExteriorColorCode = oEvent.getParameter("selectedItem").oBindingContexts.Suffix.getObject().ExteriorColorCode;
 			this.SelectedTrimInteriorColor = oEvent.getParameter("selectedItem").oBindingContexts.Suffix.getObject().TrimInteriorColor;*/
-			
-			
-			if ( oEvent.getParameter("selectedItem").getText() != "ALL") {
-			this.intercolor = oEvent.getParameter("selectedItem").oBindingContexts.Suffix.getObject().int_c;
+
+			if (oEvent.getParameter("selectedItem").getText() != "ALL" && oEvent.getParameter("selectedItem").getText() != "TOUS") {
+				this.intercolor = oEvent.getParameter("selectedItem").oBindingContexts.Suffix.getObject().int_c;
 			}
 			sap.ui.getCore().SuffixSelectedKey = this.getView().byId("SuffCmbo").getSelectedKey();
 			sap.ui.getCore().SuffixSelectedItem = this.getView().byId("SuffCmbo").getSelectedItem().getText();
@@ -1572,8 +1552,7 @@ sap.ui.define([
 			that.getView().byId("Atlantic").setSelected(false);
 			that.getView().byId("Quebec").setSelected(false);*/
 			//By Sun
-			
-			
+
 			//GSR 0505
 			// this.getOwnerComponent().suffixSelectedIndex = this.getView().byId("SuffCmbo").getSelectedItem().getBindingContext("Suffix").getPath()
 			// 	.split("/")[1] - 0;

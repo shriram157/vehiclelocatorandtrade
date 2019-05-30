@@ -68,9 +68,9 @@
 					</tnt:ToolHeader>
 					<VBox>
 						<OverflowToolbar id="otb1" class="otbVT_Hist">
-							<Label text="{i18n>VehicleTradeHistory}" width="200px" class="vHlabe1clss"/>
+							<Label text="{i18n>VehicleTradeHistory}" width="auto" class="vHlabe1clss"/>
 							<ToolbarSpacer/>
-							<Button id="openMenVTH" class="VLbtn3" text="{i18n>ExporttoExcel}"  type="Accept" press="ExporttoExcellsheet" width="138px"/>
+							<Button id="openMenVTH" class="VLbtn3" text="{i18n>ExporttoExcel}"  type="Accept" press="ExporttoExcellsheet" width="auto"/>
 						</OverflowToolbar>
 						<VBox class="sapUiSmallMargin">
 							<!--	<Table id="tableVTH" width="auto" class="sapUiResponsiveMargin" items="{/}" growingThreshold="150">
@@ -206,7 +206,7 @@
 										<cells>
 											<Link id="tradeHId" text="{Trade_Id}" class="link" subtle="true" press="oTradeHistoryLinkPress" wrapping="false"/>
 											<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="false"/>
-											<Text text="{= ${RequestingDealerVisible} === true ?'To':'From'}" wrapping="false"/>
+											<Text text="{= ${RequestingDealerVisible} === true ? 'To':'From'  }" wrapping="false"/>
 											<Text
 												text="{= ${RequestingDealerVisible} === true ?${Requested_Dealer}:${Requesting_Dealer}}-{= ${RequestingDealerVisible} === true ?${Requested_Dealer_Name}:${Requesting_Dealer_Name}}"/>
 											<Text text="{Requested_Vtn}" wrapping="false"/>

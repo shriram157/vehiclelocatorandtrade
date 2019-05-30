@@ -193,7 +193,7 @@ sap.ui.define(function () {
 				break;
 			case "X": //Update this
 				// return "Canceled";
-				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("Canceled");
+				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("Cancelled");
 				return sTextFromi18n;
 				break;
 			case "R": //Update this

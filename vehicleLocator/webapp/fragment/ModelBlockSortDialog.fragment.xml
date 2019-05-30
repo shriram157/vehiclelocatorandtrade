@@ -2,7 +2,7 @@
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core">
 	<ViewSettingsDialog
-		confirm="handleSortDialogConfirm">
+		confirm="handleSortDialogConfirm" title="{i18n>sortBy}">
 		<sortItems>
 			<ViewSettingsItem text="{i18n>Dealer}" key="ZzblockedDlr" selected="true" />
 			<ViewSettingsItem text="{i18n>Model}" key="Zzmodel" />

@@ -51,7 +51,7 @@
 					
 					<VBox>
 						<OverflowToolbar id="otb1">
-							<Label text="{i18n>VehicleTrade-VehicleSelection}" width="310px" class="vHlabe1clss"/>
+							<Label text="{i18n>VehicleTrade-VehicleSelection}" width="auto" class="vHlabe1clss"/>
 							<ToolbarSpacer/>
 						</OverflowToolbar>
 						<VBox>
@@ -62,8 +62,20 @@
 									<FlexBox width="7px"></FlexBox>
 									<ComboBox placeholder="" width="140%" showSecondaryValues="true" filterSecondaryValues="true" selectionChange="handleoVt_SeriesChange"
 										id="oVt_SeriesCmbo" items="{/}">
-										<core:ListItem text="{TCISeriesDescriptionEN}" key="{TCISeries}" additionalText=""/>
+											<core:ListItem text="{=${SPRAS}==='English' ? ${TCISeriesDescriptionEN}:${TCISeriesDescriptionFR} }" key="{TCISeries}" additionalText=""/>
 									</ComboBox>
+									
+				 
+								<!--<ComboBox placeholder="" width="70%" showSecondaryValues="true" filterSecondaryValues="true" selectionChange="SeriesClickedVLS11"-->
+								<!--	id="SeriesCmbo" items="{path:'/'}" change="handleSeriesChange">-->
+								<!--	<core:ListItem text="{=${SPRAS}==='English' ? ${TCISeriesDescriptionEN}:${TCISeriesDescriptionFR} }" key="{TCISeries}" additionalText=""/>-->
+								<!--</ComboBox>-->
+																
+									
+									
+									
+									
+									
 									<!--	<SearchField width="215px" id="idVehclSerTrad"/>-->
 								</FlexBox>
 							</HBox>

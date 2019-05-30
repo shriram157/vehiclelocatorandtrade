@@ -95,7 +95,7 @@
 								<!--</Text>-->
 								<!--<Text text="" id="tobid"/>-->
 								<!--<Text text="" id="toid"/>-->
-								<Label text="{i18n>PropsedETAtoNewDealer} - {i18n>From}" id="prolabid"/>
+								<Label text="{i18n>PropsedETAtoNewDealer} - {i18n>From}" id="prolabid"  wrapping="true"/>
 								<Text text="{path:'Req_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}  {i18n>To} : {path:'Req_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="prptid">
 		 
 								<!--</Text>-->
@@ -113,7 +113,7 @@
 										<l:GridData span="L3 M12 S3"/>
 									</layoutData>
 								</ComboBox>
-								<Button text="{i18n>SelectVehicle}" id="oSelectBtn" press="onSelectvehcicle" enabled="true">
+								<Button text="{i18n>SelectVehicle}" id="oSelectBtn" press="onSelectvehcicle" enabled="true"   wrapping="true">
 									<layoutData>
 										<l:GridData span="L2 M12 S3"/>
 									</layoutData>
@@ -154,8 +154,8 @@
 					 
 								</Text>
 								<!--<Text text="" id="tolbid"/>-->
-								<!--<Text text=""/>-->
-								<Label text="{i18n>PropsedETAtoNewDealer} -  {i18n>From}" id="prlabid"/>
+								<!--<Text text=""/>--> 
+								<Label text="{i18n>PropsedETAtoNewDealer} -  {i18n>From}" id="prlabid"  wrapping="true"/>
 								<Text text="{path:'/OffredVehicle/Off_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'} {i18n>To} : {path:'/OffredVehicle/Off_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="prpetid">
 	 
 								<!--</Text>-->
@@ -216,7 +216,7 @@
 									<VBox>
 										<Label text="{i18n>Comments}"/>
 										<TextArea width="100%" height="100px" id="oComments" maxLength="150" showExceededText="false"  liveChange="handleLiveChangeText"></TextArea>
-										<Button text="{i18n>AddComments}" id="oAddbutton" width="142px" enabled="true" press="oAddCommentsArea"/>
+										<Button text="{i18n>AddComments}" id="oAddbutton" width="auto" enabled="true" press="oAddCommentsArea"/>
 										<MessageStrip id="zmessagestrip"
 											text="{i18n>TradeCreated} {Created_By} {i18n>On} {path:'Created_On',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}"
 											class="Messagestrip1"/>
@@ -235,12 +235,12 @@
 									<HBox width="100%">
 										<FlexBox width="10px"></FlexBox>
 										<FlexBox height="200px" alignItems="Start" justifyContent="Start">
-											<Button text="{i18n>Updatesubmit}" width="150px" press="oUpdateSubmitbtn" id="oUpdateSubmitbtn"/>
+											<Button text="{i18n>Updatesubmit}" width="100%" press="oUpdateSubmitbtn" id="oUpdateSubmitbtn"/>
 											<FlexBox width="7px"></FlexBox>
 										</FlexBox>
 										<FlexBox width="10px"></FlexBox>
 										<FlexBox height="200px" alignItems="Start" justifyContent="Start">
-											<Button text="{i18n>Update}" width="100px" id="oUpdatePagebtn" press="UpdatePress"/>
+											<Button text="{i18n>Update}" width="100%" id="oUpdatePagebtn" press="UpdatePress"/>
 											<FlexBox width="7px"></FlexBox>
 										</FlexBox>
 										<FlexBox width="10px"></FlexBox>

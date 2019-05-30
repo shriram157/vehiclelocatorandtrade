@@ -54,7 +54,7 @@
 					</tnt:ToolHeader>
 					<VBox>
 						<OverflowToolbar id="otb1">
-							<Label text="{i18n>AddModelBlock}" width="200px" class="vHlabe1clss"/>
+							<Label text="{i18n>AddModelBlock}" width="auto" class="vHlabe1clss"/>
 							<ToolbarSpacer/>
 						</OverflowToolbar>
 					</VBox>

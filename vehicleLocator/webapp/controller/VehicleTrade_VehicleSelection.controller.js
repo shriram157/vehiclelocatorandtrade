@@ -446,7 +446,14 @@ sap.ui.define([
 //  the offered vehicle should send the dealer code of login dealer. 	 23rd MAy. 
 			// var dealercode = that.oSelectedItem.kunnr.slice(-5);
 	             var oReceivedData = sap.ui.getCore().SelectedTrade;
+	             
+	             
+	             if (oReceivedData != undefined) {
 	             var dealercode = oReceivedData.kunnr.slice(-5);
+	             } else {  // when navigating from model block screen, pick a different one. 
+	             var dealercode = this.oSelectedItem.kunnr.slice(-5);
+
+	             }
 
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
@@ -1418,10 +1425,14 @@ sap.ui.define([
 						for (var b = 0; b < SeriesDescription.length; b++) {
 
 							if (that.Fullurls[a].TCISeries == SeriesDescription[b].ModelSeriesNo) {
+											// exclude landcruiser 26th May
+								if ( that.Fullurls[a].TCISeries != "L/C") {
 								that.Fullurls[a].TCISeriesDescriptionEN = SeriesDescription[b].TCISeriesDescriptionEN;
 								that.Fullurls[a].TCISeriesDescriptionFR = SeriesDescription[b].TCISeriesDescriptionFR;
 								that.Fullurls[a].Division = SeriesDescription[b].Division;
 								that.Fullurls[a].SPRAS = SPRAS;
+								that.Fullurls[a].zzzadddata4 = Number(SeriesDescription[b].zzzadddata4);
+								}
 
 							}
 						}
@@ -1457,7 +1468,7 @@ sap.ui.define([
 					} else {
 						that.Fullurls[i].SPRAS = SPRAS;
 					}
-
+             	that.Fullurls[i].zzzadddata4 = Number(that.Fullurls[i].zzzadddata4);   //GSR2405
 				}
 
 				// if (sap.ui.getCore().getModel("LoginBpDealerModel") != undefined) {
@@ -1473,6 +1484,13 @@ sap.ui.define([
 				that.Fullurls = that.Fullurls.filter(function (x) {
 					return x.Division == that.Division;
 				});
+				
+									/*global  _:true*/
+				// this is the sort
+					that.Fullurls = _.sortBy(that.Fullurls, "zzzadddata4");
+				
+				
+				
 				// remove the duplicates also from here. 				
 				var SeriesModelData = new sap.ui.model.json.JSONModel(that.Fullurls).getData(); //TCISeriesDescriptionEN
 				var modelDataNoDuplicates = that.removeDuplicates(SeriesModelData, "TCISeriesDescriptionEN");

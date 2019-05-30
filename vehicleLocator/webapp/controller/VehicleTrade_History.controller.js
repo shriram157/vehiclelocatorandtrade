@@ -218,11 +218,13 @@ sap.ui.define([
 						], true)],
 						async: false,
 						success: function (oData2, oResponse1) {
+							if (oData2.length > 0){
 							TableData[i].Model_Desc = oData2.results[0].Model_Desc;
 							TableData[i].Series_Desc = oData2.results[0].Series_Desc;
 							TableData[i].Suffix_Desc = oData2.results[0].Suffix_Desc;
 							TableData[i].Colour = oData2.results[0].Int_Colour;
 							TableData[i].Ext_Colour_Desc = oData2.results[0].Ext_Colour_Desc;
+							}
 						},
 						error: function (e) {
 
@@ -237,11 +239,13 @@ sap.ui.define([
 						], true)],
 						async: false,
 						success: function (oData2, oResponse1) {
+								if (oData2.length > 0){
 							TableData[i].OffredVehicle.Model_Desc = oData2.results[0].Model_Desc;
 							TableData[i].OffredVehicle.Series_Desc = oData2.results[0].Series_Desc;
 							TableData[i].OffredVehicle.Suffix_Desc = oData2.results[0].Suffix_Desc;
 							TableData[i].OffredVehicle.Colour = oData2.results[0].Int_Colour;
 							TableData[i].OffredVehicle.Ext_Colour_Desc = oData2.results[0].Ext_Colour_Desc;
+								}
 						},
 						error: function (e) {
 
@@ -344,7 +348,16 @@ sap.ui.define([
 					break;
 
 				}
-				var dateformated = this.formatoDate(arrData[i].Changed_on);
+				// var dateformated = this.formatoDate(arrData[i].Changed_on);
+				
+				// var dateformated = this.TradeSummaryoDateTradeHistory(arrData[i].Changed_on);
+				
+				var dateAsReceived = moment.tz((arrData[i].Changed_on), "GMT");
+				var dateformated = moment(dateAsReceived).format("YYYY-MM-DD");
+			 
+				
+				
+				
 				row += '="' + arrData[i].Trade_Id + '","' + tstatus + '","' + RequestingDealerVisible +
 					'",="' + DelearData + '",="' + arrData[i].Requested_Vtn + '",="' + arrData[i].Model + '","' + arrData[i].Suffix +
 					'","' + arrData[i].APX +

@@ -17,64 +17,59 @@ sap.ui.define([
 		onInit: function () {
 			var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
 			var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
-		    this.getView().byId("oDealerCode5").setText(LoggedInDealerCode2);                                
+			this.getView().byId("oDealerCode5").setText(LoggedInDealerCode2);
 			this.getView().byId("oDealerAprvRejCntoffr").setText(LoggedInDealer);
 			var _that = this;
 			oController = this;
-			
-					this._oViewModel = new sap.ui.model.json.JSONModel({
+
+			this._oViewModel = new sap.ui.model.json.JSONModel({
 				visibleForZoneUser: false,
-				 showOrderType: true
+				showOrderType: true
 			});
 
-			this.getView().setModel(this._oViewModel, "detailView");	
-					/// set the logo and Language. 
-            //  set the model on DNC days combobox Model
-         
-         
-               this.idCb = this.byId("VT_ARCDnc");     ///VT_ARCDnc
-               this.bindCombo();
-	
-            
-				this._setTheLanguage();
+			this.getView().setModel(this._oViewModel, "detailView");
+			/// set the logo and Language. 
+			//  set the model on DNC days combobox Model
 
-				this._setTheLogo();	
-			
+			this.idCb = this.byId("VT_ARCDnc"); ///VT_ARCDnc
+			this.bindCombo();
+
+			this._setTheLanguage();
+
+			this._setTheLogo();
+
 			this.getRouter().getRoute("VehcTrad_Apprv_Rej_CounTrad").attachPatternMatched(this.onRouteMatched, this);
 		},
 		onRouteMatched: function (oEvent) {
-			
-			    this.getView().byId("oComments").setValue(""); //1803
-				 
 
-		
-				if(oEvent.getParameter("arguments").selectedmyTr!=undefined){
-			this.oSelectedItems = oEvent.getParameter("arguments").selectedmyTr;
+			this.getView().byId("oComments").setValue(""); //1803
+
+			if (oEvent.getParameter("arguments").selectedmyTr != undefined) {
+				this.oSelectedItems = oEvent.getParameter("arguments").selectedmyTr;
 			}
-// on screen refresh disable the buttons. 
-        if (sap.ui.getCore().getModel("MyTradeRequestSelected") == undefined && 
-                 sap.ui.getCore().getModel("MyTradeRequested") == undefined){
-           		this.getView().byId("oAddbutton").setEnabled(false);
+			// on screen refresh disable the buttons. 
+			if (sap.ui.getCore().getModel("MyTradeRequestSelected") == undefined &&
+				sap.ui.getCore().getModel("MyTradeRequested") == undefined) {
+				this.getView().byId("oAddbutton").setEnabled(false);
 				this.getView().byId("oacceptbtn").setVisible(false);
 				this.getView().byId("oRejectbtn").setVisible(false);
 				this.getView().byId("oCounterofrbtn").setVisible(false);
 				this.getView().byId("oCancelbtn").setVisible(false);
 				this.getView().byId("oUpdatebtn").setVisible(false);
 				this.getView().byId("oBackbtnid").setEnabled(true);
-				this.getView().byId("oBackbtnid").setVisible(true);      	
-             	this.getView().byId("oComments").setEnabled(false);
-                      }
+				this.getView().byId("oBackbtnid").setVisible(true);
+				this.getView().byId("oComments").setEnabled(false);
+			}
 
-			
 			var that = this;
 			// local =this;
-		
+
 			// local.oViewModel = new sap.ui.model.json.JSONModel({
-   //             busy: false,
-   //             delay: 0,
-   //             additionalComments: ""
-   //         });
-   //         local.getView().setModel(local.oViewModel, "LocalTradeModel");
+			//             busy: false,
+			//             delay: 0,
+			//             additionalComments: ""
+			//         });
+			//         local.getView().setModel(local.oViewModel, "LocalTradeModel");
 
 			/* SelectedPath	*/
 			if (that.oSelectedItems != undefined && that.oSelectedItems != "SelectedFromTradeHistory") {
@@ -86,41 +81,39 @@ sap.ui.define([
 					this.dnsStatus = StatusData.Trade_Status;
 					var TradeId = StatusData.Trade_Id;
 					this.VehicleTrade_SummaryData(StatusData);
-//  for the DNC = Y do not show order type. 
-                if (this.dnsStatus == "Y") {
-                	
-                this._oViewModel.setProperty("/showOrderType", false);
-                	
-                } else {
-                	
-                	this._oViewModel.setProperty("/showOrderType", true);
-                	
-                }
- 
-					
-//
-					//  for a rejected trade request do not show the VTN on the screen. 
-					 if (Status == "R") {
-					 			that.getView().byId("ovtnId").setVisible(false);
-					 			that.getView().byId("ovtnIdText").setVisible(false);
-					 } else {
-					 	
-					 			that.getView().byId("ovtnId").setVisible(true);
-					 			that.getView().byId("ovtnIdText").setVisible(true);
-					 }
+					//  for the DNC = Y do not show order type. 
+					if (this.dnsStatus == "Y") {
 
-				
+						this._oViewModel.setProperty("/showOrderType", false);
+
+					} else {
+
+						this._oViewModel.setProperty("/showOrderType", true);
+
+					}
+
+					//
+					//  for a rejected trade request do not show the VTN on the screen. 
+					if (Status == "R") {
+						that.getView().byId("ovtnId").setVisible(false);
+						that.getView().byId("ovtnIdText").setVisible(false);
+					} else {
+
+						that.getView().byId("ovtnId").setVisible(true);
+						that.getView().byId("ovtnIdText").setVisible(true);
+					}
+
 					if (AcceptVisible == false && (Status == "S")) {
 						this.getView().byId("oacceptbtn").setVisible(!AcceptVisible);
 						this.getView().byId("oRejectbtn").setVisible(!AcceptVisible);
 						this.getView().byId("oCounterofrbtn").setVisible(!AcceptVisible);
 						this.getView().byId("oCancelbtn").setVisible(AcceptVisible);
 						this.getView().byId("oUpdatebtn").setVisible(AcceptVisible);
-					/*	this.getView().byId("oacceptbtn").setVisible(!AcceptVisible);
-						this.getView().byId("oRejectbtn").setVisible(!AcceptVisible);
-						this.getView().byId("oCounterofrbtn").setVisible(!AcceptVisible);
-						this.getView().byId("oCancelbtn").setVisible(AcceptVisible);
-						this.getView().byId("oUpdatebtn").setVisible(AcceptVisible);*/
+						/*	this.getView().byId("oacceptbtn").setVisible(!AcceptVisible);
+							this.getView().byId("oRejectbtn").setVisible(!AcceptVisible);
+							this.getView().byId("oCounterofrbtn").setVisible(!AcceptVisible);
+							this.getView().byId("oCancelbtn").setVisible(AcceptVisible);
+							this.getView().byId("oUpdatebtn").setVisible(AcceptVisible);*/
 					} else {
 
 						this.getView().byId("oacceptbtn").setVisible(AcceptVisible);
@@ -128,14 +121,13 @@ sap.ui.define([
 						this.getView().byId("oCounterofrbtn").setVisible(AcceptVisible);
 						this.getView().byId("oCancelbtn").setVisible(AcceptVisible);
 						this.getView().byId("oUpdatebtn").setVisible(AcceptVisible);
-					/*	this.getView().byId("oacceptbtn").setVisible(AcceptVisible);
-						this.getView().byId("oRejectbtn").setVisible(AcceptVisible);
-						this.getView().byId("oCounterofrbtn").setVisible(AcceptVisible);
-						this.getView().byId("oCancelbtn").setVisible(!AcceptVisible);
-						this.getView().byId("oUpdatebtn").setVisible(!AcceptVisible);*/
-						
-						
-						this.getView().byId("oComments").setEnabled(AcceptVisible);  //GSR  
+						/*	this.getView().byId("oacceptbtn").setVisible(AcceptVisible);
+							this.getView().byId("oRejectbtn").setVisible(AcceptVisible);
+							this.getView().byId("oCounterofrbtn").setVisible(AcceptVisible);
+							this.getView().byId("oCancelbtn").setVisible(!AcceptVisible);
+							this.getView().byId("oUpdatebtn").setVisible(!AcceptVisible);*/
+
+						this.getView().byId("oComments").setEnabled(AcceptVisible); //GSR  
 						this.getView().byId("oAddbutton").setEnabled(AcceptVisible); //GSR
 					}
 
@@ -198,10 +190,10 @@ sap.ui.define([
 					var Add_CommentStatus = sap.ui.getCore().getModel("MyTradeRequestSelected").getData().Trade_Status;
 					if (Add_CommentStatus == "C" || Add_CommentStatus == "S") {
 						this.getView().byId("oAddbutton").setEnabled(true);
-						 	this.getView().byId("oComments").setEnabled(true);
+						this.getView().byId("oComments").setEnabled(true);
 					} else {
 						this.getView().byId("oAddbutton").setEnabled(false);
-						 	this.getView().byId("oComments").setEnabled(false);
+						this.getView().byId("oComments").setEnabled(false);
 					}
 					var that = this;
 					var sLocation = window.location.host;
@@ -213,13 +205,13 @@ sap.ui.define([
 						this.sPrefix = "";
 
 					}
-					
-	// do not fetch the entire database and changing this to use a filter. 
-	// https://tci-dev-vehiclelocatorandtrade-xsjs.cfapps.us10.hana.ondemand.com/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id%20eq%20%27TR000245%27
-	// ttps://tci-dev-vehiclelocatorandtrade-xsjs.cfapps.us10.hana.ondemand.com/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id eq 'TR000245'
-					
+
+					// do not fetch the entire database and changing this to use a filter. 
+					// https://tci-dev-vehiclelocatorandtrade-xsjs.cfapps.us10.hana.ondemand.com/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id%20eq%20%27TR000245%27
+					// ttps://tci-dev-vehiclelocatorandtrade-xsjs.cfapps.us10.hana.ondemand.com/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id eq 'TR000245'
+
 					this.nodeJsUrl = this.sPrefix;
-					that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id eq '"+ this.Tradeid +"'";
+					that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id eq '" + this.Tradeid + "'";
 
 					$.ajax({
 						url: that.oDataUrl,
@@ -235,177 +227,161 @@ sap.ui.define([
 								return x["Trade_Id"] == Tradeid;
 							});
 							var oModel = new sap.ui.model.json.JSONModel(Trade_Comment);
-							
-					//		that.getView().byId("tableVrade").setModel(oModel);
-							
 
-		
-				that.getView().setModel(oModel, "commentsModel");				
-							
-							
-							
-							
-							
+							//		that.getView().byId("tableVrade").setModel(oModel);
+
+							that.getView().setModel(oModel, "commentsModel");
+
 						}
 					});
 				} else if (sap.ui.getCore().getModel("MyTradeRequested") != undefined) {
 
 					//	this.getView().byId("SimpleFormAproveTrReq").setModel(sap.ui.getCore().getModel("MyTradeRequested"));
 					var StatusData = sap.ui.getCore().getModel("MyTradeRequested").getData();
-					
-					if ( StatusData.DNC == "Y" ) {
-						
-							this._oViewModel.setProperty("/showOrderType", false);
+
+					if (StatusData.DNC == "Y") {
+
+						this._oViewModel.setProperty("/showOrderType", false);
 					} else {
-						
-							this._oViewModel.setProperty("/showOrderType", true);
+
+						this._oViewModel.setProperty("/showOrderType", true);
 					}
-					
-					
-					
+
 					this.VehicleTrade_SummaryData(StatusData);
 					var AcceptVisible = StatusData.FromRequesting;
 					var Status = StatusData.Trade_Status;
-					
+
 					//  for a rejected trade request do not show the VTN on the screen. 
-					 if (Status == "R") {
-					 			that.getView().byId("ovtnId").setVisible(false);
-					 			that.getView().byId("ovtnIdText").setVisible(false);
-					 } else {
-					 	
-					 			that.getView().byId("ovtnId").setVisible(true);
-					 			that.getView().byId("ovtnIdText").setVisible(true);
-					 }
-					
-				
-				     if ( StatusData.Trade_Return == "N" ) {  
-				     	// this.getView().byId("offervehidContent").setVisible(false);
-				   	// Offered = {};
-					that.getView().byId("Offerevehid").setText("");
-					that.getView().byId("offeredDealer").setVisible(false);
-					that.getView().byId("oRequesteddealer").setText("");
-					that.getView().byId("oRequesteddealer").setVisible(false);
+					if (Status == "R") {
+						that.getView().byId("ovtnId").setVisible(false);
+						that.getView().byId("ovtnIdText").setVisible(false);
+					} else {
 
-					that.getView().byId("ofrModellabl").setVisible(false);
-					that.getView().byId("ofrmodelyeartext").setText("");
-					that.getView().byId("ofrmodelyeartext").setVisible(false);
+						that.getView().byId("ovtnId").setVisible(true);
+						that.getView().byId("ovtnIdText").setVisible(true);
+					}
 
-					that.getView().byId("ofrserieslabl").setVisible(false);
-					that.getView().byId("ofrseriestxt").setText("");
-					that.getView().byId("ofrseriestxt").setVisible(false);
+					if (StatusData.Trade_Return == "N") {
+						// this.getView().byId("offervehidContent").setVisible(false);
+						// Offered = {};
+						that.getView().byId("Offerevehid").setText("");
+						that.getView().byId("offeredDealer").setVisible(false);
+						that.getView().byId("oRequesteddealer").setText("");
+						that.getView().byId("oRequesteddealer").setVisible(false);
 
-					that.getView().byId("ofrmodllabl").setVisible(false);
-					that.getView().byId("ofrmodltxt").setText("");
-					that.getView().byId("ofrmodltxt").setVisible(false);
+						that.getView().byId("ofrModellabl").setVisible(false);
+						that.getView().byId("ofrmodelyeartext").setText("");
+						that.getView().byId("ofrmodelyeartext").setVisible(false);
 
-					that.getView().byId("ofrsuffixlabl").setVisible(false);
-					that.getView().byId("ofrsuffixstxt").setText("");
-					that.getView().byId("ofrsuffixstxt").setVisible(false);
+						that.getView().byId("ofrserieslabl").setVisible(false);
+						that.getView().byId("ofrseriestxt").setText("");
+						that.getView().byId("ofrseriestxt").setVisible(false);
 
-					that.getView().byId("ofrapxlabl").setVisible(false);
-					that.getView().byId("ofrapxtxt").setText("");
-					that.getView().byId("ofrapxtxt").setVisible(false);
+						that.getView().byId("ofrmodllabl").setVisible(false);
+						that.getView().byId("ofrmodltxt").setText("");
+						that.getView().byId("ofrmodltxt").setVisible(false);
 
-					that.getView().byId("ofrextcolorlabl").setVisible(false);
-					that.getView().byId("ofrexttxt").setText("");
-					that.getView().byId("ofrexttxt").setVisible(false);
+						that.getView().byId("ofrsuffixlabl").setVisible(false);
+						that.getView().byId("ofrsuffixstxt").setText("");
+						that.getView().byId("ofrsuffixstxt").setVisible(false);
 
-					that.getView().byId("ofrstatuslabl").setVisible(false);
-					that.getView().byId("ofrstatustxt").setText("");
-					that.getView().byId("ofrstatustxt").setVisible(false);
+						that.getView().byId("ofrapxlabl").setVisible(false);
+						that.getView().byId("ofrapxtxt").setText("");
+						that.getView().byId("ofrapxtxt").setVisible(false);
 
-					that.getView().byId("ofrordrtypelabl").setVisible(false);
-					that.getView().byId("ofrordtypetxt").setText("");
-					that.getView().byId("ofrordtypetxt").setVisible(false);
+						that.getView().byId("ofrextcolorlabl").setVisible(false);
+						that.getView().byId("ofrexttxt").setText("");
+						that.getView().byId("ofrexttxt").setVisible(false);
 
-					that.getView().byId("cetalaid").setVisible(false);
-					that.getView().byId("ctqtid").setText("");
-					that.getView().byId("ctqtid").setVisible(false);
+						that.getView().byId("ofrstatuslabl").setVisible(false);
+						that.getView().byId("ofrstatustxt").setText("");
+						that.getView().byId("ofrstatustxt").setVisible(false);
 
-					// that.getView().byId("fromqid").setVisible(false);
-					that.getView().byId("txlab").setText("");
-					that.getView().byId("txlab").setVisible(false);
-					
-					that.getView().byId("prolabid").setVisible(false);	
-					
+						that.getView().byId("ofrordrtypelabl").setVisible(false);
+						that.getView().byId("ofrordtypetxt").setText("");
+						that.getView().byId("ofrordtypetxt").setVisible(false);
 
-					// that.getView().byId("tobid").setVisible(false);
-					that.getView().byId("prptid").setText("");
-					that.getView().byId("prptid").setVisible(false);
+						that.getView().byId("cetalaid").setVisible(false);
+						that.getView().byId("ctqtid").setText("");
+						that.getView().byId("ctqtid").setVisible(false);
 
-					// that.getView().byId("fmlbid").setVisible(false);
-				/*	that.getView().byId("fromlbid").setVisible(false);*/
-					that.getView().byId("otxlabel").setText("");
-					that.getView().byId("otxlabel").setVisible(false);
+						// that.getView().byId("fromqid").setVisible(false);
+						that.getView().byId("txlab").setText("");
+						that.getView().byId("txlab").setVisible(false);
 
-					// that.getView().byId("idlto").setVisible(false);
+						that.getView().byId("prolabid").setVisible(false);
 
-				     } else if(StatusData.Trade_Return == "Y" ) {
- 
-                
-                    that.getView().byId("offeredDealer").setVisible(true);
-                
-                    that.getView().byId("oRequesteddealer").setVisible(true);
+						// that.getView().byId("tobid").setVisible(false);
+						that.getView().byId("prptid").setText("");
+						that.getView().byId("prptid").setVisible(false);
 
-                    that.getView().byId("ofrModellabl").setVisible(true);
-                
-                    that.getView().byId("ofrmodelyeartext").setVisible(true);
+						// that.getView().byId("fmlbid").setVisible(false);
+						/*	that.getView().byId("fromlbid").setVisible(false);*/
+						that.getView().byId("otxlabel").setText("");
+						that.getView().byId("otxlabel").setVisible(false);
 
-                    that.getView().byId("ofrserieslabl").setVisible(true);
-                
-                    that.getView().byId("ofrseriestxt").setVisible(true);
+						// that.getView().byId("idlto").setVisible(false);
 
-                    that.getView().byId("ofrmodllabl").setVisible(true);
-                    
-                    that.getView().byId("ofrmodltxt").setVisible(true);
+					} else if (StatusData.Trade_Return == "Y") {
 
-                    that.getView().byId("ofrsuffixlabl").setVisible(true);
-                
-                    that.getView().byId("ofrsuffixstxt").setVisible(true);
+						that.getView().byId("offeredDealer").setVisible(true);
 
-                    that.getView().byId("ofrapxlabl").setVisible(true);
-                    
-                    that.getView().byId("ofrapxtxt").setVisible(true);
+						that.getView().byId("oRequesteddealer").setVisible(true);
 
-                    that.getView().byId("ofrextcolorlabl").setVisible(true);
-                
-                    that.getView().byId("ofrexttxt").setVisible(true);
+						that.getView().byId("ofrModellabl").setVisible(true);
 
-                    that.getView().byId("ofrstatuslabl").setVisible(true);
-                    
-                    that.getView().byId("ofrstatustxt").setVisible(true);
+						that.getView().byId("ofrmodelyeartext").setVisible(true);
 
-                    that.getView().byId("ofrordrtypelabl").setVisible(true);
-                    
-                    that.getView().byId("ofrordtypetxt").setVisible(true);
+						that.getView().byId("ofrserieslabl").setVisible(true);
 
-                    that.getView().byId("cetalaid").setVisible(true);
-                
-                    that.getView().byId("ctqtid").setVisible(true);
+						that.getView().byId("ofrseriestxt").setVisible(true);
 
-                    // that.getView().byId("fromqid").setVisible(true);
-                
-                    that.getView().byId("txlab").setVisible(true);
-                    
-                    that.getView().byId("prolabid").setVisible(true);    
-                    
+						that.getView().byId("ofrmodllabl").setVisible(true);
 
-                    // that.getView().byId("tobid").setVisible(true);
-                
-                    that.getView().byId("prptid").setVisible(true);
+						that.getView().byId("ofrmodltxt").setVisible(true);
 
-                    // that.getView().byId("fmlbid").setVisible(true);
-                
-                
-                    that.getView().byId("otxlabel").setVisible(true);
+						that.getView().byId("ofrsuffixlabl").setVisible(true);
 
-                    // that.getView().byId("idlto").setVisible(true);
- 
-				     	
-				     }
+						that.getView().byId("ofrsuffixstxt").setVisible(true);
 
-				
-				
+						that.getView().byId("ofrapxlabl").setVisible(true);
+
+						that.getView().byId("ofrapxtxt").setVisible(true);
+
+						that.getView().byId("ofrextcolorlabl").setVisible(true);
+
+						that.getView().byId("ofrexttxt").setVisible(true);
+
+						that.getView().byId("ofrstatuslabl").setVisible(true);
+
+						that.getView().byId("ofrstatustxt").setVisible(true);
+
+						that.getView().byId("ofrordrtypelabl").setVisible(true);
+
+						that.getView().byId("ofrordtypetxt").setVisible(true);
+
+						that.getView().byId("cetalaid").setVisible(true);
+
+						that.getView().byId("ctqtid").setVisible(true);
+
+						// that.getView().byId("fromqid").setVisible(true);
+
+						that.getView().byId("txlab").setVisible(true);
+
+						that.getView().byId("prolabid").setVisible(true);
+
+						// that.getView().byId("tobid").setVisible(true);
+
+						that.getView().byId("prptid").setVisible(true);
+
+						// that.getView().byId("fmlbid").setVisible(true);
+
+						that.getView().byId("otxlabel").setVisible(true);
+
+						// that.getView().byId("idlto").setVisible(true);
+
+					}
+
 					if (AcceptVisible == true && (Status == "S" || Status == "C")) {
 						this.getView().byId("oacceptbtn").setVisible(!AcceptVisible);
 						this.getView().byId("oRejectbtn").setVisible(!AcceptVisible);
@@ -414,12 +390,12 @@ sap.ui.define([
 						this.getView().byId("oUpdatebtn").setVisible(AcceptVisible);
 					} else {
 
-					/*	this.getView().byId("oacceptbtn").setVisible(!AcceptVisible);
-						this.getView().byId("oRejectbtn").setVisible(!AcceptVisible);
-						this.getView().byId("oCounterofrbtn").setVisible(!AcceptVisible);
-						this.getView().byId("oCancelbtn").setVisible(AcceptVisible);
-						this.getView().byId("oUpdatebtn").setVisible(AcceptVisible);*/
-					    this.getView().byId("oacceptbtn").setVisible(!AcceptVisible);
+						/*	this.getView().byId("oacceptbtn").setVisible(!AcceptVisible);
+							this.getView().byId("oRejectbtn").setVisible(!AcceptVisible);
+							this.getView().byId("oCounterofrbtn").setVisible(!AcceptVisible);
+							this.getView().byId("oCancelbtn").setVisible(AcceptVisible);
+							this.getView().byId("oUpdatebtn").setVisible(AcceptVisible);*/
+						this.getView().byId("oacceptbtn").setVisible(!AcceptVisible);
 						this.getView().byId("oRejectbtn").setVisible(!AcceptVisible);
 						this.getView().byId("oCounterofrbtn").setVisible(!AcceptVisible);
 						this.getView().byId("oCancelbtn").setVisible(!AcceptVisible);
@@ -433,59 +409,55 @@ sap.ui.define([
 					/*	this.getView().byId("VT_ARCTtrdinStatus").setModel(oStatusModel);*/
 					this.getView().byId("VT_ARCTtrdinRet").setModel(oStatusModel);
 					/*this.getView().byId("VT_ARCTDnc").setModel(oStatusModel);*/
-					
-					
+
 					//this.getView().byId("VT_ARCDnc").setModel(oStatusModel);  GSR0605
-					
-					
-					
+
 					//	this.getView().byId("oAddbutton").setModel(oStatusModel);	
 					//	this.getView().byId("SimpleFormAproveTrReq").bindElement("/");
 
 					var Dnc = StatusData.DNC;
-						if (Dnc == "Y" || Dnc == "X") {
-							this.getView().byId("VT_ARCDnc").setVisible(false);
-							// var newItem = new sap.ui.core.Item({
-							// 	key: "0",
-							// 	text: "0"
-							// });
-							// 		this.getView().byId("VT_ARCDnc").insertItem(newItem);
-							// 							var newItem = new sap.ui.core.Item({
-							// 	key: "10",
-							// 	text: "10"
-							// });
-							// 		this.getView().byId("VT_ARCDnc").insertItem(newItem);
-							
-							// 							var newItem = new sap.ui.core.Item({
-							// 	key: "20",
-							// 	text: "20"
-							// });
-							// 		this.getView().byId("VT_ARCDnc").insertItem(newItem);
-							// 							var newItem = new sap.ui.core.Item({
-							// 	key: "40",
-							// 	text: "40"
-							// });
-							// 		this.getView().byId("VT_ARCDnc").insertItem(newItem);									
-									
-							// this.getView().byId("VT_ARCDnc").insertItem(newItem);
-							this.getView().byId("VT_ARCDnc").setSelectedKey("0");
-							this.getView().byId("VT_ARCDnc").setSelectedItem("0");
+					if (Dnc == "Y" || Dnc == "X") {
+						this.getView().byId("VT_ARCDnc").setVisible(false);
+						// var newItem = new sap.ui.core.Item({
+						// 	key: "0",
+						// 	text: "0"
+						// });
+						// 		this.getView().byId("VT_ARCDnc").insertItem(newItem);
+						// 							var newItem = new sap.ui.core.Item({
+						// 	key: "10",
+						// 	text: "10"
+						// });
+						// 		this.getView().byId("VT_ARCDnc").insertItem(newItem);
 
-						
-						} else if (Dnc == "N" || Dnc == "" || Dnc == null) {
-							this.getView().byId("VT_ARCDnc").setVisible(false);
-							// var newItem = new sap.ui.core.Item({
-							// 	key: "",
-							// 	text: ""
-							// });
-							// this.getView().byId("VT_ARCDnc").insertItem(newItem);
-							this.getView().byId("VT_ARCDnc").setSelectedKey("");
-							this.getView().byId("VT_ARCDnc").setSelectedItem("");
-						} else {
-							this.getView().byId("VT_ARCDnc").setVisible(false);
-							this.getView().byId("VT_ARCDnc").setSelectedKey("");
-							this.getView().byId("VT_ARCDnc").setSelectedItem("");
-						}
+						// 							var newItem = new sap.ui.core.Item({
+						// 	key: "20",
+						// 	text: "20"
+						// });
+						// 		this.getView().byId("VT_ARCDnc").insertItem(newItem);
+						// 							var newItem = new sap.ui.core.Item({
+						// 	key: "40",
+						// 	text: "40"
+						// });
+						// 		this.getView().byId("VT_ARCDnc").insertItem(newItem);									
+
+						// this.getView().byId("VT_ARCDnc").insertItem(newItem);
+						this.getView().byId("VT_ARCDnc").setSelectedKey("0");
+						this.getView().byId("VT_ARCDnc").setSelectedItem("0");
+
+					} else if (Dnc == "N" || Dnc == "" || Dnc == null) {
+						this.getView().byId("VT_ARCDnc").setVisible(false);
+						// var newItem = new sap.ui.core.Item({
+						// 	key: "",
+						// 	text: ""
+						// });
+						// this.getView().byId("VT_ARCDnc").insertItem(newItem);
+						this.getView().byId("VT_ARCDnc").setSelectedKey("");
+						this.getView().byId("VT_ARCDnc").setSelectedItem("");
+					} else {
+						this.getView().byId("VT_ARCDnc").setVisible(false);
+						this.getView().byId("VT_ARCDnc").setSelectedKey("");
+						this.getView().byId("VT_ARCDnc").setSelectedItem("");
+					}
 
 					this.getView().byId("SimpleForrmDisa220").setModel(sap.ui.getCore().getModel("MyTradeRequested"));
 					this.getView().byId("SimpleForrmDisa220").bindElement("/");
@@ -495,10 +467,10 @@ sap.ui.define([
 					var Add_CommentStatus = sap.ui.getCore().getModel("MyTradeRequested").getData().Trade_Status;
 					if (Add_CommentStatus == "C" || Add_CommentStatus == "S") {
 						this.getView().byId("oAddbutton").setEnabled(true);
-						 	this.getView().byId("oComments").setEnabled(true);
+						this.getView().byId("oComments").setEnabled(true);
 					} else {
 						this.getView().byId("oAddbutton").setEnabled(false);
-						 	this.getView().byId("oComments").setEnabled(false);
+						this.getView().byId("oComments").setEnabled(false);
 					}
 					var that = this;
 					var sLocation = window.location.host;
@@ -511,10 +483,9 @@ sap.ui.define([
 
 					}
 					this.nodeJsUrl = this.sPrefix;
-					
-					
-					that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id eq '"+ this.Tradeid +"'";		
-					
+
+					that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id eq '" + this.Tradeid + "'";
+
 					// that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment";
 					$.ajax({
 						url: that.oDataUrl,
@@ -531,7 +502,7 @@ sap.ui.define([
 							});
 							var oModel = new sap.ui.model.json.JSONModel(Trade_Comment);
 							// that.getView().byId("tableVrade").setModel(oModel);
-							that.getView().setModel(oModel, "commentsModel");	
+							that.getView().setModel(oModel, "commentsModel");
 						}
 					});
 
@@ -541,10 +512,10 @@ sap.ui.define([
 				var StatusData = sap.ui.getCore().getModel("TradeRequestedHistory").getData();
 				var Status = [];
 				Status.push(StatusData);
-				
-				    if ( StatusData.Trade_Return == "N" ) {  
-				     	// this.getView().byId("offervehidContent").setVisible(false);
-				   	// Offered = {};
+
+				if (StatusData.Trade_Return == "N") {
+					// this.getView().byId("offervehidContent").setVisible(false);
+					// Offered = {};
 					that.getView().byId("Offerevehid").setText("");
 					that.getView().byId("offeredDealer").setVisible(false);
 					that.getView().byId("oRequesteddealer").setText("");
@@ -589,93 +560,87 @@ sap.ui.define([
 					// that.getView().byId("fromqid").setVisible(false);
 					that.getView().byId("txlab").setText("");
 					that.getView().byId("txlab").setVisible(false);
-					
-					that.getView().byId("prolabid").setVisible(false);	
-					
+
+					that.getView().byId("prolabid").setVisible(false);
 
 					// that.getView().byId("tobid").setVisible(false);
 					that.getView().byId("prptid").setText("");
 					that.getView().byId("prptid").setVisible(false);
 
 					// that.getView().byId("fmlbid").setVisible(false);
-				/*	that.getView().byId("fromlbid").setVisible(false);*/
+					/*	that.getView().byId("fromlbid").setVisible(false);*/
 					that.getView().byId("otxlabel").setText("");
 					that.getView().byId("otxlabel").setVisible(false);
 
 					// that.getView().byId("idlto").setVisible(false);
 
+				} else if (StatusData.Trade_Return == "Y") {
 
-				     } else if(StatusData.Trade_Return == "Y" ) {
- 
-                
-                    that.getView().byId("offeredDealer").setVisible(true);
-                
-                    that.getView().byId("oRequesteddealer").setVisible(true);
+					that.getView().byId("offeredDealer").setVisible(true);
 
-                    that.getView().byId("ofrModellabl").setVisible(true);
-                
-                    that.getView().byId("ofrmodelyeartext").setVisible(true);
+					that.getView().byId("oRequesteddealer").setVisible(true);
 
-                    that.getView().byId("ofrserieslabl").setVisible(true);
-                
-                    that.getView().byId("ofrseriestxt").setVisible(true);
+					that.getView().byId("ofrModellabl").setVisible(true);
 
-                    that.getView().byId("ofrmodllabl").setVisible(true);
-                    
-                    that.getView().byId("ofrmodltxt").setVisible(true);
+					that.getView().byId("ofrmodelyeartext").setVisible(true);
 
-                    that.getView().byId("ofrsuffixlabl").setVisible(true);
-                
-                    that.getView().byId("ofrsuffixstxt").setVisible(true);
+					that.getView().byId("ofrserieslabl").setVisible(true);
 
-                    that.getView().byId("ofrapxlabl").setVisible(true);
-                    
-                    that.getView().byId("ofrapxtxt").setVisible(true);
+					that.getView().byId("ofrseriestxt").setVisible(true);
 
-                    that.getView().byId("ofrextcolorlabl").setVisible(true);
-                
-                    that.getView().byId("ofrexttxt").setVisible(true);
+					that.getView().byId("ofrmodllabl").setVisible(true);
 
-                    that.getView().byId("ofrstatuslabl").setVisible(true);
-                    
-                    that.getView().byId("ofrstatustxt").setVisible(true);
+					that.getView().byId("ofrmodltxt").setVisible(true);
 
-                    that.getView().byId("ofrordrtypelabl").setVisible(true);
-                    
-                    that.getView().byId("ofrordtypetxt").setVisible(true);
+					that.getView().byId("ofrsuffixlabl").setVisible(true);
 
-                    that.getView().byId("cetalaid").setVisible(true);
-                
-                    that.getView().byId("ctqtid").setVisible(true);
+					that.getView().byId("ofrsuffixstxt").setVisible(true);
 
-                    // that.getView().byId("fromqid").setVisible(true);
-                
-                    that.getView().byId("txlab").setVisible(true);
-                    
-                    that.getView().byId("prolabid").setVisible(true);    
-                    
+					that.getView().byId("ofrapxlabl").setVisible(true);
 
-                    // that.getView().byId("tobid").setVisible(true);
-                
-                    that.getView().byId("prptid").setVisible(true);
+					that.getView().byId("ofrapxtxt").setVisible(true);
 
-                    // that.getView().byId("fmlbid").setVisible(true);
-                
-                
-                    that.getView().byId("otxlabel").setVisible(true);
+					that.getView().byId("ofrextcolorlabl").setVisible(true);
 
-                    // that.getView().byId("idlto").setVisible(true);
- 
-				     	
-				     }
- 
+					that.getView().byId("ofrexttxt").setVisible(true);
+
+					that.getView().byId("ofrstatuslabl").setVisible(true);
+
+					that.getView().byId("ofrstatustxt").setVisible(true);
+
+					that.getView().byId("ofrordrtypelabl").setVisible(true);
+
+					that.getView().byId("ofrordtypetxt").setVisible(true);
+
+					that.getView().byId("cetalaid").setVisible(true);
+
+					that.getView().byId("ctqtid").setVisible(true);
+
+					// that.getView().byId("fromqid").setVisible(true);
+
+					that.getView().byId("txlab").setVisible(true);
+
+					that.getView().byId("prolabid").setVisible(true);
+
+					// that.getView().byId("tobid").setVisible(true);
+
+					that.getView().byId("prptid").setVisible(true);
+
+					// that.getView().byId("fmlbid").setVisible(true);
+
+					that.getView().byId("otxlabel").setVisible(true);
+
+					// that.getView().byId("idlto").setVisible(true);
+
+				}
+
 				var oStatusModel = new sap.ui.model.json.JSONModel(Status);
 				var Dnc = StatusData.DNC;
 				// if (Dnc == "Y" || Dnc == "X") {
-					if ((Dnc == "Y" || Dnc == "X") && (this.dnsStatus != "R")) {
+				if ((Dnc == "Y" || Dnc == "X") && (this.dnsStatus != "R")) {
 					this.getView().byId("VT_ARCDnc").setVisible(true);
 					this.getView().byId("VT_ARCDnc").setEnabled(false);
-					
+
 					// var newItem = new sap.ui.core.Item({
 					// 			key: "0",
 					// 			text: "0"
@@ -686,7 +651,7 @@ sap.ui.define([
 					// 			text: "10"
 					// 		});
 					// 				this.getView().byId("VT_ARCDnc").insertItem(newItem);
-							
+
 					// 									var newItem = new sap.ui.core.Item({
 					// 			key: "20",
 					// 			text: "20"
@@ -720,12 +685,9 @@ sap.ui.define([
 				/*	this.getView().byId("VT_ARCTtrdinStatus").setModel(oStatusModel);*/
 				this.getView().byId("VT_ARCTtrdinRet").setModel(oStatusModel);
 				/*this.getView().byId("VT_ARCTDnc").setModel(oStatusModel);*/
-				
+
 				// this.getView().byId("VT_ARCDnc").setModel(oStatusModel);  GSR0605
-				
-				
-				
-				
+
 				this.getView().byId("SimpleFormAproveTrReq").bindElement("/");
 				this.getView().byId("SimpleForrmDisa220").setModel(sap.ui.getCore().getModel("TradeRequestedHistory"));
 				this.getView().byId("SimpleForrmDisa220").bindElement("/");
@@ -735,7 +697,7 @@ sap.ui.define([
 				this.Tradeid = Tradeid;
 				var Add_CommentStatus = sap.ui.getCore().getModel("TradeRequestedHistory").getData().Trade_Status;
 				this.getView().byId("oAddbutton").setEnabled(false);
-				 	this.getView().byId("oComments").setEnabled(false);
+				this.getView().byId("oComments").setEnabled(false);
 				this.getView().byId("oacceptbtn").setVisible(false);
 				this.getView().byId("oRejectbtn").setVisible(false);
 				this.getView().byId("oCounterofrbtn").setVisible(false);
@@ -770,7 +732,7 @@ sap.ui.define([
 
 				}
 				this.nodeJsUrl = this.sPrefix;
-					that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id eq '"+ this.Tradeid +"'";
+				that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id eq '" + this.Tradeid + "'";
 				// that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment";
 				$.ajax({
 					url: that.oDataUrl,
@@ -782,73 +744,71 @@ sap.ui.define([
 
 						debugger;
 						var Data = oData.d.results;
-					var Trade_Comment = Data.filter(function (x) {
+						var Trade_Comment = Data.filter(function (x) {
 							return x["Trade_Id"] == Tradeid;
 						});
 						var oModel = new sap.ui.model.json.JSONModel(Trade_Comment);
 						// that.getView().byId("tableVrade").setModel(oModel);
-						that.getView().setModel(oModel, "commentsModel");	
+						that.getView().setModel(oModel, "commentsModel");
 					},
-					
-					
-				error: function(jqXHR, textStatus, errorThrown) {
-					var Trade_Comment = [];
-					 	var oModel = new sap.ui.model.json.JSONModel(Trade_Comment);
-						 
-						that.getView().setModel(oModel, "commentsModel");	
-					
-				 
-				}
-					
-// when there is an error on this xsodata call just reset the data. GSR
 
-						// var oModel = new sap.ui.model.json.JSONModel(Trade_Comment);
-						// // that.getView().byId("tableVrade").setModel(oModel);
-						// that.getView().setModel(oModel, "commentsModel");	
-					
+					error: function (jqXHR, textStatus, errorThrown) {
+						var Trade_Comment = [];
+						var oModel = new sap.ui.model.json.JSONModel(Trade_Comment);
 
-					
+						that.getView().setModel(oModel, "commentsModel");
+
+					}
+
+					// when there is an error on this xsodata call just reset the data. GSR
+
+					// var oModel = new sap.ui.model.json.JSONModel(Trade_Comment);
+					// // that.getView().byId("tableVrade").setModel(oModel);
+					// that.getView().setModel(oModel, "commentsModel");	
+
 				});
 
 			}
-			
+
 			// for zone user. 
-				var confirmZoneUser = sap.ui.getCore().getModel("LoginBpDealerModel").oData["0"].BusinessPartnerName;	
-			   if (confirmZoneUser.includes("Zone User")) {
-		// just disable all the buttons
-           		this.getView().byId("oAddbutton").setEnabled(false);
-				 //this.getView().byId("oUpdatePagebtn").setEnabled(false);
-			  }		
+			var confirmZoneUser = sap.ui.getCore().getModel("LoginBpDealerModel").oData["0"].BusinessPartnerName;
+			if (confirmZoneUser.includes("Zone User")) {
+				// just disable all the buttons
+				this.getView().byId("oAddbutton").setEnabled(false);
+				//this.getView().byId("oUpdatePagebtn").setEnabled(false);
+			}
 
-// for zone user. 
+			// for zone user. 
 
-   				var confirmZoneUser = sap.ui.getCore().getModel("LoginBpDealerModel").oData["0"].BusinessPartnerName;	
-			   if (confirmZoneUser.includes("Zone User")) {
-		// just disable all the buttons
-           		this.getView().byId("oAddbutton").setEnabled(false); 
-				this.getView().byId("oacceptbtn").setVisible(false); 
+			var confirmZoneUser = sap.ui.getCore().getModel("LoginBpDealerModel").oData["0"].BusinessPartnerName;
+			if (confirmZoneUser.includes("Zone User")) {
+				// just disable all the buttons
+				this.getView().byId("oAddbutton").setEnabled(false);
+				this.getView().byId("oacceptbtn").setVisible(false);
 				this.getView().byId("oRejectbtn").setVisible(false);
-				this.getView().byId("oCounterofrbtn").setVisible(false); 
-				this.getView().byId("oCancelbtn").setVisible(false); 
-				this.getView().byId("oUpdatebtn").setVisible(false); 
+				this.getView().byId("oCounterofrbtn").setVisible(false);
+				this.getView().byId("oCancelbtn").setVisible(false);
+				this.getView().byId("oUpdatebtn").setVisible(false);
 				this.getView().byId("oBackbtnid").setEnabled(true);
-             	this.getView().byId("oComments").setEnabled(false);
-			  	
-			  }	
+				this.getView().byId("oComments").setEnabled(false);
 
+			}
 
 		},
-		
+
 		oAddCommentsArea: function () {
 			var Comment = this.getView().byId("oComments").getValue();
 			if (Comment == "") {
-				sap.m.MessageBox.error("Please enter comment");
+				
+			var sTextFromi18n = this.getView().getModel("i18n").getResourceBundle().getText("pleaseEnterComment");
+				sap.m.MessageBox.error(sTextFromi18n);   //"Please enter comment"
 			} else {
 
 				// if (this.getView().byId("tableVrade").getModel() != undefined) {
-					// var CommentData = this.getView().byId("tableVrade").getModel().getData();
-									if (this.getView().byId("tableVrade").getModel("commentsModel") != undefined) {
-              	var CommentData = this.getView().byId("tableVrade").getModel("commentsModel").getData();
+				// var CommentData = this.getView().byId("tableVrade").getModel().getData();
+				if (this.getView().byId("tableVrade").getModel("commentsModel") != undefined) {
+					var CommentData = this.getView().byId("tableVrade").getModel("commentsModel").getData();
+
 					function dynamicSort(property) {
 						var sortOrder = 1;
 						if (property[0] === "-") {
@@ -872,30 +832,30 @@ sap.ui.define([
 						var oComment_Id = "01";
 					}
 					var TradeId = this.Tradeid;
-						console.log("TradeId",TradeId);
+					console.log("TradeId", TradeId);
 					var that = this;
 
 					var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 						pattern: "yyyy-MM-dd'T'HH:mm:ss"
 					});
 					var oCommentdate = new Date(oDateFormat.format(new Date()));
-					 oCommentdate.setDate(oCommentdate.getDate());
+					oCommentdate.setDate(oCommentdate.getDate());
 					/*	var oCreatedby = this.getView().byId("SimpleFormAproveTrReq").getModel().getData().Created_By;*/
-		    var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
-			var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
-			var Created_By  = LoggedinUserFname+LoggedinUserLname;
+					var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
+					var LoggedinUserLname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
+					var Created_By = LoggedinUserFname + LoggedinUserLname;
 
-			function truncateString(str, num) {
-				if (num > str.length) {
-					return str;
-				} else {
-					str = str.substring(0, num);
-					return str;
-				}
+					function truncateString(str, num) {
+						if (num > str.length) {
+							return str;
+						} else {
+							str = str.substring(0, num);
+							return str;
+						}
 
-			}
+					}
 
-			Created_By = truncateString(Created_By, 12);
+					Created_By = truncateString(Created_By, 12);
 
 					var oTradeComment = {
 
@@ -928,73 +888,64 @@ sap.ui.define([
 						"Method": "POST"
 					});
 
-					that.oDataModel.create("/TradeComment", oTradeComment, null, function (s) 
-					{
-			/*	var that = this;*/
-				var sLocation = window.location.host;
-				var sLocation_conf = sLocation.search("webide");
+					that.oDataModel.create("/TradeComment", oTradeComment, null, function (s) {
+						/*	var that = this;*/
+						var sLocation = window.location.host;
+						var sLocation_conf = sLocation.search("webide");
 
-				if (sLocation_conf == 0) {
-					that.sPrefix = "/VehicleLocator_Xsodata";
-				} else {
-					that.sPrefix = "";
+						if (sLocation_conf == 0) {
+							that.sPrefix = "/VehicleLocator_Xsodata";
+						} else {
+							that.sPrefix = "";
 
-				}
-				that.nodeJsUrl = that.sPrefix;
-		that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id eq '"+ that.Tradeid +"'";			
-				// that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment";
-				$.ajax({
-					url: that.oDataUrl,
-					method: "GET",
-					async: false,
-					dataType: "json",
+						}
+						that.nodeJsUrl = that.sPrefix;
+						that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id eq '" + that.Tradeid + "'";
+						// that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment";
+						$.ajax({
+							url: that.oDataUrl,
+							method: "GET",
+							async: false,
+							dataType: "json",
 
-					success: function (oData) {
+							success: function (oData) {
 
-						debugger;
-						var Data = oData.d.results;
-						
-						// console.log("additional Comment", 	local.oViewModel);
-						console.log("trade id",TradeId);
-						
-					var oComTrade_Comment = Data.filter(function (x) {
-							return x["Trade_Id"] == TradeId;
+								debugger;
+								var Data = oData.d.results;
+
+								// console.log("additional Comment", 	local.oViewModel);
+								console.log("trade id", TradeId);
+
+								var oComTrade_Comment = Data.filter(function (x) {
+									return x["Trade_Id"] == TradeId;
+								});
+
+								var oModel = new sap.ui.model.json.JSONModel(oComTrade_Comment);
+								/*	oModel.updateBindings(true);*/
+								// that.getView().byId("tableVrade").setModel(oModel);
+								that.getView().setModel(oModel, "commentsModel");
+							}
 						});
-						
-					var oModel = new sap.ui.model.json.JSONModel(oComTrade_Comment);
-					/*	oModel.updateBindings(true);*/	
-					// that.getView().byId("tableVrade").setModel(oModel);
-				that.getView().setModel(oModel, "commentsModel");	
-					}
-				});
-						
-			  //we need the comments to be cleared after database save. 		
-				  that.getView().byId("oComments").setValue(""); //1804	
-				  
-			 
-					
+
+						//we need the comments to be cleared after database save. 		
+						that.getView().byId("oComments").setValue(""); //1804	
+
 						// that.getView().byId("oComments").setValue("");
-				/*	var oComModel = new sap.ui.model.json.JSON();*/
-					
-		
-					}, function ()
-					{
+						/*	var oComModel = new sap.ui.model.json.JSON();*/
+
+					}, function () {
 
 					});
 
 					/*	this.getView().byId("Comment_Txt").setValue("");	
 					 */
 				}
-	//update the bindings. 
-	
-	
-	
-	
-	 
-	    var oModelData = this.getView().getModel("commentsModel");
-  
+				//update the bindings. 
+
+				var oModelData = this.getView().getModel("commentsModel");
+
 				oModelData.refresh(true);
-			   	oModelData.updateBindings(true);
+				oModelData.updateBindings(true);
 			}
 		},
 
@@ -1013,27 +964,26 @@ sap.ui.define([
 			var CommentTableData = this.getView().byId("tableVrade").getModel("commentsModel");
 			sap.ui.getCore().setModel(SimpleFormAproveTrReq, "SelectedSimpleFormAproveTrReq");
 			sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").setProperty("/SelectedTradeComment", CommentTableData);
-			this.getRouter().navTo("VehicleTrade_UpdtTradReq",{
-				SelectedTrade : "VehicleTrade_ApprvTradeVehicle"
+			this.getRouter().navTo("VehicleTrade_UpdtTradReq", {
+				SelectedTrade: "VehicleTrade_ApprvTradeVehicle"
 			});
 
 		},
 		oAccept: function () {
 			debugger;
-			
-			
-		// 05-05 if an Update has been pressed just take the comments to HDB
-	 	var Comment = this.getView().byId("oComments").getValue();
+
+			// 05-05 if an Update has been pressed just take the comments to HDB
+			var Comment = this.getView().byId("oComments").getValue();
 			if (Comment !== "") {
-				 this.oAddCommentsArea();
-			}	
+				this.oAddCommentsArea();
+			}
 
 			var that = this;
-			
+
 			//2204 - 
-				var RequstingDealer_Actual = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requesting_Dealer; // new changes
-				var RequstedDealer = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Dealer;
-			
+			var RequstingDealer_Actual = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requesting_Dealer; // new changes
+			var RequstedDealer = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Dealer;
+
 			/*	var OwningDealer = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Dealer;*/
 
 			// var RequstedDealer = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Dealer;
@@ -1094,7 +1044,6 @@ sap.ui.define([
 
 			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
 
- 
 			//https://TCID1GWAPP1.tci.internal.toyota.ca:44300/sap/opu/odata/sap/Z_DEALER_TRADE_REQUEST_SRV/ApproveTradeReqSet?$filter=VehiclesOwningDelear eq '2400042176' and Suffixcode eq 'ML' and Modelyear eq '2018' and Modelcode eq 'YZ3DCT' and Interiorcolorcode eq 'LC14' and Exteriorcolorcode eq '01D6' and APX eq '0' and VTN eq '7'&$format=json
 			/*	oVehTrano = "000828";
 				oWningVTN = "000826";*/
@@ -1105,14 +1054,14 @@ sap.ui.define([
 
 */
 			/* var AcceptUrl =  that.oDataUrl+"/ApproveTradeReqSet?$filter=RequestingDel eq '2400042193' and (VehiclesOwningDelear eq '2400042193'  or VehiclesOwningDelear eq '2400042176' ) and (Suffixcode eq 'ML' or Suffixcode eq 'ML' ) and (Modelyear eq '2018' or Modelyear eq '2018')  and (Modelcode eq 'YZ3DCT' or Modelcode eq 'YZ3DCT' ) and ( Interiorcolorcode eq 'LC14' or Interiorcolorcode eq 'LC14') and  ( Exteriorcolorcode eq '01D6' or Exteriorcolorcode eq '01D6' ) and ( APX eq '00' or APX eq '00' ) and  ( VTN eq '000828' or  VTN eq '000826')&$format=json";*/
-		/*	var AcceptUrl = that.oDataUrl + "/ApproveTradeReqSet?$filter=RequestingDel eq '" + RequestingDealer +
-				"' and (VehiclesOwningDelear eq '" + RequestingDealer + "'or VehiclesOwningDelear eq '" + RequstedDealer +
-				"' ) and (Suffixcode eq '" + oSuffixcode + "' or Suffixcode eq '" + oWnSuffixcode + "' )and (Modelyear eq '" + oModelyear +
-				"' or Modelyear eq '" + oWnModelyear + "')  and (Modelcode eq '" + oModelcode + "' or Modelcode eq '" + oWnModelcode +
-				"' )and ( Interiorcolorcode eq '" + oIntcolorcode + "' or Interiorcolorcode eq '" + oWnoIntcolorcode +
-				"') and ( Exteriorcolorcode eq '" + oExtcolorcode + "' or Exteriorcolorcode eq '" + oWnoExtcolorcode + "' ) and ( APX eq '" + oApx +
-				"' or APX eq '" + oWnoApx + "' ) and  ( VTN eq '" + oVehTrano + "' or VTN eq '" + oWningVTN + "')&$format=json";*/
-				
+			/*	var AcceptUrl = that.oDataUrl + "/ApproveTradeReqSet?$filter=RequestingDel eq '" + RequestingDealer +
+					"' and (VehiclesOwningDelear eq '" + RequestingDealer + "'or VehiclesOwningDelear eq '" + RequstedDealer +
+					"' ) and (Suffixcode eq '" + oSuffixcode + "' or Suffixcode eq '" + oWnSuffixcode + "' )and (Modelyear eq '" + oModelyear +
+					"' or Modelyear eq '" + oWnModelyear + "')  and (Modelcode eq '" + oModelcode + "' or Modelcode eq '" + oWnModelcode +
+					"' )and ( Interiorcolorcode eq '" + oIntcolorcode + "' or Interiorcolorcode eq '" + oWnoIntcolorcode +
+					"') and ( Exteriorcolorcode eq '" + oExtcolorcode + "' or Exteriorcolorcode eq '" + oWnoExtcolorcode + "' ) and ( APX eq '" + oApx +
+					"' or APX eq '" + oWnoApx + "' ) and  ( VTN eq '" + oVehTrano + "' or VTN eq '" + oWningVTN + "')&$format=json";*/
+
 			var AcceptUrl = that.oDataUrl + "/ApproveTradeReqSet?$filter=RequestingDel eq '" + RequstingDealer_Actual +
 				"' and (VehiclesOwningDelear eq '" + RequstedDealer + "'or VehiclesOwningDelear eq '" + RequestingDealer +
 				"' ) and (Suffixcode eq '" + oSuffixcode + "' or Suffixcode eq '" + oWnSuffixcode + "' )and (Modelyear eq '" + oModelyear +
@@ -1120,7 +1069,6 @@ sap.ui.define([
 				"' )and ( Interiorcolorcode eq '" + oIntcolorcode + "' or Interiorcolorcode eq '" + oWnoIntcolorcode +
 				"') and ( Exteriorcolorcode eq '" + oExtcolorcode + "' or Exteriorcolorcode eq '" + oWnoExtcolorcode + "' ) and ( APX eq '" + oApx +
 				"' or APX eq '" + oWnoApx + "' ) and  ( VTN eq '" + oVehTrano + "' or VTN eq '" + oWningVTN + "')&$format=json";
-	
 
 			$.ajax({
 				url: AcceptUrl,
@@ -1146,42 +1094,39 @@ sap.ui.define([
 						}
 						sap.m.MessageBox.information(Message, {
 
-							actions: [sap.m.MessageBox.Action.OK ],
+							actions: [sap.m.MessageBox.Action.OK],
 							onClose: fnCallbackMessageBox
 						});
 						that.AcceptFailedComment(Message);
 						that.AcceptFailed();
 
-					//	sap.m.MessageBox.error(Message);
+						//	sap.m.MessageBox.error(Message);
 					} else if (a == "S") {
-					 
-						
-						
+
 						var sMessageText = that.getView().getModel("i18n").getResourceBundle().getText("messageTradeAccepted", [that.Tradeid]);
 						var Message = sMessageText;
-							// var Message =  "Trade " + that.Tradeid + " has been Accepted Succesfully";
-							function fnCallbackMessageBox1(oAction) {
-						/*	that.getRouter().navTo("VehicleTrade_Summary", {
-								DataClicked: "Yes"
-							});*/
-						
-							}
+						// var Message =  "Trade " + that.Tradeid + " has been Accepted Succesfully";
+						function fnCallbackMessageBox1(oAction) {
+							/*	that.getRouter().navTo("VehicleTrade_Summary", {
+									DataClicked: "Yes"
+								});*/
+
+						}
 						sap.m.MessageBox.success(Message, {
-							actions: [sap.m.MessageBox.Action.OK ],
+							actions: [sap.m.MessageBox.Action.OK],
 							onClose: fnCallbackMessageBox1
 						});
 						debugger;
 						that.AcceptSuccess();
-					
 
-				}
+					}
 				},
 				error: function () {
-				/*	alert("Error");*/
+					/*	alert("Error");*/
 				}
-			
+
 			});
-			
+
 		},
 		AcceptFailedComment: function (Message) {
 
@@ -1225,21 +1170,21 @@ sap.ui.define([
 				});
 				var oCommentdate = oDateFormat.format(new Date());
 				/*	var oCreatedby = this.getView().byId("SimpleFormAproveTrReq").getModel().getData().Created_By;*/
-			 var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
-			var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
-			var Created_By  = LoggedinUserFname+LoggedinUserLname;
+				var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
+				var LoggedinUserLname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
+				var Created_By = LoggedinUserFname + LoggedinUserLname;
 
-			function truncateString(str, num) {
-				if (num > str.length) {
-					return str;
-				} else {
-					str = str.substring(0, num);
-					return str;
+				function truncateString(str, num) {
+					if (num > str.length) {
+						return str;
+					} else {
+						str = str.substring(0, num);
+						return str;
+					}
+
 				}
 
-			}
-
-		Created_By = truncateString(Created_By, 12);
+				Created_By = truncateString(Created_By, 12);
 
 				var oTradeComment = {
 
@@ -1289,12 +1234,11 @@ sap.ui.define([
 
 		},
 		AcceptSuccess: function () {
-			
-			//  put the accept button to gre mode.  -- GSR
-				// this.getView().byId("oacceptbtn").setEnable(false);
-				// this.getView().byId("oRejectbtn").setEnable(false);
-				// this.getView().byId("oCounterofrbtn").setEnable(false);
 
+			//  put the accept button to gre mode.  -- GSR
+			// this.getView().byId("oacceptbtn").setEnable(false);
+			// this.getView().byId("oRejectbtn").setEnable(false);
+			// this.getView().byId("oCounterofrbtn").setEnable(false);
 
 			var that = this;
 
@@ -1311,29 +1255,26 @@ sap.ui.define([
 			var Req_Current_ETA_From = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Req_Current_ETA_From;
 			Req_Current_ETA_From = this.DatesFormatting(Req_Current_ETA_From);
 			var Req_Current_ETA_To = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Req_Current_ETA_To;
-				Req_Current_ETA_To = this.DatesFormatting(Req_Current_ETA_To);
+			Req_Current_ETA_To = this.DatesFormatting(Req_Current_ETA_To);
 			var Req_Proposed_ETA_From = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Req_Proposed_ETA_From;
 			Req_Proposed_ETA_From = this.DatesFormatting(Req_Proposed_ETA_From);
 			var Req_Proposed_ETA_To = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Req_Proposed_ETA_To;
-				Req_Proposed_ETA_To = this.DatesFormatting(Req_Proposed_ETA_To);
+			Req_Proposed_ETA_To = this.DatesFormatting(Req_Proposed_ETA_To);
 			var Off_Current_ETA_From = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Off_Current_ETA_From;
-			
-				Off_Current_ETA_From = this.DatesFormatting(Off_Current_ETA_From);
+
+			Off_Current_ETA_From = this.DatesFormatting(Off_Current_ETA_From);
 			var Off_Current_ETA_To = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Off_Current_ETA_To;
-				Off_Current_ETA_To = this.DatesFormatting(Off_Current_ETA_To);
+			Off_Current_ETA_To = this.DatesFormatting(Off_Current_ETA_To);
 			var Off_Proposed_ETA_From = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Off_Proposed_ETA_From;
-				Off_Proposed_ETA_From = this.DatesFormatting(Off_Proposed_ETA_From);
+			Off_Proposed_ETA_From = this.DatesFormatting(Off_Proposed_ETA_From);
 			var Off_Proposed_ETA_To = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Off_Proposed_ETA_To;
-				Off_Proposed_ETA_To = this.DatesFormatting(Off_Proposed_ETA_To);
-// when updating a record do not update the created by and created on - GSR					
+			Off_Proposed_ETA_To = this.DatesFormatting(Off_Proposed_ETA_To);
+			// when updating a record do not update the created by and created on - GSR					
 			var Created_By = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_By;
-				
+
 			//  var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
 			// var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
 			// var Created_By  = LoggedinUserFname+LoggedinUserLname;
-			
-			
-			
 
 			function truncateString(str, num) {
 				if (num > str.length) {
@@ -1345,17 +1286,14 @@ sap.ui.define([
 
 			}
 
-	Created_By = truncateString(Created_By, 12);
+			Created_By = truncateString(Created_By, 12);
 
 			var Created_On = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_On;
-			
-				Created_On = this.DatesFormattingCreatedOnDate(Created_On);
-			
-			
-			
-			
+
+			Created_On = this.DatesFormattingCreatedOnDate(Created_On);
+
 			/*	Created_On = this.DatesFormatting(Created_On);*/
-		//	var Changed_on = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Changed_on;
+			//	var Changed_on = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Changed_on;
 			var Requested_Dealer = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Dealer;
 			var Requested_Dealer_Name = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Dealer_Name;
 
@@ -1364,7 +1302,7 @@ sap.ui.define([
 			/*	var Trade_Status = "R";*/
 			//	}
 			var Changed_on = new Date(oDateFormat.format(new Date()));
-				Changed_on = oDateFormat.format(new Date(Changed_on));
+			Changed_on = oDateFormat.format(new Date(Changed_on));
 			var oEntry = {
 
 				"Trade_Id": Trade_Id,
@@ -1382,10 +1320,10 @@ sap.ui.define([
 				"Off_Current_ETA_To": Off_Current_ETA_To,
 				"Off_Proposed_ETA_From": Off_Proposed_ETA_From,
 				"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
-		
+
 				"Created_By": Created_By,
-				"Created_On":Created_On,
-				
+				"Created_On": Created_On,
+
 				"Changed_on": new Date(Changed_on),
 				"Requested_Dealer": Requested_Dealer,
 				"Requested_Dealer_Name": Requested_Dealer_Name
@@ -1411,7 +1349,6 @@ sap.ui.define([
 					"Requested_Dealer_Name": Requested_Dealer_Name*/
 			};
 
-            
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
 
@@ -1434,10 +1371,12 @@ sap.ui.define([
 				"Method": "PUT"
 			});
 			var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
-			that.oDataModel.update(UpdatedTreadeEntity, oEntry, {merge:true} , function (s) {
-//	that.VehicleTrade_SummaryData();
+			that.oDataModel.update(UpdatedTreadeEntity, oEntry, {
+				merge: true
+			}, function (s) {
+				//	that.VehicleTrade_SummaryData();
 
-				that.getView().byId("SimpleFormAproveTrReq").getModel().getData().Trade_Status="A"; 
+				that.getView().byId("SimpleFormAproveTrReq").getModel().getData().Trade_Status = "A";
 				that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
 
 				/*	that.TradeComment(oEntry);
@@ -1445,13 +1384,13 @@ sap.ui.define([
 					that.TradeStatus(oEntry);
 					that.VehicleTrade_Summary();
 				*/
-			/*	that.getRouter().navTo("VehicleTrade_Summary", {
-					DataClicked: "Yes"
-				});*/
+				/*	that.getRouter().navTo("VehicleTrade_Summary", {
+						DataClicked: "Yes"
+					});*/
 
 				//	that.getRouter().navTo("VehicleTrade_Summary");
 			}, function () {
-			
+
 			});
 
 		},
@@ -1485,30 +1424,30 @@ sap.ui.define([
 			Off_Proposed_ETA_From = this.DatesFormatting(Off_Proposed_ETA_From);
 			var Off_Proposed_ETA_To = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Off_Proposed_ETA_To;
 			Off_Proposed_ETA_To = this.DatesFormatting(Off_Proposed_ETA_To);
-	// when updating a record do not update the created by and created on - GSR				
-				var Created_By = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_By;
-				
-		/*	var Created_By = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');*/
+			// when updating a record do not update the created by and created on - GSR				
+			var Created_By = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_By;
 
-	// 	 var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
-	// 		var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
-	// 		var Created_By  = LoggedinUserFname+LoggedinUserLname;
+			/*	var Created_By = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');*/
 
-	// 		function truncateString(str, num) {
-	// 			if (num > str.length) {
-	// 				return str;
-	// 			} else {
-	// 				str = str.substring(0, num);
-	// 				return str;
-	// 			}
+			// 	 var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
+			// 		var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
+			// 		var Created_By  = LoggedinUserFname+LoggedinUserLname;
 
-	// 		}
+			// 		function truncateString(str, num) {
+			// 			if (num > str.length) {
+			// 				return str;
+			// 			} else {
+			// 				str = str.substring(0, num);
+			// 				return str;
+			// 			}
 
-	// Created_By = truncateString(Created_By, 12);
+			// 		}
+
+			// Created_By = truncateString(Created_By, 12);
 
 			var Created_On = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_On;
-		/*	Created_On = this.DatesFormatting(Created_On);*/
-		//	Created_On.setDate(Created_On.getDate() + 1);
+			/*	Created_On = this.DatesFormatting(Created_On);*/
+			//	Created_On.setDate(Created_On.getDate() + 1);
 			//	var Changed_on = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Changed_on;
 			var Requested_Dealer = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Dealer;
 			var Requested_Dealer_Name = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Dealer_Name;
@@ -1518,8 +1457,8 @@ sap.ui.define([
 			/*	var Trade_Status = "R";*/
 			//	}
 			var Changed_on = new Date(oDateFormat.format(new Date()));
-				Changed_on = oDateFormat.format(new Date(Changed_on));
-		//	Changed_on.setDate(Changed_on.getDate() + 1);
+			Changed_on = oDateFormat.format(new Date(Changed_on));
+			//	Changed_on.setDate(Changed_on.getDate() + 1);
 			var oEntry = {
 
 				"Trade_Id": Trade_Id,
@@ -1538,7 +1477,7 @@ sap.ui.define([
 				"Off_Proposed_ETA_From": Off_Proposed_ETA_From,
 				"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
 				"Created_By": Created_By,
-				"Created_On":Created_On,
+				"Created_On": Created_On,
 				"Changed_on": new Date(Changed_on),
 				"Requested_Dealer": Requested_Dealer,
 				"Requested_Dealer_Name": Requested_Dealer_Name
@@ -1586,7 +1525,9 @@ sap.ui.define([
 				"Method": "PUT"
 			});
 			var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
-			that.oDataModel.update(UpdatedTreadeEntity, oEntry, {merge:true} ,function (s) {
+			that.oDataModel.update(UpdatedTreadeEntity, oEntry, {
+				merge: true
+			}, function (s) {
 
 				/*	that.TradeComment(oEntry);
 					that.TradeVehcles(oEntry);
@@ -1606,208 +1547,200 @@ sap.ui.define([
 		onReject: function () {
 
 			var that = this;
-	
-			
-			
-		/*	if (this.getView().byId("VT_CStradinRet").getSelectedKey() == "Yes" && this.getView().byId("FromFourth").getText() == "") {
+
+			/*	if (this.getView().byId("VT_CStradinRet").getSelectedKey() == "Yes" && this.getView().byId("FromFourth").getText() == "") {
 				sap.m.MessageBox.warning("Please select a vehicle");
 				return;
-           }*/
-           	var textForDialog = this.getView().getModel("i18n").getResourceBundle().getText("rejectTradeRequest");
-   
-           
-           	var dialog = new Dialog({
-				title: 'Confirm Trade Request Rejection',
+           }*/   
+			var textForDialog = this.getView().getModel("i18n").getResourceBundle().getText("rejectTradeRequest");
+			var titleForDialog = this.getView().getModel("i18n").getResourceBundle().getText("confirmTitleReject");
+
+			var dialog = new Dialog({
+				title: titleForDialog,
 				type: 'Message',
-				content: new Text({ text: textForDialog }),    
+				content: new Text({
+					text: textForDialog
+				}),
 				beginButton: new Button({
 					text: 'Yes',
-					icon : 'sap-icon://message-warning',
-					type : 'Accept',
-					id : 'oYes',
+					icon: 'sap-icon://message-warning',
+					type: 'Accept',
+					id: 'oYes',
 					press: function () {
-						
-						
-			
-			// 05-05 if an reject has been pressed just take the comments to HDB
-				 	var Comment = that.getView().byId("oComments").getValue();
+
+						// 05-05 if an reject has been pressed just take the comments to HDB
+						var Comment = that.getView().byId("oComments").getValue();
 						if (Comment !== "") {
-							 that.oAddCommentsArea();
-						}	
- 
-						
+							that.oAddCommentsArea();
+						}
+
 						/*sap.m.MessageBox.warning('Yes');*/
-			var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
-				pattern: "yyyy-MM-dd'T'HH:mm:ss"
-			});
-			var Trade_Id = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Trade_Id;
-			var Trade_Status = "R";
-			var Requesting_Dealer = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requesting_Dealer;
-			var Requesting_Dealer_Name = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requesting_Dealer_Name;
-			var Requested_Vtn = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Vtn;
-			var Offered_Vtn = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Offered_Vtn;
-			var Trade_Return = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Trade_Return;
-			var Req_Current_ETA_From = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Req_Current_ETA_From;
-			Req_Current_ETA_From = that.DatesFormatting(Req_Current_ETA_From);
-			var Req_Current_ETA_To = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Req_Current_ETA_To;
-			Req_Current_ETA_To = that.DatesFormatting(Req_Current_ETA_To);
-			var Req_Proposed_ETA_From = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Req_Proposed_ETA_From;
-			Req_Proposed_ETA_From = that.DatesFormatting(Req_Proposed_ETA_From);
-			var Req_Proposed_ETA_To = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Req_Proposed_ETA_To;
-			Req_Proposed_ETA_To = that.DatesFormatting(Req_Proposed_ETA_To);
-			var Off_Current_ETA_From = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Off_Current_ETA_From;
-			Off_Current_ETA_From = that.DatesFormatting(Off_Current_ETA_From);
-			var Off_Current_ETA_To = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Off_Current_ETA_To;
-			Off_Current_ETA_To = that.DatesFormatting(Off_Current_ETA_To);
-			var Off_Proposed_ETA_From = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Off_Proposed_ETA_From;
-			Off_Proposed_ETA_From = that.DatesFormatting(Off_Proposed_ETA_From);
-			var Off_Proposed_ETA_To = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Off_Proposed_ETA_To;
-			Off_Proposed_ETA_To = that.DatesFormatting(Off_Proposed_ETA_To);
-			// when updating a record do not update the created by and created on - GSR		
-				var Created_By = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_By;
-		 //var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
-			// var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
-	// 		var Created_By  = LoggedinUserFname+LoggedinUserLname;
+						var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+							pattern: "yyyy-MM-dd'T'HH:mm:ss"
+						});
+						var Trade_Id = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Trade_Id;
+						var Trade_Status = "R";
+						var Requesting_Dealer = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requesting_Dealer;
+						var Requesting_Dealer_Name = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requesting_Dealer_Name;
+						var Requested_Vtn = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Vtn;
+						var Offered_Vtn = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Offered_Vtn;
+						var Trade_Return = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Trade_Return;
+						var Req_Current_ETA_From = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Req_Current_ETA_From;
+						Req_Current_ETA_From = that.DatesFormatting(Req_Current_ETA_From);
+						var Req_Current_ETA_To = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Req_Current_ETA_To;
+						Req_Current_ETA_To = that.DatesFormatting(Req_Current_ETA_To);
+						var Req_Proposed_ETA_From = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Req_Proposed_ETA_From;
+						Req_Proposed_ETA_From = that.DatesFormatting(Req_Proposed_ETA_From);
+						var Req_Proposed_ETA_To = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Req_Proposed_ETA_To;
+						Req_Proposed_ETA_To = that.DatesFormatting(Req_Proposed_ETA_To);
+						var Off_Current_ETA_From = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Off_Current_ETA_From;
+						Off_Current_ETA_From = that.DatesFormatting(Off_Current_ETA_From);
+						var Off_Current_ETA_To = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Off_Current_ETA_To;
+						Off_Current_ETA_To = that.DatesFormatting(Off_Current_ETA_To);
+						var Off_Proposed_ETA_From = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Off_Proposed_ETA_From;
+						Off_Proposed_ETA_From = that.DatesFormatting(Off_Proposed_ETA_From);
+						var Off_Proposed_ETA_To = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Off_Proposed_ETA_To;
+						Off_Proposed_ETA_To = that.DatesFormatting(Off_Proposed_ETA_To);
+						// when updating a record do not update the created by and created on - GSR		
+						var Created_By = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_By;
+						//var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
+						// var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
+						// 		var Created_By  = LoggedinUserFname+LoggedinUserLname;
 
-	// 		function truncateString(str, num) {
-	// 			if (num > str.length) {
-	// 				return str;
-	// 			} else {
-	// 				str = str.substring(0, num);
-	// 				return str;
-	// 			}
+						// 		function truncateString(str, num) {
+						// 			if (num > str.length) {
+						// 				return str;
+						// 			} else {
+						// 				str = str.substring(0, num);
+						// 				return str;
+						// 			}
 
-	// 		}
+						// 		}
 
-	// Created_By = truncateString(Created_By, 12);
+						// Created_By = truncateString(Created_By, 12);
 
-			var Created_On = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_On;
-			var Changed_on = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Changed_on;
-			var Requested_Dealer = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Dealer;
-			var Requested_Dealer_Name = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Dealer_Name;
+						var Created_On = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_On;
+						var Changed_on = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Changed_on;
+						var Requested_Dealer = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Dealer;
+						var Requested_Dealer_Name = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Dealer_Name;
 
-			var dncBlockedDays = that.getView().byId("VT_ARCDnc").getValue();
-			//	 var Created_On = oDateFormat.format(new Date(ValidTo));
-			/*	var Trade_Status = "R";*/
-			//	}
-			var Changed_on = new Date();
-			Changed_on = oDateFormat.format(new Date(Changed_on));
-			var oEntry = {
+						var dncBlockedDays = that.getView().byId("VT_ARCDnc").getValue();
+						//	 var Created_On = oDateFormat.format(new Date(ValidTo));
+						/*	var Trade_Status = "R";*/
+						//	}
+						var Changed_on = new Date();
+						Changed_on = oDateFormat.format(new Date(Changed_on));
+						var oEntry = {
 
-				"Trade_Id": Trade_Id,
-				"Trade_Status": Trade_Status,
-				"Requesting_Dealer": Requesting_Dealer,
-				"Requesting_Dealer_Name": Requesting_Dealer_Name,
-				"Requested_Vtn": Requested_Vtn,
-				"Offered_Vtn": Offered_Vtn,
-				"Trade_Return": Trade_Return,
-				"Req_Current_ETA_From": Req_Current_ETA_From,
-				"Req_Current_ETA_To": Req_Current_ETA_To,
-				"Req_Proposed_ETA_From": Req_Proposed_ETA_From,
-				"Req_Proposed_ETA_To": Req_Proposed_ETA_To,
-				"Off_Current_ETA_From": Off_Current_ETA_From,
-				"Off_Current_ETA_To": Off_Current_ETA_To,
-				"Off_Proposed_ETA_From": Off_Proposed_ETA_From,
-				"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
-		
-				"Created_By": Created_By,
-				"Created_On":Created_On,
-				"Changed_on": new Date(Changed_on),
-				"Requested_Dealer": Requested_Dealer,
-				"Requested_Dealer_Name": Requested_Dealer_Name
-					/*"Trade_Id": Trade_Id,
-					"Trade_Status": Trade_Status,
-					"Requesting_Dealer": Requesting_Dealer,
-					"Requesting_Dealer_Name": Requesting_Dealer_Name,
-					"Requested_Vtn": Requested_Vtn,
-					"Offered_Vtn": Offered_Vtn,
-					"Trade_Return": Trade_Return,
-					"Req_Current_ETA_From": Req_Current_ETA_FromData,
-					"Req_Current_ETA_To": Req_Current_ETA_To,
-					"Req_Proposed_ETA_From": Req_Proposed_ETA_From,
-					"Req_Proposed_ETA_To": Req_Proposed_ETA_To,
-					"Off_Current_ETA_From": Off_Current_ETA_From,
-					"Off_Current_ETA_To": Off_Current_ETA_To,
-					"Off_Proposed_ETA_From": Off_Proposed_ETA_From,
-					"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
-					"Created_By": Created_By,
-					"Created_On": Created_On,
-					"Changed_on": Changed_on,
-					"Requested_Dealer": Requested_Dealer,
-					"Requested_Dealer_Name": Requested_Dealer_Name*/
-			};
+							"Trade_Id": Trade_Id,
+							"Trade_Status": Trade_Status,
+							"Requesting_Dealer": Requesting_Dealer,
+							"Requesting_Dealer_Name": Requesting_Dealer_Name,
+							"Requested_Vtn": Requested_Vtn,
+							"Offered_Vtn": Offered_Vtn,
+							"Trade_Return": Trade_Return,
+							"Req_Current_ETA_From": Req_Current_ETA_From,
+							"Req_Current_ETA_To": Req_Current_ETA_To,
+							"Req_Proposed_ETA_From": Req_Proposed_ETA_From,
+							"Req_Proposed_ETA_To": Req_Proposed_ETA_To,
+							"Off_Current_ETA_From": Off_Current_ETA_From,
+							"Off_Current_ETA_To": Off_Current_ETA_To,
+							"Off_Proposed_ETA_From": Off_Proposed_ETA_From,
+							"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
 
-			var sLocation = window.location.host;
-			var sLocation_conf = sLocation.search("webide");
+							"Created_By": Created_By,
+							"Created_On": Created_On,
+							"Changed_on": new Date(Changed_on),
+							"Requested_Dealer": Requested_Dealer,
+							"Requested_Dealer_Name": Requested_Dealer_Name
+								/*"Trade_Id": Trade_Id,
+								"Trade_Status": Trade_Status,
+								"Requesting_Dealer": Requesting_Dealer,
+								"Requesting_Dealer_Name": Requesting_Dealer_Name,
+								"Requested_Vtn": Requested_Vtn,
+								"Offered_Vtn": Offered_Vtn,
+								"Trade_Return": Trade_Return,
+								"Req_Current_ETA_From": Req_Current_ETA_FromData,
+								"Req_Current_ETA_To": Req_Current_ETA_To,
+								"Req_Proposed_ETA_From": Req_Proposed_ETA_From,
+								"Req_Proposed_ETA_To": Req_Proposed_ETA_To,
+								"Off_Current_ETA_From": Off_Current_ETA_From,
+								"Off_Current_ETA_To": Off_Current_ETA_To,
+								"Off_Proposed_ETA_From": Off_Proposed_ETA_From,
+								"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
+								"Created_By": Created_By,
+								"Created_On": Created_On,
+								"Changed_on": Changed_on,
+								"Requested_Dealer": Requested_Dealer,
+								"Requested_Dealer_Name": Requested_Dealer_Name*/
+						};
 
-			if (sLocation_conf == 0) {
-				that.sPrefix = "/VehicleLocator_Xsodata";
-			} else {
-				that.sPrefix = "";
+						var sLocation = window.location.host;
+						var sLocation_conf = sLocation.search("webide");
 
-			}
-			//	that.nodeJsUrl = that.sPrefix + "/vehicleTrade";
-			that.nodeJsUrl = that.sPrefix;
-			that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
+						if (sLocation_conf == 0) {
+							that.sPrefix = "/VehicleLocator_Xsodata";
+						} else {
+							that.sPrefix = "";
 
-			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
-			that.oDataModel.setHeaders({
-				"Content-Type": "application/json",
-				"X-Requested-With": "XMLHttpRequest",
-				"DataServiceVersion": "2.0",
-				"Accept": "application/json",
-				"Method": "PUT"
-			});
-			var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
-			that.oDataModel.update(UpdatedTreadeEntity, oEntry, {merge:true} , function (s) {
-				debugger
+						}
+						//	that.nodeJsUrl = that.sPrefix + "/vehicleTrade";
+						that.nodeJsUrl = that.sPrefix;
+						that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
 
-				if (dncBlockedDays != 0 && dncBlockedDays != "") {
-					that.DNCBlockoutDays();
-				}
-				/*	that.TradeComment(oEntry);
-					that.TradeVehcles(oEntry);
-					that.TradeStatus(oEntry);
-					that.VehicleTrade_Summary();
-				*/
-				that.getRouter().navTo("VehicleTrade_Summary", {
-					DataClicked: "Yes"
-				});
+						that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
+						that.oDataModel.setHeaders({
+							"Content-Type": "application/json",
+							"X-Requested-With": "XMLHttpRequest",
+							"DataServiceVersion": "2.0",
+							"Accept": "application/json",
+							"Method": "PUT"
+						});
+						var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
+						that.oDataModel.update(UpdatedTreadeEntity, oEntry, {
+							merge: true
+						}, function (s) {
+							debugger
 
-				//	that.getRouter().navTo("VehicleTrade_Summary");
-			}, function () {
-				alert("fail");
-			});
-						
-						
-						
-						
-						
+							if (dncBlockedDays != 0 && dncBlockedDays != "") {
+								that.DNCBlockoutDays();
+							}
+							/*	that.TradeComment(oEntry);
+								that.TradeVehcles(oEntry);
+								that.TradeStatus(oEntry);
+								that.VehicleTrade_Summary();
+							*/
+							that.getRouter().navTo("VehicleTrade_Summary", {
+								DataClicked: "Yes"
+							});
+
+							//	that.getRouter().navTo("VehicleTrade_Summary");
+						}, function () {
+							alert("fail");
+						});
+
 						dialog.close();
 					}
 				}),
 				endButton: new Button({
 					text: 'No',
-				
-					type : 'Reject',
-					id : 'oNo',
+
+					type: 'Reject',
+					id: 'oNo',
 					press: function () {
 						/*	sap.m.MessageBox.warning('No');*/
 						dialog.close();
 					}
 				}),
-				afterClose: function() {
+				afterClose: function () {
 					dialog.destroy();
 				}
 			});
- 
-			dialog.open();
-			
-		},
-			
-		
 
-		
+			dialog.open();
+
+		},
+
 		DNCBlockoutDays: function () {
 
 			var that = this;
@@ -1817,10 +1750,10 @@ sap.ui.define([
 				});*/
 			/*	pattern: "yyyyMMdd'T'HHmmss"*/
 
-		/*	var oDateFormat1 = sap.ui.core.format.DateFormat.getDateTimeInstance({
-				pattern: "ddMMyyyy"
-			});*/
-				var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+			/*	var oDateFormat1 = sap.ui.core.format.DateFormat.getDateTimeInstance({
+					pattern: "ddMMyyyy"
+				});*/
+			var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 				pattern: "yyyy-MM-dd'T'HH:mm:ss"
 			});
 
@@ -1887,25 +1820,25 @@ sap.ui.define([
 		BlocIdSuccess: function (ZzblockId) {
 			var that = this;
 			var oBlockId = ZzblockId;
-			var BlockingDealer = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requesting_Dealer; 
+			var BlockingDealer = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requesting_Dealer;
 			var BlockedDealer = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Dealer;
 			var oModelRequested = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Model;
 			var oSeries = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Series;
 
 			var oCommentData = this.getView().byId("tableVrade").getModel("commentsModel").oData;
 
-		/*	var oComment = [];
-			for (var i = 0; i < oCommentData.length; i++) {
-				oComment.push(oCommentData[i].Comment_Txt);
-			}
-			if (oComment.length != 0) {
-				var oComment = oComment.join(".");
-			} else {
-				var oComment = "testing";
-			}
+			/*	var oComment = [];
+				for (var i = 0; i < oCommentData.length; i++) {
+					oComment.push(oCommentData[i].Comment_Txt);
+				}
+				if (oComment.length != 0) {
+					var oComment = oComment.join(".");
+				} else {
+					var oComment = "testing";
+				}
 
-			var BlockStartdate = "\/Date(1543449600000)\/";
-			var Blockenddate = "\/Date(1543536000000)\/";*/
+				var BlockStartdate = "\/Date(1543449600000)\/";
+				var Blockenddate = "\/Date(1543536000000)\/";*/
 			/*	var BlockStartdate = oDateFormat1.format(new Date());
 					var dncBlockedDays = this.getView().byId("VT_ARCDnc").getValue();
 				var someDate = new Date();
@@ -1914,26 +1847,26 @@ sap.ui.define([
 
 				Blockenddate = oDateFormat1.format(new Date(Blockenddate));*/
 			/*	var Createdby = sap.ui.getCore().LoginDetails.Username;*/
-		/*	var Createdby = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');*/
-               var oComment ="Via Trade Request";
-     	       var BlockStartdateval = new Date();
-		       Date.parse(BlockStartdateval);
-		       var BlockStartdate = "/Date(" +Date.parse(BlockStartdateval)+ ")/";
-		 
-		        var dncBlockedDays = this.getView().byId("VT_ARCDnc").getValue();
-		        Date.prototype.addDays = function(days) {
-               this.setDate(this.getDate() + parseInt(days));
-               return this;
-               };
-			     var BlockenddateVal2 = new Date();
-			     BlockenddateVal2.addDays(dncBlockedDays);
-			      Date.parse(BlockenddateVal2);
-			      var Blockenddate = "/Date(" +Date.parse(BlockenddateVal2)+ ")/";
-			     
-		    var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
-			var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
-			var Createdby  = LoggedinUserFname+LoggedinUserLname;
-       
+			/*	var Createdby = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');*/
+			var oComment = "Via Trade Request";
+			var BlockStartdateval = new Date();
+			Date.parse(BlockStartdateval);
+			var BlockStartdate = "/Date(" + Date.parse(BlockStartdateval) + ")/";
+
+			var dncBlockedDays = this.getView().byId("VT_ARCDnc").getValue();
+			Date.prototype.addDays = function (days) {
+				this.setDate(this.getDate() + parseInt(days));
+				return this;
+			};
+			var BlockenddateVal2 = new Date();
+			BlockenddateVal2.addDays(dncBlockedDays);
+			Date.parse(BlockenddateVal2);
+			var Blockenddate = "/Date(" + Date.parse(BlockenddateVal2) + ")/";
+
+			var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
+			var LoggedinUserLname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
+			var Createdby = LoggedinUserFname + LoggedinUserLname;
+
 			function truncateString(str, num) {
 				if (num > str.length) {
 					return str;
@@ -1996,19 +1929,13 @@ sap.ui.define([
 
 		onCounterTrade: function () {
 
-	
-
 			var that = this;
-			
-				// 05-05 if an oncountertrade has been pressed just take the comments to HDB
-	 	var Comment = this.getView().byId("oComments").getValue();
+
+			// 05-05 if an oncountertrade has been pressed just take the comments to HDB
+			var Comment = this.getView().byId("oComments").getValue();
 			if (Comment !== "") {
-				 this.oAddCommentsArea();
-			}	
-	
-			
-			
-			
+				this.oAddCommentsArea();
+			}
 
 			var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 				pattern: "yyyy-MM-dd'T'HH:mm:ss"
@@ -2036,25 +1963,25 @@ sap.ui.define([
 			Off_Proposed_ETA_From = this.DatesFormatting(Off_Proposed_ETA_From);
 			var Off_Proposed_ETA_To = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Off_Proposed_ETA_To;
 			Off_Proposed_ETA_To = this.DatesFormatting(Off_Proposed_ETA_To);
-				var Created_By = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_By;
-	// 	 var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
-	// 		var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
-	// 		var Created_By  = LoggedinUserFname+LoggedinUserLname;
+			var Created_By = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_By;
+			// 	 var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
+			// 		var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
+			// 		var Created_By  = LoggedinUserFname+LoggedinUserLname;
 
-	// 		function truncateString(str, num) {
-	// 			if (num > str.length) {
-	// 				return str;
-	// 			} else {
-	// 				str = str.substring(0, num);
-	// 				return str;
-	// 			}
+			// 		function truncateString(str, num) {
+			// 			if (num > str.length) {
+			// 				return str;
+			// 			} else {
+			// 				str = str.substring(0, num);
+			// 				return str;
+			// 			}
 
-	// 		}
+			// 		}
 
-	// Created_By = truncateString(Created_By, 12);
+			// Created_By = truncateString(Created_By, 12);
 			var Created_On = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_On;
-		/*	Created_On = this.DatesFormatting(Created_On);*/
-		//	var Changed_on = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Changed_on;
+			/*	Created_On = this.DatesFormatting(Created_On);*/
+			//	var Changed_on = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Changed_on;
 			var Requested_Dealer = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Dealer;
 			var Requested_Dealer_Name = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Dealer_Name;
 
@@ -2065,7 +1992,7 @@ sap.ui.define([
 			var Changed_on = oDateFormat.format(new Date());
 			/*	var Changed_on = new Date();
 			Changed_on = oDateFormat.format(new Date(Changed_on));*/
-			
+
 			var oEntry = {
 
 				"Trade_Id": Trade_Id,
@@ -2085,7 +2012,7 @@ sap.ui.define([
 				"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
 
 				"Created_By": Created_By,
-				"Created_On":Created_On,
+				"Created_On": Created_On,
 				"Changed_on": new Date(Changed_on),
 				"Requested_Dealer": Requested_Dealer,
 				"Requested_Dealer_Name": Requested_Dealer_Name
@@ -2133,7 +2060,9 @@ sap.ui.define([
 				"Method": "PUT"
 			});
 			var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
-			that.oDataModel.update(UpdatedTreadeEntity, oEntry, {merge:true} , function (s) {
+			that.oDataModel.update(UpdatedTreadeEntity, oEntry, {
+				merge: true
+			}, function (s) {
 				debugger
 
 				/*	if(dncBlockedDays!=0&&dncBlockedDays!=""){
@@ -2155,18 +2084,14 @@ sap.ui.define([
 
 		},
 		onCancel: function () {
-			
-			
-			
-			
+
 			var that = this;
 
 			// 05-05 if an Update has been pressed just take the comments to HDB
-	 	var Comment = this.getView().byId("oComments").getValue();
+			var Comment = this.getView().byId("oComments").getValue();
 			if (Comment !== "") {
-				 this.oAddCommentsArea();
-			}	
-
+				this.oAddCommentsArea();
+			}
 
 			var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 				pattern: "yyyy-MM-dd'T'HH:mm:ss"
@@ -2195,25 +2120,25 @@ sap.ui.define([
 			var Off_Proposed_ETA_To = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Off_Proposed_ETA_To;
 			Off_Proposed_ETA_To = this.DatesFormatting(Off_Proposed_ETA_To);
 			// when updating a record do not update the created by and created on - GSR	
-				var Created_By = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_By;
-	// 	 var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
-	// 		var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
-	// 		var Created_By  = LoggedinUserFname+LoggedinUserLname;
+			var Created_By = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_By;
+			// 	 var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
+			// 		var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
+			// 		var Created_By  = LoggedinUserFname+LoggedinUserLname;
 
-	// 		function truncateString(str, num) {
-	// 			if (num > str.length) {
-	// 				return str;
-	// 			} else {
-	// 				str = str.substring(0, num);
-	// 				return str;
-	// 			}
+			// 		function truncateString(str, num) {
+			// 			if (num > str.length) {
+			// 				return str;
+			// 			} else {
+			// 				str = str.substring(0, num);
+			// 				return str;
+			// 			}
 
-	// 		}
+			// 		}
 
-	// Created_By = truncateString(Created_By, 12);
+			// Created_By = truncateString(Created_By, 12);
 			var Created_On = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_On;
 			/*	Created_On = this.DatesFormatting(Created_On);*/
-		/*	var Changed_on = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Changed_on;*/
+			/*	var Changed_on = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Changed_on;*/
 			var Requested_Dealer = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Dealer;
 			var Requested_Dealer_Name = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Dealer_Name;
 
@@ -2239,9 +2164,9 @@ sap.ui.define([
 				"Off_Current_ETA_To": Off_Current_ETA_To,
 				"Off_Proposed_ETA_From": Off_Proposed_ETA_From,
 				"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
-			
+
 				"Created_By": Created_By,
-				"Created_On":Created_On,
+				"Created_On": Created_On,
 				"Changed_on": new Date(Changed_on),
 				"Requested_Dealer": Requested_Dealer,
 				"Requested_Dealer_Name": Requested_Dealer_Name
@@ -2289,7 +2214,9 @@ sap.ui.define([
 				"Method": "PUT"
 			});
 			var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
-			that.oDataModel.update(UpdatedTreadeEntity, oEntry, {merge:true} , function (s) {
+			that.oDataModel.update(UpdatedTreadeEntity, oEntry, {
+				merge: true
+			}, function (s) {
 				debugger
 
 				/*	that.TradeComment(oEntry);
@@ -2303,7 +2230,7 @@ sap.ui.define([
 
 				//	that.getRouter().navTo("VehicleTrade_Summary");
 			}, function () {
-			/*	alert("fail");*/
+				/*	alert("fail");*/
 			});
 
 		},
@@ -2312,14 +2239,13 @@ sap.ui.define([
 			var oPage = this.getView().byId("App_Apprvpage"); //Get Hold of page
 			oPage.scrollTo(0, 0);
 			//for screen 8
-			if(	this.oSelectedItems=="SelectedFromTradeHistory"){
-		 	this.getRouter().navTo("VehicleTrade_History");  
-		}
-		else{
-			   this.getRouter().navTo("VehicleTrade_Summary", {
-				DataClicked: "Yes"
-			});
-		}
+			if (this.oSelectedItems == "SelectedFromTradeHistory") {
+				this.getRouter().navTo("VehicleTrade_History");
+			} else {
+				this.getRouter().navTo("VehicleTrade_Summary", {
+					DataClicked: "Yes"
+				});
+			}
 		},
 
 		VehicleTrade_SummaryData: function (StatusData) {
@@ -2472,15 +2398,15 @@ sap.ui.define([
 
 				}
 				var filtered = TradeVehicles;
-		//		var Spars = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language.slice(0, 1);
+				//		var Spars = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language.slice(0, 1);
 				//	var Spars = "E";
-			     var Spars;
-		    if (that.sCurrentLocaleD == "French") {
-		    		Spars = "F";
-		    } else {
-		    		Spars = "E"; 
-		    }
- 
+				var Spars;
+				if (that.sCurrentLocaleD == "French") {
+					Spars = "F";
+				} else {
+					Spars = "E";
+				}
+
 				var finalArray = [];
 				for (var k = 0; k < filtered.length; k++) {
 					for (var l = 0; l < oTradeVehicleDesc.length; l++) {
@@ -2733,7 +2659,7 @@ sap.ui.define([
 					that.getView().byId("ofrordrtypelabl").setVisible(true);
 					that.getView().byId("cetalaid").setVisible(true);
 					// that.getView().byId("fromqid").setVisible(true);
-				/*	that.getView().byId("fromlbid").setVisible(true);*/
+					/*	that.getView().byId("fromlbid").setVisible(true);*/
 					// that.getView().byId("idlto").setVisible(true);
 					// that.getView().byId("tobid").setVisible(true);
 					// that.getView().byId("fmlbid").setVisible(true);
@@ -2799,16 +2725,15 @@ sap.ui.define([
 					// that.getView().byId("fromqid").setVisible(false);
 					that.getView().byId("txlab").setText("");
 					that.getView().byId("txlab").setVisible(false);
-					
-					that.getView().byId("prolabid").setVisible(false);	
-					
+
+					that.getView().byId("prolabid").setVisible(false);
 
 					// that.getView().byId("tobid").setVisible(false);
 					that.getView().byId("prptid").setText("");
 					that.getView().byId("prptid").setVisible(false);
 
 					// that.getView().byId("fmlbid").setVisible(false);
-				/*	that.getView().byId("fromlbid").setVisible(false);*/
+					/*	that.getView().byId("fromlbid").setVisible(false);*/
 					that.getView().byId("otxlabel").setText("");
 					that.getView().byId("otxlabel").setVisible(false);
 
@@ -2855,92 +2780,91 @@ sap.ui.define([
 				return "0000-00-00T00:00:00";
 			}
 		},
-		
- 
-	_setTheLanguage: function (oEvent) {
 
-				// var oI18nModel = new sap.ui.model.resource.ResourceModel({
-				// 	bundleUrl: "i18n/i18n.properties"
-				// });
-				// this.getView().setModel(oI18nModel, "i18n");
+		_setTheLanguage: function (oEvent) {
 
-				//  get the locale to determine the language. 
-				var isLocaleSent = window.location.search.match(/language=([^&]*)/i);
-				if (isLocaleSent) {
-					var sSelectedLocale = window.location.search.match(/language=([^&]*)/i)[1];
-				} else {
-					var sSelectedLocale = "EN"; // default is english 
+			// var oI18nModel = new sap.ui.model.resource.ResourceModel({
+			// 	bundleUrl: "i18n/i18n.properties"
+			// });
+			// this.getView().setModel(oI18nModel, "i18n");
+
+			//  get the locale to determine the language. 
+			var isLocaleSent = window.location.search.match(/language=([^&]*)/i);
+			if (isLocaleSent) {
+				var sSelectedLocale = window.location.search.match(/language=([^&]*)/i)[1];
+			} else {
+				var sSelectedLocale = "EN"; // default is english 
+			}
+
+			//selected language.	
+			// if (window.location.search == "?language=fr") {
+			if (sSelectedLocale == "fr") {
+				var i18nModel = new sap.ui.model.resource.ResourceModel({
+					bundleUrl: "i18n/i18n.properties",
+					bundleLocale: ("fr")
+
+				});
+				this.getView().setModel(i18nModel, "i18n");
+				this.sCurrentLocale = 'FR';
+				this.sCurrentLocaleD = 'French';
+
+			} else {
+				var i18nModel = new sap.ui.model.resource.ResourceModel({
+					bundleUrl: "i18n/i18n.properties",
+					bundleLocale: ("en")
+
+				});
+				this.getView().setModel(i18nModel, "i18n");
+				this.sCurrentLocale = 'EN';
+				this.sCurrentLocaleD = 'English';
+
+			}
+
+			var oModeli18n = this.getView().getModel("i18n");
+			this._oResourceBundle = oModeli18n.getResourceBundle();
+		},
+
+		_setTheLogo: function (oEvent) {
+
+			// if (userDetails[0].UserType == 'Dealer') {
+
+			var isDivisionSent = window.location.search.match(/Division=([^&]*)/i);
+			if (isDivisionSent) {
+				this.sDivision = window.location.search.match(/Division=([^&]*)/i)[1];
+
+				// if (this.sDivision == aDataBP[0].Division) {
+
+				// 	this.getView().byId("messageStripError").setProperty("visible", false);
+
+				if (this.sDivision == '10') // set the toyoto logo
+				{
+					var currentImageSource = this.getView().byId("idLexusLogo");
+					currentImageSource.setProperty("src", "Images/toyota_logo_colour.png");
+
+				} else { // set the lexus logo
+					var currentImageSource = this.getView().byId("idLexusLogo");
+					currentImageSource.setProperty("src", "Images/i_lexus_black_full.png");
+
+					// }
 				}
+			}
 
-				//selected language.	
-				// if (window.location.search == "?language=fr") {
-				if (sSelectedLocale == "fr") {
-					var i18nModel = new sap.ui.model.resource.ResourceModel({
-						bundleUrl: "i18n/i18n.properties",
-						bundleLocale: ("fr")
+		},
+		handleLiveChangeText: function (oEvent) {
+			var oTextArea = oEvent.getSource(),
+				iValueLength = oTextArea.getValue().length;
+			if (iValueLength >= 150) {
+				sap.m.MessageBox.warning("Comments not exceed more than 150 characters");
+				return;
+			}
 
-					});
-					this.getView().setModel(i18nModel, "i18n");
-					this.sCurrentLocale = 'FR';
-					this.sCurrentLocaleD = 'French';
-
-				} else {
-					var i18nModel = new sap.ui.model.resource.ResourceModel({
-						bundleUrl: "i18n/i18n.properties",
-						bundleLocale: ("en")
-
-					});
-					this.getView().setModel(i18nModel, "i18n");
-					this.sCurrentLocale = 'EN';
-					this.sCurrentLocaleD = 'English';
-
-				}
-
-				var oModeli18n = this.getView().getModel("i18n");
-				this._oResourceBundle = oModeli18n.getResourceBundle();
-			},
-		
- 					_setTheLogo: function (oEvent) {
-
-				// if (userDetails[0].UserType == 'Dealer') {
-
-				var isDivisionSent = window.location.search.match(/Division=([^&]*)/i);
-				if (isDivisionSent) {
-					this.sDivision = window.location.search.match(/Division=([^&]*)/i)[1];
-
-					// if (this.sDivision == aDataBP[0].Division) {
-
-					// 	this.getView().byId("messageStripError").setProperty("visible", false);
-
-					if (this.sDivision == '10') // set the toyoto logo
-					{
-						var currentImageSource = this.getView().byId("idLexusLogo");
-						currentImageSource.setProperty("src", "Images/toyota_logo_colour.png");  
-
-					} else { // set the lexus logo
-						var currentImageSource = this.getView().byId("idLexusLogo");
-						currentImageSource.setProperty("src", "Images/i_lexus_black_full.png");
-
-						// }
-					}
-				}
-
-			},
-				handleLiveChangeText: function(oEvent) {
-					var oTextArea = oEvent.getSource(),
-					iValueLength = oTextArea.getValue().length;
-		if(iValueLength>=150) {
-        sap.m.MessageBox.warning("Comments not exceed more than 150 characters");
-        return;
-    } 
-				
-						/*	iMaxLength = oTextArea.getMaxLength(),
+			/*	iMaxLength = oTextArea.getMaxLength(),
 							sState = iValueLength > iMaxLength ? "Warning" : "None";
 
 					oTextArea.setValueState(sState);*/
-				},
-				
-				DatesFormattingCreatedOnDate: function (Created_On) {
+		},
+
+		DatesFormattingCreatedOnDate: function (Created_On) {
 			if (Created_On != null && Created_On != "" && Created_On != "/Date(0)/") {
 				var dateTo = Created_On.split("(")[1];
 				if (Created_On.indexOf("+") != -1) {
@@ -2955,86 +2879,83 @@ sap.ui.define([
 					dateTo = dateTo;
 					// var dataTo1 = dateTo.substring(0, dateTo.length - 5);
 					// var ValidTo = new Date(dataTo1 * 1000);
-					
+
 					// ValidTo = ValidTo.toGMTString().substring(4, 16);
 
 					// var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 					// 	pattern: "yyyy-MM-dd'T'HH:mm:ss"
 					// });
-					
-					
-					var dataTo1 = dateTo.substring(0, dateTo.length -2 );
-					
-					var  currentTime = new Date(Number(dataTo1));
-					
+
+					var dataTo1 = dateTo.substring(0, dateTo.length - 2);
+
+					var currentTime = new Date(Number(dataTo1));
+
 					// var  currentTime = new Date(dataTo1);    
-					
+
 					// var convertTime = moment(currentTime).tz(timezone).format("YYYY-MM-DD HH:mm:ss");
 					// var convertTime = moment(currentTime).tz("GMT").format("YYYY-MM-DD HH:mm:ss");
-					
+
 					var convertTime = moment(currentTime).format("YYYY-MM-DD HH:mm:ss");
-					
-						var returnThisDate = new Date(convertTime);		
-					
+
+					var returnThisDate = new Date(convertTime);
+
 					return new Date(returnThisDate);
 
-						// return new Date(oDateFormat.format(new Date(returnThisDate)));
-					
-					
+					// return new Date(oDateFormat.format(new Date(returnThisDate)));
+
 					// return new Date(oDateFormat.format(new Date(ValidTo)));
 				}
 
 			} else {
 				return "0000-00-00T00:00:00";
 			}
-		},				
-// ----------------------------
+		},
+		// ----------------------------
 
-    bindCombo: function() {
-        var data = [{
-            "key": "0",
-            "text": "0"
-        }, {
-            "key": "10",
-            "text": "10"
-        }, {
-            "key": "20",
-            "text": "20"
-        }, {
-            "key": "40",
-            "text": "40"
-        }];
+		bindCombo: function () {
+			var data = [{
+				"key": "0",
+				"text": "0"
+			}, {
+				"key": "10",
+				"text": "10"
+			}, {
+				"key": "20",
+				"text": "20"
+			}, {
+				"key": "40",
+				"text": "40"
+			}];
 
-        var oModel = new sap.ui.model.json.JSONModel(data);
-        this.getView().setModel(oModel, "dncDays");
-        
-        this.idCb.attachBrowserEvent("keyup", function(event) {            
-            var len = this.getItems().length;
-            var enteredText = this.getValue();
-            var bExists = false;
-            for(var i=0;i<len;i++){
-            	var itemText = this.getItems()[i].getProperty("text");              
-              if(itemText == enteredText || itemText.startsWith(enteredText)){
-              	bExists = true;
-                break;
-							}
-            }
-            if(bExists){
-              this.setValueState(sap.ui.core.ValueState.None);
-            }else{
-              this.setValueState(sap.ui.core.ValueState.Error);
-              this.setValue("");
-            }
-            
-        });
-    }
+			var oModel = new sap.ui.model.json.JSONModel(data);
+			this.getView().setModel(oModel, "dncDays");
+
+			this.idCb.attachBrowserEvent("keyup", function (event) {
+				var len = this.getItems().length;
+				var enteredText = this.getValue();
+				var bExists = false;
+				for (var i = 0; i < len; i++) {
+					var itemText = this.getItems()[i].getProperty("text");
+					if (itemText == enteredText || itemText.startsWith(enteredText)) {
+						bExists = true;
+						break;
+					}
+				}
+				if (bExists) {
+					this.setValueState(sap.ui.core.ValueState.None);
+				} else {
+					this.setValueState(sap.ui.core.ValueState.Error);
+					this.setValue("");
+				}
+
+			});
+		}
+
+		/*	onBack :function()
+			{
+			this.getRouter().navTo("VehicleSearcResults");	
 				
-
-	/*	onBack :function()
-		{
-		this.getRouter().navTo("VehicleSearcResults");	
-			
-		}*/
+			}*/
 
 	});
 });

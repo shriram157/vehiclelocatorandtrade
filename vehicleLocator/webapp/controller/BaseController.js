@@ -1,8 +1,9 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/core/routing/History",
-	"sap/ui/Device"
-], function (Controller, History, Device) {
+	"sap/ui/Device",
+		'sap/m/MessageBox'
+], function (Controller, History, Device, MessageBox) {
 	"use strict";
 
 	return Controller.extend("vehicleLocator.controller.BaseController", {
@@ -131,7 +132,12 @@ sap.ui.define([
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 				oRouter.navTo("VehicleLocSearch", {}, true);
 			}
-		}		
+		},
+		
+			handleLinkPress: function (evt) {
+			MessageBox.alert("Link was clicked!");
+		}
+
 
 		/**
 		 * Event handler for navigating back.

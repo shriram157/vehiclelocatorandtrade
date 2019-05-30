@@ -1,6 +1,6 @@
  <core:FragmentDefinition xmlns="sap.m"
                          xmlns:core="sap.ui.core">
-    <ViewSettingsDialog confirm="handleConfirm" cancel="handleCancel" id="vsd1">
+    <ViewSettingsDialog confirm="handleConfirm" cancel="handleCancel" id="vsd1" title="{i18n>sortBy}">
         <sortItems>
             <ViewSettingsItem selected="true" key="zzvtn" text="{i18n>VehicleTrackingNumber}" />
             <ViewSettingsItem key="zzseries" text="{i18n>Series}" />
