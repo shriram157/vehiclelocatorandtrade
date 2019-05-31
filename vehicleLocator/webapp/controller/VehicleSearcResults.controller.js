@@ -951,8 +951,28 @@ sap.ui.define([
 				}
 				var Color = sap.ui.getCore().getModel("SearchedData").getData();
 				var obj = {};
+			
+			
+			  if (DefaultSuffix == 'ALL' || DefaultSuffix == 'TOUS' ) {
 				for (var i = 0, len = Color.length; i < len; i++)
-					obj[Color[i]['zzextcol']] = Color[i];
+				    
+					{
+				    if ( Color[i].zz_trading_ind == "2" || Color[i].zz_trading_ind == "3" ) {
+						obj[Color[i]['zzextcol']] = Color[i];
+				    }
+					}
+			  } else {
+			  	// if (DefaultSuffix.substring(0, 2))
+				for (var i = 0, len = Color.length; i < len; i++)
+				    
+					{
+				   if ( (DefaultSuffix.substring(0, 2) == Color[i].zzsuffix) && ( Color[i].zz_trading_ind == "2" || Color[i].zz_trading_ind == "3" )) {		
+						obj[Color[i]['zzextcol']] = Color[i];
+						  }
+					}
+
+			  	
+			  }
 				Color = new Array();
 				for (var key in obj)
 					Color.push(obj[key]);
@@ -1568,8 +1588,27 @@ sap.ui.define([
 				}
 				var Color = sap.ui.getCore().getModel("SearchedData").getData();
 				var obj = {};
-				for (var i = 0, len = Color.length; i < len; i++)
+				
+				var Status = this.getView().byId("VLRStatus").getSelectedKey();
+				if (Status == "1" ) { 
+				for (var i = 0, len = Color.length; i < len; i++) {
+				   if (Color[i].zz_trading_ind == "1") {
 					obj[Color[i]['zzextcol']] = Color[i];
+				   }
+					
+				}
+				} else {
+					
+					for (var i = 0, len = Color.length; i < len; i++) {
+				   if ((Color[i].zz_trading_ind == "2") || (Color[i].zz_trading_ind == "3") ) {
+					obj[Color[i]['zzextcol']] = Color[i];
+				   }
+					
+				}
+					
+					
+				}
+				
 				Color = new Array();
 				for (var key in obj)
 					Color.push(obj[key]);

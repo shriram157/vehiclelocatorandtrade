@@ -56,6 +56,9 @@ sap.ui.define([
 				origOpen.apply(this, arguments);
 			};
 				 
+		
+		
+					// this.getView().byId("oTitleText").setText("test");
 			
 		},
 		

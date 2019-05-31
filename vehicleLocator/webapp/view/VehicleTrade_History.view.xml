@@ -206,7 +206,7 @@
 										<cells>
 											<Link id="tradeHId" text="{Trade_Id}" class="link" subtle="true" press="oTradeHistoryLinkPress" wrapping="false"/>
 											<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="false"/>
-											<Text text="{= ${RequestingDealerVisible} === true ? 'To':'From'  }" wrapping="false"/>
+											<Text text="{= ${RequestingDealerVisible} === true ? ${i18n>To}:${i18n>From} }" wrapping="false"/>
 											<Text
 												text="{= ${RequestingDealerVisible} === true ?${Requested_Dealer}:${Requesting_Dealer}}-{= ${RequestingDealerVisible} === true ?${Requested_Dealer_Name}:${Requesting_Dealer_Name}}"/>
 											<Text text="{Requested_Vtn}" wrapping="false"/>

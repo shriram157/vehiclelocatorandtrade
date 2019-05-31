@@ -267,6 +267,8 @@
                 "uri": "lib/moment-timezone-with-data.js"
             }, {
                 "uri": "lib/underscore.js"
+            }, {
+               "uri": "lib/changeFabicon.js"
             }
             
             ],

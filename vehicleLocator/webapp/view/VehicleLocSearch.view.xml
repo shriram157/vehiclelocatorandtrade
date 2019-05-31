@@ -132,12 +132,12 @@
 								<ToolbarSpacer></ToolbarSpacer>
 								<Label text="{i18n>Zone}" required="true"/>
 								<VBox>
-									<CheckBox text="{i18n>Pacific}" id="Pacific" selected="false" editable="{editZoneProperty>/allow}"/>
-									<CheckBox text="{i18n>Prairie}" id="Prairie" selected="false" editable="{editZoneProperty>/allow}"/>
-									<CheckBox text="{i18n>Central}" id="Central" selected="false" editable="{editZoneProperty>/allow}"/>
-									<CheckBox text="{i18n>Quebec}" id="Quebec" selected="false" editable="{editZoneProperty>/allow}"/>
-									<CheckBox text="{i18n>Atlantic}" id="Atlantic" selected="false" editable="{editZoneProperty>/allow}"/>
-							
+									<CheckBox text="{i18n>Pacific}" id="Pacific" selected="false" editable="{editZoneProperty>/allow}" visible="{displayZoneLexus>/fortoyota}"/>
+									<CheckBox text="{i18n>Prairie}" id="Prairie" selected="false" editable="{editZoneProperty>/allow}" visible="{displayZoneLexus>/fortoyota}"/>
+									<CheckBox text="{i18n>Central}" id="Central" selected="false" editable="{editZoneProperty>/allow}" visible="{displayZoneLexus>/fortoyota}"/>
+									<CheckBox text="{i18n>Quebec}" id="Quebec" selected="false" editable="{editZoneProperty>/allow}" visible="{displayZoneLexus>/fortoyota}"/>
+									<CheckBox text="{i18n>Atlantic}" id="Atlantic" selected="false" editable="{editZoneProperty>/allow}" visible="{displayZoneLexus>/fortoyota}"/>
+								    <CheckBox text="Lexus" id="Lexus" selected="false" visible="{displayZoneLexus>/forlexus}"/>
 								</VBox>
 							</form:content>
 						</form:SimpleForm>

@@ -199,6 +199,19 @@ sap.ui.define([
 							"BusinessPartnerType": "Z001",
 							"searchTermReceivedDealerName": "42120"
 						});
+						
+						// Lexus dealer test
+						
+						// 						BpDealer.push({
+						// 	"BusinessPartnerKey": "2400042357",
+						// 	"BusinessPartner": "42357",
+
+						// 	"BusinessPartnerName": "Lexus Dealer...", //item.OrganizationBPName1 //item.BusinessPartnerFullName
+						// 	"Division": "20",
+						// 	"BusinessPartnerType": "Z001",
+						// 	"searchTermReceivedDealerName": "42357"
+						// });
+						
 
 						// BpDealer.push({
 						// 	"BusinessPartnerKey": "2400042193",
@@ -261,7 +274,13 @@ sap.ui.define([
 									LoggedinUserLastName: "42120",
 									UserType: "Dealer",
 									Zone: undefined
-
+// // Lexus test
+// 									DealerCode: "42357",
+// 									Language: "English",
+// 									LoggedinUserFirstName: "User",
+// 									LoggedinUserLastName: "42357",
+// 									UserType: "Dealer",
+// 									Zone: undefined
 								});
 							}
 						} else {
@@ -397,6 +416,10 @@ sap.ui.define([
 									/*	that.getView().byId("Atlantic").setSelected(true);*/
 									return;
 									break;
+								case "9000":
+									that.getView().byId("Lexus").setSelected(true);
+												return;
+									break;	
 								}
 							}
 
@@ -497,6 +520,13 @@ sap.ui.define([
 						/*	that.getView().byId("Atlantic").setSelected(true);*/
 
 						break;
+					case "7": //4 =5000  
+						that.getView().byId("Lexus").setSelected(true);
+						that.zoneDescription = "Lexus";
+						that.sapUserZone = "9000";
+						that.zoneStockCode = "2400579000";
+						that.lexusZoneStockCode = "2400579100";
+						break;	
 					}
 				}
 
@@ -1139,6 +1169,7 @@ sap.ui.define([
 			}
 			if (that.getView().byId("Pacific").getSelected() == false && that.getView().byId("Prairie").getSelected() == false && that.getView()
 				.byId("Central").getSelected() == false && that.getView().byId("Atlantic").getSelected() == false && that.getView().byId("Quebec")
+				.getSelected() == false && that.getView().byId("Lexus")
 				.getSelected() == false) {
 				//	sap.m.MessageBox.error("Please select Zone");
 				that.getView().byId("SeriesErrMsgStrip").setText(selectMandtFields);
@@ -1179,6 +1210,11 @@ sap.ui.define([
 
 				SelectedZone.push("5000");
 			}
+		    if (that.getView().byId("Lexus").getSelected() == true) {
+
+				SelectedZone.push("9000");
+			}		
+			
 			this.getOwnerComponent().SelectedZone = SelectedZone;
 			this.getOwnerComponent().suffixSelectedValue = that.getView().byId("SuffCmbo").getSelectedItem().getText();
 			/*this.getRouter().navTo("VehicleSearcResults");*/
@@ -1807,7 +1843,10 @@ sap.ui.define([
 				});
 				this.getView().setModel(i18nModel, "i18n");
 				this.sCurrentLocale = 'FR';
-				this.sCurrentLocaleD = 'French';
+				this.sCurrentLocaleD = "French";
+				
+				 
+				
 
 			} else {
 				var i18nModel = new sap.ui.model.resource.ResourceModel({
@@ -1819,6 +1858,8 @@ sap.ui.define([
 				this.sCurrentLocale = 'EN';
 				this.sCurrentLocaleD = 'English';
 			}
+
+	
 
 			var oModeli18n = this.getView().getModel("i18n");
 			this._oResourceBundle = oModeli18n.getResourceBundle();
@@ -1840,10 +1881,35 @@ sap.ui.define([
 				{
 					var currentImageSource = this.getView().byId("idLexusLogo");
 					currentImageSource.setProperty("src", "Images/toyota_logo_colour.png");
+					
+					
+			//  enable the toyota zone 
+	           var display = {
+					forlexus: false,
+					fortoyota:true
+				};
+				this.getView().setModel(new sap.ui.model.json.JSONModel(display), "displayZoneLexus");		
+					
+					
+					
+					
 
 				} else { // set the lexus logo
 					var currentImageSource = this.getView().byId("idLexusLogo");
 					currentImageSource.setProperty("src", "Images/i_lexus_black_full.png");
+
+//  enable the lexus zone 
+	           var display = {
+					forlexus: true,
+					fortoyota:false
+				};
+				this.getView().setModel(new sap.ui.model.json.JSONModel(display), "displayZoneLexus");
+
+				
+
+
+
+
 
 					// }
 				}

@@ -1085,7 +1085,38 @@ sap.ui.define([
 
 					if (a == "E") {
 						var Message = odata.d.results[0].Message.trim();
+						
+			// ======================== code to translate into french ===========================			
+		 			  if (that.sCurrentLocale == 'FR'){                     
+					if (Message.includes("vehicle(s) has been marked sold") == true) {
+						Message = "Échange non complété - le(s) véhicule(s) a été (ont été) marqué(s) comme étant vendu(s).";
 
+					} else if (Message.includes("VTN Not in Allocation table") == true) {
+						Message = "Le VTN ne figure pas dans la table d'attribution";
+
+					} else if (Message.includes("status has changed to non-routable") == true) {
+					Message = "Échange non complété - le statut du (des) véhicule(s) a changé et ne peut plus être acheminé";
+
+					// } else if (Message.includes("Trade completed from VTN") == true) {
+					// 	// Message = "Tirez le véhicule terminé du concessionnaire à la zone d'inventaire";   //  
+					// 		Message = "Le dossier a été extrait dans la zone du code.";
+
+					} else if (Message.includes("vehicle(s) configuration (model, suffix, colour, apx) has changed") == true) {
+						Message = "Échange non complété - la configuration du (des) véhicule(s) (modèle, suffixe, couleur, APX) a changé";
+
+					} else if (Message.includes("vehicle(s) no longer in Dealers pipeline / inventory") == true) {
+						Message =
+							"Échange non complété - le(s) véhicule(s) n'est (ne sont) plus dans la chaîne d'approvisionnement/les stocks du concessionnaire";
+
+					} else {
+
+						Message = Message; // what ever comes
+					}
+		 			  }
+	
+						
+						
+//  cod eto translate into french.================================= end=====================
 						function fnCallbackMessageBox(oAction) {
 							that.getRouter().navTo("VehicleTrade_Summary", {
 								DataClicked: "Yes"
@@ -1102,8 +1133,14 @@ sap.ui.define([
 
 						//	sap.m.MessageBox.error(Message);
 					} else if (a == "S") {
-
-						var sMessageText = that.getView().getModel("i18n").getResourceBundle().getText("messageTradeAccepted", [that.Tradeid]);
+                        
+                        if (that.sCurrentLocale == 'FR'){
+                        	var sMessageText = that.getView().getModel("i18n").getResourceBundle().getText("messageTradeAccepted", [that.Tradeid]);	
+                        	 sMessageText = sMessageText.replace("({0})", that.Tradeid);  // for french the control is not doing the right thing ui bug
+                        } else {
+                        	var sMessageText = that.getView().getModel("i18n").getResourceBundle().getText("messageTradeAccepted", [that.Tradeid]);	
+                        }
+					
 						var Message = sMessageText;
 						// var Message =  "Trade " + that.Tradeid + " has been Accepted Succesfully";
 						function fnCallbackMessageBox1(oAction) {
@@ -1554,7 +1591,8 @@ sap.ui.define([
            }*/   
 			var textForDialog = this.getView().getModel("i18n").getResourceBundle().getText("rejectTradeRequest");
 			var titleForDialog = this.getView().getModel("i18n").getResourceBundle().getText("confirmTitleReject");
-
+        	var yesmsg = this.getView().getModel("i18n").getResourceBundle().getText("Yes");
+        	var nomsg = this.getView().getModel("i18n").getResourceBundle().getText("No");
 			var dialog = new Dialog({
 				title: titleForDialog,
 				type: 'Message',
@@ -1562,7 +1600,7 @@ sap.ui.define([
 					text: textForDialog
 				}),
 				beginButton: new Button({
-					text: 'Yes',
+					text: yesmsg,
 					icon: 'sap-icon://message-warning',
 					type: 'Accept',
 					id: 'oYes',
@@ -1716,14 +1754,14 @@ sap.ui.define([
 
 							//	that.getRouter().navTo("VehicleTrade_Summary");
 						}, function () {
-							alert("fail");
+							// alert("fail");
 						});
 
 						dialog.close();
 					}
 				}),
 				endButton: new Button({
-					text: 'No',
+					text: nomsg,
 
 					type: 'Reject',
 					id: 'oNo',
