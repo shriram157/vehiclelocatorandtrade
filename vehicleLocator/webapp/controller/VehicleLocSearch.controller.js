@@ -50,7 +50,7 @@ sap.ui.define([
 
 					var userType = oData.loggedUserType[0];
 
-					 //var userType = "Zone_User"; // TODO: Remove before deployment locatyest only - GSR
+					 var userType = "Zone_User"; // TODO: Remove before deployment locatyest only - GSR
 					//var userType = "Dealer_User"; // TODO: Remove before deployment locatyest only - GSR
 
 					switch (userType) {
@@ -477,6 +477,40 @@ sap.ui.define([
 				// add your code here. // TODO:  
 				break;
 			case "Zone":
+
+				//Bussinesspartner zone implementation.----------//
+
+				var sLocation = window.location.host;
+				var sLocation_conf = sLocation.search("webide");
+
+				if (sLocation_conf == 0) {
+					this.sPrefix = "/vehicleLocatorNode";
+				} else {
+					this.sPrefix = "";
+
+				}
+
+				this.nodeJsUrl = this.sPrefix + "/node";
+				that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_CATALOGUE_SRV";
+				var SelYear = new Date().getFullYear().toString();
+				that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
+				var SeriesUrl = that.oDataUrl + "/ZC_MODEL_DETAILS?$filter=Modelyear eq '" + SelYear + "'";
+				var ajax1 = $.ajax({
+					dataType: "json",
+					xhrFields: //
+					{
+						withCredentials: true
+					},
+
+					url: SeriesUrl,
+					async: true,
+					success: function (result) {
+						var SeriesUrl = result.d.results;
+						var SeriesModel = new sap.ui.model.json.JSONModel(SeriesUrl);
+						sap.ui.getCore().setModel(SeriesModel, "SeriesModel");
+						that.SuffixDescrioptionBinding();
+					}
+				});
 
 				{
 					var SelectedZone = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].Zone;
