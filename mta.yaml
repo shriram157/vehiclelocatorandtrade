@@ -1,7 +1,7 @@
 ID: vehiclelocatorandtrade
 _schema-version: '3.1'
 description: Vehicle locator and trade consolidated app
-version: 0.0.1
+version: 1.0.0
 
 modules:
  - name: vehiclelocatorandtrade-hdb
