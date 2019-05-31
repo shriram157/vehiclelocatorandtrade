@@ -429,9 +429,10 @@ sap.ui.define([
 				Suffix = this.getView().byId("VLRSuffix").getSelectedKey();
 			}
 			if (Suffix != "" && Suffix != "all") {
-
+                 var suffixisNotequaltoAll = true;
 				filterArray.push(new sap.ui.model.Filter("zzsuffix", sap.ui.model.FilterOperator.Contains, Suffix));
 			} else if (Suffix == "all") {
+				var suffixisNotequaltoAll = false;
 				var SelSuffix = this.getView().byId("VLRSuffix").getModel().getData();
 				for (var i = 0; i < SelSuffix.length; i++) {
 					filterArray.push(new sap.ui.model.Filter("zzsuffix", sap.ui.model.FilterOperator.Contains, SelSuffix[i].zzsuffix));
@@ -447,7 +448,24 @@ sap.ui.define([
 				// var SelColor = this.getView().byId("table1VSR").getBinding("rows").getModel().getData(); //guna
 				var SelColor = this.getView().getModel("vehicleSearchTableModel").getData();
 				for (var i = 0; i < SelColor.length; i++) {
-					filterArray.push(new sap.ui.model.Filter("zzextcol", sap.ui.model.FilterOperator.Contains, SelColor[i].zzextcol));
+					if (Status == "1") {
+						if ( SelColor[i].zz_trading_ind == "1") {
+							 if (suffixisNotequaltoAll == true && SelColor[i].zzsuffix == Suffix ) {
+							filterArray.push(new sap.ui.model.Filter("zzextcol", sap.ui.model.FilterOperator.Contains, SelColor[i].zzextcol));
+							 } else if (suffixisNotequaltoAll == false ){
+							 	filterArray.push(new sap.ui.model.Filter("zzextcol", sap.ui.model.FilterOperator.Contains, SelColor[i].zzextcol));	
+							 }
+						}
+					} else {
+						if (SelColor[i].zz_trading_ind == "2" || SelColor[i].zz_trading_ind == "3") {
+													 if (suffixisNotequaltoAll == true && SelColor[i].zzsuffix == Suffix ) {
+							filterArray.push(new sap.ui.model.Filter("zzextcol", sap.ui.model.FilterOperator.Contains, SelColor[i].zzextcol));
+							 } else if (suffixisNotequaltoAll == false){
+							 	filterArray.push(new sap.ui.model.Filter("zzextcol", sap.ui.model.FilterOperator.Contains, SelColor[i].zzextcol));	
+							 }
+						}
+					}
+
 				}
 
 			}
@@ -951,28 +969,26 @@ sap.ui.define([
 				}
 				var Color = sap.ui.getCore().getModel("SearchedData").getData();
 				var obj = {};
-			
-			
-			  if (DefaultSuffix == 'ALL' || DefaultSuffix == 'TOUS' ) {
-				for (var i = 0, len = Color.length; i < len; i++)
-				    
+
+				if (DefaultSuffix == 'ALL' || DefaultSuffix == 'TOUS') {
+					for (var i = 0, len = Color.length; i < len; i++)
+
 					{
-				    if ( Color[i].zz_trading_ind == "2" || Color[i].zz_trading_ind == "3" ) {
-						obj[Color[i]['zzextcol']] = Color[i];
-				    }
+						if (Color[i].zz_trading_ind == "2" || Color[i].zz_trading_ind == "3") {
+							obj[Color[i]['zzextcol']] = Color[i];
+						}
 					}
-			  } else {
-			  	// if (DefaultSuffix.substring(0, 2))
-				for (var i = 0, len = Color.length; i < len; i++)
-				    
+				} else {
+					// if (DefaultSuffix.substring(0, 2))
+					for (var i = 0, len = Color.length; i < len; i++)
+
 					{
-				   if ( (DefaultSuffix.substring(0, 2) == Color[i].zzsuffix) && ( Color[i].zz_trading_ind == "2" || Color[i].zz_trading_ind == "3" )) {		
-						obj[Color[i]['zzextcol']] = Color[i];
-						  }
+						if ((DefaultSuffix.substring(0, 2) == Color[i].zzsuffix) && (Color[i].zz_trading_ind == "2" || Color[i].zz_trading_ind == "3")) {
+							obj[Color[i]['zzextcol']] = Color[i];
+						}
 					}
 
-			  	
-			  }
+				}
 				Color = new Array();
 				for (var key in obj)
 					Color.push(obj[key]);
@@ -1361,32 +1377,32 @@ sap.ui.define([
 				// 	var zzextcol = arrData[i].zzextcol + "-" + arrData[i].mktg_desc_fr;
 				// 	var zzsuffix = arrData[i].zzsuffix + "-" + arrData[i].suffix_desc_fr + "/" + arrData[i].mrktg_int_desc_fr;
 				// } else {
-				
+
 				if (SPRAS == "English") {
-				var matnr = arrData[i].matnr + "-" + arrData[i].model_desc_en;
-				var zzextcol = arrData[i].zzextcol + "-" + arrData[i].mktg_desc_en;
-				var zzsuffix = arrData[i].zzsuffix + "-" + arrData[i].suffix_desc_en + "/" + arrData[i].mrktg_int_desc_en;
-				 } else {
-				 	
-				 var matnr = arrData[i].matnr + "-" + arrData[i].model_desc_fr;	
-				 var zzextcol = arrData[i].zzextcol + "-" + arrData[i].mktg_desc_fr;	
-				 var zzsuffix = arrData[i].zzsuffix + "-" + arrData[i].suffix_desc_fr + "/" + arrData[i].mrktg_int_desc_fr;	 	
-				 }
+					var matnr = arrData[i].matnr + "-" + arrData[i].model_desc_en;
+					var zzextcol = arrData[i].zzextcol + "-" + arrData[i].mktg_desc_en;
+					var zzsuffix = arrData[i].zzsuffix + "-" + arrData[i].suffix_desc_en + "/" + arrData[i].mrktg_int_desc_en;
+				} else {
+
+					var matnr = arrData[i].matnr + "-" + arrData[i].model_desc_fr;
+					var zzextcol = arrData[i].zzextcol + "-" + arrData[i].mktg_desc_fr;
+					var zzsuffix = arrData[i].zzsuffix + "-" + arrData[i].suffix_desc_fr + "/" + arrData[i].mrktg_int_desc_fr;
+				}
 
 				var zzordertype = "";
 				switch (arrData[i].zzordertype) {
 				case "SO":
 					// zzordertype = "STOCK Open";
-			        zzordertype = this.getView().getModel("i18n").getResourceBundle().getText("Stockopen");
-			 
+					zzordertype = this.getView().getModel("i18n").getResourceBundle().getText("Stockopen");
+
 					break;
 				case "SR":
 					// zzordertype = "STOCK Restricted";
-                     zzordertype =  this.getView().getModel("i18n").getResourceBundle().getText("StockRestricted");
+					zzordertype = this.getView().getModel("i18n").getResourceBundle().getText("StockRestricted");
 					break;
 				case "DM":
 					// zzordertype = "DEMO";
-					  zzordertype = this.getView().getModel("i18n").getResourceBundle().getText("Demo");
+					zzordertype = this.getView().getModel("i18n").getResourceBundle().getText("Demo");
 
 					break;
 				case "BA":
@@ -1398,31 +1414,30 @@ sap.ui.define([
 					// zzordertype = "LAUNCH Stock";
 					zzordertype = this.getView().getModel("i18n").getResourceBundle().getText("LaunchStock");
 
-
 					break;
 				case "RS":
 					// zzordertype = "RETAIL SOLD";
-	zzordertype = this.getView().getModel("i18n").getResourceBundle().getText("RetailSold");
+					zzordertype = this.getView().getModel("i18n").getResourceBundle().getText("RetailSold");
 					break;
 				case "F1":
 					// zzordertype = "DLR RAC";
-	zzordertype = this.getView().getModel("i18n").getResourceBundle().getText("Dlrrac");
+					zzordertype = this.getView().getModel("i18n").getResourceBundle().getText("Dlrrac");
 					break;
 				case "F2":
 					// zzordertype = "DLR ELITE";
-	zzordertype = this.getView().getModel("i18n").getResourceBundle().getText("DlrElite");
+					zzordertype = this.getView().getModel("i18n").getResourceBundle().getText("DlrElite");
 					break;
 				case "F3":
 					// zzordertype = "NAT RAC";
-	zzordertype = this.getView().getModel("i18n").getResourceBundle().getText("Natrac");
+					zzordertype = this.getView().getModel("i18n").getResourceBundle().getText("Natrac");
 					break;
 				case "F4":
 					// zzordertype = "NAT ELITE";
-	zzordertype = this.getView().getModel("i18n").getResourceBundle().getText("NatElite");
+					zzordertype = this.getView().getModel("i18n").getResourceBundle().getText("NatElite");
 					break;
-				case "F5":  
+				case "F5":
 					// zzordertype = "MOBILITY";
-	zzordertype = this.getView().getModel("i18n").getResourceBundle().getText("Mobility");
+					zzordertype = this.getView().getModel("i18n").getResourceBundle().getText("Mobility");
 					break;
 
 				}
@@ -1480,7 +1495,7 @@ sap.ui.define([
 				if ((arrData[i].pd_flag == false) || (arrData[i].pd_flag == "")) {
 					// var z_pd_flag = "No";
 					var z_pd_flag = this.getView().getModel("i18n").getResourceBundle().getText("No");
-					
+
 				} else if ((arrData[i].pd_flag == true) || (arrData[i].pd_flag == "D")) {
 					// var z_pd_flag = "Yes";
 					var z_pd_flag = this.getView().getModel("i18n").getResourceBundle().getText("Yes");
@@ -1588,27 +1603,26 @@ sap.ui.define([
 				}
 				var Color = sap.ui.getCore().getModel("SearchedData").getData();
 				var obj = {};
-				
+
 				var Status = this.getView().byId("VLRStatus").getSelectedKey();
-				if (Status == "1" ) { 
-				for (var i = 0, len = Color.length; i < len; i++) {
-				   if (Color[i].zz_trading_ind == "1") {
-					obj[Color[i]['zzextcol']] = Color[i];
-				   }
-					
-				}
-				} else {
-					
+				if (Status == "1") {
 					for (var i = 0, len = Color.length; i < len; i++) {
-				   if ((Color[i].zz_trading_ind == "2") || (Color[i].zz_trading_ind == "3") ) {
-					obj[Color[i]['zzextcol']] = Color[i];
-				   }
-					
+						if (Color[i].zz_trading_ind == "1") {
+							obj[Color[i]['zzextcol']] = Color[i];
+						}
+
+					}
+				} else {
+
+					for (var i = 0, len = Color.length; i < len; i++) {
+						if ((Color[i].zz_trading_ind == "2") || (Color[i].zz_trading_ind == "3")) {
+							obj[Color[i]['zzextcol']] = Color[i];
+						}
+
+					}
+
 				}
-					
-					
-				}
-				
+
 				Color = new Array();
 				for (var key in obj)
 					Color.push(obj[key]);
@@ -2102,7 +2116,6 @@ sap.ui.define([
 					this.getView().byId("VLRDealer").setSelectedKey(selctedDealer);
 				}
 			}
-		 
 
 			var Status = this.getView().byId("VLRStatus").getSelectedKey();
 			if (Status == "1") {
@@ -2156,7 +2169,7 @@ sap.ui.define([
 				this.getView().byId("VLRColor").setSelectedItem("ALL");*/
 				if (selctedColor == "" || SelctKey.length == 0) {
 
-						if (this.sCurrentLocale == "EN") {
+					if (this.sCurrentLocale == "EN") {
 						this.getView().byId("VLRDealer").setSelectedItem("ALL");
 					} else {
 						this.getView().byId("VLRDealer").setSelectedItem("TOUS");
@@ -2167,7 +2180,6 @@ sap.ui.define([
 					this.getView().byId("VLRColor").setSelectedKey(selctedColor);
 				}
 			}
-		 
 
 			this.onStatusChange();
 
