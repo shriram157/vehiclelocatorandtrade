@@ -218,10 +218,10 @@
                  
                  
                          
-                      <Column id="zzvtn1"   demandPopin="true" minScreenWidth="Tablet"
-                            hAlign="Left">
-                        <Text text="VTN"/>
-                         </Column>                       
+                      <!--<Column id="zzvtn1"   demandPopin="true" minScreenWidth="Tablet"-->
+                      <!--      hAlign="Left">-->
+                      <!--  <Text text="VTN"/>-->
+                      <!--   </Column>                       -->
                          
                          
                          
@@ -251,7 +251,7 @@
                          	<Text text="{vehicleSearchTableModel>ort01}" wrapping="false"/>
                           	<Text text="{vehicleSearchTableModel>bezei}" wrapping="false"/>
                           
-                          	<Text text="{vehicleSearchTableModel>zzvtn}" wrapping="false"/>
+                          	<!--<Text text="{vehicleSearchTableModel>zzvtn}" wrapping="false"/>-->
                           
                           	 
 
