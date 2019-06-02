@@ -166,7 +166,7 @@ sap.ui.define([
 			
 				this.nodeJsUrl = this.sPrefix;
 			   var confirmZoneUser = sap.ui.getCore().getModel("LoginBpDealerModel").oData["0"].BusinessPartnerName;	
-			   if (confirmZoneUser.includes("Zone User")) {
+			   if (confirmZoneUser.includes("Zone User") || confirmZoneUser.includes("National")) {
 			  	   this.userType = "Zone";
 			  	   
 			  	   		this._oViewModel.setProperty("/visibleByDefault", true);

@@ -34,6 +34,18 @@ sap.ui.define([
 				this.currentScopeUrl = "/userDetails/currentScopesForUser";
 
 			}
+// detail view model instantiation. 
+			this._oViewModel = new sap.ui.model.json.JSONModel({
+				busy: false,
+				delay: 0,
+				visibleForNational: false,
+				editAllowed: true,
+				onlyShownoEditForChange: true
+
+			});
+
+			this.getView().setModel(this._oViewModel, "detailView"); 
+
 
 			//  ajax call to BP Data and Scope Data
 			var oModelDetailview = this.getView().getModel("detailView");
@@ -52,14 +64,16 @@ sap.ui.define([
 
 					 //var userType = "Zone_User"; // TODO: Remove before deployment locatyest only - GSR
 					//var userType = "Dealer_User"; // TODO: Remove before deployment locatyest only - GSR
-
+                             //var userType = "TCI_User";
+             
 					switch (userType) {
 					case "Dealer_User":
 						that.userTypeReceived = "Dealer_User";
 						break;
 
 					case "TCI_User":
-						that.userTypeReceived = "TCI_User";
+						// that.userTypeReceived = "TCI_User";
+								that.userTypeReceived = "National";
 						break;
 					case "Zone_User":
 						that.userTypeReceived = "Zone_User";
@@ -166,11 +180,21 @@ sap.ui.define([
 									// "searchTermReceivedDealerName": item.SearchTerm2
 
 							});
+						} else if (i == 0 && that.userTypeReceived == "National")  {
+								BpDealer.push({
+								// "BusinessPartnerKey": item.BusinessPartnerKey,
+								// "BusinessPartner": item.BusinessPartner, 
+								"BusinessPartnerName": "National"
+									// "Division": item.Division,
+									// "BusinessPartnerType": item.BusinessPartnerType,
+									// "searchTermReceivedDealerName": item.SearchTerm2
+
+							});
 						}
 
 						// for toyota login show only toyota dealers, for lexus show only lexus. 
 
-						if (item.Division == that.sDivision || item.Division == "Dual") {
+						 if (item.Division == that.sDivision || item.Division == "Dual") {
 
 							BpDealer.push({
 								"BusinessPartnerKey": item.BusinessPartnerKey,
@@ -181,13 +205,13 @@ sap.ui.define([
 								"searchTermReceivedDealerName": item.SearchTerm2
 
 							});
-						} // TODO: enable this before migration
+						 } // TODO: enable this before migration
 
 					});
 
 					var sLocation = window.location.host;
 					var sLocation_conf = sLocation.search("webide");
-					if (sLocation_conf == 0 && that.userTypeReceived != "Zone_User") {
+					if (sLocation_conf == 0 && that.userTypeReceived != "Zone_User" && that.userTypeReceived != "National") {
 						var BpDealer = [];
 
 						BpDealer.push({
@@ -232,13 +256,26 @@ sap.ui.define([
 					}
 
 					//  set your model or use the model below - 
+					if (that.userTypeReceived != "National" ){
+						
+						
+		
+					
 					that.getView().setModel(new sap.ui.model.json.JSONModel(BpDealer), "BpDealerModel");
 					sap.ui.getCore().setModel(new sap.ui.model.json.JSONModel(BpDealer), "LoginBpDealerModel");
 					var LoggedInDealerCode1 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
 					var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
 					that.getView().byId("oDealerCode1").setText(LoggedInDealerCode1);
 					that.getView().byId("oDealertitle").setText(LoggedInDealer);
-
+			            this._oViewModel.setProperty("/visibleForNational", false);
+					} else {
+					that.getView().setModel(new sap.ui.model.json.JSONModel(BpDealer), "BpDealerModel");
+					sap.ui.getCore().setModel(new sap.ui.model.json.JSONModel(BpDealer), "LoginBpDealerModel");		
+					that.getView().setModel(new sap.ui.model.json.JSONModel(BpDealer), "BpDealerModelZone");	
+						this._oViewModel.setProperty("/visibleForNational", true);
+						
+						
+					}
 					// read the saml attachments the same way 
 
 					$.each(oData.samlAttributes, function (i, item) {
@@ -265,7 +302,25 @@ sap.ui.define([
 									"UserType": "Zone",
 									"Zone": "3"
 								});
-							} else {
+							} else if (that.userTypeReceived == "National")  {
+								
+// DealerCode: undefined
+// Language: "English"
+// LoggedinUserFirstName: "Vehicle Locator Trade"
+// LoggedinUserLastName: "TCI User"
+// UserType: "National"
+// Zone: undefined
+								userAttributes.push({
+								    "DealerCode": undefined,
+									"LoggedinUserFirstName": "Vehicle Locator Trade",
+									"Language": "English",
+									"LoggedinUserLastName": "TCI User",
+									"UserType": "National",
+									"Zone": undefined
+								});
+								
+								
+							} else {	
 								userAttributes.push({
 
 									DealerCode: "42120",
@@ -473,8 +528,42 @@ sap.ui.define([
 
 				break;
 
-			case "TCI_User":
-				// add your code here. // TODO:  
+			// case "TCI_User":
+			case "National":
+	      	this._oViewModel.setProperty("/visibleForNational", true);
+					var sLocation = window.location.host;
+				var sLocation_conf = sLocation.search("webide");
+
+				if (sLocation_conf == 0) {
+					this.sPrefix = "/vehicleLocatorNode";
+				} else {
+					this.sPrefix = "";
+
+				}
+
+				this.nodeJsUrl = this.sPrefix + "/node";
+				that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_CATALOGUE_SRV";
+				var SelYear = new Date().getFullYear().toString();
+				that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
+				var SeriesUrl = that.oDataUrl + "/ZC_MODEL_DETAILS?$filter=Modelyear eq '" + SelYear + "'";
+				var ajax1 = $.ajax({
+					dataType: "json",
+					xhrFields: //
+					{
+						withCredentials: true
+					},
+
+					url: SeriesUrl,
+					async: true,
+					success: function (result) {
+						var SeriesUrl = result.d.results;
+						var SeriesModel = new sap.ui.model.json.JSONModel(SeriesUrl);
+						sap.ui.getCore().setModel(SeriesModel, "SeriesModel");
+						that.SuffixDescrioptionBinding();
+					}
+				});
+				
+				
 				break;
 			case "Zone":
 
@@ -1125,7 +1214,7 @@ sap.ui.define([
 		},
 
 		onSePress: function () {
-
+ 
 			var that = this;
 			this._setTheLanguage();
 			sap.ui.core.BusyIndicator.show();
@@ -1288,9 +1377,25 @@ sap.ui.define([
 			// 		 	if(Dealer_No.length == 10){
 			// 	Dealer_No=Dealer_No.slice(-5);
 			// }		
-
-			var userAttributesModellen = that.getView().getModel("userAttributesModel").getData();
+            if (that.userTypeReceived != "National")    
+			{ var userAttributesModellen = that.getView().getModel("userAttributesModel").getData();
 			var oDealer = userAttributesModellen[0].DealerCode;
+			} else {
+			// if the usertype is national , then the bp is from the drop down key	
+	           if (that.theFirstDefaultDealerSelected)		{
+	           	 oDealer = that.theFirstDefaultDealerSelected;
+	           } else {
+	             	sap.m.MessageBox.error(
+							"Please select the dealer from the drop down before proceeding to search vehicles"
+						);
+							sap.ui.core.BusyIndicator.hide();
+	                    return;
+	           }
+				
+			}
+			
+			
+			
 			if (oDealer == undefined) {
 				// for zone users this will be blank,  so lets send the zone code to fetch the zone inventory. 
 
@@ -1301,11 +1406,13 @@ sap.ui.define([
 					oDealer = that.lexusZoneStockCode;
 				}
 
+	
+
+			} else {
 				if (oDealer.length == 10) {
 					// oDealer=oDealer.slice(-6); 
 					oDealer = oDealer.slice(-5);
 				}
-
 			}
 
 			if (SuffCmbo == 'ALL' || SuffCmbo == 'TOUS') {
@@ -1370,7 +1477,7 @@ sap.ui.define([
 
 					var userType = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].UserType;
 
-					if (userType == "Zone") {
+					if (userType == "Zone" || userType == "National" ) {
 						var FilterZonestockData = FilterDeleade_OrderTypefilteNotnull.filter(function (x) {
 							return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "DM" || x.zzordertype == "SO" || x.zzordertype == "RS" || x.zzordertype ==
 								"F1" || x.zzordertype == "F2" || x.zzordertype == "F3" || x.zzordertype == "F4" || x.zzordertype == "F5");
@@ -1505,9 +1612,10 @@ sap.ui.define([
 					var Obj = {};
 					Obj.selectedSuffix = selectedSuffix.replace(/\//g, "%2F");
 					Obj.LoginUser = LoginUser;
+					Obj.userTypeReceived = that.userTypeReceived;
 					sap.ui.core.BusyIndicator.hide();
 
-					if (that.userTypeReceived == "Zone_User") {
+					if (that.userTypeReceived == "Zone_User" || that.userTypeReceived == "National") {
 
 						that.getRouter().navTo("VehicleSearcResultsForZoneUser", {
 							LoginUser: JSON.stringify(Obj)
@@ -1949,6 +2057,21 @@ sap.ui.define([
 				}
 			}
 
+		},
+		onBusinessPartnerSelected: function(oEvent) {
+						var sSelectedDealer = oEvent.getParameter("\selectedItem").getProperty("key");
+			
+			
+			this.requestedDealerToSAP = sSelectedDealer;
+			var sSelectedDealerText = oEvent.getParameter("\selectedItem").getProperty("additionalText");
+			var sSelectedText = oEvent.getParameter("\selectedItem").getProperty("text");
+
+			this.theFirstDefaultDealerSelected = sSelectedDealer;
+			// this._oViewModel.setProperty("/DealerName", sSelectedDealerText);
+			// call the function to get the relevant data to screen again. 
+			
+						this._oViewModel.setProperty("/texttoshow", sSelectedDealerText);
+			
 		}
 
 	});

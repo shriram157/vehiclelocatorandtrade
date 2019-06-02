@@ -655,7 +655,7 @@ sap.ui.define([
 			// var sapZoneForZoneUser = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].UserType[0];
 
 			var oModelData = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0];
-			if (oModelData != undefined) {
+			if ((oModelData != undefined) && (oModelData.UserType == "Zone_User")) {
 				var userZoneRaw = oModelData.Zone[0];
 			}
 			if (userZoneRaw != undefined) {
@@ -703,10 +703,31 @@ sap.ui.define([
 				}
 
 			}
-
+            
+            if (oModelData.UserType == "Zone_User" ) {
+            
 			this.sapUserZoneDetermined = sapUserZone;
 			this.zoneStockCode = zoneStockCode;
 			this.lexusZoneStockCode = lexusZoneStockCode;
+			
+			         		var oModelDetail = this.getView().getModel("detailView");
+	                 oModelDetail.setProperty("/visiblePull", true);
+            } else if (oModelData.UserType == "National") {
+            	
+            		var oModelDetail = this.getView().getModel("detailView");
+	                 oModelDetail.setProperty("/visiblePull", false);
+            	
+            	
+            	
+            sapUserZone = "9000";	
+          	zoneStockCode = "2400559000";
+		    lexusZoneStockCode = "2400559100";	
+            this.sapUserZoneDetermined = sapUserZone;
+			this.zoneStockCode = zoneStockCode;
+			this.lexusZoneStockCode = lexusZoneStockCode;
+            	
+            }
+			
 			// use the above to send to SAP along with pulled vehicles. 
 
 			// if the user is retruning by pressing the back button,  then it is better, that we dont refresh the data again. 

@@ -25,7 +25,7 @@
 					<Label id="oDealerCode2" width="auto"/>
 					<Label id="oDealersearchresults" width="auto"/>
 					<ToolbarSpacer/>
-					<Button id="openMenu3" class="VLbtn1" text="{i18n>PullVehicles}" type="Transparent" press="handlePressPullvehcls" width="auto"/>
+					<Button id="openMenu3" class="VLbtn1" text="{i18n>PullVehicles}" type="Transparent" press="handlePressPullvehcls" width="auto" visible="{detailView>/visiblePull}"/>
 					<Button id="openMenu4" class="VLbtn2" text="{i18n>ExporttoVehicles}" type="Transparent" press="handleExporttohecls" width="auto"/>
 					<Button id="openMenu5" class="VLbtn3" text="{i18n>BacktoSerach}" type="Transparent" press="handlebacksearch" width="auto"/>
 					

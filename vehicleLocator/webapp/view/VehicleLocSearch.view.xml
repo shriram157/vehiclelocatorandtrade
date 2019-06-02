@@ -33,7 +33,25 @@
 						   <Title id="oDealerCode1" titleStyle="H3" width="auto" textAlign="Left" visible="true" wrapping="false" class="titledealervehiclesearch"/>
 					
 						<Title id="oDealertitle" titleStyle="H3" width="auto" textAlign="Left" visible="true" wrapping="false" class="titledealervehiclesearch"/>
+						  <Label text="{detailView>/texttoshow}" />  
 						<ToolbarSpacer></ToolbarSpacer>
+						
+						
+										    <Label text="{i18n>Dealer}" required="true" visible="{detailView>/visibleForNational}"/>   
+											    
+												<ComboBox showSecondaryValues="true" required="true" visible="{detailView>/visibleForNational}" fieldGroupIds="requiredField"
+													editable="{detailView>/editAllowed}" width="20rem"   value="{BpDealerModelZone>/BusinessPartnerKey}"
+													filterSecondaryValues="true" id="dealerID" enabled="{detailView>/onlyShownoEditForChange}"
+													items="{path: 'BpDealerModelZone>/', sorter: { path: 'BusinessPartner' }, length:750 }" selectedKey="{BusinessPartnerKey}"
+													selectionChange="onBusinessPartnerSelected" showValueStateMessage="false" textAlign="Begin">
+													<core:ListItem key="{BpDealerModelZone>BusinessPartnerKey}" text="{BpDealerModelZone>BusinessPartner}"
+														additionalText="{BpDealerModelZone>BusinessPartnerName}"/>
+						
+												</ComboBox>
+											    
+										   
+	
+						
 						<Button text="{i18n>TradeSummary}" type="Transparent" press="TradeSummaryLinkPress"/>
 						<Button text="{i18n>TradeHistory}" type="Transparent" press="TradeHistoryLinkPress"/>
 						<Button text="{i18n>ModelBlock}" type="Transparent" press="BlockSummarypress"/>
