@@ -448,23 +448,23 @@ sap.ui.define([
 				// var SelColor = this.getView().byId("table1VSR").getBinding("rows").getModel().getData(); //guna
 				var SelColor = this.getView().getModel("vehicleSearchTableModel").getData();
 				for (var i = 0; i < SelColor.length; i++) {
-					// if (Status == "1") {
-					// 	if ( SelColor[i].zz_trading_ind == "1") {
-					// 		 if (suffixisNotequaltoAll == true && SelColor[i].zzsuffix == Suffix ) {
-					// 		filterArray.push(new sap.ui.model.Filter("zzextcol", sap.ui.model.FilterOperator.Contains, SelColor[i].zzextcol));
-					// 		 } else if (suffixisNotequaltoAll == false ){
-					// 		 	filterArray.push(new sap.ui.model.Filter("zzextcol", sap.ui.model.FilterOperator.Contains, SelColor[i].zzextcol));	
-					// 		 }
-					// 	}
-					// } else {
-					// 	if (SelColor[i].zz_trading_ind == "2" || SelColor[i].zz_trading_ind == "3") {
-					// 								 if (suffixisNotequaltoAll == true && SelColor[i].zzsuffix == Suffix ) {
-					// 		filterArray.push(new sap.ui.model.Filter("zzextcol", sap.ui.model.FilterOperator.Contains, SelColor[i].zzextcol));
-					// 		 } else if (suffixisNotequaltoAll == false){
+					if (Status == "1") {
+						if ( SelColor[i].zz_trading_ind == "1") {
+							 if (suffixisNotequaltoAll == true && SelColor[i].zzsuffix == Suffix ) {
+							filterArray.push(new sap.ui.model.Filter("zzextcol", sap.ui.model.FilterOperator.Contains, SelColor[i].zzextcol));
+							 } else if (suffixisNotequaltoAll == false ){
 							 	filterArray.push(new sap.ui.model.Filter("zzextcol", sap.ui.model.FilterOperator.Contains, SelColor[i].zzextcol));	
-					// 		 }
-					// 	}
-					// }
+							 }
+						}
+					} else {
+						if (SelColor[i].zz_trading_ind == "2" || SelColor[i].zz_trading_ind == "3") {
+													 if (suffixisNotequaltoAll == true && SelColor[i].zzsuffix == Suffix ) {
+							filterArray.push(new sap.ui.model.Filter("zzextcol", sap.ui.model.FilterOperator.Contains, SelColor[i].zzextcol));
+							 } else if (suffixisNotequaltoAll == false){
+							 	filterArray.push(new sap.ui.model.Filter("zzextcol", sap.ui.model.FilterOperator.Contains, SelColor[i].zzextcol));	
+							 }
+						}
+					}
 
 				}
 

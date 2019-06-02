@@ -33,7 +33,8 @@
 						   <Title id="oDealerCode1" titleStyle="H3" width="auto" textAlign="Left" visible="true" wrapping="false" class="titledealervehiclesearch"/>
 					
 						<Title id="oDealertitle" titleStyle="H3" width="auto" textAlign="Left" visible="true" wrapping="false" class="titledealervehiclesearch"/>
-		
+						  <Label text="{detailView>/texttoshow}" />  
+						<ToolbarSpacer></ToolbarSpacer>
 						
 						
 										    <Label text="{i18n>Dealer}" required="true" visible="{detailView>/visibleForNational}"/>   
@@ -47,11 +48,9 @@
 														additionalText="{BpDealerModelZone>BusinessPartnerName}"/>
 						
 												</ComboBox>
-													   <Label text="{detailView>/texttoshow}" />   
-											    	  
+											    
 										   
-				
-						<ToolbarSpacer></ToolbarSpacer>
+	
 						
 						<Button text="{i18n>TradeSummary}" type="Transparent" press="TradeSummaryLinkPress"/>
 						<Button text="{i18n>TradeHistory}" type="Transparent" press="TradeHistoryLinkPress"/>

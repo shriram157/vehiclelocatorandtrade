@@ -40,7 +40,7 @@
 						
 												</ComboBox>
 											    
-										   <Label text="{detailView>/texttoshow}" />    	
+										   <Label text="{detailView>/DealerName}" />    	
 						
 						
 						
@@ -169,14 +169,18 @@
 									<cells>
 										<!--<CheckBox  select="onSelectedLine" />-->
 										<ComboBox editable="false" width="100%"
-											items="{path:'Dealers>/A_BusinessPartner',filters: [ { path: 'Customer', operator: 'StartsWith', value1:'240' }], length:750}"
+											items="{path:'Dealers>/A_BusinessPartner',filters: [ { path: 'Customer', operator: 'StartsWith', value1:'2400000' }]}"
 											selectedKey="{path:'ModelBlock>ZzblockedDlr'}" modelContextChange="onDealernum"   class="readonlycombo" >
 											<items>
 												<core:Item key="{Dealers>Customer}"
 													text="{path:'Dealers>Customer',formatter:'vehicleLocator.Formatter.Formatter.DealerNameFormat'}-{Dealers>OrganizationBPName1}"/>
 											</items>
 										</ComboBox>
-		
+									
+										
+										
+										
+										
 										<ComboBox editable="false" width="100%" items="{Vehicles>/zc_mmfields}" class="readonlycombo" selectedKey="{ModelBlock>Zzseries}"
 											modelContextChange="onSeriesnum">
 											<items>
@@ -190,7 +194,7 @@
 											     <core:Item key="{Vehicles>Model}" text="{Vehicles>Model} - {=${languageModel>/SPRAS}==='English' ? ${Vehicles>ModelDescriptionEN}:${Vehicles>ModelDescriptionFR} }" />
 											</items>
 										</ComboBox>
-										<Text text="{ModelBlock>Zzduration}" wrapping="true" textAlign="Center" />
+										<Text text="{ModelBlock>Zzduration}" wrapping="true" textAlign="Center"/>
 										<Text text="{path:'ModelBlock>ZzblkstartDate',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" textAlign="Center"
 											wrapping="false"/>
 										<Text text="{path:'ModelBlock>ZzblkendDate',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" textAlign="Center"

@@ -712,11 +712,13 @@ sap.ui.define([
 			
 			         		var oModelDetail = this.getView().getModel("detailView");
 	                 oModelDetail.setProperty("/visiblePull", true);
+	                 	oModelDetail.setProperty("/zoneUserDelete", "MultiSelect");
             } else if (oModelData.UserType == "National") {
             	
             		var oModelDetail = this.getView().getModel("detailView");
 	                 oModelDetail.setProperty("/visiblePull", false);
-            	
+	             	oModelDetail.setProperty("/zoneUserDelete", "None");       
+
             	
             	
             sapUserZone = "9000";	

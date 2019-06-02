@@ -15,7 +15,6 @@ sap.ui.define([
 		onInit: function () {
 			var _that = this;
 			this._mViewSettingsDialogs = {};
-				this.returningFromBPselect = false;
 
 			var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
 			var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
@@ -38,8 +37,7 @@ sap.ui.define([
 				delay: 0,
 				visibleByDefault: false,
 				editAllowed: true,
-				onlyShownoEditForChange: true,
-				texttoshow: ""
+				onlyShownoEditForChange: true
 
 			});
 
@@ -180,7 +178,7 @@ sap.ui.define([
 
 			var Businesspartnerurl = that.oDataUrl2 +
 				"/A_BusinessPartner/?$format=json&$expand=to_Customer&$filter=(BusinessPartnerType eq 'Z001' or BusinessPartnerType eq 'Z004' or BusinessPartnerType eq 'Z005') and zstatus ne 'X' &$orderby=BusinessPartner asc";
-            // if ( this.returningFromBPselect == false) {
+
 			var ajax3 = $.ajax({
 				dataType: "json",
 				xhrFields: //
@@ -277,9 +275,6 @@ sap.ui.define([
 				}
 
 			});
-			
-            // }
-			
 		},
 
 		VehicleLocSearchPressMBS: function () {
@@ -834,7 +829,7 @@ sap.ui.define([
 			
 						this._oViewModel.setProperty("/texttoshow", sSelectedDealerText);
 			
-			this.returningFromBPselect = true;
+			
 			this.onRouteMatched();
 
 		},

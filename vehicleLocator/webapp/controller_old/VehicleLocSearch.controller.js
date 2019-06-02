@@ -40,8 +40,7 @@ sap.ui.define([
 				delay: 0,
 				visibleForNational: false,
 				editAllowed: true,
-				onlyShownoEditForChange: true,
-				texttoshow: ""
+				onlyShownoEditForChange: true
 
 			});
 
