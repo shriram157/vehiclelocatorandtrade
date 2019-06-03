@@ -164,7 +164,7 @@ sap.ui.define([
 
 			}
 			//=================<< Model Dec >>=====================================
-			this.nodeJsUrl = this.sPrefix + "/node";
+			this.nodeJsUrl = this.sPrefix + "/userDetails";
 
 			//=============================<< Model Block Reqs >>==========================================
 			var Filter0 = new sap.ui.model.Filter('ZzblockingDlr', 'EQ', "24000" + Dealer_No);
@@ -175,11 +175,13 @@ sap.ui.define([
 			var LoginBusinessPartnerCode = Dealer_No
 			this.dealerNo = Dealer_No;
 				//var LoginBusinessPartnerCode = sap.ui.getCore().LoginDetails.BussinesspartnerCode;
-			that.oDataUrl2 = this.nodeJsUrl + "/API_BUSINESS_PARTNER";
+			// that.oDataUrl2 = this.nodeJsUrl + "/API_BUSINESS_PARTNER";
+			
+			that.oDataUrl2 = this.nodeJsUrl + "/dealers";
 			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl2, true);
-
-			var Businesspartnerurl = that.oDataUrl2 +
-				"/A_BusinessPartner/?$format=json&$expand=to_Customer&$filter=(BusinessPartnerType eq 'Z001' or BusinessPartnerType eq 'Z004' or BusinessPartnerType eq 'Z005') and zstatus ne 'X' &$orderby=BusinessPartner asc";
+                 var Businesspartnerurl = that.oDataUrl2;
+			// var Businesspartnerurl = that.oDataUrl2 +
+			// 	"/A_BusinessPartner/?$format=json&$expand=to_Customer&$filter=(BusinessPartnerType eq 'Z001' or BusinessPartnerType eq 'Z004' or BusinessPartnerType eq 'Z005') and zstatus ne 'X' &$orderby=BusinessPartner asc";
             // if ( this.returningFromBPselect == false) {
 			var ajax3 = $.ajax({
 				dataType: "json",
@@ -196,7 +198,8 @@ sap.ui.define([
 			$.when(ajax3).done(function (Businesspartnerurl) {
 				debugger;
 
-				var Businesspartnerurl = Businesspartnerurl.d.results;
+				// var Businesspartnerurl = Businesspartnerurl.d.results;
+					var Businesspartnerurl = Businesspartnerurl.attributes;
 
 				//	var LoginBusinessPartnerCode = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerKey;  //GSR1104
 				var LoginBusinessPartnerCode = that.dealerNo;
