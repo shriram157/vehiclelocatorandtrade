@@ -171,10 +171,17 @@
 										<ComboBox editable="false" width="100%"
 											items="{path:'Dealers>/attributes',filters: [ { path: 'BusinessPartnerKey', operator: 'StartsWith', value1:'240' }], length:750}"
 											selectedKey="{path:'ModelBlock>ZzblockedDlr'}" modelContextChange="onDealernum"   class="readonlycombo" >
-											<items>
-												<core:Item key="{Dealers>/attributes}"
-													text="{path:'Dealers>attributes',formatter:'vehicleLocator.Formatter.Formatter.DealerNameFormat'}-{Dealers>BusinessPartnerName}"/>
+											<!--<items>-->
+											<!--	<core:Item key="{Dealers>/attributes}"-->
+											<!--		text="{path:'Dealers>attributes',formatter:'vehicleLocator.Formatter.Formatter.DealerNameFormat'}-{Dealers>/BusinessPartnerName}"/>-->
+											<!--</items>-->
+														<items>
+												<core:Item key="{Dealers>BusinessPartnerKey}"
+													text="{path:'Dealers>BusinessPartnerKey',formatter:'vehicleLocator.Formatter.Formatter.DealerNameFormat'}-{Dealers>BusinessPartnerName}"/>
 											</items>
+											
+											
+											
 										</ComboBox>
 		
 										<ComboBox editable="false" width="100%" items="{Vehicles>/zc_mmfields}" class="readonlycombo" selectedKey="{ModelBlock>Zzseries}"

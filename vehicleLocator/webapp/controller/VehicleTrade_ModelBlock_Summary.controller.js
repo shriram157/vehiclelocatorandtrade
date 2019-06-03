@@ -210,7 +210,8 @@ sap.ui.define([
 
 					let attributeFromSAP;
 					try {
-						attributeFromSAP = Businesspartnerurl[n].to_Customer.Attribute1;
+						// attributeFromSAP = Businesspartnerurl[n].to_Customer.Attribute1;
+								attributeFromSAP = Businesspartnerurl[n].BPDivision;  //Businesspartnerurl["0"].BPDivision
 					} catch (e) {
 
 						// return;
