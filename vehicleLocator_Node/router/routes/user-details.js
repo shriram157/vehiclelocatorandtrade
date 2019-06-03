@@ -285,8 +285,7 @@ module.exports = function (appContext) {
 		var tracer = req.loggingContext.getTracer(__filename);
 
 		var resBody = {
-			"attributes": [],
-			"sales": []
+			"attributes": []
 		};
 
 		var bpReqUrl = url + "/API_BUSINESS_PARTNER/A_BusinessPartner?sap-client=" + s4Client + "&$format=json" +
@@ -329,7 +328,6 @@ module.exports = function (appContext) {
 								customerSalesArea.results[i].SalesOrganization == "6000") && (customerSalesArea.results[i].DistributionChannel == "10" &&
 								customerSalesArea.results[i].SalesGroup != "T99"))) {
 							filtered = true;
-							resBody.sales.push(customerSalesArea.results[i]); //to fetch sales data
 						}
 					}
 					return filtered;
@@ -344,7 +342,6 @@ module.exports = function (appContext) {
 						BusinessPartnerType: bpResults[i].BusinessPartnerType,
 						SearchTerm2: bpResults[i].SearchTerm2
 					};
-					// bpAttributes.Sales = bpResults[i].sales;
 					try {
 						toCustomerAttr1 = bpResults[i].to_Customer.Attribute1;
 					} catch (e) {
