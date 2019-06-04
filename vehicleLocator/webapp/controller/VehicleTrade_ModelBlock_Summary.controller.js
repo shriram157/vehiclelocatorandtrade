@@ -249,7 +249,7 @@ sap.ui.define([
 
 					}
 					// excclude 2400029000 2400029000 
-					if (Businesspartnerurl[n].BusinessPartner == "2400029000" || Businesspartnerurl[n].BusinessPartner == "2400049000") {
+					if (Businesspartnerurl[n].BusinessPartnerKey == "2400029000" || Businesspartnerurl[n].BusinessPartnerKey == "2400049000") {
 							Businesspartnerurl.splice(n, 1);
 								continue;;
 					}
