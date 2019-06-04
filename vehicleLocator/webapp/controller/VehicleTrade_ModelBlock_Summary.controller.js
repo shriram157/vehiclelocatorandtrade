@@ -248,6 +248,11 @@ sap.ui.define([
 						sapDivision = "10"; //  lets put that as a toyota dealer
 
 					}
+					// excclude 2400029000 2400029000 
+					if (Businesspartnerurl[n].BusinessPartner == "2400029000" || Businesspartnerurl[n].BusinessPartner == "2400049000") {
+							Businesspartnerurl.splice(n, 1);
+								continue;;
+					}
 
 					if (that.sDivision == sapDivision) {
 						// check if it is a logged in dealer remove else just return. 
