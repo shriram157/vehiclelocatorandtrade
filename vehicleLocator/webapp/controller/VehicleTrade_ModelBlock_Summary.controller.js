@@ -230,15 +230,16 @@ sap.ui.define([
 
 						break;
 					case "03":
-						sapDivision = "Dual";
-
+						// sapDivision = "Dual";
+                      sapDivision =  this.sDivision ;
 						break;
 					case "04":
 						sapDivision = "10";
 
 						break;
 					case "05":
-						sapDivision = "Dual";
+						// sapDivision = "Dual";
+						 sapDivision =  this.sDivision ;
 
 						break;
 					default:
