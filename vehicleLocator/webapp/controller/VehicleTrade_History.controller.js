@@ -218,7 +218,7 @@ sap.ui.define([
 						], true)],
 						async: false,
 						success: function (oData2, oResponse1) {
-							if (oData2.length > 0){
+							if (oData2.results.length > 0){
 							TableData[i].Model_Desc = oData2.results[0].Model_Desc;
 							TableData[i].Series_Desc = oData2.results[0].Series_Desc;
 							TableData[i].Suffix_Desc = oData2.results[0].Suffix_Desc;
@@ -239,7 +239,7 @@ sap.ui.define([
 						], true)],
 						async: false,
 						success: function (oData2, oResponse1) {
-								if (oData2.length > 0){
+								if (oData2.results.length > 0){
 							TableData[i].OffredVehicle.Model_Desc = oData2.results[0].Model_Desc;
 							TableData[i].OffredVehicle.Series_Desc = oData2.results[0].Series_Desc;
 							TableData[i].OffredVehicle.Suffix_Desc = oData2.results[0].Suffix_Desc;

@@ -64,7 +64,7 @@
 							<form:content>
 								<core:Title text="" class="VTMBSClass"/>
 								<Label text="{i18n>Dealer}" required="true"/>         
-								<ComboBox id="VT_MBSdeal" showSecondaryValues="true" 	filterSecondaryValues="true" selectionChange="onBusinessPartnerSelected" width="76%"  items="{path: '/', length:750 }" >
+								<ComboBox id="VT_MBSdeal" showSecondaryValues="true" 	filterSecondaryValues="true" selectionChange="onBusinessPartnerSelected1" width="76%"  items="{path: '/', length:750 }" >
 									<core:ListItem key="{BusinessPartnerKey}" text="{path:'BusinessPartnerKey',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDealer'}" 
 										additionalText="{BusinessPartnerName}"  />
 								</ComboBox>
@@ -89,11 +89,7 @@
 										}">
 										<core:Item key="{dncDays>key}" text="{dncDays>text}" />
 									</ComboBox>
-								
-								
-								
-								
-								
+	
 								
 								<!--	<Select id="VT_MBSbmnd" change="onVT_MBSbnmd" width="76%"   items="{}">
 									<core:ListItem key="{}" text="{jsonDatamodel>Status}"/>
@@ -167,22 +163,36 @@
 							<items>
 								<ColumnListItem type="Inactive" press="detailItems">
 									<cells>
-										<!--<CheckBox  select="onSelectedLine" />-->
-										<ComboBox editable="false" width="100%"
-											items="{path:'Dealers>/attributes',filters: [ { path: 'BusinessPartnerKey', operator: 'StartsWith', value1:'240' }], length:750}"
-											selectedKey="{path:'ModelBlock>ZzblockedDlr'}" modelContextChange="onDealernum"   class="readonlycombo" >
+									 
+									 <!--   	<ComboBox editable="false" width="100%"-->
+										<!--	items="{path:'Dealers>',filters: [ { path: 'BusinessPartnerKey', operator: 'StartsWith', value1:'240' }], length:750}"-->
+										<!--	selectedKey="{path:'ModelBlock>ZzblockedDlr'}" modelContextChange="onDealernum"   class="readonlycombo" >-->
 											<!--<items>-->
 											<!--	<core:Item key="{Dealers>/attributes}"-->
 											<!--		text="{path:'Dealers>attributes',formatter:'vehicleLocator.Formatter.Formatter.DealerNameFormat'}-{Dealers>/BusinessPartnerName}"/>-->
 											<!--</items>-->
-														<items>
-												<core:Item key="{Dealers>BusinessPartnerKey}"
-													text="{path:'Dealers>BusinessPartnerKey',formatter:'vehicleLocator.Formatter.Formatter.DealerNameFormat'}-{Dealers>BusinessPartnerName}"/>
+										<!--				<items>-->
+										<!--		<core:Item key="{Dealers>BusinessPartnerKey}"-->
+										<!--			text="{path:'Dealers>BusinessPartnerKey',formatter:'vehicleLocator.Formatter.Formatter.DealerNameFormat'}-{Dealers>BusinessPartnerName}"/>-->
+										<!--	</items>-->
+											
+											
+											
+										<!--</ComboBox>-->
+										
+											<ComboBox editable="false" width="100%"
+											items="{path:'Dealers>/A_BusinessPartner',filters: [ { path: 'Customer', operator: 'StartsWith', value1:'240' }], length:750}"
+											selectedKey="{path:'ModelBlock>ZzblockedDlr'}" modelContextChange="onDealernum"   class="readonlycombo" >
+											<items>
+												<core:Item key="{Dealers>Customer}"
+													text="{path:'Dealers>Customer',formatter:'vehicleLocator.Formatter.Formatter.DealerNameFormat'}-{Dealers>OrganizationBPName1}"/>
 											</items>
-											
-											
-											
-										</ComboBox>
+										</ComboBox>			
+										
+										
+										
+										
+										
 		
 										<ComboBox editable="false" width="100%" items="{Vehicles>/zc_mmfields}" class="readonlycombo" selectedKey="{ModelBlock>Zzseries}"
 											modelContextChange="onSeriesnum">
