@@ -185,6 +185,7 @@ sap.ui.define([
 								TableData[i].Suffix = oData1.results[x].Suffix;
 								TableData[i].Colour = oData1.results[x].Int_Colour;
 								TableData[i].Ext_Colour = oData1.results[x].Ext_Colour;
+								TableData[i].Int_Colour_Desc = oData1.results[0].Int_Colour_Desc;
 								TableData[i].APX = oData1.results[x].APX;
 								TableData[i].Order_Type = oData1.results[x].Order_Type;
 								TableData[i].Status = oData1.results[x].Status;
@@ -198,6 +199,7 @@ sap.ui.define([
 								TableData[i].OffredVehicle.Series = oData1.results[x].Series;
 								TableData[i].OffredVehicle.Suffix = oData1.results[x].Suffix;
 								TableData[i].OffredVehicle.Colour = oData1.results[x].Int_Colour;
+								TableData[i].Int_Colour_Desc = oData1.results[0].Int_Colour_Desc;
 								TableData[i].OffredVehicle.Ext_Colour = oData1.results[x].Ext_Colour;
 								TableData[i].OffredVehicle.APX = oData1.results[x].APX;
 								TableData[i].OffredVehicle.Order_Type = oData1.results[x].Order_Type;
@@ -222,6 +224,7 @@ sap.ui.define([
 							TableData[i].Model_Desc = oData2.results[0].Model_Desc;
 							TableData[i].Series_Desc = oData2.results[0].Series_Desc;
 							TableData[i].Suffix_Desc = oData2.results[0].Suffix_Desc;
+							TableData[i].Int_Colour_Desc = oData2.results[0].Int_Colour_Desc;   
 							TableData[i].Colour = oData2.results[0].Int_Colour;
 							TableData[i].Ext_Colour_Desc = oData2.results[0].Ext_Colour_Desc;
 							}
@@ -243,6 +246,7 @@ sap.ui.define([
 							TableData[i].OffredVehicle.Model_Desc = oData2.results[0].Model_Desc;
 							TableData[i].OffredVehicle.Series_Desc = oData2.results[0].Series_Desc;
 							TableData[i].OffredVehicle.Suffix_Desc = oData2.results[0].Suffix_Desc;
+							TableData[i].Int_Colour_Desc = oData2.results[0].Int_Colour_Desc;
 							TableData[i].OffredVehicle.Colour = oData2.results[0].Int_Colour;
 							TableData[i].OffredVehicle.Ext_Colour_Desc = oData2.results[0].Ext_Colour_Desc;
 								}
