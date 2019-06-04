@@ -206,7 +206,9 @@ sap.ui.define([
 
 				//  remove the logged in USEr available LoginBusinessPartnerCode in Businesspartnerurl
 
-				for (var n = 0; n < Businesspartnerurl.length; n++) {
+				// for (var n = 0; n < Businesspartnerurl.length; n++) {
+				
+				for (var n = Businesspartnerurl.length - 1; n >= 0; n--) {
 
 					let attributeFromSAP;
 					try {
