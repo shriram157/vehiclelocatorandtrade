@@ -250,7 +250,8 @@ sap.ui.define([
 					if (that.sDivision == sapDivision) {
 						// check if it is a logged in dealer remove else just return. 
 						if (Businesspartnerurl[n].BusinessPartner == LoginBusinessPartnerCode) {
-							Businesspartnerurl.slice(n, 1);
+							// Businesspartnerurl.slice(n, 1);
+							Businesspartnerurl.splice(n, 1);
 							continue;;
 						} else {
 							// keep the record
@@ -261,7 +262,8 @@ sap.ui.define([
 
 						if (that.sDivision != undefined) {
 							// remove the record
-							Businesspartnerurl.slice(n, 1);
+							// Businesspartnerurl.slice(n, 1);
+							Businesspartnerurl.splice(n, 1);
 						}
 
 					}
