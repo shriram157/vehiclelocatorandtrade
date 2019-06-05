@@ -492,75 +492,11 @@ sap.ui.define([
 				filterArray.push(new sap.ui.model.Filter("Hold_stat", sap.ui.model.FilterOperator.EQ, "N"));
 			}
 
-			// this.getView().byId("table1VSR").getBinding("rows").filter(filterArray);
-
-			// sap.ushell.components.tableSearchResults.getBinding("rows").filter(filterArray);  // guna
-			// sap.ushell.components.tableSearchResults.getBinding("items").filter(filterArray);  //0805
-
-			// var FilterdedTableData=sap.ushell.components.tableSearchResults.getBinding("rows").aIndices;// guna
-
-			// var FilterdedTableData = sap.ushell.components.tableSearchResults.getBinding("items").aIndices;  //0805
-
-			//var tableData=sap.ushell.components.tableSearchResults.getModel("vehicleSearchTableModel").getData();   // guna
-
-			// also lets try to apply the filter data if the value is not initial in the filter field. 
-
-			//debugger;
-			// trey to push the filter array also here ---------------------------------------------
-			// searchVehicleList
-			//       var sSearchQuery = this.byId("searchVehicleList").getValue(); 
-			//      if (sSearchQuery) {
-			// 	var oFilter = new Filter([
-			// 		new Filter("kunnr", sap.ui.model.FilterOperator.Contains, sSearchQuery),
-			// 		new Filter("matnr", sap.ui.model.FilterOperator.Contains, sSearchQuery),
-			// 		new Filter("zzsuffix", sap.ui.model.FilterOperator.Contains, sSearchQuery),
-			// 		new Filter("zzapx", sap.ui.model.FilterOperator.Contains, sSearchQuery),
-			// 		new Filter("zzextcol", sap.ui.model.FilterOperator.Contains, sSearchQuery),
-			// 		new Filter("zzordertype", sap.ui.model.FilterOperator.Contains, sSearchQuery),
-			// 		new Filter("zzadddata4", sap.ui.model.FilterOperator.Contains, sSearchQuery),
-			// 		new Filter("pstsp", sap.ui.model.FilterOperator.Contains, sSearchQuery),
-			// 		new Filter("non_D_flag", sap.ui.model.FilterOperator.Contains, sSearchQuery),
-			// 		new Filter("ort01", sap.ui.model.FilterOperator.Contains, sSearchQuery),
-			// 		new Filter("bezei", sap.ui.model.FilterOperator.Contains, sSearchQuery)
-			// 	], false);
-
-			// 	// aFilters.push(oFilter);
-			// 	filterArray.push(oFilter);
-			// }
-
+		 
 			this.byId("table1VSR")
 				.getBinding("items")
 				.filter(filterArray);
-			// .sort(aSorters);
-
-			// sap.ushell.components.tableSearchResults.getBinding("items").filter(filterArray); //0805
-
-			// filter array end --------------------------------------------------------------------
-
-			// set the count to screen. But do not do this when we are navigating from suffix change. 
-
-			//         if (	this.comingFromSuffixChange == true ) {
-			//         		// this.comingFromSuffixChange = false;
-			//         	var tableData = sap.ushell.components.tableSearchResults.getModel("vehicleSearchTableModel").getData();		
-			//         			var tableLength = tableData.length;
-			// var oModelDetail = this.getView().getModel("detailView");
-
-			// var sExpectedText = this.getView().getModel("i18n").getResourceBundle().getText("tableCount", [tableLength]);
-			// oModelDetail.setProperty("/tableCount", sExpectedText);
-
-			//         } else {
-
-			//0805 - Begin
-
-			// var tableLength = FilterdedTableData.length;
-			// var oModelDetail = this.getView().getModel("detailView");
-
-			// var sExpectedText = this.getView().getModel("i18n").getResourceBundle().getText("tableCount", [tableLength]);
-			// oModelDetail.setProperty("/tableCount", sExpectedText);
-
-			//0805 - End
-
-			// }
+	 
 			var tableData = sap.ushell.components.tableSearchResults.getModel("vehicleSearchTableModel").getData();
 
 			for (var i = 0; i < tableData.length; i++) {

@@ -25,8 +25,16 @@ sap.ui.define([
 			var sLocation_conf = sLocation.search("webide");
 			if (sLocation_conf == 0) {
 				this.sPrefix = "/vehicleLocatorNode"; // the destination
-				this.attributeUrl = "/userDetails/attributesforlocaltesting";
-				this.currentScopeUrl = "/userDetails/currentScopesForUserLocaltesting";
+				// this.attributeUrl = "/userDetails/attributesforlocaltesting";
+				// this.currentScopeUrl = "/userDetails/currentScopesForUserLocaltesting";
+				
+						// this.sPrefix = "";
+				this.attributeUrl = "/userDetails/attributes";
+
+				this.currentScopeUrl = "/userDetails/currentScopesForUser";		
+				
+				
+				
 			} else {
 				this.sPrefix = "";
 				this.attributeUrl = "/userDetails/attributes";
@@ -62,8 +70,8 @@ sap.ui.define([
 
 					var userType = oData.loggedUserType[0];
 
-					//var userType = "Zone_User"; // TODO: Remove before deployment locatyest only - GSR
-					 //var userType = "Dealer_User"; // TODO: Remove before deployment locatyest only - GSR
+					// var userType = "Zone_User"; // TODO: Remove before deployment locatyest only - GSR
+					// var userType = "Dealer_User"; // TODO: Remove before deployment locatyest only - GSR
 					//var userType = "TCI_User";
 
 					switch (userType) {

@@ -161,7 +161,7 @@ module.exports = function (appContext) {
 									customerSalesArea.results[i].SalesOffice === "5000" || customerSalesArea.results[i].SalesOffice === "7000" ||
 									customerSalesArea.results[i].SalesOffice === "9000" || customerSalesArea.results[i].SalesOffice === "8000") && ((
 									customerSalesArea.results[i].SalesOrganization == "6000") && (customerSalesArea.results[i].DistributionChannel == "10" &&
-									customerSalesArea.results[i].SalesGroup != "T99"))) {
+									customerSalesArea.results[i].SalesGroup != "T99")  && (customerSalesArea.results[i].Customer !== "2400029000" || customerSalesArea.results[i].Customer !== "2400049000"  ))) {
 								filtered = true;
 							}
 						}
