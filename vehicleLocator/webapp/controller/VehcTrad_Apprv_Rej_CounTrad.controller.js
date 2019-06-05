@@ -1419,7 +1419,7 @@ sap.ui.define([
 			});
 		
 		// at this point hide the busyh indictor and relaod the page. 	
-		   //sap.ui.core.BusyIndicator.hide();
+		   sap.ui.core.BusyIndicator.hide();
 		   //		  that.getRouter().navTo("VehcTrad_Apprv_Rej_CounTrad", {
 					// 	DataClicked: "Yes"
 					// });
