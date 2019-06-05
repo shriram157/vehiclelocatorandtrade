@@ -172,7 +172,9 @@ module.exports = function (appContext) {
 
 				for (var i = 0; i < bpResults.length; i++) {
 					var bpLength = bpResults[i].BusinessPartner.length;
-					if (bpResults[i].BusinessPartner != "2400029000" || bpResults[i].BusinessPartner != "2400049000" ) {
+					if (bpResults[i].BusinessPartner === "2400029000" || bpResults[i].BusinessPartner === "2400049000" ) {
+					continue;	
+					}
 					bpAttributes = {
 						BusinessPartnerName: bpResults[i].OrganizationBPName1,
 						BusinessPartnerKey: bpResults[i].BusinessPartner,
@@ -180,7 +182,7 @@ module.exports = function (appContext) {
 						BusinessPartnerType: bpResults[i].BusinessPartnerType,
 						SearchTerm2: bpResults[i].SearchTerm2
 					};
-					}
+					
 					try {
 						toCustomerAttr1 = bpResults[i].to_Customer.Attribute1;
 					} catch (e) {
