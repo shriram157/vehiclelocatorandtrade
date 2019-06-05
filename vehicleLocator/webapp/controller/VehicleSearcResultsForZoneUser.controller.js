@@ -655,7 +655,7 @@ sap.ui.define([
 			// var sapZoneForZoneUser = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].UserType[0];
 
 			var oModelData = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0];
-			if ((oModelData != undefined) && (oModelData.UserType == "Zone_User")) {
+			if ((oModelData != undefined) && (oModelData.UserType == "Zone")) {
 				var userZoneRaw = oModelData.Zone[0];
 			}
 			if (userZoneRaw != undefined) {
@@ -704,7 +704,7 @@ sap.ui.define([
 
 			}
             
-            if (oModelData.UserType == "Zone_User" ) {
+            if (oModelData.UserType == "Zone" ) {
             
 			this.sapUserZoneDetermined = sapUserZone;
 			this.zoneStockCode = zoneStockCode;
