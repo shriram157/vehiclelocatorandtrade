@@ -1392,9 +1392,11 @@ sap.ui.define([
 
 				if (this.sDivision == '10') {
 					oDealer = that.zoneStockCode;
+							oDealer = oDealer.slice(-5);
 				} else {
 
 					oDealer = that.lexusZoneStockCode;
+							oDealer = oDealer.slice(-5);
 				}
 
 			} else {
