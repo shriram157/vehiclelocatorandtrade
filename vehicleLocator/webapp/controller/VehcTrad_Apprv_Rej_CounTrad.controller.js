@@ -1146,7 +1146,9 @@ sap.ui.define([
 					
 						var Message = sMessageText;
 						// var Message =  "Trade " + that.Tradeid + " has been Accepted Succesfully";
+					    	that.AcceptSuccess();
 						function fnCallbackMessageBox1(oAction) {
+							
 								that.getRouter().navTo("VehicleTrade_Summary", {
 									DataClicked: "Yes"
 								});
@@ -1157,7 +1159,7 @@ sap.ui.define([
 							onClose: fnCallbackMessageBox1
 						});
 						debugger;
-						that.AcceptSuccess();
+					
 
 					}
 				},
@@ -1417,10 +1419,10 @@ sap.ui.define([
 			});
 		
 		// at this point hide the busyh indictor and relaod the page. 	
-		   sap.ui.core.BusyIndicator.hide();
-		   		  that.getRouter().navTo("VehcTrad_Apprv_Rej_CounTrad", {
-						DataClicked: "Yes"
-					});
+		   //sap.ui.core.BusyIndicator.hide();
+		   //		  that.getRouter().navTo("VehcTrad_Apprv_Rej_CounTrad", {
+					// 	DataClicked: "Yes"
+					// });
 			
 
 		},
