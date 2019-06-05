@@ -161,16 +161,18 @@ module.exports = function (appContext) {
 									customerSalesArea.results[i].SalesOffice === "5000" || customerSalesArea.results[i].SalesOffice === "7000" ||
 									customerSalesArea.results[i].SalesOffice === "9000" || customerSalesArea.results[i].SalesOffice === "8000") && ((
 									customerSalesArea.results[i].SalesOrganization == "6000") && (customerSalesArea.results[i].DistributionChannel == "10" &&
-									customerSalesArea.results[i].SalesGroup != "T99")  && (customerSalesArea.results[i].Customer !== "2400029000" || customerSalesArea.results[i].Customer !== "2400049000"  ))) {
+									customerSalesArea.results[i].SalesGroup != "T99"))) {
 								filtered = true;
 							}
 						}
 						return filtered;
 					});
 				}
+// 05-06 added logic to exclude land cruiser.
 
 				for (var i = 0; i < bpResults.length; i++) {
 					var bpLength = bpResults[i].BusinessPartner.length;
+					if (bpResults[i].BusinessPartner != "2400029000" || bpResults[i].BusinessPartner != "2400049000" ) {
 					bpAttributes = {
 						BusinessPartnerName: bpResults[i].OrganizationBPName1,
 						BusinessPartnerKey: bpResults[i].BusinessPartner,
@@ -178,6 +180,7 @@ module.exports = function (appContext) {
 						BusinessPartnerType: bpResults[i].BusinessPartnerType,
 						SearchTerm2: bpResults[i].SearchTerm2
 					};
+					}
 					try {
 						toCustomerAttr1 = bpResults[i].to_Customer.Attribute1;
 					} catch (e) {

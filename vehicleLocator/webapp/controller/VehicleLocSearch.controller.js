@@ -163,17 +163,7 @@ sap.ui.define([
 				success: function (oData) {
 					var BpDealer = [];
 					var userAttributes = [];
-					/*	BpDealer.push({
-											"BusinessPartnerKey": "2400042120",
-											"BusinessPartner": "42120",
 
-											"BusinessPartnerName": "Don Valley North Toyota...", //item.OrganizationBPName1 //item.BusinessPartnerFullName
-											"Division": "10",
-											"BusinessPartnerType": "Z001",
-											"searchTermReceivedDealerName": "42120",
-											"LoggedinUserFirstName" : "User",
-											"LoggedinUserLastName": "42120"
-										});*/
 					$.each(oData.attributes, function (i, item) {
 						var BpLength = item.BusinessPartner.length;
 
