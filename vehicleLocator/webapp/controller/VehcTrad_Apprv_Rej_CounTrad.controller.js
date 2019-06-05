@@ -971,7 +971,10 @@ sap.ui.define([
 		},
 		oAccept: function () {
 			debugger;
-
+            //  dated June 4th.  
+            sap.ui.core.BusyIndicator.show();
+            // also disable the accept button, preventing the user not to double click. 
+            this.getView().byId("oacceptbtn").setVisible(false);
 			// 05-05 if an Update has been pressed just take the comments to HDB
 			var Comment = this.getView().byId("oComments").getValue();
 			if (Comment !== "") {
@@ -1144,9 +1147,9 @@ sap.ui.define([
 						var Message = sMessageText;
 						// var Message =  "Trade " + that.Tradeid + " has been Accepted Succesfully";
 						function fnCallbackMessageBox1(oAction) {
-							/*	that.getRouter().navTo("VehicleTrade_Summary", {
+								that.getRouter().navTo("VehicleTrade_Summary", {
 									DataClicked: "Yes"
-								});*/
+								});
 
 						}
 						sap.m.MessageBox.success(Message, {
@@ -1167,11 +1170,7 @@ sap.ui.define([
 		},
 		AcceptFailedComment: function (Message) {
 
-			/*var Comment = this.getView().byId("oComments").getValue();
-			if (Comment == "") {
-				sap.m.MessageBox.error("Please enter comment");
-			} else {
-*/
+ 
 			var Comment = Message;
 			if (this.getView().byId("tableVrade").getModel("commentsModel") != undefined) {
 				var CommentData = this.getView().byId("tableVrade").getModel("commentsModel").getData();
@@ -1268,6 +1267,12 @@ sap.ui.define([
 				 */
 			}
 			//	}
+					// at this point hide the busyh indictor and relaod the page. 	
+     		   sap.ui.core.BusyIndicator.hide();
+		   		  that.getRouter().navTo("VehcTrad_Apprv_Rej_CounTrad", {
+						DataClicked: "Yes"
+					});
+			
 
 		},
 		AcceptSuccess: function () {
@@ -1364,26 +1369,7 @@ sap.ui.define([
 				"Changed_on": new Date(Changed_on),
 				"Requested_Dealer": Requested_Dealer,
 				"Requested_Dealer_Name": Requested_Dealer_Name
-					/*"Trade_Id": Trade_Id,
-					"Trade_Status": Trade_Status,
-					"Requesting_Dealer": Requesting_Dealer,
-					"Requesting_Dealer_Name": Requesting_Dealer_Name,
-					"Requested_Vtn": Requested_Vtn,
-					"Offered_Vtn": Offered_Vtn,
-					"Trade_Return": Trade_Return,
-					"Req_Current_ETA_From": Req_Current_ETA_FromData,
-					"Req_Current_ETA_To": Req_Current_ETA_To,
-					"Req_Proposed_ETA_From": Req_Proposed_ETA_From,
-					"Req_Proposed_ETA_To": Req_Proposed_ETA_To,
-					"Off_Current_ETA_From": Off_Current_ETA_From,
-					"Off_Current_ETA_To": Off_Current_ETA_To,
-					"Off_Proposed_ETA_From": Off_Proposed_ETA_From,
-					"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
-					"Created_By": Created_By,
-					"Created_On": Created_On,
-					"Changed_on": Changed_on,
-					"Requested_Dealer": Requested_Dealer,
-					"Requested_Dealer_Name": Requested_Dealer_Name*/
+ 
 			};
 
 			var sLocation = window.location.host;
@@ -1429,6 +1415,13 @@ sap.ui.define([
 			}, function () {
 
 			});
+		
+		// at this point hide the busyh indictor and relaod the page. 	
+		   sap.ui.core.BusyIndicator.hide();
+		   		  that.getRouter().navTo("VehcTrad_Apprv_Rej_CounTrad", {
+						DataClicked: "Yes"
+					});
+			
 
 		},
 		AcceptFailed: function () {
@@ -1518,26 +1511,7 @@ sap.ui.define([
 				"Changed_on": new Date(Changed_on),
 				"Requested_Dealer": Requested_Dealer,
 				"Requested_Dealer_Name": Requested_Dealer_Name
-					/*"Trade_Id": Trade_Id,
-					"Trade_Status": Trade_Status,
-					"Requesting_Dealer": Requesting_Dealer,
-					"Requesting_Dealer_Name": Requesting_Dealer_Name,
-					"Requested_Vtn": Requested_Vtn,
-					"Offered_Vtn": Offered_Vtn,
-					"Trade_Return": Trade_Return,
-					"Req_Current_ETA_From": Req_Current_ETA_FromData,
-					"Req_Current_ETA_To": Req_Current_ETA_To,
-					"Req_Proposed_ETA_From": Req_Proposed_ETA_From,
-					"Req_Proposed_ETA_To": Req_Proposed_ETA_To,
-					"Off_Current_ETA_From": Off_Current_ETA_From,
-					"Off_Current_ETA_To": Off_Current_ETA_To,
-					"Off_Proposed_ETA_From": Off_Proposed_ETA_From,
-					"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
-					"Created_By": Created_By,
-					"Created_On": Created_On,
-					"Changed_on": Changed_on,
-					"Requested_Dealer": Requested_Dealer,
-					"Requested_Dealer_Name": Requested_Dealer_Name*/
+	 
 			};
 
 			var sLocation = window.location.host;
@@ -1579,6 +1553,13 @@ sap.ui.define([
 			}, function () {
 
 			});
+			// at this point hide the busyh indictor and relaod the page. 	
+		   sap.ui.core.BusyIndicator.hide();
+		   		  that.getRouter().navTo("VehcTrad_Apprv_Rej_CounTrad", {
+						DataClicked: "Yes"
+					});		
+			
+			
 
 		},
 		onReject: function () {
@@ -1691,26 +1672,7 @@ sap.ui.define([
 							"Changed_on": new Date(Changed_on),
 							"Requested_Dealer": Requested_Dealer,
 							"Requested_Dealer_Name": Requested_Dealer_Name
-								/*"Trade_Id": Trade_Id,
-								"Trade_Status": Trade_Status,
-								"Requesting_Dealer": Requesting_Dealer,
-								"Requesting_Dealer_Name": Requesting_Dealer_Name,
-								"Requested_Vtn": Requested_Vtn,
-								"Offered_Vtn": Offered_Vtn,
-								"Trade_Return": Trade_Return,
-								"Req_Current_ETA_From": Req_Current_ETA_FromData,
-								"Req_Current_ETA_To": Req_Current_ETA_To,
-								"Req_Proposed_ETA_From": Req_Proposed_ETA_From,
-								"Req_Proposed_ETA_To": Req_Proposed_ETA_To,
-								"Off_Current_ETA_From": Off_Current_ETA_From,
-								"Off_Current_ETA_To": Off_Current_ETA_To,
-								"Off_Proposed_ETA_From": Off_Proposed_ETA_From,
-								"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
-								"Created_By": Created_By,
-								"Created_On": Created_On,
-								"Changed_on": Changed_on,
-								"Requested_Dealer": Requested_Dealer,
-								"Requested_Dealer_Name": Requested_Dealer_Name*/
+	 
 						};
 
 						var sLocation = window.location.host;
@@ -1743,11 +1705,7 @@ sap.ui.define([
 							if (dncBlockedDays != 0 && dncBlockedDays != "") {
 								that.DNCBlockoutDays();
 							}
-							/*	that.TradeComment(oEntry);
-								that.TradeVehcles(oEntry);
-								that.TradeStatus(oEntry);
-								that.VehicleTrade_Summary();
-							*/
+		 
 							that.getRouter().navTo("VehicleTrade_Summary", {
 								DataClicked: "Yes"
 							});
@@ -1865,27 +1823,7 @@ sap.ui.define([
 
 			var oCommentData = this.getView().byId("tableVrade").getModel("commentsModel").oData;
 
-			/*	var oComment = [];
-				for (var i = 0; i < oCommentData.length; i++) {
-					oComment.push(oCommentData[i].Comment_Txt);
-				}
-				if (oComment.length != 0) {
-					var oComment = oComment.join(".");
-				} else {
-					var oComment = "testing";
-				}
-
-				var BlockStartdate = "\/Date(1543449600000)\/";
-				var Blockenddate = "\/Date(1543536000000)\/";*/
-			/*	var BlockStartdate = oDateFormat1.format(new Date());
-					var dncBlockedDays = this.getView().byId("VT_ARCDnc").getValue();
-				var someDate = new Date();
-				var numberOfDaysToAdd = Number(dncBlockedDays);
-				var Blockenddate = someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
-
-				Blockenddate = oDateFormat1.format(new Date(Blockenddate));*/
-			/*	var Createdby = sap.ui.getCore().LoginDetails.Username;*/
-			/*	var Createdby = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');*/
+ 
 			var oComment = "Via Trade Request";
 			var BlockStartdateval = new Date();
 			Date.parse(BlockStartdateval);
@@ -2002,19 +1940,7 @@ sap.ui.define([
 			var Off_Proposed_ETA_To = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Off_Proposed_ETA_To;
 			Off_Proposed_ETA_To = this.DatesFormatting(Off_Proposed_ETA_To);
 			var Created_By = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_By;
-			// 	 var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
-			// 		var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
-			// 		var Created_By  = LoggedinUserFname+LoggedinUserLname;
-
-			// 		function truncateString(str, num) {
-			// 			if (num > str.length) {
-			// 				return str;
-			// 			} else {
-			// 				str = str.substring(0, num);
-			// 				return str;
-			// 			}
-
-			// 		}
+ 
 
 			// Created_By = truncateString(Created_By, 12);
 			var Created_On = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_On;
@@ -2054,26 +1980,7 @@ sap.ui.define([
 				"Changed_on": new Date(Changed_on),
 				"Requested_Dealer": Requested_Dealer,
 				"Requested_Dealer_Name": Requested_Dealer_Name
-					/*"Trade_Id": Trade_Id,
-					"Trade_Status": Trade_Status,
-					"Requesting_Dealer": Requesting_Dealer,
-					"Requesting_Dealer_Name": Requesting_Dealer_Name,
-					"Requested_Vtn": Requested_Vtn,
-					"Offered_Vtn": Offered_Vtn,
-					"Trade_Return": Trade_Return,
-					"Req_Current_ETA_From": Req_Current_ETA_FromData,
-					"Req_Current_ETA_To": Req_Current_ETA_To,
-					"Req_Proposed_ETA_From": Req_Proposed_ETA_From,
-					"Req_Proposed_ETA_To": Req_Proposed_ETA_To,
-					"Off_Current_ETA_From": Off_Current_ETA_From,
-					"Off_Current_ETA_To": Off_Current_ETA_To,
-					"Off_Proposed_ETA_From": Off_Proposed_ETA_From,
-					"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
-					"Created_By": Created_By,
-					"Created_On": Created_On,
-					"Changed_on": Changed_on,
-					"Requested_Dealer": Requested_Dealer,
-					"Requested_Dealer_Name": Requested_Dealer_Name*/
+ 
 			};
 
 			var sLocation = window.location.host;
@@ -2103,19 +2010,11 @@ sap.ui.define([
 			}, function (s) {
 				debugger
 
-				/*	if(dncBlockedDays!=0&&dncBlockedDays!=""){
-					that.DNCBlockoutDays();	
-					}*/
-				/*	that.TradeComment(oEntry);
-					that.TradeVehcles(oEntry);
-					that.TradeStatus(oEntry);
-					that.VehicleTrade_Summary();
-				*/
+ 
 				that.getRouter().navTo("VehicleTrade_Summary", {
 					DataClicked: "Yes"
 				});
-
-				//	that.getRouter().navTo("VehicleTrade_Summary");
+ 
 			}, function () {
 				alert("fail");
 			});
@@ -2159,19 +2058,7 @@ sap.ui.define([
 			Off_Proposed_ETA_To = this.DatesFormatting(Off_Proposed_ETA_To);
 			// when updating a record do not update the created by and created on - GSR	
 			var Created_By = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_By;
-			// 	 var LoggedinUserFname = sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserFirstName;
-			// 		var LoggedinUserLname =  sap.ui.getCore().getModel("LoginuserAttributesModel").oData["0"].LoggedinUserLastName;
-			// 		var Created_By  = LoggedinUserFname+LoggedinUserLname;
-
-			// 		function truncateString(str, num) {
-			// 			if (num > str.length) {
-			// 				return str;
-			// 			} else {
-			// 				str = str.substring(0, num);
-			// 				return str;
-			// 			}
-
-			// 		}
+ 
 
 			// Created_By = truncateString(Created_By, 12);
 			var Created_On = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Created_On;
