@@ -1109,13 +1109,19 @@ sap.ui.define([
 
 				}
 			}
+			
 
 			var obj = {};
 			for (var i = 0, len = Dealer.length; i < len; i++)
 				obj[Dealer[i]['kunnr']] = Dealer[i];
 			Dealer = new Array();
-			for (var key in obj)
-				Dealer.push(obj[key]);
+			for (var key in obj) {
+				//  when the app is started just display the dealers with status pipeline - routable. 
+				
+				Dealer.push(obj[key]);	
+				
+			}
+			
 			var Model1 = new sap.ui.model.json.JSONModel(Dealer);
 			Model1.setSizeLimit(1000);
 			this.getView().byId("VLRDealer").setModel(Model1);

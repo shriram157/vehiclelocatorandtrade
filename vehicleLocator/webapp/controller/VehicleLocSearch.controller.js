@@ -250,6 +250,8 @@ sap.ui.define([
 						);
 					}
 
+
+             
 					//  set your model or use the model below - 
 					if (that.userTypeReceived != "National") {
 
@@ -261,57 +263,59 @@ sap.ui.define([
 						that.getView().byId("oDealertitle").setText(LoggedInDealer);
 						this._oViewModel.setProperty("/visibleForNational", false);
 					} else {
+						// var BpDealerTemp = [...BpDealer];
+						var BpDealerTemp = BpDealer.slice();
 						var confirmStockCode = "";
-						for (var i = 0; i < BpDealer.length; i++) {
+						for (var i = 0; i < BpDealerTemp.length; i++) {
                             if (i == 0) {
-								 BpDealer.splice(0, 1);
+								 BpDealerTemp.splice(0, 1);
 					
 							}
-							if ((BpDealer[i].BusinessPartnerKey == "2400500078" ) && (this.sDivision == "20" )) {
-									 BpDealer.splice(i, 1);
+							if ((BpDealerTemp[i].BusinessPartnerKey == "2400500078" ) && (this.sDivision == "20" )) {
+									 BpDealerTemp.splice(i, 1);
 							}
 							// if ((BpDealer[i].BusinessPartnerKey == "2400542217") && (this.sDivision == "20")){
 							// 		 BpDealer.splice(i, 1);
 							// 	continue;
 							// }
 
-							if (BpDealer[i].BusinessPartnerKey) {
-								confirmStockCode = BpDealer[i].BusinessPartnerKey.substring(4, 5);
+							if (BpDealerTemp[i].BusinessPartnerKey) {
+								confirmStockCode = BpDealerTemp[i].BusinessPartnerKey.substring(4, 5);
 							}
 							if (confirmStockCode == "5") {
 
-								switch (BpDealer[i].BusinessPartnerName) {
+								switch (BpDealerTemp[i].BusinessPartnerName) {
 
 								case "Pacific Zone Stock":
 									//BpDealer[i].dummyFieldForSort = 1;
-									BpDealer[i].dummyFieldForSort = BpDealer.length - (BpDealer.length - 1);
+									BpDealerTemp[i].dummyFieldForSort = BpDealerTemp.length - (BpDealerTemp.length - 1);
 									break;
 								case "Prairie Zone Stock":
-									BpDealer[i].dummyFieldForSort = BpDealer.length - (BpDealer.length - 2);
+									BpDealerTemp[i].dummyFieldForSort = BpDealerTemp.length - (BpDealerTemp.length - 2);
 									break;
 								case "National Demo":
-									BpDealer[i].dummyFieldForSort = BpDealer.length - (BpDealer.length - 6);
+									BpDealerTemp[i].dummyFieldForSort = BpDealerTemp.length - (BpDealerTemp.length - 6);
 									break;
 								case "Central Zone Stock":
-									BpDealer[i].dummyFieldForSort = BpDealer.length - (BpDealer.length - 3);
+									BpDealerTemp[i].dummyFieldForSort = BpDealerTemp.length - (BpDealerTemp.length - 3);
 									break;
 								case "Quebec Zone Stock":
-									BpDealer[i].dummyFieldForSort = BpDealer.length - (BpDealer.length - 4);
+									BpDealerTemp[i].dummyFieldForSort = BpDealerTemp.length - (BpDealerTemp.length - 4);
 									break;
 								case "Atlantic Zone Stock":	
-									BpDealer[i].dummyFieldForSort = BpDealer.length - (BpDealer.length - 5);
+									BpDealerTemp[i].dummyFieldForSort = BpDealerTemp.length - (BpDealerTemp.length - 5);
 									break;
 								}
 
 							} else {
 								
-								BpDealer[i].dummyFieldForSort = i + 7;
+								BpDealerTemp[i].dummyFieldForSort = i + 7;
 							}
 						}
 
 						that.getView().setModel(new sap.ui.model.json.JSONModel(BpDealer), "BpDealerModel");
 						sap.ui.getCore().setModel(new sap.ui.model.json.JSONModel(BpDealer), "LoginBpDealerModel");
-						that.getView().setModel(new sap.ui.model.json.JSONModel(BpDealer), "BpDealerModelZone");
+						that.getView().setModel(new sap.ui.model.json.JSONModel(BpDealerTemp), "BpDealerModelZone");
 						this._oViewModel.setProperty("/visibleForNational", true);
 
 					}
