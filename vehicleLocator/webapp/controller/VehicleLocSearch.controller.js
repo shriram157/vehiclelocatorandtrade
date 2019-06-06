@@ -27,14 +27,12 @@ sap.ui.define([
 				this.sPrefix = "/vehicleLocatorNode"; // the destination
 				// this.attributeUrl = "/userDetails/attributesforlocaltesting";
 				// this.currentScopeUrl = "/userDetails/currentScopesForUserLocaltesting";
-				
-						// this.sPrefix = "";
+
+				// this.sPrefix = "";
 				this.attributeUrl = "/userDetails/attributes";
 
-				this.currentScopeUrl = "/userDetails/currentScopesForUser";		
-				
-				
-				
+				this.currentScopeUrl = "/userDetails/currentScopesForUser";
+
 			} else {
 				this.sPrefix = "";
 				this.attributeUrl = "/userDetails/attributes";
@@ -263,41 +261,46 @@ sap.ui.define([
 						that.getView().byId("oDealertitle").setText(LoggedInDealer);
 						this._oViewModel.setProperty("/visibleForNational", false);
 					} else {
-				   	var confirmStockCode = "";
-						for (var i = 0; i<BpDealer.length; i++ ) {
-							
-							if (BpDealer[i].BusinessPartnerKey){
-						  confirmStockCode = BpDealer[i].BusinessPartnerKey.substring(4, 5);
+						var confirmStockCode = "";
+						for (var i = 0; i < BpDealer.length; i++) {
+                            if (i == 0) {
+								 BpDealer.splice(0, 1);
+					
 							}
-							if ( confirmStockCode == "5") {
-								
+
+							if (BpDealer[i].BusinessPartnerKey) {
+								confirmStockCode = BpDealer[i].BusinessPartnerKey.substring(4, 5);
+							}
+							if (confirmStockCode == "5") {
+
 								switch (BpDealer[i].BusinessPartnerName) {
 
 								case "Pacific Zone Stock":
-								 //BpDealer[i].dummyFieldForSort = 1;
-								  BpDealer[i].dummyFieldForSort =  BpDealer.length - ( BpDealer.length - 1);
+									//BpDealer[i].dummyFieldForSort = 1;
+									BpDealer[i].dummyFieldForSort = BpDealer.length - (BpDealer.length - 1);
 									break;
 								case "Prairie Zone Stock":
-								   BpDealer[i].dummyFieldForSort =  BpDealer.length - ( BpDealer.length - 2);
+									BpDealer[i].dummyFieldForSort = BpDealer.length - (BpDealer.length - 2);
 									break;
 								case "National Demo":
-									  BpDealer[i].dummyFieldForSort =  BpDealer.length - ( BpDealer.length - 6);
+									BpDealer[i].dummyFieldForSort = BpDealer.length - (BpDealer.length - 6);
 									break;
 								case "Central Zone Stock":
-								   BpDealer[i].dummyFieldForSort =  BpDealer.length - ( BpDealer.length - 3);
+									BpDealer[i].dummyFieldForSort = BpDealer.length - (BpDealer.length - 3);
 									break;
 								case "Quebec Zone Stock":
-								    BpDealer[i].dummyFieldForSort =  BpDealer.length - ( BpDealer.length - 4);
+									BpDealer[i].dummyFieldForSort = BpDealer.length - (BpDealer.length - 4);
 									break;
 								case "Atlantic Zone Stock":
-								 	  BpDealer[i].dummyFieldForSort =  BpDealer.length - ( BpDealer.length - 5);
+									BpDealer[i].dummyFieldForSort = BpDealer.length - (BpDealer.length - 5);
 									break;
-								 	}	
+								}
 
 							} else {
-								 BpDealer[i].dummyFieldForSort = i + 7;
+								
+								BpDealer[i].dummyFieldForSort = i + 7;
 							}
- 						}
+						}
 
 						that.getView().setModel(new sap.ui.model.json.JSONModel(BpDealer), "BpDealerModel");
 						sap.ui.getCore().setModel(new sap.ui.model.json.JSONModel(BpDealer), "LoginBpDealerModel");
@@ -1426,11 +1429,11 @@ sap.ui.define([
 
 				if (this.sDivision == '10') {
 					oDealer = that.zoneStockCode;
-							oDealer = oDealer.slice(-5);
+					oDealer = oDealer.slice(-5);
 				} else {
 
 					oDealer = that.lexusZoneStockCode;
-							oDealer = oDealer.slice(-5);
+					oDealer = oDealer.slice(-5);
 				}
 
 			} else {
