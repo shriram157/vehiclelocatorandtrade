@@ -270,10 +270,10 @@ sap.ui.define([
 							if ((BpDealer[i].BusinessPartnerKey == "2400500078" ) && (this.sDivision == "20" )) {
 									 BpDealer.splice(i, 1);
 							}
-							if ((BpDealer[i].BusinessPartnerKey == "2400542217") && (this.sDivision == "20")){
-									 BpDealer.splice(i, 1);
-								continue;
-							}
+							// if ((BpDealer[i].BusinessPartnerKey == "2400542217") && (this.sDivision == "20")){
+							// 		 BpDealer.splice(i, 1);
+							// 	continue;
+							// }
 
 							if (BpDealer[i].BusinessPartnerKey) {
 								confirmStockCode = BpDealer[i].BusinessPartnerKey.substring(4, 5);
