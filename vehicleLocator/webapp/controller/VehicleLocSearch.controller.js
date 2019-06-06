@@ -272,6 +272,7 @@ sap.ui.define([
 							}
 							if ((BpDealer[i].BusinessPartnerKey == "2400542217") && (this.sDivision == "20")){
 									 BpDealer.splice(i, 1);
+								continue;
 							}
 
 							if (BpDealer[i].BusinessPartnerKey) {
