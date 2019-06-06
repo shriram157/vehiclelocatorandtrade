@@ -975,6 +975,8 @@ sap.ui.define([
             sap.ui.core.BusyIndicator.show();
             // also disable the accept button, preventing the user not to double click. 
             this.getView().byId("oacceptbtn").setVisible(false);
+              this.getView().byId("oRejectbtn").setVisible(false);
+              this.getView().byId("oCounterofrbtn").setVisible(false);
 			// 05-05 if an Update has been pressed just take the comments to HDB
 			var Comment = this.getView().byId("oComments").getValue();
 			if (Comment !== "") {
@@ -1567,6 +1569,12 @@ sap.ui.define([
 		onReject: function () {
 
 			var that = this;
+			
+		     // also disable the accept button, preventing the user not to double click. 
+            this.getView().byId("oacceptbtn").setVisible(false);
+              this.getView().byId("oRejectbtn").setVisible(false);
+              this.getView().byId("oCounterofrbtn").setVisible(false);
+			
 
 			/*	if (this.getView().byId("VT_CStradinRet").getSelectedKey() == "Yes" && this.getView().byId("FromFourth").getText() == "") {
 				sap.m.MessageBox.warning("Please select a vehicle");
@@ -1908,6 +1916,15 @@ sap.ui.define([
 		onCounterTrade: function () {
 
 			var that = this;
+			
+			            // also disable the accept button, preventing the user not to double click. 
+            this.getView().byId("oacceptbtn").setVisible(false);
+              this.getView().byId("oRejectbtn").setVisible(false);
+              this.getView().byId("oCounterofrbtn").setVisible(false);
+			
+			
+			
+			
 
 			// 05-05 if an oncountertrade has been pressed just take the comments to HDB
 			var Comment = this.getView().byId("oComments").getValue();
