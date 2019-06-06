@@ -267,6 +267,9 @@ sap.ui.define([
 								 BpDealer.splice(0, 1);
 					
 							}
+							if ((BpDealer[i].BusinessPartnerKey == "2400500078" || BpDealer[i].BusinessPartnerKey == "2400542217") && (this.sDivision == "20" )) {
+									 BpDealer.splice(i, 1);
+							}
 
 							if (BpDealer[i].BusinessPartnerKey) {
 								confirmStockCode = BpDealer[i].BusinessPartnerKey.substring(4, 5);
@@ -291,7 +294,7 @@ sap.ui.define([
 								case "Quebec Zone Stock":
 									BpDealer[i].dummyFieldForSort = BpDealer.length - (BpDealer.length - 4);
 									break;
-								case "Atlantic Zone Stock":
+								case "Atlantic Zone Stock":	
 									BpDealer[i].dummyFieldForSort = BpDealer.length - (BpDealer.length - 5);
 									break;
 								}
