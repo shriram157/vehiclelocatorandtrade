@@ -263,6 +263,42 @@ sap.ui.define([
 						that.getView().byId("oDealertitle").setText(LoggedInDealer);
 						this._oViewModel.setProperty("/visibleForNational", false);
 					} else {
+				   	var confirmStockCode = "";
+						for (var i = 0; i<BpDealer.length; i++ ) {
+							
+							if (BpDealer[i].BusinessPartnerKey){
+						  confirmStockCode = BpDealer[i].BusinessPartnerKey.substring(4, 5);
+							}
+							if ( confirmStockCode == "5") {
+								
+								switch (BpDealer[i].BusinessPartnerName) {
+
+								case "Pacific Zone Stock":
+								 //BpDealer[i].dummyFieldForSort = 1;
+								  BpDealer[i].dummyFieldForSort =  BpDealer.length - ( BpDealer.length - 1);
+									break;
+								case "Prairie Zone Stock":
+								   BpDealer[i].dummyFieldForSort =  BpDealer.length - ( BpDealer.length - 2);
+									break;
+								case "National Demo":
+									  BpDealer[i].dummyFieldForSort =  BpDealer.length - ( BpDealer.length - 6);
+									break;
+								case "Central Zone Stock":
+								   BpDealer[i].dummyFieldForSort =  BpDealer.length - ( BpDealer.length - 3);
+									break;
+								case "Quebec Zone Stock":
+								    BpDealer[i].dummyFieldForSort =  BpDealer.length - ( BpDealer.length - 4);
+									break;
+								case "Atlantic Zone Stock":
+								 	  BpDealer[i].dummyFieldForSort =  BpDealer.length - ( BpDealer.length - 5);
+									break;
+								 	}	
+
+							} else {
+								 BpDealer[i].dummyFieldForSort = i + 7;
+							}
+ 						}
+
 						that.getView().setModel(new sap.ui.model.json.JSONModel(BpDealer), "BpDealerModel");
 						sap.ui.getCore().setModel(new sap.ui.model.json.JSONModel(BpDealer), "LoginBpDealerModel");
 						that.getView().setModel(new sap.ui.model.json.JSONModel(BpDealer), "BpDealerModelZone");
