@@ -166,7 +166,7 @@
 		
 			},
 			"routes": [{
-				"pattern": "",
+				"pattern": "VehicleLocSearch",
 				"name": "VehicleLocSearch",
 				"target": "VehicleLocSearch"
 			}, {
