@@ -698,8 +698,8 @@ sap.ui.define([
 				
 					
 					sapUserZone = "9000";	
-			        zoneStockCode = "2400507100";
-					lexusZoneStockCode = "2400507100";	
+					zoneStockCode = "2400507100";
+					lexusZoneStockCode = "2400507100";
 								
 					
 					
@@ -729,7 +729,7 @@ sap.ui.define([
 
             	
             	
-            sapUserZone = "9000";	
+     
 			sapUserZone = "9000";	
 			        zoneStockCode = "2400507100";
 					lexusZoneStockCode = "2400507100";		
