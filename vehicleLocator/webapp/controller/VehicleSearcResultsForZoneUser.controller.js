@@ -695,7 +695,15 @@ sap.ui.define([
 					break;
 				case "7":
 					//nothing for vehicle locator with 9000
-					sapUserZone = "9000";
+				
+					
+					sapUserZone = "9000";	
+			        zoneStockCode = "2400507100";
+					lexusZoneStockCode = "2400507100";	
+								
+					
+					
+					
 					break;
 
 				default:
@@ -722,8 +730,9 @@ sap.ui.define([
             	
             	
             sapUserZone = "9000";	
-          	zoneStockCode = "2400559000";
-		    lexusZoneStockCode = "2400559100";	
+			sapUserZone = "9000";	
+			        zoneStockCode = "2400507100";
+					lexusZoneStockCode = "2400507100";		
             this.sapUserZoneDetermined = sapUserZone;
 			this.zoneStockCode = zoneStockCode;
 			this.lexusZoneStockCode = lexusZoneStockCode;
