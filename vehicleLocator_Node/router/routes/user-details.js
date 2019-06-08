@@ -138,7 +138,9 @@ module.exports = function (appContext) {
 						}
 						var filtered = false;
 						for (var i = 0; i < customerSalesArea.results.length; i++) {
-							if (customerSalesArea.results[i].SalesOffice === bpZone) {
+							if ((customerSalesArea.results[i].SalesOffice === bpZone) && ((
+									customerSalesArea.results[i].SalesOrganization == "6000") && (customerSalesArea.results[i].DistributionChannel == "10" &&
+									customerSalesArea.results[i].SalesGroup != "T99"))) { 
 								filtered = true;
 							}
 						}
