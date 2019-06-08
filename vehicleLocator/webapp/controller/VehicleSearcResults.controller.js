@@ -1119,6 +1119,7 @@ sap.ui.define([
 		       if (Dealer[i].zz_trading_ind == "2" || Dealer[i].zz_trading_ind == "3"){
 				obj[Dealer[i]['kunnr']] = Dealer[i];
 			    }
+			    }
 				
 			Dealer = new Array();
 			for (var key in obj) {

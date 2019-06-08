@@ -180,7 +180,7 @@
                         <Text text = "{i18n>Dealer}"/>
                     </Column>
                     <Column id="matnr1" demandPopin="true" minScreenWidth="Tablet"  width="17rem"
-                            hAlign="Center">
+                            hAlign="Left">
                         <Text text="{i18n>Model}"/>
                     </Column>
                     <Column id="suffix1"  demandPopin="true"  width="12rem"
