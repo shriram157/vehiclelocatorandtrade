@@ -710,7 +710,7 @@ sap.ui.define([
 			var loggedinDealerNameSetModel = sap.ui.getCore().getModel("LoginBpDealerModel").getData(); //[0].BusinessPartner;
 			for (var i = 0; i < 1; i++) {
 
-				if (loggedinDealerNameSetModel[i].BusinessPartnerName == "Zone User") {
+				if (loggedinDealerNameSetModel[i].BusinessPartnerName == "Zone User" || loggedinDealerNameSetModel[i].BusinessPartnerName == "National") {
 					loggedinDealerNameSetModel[i].BusinessPartnerName = that.zoneDescription + " - " + loggedinDealerNameSetModel[i].BusinessPartnerName;
 				}
 			}

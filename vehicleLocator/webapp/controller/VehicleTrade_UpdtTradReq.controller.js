@@ -443,7 +443,7 @@ sap.ui.define([
 				/*	this.getView().byId("VT_ARCTtrdinRet").setModel(oStatusModel);*/
 			}
 				var confirmZoneUser = sap.ui.getCore().getModel("LoginBpDealerModel").oData["0"].BusinessPartnerName;	
-			   if (confirmZoneUser.includes("Zone User")) {
+         	if (confirmZoneUser.includes("Zone User") || confirmZoneUser.includes("National")) {
 		// just disable all the buttons
            		this.getView().byId("oAddbutton").setEnabled(false);
 				this.getView().byId("oacceptbtn").setVisible(false);
