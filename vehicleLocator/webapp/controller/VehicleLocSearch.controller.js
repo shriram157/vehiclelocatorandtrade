@@ -67,10 +67,15 @@ sap.ui.define([
 					// userScopes.forEach(function (data) {
 
 					var userType = oData.loggedUserType[0];
+//based on what you are fixing on the ui,  enable that flag for user type
+						var sLocation = window.location.host;
+						var sLocation_conf = sLocation.search("webide");
+						if (sLocation_conf == 0) {
+					   //var userType = "Zone_User"; // TODO: Remove before deployment locatyest only - GSR
+					 //var userType = "Dealer_User"; // TODO: Remove before deployment locatyest only - GSR
+					//var userType = "TCI_User";		
 
-					// var userType = "Zone_User"; // TODO: Remove before deployment locatyest only - GSR
-					// var userType = "Dealer_User"; // TODO: Remove before deployment locatyest only - GSR
-					//var userType = "TCI_User";
+						}
 
 					switch (userType) {
 					case "Dealer_User":

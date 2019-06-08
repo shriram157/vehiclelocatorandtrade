@@ -1022,8 +1022,13 @@ sap.ui.define([
 
 			var obj = {};
 			for (var i = 0, len = Dealer.length; i < len; i++)
+//  when the app is started just display the dealers with status pipeline - routable.  - GSR 0806 - Defect 13856
+		       if (Dealer[i].zz_trading_ind == "2" || Dealer[i].zz_trading_ind == "3" ){		
 				obj[Dealer[i]['kunnr']] = Dealer[i];
+		       }				
+				
 			Dealer = new Array();
+			
 			for (var key in obj)
 				Dealer.push(obj[key]);
 			var Model1 = new sap.ui.model.json.JSONModel(Dealer);
