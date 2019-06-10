@@ -276,13 +276,13 @@ sap.ui.define([
 								 BpDealerTemp.splice(0, 1);
 					
 							}
-							if ((BpDealerTemp[i].BusinessPartnerKey == "2400500078" ) ) {
-									 BpDealerTemp.splice(i, 1);
-							}
-							if ((BpDealer[i].BusinessPartnerKey == "2400542217") ){
-									 BpDealer.splice(i, 1);
-								continue;
-							}
+							// if ((BpDealerTemp[i].BusinessPartnerKey == "2400500078" ) ) {
+							// 		 BpDealerTemp.splice(i, 1);
+							// }
+							// if ((BpDealer[i].BusinessPartnerKey == "2400542217") ){
+							// 		 BpDealer.splice(i, 1);
+							// 	continue;
+							// }
 
 							if (BpDealerTemp[i].BusinessPartnerKey) {
 								confirmStockCode = BpDealerTemp[i].BusinessPartnerKey.substring(4, 5);

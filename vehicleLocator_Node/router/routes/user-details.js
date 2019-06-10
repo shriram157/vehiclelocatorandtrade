@@ -174,7 +174,8 @@ module.exports = function (appContext) {
 
 				for (var i = 0; i < bpResults.length; i++) {
 					var bpLength = bpResults[i].BusinessPartner.length;
-					if (bpResults[i].BusinessPartner === "2400029000" || bpResults[i].BusinessPartner === "2400049000" ) {
+					if (bpResults[i].BusinessPartner === "2400029000" || bpResults[i].BusinessPartner === "2400049000" ||
+					    bpResults[i].BusinessPartner === "2400500078" || bpResults[i].BusinessPartner === "2400542217"    ) {
 					continue;	
 					}
 					bpAttributes = {
