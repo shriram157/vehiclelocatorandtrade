@@ -187,7 +187,8 @@ sap.ui.define([
 							"BusinessPartnerName": item.BusinessPartnerName,  
 							"Division": item.Division,
 							"BusinessPartnerType": item.BusinessPartnerType,
-							"searchTermReceivedDealerName":item.SearchTerm2
+							"searchTermReceivedDealerName":item.SearchTerm2,
+							"dummyFieldForSort" : item.dummyFieldForSort
 						});
                         }
 					});
