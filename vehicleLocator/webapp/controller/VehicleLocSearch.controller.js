@@ -72,8 +72,8 @@ sap.ui.define([
 						var sLocation_conf = sLocation.search("webide");
 						if (sLocation_conf == 0) {
 					   //var userType = "Zone_User"; // TODO: Remove before deployment locatyest only - GSR
-					 //var userType = "Dealer_User"; // TODO: Remove before deployment locatyest only - GSR
-					//var userType = "TCI_User";		
+					 var userType = "Dealer_User"; // TODO: Remove before deployment locatyest only - GSR
+					// var userType = "TCI_User";		
 
 						}
 
