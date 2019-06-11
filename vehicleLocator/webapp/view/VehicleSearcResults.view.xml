@@ -290,13 +290,13 @@
 						<Column id="zzapx1" demandPopin="true" minScreenWidth="Tablet" width="5rem">
 							<Text text="{i18n>APX}" id="nameColumnTitle1"/>
 						</Column>
-						<Column id="ID_Profit1" demandPopin="true" minScreenWidth="Tablet" width="9rem">
+						<Column id="ID_Profit1" demandPopin="true" minScreenWidth="Tablet" width="8rem">
 							<Text text="{i18n>OrderType}"/>
 						</Column>
-						<Column id="ETAFrom1" hAlign="Left" demandPopin="true" minScreenWidth="Tablet" width="9rem">
+						<Column id="ETAFrom1" hAlign="Left" demandPopin="true" minScreenWidth="Tablet" width="8rem">
 							<Text text="{i18n>ETAFrom}"/>
 						</Column>
-						<Column id="pstsp1" demandPopin="true" minScreenWidth="Tablet" width="9rem">
+						<Column id="pstsp1" demandPopin="true" minScreenWidth="Tablet" width="8rem">
 							<Text text="{i18n>ETATo}"/>
 						</Column>
 						<Column id="accessoryInstall1" demandPopin="true" minScreenWidth="Tablet" width="5rem" hAlign="Left">
@@ -305,7 +305,7 @@
 						<Column id="city1" demandPopin="true" minScreenWidth="Tablet">
 							<Text text="{i18n>City}" width="8rem" wrapping="true"/>
 						</Column>
-						<Column id="Province1" demandPopin="true" width="12rem" minScreenWidth="Tablet" hAlign="Center">
+						<Column id="Province1" demandPopin="true" width="14rem" minScreenWidth="Tablet" hAlign="Left">
 							<Text text="{i18n>Province}"/>
 						</Column>
 						<!--<Column id="zzvtn1" demandPopin="true" minScreenWidth="Tablet" hAlign="Left">-->
@@ -326,18 +326,18 @@
 				mode="{detailView>/zoneUserDelete}"
 				modeAnimationOn="true" growing="true" growingThreshold="200">
 				
-				    <columns>
+				  <columns>
                     <Column width="15rem" hAlign="Left" />
                     <Column width="10rem" hAlign="Left" />
                     <Column demandPopin="true" width="15rem" minScreenWidth="Tablet" />
                     <Column hAlign="Left" minScreenWidth="tablet" demandPopin="true" width="12rem"/>
                     <Column hAlign="Left" width="5rem"/>
-                    <Column hAlign="Left" width="9rem"/>
-                    <Column hAlign="Left" width="9rem" />
-                    <Column hAlign="Left" width="9rem"/>
+                    <Column hAlign="Left" width="8rem"/>
+                    <Column hAlign="Left" width="8rem" />
+                    <Column hAlign="Left" width="8rem"/>
                     <Column hAlign="Left" width="5rem"/>
                     <Column hAlign="Left" width="8rem"/>
-                   <Column hAlign="Left" width="12rem" />
+                   <Column hAlign="Left" width="14rem" />
                     
                   </columns>
 
