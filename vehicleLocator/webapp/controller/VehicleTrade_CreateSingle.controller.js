@@ -183,12 +183,12 @@ sap.ui.define([
 				}
 			}
 // defect 11177 -  do not show 	dnc indicator based on order type		
-			var oModelData = this.getView().getModel("TradeModel").getData();
-			if (oModelData.dnc_ind == "Y") {
-			 	this.getView().byId("oOrdertype").setVisible(false);
-			} else {
-					this.getView().byId("oOrdertype").setVisible(true);
-			}
+			// var oModelData = this.getView().getModel("TradeModel").getData();
+			// if (oModelData.dnc_ind == "Y") {
+			//  	this.getView().byId("oOrdertype").setVisible(false);
+			// } else {
+			// 		this.getView().byId("oOrdertype").setVisible(true);
+			// }
 			
 			
 			
