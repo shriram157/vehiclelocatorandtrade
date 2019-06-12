@@ -860,6 +860,9 @@ sap.ui.define([
 			var ovtnReq = that.getView().getModel("TradeModel").oData.zzvtn;
 			var ostatusReq = that.getView().getModel("TradeModel").getData().zz_trading_ind;
 			
+			ostatusReq = ostatusReq.substring(0, 2);
+			
+			
 			var oOrdertypeReq = that.getView().getModel("TradeModel").getData().zzordertype;
 			var oDNCreq = that.getView().getModel("TradeModel").getData().dnc_ind;
 
@@ -891,6 +894,9 @@ sap.ui.define([
 				var exterior = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzextcol;
 				var vtn = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzvtn;
 				var ostatus = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zz_trading_ind;
+				
+					ostatus = ostatus.substring(0, 2);
+				
 				var oOrdertype = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzordertype;
 				var DNC = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.dnc_ind;
 				var oEntry1 = {

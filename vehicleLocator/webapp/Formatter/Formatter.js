@@ -99,7 +99,13 @@ sap.ui.define(function () {
 				var sTextFromi18n = "DNC";     //this.getModel("i18n").getResourceBundle().getText("Mobility");
 				return sTextFromi18n;
 				break;	
-
+			case "DN":
+				// return "DNC";
+				var sTextFromi18n = "DNC";     //this.getModel("i18n").getResourceBundle().getText("Mobility");
+				return sTextFromi18n;
+				break;			
+				
+				
 			}
 
 		},
