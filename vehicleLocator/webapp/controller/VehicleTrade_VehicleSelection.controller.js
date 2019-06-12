@@ -220,7 +220,7 @@ sap.ui.define([
 				//}
 
 				var model = new sap.ui.model.json.JSONModel(oVehicleModel);
-				model.setSizeLimit(1000);
+				model.setSizeLimit(10000);
 				this.getView().setModel(model, "vehicleSelectTableModel");
 
 				// var oModeltemp = 	this.getView().getModel("vehicleSelectTableModel");
@@ -231,6 +231,16 @@ sap.ui.define([
 
 				var sExpectedText = this.getView().getModel("i18n").getResourceBundle().getText("tableCount", [tableLength]);
 				oModelDetail.setProperty("/tableCount", sExpectedText);
+
+				//  put the DNC indicator to the screen. 
+				var oModelVehicleSelectTable = this.getView().getModel("vehicleSelectTableModel");
+				var oModelVehicleSelectTableData = this.getView().getModel("vehicleSelectTableModel").getData();
+
+				for (var i = 0; i < oModelVehicleSelectTableData.length; i++) {
+					if (oModelVehicleSelectTableData[i].dnc_ind == "Y") {
+						oModelVehicleSelectTableData[i].zzordertype = "DNC";
+					}
+				}
 
 				// replacing this with sap.m table
 				// this.getView().byId("table").setModel(oVehicleModel);
@@ -442,18 +452,17 @@ sap.ui.define([
 			that.oSelectedItem = oEvt.getSource().getBindingContext("vehicleSelectTableModel").getObject();
 			that.oSelectedItem.FromFourth = "FromFourth";
 			var VTN = that.oSelectedItem.zzvtn;
-			
-//  the offered vehicle should send the dealer code of login dealer. 	 23rd MAy. 
-			// var dealercode = that.oSelectedItem.kunnr.slice(-5);
-	             var oReceivedData = sap.ui.getCore().SelectedTrade;
-	             
-	             
-	             if (oReceivedData != undefined) {
-	             var dealercode = oReceivedData.kunnr.slice(-5);
-	             } else {  // when navigating from model block screen, pick a different one. 
-	             var dealercode = this.oSelectedItem.kunnr.slice(-5);
 
-	             }
+			//  the offered vehicle should send the dealer code of login dealer. 	 23rd MAy. 
+			// var dealercode = that.oSelectedItem.kunnr.slice(-5);
+			var oReceivedData = sap.ui.getCore().SelectedTrade;
+
+			if (oReceivedData != undefined) {
+				var dealercode = oReceivedData.kunnr.slice(-5);
+			} else { // when navigating from model block screen, pick a different one. 
+				var dealercode = this.oSelectedItem.kunnr.slice(-5);
+
+			}
 
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
@@ -1425,13 +1434,13 @@ sap.ui.define([
 						for (var b = 0; b < SeriesDescription.length; b++) {
 
 							if (that.Fullurls[a].TCISeries == SeriesDescription[b].ModelSeriesNo) {
-											// exclude landcruiser 26th May
-								if ( that.Fullurls[a].TCISeries != "L/C") {
-								that.Fullurls[a].TCISeriesDescriptionEN = SeriesDescription[b].TCISeriesDescriptionEN;
-								that.Fullurls[a].TCISeriesDescriptionFR = SeriesDescription[b].TCISeriesDescriptionFR;
-								that.Fullurls[a].Division = SeriesDescription[b].Division;
-								that.Fullurls[a].SPRAS = SPRAS;
-								that.Fullurls[a].zzzadddata4 = Number(SeriesDescription[b].zzzadddata4);
+								// exclude landcruiser 26th May
+								if (that.Fullurls[a].TCISeries != "L/C") {
+									that.Fullurls[a].TCISeriesDescriptionEN = SeriesDescription[b].TCISeriesDescriptionEN;
+									that.Fullurls[a].TCISeriesDescriptionFR = SeriesDescription[b].TCISeriesDescriptionFR;
+									that.Fullurls[a].Division = SeriesDescription[b].Division;
+									that.Fullurls[a].SPRAS = SPRAS;
+									that.Fullurls[a].zzzadddata4 = Number(SeriesDescription[b].zzzadddata4);
 								}
 
 							}
@@ -1468,7 +1477,7 @@ sap.ui.define([
 					} else {
 						that.Fullurls[i].SPRAS = SPRAS;
 					}
-             	that.Fullurls[i].zzzadddata4 = Number(that.Fullurls[i].zzzadddata4);   //GSR2405
+					that.Fullurls[i].zzzadddata4 = Number(that.Fullurls[i].zzzadddata4); //GSR2405
 				}
 
 				// if (sap.ui.getCore().getModel("LoginBpDealerModel") != undefined) {
@@ -1484,13 +1493,11 @@ sap.ui.define([
 				that.Fullurls = that.Fullurls.filter(function (x) {
 					return x.Division == that.Division;
 				});
-				
-									/*global  _:true*/
+
+				/*global  _:true*/
 				// this is the sort
-					that.Fullurls = _.sortBy(that.Fullurls, "zzzadddata4");
-				
-				
-				
+				that.Fullurls = _.sortBy(that.Fullurls, "zzzadddata4");
+
 				// remove the duplicates also from here. 				
 				var SeriesModelData = new sap.ui.model.json.JSONModel(that.Fullurls).getData(); //TCISeriesDescriptionEN
 				var modelDataNoDuplicates = that.removeDuplicates(SeriesModelData, "TCISeriesDescriptionEN");

@@ -59,7 +59,7 @@
 						<Button text="{i18n>TradeHistory}" type="Transparent" press="TradeHistoryLinkPressTS"/>
 						<Button text="{i18n>ModelBlock}" type="Transparent" press="BlockSummarypressTS"/>
 						
-							<Button   class="VLbtn2" text="{i18n>Back}" type="Transparent" press="onNavBack" width="auto"/>
+							<!--<Button   class="VLbtn2" text="{i18n>Back}" type="Transparent" press="onNavBack" width="auto"/>-->
 						
 						
 						<!--<Button text="Vehicle Locator" press="handleLinkPress"/>

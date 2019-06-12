@@ -501,11 +501,12 @@ sap.ui.define([
 
 			for (var i = 0; i < tableData.length; i++) {
 				if (tableData[i].dnc_ind == "Y") {
-					// tableData[i].zzordertype = "";
-					tableData[i].visibleOrderType = false;
+					 tableData[i].zzordertype = "DNC";
+					 tableData[i].visibleOrderType = true;
 
 				} else {
-					tableData[i].visibleOrderType = true;
+					 tableData[i].visibleOrderType = true;
+					 //tableData[i].zzordertype = "DNC";
 				}
 			}
 

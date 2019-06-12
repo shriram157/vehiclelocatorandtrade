@@ -272,10 +272,10 @@
 						</OverflowToolbar>
 					</headerToolbar>
 					<columns width="99%">
-						<!--<Column id="tradeText1" demandPopin="true" minScreenWidth="Tablet" width="6rem" hAlign="Left">-->
-						<!--	<Text text="{i18n>Trade}" id="nameColumnTitle2"/>-->
-						<!--</Column>-->
-						<Column id="dealerId1" demandPopin="true" minScreenWidth="Tablet" width="17rem" hAlign="Left">
+						<Column id="tradeText1" demandPopin="true" minScreenWidth="Tablet" width="5rem" hAlign="Left">
+							<Text text="{i18n>Trade}" id="nameColumnTitle2"/>
+						</Column>
+						<Column id="dealerId1" demandPopin="true" minScreenWidth="Tablet" width="16rem" hAlign="Left">
 							<Text text="{i18n>Dealer}"/>
 						</Column>
 						<Column id="matnr1" demandPopin="true" minScreenWidth="Tablet" width="10rem" hAlign="Left">
@@ -284,7 +284,7 @@
 						<Column id="suffix1" demandPopin="true" width="15rem" minScreenWidth="Tablet" hAlign="Left">
 							<Text text="{i18n>Suffix}"/>
 						</Column>
-		    			<Column id="ID_DealerNet1" demandPopin="true" width="12rem" minScreenWidth="Tablet" hAlign="Left">
+		    			<Column id="ID_DealerNet1" demandPopin="true" width="11rem" minScreenWidth="Tablet" hAlign="Left">
 							<Text text="{i18n>Color}"/>
 						</Column>			
 						<Column id="zzapx1" demandPopin="true" minScreenWidth="Tablet" width="5rem">
@@ -305,7 +305,7 @@
 						<Column id="city1" demandPopin="true" minScreenWidth="Tablet">
 							<Text text="{i18n>City}" width="8rem" wrapping="true"/>
 						</Column>
-						<Column id="Province1" demandPopin="true" width="14rem" minScreenWidth="Tablet" hAlign="Left">
+						<Column id="Province1" demandPopin="true" width="14rem" minScreenWidth="Tablet" hAlign="Center">
 							<Text text="{i18n>Province}"/>
 						</Column>
 						<!--<Column id="zzvtn1" demandPopin="true" minScreenWidth="Tablet" hAlign="Left">-->
@@ -327,6 +327,7 @@
 				modeAnimationOn="true" growing="true" growingThreshold="200">
 				
 				  <columns>
+				  	 <Column width="3rem" hAlign="Left" />
                     <Column width="15rem" hAlign="Left" />
                     <Column width="10rem" hAlign="Left" />
                     <Column demandPopin="true" width="15rem" minScreenWidth="Tablet" />
@@ -338,6 +339,19 @@
                     <Column hAlign="Left" width="5rem"/>
                     <Column hAlign="Left" width="8rem"/>
                    <Column hAlign="Left" width="14rem" />
+        
+        		    <!--<Column width="7%" hAlign="Left" />-->
+              <!--      <Column width="15%" hAlign="Left" />-->
+              <!--      <Column width="10%" hAlign="Left" />-->
+              <!--      <Column demandPopin="true" width="15%" minScreenWidth="Tablet" hAlign="Left" />-->
+              <!--      <Column hAlign="Left" minScreenWidth="tablet" demandPopin="true" width="12%"/>-->
+              <!--      <Column hAlign="Left" width="3%"/>-->
+              <!--      <Column hAlign="Left" width="8%"/>-->
+              <!--      <Column hAlign="Left" width="8%" />-->
+              <!--      <Column hAlign="Left" width="8%"/>-->
+              <!--      <Column hAlign="Left" width="5%"/>-->
+              <!--      <Column hAlign="Left" width="10%"/>-->
+              <!--     <Column hAlign="Left" width="14%" />-->
                     
                   </columns>
 
@@ -346,7 +360,7 @@
 					<items>
 						<ColumnListItem id="onlinkPress">
 							<cells>
-								<!--<Link id="tradeId1" text="{i18n>Trade}" class="link" subtle="true" press="oTradeLinkPress" wrapping="false"/>-->
+								 <Link id="tradeId1" text="{i18n>Trade}" class="link" subtle="true" press="oTradeLinkPress" wrapping="false"/>
 								<Text text="{path:'vehicleSearchTableModel>kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'} - {vehicleSearchTableModel>name1}" wrapping="true"/>
 								<!--<Text text="{vehicleSearchTableModel>matnr} - {vehicleSearchTableModel>model_desc_en}" wrapping="true"/>-->
 								<Text text="{vehicleSearchTableModel>matnr} - {=${languageModel>/SPRAS}==='English' ? ${vehicleSearchTableModel>model_desc_en}:${vehicleSearchTableModel>model_desc_fr} }" wrapping="true"/>
@@ -358,7 +372,7 @@
 								<Text text="{path:'vehicleSearchTableModel>zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate1'}" wrapping="false"/>
 								<Text text="{path:'vehicleSearchTableModel>pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate1'}" wrapping="false"/>
 								<Text text="{parts: [{path: 'vehicleSearchTableModel>non_D_flag'},{path: 'vehicleSearchTableModel>pd_flag'}], formatter : 'vehicleLocator.Formatter.Formatter.AccessoryInstall'}"/>
-								<Text text="{vehicleSearchTableModel>ort01}" wrapping="false"/>
+								<Text text="{vehicleSearchTableModel>ort01}" wrapping="true"/>
 								<Text text="{vehicleSearchTableModel>bezei}" wrapping="true"/>
 								<!--<Text text="{vehicleSearchTableModel>zzvtn}" wrapping="false"/>-->
 							</cells>
