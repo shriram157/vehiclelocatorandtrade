@@ -858,6 +858,7 @@ sap.ui.define([
 			var ostatus = this.getView().byId("SimpleFormUpdateTrReq").getModel().oData.Status;
 
 			var oOrdertype = this.getView().byId("SimpleFormUpdateTrReq").getModel().oData.Order_Type;
+				oOrdertype = oOrdertype.substring(0, 2);
 			var DNC = this.getView().byId("SimpleFormUpdateTrReq").getModel().oData.DNC;
 			var oEntry1 = {
 				APX: Apx,
@@ -1727,6 +1728,7 @@ sap.ui.define([
 			var ovtnReq = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().VTN;
 			var ostatusReq = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Status;
 			var oOrdertypeReq = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Order_Type;
+		 	oOrdertypeReq = oOrdertypeReq.substring(0, 2);
 			var oDNCreq = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().DNC;
 
 			var oEntry2 = {
@@ -1759,6 +1761,7 @@ sap.ui.define([
 				var vtn = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.VTN;
 				var ostatus = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Status;
 				var oOrdertype = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Order_Type;
+					 	oOrdertype = oOrdertype.substring(0, 2);
 				var DNC = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.DNC;
 				var oEntry1 = {
 					APX: Apx,
@@ -1908,6 +1911,7 @@ sap.ui.define([
 			var ovtnReq = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().VTN;
 			var ostatusReq = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Status;
 			var oOrdertypeReq = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Order_Type;
+				oOrdertypeReq = oOrdertypeReq.substring(0, 2);
 			var oDNCreq = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().DNC;
 
 			var oEntry2 = {
@@ -1939,6 +1943,7 @@ sap.ui.define([
 				var vtn = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.VTN;
 				var ostatus = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Status;
 				var oOrdertype = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Order_Type;
+					oOrdertype = oOrdertype.substring(0, 2);
 				var DNC = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.DNC;
 				var oEntry1 = {
 					APX: Apx,
@@ -2016,6 +2021,7 @@ sap.ui.define([
 			var ovtnReq = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().VTN;
 			var ostatusReq = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Status;
 			var oOrdertypeReq = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Order_Type;
+	     	 oOrdertypeReq = oOrdertypeReq.substring(0, 2);
 			var oDNCreq = that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().DNC;
 
 			var oEntry2 = {
@@ -2048,6 +2054,8 @@ sap.ui.define([
 			var vtn = offeredv.Offered_Vtn;
 			var ostatus = offeredv.Status;
 			var oOrdertype = offeredv.Order_Type;
+			
+		      oOrdertype = oOrdertype.substring(0, 2);
 			var DNC = offeredv.DNC || offeredv.dnc_ind;
 			var oEntry1 = {
 				APX: Apx,
@@ -2425,6 +2433,10 @@ sap.ui.define([
 			}
 			// ?$filter=kunnr eq '2400042120' and zzvtn eq '002292' and zzseries eq 'SIE'
 			var ordertype = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Order_Type;
+			if (ordertype.length > "2") {
+				ordertype = "SO";
+			}
+	
 			if (ordertype == "SO" || ordertype == "DM") {
 				this.nodeJsUrl = this.sPrefix + "/node";
 				that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_MASTER_SRV";
@@ -2553,6 +2565,8 @@ sap.ui.define([
 
 								vehicle_data.Status = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Status;
 								vehicle_data.Order_Type = Data.zzordertype;
+								
+									vehicle_data.Order_Type = vehicle_data.Order_Type.substring(0, 2);
 								//	var Req_Current_ETA_From=Number(vehicle_data.pstsp);
 
 								// vehicle_data.Off_Current_ETA_From = Data.pstsp;
