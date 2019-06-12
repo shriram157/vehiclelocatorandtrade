@@ -1248,7 +1248,14 @@ sap.ui.define([
 					zzordertype = "MOBILITY";
 
 					break;
+			  case "DNC":
+					zzordertype = "DNC";
 
+					break;		
+			  case "DN":
+					zzordertype = "DNC";
+
+					break;	
 				}
 
 				if (arrData[i].zzadddata4 != null && arrData[i].zzadddata4 != "") {
