@@ -268,7 +268,7 @@ sap.ui.define([
 		},
 
 		handleoVt_SeriesChange: function () {
-			debugger
+			debugger;
 
 			var that = this;
 			sap.ui.core.BusyIndicator.show();
@@ -405,7 +405,7 @@ sap.ui.define([
 				// set the model	
 				var model = new sap.ui.model.json.JSONModel(oVehicleModel).getData();
 				//    var model = oVehicleModel.getData();
-				model.setSizeLimit(1000);
+				model.setSizeLimit(10000);
 
 				// based on the language set the descriptions. 
 				//     if (this.sCurrentLocaleD == "French") {
@@ -434,6 +434,19 @@ sap.ui.define([
 
 				// 	var oProductNameColumn = this.getView().byId("oETAFromId");
 				// this.getView().byId("table").sort(oProductNameColumn, SortOrder.Ascending);
+				
+				
+				//GUNA
+					//  put the DNC indicator to the screen. 
+				var oModelVehicleSelectTable = this.getView().getModel("vehicleSelectTableModel");
+				var oModelVehicleSelectTableData = this.getView().getModel("vehicleSelectTableModel").getData();
+
+				for (var i = 0; i < oModelVehicleSelectTableData.length; i++) {
+					if (oModelVehicleSelectTableData[i].dnc_ind == "Y") {
+						oModelVehicleSelectTableData[i].zzordertype = "DNC";
+					}
+				}
+					oModelVehicleSelectTable.updateBindings(true);
 
 			}
 		},
@@ -522,9 +535,9 @@ sap.ui.define([
 						}
 
 						if ((CurrentETAFrom == "" || CurrentETAFrom == null) && (CurrentETATo != "" && CurrentETATo != null)) {
-							CurrentETAFrom = CurrentETATo
+							CurrentETAFrom = CurrentETATo;
 						} else if ((CurrentETAFrom != "" && CurrentETAFrom != null) && (CurrentETATo == "" || CurrentETATo == null)) {
-							CurrentETATo = CurrentETAFrom
+							CurrentETATo = CurrentETAFrom;
 						} else if ((CurrentETAFrom == "" || CurrentETAFrom == null) && (CurrentETATo == "" || CurrentETATo == null)) {
 							/*CurrentETATo=Data.Calculate.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1')
 							CurrentETAFrom=Data.Calculate.replace(/(\d{4})(\d{2})(\d{2})/g, '$2/$3/$1')*/
@@ -627,7 +640,7 @@ sap.ui.define([
 						} else if (that.SelectedVehicleFrom == "VehicleTrade_ModelBlock_Summary") {
 							//	var Selobj=escape(JSON.stringify(oSelectedItem));
 							var model = new sap.ui.model.json.JSONModel(that.oSelectedItem);
-							sap.ui.getCore().setModel(model, "VehicleTrade_ModelBlock_SummaryTrade")
+							sap.ui.getCore().setModel(model, "VehicleTrade_ModelBlock_SummaryTrade");
 							that.getRouter().navTo("VehicleTrade_ModelBlock_Summary", {
 								SelectedTrade: "VehicleTradeVehicle"
 							});
@@ -707,7 +720,7 @@ sap.ui.define([
 						} else if (that.SelectedVehicleFrom == "VehicleTrade_ModelBlock_Summary") {
 							//	var Selobj=escape(JSON.stringify(oSelectedItem));
 							var model = new sap.ui.model.json.JSONModel(that.oSelectedItem);
-							sap.ui.getCore().setModel(model, "VehicleTrade_ModelBlock_SummaryTrade")
+							sap.ui.getCore().setModel(model, "VehicleTrade_ModelBlock_SummaryTrade");
 							that.getRouter().navTo("VehicleTrade_ModelBlock_Summary", {
 								SelectedTrade: "VehicleTradeVehicle"
 							});
