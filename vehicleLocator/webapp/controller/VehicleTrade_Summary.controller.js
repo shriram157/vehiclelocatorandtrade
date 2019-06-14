@@ -608,12 +608,12 @@ oBinding.filter(aTableFilters);
 			},
 					handleViewSettingsDialogButtonPressed: function (oEvt) {
 			// this._oResponsivePopover = sap.ui.xmlfragment("vehicleLocator.fragment.VehicleSearchResult", this);
-			if (!this._sortDialog) {
-				this._sortDialog = sap.ui.xmlfragment("VehicleTradeSummarySortDialog", "vehicleLocator.fragment.VehicleTradeSummarySortDialog", this);
+			if (!this._sortDialog1) {
+				this._sortDialog1 = sap.ui.xmlfragment("VehicleTradeSummarySortDialog", "vehicleLocator.fragment.VehicleTradeSummarySortDialog", this);
 			}
-			this.getView().addDependent(this._sortDialog);
+			this.getView().addDependent(this._sortDialog1);
 
-			this._sortDialog.open();
+			this._sortDialog1.open();
 
 		},
 		
