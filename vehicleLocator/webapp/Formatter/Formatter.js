@@ -316,6 +316,18 @@ sap.ui.define(function () {
 			}
 		},
 		
+			TradeSummaryoDateModelBlock: function (Created_On) {
+					var dateTo = Created_On.split("(")[1];
+					
+		       	dateTo = dateTo;
+					var dataTo1 = Number(dateTo.replace(/[^A-Z\d\s]/gi, '').replace(/[^0-9\.]+/g, ""));
+			
+					var ValidTo = new Date(dataTo1).toUTCString();
+					var dateAsReceived = moment.tz(ValidTo, "GMT");
+					var returnThisDate = moment(dateAsReceived).format('YYYY-MM-DD');
+					return returnThisDate;
+			},
+			
 			TradeSummaryoDate: function (Created_On) {
 			if (Created_On != null && Created_On != "" && Created_On != "/Date(0)/" && !Created_On.getMonth) {
 				var dateTo = Created_On.split("(")[1];
