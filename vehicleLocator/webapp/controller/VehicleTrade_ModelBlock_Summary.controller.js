@@ -60,6 +60,7 @@ sap.ui.define([
 			//for zone user the below code ========================
 
 			var that = this;
+			 that.getView().byId("submitDNCId").setEnabled(true);
 			var confirmZoneUser = sap.ui.getCore().getModel("LoginBpDealerModel").oData["0"].BusinessPartnerName;
 		 if  (confirmZoneUser.includes("Zone User")  || confirmZoneUser.includes("National") )     {
 				this.userType = "Zone";
@@ -521,6 +522,11 @@ sap.ui.define([
 		DncBlockDaysUpdate: function () {
 
 			var that = this;
+			
+			that.getView().byId("TypeHerid").setValue("");
+				// that.getView().byId("submitDNCId").setEnabled(false);
+		    that.getView().byId("submitDNCId").setEnabled(false);
+			
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
 
@@ -573,6 +579,7 @@ sap.ui.define([
 			debugger;
 
 			var that = this;
+			that.getView().byId("submitDNCId").setEnabled(true);
 			sap.ui.core.BusyIndicator.show();
 
 			// /vehicleLocatorNode/node/Z_VEHICLE_MASTER_SRV/ZVMS_CDS_ETA_consolidate?$filter=matnr eq'YZ3DCT' and zzsuffix eq 'ML' and zzmoyr eq '2018' and kunnr eq '2400042193'"	
@@ -835,6 +842,7 @@ sap.ui.define([
 			oBinding.refresh();
 		},
 		onBusinessPartnerSelected: function (oEvent) {
+			this.getView().byId("submitDNCId").setEnabled(true);        
 
 			var sSelectedDealer = oEvent.getParameter("\selectedItem").getProperty("key");
 			

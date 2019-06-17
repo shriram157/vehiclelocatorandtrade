@@ -102,7 +102,7 @@
 									<Button text="Submit"/>
 								</FlexBox>-->
 								<Label text=""/>
-								<Button text="{i18n>Submit}" press="onSubmit" width="26%"/>
+								<Button text="{i18n>Submit}" press="onSubmit" width="26%" id = "submitDNCId"/>
 								<core:Title text=""/>
 								<!--<ToolbarSpacer></ToolbarSpacer>-->
 								<!--<Label text="Zone"/>
