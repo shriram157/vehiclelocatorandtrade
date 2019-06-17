@@ -423,7 +423,7 @@ sap.ui.define([
 					//comment this line
 
 					///////
-					oJsonModel.setSizeLimit(1500);
+					oJsonModel.setSizeLimit(15000);
 					sap.ui.getCore().setModel(oJsonModel, "oVehicleSelectionResults");
 					that.getRouter().navTo("VehicleTrade_VehicleSelection", {
 						SelectedVehicleFrom: "VehileTrade_CreateSingle"
@@ -479,7 +479,12 @@ sap.ui.define([
 
 				}
 				this.nodeJsUrl = this.sPrefix;
-				that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeRequest";
+				// that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeRequest";
+//  date 14th June.  The above odata call eventually going to cause performance bottle neck the objective here is to get the highest trade id and this can be done with the 
+// below syntax. 
+     //https://uat-vehiclelocatorandtrade.scp.toyota.ca/xsodata/vehicleTrade_SRV.xsodata/TradeRequest?&$orderby=Trade_Id%20desc&$top=1
+					that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeRequest?&$orderby=Trade_Id%20desc&$top=1";
+				
 				$.ajax({
 					url: that.oDataUrl,
 					method: "GET",
@@ -718,7 +723,12 @@ sap.ui.define([
 
 			}
 			this.nodeJsUrl = this.sPrefix;
-			that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment";
+			// that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment";
+		 
+			// https://uat-vehiclelocatorandtrade.scp.toyota.ca/xsodata/vehicleTrade_SRV.xsodata/TradeComment(Trade_Id='TR000086',Comment_Id='01')
+			
+				that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment(Trade_Id='"+ that.Trade_Id + "',Comment_Id='01')";
+			
 			$.ajax({
 				url: that.oDataUrl,
 				method: "GET",
@@ -757,7 +767,12 @@ sap.ui.define([
 					}
 					that.TradeComment_id();
 				},
-				error: function () {}
+				error: function () {
+					// if resource is not found just add the comment Id here
+						that.oComment_Id = "01";
+						that.TradeComment_id();
+
+				}
 			});
 
 		},

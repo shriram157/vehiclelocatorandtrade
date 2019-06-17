@@ -2190,6 +2190,7 @@ sap.ui.define([
 
 			if (aContexts.length === 0) {
 				// raise an error message.  
+					sap.ui.core.BusyIndicator.hide();
 				sap.m.MessageBox.error(pullbackErrorMessage); // "Please select a vehicle to pull back to Zone Stock"
 			} else {
 
