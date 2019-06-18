@@ -17,14 +17,15 @@ modules:
       disk-quota: 512M
       memory: 256M
    properties:
-      UPS_NAME: VEHICLE_LOCATOR_AND_TRADE_APIM_CUPS
-      XS_APP_LOG_LEVEL: info
-      XS_LOG_USER: true
-      XS_LOG_REFERER: true
-      XS_LOG_CONNECTION_DATA: true
       NODE_TLS_REJECT_UNAUTHORIZED: 0
+      OPTIMIZE_MEMORY: true
       TRADE_REQ_CLEANUP_TASK_CRON_TIME: "0 59 23 * * *"
       TRADE_REQ_CLEANUP_TASK_TIME_ZONE: America/Toronto
+      UPS_NAME: VEHICLE_LOCATOR_AND_TRADE_APIM_CUPS
+      XS_APP_LOG_LEVEL: info
+      XS_LOG_CONNECTION_DATA: true
+      XS_LOG_REFERER: true
+      XS_LOG_USER: true
    provides:
     - name: vehiclelocatorandtrade-node_api
       properties:
@@ -41,6 +42,8 @@ modules:
    parameters:
       disk-quota: 512M
       memory: 256M
+   properties:
+      OPTIMIZE_MEMORY: true
    provides:
     - name: vehiclelocatorandtrade-xsjs_api
       properties:
@@ -70,6 +73,7 @@ modules:
              "uriPattern": "^/custom/do/logout$"
            }
          ]
+      OPTIMIZE_MEMORY: true
       SESSION_TIMEOUT: 60
       XS_APP_LOG_LEVEL: info
    build-parameters:
