@@ -209,6 +209,9 @@
 										</ComboBox>
 										<Text text="{ModelBlock>Zzduration}" wrapping="true" textAlign="Center" />
 										<Text text="{path:'ModelBlock>ZzblkstartDate',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDateModelBlock'}" textAlign="Center"
+									 
+										
+										
 											wrapping="false"/>
 										<Text text="{path:'ModelBlock>ZzblkendDate',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDateModelBlock'}" textAlign="Center"
 											wrapping="false"/>

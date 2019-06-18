@@ -317,23 +317,14 @@ sap.ui.define(function () {
 		},
 		
 			TradeSummaryoDateModelBlock: function (Created_On) {
-				// 			var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
-				// 	pattern: "yyyy-MM-dd"
-				// });
+ 
 				
-				var ValidTo = new Date(Created_On)
-				var returnThisDate = moment(ValidTo).format("YYYY-MM-DD");
-				
-				
-				
-			  //  var dateTo = oDateFormat.format(Created_On);
-					
-		   //    	dateTo = dateTo;
-					// var dataTo1 = Number(dateTo.replace(/[^A-Z\d\s]/gi, '').replace(/[^0-9\.]+/g, ""));
-			
-					// var ValidTo = new Date(dataTo1).toUTCString();
-					// var dateAsReceived = moment.tz(ValidTo, "GMT");
-					// var returnThisDate = moment(dateAsReceived).format('YYYY-MM-DD');
+				 var dateFormat = sap.ui.core.format.DateFormat.getDateInstance({
+				          pattern: "yyyy-MM-dd"
+				});
+				var returnThisDate = dateFormat.format(new Date(Created_On), true); // utc format to true will retain the date as sent from SAP GSR
+ 
+ 
 					return returnThisDate;
 			},
 			
