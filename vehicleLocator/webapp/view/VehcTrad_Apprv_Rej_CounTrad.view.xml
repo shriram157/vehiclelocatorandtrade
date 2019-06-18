@@ -394,6 +394,7 @@
 	
 								<core:Title text="" class="Vtaprct1"/>
 								<VBox>
+									<Text text="{i18n>counterOfferText}" width=""/>	
 									<Text text="{i18n>disclaimerText}"	width=""/>	
 									<Label text=""/>
 									<HBox>
@@ -431,6 +432,7 @@
 											<FlexBox width="7px"></FlexBox>
 										</FlexBox>
 									</HBox>
+									
 								</VBox>
 							</form:content>
 						</form:SimpleForm>

@@ -1917,6 +1917,18 @@ sap.ui.define([
 
 			var that = this;
 			
+						var Comment = this.getView().byId("oComments").getValue();
+			if (Comment !== "") { 
+				this.oAddCommentsArea();
+			} else {
+				var sTextFromi18n = this.getView().getModel("i18n").getResourceBundle().getText("pleaseEnterComment");
+				sap.m.MessageBox.error(sTextFromi18n);   //"P
+				return;
+			}
+			
+	 
+			
+			
 			            // also disable the accept button, preventing the user not to double click. 
             this.getView().byId("oacceptbtn").setVisible(false);
               this.getView().byId("oRejectbtn").setVisible(false);
@@ -1927,10 +1939,7 @@ sap.ui.define([
 			
 
 			// 05-05 if an oncountertrade has been pressed just take the comments to HDB
-			var Comment = this.getView().byId("oComments").getValue();
-			if (Comment !== "") {
-				this.oAddCommentsArea();
-			}
+
 
 			var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 				pattern: "yyyy-MM-dd'T'HH:mm:ss"
