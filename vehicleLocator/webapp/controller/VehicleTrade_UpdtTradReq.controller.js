@@ -54,7 +54,13 @@ sap.ui.define([
 				
 				var SelectedTrade = 	this.SelectedTrade ;	
 			}
-			
+// bring the comments from the earlier screen to here. 
+
+       //var SelectedTradeComment = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getProperty("/SelectedTradeComment");
+       //var existingCommentData = SelectedTradeComment.getData();
+             // instead, lets get it from db
+            		this.Tradeid = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Trade_Id;
+              		this.getTheLatestCommentId();	
 			
 			
 			/*	var pardia_title = i18n.getText("ctrl_success_dialog");
@@ -1084,8 +1090,12 @@ sap.ui.define([
 
 				// if (this.getView().byId("tableVrade").getModel() != undefined) {
 					// var CommentData = this.getView().byId("tableVrade").getModel().getData();
-									if (this.getView().byId("tableVrade").getModel("commentsModel") != undefined) {
+	//			if (this.getView().byId("tableVrade").getModel("commentsModel") != undefined) {
+										
+						var CommentData = "";			
+					if (this.getView().byId("tableVrade").getModel("commentsModel") != undefined) {					
               	var CommentData = this.getView().byId("tableVrade").getModel("commentsModel").getData();
+			
 					function dynamicSort(property) {
 						var sortOrder = 1;
 						if (property[0] === "-") {
@@ -1099,6 +1109,7 @@ sap.ui.define([
 					};
 
 					CommentData.sort(dynamicSort("Comment_Id"));
+					}
 					if (CommentData.length != 0) {
 						var databasevalue = CommentData[CommentData.length - 1].Comment_Id;
 						var incrementvalue = (+databasevalue) + 1;
@@ -1218,7 +1229,7 @@ sap.ui.define([
 
 					/*	this.getView().byId("Comment_Txt").setValue("");	
 					 */
-				}
+			//	}
 			}
 			
 				//update the bindings. 
@@ -1282,7 +1293,9 @@ sap.ui.define([
 						// that.getView().setModel(oModel, "commentsModel");	
  
 				});
-
+                 
+                 var oModelComments = this.getView().getModel("commentsModel");
+                    	oModelComments.updateBindings(true);
 			
 			
 		},

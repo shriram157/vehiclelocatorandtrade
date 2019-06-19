@@ -173,7 +173,22 @@
 					<VBox class="sapUiLargeMargin">
 						<!--cellClick="onRowPress" selectionBehavior="Row" selectionMode="None"-->
 						<Table id="tableVrade" 
-							items="{ path:'TradeRequestModel>/TradeComment', sorter : [{ path:'Comment_Id', descending : 'true' }] }">
+					                   items="{
+                    path: 'commentsModel>/',
+                    sorter: [{
+                    path: 'Comment_Id',
+                    descending: true
+                    },
+                    {
+                    path: 'Comment_Id',
+                    descending: true
+                    }]
+                    }"
+                       noDataText="{i18n>NoData}"
+
+                   updateFinished="onUpdateFinished"
+                   mode="None"
+                   modeAnimationOn="true">
 							<columns>
 								<Column id="Comment_Date">
 									<Text text="{i18n>Date}"/>
@@ -197,11 +212,9 @@
 							<items>
 								<ColumnListItem id="columnslistmon" type="Inactive" press="detailItems">
 									<cells>
-										<Text
-											text="{path:'TradeRequestModel>Comment_Date',type:'sap.ui.model.type.DateTime', formatOptions: { pattern: 'yyyy-MM-dd', strictParsing: false, relative: false }}"
-											wrapping="false"/>
-										<Text text="{TradeRequestModel>Created_By}"/>
-										<Text text="{TradeRequestModel>Comment_Txt}" wrapping="false"/>
+		                          	<Text text="{path:'commentsModel>Comment_Date',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}"  wrapping="false" />
+                          	<Text text="{commentsModel>Created_By}" wrapping="false"/>
+                          	<Text text="{commentsModel>Comment_Txt}" wrapping="true"/>
 									</cells>
 								</ColumnListItem>
 								</items>
