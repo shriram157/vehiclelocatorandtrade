@@ -1049,31 +1049,20 @@ sap.ui.define([
 
 			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
 
-			//https://TCID1GWAPP1.tci.internal.toyota.ca:44300/sap/opu/odata/sap/Z_DEALER_TRADE_REQUEST_SRV/ApproveTradeReqSet?$filter=VehiclesOwningDelear eq '2400042176' and Suffixcode eq 'ML' and Modelyear eq '2018' and Modelcode eq 'YZ3DCT' and Interiorcolorcode eq 'LC14' and Exteriorcolorcode eq '01D6' and APX eq '0' and VTN eq '7'&$format=json
-			/*	oVehTrano = "000828";
-				oWningVTN = "000826";*/
-			/*	var AcceptUrl = that.oDataUrl + "/ApproveTradeReqSet?$filter=VehiclesOwningDelear eq'" + oRequestedDealer + "' and Suffixcode eq '" +
-				oSuffixcode +
-				"' and Modelyear eq '" + oModelyear + "' and Modelcode eq '" + oModelcode + "' and Interiorcolorcode eq '" + oIntcolorcode +
-				"' and Exteriorcolorcode eq '" + oExtcolorcode + "' and APX eq '" + oApx + "' and VTN eq '" + oVehTrano + "'" + "&$format=json";
-
-*/
-			/* var AcceptUrl =  that.oDataUrl+"/ApproveTradeReqSet?$filter=RequestingDel eq '2400042193' and (VehiclesOwningDelear eq '2400042193'  or VehiclesOwningDelear eq '2400042176' ) and (Suffixcode eq 'ML' or Suffixcode eq 'ML' ) and (Modelyear eq '2018' or Modelyear eq '2018')  and (Modelcode eq 'YZ3DCT' or Modelcode eq 'YZ3DCT' ) and ( Interiorcolorcode eq 'LC14' or Interiorcolorcode eq 'LC14') and  ( Exteriorcolorcode eq '01D6' or Exteriorcolorcode eq '01D6' ) and ( APX eq '00' or APX eq '00' ) and  ( VTN eq '000828' or  VTN eq '000826')&$format=json";*/
-			/*	var AcceptUrl = that.oDataUrl + "/ApproveTradeReqSet?$filter=RequestingDel eq '" + RequestingDealer +
-					"' and (VehiclesOwningDelear eq '" + RequestingDealer + "'or VehiclesOwningDelear eq '" + RequstedDealer +
-					"' ) and (Suffixcode eq '" + oSuffixcode + "' or Suffixcode eq '" + oWnSuffixcode + "' )and (Modelyear eq '" + oModelyear +
-					"' or Modelyear eq '" + oWnModelyear + "')  and (Modelcode eq '" + oModelcode + "' or Modelcode eq '" + oWnModelcode +
-					"' )and ( Interiorcolorcode eq '" + oIntcolorcode + "' or Interiorcolorcode eq '" + oWnoIntcolorcode +
-					"') and ( Exteriorcolorcode eq '" + oExtcolorcode + "' or Exteriorcolorcode eq '" + oWnoExtcolorcode + "' ) and ( APX eq '" + oApx +
-					"' or APX eq '" + oWnoApx + "' ) and  ( VTN eq '" + oVehTrano + "' or VTN eq '" + oWningVTN + "')&$format=json";*/
-
+		//lets get the 
+		
+		var loggedUserId = sap.ui.getCore().getModel("userIDDetails").oData["0"].userId;
+		
+		// and UpdatedBy eq 'ARSULP'&$format=json      
+		
+		
 			var AcceptUrl = that.oDataUrl + "/ApproveTradeReqSet?$filter=RequestingDel eq '" + RequstingDealer_Actual +
 				"' and (VehiclesOwningDelear eq '" + RequstedDealer + "'or VehiclesOwningDelear eq '" + RequestingDealer +
 				"' ) and (Suffixcode eq '" + oSuffixcode + "' or Suffixcode eq '" + oWnSuffixcode + "' )and (Modelyear eq '" + oModelyear +
 				"' or Modelyear eq '" + oWnModelyear + "')  and (Modelcode eq '" + oModelcode + "' or Modelcode eq '" + oWnModelcode +
 				"' )and ( Interiorcolorcode eq '" + oIntcolorcode + "' or Interiorcolorcode eq '" + oWnoIntcolorcode +
 				"') and ( Exteriorcolorcode eq '" + oExtcolorcode + "' or Exteriorcolorcode eq '" + oWnoExtcolorcode + "' ) and ( APX eq '" + oApx +
-				"' or APX eq '" + oWnoApx + "' ) and  ( VTN eq '" + oVehTrano + "' or VTN eq '" + oWningVTN + "')&$format=json";
+				"' or APX eq '" + oWnoApx + "' ) and  ( VTN eq '" + oVehTrano + "' or VTN eq '" + oWningVTN + "') and ( UpdatedBy eq '" + loggedUserId + "') &$format=json";
 
 			$.ajax({
 				url: AcceptUrl,

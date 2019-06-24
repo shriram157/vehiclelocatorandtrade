@@ -166,6 +166,18 @@ sap.ui.define([
 				success: function (oData) {
 					var BpDealer = [];
 					var userAttributes = [];
+					var userLoginDetails = [];
+					
+					
+	//  lets also get the logged in userid details so we can push the same to SAP. 
+	                	// $.each(oData.userProfile, function (i, item) {
+	                	userLoginDetails.push({
+	                	
+	                	  "userId": oData.userProfile.id
+	                		
+	                	});
+	                	
+					sap.ui.getCore().setModel(new sap.ui.model.json.JSONModel(userLoginDetails), "userIDDetails");
 
 					$.each(oData.attributes, function (i, item) {
 						var BpLength = item.BusinessPartner.length;
