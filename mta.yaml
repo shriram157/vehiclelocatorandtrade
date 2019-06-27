@@ -22,7 +22,7 @@ modules:
       TRADE_REQ_CLEANUP_TASK_CRON_TIME: "0 59 23 * * *"
       TRADE_REQ_CLEANUP_TASK_TIME_ZONE: America/Toronto
       UPS_NAME: VEHICLE_LOCATOR_AND_TRADE_APIM_CUPS
-      XS_APP_LOG_LEVEL: info
+      XS_APP_LOG_LEVEL: error
       XS_LOG_CONNECTION_DATA: true
       XS_LOG_REFERER: true
       XS_LOG_USER: true
@@ -44,13 +44,14 @@ modules:
       memory: 256M
    properties:
       OPTIMIZE_MEMORY: true
+      XS_APP_LOG_LEVEL: error
    provides:
     - name: vehiclelocatorandtrade-xsjs_api
       properties:
          url: ${default-url}
    requires:
-    - name: application-logs_vehiclelocatorandtrade
     - name: vehiclelocatorandtrade-hdb
+    - name: application-logs_vehiclelocatorandtrade
     - name: hdi_vehiclelocatorandtrade
     - name: uaa_vehiclelocatorandtrade
 
@@ -70,12 +71,12 @@ modules:
                }
              ],
              "allowedCredentials": true,
-             "uriPattern": "^/custom/do/logout$"
+             "uriPattern": "^/custom/do/logout"
            }
          ]
       OPTIMIZE_MEMORY: true
       SESSION_TIMEOUT: 60
-      XS_APP_LOG_LEVEL: info
+      XS_APP_LOG_LEVEL: error
    build-parameters:
       builder: grunt
       build-result: dist
