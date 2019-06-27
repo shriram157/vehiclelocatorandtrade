@@ -430,9 +430,14 @@ sap.ui.define([
 				// var oModelVehicleSelectTable = this.getView().getModel("vehicleSelectTableModel");
 				// var oModelVehicleSelectTableData = this.getView().getModel("vehicleSelectTableModel").getData();
 
-				for (var i = 0; i < oJsonModel.length; i++) {
-					if (oJsonModel[i].dnc_ind == "Y") {
-						oJsonModel[i].zzordertype = "DNC";
+				// for (var i = 0; i < oJsonModel.length; i++) {
+				// 	if (oJsonModel[i].dnc_ind == "Y") {
+				// 		oJsonModel[i].zzordertype = "DNC";
+				// 	}
+				// }
+				for (var i = 0; i < oJsonModel.oData.length; i++) {
+					if (oJsonModel.oData[i].dnc_ind == "Y") {
+						oJsonModel.oData[i].zzordertype = "DNC";
 					}
 				}
 	
