@@ -156,7 +156,16 @@ sap.ui.define([
 			var Filterall = new sap.ui.model.Filter([Filter, Filter2], true);
 			TableData = [];
 			oModel.read("/TradeRequest", {
-				filters: [Filterall],
+				
+				
+				
+				 urlParameters: {
+									filters: [Filterall],
+									"$expand": "TradeVehicles",
+
+								 },
+	
+				
 				async: false,
 				success: function (oData, oResponse) {
 					//=====Filter on Vehicles=====================	

@@ -423,6 +423,20 @@ sap.ui.define([
 					//comment this line
 
 					///////
+					
+				// for dnc ind lets put that as DNC
+				
+								//  put the DNC indicator to the screen. 
+				// var oModelVehicleSelectTable = this.getView().getModel("vehicleSelectTableModel");
+				// var oModelVehicleSelectTableData = this.getView().getModel("vehicleSelectTableModel").getData();
+
+				for (var i = 0; i < oJsonModel.length; i++) {
+					if (oJsonModel[i].dnc_ind == "Y") {
+						oJsonModel[i].zzordertype = "DNC";
+					}
+				}
+	
+					
 					oJsonModel.setSizeLimit(15000);
 					sap.ui.getCore().setModel(oJsonModel, "oVehicleSelectionResults");
 					that.getRouter().navTo("VehicleTrade_VehicleSelection", {
