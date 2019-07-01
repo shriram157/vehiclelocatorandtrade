@@ -143,10 +143,12 @@ sap.ui.define([
 	 
                 } else{
                  
-                   lang = 'E';
+                   lang = 'E'; 
 
                  }
-
+// The idea is to replace the entire below xosdata calls with a more appropriate and optimized ones wihtout
+ // looping the xsodata service for better performance. 30th June 2019
+ 
 			var oModel = new sap.ui.model.odata.ODataModel(this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata", true);
 
 			var Filter0 = new sap.ui.model.Filter('Requesting_Dealer', 'EndsWith', Dealer_No);
@@ -156,13 +158,10 @@ sap.ui.define([
 			var Filterall = new sap.ui.model.Filter([Filter, Filter2], true);
 			TableData = [];
 			oModel.read("/TradeRequest", {
-				
-				
-				
+
 				 urlParameters: {
 									filters: [Filterall],
-									"$expand": "TradeVehicles",
-
+									"$expand": "TradeVehicles"
 								 },
 	
 				
