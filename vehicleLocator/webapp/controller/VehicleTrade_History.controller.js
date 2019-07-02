@@ -152,7 +152,7 @@ sap.ui.define([
 			var Filterall = new sap.ui.model.Filter([Filterall1, Filter3], true);
            
 
-            TableData = [];
+            TableData = []; 
 			oModel.read("/TradeRequest", {
 				filters: [Filterall], 
 			    urlParameters:{
@@ -222,7 +222,6 @@ sap.ui.define([
 					for (var j = 0; j < results.length; j++) {
 
 						if (results[j].VTN == TableData[i].Requested_Vtn && results[j].SPRAS == lang) {
-
 							TableData[i].Model_Desc = results[j].Model_Desc;
 							TableData[i].Series_Desc = results[j].Series_Desc;
 							TableData[i].Suffix_Desc = results[j].Suffix_Desc;
@@ -240,7 +239,7 @@ sap.ui.define([
 					for (var k = 0; k < results.length; k++) {
 						if (results[k].VTN == TableData[i].Offered_Vtn && results[k].SPRAS == lang) {
 							// if (results.length > 0) {
-							if (TableData[i].OffredVehicle) {
+							if (TableData[i].OffredVehicle) { 
 								TableData[i].OffredVehicle.Model_Desc = results[k].Model_Desc;
 								TableData[i].OffredVehicle.Series_Desc = results[k].Series_Desc;
 								TableData[i].OffredVehicle.Suffix_Desc = results[k].Suffix_Desc;
@@ -250,7 +249,6 @@ sap.ui.define([
 							}
 						}
 					}
-
 				}
 			}
 			var model = new sap.ui.model.json.JSONModel(TableData);
