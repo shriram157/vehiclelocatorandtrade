@@ -35,7 +35,7 @@ function run(client, appContext) {
 				}
 				var updateSql = "UPDATE \"vehicleTrade.Trade_Request\" SET \"Trade_Status\" = 'R', \"Changed_on\" = ?" +
 					" WHERE ((\"Requested_Dealer\" = ? AND \"Requested_Vtn\" = ?) OR (\"Requesting_Dealer\" = ? AND " +
-					"\"Offered_Vtn\" = ?)) AND \"Trade_Status\" IN ('C', 'S')";
+					"\"Offered_Vtn\" = ? AND '' != ?)) AND \"Trade_Status\" IN ('C', 'S')";
 				client.prepare(updateSql, function (err, updateStmt) {
 					if (err) {
 						tracer.error("ERROR preparing SQL statement [ %s ] with error [ %s ].", updateSql, err.toString());
@@ -52,6 +52,7 @@ function run(client, appContext) {
 								selectResult.Requested_Dealer,
 								selectResult.Requested_Vtn,
 								selectResult.Requesting_Dealer,
+								selectResult.Offered_Vtn,
 								selectResult.Offered_Vtn
 							];
 							tracer.debug("Executing SQL statement [ %s ] with parameters [ %s ].", updateSql, JSON.stringify(updateStmtParams));
