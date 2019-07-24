@@ -228,11 +228,12 @@ sap.ui.define([
 
 				var Filter0 = new sap.ui.model.Filter('Requesting_Dealer', 'EndsWith', loggedDealerCode);
 				var Filter1 = new sap.ui.model.Filter('Requested_Dealer', 'EndsWith', loggedDealerCode);
-				// var Filter2 = new sap.ui.model.Filter('Trade_Status', 'EQ', 'A');
+				var Filter2 = new sap.ui.model.Filter('Trade_Status', 'NE', "A");
 				var Filter3 = new sap.ui.model.Filter('Changed_on', "GE", dateMinusThirty);
-				var Filter = new sap.ui.model.Filter([Filter0, Filter1], false);
+				var Filter4 = new sap.ui.model.Filter([Filter0, Filter1], false);
+				var Filter = new sap.ui.model.Filter([Filter4, Filter2], true);
 				// var Filterall1 = new sap.ui.model.Filter([Filter, Filter2], true);
-				var Filterall = new sap.ui.model.Filter([Filter, Filter3], true);
+				var Filterall = new sap.ui.model.Filter([Filter, Filter4], true);
 
 				// ============= performance improvement -  the existing Ajax calls are not valid one End==============================  		
 
@@ -286,8 +287,9 @@ sap.ui.define([
 						TradeRequest[i].Status = TradeVehicles[j].Status;
 						TradeRequest[i].Suffix = TradeVehicles[j].Suffix;
 						TradeRequest[i].Trade_Id = TradeVehicles[j].Trade_Id;
-						TradeRequest[i].VTN = TradeVehicles[j].VTN;
-
+						// TradeRequest[i].requestedVTN = TradeVehicles[j].VTN;
+						TradeRequest[i].VTN          = TradeVehicles[j].VTN;
+	                    // TradeRequest[i].offeredVTN = TradeRequest[i].Offered_Vtn;
 					}
 
 				}
@@ -301,6 +303,7 @@ sap.ui.define([
 						TradeRequest[i].SPRAS = oTradeVehicleDesc[l].SPRAS;
 						TradeRequest[i].Series_Desc = oTradeVehicleDesc[l].Series_Desc;
 						TradeRequest[i].Suffix_Desc = oTradeVehicleDesc[l].Suffix_Desc;
+					
 
 					}
 

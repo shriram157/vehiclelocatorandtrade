@@ -63,6 +63,11 @@
 								<core:Title text="{i18n>RequestedVehicleInformation }"/>
 								<Label text="Dealer"/>
 								<Text text="{path:'/Requested_Dealer',formatter:'vehicleLocator.Formatter.Formatter.Dealer'}-{Requested_Dealer_Name}"/>
+								
+								<Label text="{i18n>VehicleTrackingNumber}" id="vehtnumReq"/>
+								<Text text="{Requested_Vtn}" id="ovtnIdReq"/>
+								
+								
 								<Label text="{i18n>ModelYear}"/>
 								<Text text="{Model_Year}"/>
 								<Label text="{i18n>Series}"/>

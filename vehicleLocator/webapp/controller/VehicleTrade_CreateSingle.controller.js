@@ -55,12 +55,30 @@ sap.ui.define([
 			this._setTheLanguage();
 
 			this._setTheLogo();
+			
+			var oViewModel = new sap.ui.model.json.JSONModel({
+		 
+				showVinDiplayOff: false,
+				showVinDiplayReq:true
+
+			});
+
+			this.getView().setModel(oViewModel, "detailView");	
+			
+			
+			
+			
+			
 
 			this.getRouter().getRoute("VehicleTrade_CreateSingle").attachPatternMatched(this.onRouteMatched, this);
 			/*this.getRouter().attachRouteMatched(this.onRouteMatched, this);*/
 		},
 		onRouteMatched: function (oEvent) {
-
+                 
+                 
+     
+                 
+           	var oModelDetail = this.getView().getModel("detailView");
 			this.getView().byId("oTypeHere").setValue(""); //1803
 
 			// language setting for screen is getting complicated, so making use of the below model.  2903
@@ -84,9 +102,12 @@ sap.ui.define([
 			var oReceivedDataString = oEvent.getParameter("arguments").SelectedTrade;
 			if (oReceivedDataString != undefined) {
 				if (oReceivedDataString != "VehicleTradeVehicle") {
+					
+						 oModelDetail.setProperty("/showVinDiplayOff", false);
+						 
 					this.getView().byId("oOtherVehInfoid").setText("");
 					this.getView().byId("vtnlabeid").setVisible(false);
-					this.getView().byId("vtnid").setVisible(false);
+					// this.getView().byId("vtnid").setVisible(false);
 					this.getView().byId("moylablid").setVisible(false);
 					this.getView().byId("yearid").setVisible(false);
 					this.getView().byId("serielabelid").setVisible(false);
@@ -121,6 +142,9 @@ sap.ui.define([
 					// this.getView().byId("textide").setVisible(false);
 
 					var oReceivedData = sap.ui.getCore().SelectedTrade;
+	                  oModelDetail.setProperty("/showVinDiplayReq", oReceivedData.dispalyVin );
+					
+					
 					var oModel = new sap.ui.model.json.JSONModel(oReceivedData);
 					
 			
@@ -133,6 +157,9 @@ sap.ui.define([
 					
 
 				} else if (oReceivedDataString == "VehicleTradeVehicle") {
+
+
+
 
 					this.getView().byId("vtnlabeid").setVisible(true);
 					this.getView().byId("vtnid").setVisible(true);
@@ -167,6 +194,12 @@ sap.ui.define([
 					this.getView().byId("offeredStatus").setVisible(true);
 					this.getView().byId("offordetype").setVisible(true);
 					this.getView().byId("oofferedOrdertype").setVisible(true);
+					
+					
+					// this.getView().byId("vinLableIdOff").setVisible(true);
+					// this.getView().byId("vinVinIdOff").setVisible(true);	
+					 oModelDetail.setProperty("/showVinDiplayOff", true);
+					
 
 					// var i18n = sap.ui.getCore().getModel("i18n").getResourceBundle();
 					// var OtherVehicleInformation_text = i18n.getText("OfferVehicleInformation");
@@ -237,7 +270,7 @@ sap.ui.define([
 				this.getView().byId("oSeleBtn").setVisible(false);
 				this.getView().byId("oOtherVehInfoid").setText("");
 				this.getView().byId("vtnlabeid").setVisible(false);
-				this.getView().byId("vtnid").setVisible(false);
+				// this.getView().byId("vtnid").setVisible(false);
 				this.getView().byId("moylablid").setVisible(false);
 				this.getView().byId("yearid").setVisible(false);
 				this.getView().byId("serielabelid").setVisible(false);

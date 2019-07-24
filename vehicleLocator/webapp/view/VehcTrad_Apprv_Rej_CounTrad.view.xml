@@ -139,9 +139,16 @@
 								<form:content id="offervehidContent">	
 								<core:Title text="{i18n>OfferVehicleInformation}" id="Offerevehid"/>
 								<Label text="Dealer" id="offeredDealer"/>
+		
 								<Text
 									text="{path:'/OffredVehicle/Requesting_Dealer',formatter:'vehicleLocator.Formatter.Formatter.Dealer'}-{/OffredVehicle/Requesting_Dealer_Name}"
 									id="oRequesteddealer"/>
+									
+									
+									
+							   	<Label text="{i18n>VehicleTrackingNumber}" id="vtnlabeid" visible="{detailView>/showVinDiplayOff}"/>
+								<Text text="{/OffredVehicle/Offered_Vtn}" id="vtnid" visible="{detailView>/showVinDiplayOff}"/>
+								
 								<!--	"{path:'TradeModel>kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'}-{TradeModel>name1}"-->
 								<Label text="{i18n>ModelYear}" id="ofrModellabl"/>
 								<Text text="{/OffredVehicle/Model_Year}" id="ofrmodelyeartext"/>

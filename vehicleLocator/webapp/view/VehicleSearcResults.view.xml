@@ -133,136 +133,6 @@
 						</f:content>
 					</f:SimpleForm>
 
-				
-	
-	      <!--      <Table id="table1VSR" width="98%" class="sapUiResponsiveMargin" alternateRowColors="true" -->
-       <!--            items="{-->
-       <!--             path: 'vehicleSearchTableModel>/',-->
-       <!--             sorter: {-->
-       <!--             path: 'pstsp',-->
-       <!--             descending: false-->
-       <!--             }-->
-       <!--             }"-->
-       <!--                noDataText="{i18n>NoData}"-->
-
-       <!--            updateFinished="onUpdateFinished"-->
-       <!--            mode="None"-->
-       <!--            modeAnimationOn="true" growing="true"-->
-							<!--growingThreshold="200"-->
-							<!--growingScrollToLoad="true">-->
-
-       <!--         <headerToolbar>-->
-       <!--             <OverflowToolbar id="otbSubheader">-->
-
-       <!--                 <Title id="tableHeader" text="{detailView>/tableCount}"/>-->
-
-       <!--                 <ToolbarSpacer/>-->
-                        
-                        <!--<SearchField id="searchVehicleList" liveChange="onLiveChange" showSearchButton="true"-->
-                        <!--             placeholder="Search table...">-->
-                        <!--    <layoutData>-->
-                        <!--        <OverflowToolbarLayoutData minWidth="200px" maxWidth="300px" shrinkable="true"/>-->
-                        <!--    </layoutData>-->
-                        <!--</SearchField>-->
-                        
-                        <!--<Button text="Reset" type="Transparent" press="onReset"/>-->
-       <!--                 <Button tooltip="Sort table by selected fields" icon="sap-icon://sort"	-->
-       <!--                         press="handleViewSettingsDialogButtonPressed" text="{i18n>Sorting}"/>-->
-       <!--             </OverflowToolbar>-->
-       <!--         </headerToolbar>-->
-
-       <!--         <columns>-->
-
-       <!--             <Column id="tradeText1" demandPopin="true" minScreenWidth="Tablet"   width="6rem"-->
-       <!--                     hAlign="Left">-->
-       <!--                 <Text text="{i18n>Trade}" id="nameColumnTitle2"/>-->
-       <!--             </Column>-->
-       <!--             <Column id="dealerId1" demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="14rem">-->
-       <!--                 <Text text = "{i18n>Dealer}"/>-->
-       <!--             </Column>-->
-       <!--             <Column id="matnr1" demandPopin="true" minScreenWidth="Tablet"  width="17rem"-->
-       <!--                     hAlign="Left">-->
-       <!--                 <Text text="{i18n>Model}"/>-->
-       <!--             </Column>-->
-       <!--             <Column id="suffix1"  demandPopin="true"  width="12rem"-->
-       <!--                     minScreenWidth="Tablet"  hAlign="Left">-->
-       <!--                 <Text text="{i18n>Suffix}"/>-->
-       <!--             </Column>-->
-       <!--             <Column id="ID_DealerNet1"  demandPopin="true"  -->
-       <!--                     minScreenWidth="Tablet">-->
-       <!--                 <Text text="{i18n>Color}"/>-->
-       <!--             </Column>-->
-       <!--             <Column id="zzapx1"   demandPopin="true"-->
-       <!--                     minScreenWidth="Tablet" width="5rem">-->
-       <!--                 <Text text="{i18n>APX}" id="nameColumnTitle1"/>-->
-       <!--             </Column>-->
-
-       <!--             <Column id="ID_Profit1"  demandPopin="true" minScreenWidth="Tablet">-->
-       <!--                 <Text text="{i18n>OrderType}"/>-->
-       <!--             </Column>-->
-       <!--             <Column id="ETAFrom1"   hAlign="Center" demandPopin="true"-->
-       <!--                     minScreenWidth="Tablet">-->
-       <!--                 <Text text="{i18n>ETAFrom}" />-->
-       <!--             </Column>-->
-       <!--             <Column id="pstsp1"   demandPopin="true" minScreenWidth="Tablet">-->
-       <!--                 <Text text="{i18n>ETATo}" />-->
-       <!--             </Column>-->
-       <!--             <Column id="accessoryInstall1"  demandPopin="true" minScreenWidth="Tablet" width="5rem" hAlign="Center">-->
-       <!--                 <Text text="{i18n>AccessoryInstall}"  wrapping="true"/>-->
-       <!--             </Column>-->
-       <!--             <Column id="city1"  demandPopin="true" minScreenWidth="Tablet">-->
-       <!--                 <Text text="{i18n>City}"/>-->
-       <!--             </Column>-->
-       <!--             <Column id="Province1"   demandPopin="true" minScreenWidth="Tablet"-->
-       <!--                     hAlign="Left">-->
-       <!--                 <Text text="{i18n>Province}"/>-->
-       <!--                  </Column>-->
-                 
-                 
-                         
-                      <!--<Column id="zzvtn1"   demandPopin="true" minScreenWidth="Tablet"-->
-                      <!--      hAlign="Left">-->
-                      <!--  <Text text="VTN"/>-->
-                      <!--   </Column>                       -->
-                         
-                         
-                         
-       <!--         </columns>-->
-
-       <!--         <items>-->
-       <!--            <ColumnListItem type="Active" press="oTradeLinkPress" id="onlinkPress">-->
-       <!--                 <cells>-->
-       
-                        	
-       <!--                     <Link id="tradeId1" text="{i18n>Trade}" class="link" subtle="true" press="oTradeLinkPress" wrapping="false"/>-->
-                 
-       <!--                   	<Text text="{path:'vehicleSearchTableModel>kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'} - {vehicleSearchTableModel>name1}" wrapping="true" />-->
-                          	<!--<Text text="{vehicleSearchTableModel>matnr} - {vehicleSearchTableModel>model_desc_en}" wrapping="true"/>-->
-       <!--                   	<Text text="{vehicleSearchTableModel>matnr} - {=${languageModel>/SPRAS}==='English' ? ${vehicleSearchTableModel>model_desc_en}:${vehicleSearchTableModel>model_desc_fr} }" wrapping="true"/>-->
-                          	
-                          	
-       <!--                   	<Text text="{vehicleSearchTableModel>zzsuffix} - {=${languageModel>/SPRAS}==='English' ? ${vehicleSearchTableModel>suffix_desc_en}:${vehicleSearchTableModel>suffix_desc_fr} }/{=${languageModel>/SPRAS}==='English' ? ${vehicleSearchTableModel>mrktg_int_desc_en}:${vehicleSearchTableModel>mrktg_int_desc_fr} }" wrapping="true"/>-->
-                          	
-       <!--                  	<Text text="{vehicleSearchTableModel>zzextcol} - {=${languageModel>/SPRAS}==='English' ? ${vehicleSearchTableModel>mktg_desc_en}:${vehicleSearchTableModel>mktg_desc_fr} }" wrapping="true"/>-->
-       <!--                  	<Text text="{vehicleSearchTableModel>zzapx}" wrapping="true"/>-->
- 
-       <!--         		   	<Text text="{path:'vehicleSearchTableModel>zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" wrapping="false" visible="{vehicleSearchTableModel>visibleOrderType}"/>-->
-							<!--<Text text="{path:'vehicleSearchTableModel>zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate1'}" wrapping="false"/>			 -->
-       <!--                   	<Text text="{path:'vehicleSearchTableModel>pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate1'}" wrapping="false"/>-->
-       <!--                   	<Text text="{parts: [{path: 'vehicleSearchTableModel>non_D_flag'},{path: 'vehicleSearchTableModel>pd_flag'}], formatter : 'vehicleLocator.Formatter.Formatter.AccessoryInstall'}"/>-->
-       <!--                  	<Text text="{vehicleSearchTableModel>ort01}" wrapping="false"/>-->
-       <!--                   	<Text text="{vehicleSearchTableModel>bezei}" wrapping="false"/>-->
-                          
-                          	<!--<Text text="{vehicleSearchTableModel>zzvtn}" wrapping="false"/>-->
-                          
-                          	 
-
-       <!--                 </cells>-->
-       <!--             </ColumnListItem>-->
-       <!--         </items>-->
-       <!--     </Table>-->
-					
-				            <!--Fixed table header -->
             <Table showNoData="false">
 					<headerToolbar width="99%">
 						<OverflowToolbar id="otbSubheader">
@@ -272,8 +142,11 @@
 						</OverflowToolbar>
 					</headerToolbar>
 					<columns width="99%">
-						<Column id="tradeText1" demandPopin="true" minScreenWidth="Tablet" width="5rem" hAlign="Left">
+						<Column id="tradeText1" demandPopin="true" minScreenWidth="Tablet" width="8rem" hAlign="Left">
 							<Text text="{i18n>Trade}" id="nameColumnTitle2"/>
+						</Column>
+					    <Column id="zzvtn1" demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="6rem" >
+							<Text text="VTN"/>
 						</Column>
 						<Column id="dealerId1" demandPopin="true" minScreenWidth="Tablet" width="16rem" hAlign="Left">
 							<Text text="{i18n>Dealer}"/>
@@ -303,14 +176,14 @@
 							<Text text="{i18n>AccessoryInstall}" wrapping="true"/>
 						</Column>
 						<Column id="city1" demandPopin="true" minScreenWidth="Tablet">
-							<Text text="{i18n>City}" width="8rem" wrapping="true"/>
+							<Text text="{i18n>City}" width="10rem" wrapping="true"/>
 						</Column>
-						<Column id="Province1" demandPopin="true" width="14rem" minScreenWidth="Tablet" hAlign="Center">
+
+						
+						<Column id="Province1" demandPopin="true" width="17rem" minScreenWidth="Tablet" hAlign="Center">
 							<Text text="{i18n>Province}"/>
 						</Column>
-						<!--<Column id="zzvtn1" demandPopin="true" minScreenWidth="Tablet" hAlign="Left">-->
-						<!--	<Text text="VTN"/>-->
-						<!--</Column>-->
+
 					</columns>
             </Table>
 				
@@ -327,7 +200,8 @@
 				modeAnimationOn="true" growing="true" growingThreshold="200">
 				
 				  <columns>
-				  	 <Column width="3rem" hAlign="Left" />
+				  	 <Column width="5rem" hAlign="Left" />
+				  	 <Column hAlign="Left" width="6rem" />
                     <Column width="15rem" hAlign="Left" />
                     <Column width="10rem" hAlign="Left" />
                     <Column demandPopin="true" width="15rem" minScreenWidth="Tablet" />
@@ -337,8 +211,10 @@
                     <Column hAlign="Left" width="8rem" />
                     <Column hAlign="Left" width="8rem"/>
                     <Column hAlign="Left" width="5rem"/>
-                    <Column hAlign="Left" width="8rem"/>
-                   <Column hAlign="Left" width="14rem" />
+                    <Column hAlign="Left" width="10rem"/>
+                 
+                   <Column hAlign="Left" width="10rem" />
+            
         
         		    <!--<Column width="7%" hAlign="Left" />-->
               <!--      <Column width="15%" hAlign="Left" />-->
@@ -361,6 +237,7 @@
 						<ColumnListItem id="onlinkPress">
 							<cells>
 								 <Link id="tradeId1" text="{i18n>Trade}" class="link" subtle="true" press="oTradeLinkPress" wrapping="false"/>
+								 	<Text text="{vehicleSearchTableModel>zzvtn}" wrapping="false"/>	
 								<Text text="{path:'vehicleSearchTableModel>kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'} - {vehicleSearchTableModel>name1}" wrapping="true"/>
 								<!--<Text text="{vehicleSearchTableModel>matnr} - {vehicleSearchTableModel>model_desc_en}" wrapping="true"/>-->
 								<Text text="{vehicleSearchTableModel>matnr} - {=${languageModel>/SPRAS}==='English' ? ${vehicleSearchTableModel>model_desc_en}:${vehicleSearchTableModel>model_desc_fr} }" wrapping="true"/>
@@ -373,8 +250,9 @@
 								<Text text="{path:'vehicleSearchTableModel>pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate1'}" wrapping="false"/>
 								<Text text="{parts: [{path: 'vehicleSearchTableModel>non_D_flag'},{path: 'vehicleSearchTableModel>pd_flag'}], formatter : 'vehicleLocator.Formatter.Formatter.AccessoryInstall'}"/>
 								<Text text="{vehicleSearchTableModel>ort01}" wrapping="true"/>
+							
 								<Text text="{vehicleSearchTableModel>bezei}" wrapping="true"/>
-								<!--<Text text="{vehicleSearchTableModel>zzvtn}" wrapping="false"/>-->
+							
 							</cells>
 						</ColumnListItem>
 					</items>

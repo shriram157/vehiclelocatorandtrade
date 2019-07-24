@@ -24,7 +24,8 @@ sap.ui.define([
 
 			this._oViewModel = new sap.ui.model.json.JSONModel({
 				visibleForZoneUser: false,
-				showOrderType: true
+				showOrderType: true,
+				// showVinDiplayOff:true
 			});
 
 			this.getView().setModel(this._oViewModel, "detailView");
@@ -74,6 +75,7 @@ sap.ui.define([
 			/* SelectedPath	*/
 			if (that.oSelectedItems != undefined && that.oSelectedItems != "SelectedFromTradeHistory") {
 				if (sap.ui.getCore().getModel("MyTradeRequestSelected") != undefined) {
+							this._oViewModel.setProperty("/showVinDiplayOff", false);
 					//		this.getView().byId("SimpleFormAproveTrReq").setModel(sap.ui.getCore().getModel("MyTradeRequestSelected"));
 					var StatusData = sap.ui.getCore().getModel("MyTradeRequestSelected").getData();
 					var AcceptVisible = StatusData.FromRequesting;
@@ -97,6 +99,7 @@ sap.ui.define([
 					if (Status == "R") {
 						that.getView().byId("ovtnId").setVisible(false);
 						that.getView().byId("ovtnIdText").setVisible(false);
+					
 					} else {
 
 						that.getView().byId("ovtnId").setVisible(true);
@@ -262,6 +265,8 @@ sap.ui.define([
 					}
 
 					if (StatusData.Trade_Return == "N") {
+						
+								this._oViewModel.setProperty("/showVinDiplayOff", false);
 						// this.getView().byId("offervehidContent").setVisible(false);
 						// Offered = {};
 						that.getView().byId("Offerevehid").setText("");
@@ -323,6 +328,9 @@ sap.ui.define([
 						// that.getView().byId("idlto").setVisible(false);
 
 					} else if (StatusData.Trade_Return == "Y") {
+					
+					
+					 this._oViewModel.setProperty("/showVinDiplayOff", true);  //2207
 
 						that.getView().byId("offeredDealer").setVisible(true);
 
@@ -516,6 +524,8 @@ sap.ui.define([
 				if (StatusData.Trade_Return == "N") {
 					// this.getView().byId("offervehidContent").setVisible(false);
 					// Offered = {};
+					
+						this._oViewModel.setProperty("/showVinDiplayOff", false);
 					that.getView().byId("Offerevehid").setText("");
 					that.getView().byId("offeredDealer").setVisible(false);
 					that.getView().byId("oRequesteddealer").setText("");
@@ -575,6 +585,7 @@ sap.ui.define([
 					// that.getView().byId("idlto").setVisible(false);
 
 				} else if (StatusData.Trade_Return == "Y") {
+						this._oViewModel.setProperty("/showVinDiplayOff", true);
 
 					that.getView().byId("offeredDealer").setVisible(true);
 

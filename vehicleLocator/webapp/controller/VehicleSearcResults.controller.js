@@ -758,6 +758,15 @@ sap.ui.define([
 						that.selectedTrade.Proposed_ETA_To = Proposed_ETA_To;
 						that.selectedTrade.Proposed_ETA_From = Data.Calculate;
 						//that.selectedTrade=escape(JSON.stringify(that.selectedTrade));
+						
+						
+						if (that.selectedTrade.mmsta > "M275" && that.selectedTrade.vhvin !="") {
+							that.selectedTrade.dispalyVin = true;
+						} else {
+							that.selectedTrade.dispalyVin = false;
+						}
+						
+						
 						sap.ui.getCore().SelectedTrade = that.selectedTrade;
 						sap.ui.getCore().SelectedTradeStatus = "";
 						if (that.oTableSelectPath != undefined) {
