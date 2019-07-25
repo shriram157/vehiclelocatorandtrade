@@ -2175,7 +2175,8 @@ sap.ui.define([
 					new Filter("zzextcol", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("mktg_desc_en", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("mktg_desc_fr", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-
+					new Filter("ort01", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("bezei", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 				], false);
 
 				if (Status == "1") {
