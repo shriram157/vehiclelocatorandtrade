@@ -138,7 +138,15 @@
 						<OverflowToolbar id="otbSubheader">
 							<Title id="tableHeader" text="{detailView>/tableCount}"/>
 							<ToolbarSpacer/>
-							<Button tooltip="Sort table by selected fields" icon="sap-icon://sort" press="handleViewSettingsDialogButtonPressed" text="{i18n>Sorting}"/>
+							
+	                        <SearchField id="searchVehicleList" liveChange="onLiveChange" showSearchButton="true"
+                                     placeholder="{i18n>placeHolderText}" >
+                            <layoutData>
+                                <OverflowToolbarLayoutData minWidth="200px" maxWidth="300px" shrinkable="true"/>
+                            </layoutData>
+                        </SearchField>						
+ 
+							<Button tooltip="{i18n>bToolTip}" icon="sap-icon://sort" press="handleViewSettingsDialogButtonPressed" text="{i18n>Sorting}"/>
 						</OverflowToolbar>
 					</headerToolbar>
 					<columns width="99%">

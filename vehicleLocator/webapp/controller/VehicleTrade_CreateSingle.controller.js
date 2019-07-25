@@ -103,7 +103,7 @@ sap.ui.define([
 			if (oReceivedDataString != undefined) {
 				if (oReceivedDataString != "VehicleTradeVehicle") {
 					
-						 oModelDetail.setProperty("/showVinDiplayOff", false);
+					
 						 
 					this.getView().byId("oOtherVehInfoid").setText("");
 					this.getView().byId("vtnlabeid").setVisible(false);
@@ -143,7 +143,9 @@ sap.ui.define([
 
 					var oReceivedData = sap.ui.getCore().SelectedTrade;
 	                  oModelDetail.setProperty("/showVinDiplayReq", oReceivedData.dispalyVin );
-					
+					  oModelDetail.setProperty("/showVinDiplayOff", false);
+					 this.getView().byId("vtnlabeid").setVisible(false);
+					this.getView().byId("vtnid").setVisible(false);
 					
 					var oModel = new sap.ui.model.json.JSONModel(oReceivedData);
 					

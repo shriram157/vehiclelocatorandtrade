@@ -378,6 +378,9 @@ sap.ui.define([
 		},
 		onStatusChange: function () {
 
+			//  when the control is reached here, we need to clear the filterbox
+			this.getView().byId("searchVehicleList").setValue("");
+
 			var filterArray = [];
 			/*	this.getView().byId("table1VSR").getBinding("items").filter([]);*/
 			// this.getView().byId("table1VSR").getBinding("rows").filter([]); guna
@@ -429,7 +432,7 @@ sap.ui.define([
 				Suffix = this.getView().byId("VLRSuffix").getSelectedKey();
 			}
 			if (Suffix != "" && Suffix != "all") {
-                 var suffixisNotequaltoAll = true;
+				var suffixisNotequaltoAll = true;
 				filterArray.push(new sap.ui.model.Filter("zzsuffix", sap.ui.model.FilterOperator.Contains, Suffix));
 			} else if (Suffix == "all") {
 				var suffixisNotequaltoAll = false;
@@ -461,7 +464,7 @@ sap.ui.define([
 					// 								 if (suffixisNotequaltoAll == true && SelColor[i].zzsuffix == Suffix ) {
 					// 		filterArray.push(new sap.ui.model.Filter("zzextcol", sap.ui.model.FilterOperator.Contains, SelColor[i].zzextcol));
 					// 		 } else if (suffixisNotequaltoAll == false){
-							 	filterArray.push(new sap.ui.model.Filter("zzextcol", sap.ui.model.FilterOperator.Contains, SelColor[i].zzextcol));	
+					filterArray.push(new sap.ui.model.Filter("zzextcol", sap.ui.model.FilterOperator.Contains, SelColor[i].zzextcol));
 					// 		 }
 					// 	}
 					// }
@@ -492,21 +495,20 @@ sap.ui.define([
 				filterArray.push(new sap.ui.model.Filter("Hold_stat", sap.ui.model.FilterOperator.EQ, "N"));
 			}
 
-		 
 			this.byId("table1VSR")
 				.getBinding("items")
 				.filter(filterArray);
-	 
+
 			var tableData = sap.ushell.components.tableSearchResults.getModel("vehicleSearchTableModel").getData();
 
 			for (var i = 0; i < tableData.length; i++) {
 				if (tableData[i].dnc_ind == "Y") {
-					 tableData[i].zzordertype = "DNC";
-					 tableData[i].visibleOrderType = true;
+					tableData[i].zzordertype = "DNC";
+					tableData[i].visibleOrderType = true;
 
 				} else {
-					 tableData[i].visibleOrderType = true;
-					 //tableData[i].zzordertype = "DNC";
+					tableData[i].visibleOrderType = true;
+					//tableData[i].zzordertype = "DNC";
 				}
 			}
 
@@ -758,15 +760,13 @@ sap.ui.define([
 						that.selectedTrade.Proposed_ETA_To = Proposed_ETA_To;
 						that.selectedTrade.Proposed_ETA_From = Data.Calculate;
 						//that.selectedTrade=escape(JSON.stringify(that.selectedTrade));
-						
-						
-						if (that.selectedTrade.mmsta > "M275" && that.selectedTrade.vhvin !="") {
+
+						if (that.selectedTrade.mmsta > "M275" && that.selectedTrade.vhvin != "") {
 							that.selectedTrade.dispalyVin = true;
 						} else {
 							that.selectedTrade.dispalyVin = false;
 						}
-						
-						
+
 						sap.ui.getCore().SelectedTrade = that.selectedTrade;
 						sap.ui.getCore().SelectedTradeStatus = "";
 						if (that.oTableSelectPath != undefined) {
@@ -1119,26 +1119,23 @@ sap.ui.define([
 
 				}
 			}
-//  the default view (Defect 13856) should build the Dealer drop down on records for the stock routable. 
-
+			//  the default view (Defect 13856) should build the Dealer drop down on records for the stock routable. 
 
 			var obj = {};
-			for (var i = 0, len = Dealer.length; i < len; i++)
-			    {
-		//  when the app is started just display the dealers with status pipeline - routable.  - GSR 0806 - Defect 13856
-		       if (Dealer[i].zz_trading_ind == "2" || Dealer[i].zz_trading_ind == "3"){
-				obj[Dealer[i]['kunnr']] = Dealer[i];
-			    }
-			    }
-				
+			for (var i = 0, len = Dealer.length; i < len; i++) {
+				//  when the app is started just display the dealers with status pipeline - routable.  - GSR 0806 - Defect 13856
+				if (Dealer[i].zz_trading_ind == "2" || Dealer[i].zz_trading_ind == "3") {
+					obj[Dealer[i]['kunnr']] = Dealer[i];
+				}
+			}
+
 			Dealer = new Array();
 			for (var key in obj) {
-			
-				
-				Dealer.push(obj[key]);	
-				
+
+				Dealer.push(obj[key]);
+
 			}
-			
+
 			var Model1 = new sap.ui.model.json.JSONModel(Dealer);
 			Model1.setSizeLimit(1000);
 			this.getView().byId("VLRDealer").setModel(Model1);
@@ -1619,7 +1616,7 @@ sap.ui.define([
 			// if (SuffixData.length != 0) {
 
 			// }
-// =========================================================== begin of comment ================== Guna
+			// =========================================================== begin of comment ================== Guna
 			// var obj = {};
 			// for (var i = 0, len = Status.length; i < len; i++)
 			// 	obj[Status[i]['zz_trading_ind']] = Status[i];
@@ -1712,7 +1709,7 @@ sap.ui.define([
 			// 	}
 
 			// }
-// =========================================================== end of comment ================== Guna			
+			// =========================================================== end of comment ================== Guna			
 			/*	if(StatusFilter.length!=0){
 						this.getView().byId("VLRStatus").setSelectedItem("Pipeline - Routable");
 	this.getView().byId("VLRStatus").setSelectedKey("1");
@@ -2145,52 +2142,68 @@ sap.ui.define([
 
 		},
 		onLiveChange: function (oEvent) {
+
 			this.sSearchQuery = oEvent.getSource()
 				.getValue();
 			this.fnApplyFiltersAndOrdering();
+
+			this.getView().byId("VLRDealer").setSelectedKey("all");
+			this.getView().byId("VLRSuffix").setSelectedKey("all");
+			this.getView().byId("VLRColor").setSelectedKey("all");
+			this.getView().byId("chknew").setSelected(false);
+			this.getView().byId("chkexi").setSelected(false);
+
 		},
 		fnApplyFiltersAndOrdering: function (oEvent) {
 			var aFilters = [],
 				aSorters = [];
 
 			aSorters.push(new Sorter("dealerId1", this.bDescending));
+			// based on the status that is presnet in the screen apply one more filter. 
+			var Status = this.getView().byId("VLRStatus").getSelectedKey();
 
 			if (this.sSearchQuery) {
 				var oFilter = new Filter([
+					new Filter("zzvtn", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("kunnr", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("matnr", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("model_desc_en", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("model_desc_fr", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("zzsuffix", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-					new Filter("zzapx", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("suffix_desc_en", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("suffix_desc_fr", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("zzextcol", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-					new Filter("zzordertype", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-					new Filter("zzadddata4", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-					new Filter("pstsp", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-					new Filter("non_D_flag", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-					new Filter("ort01", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-					new Filter("bezei", sap.ui.model.FilterOperator.Contains, this.sSearchQuery)
+					new Filter("mktg_desc_en", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("mktg_desc_fr", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+
 				], false);
-				// this.sSearchQuery);
-				aFilters.push(oFilter);
+
+				if (Status == "1") {
+
+					var oFilter1 = new Filter([
+						new Filter("zz_trading_ind", sap.ui.model.FilterOperator.Contains, Status)
+					]);
+
+				} else {
+
+					var oFilter1 = new Filter([
+						new Filter("zz_trading_ind", sap.ui.model.FilterOperator.NE, "1")
+					]);
+
+				}
+
+				var aFilters = new sap.ui.model.Filter([oFilter1, oFilter], true);
+
+				// aFilters.push(oFilter);
 			}
+
+			// based on the status field			
 
 			this.byId("table1VSR")
 				.getBinding("items")
 				.filter(aFilters)
 				.sort(aSorters);
 		},
-
-		// handleViewSettingsDialogButtonPressed : function(oEvent) {
-		//     if (!this._oDialog) {
-		//         this._oDialog = sap.ui.xmlfragment("vehicleSortDialog", "vehicleLocator.Dialog",
-		//             this);
-		//         this._addSortItems();
-
-		//     }
-		//     // toggle compact style
-		//     jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(),
-		//         this._oDialog);
-		//     this._oDialog.open();
-		// },
 
 		handleViewSettingsDialogButtonPressed: function (oEvt) {
 			// this._oResponsivePopover = sap.ui.xmlfragment("vehicleLocator.fragment.VehicleSearchResult", this);
