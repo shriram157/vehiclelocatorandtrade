@@ -183,12 +183,12 @@
 						<Column id="accessoryInstall1" demandPopin="true" minScreenWidth="Tablet" width="5rem" hAlign="Left">
 							<Text text="{i18n>AccessoryInstall}" wrapping="true"/>
 						</Column>
-						<Column id="city1" demandPopin="true" minScreenWidth="Tablet">
-							<Text text="{i18n>City}" width="10rem" wrapping="true"/>
+						<Column id="city1" demandPopin="true" minScreenWidth="Tablet" width="10rem" >
+							<Text text="{i18n>City}"  wrapping="true"/>
 						</Column>
 
 						
-						<Column id="Province1" demandPopin="true" width="17rem" minScreenWidth="Tablet" hAlign="Center">
+						<Column id="Province1" demandPopin="true" width="12rem" minScreenWidth="Tablet" hAlign="Center">
 							<Text text="{i18n>Province}"/>
 						</Column>
 
@@ -220,8 +220,7 @@
                     <Column hAlign="Left" width="8rem"/>
                     <Column hAlign="Left" width="5rem"/>
                     <Column hAlign="Left" width="10rem"/>
-                 
-                   <Column hAlign="Left" width="17rem" />
+                    <Column hAlign="Left" width="12rem" />
             
         
         		    <!--<Column width="7%" hAlign="Left" />-->
