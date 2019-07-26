@@ -1299,15 +1299,22 @@ sap.ui.define([
 			if (this.sSearchQuery) {
 				var oFilter = new Filter([
 					new Filter("zzvtn", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-					new Filter("zzseries", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("vhvin", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("matnr", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+						new Filter("model_desc_en", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("model_desc_fr", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),	
+					
 					new Filter("zzsuffix", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-					new Filter("zzapx", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("suffix_desc_en", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),	
+					new Filter("suffix_desc_fr", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),	
+					
+				 
 					new Filter("zzextcol", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+
 					new Filter("mktg_desc_en", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-					//	new Filter("zzordertype", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-					new Filter("zzadddata4", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-					new Filter("pstsp", sap.ui.model.FilterOperator.Contains, this.sSearchQuery)
+				    new Filter("mktg_desc_fr", sap.ui.model.FilterOperator.Contains, this.sSearchQuery)
+					
+			
 
 				], false);
 				// this.sSearchQuery);
@@ -1319,18 +1326,7 @@ sap.ui.define([
 				.filter(aFilters)
 				.sort(aSorters);
 
-			// var aFilters = [];
-			//      this.sSearchQuery= oEvt.getSource().getValue();
-			//      if (this.sSearchQuery && this.sSearchQuery.length > 0) {
-			//          var filter = new Filter("vehicleSelectTableModel", sap.ui.model.FilterOperator.Contains, this.sSearchQuery);
-			//          aFilters.push(filter);
-			//      }
-
-			//      // update list binding
-			//      var oTableUpdate = this.getView().byId("vehicleSelectTable");
-			//      var binding = oTableUpdate .getBinding("items");
-			//      binding.filter(aFilters, "Application");
-			//  }			
+		
 
 		},
 
@@ -1577,7 +1573,25 @@ sap.ui.define([
 			} else {
 				return "";
 			}
-		}
+		},
+				onUpdateFinished: function (oEvent) {
+
+			var oTable = this.getView().byId("vehicleSelectTable");
+
+			if (oTable.getBinding("items").isLengthFinal()) {
+				var iCount = oEvent.getParameter("total");
+				// iItems = oTable.getItems().length;
+				// sTitle += "(" + iItems + "/" + iCount + ")";
+			}
+			// this.getView().byId("title").setText(sTitle);
+
+			var tableLength = iCount; //tableData.length;
+			var oModelDetail = this.getView().getModel("detailView");
+
+			var sExpectedText = this.getView().getModel("i18n").getResourceBundle().getText("tableCount", [tableLength]);
+			oModelDetail.setProperty("/tableCount", sExpectedText);
+
+		},
 
 		/*onSelectLink:function(oEvt)
 		   

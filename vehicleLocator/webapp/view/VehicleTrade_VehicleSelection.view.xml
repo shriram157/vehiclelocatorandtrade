@@ -72,9 +72,14 @@
 								updateFinished="onUpdateFinished" mode="None" modeAnimationOn="true">
 								<headerToolbar>
 									<OverflowToolbar id="otbSubheader">
-										<Title id="tableHeader1" text="{detailView>/tableCountSelect}"/>
+										<Title id="tableHeader1" text="{detailView>/tableCount}"/>
 										<ToolbarSpacer/>
-										<Button tooltip="Sort table by selected fields" icon="sap-icon://sort" press="handleViewSettingsDialogButtonPressed" text="{i18n>Sorting}"/>
+										<SearchField id="searchMyVehicleList" liveChange="onLiveChange" showSearchButton="true" placeholder="{i18n>placeHolderText}">
+											<layoutData>
+												<OverflowToolbarLayoutData minWidth="200px" maxWidth="300px" shrinkable="true"/>
+											</layoutData>
+										</SearchField>
+										<Button tooltip="{i18n>bToolTip}" icon="sap-icon://sort" press="handleViewSettingsDialogButtonPressed" text="{i18n>Sorting}"/>
 									</OverflowToolbar>
 								</headerToolbar>
 								<columns>
@@ -84,7 +89,7 @@
 									<Column id="vehicleTrackNum" demandPopin="true" minScreenWidth="Tablet" hAlign="Center" width="6rem">
 										<Text text="{i18n>VehicleTrackingNumber}" wrapping="true"/>
 									</Column>
-								    <Column id="vehicleVin" demandPopin="true" minScreenWidth="Tablet" hAlign="Center" width="12rem">
+									<Column id="vehicleVin" demandPopin="true" minScreenWidth="Tablet" hAlign="Center" width="12rem">
 										<Text text="{i18n>VIN}" wrapping="true"/>
 									</Column>
 									<Column id="series1" demandPopin="true" minScreenWidth="Tablet" width="6rem" hAlign="Center">
@@ -117,8 +122,7 @@
 										<cells>
 											<Link id="selectId" text="{i18n>Select}" class="link" subtle="true" press="oTradeLinkPress" wrapping="false"/>
 											<Text text="{vehicleSelectTableModel>zzvtn}" wrapping="false" width="6rem" id="zzvtnid"/>
-											
-												<Text text="{vehicleSelectTableModel>vhvin}" wrapping="false" width="12rem" id="vhvinid"/>
+											<Text text="{vehicleSelectTableModel>vhvin}" wrapping="false" width="12rem" id="vhvinid"/>
 											<Text
 												text="{=${languageModel>/SPRAS}==='English' ? ${vehicleSelectTableModel>zzseries_desc_en}:${vehicleSelectTableModel>zzseries_desc_fr} }"
 												id="oSeries"/>
