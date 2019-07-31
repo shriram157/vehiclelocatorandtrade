@@ -172,8 +172,8 @@
 					</columns>
 				</Table>
 				<!--Table with data without header row inside scroll container -->
-				<ScrollContainer vertical="true" focusable="true" height="70%" >
-					<Table id="table1VSR"  class="sapUiResponsiveMargin" alternateRowColors="true" 
+				<ScrollContainer vertical="true" focusable="true" height="70%" width="99%" >
+					<Table id="table1VSR"  class="sapUiResponsiveMargin" alternateRowColors="true" width="99%"
 						items="{ path: 'vehicleSearchTableModel>/', sorter: { path: 'pstsp', ascending: true } }" noDataText="{i18n>NoData}"
 						updateFinished="onUpdateFinished" mode="{detailView>/zoneUserDelete}" modeAnimationOn="true" growing="true" growingThreshold="200">
 						<columns>
@@ -204,7 +204,7 @@
 							<!--     <Column hAlign="Left" width="14%" />-->
 						</columns>
 						<items>
-							<ColumnListItem id="onlinkPress" type="Navigation" unread="true" >
+							<ColumnListItem id="onlinkPress" type="Navigation" unread="true"  >
 								<cells>
 									<Link id="tradeId1" text="{i18n>Trade}" class="link" subtle="true" press="oTradeLinkPress" wrapping="false" width="5rem"/>
 									<Text text="{vehicleSearchTableModel>zzvtn}" wrapping="false" width="6rem"/>
