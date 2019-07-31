@@ -116,7 +116,7 @@
 						</l:Grid>
 					</f:content>
 				</f:SimpleForm>
-				<Table showNoData="false" class="sapUiResponsiveMargin" alternateRowColors="true" >
+				<Table showNoData="false" class="sapUiResponsiveMargin" alternateRowColors="true" width="99%" >
 					<headerToolbar >
 						<OverflowToolbar id="otbSubheader">
 							<Title id="tableHeader" text="{detailView>/tableCount}"/>
