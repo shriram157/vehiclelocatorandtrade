@@ -136,7 +136,7 @@
 						<Column id="zzvtn1" demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="6rem">
 							<Text text="VTN"/>
 						</Column>
-						<Column id="dealerId1" demandPopin="true" minScreenWidth="Tablet" width="15rem" hAlign="Left">
+						<Column id="dealerId1" demandPopin="true" minScreenWidth="Tablet" width="12rem" hAlign="Left">
 							<Text text="{i18n>Dealer}"/>
 						</Column>
 						<Column id="matnr1" demandPopin="true" minScreenWidth="Tablet" width="10rem" hAlign="Left">
@@ -148,7 +148,7 @@
 						<Column id="ID_DealerNet1" demandPopin="true" width="12rem" minScreenWidth="Tablet" hAlign="Left">
 							<Text text="{i18n>Color}"/>
 						</Column>
-						<Column id="zzapx1" demandPopin="true" minScreenWidth="Tablet" width="5rem">
+						<Column id="zzapx1" demandPopin="true" minScreenWidth="Tablet" width="3rem">
 							<Text text="{i18n>APX}" id="nameColumnTitle1"/>
 						</Column>
 						<Column id="ID_Profit1" demandPopin="true" minScreenWidth="Tablet" width="8rem">
@@ -160,36 +160,36 @@
 						<Column id="pstsp1" demandPopin="true" minScreenWidth="Tablet" width="8rem">
 							<Text text="{i18n>ETATo}"/>
 						</Column>
-						<Column id="accessoryInstall1" demandPopin="true" minScreenWidth="Tablet" width="5rem" hAlign="Left">
+						<Column id="accessoryInstall1" demandPopin="true" minScreenWidth="Tablet" width="3rem" hAlign="Left">
 							<Text text="{i18n>AccessoryInstall}" wrapping="true"/>
 						</Column>
-						<Column id="city1" demandPopin="true" minScreenWidth="Tablet" width="10rem">
+						<Column id="city1" demandPopin="true" minScreenWidth="Tablet" width="8rem"  >
 							<Text text="{i18n>City}" wrapping="true"/>
 						</Column>
-						<Column id="Province1" demandPopin="true" width="12rem" minScreenWidth="Tablet" hAlign="Left">
+						<Column id="Province1" demandPopin="true" width="8rem" minScreenWidth="Tablet" hAlign="Left">
 							<Text text="{i18n>Province}"/>
 						</Column>
 					</columns>
 				</Table>
 				<!--Table with data without header row inside scroll container -->
 				<ScrollContainer vertical="true" focusable="true" height="70%" width="99%" >
-					<Table id="table1VSR"  class="sapUiResponsiveMargin" alternateRowColors="true" width="99%"
+					<Table id="table1VSR"  class="sapUiResponsiveMargin" alternateRowColors="true" 
 						items="{ path: 'vehicleSearchTableModel>/', sorter: { path: 'pstsp', ascending: true } }" noDataText="{i18n>NoData}"
 						updateFinished="onUpdateFinished" mode="{detailView>/zoneUserDelete}" modeAnimationOn="true" growing="true" growingThreshold="200">
 						<columns>
 							<Column hAlign="Left" width="5rem"/>
 							<Column hAlign="Left" width="6rem"/>
-							<Column hAlign="Left" width="15rem"/>
+							<Column hAlign="Left" width="12rem"/>
 							<Column hAlign="Left" width="10rem"/>
 							<Column hAlign="Left" width="15rem"/>
 							<Column hAlign="Left" width="12rem"/>
-							<Column hAlign="Left" width="5rem"/>
+							<Column hAlign="Left" width="3rem"/>
 							<Column hAlign="Left" width="8rem"/>
 							<Column hAlign="Left" width="8rem"/>
 							<Column hAlign="Left" width="8rem"/>
-							<Column hAlign="Left" width="5rem"/>
-							<Column hAlign="Left" width="10rem"/>
-							<Column hAlign="Left" width="12rem"/>
+							<Column hAlign="Left" width="3rem"/>
+							<Column hAlign="Left" width="8rem"/>
+							<Column hAlign="Left" width="8rem"/>
 							<!--<Column width="7%" hAlign="Left" />-->
 							<!--      <Column width="15%" hAlign="Left" />-->
 							<!--      <Column width="10%" hAlign="Left" />-->
@@ -209,7 +209,7 @@
 									<Link id="tradeId1" text="{i18n>Trade}" class="link" subtle="true" press="oTradeLinkPress" wrapping="false" width="5rem"/>
 									<Text text="{vehicleSearchTableModel>zzvtn}" wrapping="false" width="6rem"/>
 									<Text text="{path:'vehicleSearchTableModel>kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'} - {vehicleSearchTableModel>name1}"
-										wrapping="true" width="15rem"/>
+										wrapping="true" width="12rem"/>
 									<!--<Text text="{vehicleSearchTableModel>matnr} - {vehicleSearchTableModel>model_desc_en}" wrapping="true"/>-->
 									<Text
 										text="{vehicleSearchTableModel>matnr} - {=${languageModel>/SPRAS}==='English' ? ${vehicleSearchTableModel>model_desc_en}:${vehicleSearchTableModel>model_desc_fr} }"
@@ -220,16 +220,16 @@
 									<Text
 										text="{vehicleSearchTableModel>zzextcol} - {=${languageModel>/SPRAS}==='English' ? ${vehicleSearchTableModel>mktg_desc_en}:${vehicleSearchTableModel>mktg_desc_fr} }"
 										wrapping="true" width="12rem"/>
-									<Text text="{vehicleSearchTableModel>zzapx}" wrapping="true" width="5rem"/>
+									<Text text="{vehicleSearchTableModel>zzapx}" wrapping="true" width="3rem"/>
 									<Text text="{path:'vehicleSearchTableModel>zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" wrapping="false"
 										visible="{vehicleSearchTableModel>visibleOrderType}" width="8rem"/>
 									<Text text="{path:'vehicleSearchTableModel>zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate1'}"
 										wrapping="false" width="8rem"/>
 									<Text text="{path:'vehicleSearchTableModel>pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate1'}" wrapping="false" width="8rem"/>
 									<Text
-										text="{parts: [{path: 'vehicleSearchTableModel>non_D_flag'},{path: 'vehicleSearchTableModel&gt;pd_flag'}], formatter : 'vehicleLocator.Formatter.Formatter.AccessoryInstall'}" width="5rem"/>
-									<Text text="{vehicleSearchTableModel>ort01}" wrapping="true" width="10rem"/>
-									<Text text="{vehicleSearchTableModel>bezei}" wrapping="true" width="12rem"/>
+										text="{parts: [{path: 'vehicleSearchTableModel>non_D_flag'},{path: 'vehicleSearchTableModel&gt;pd_flag'}], formatter : 'vehicleLocator.Formatter.Formatter.AccessoryInstall'}" width="3rem"/>
+									<Text text="{vehicleSearchTableModel>ort01}" wrapping="true" width="8rem"/>
+									<Text text="{vehicleSearchTableModel>bezei}" wrapping="true" width="8rem"/>
 								</cells>
 							</ColumnListItem>
 						</items>
