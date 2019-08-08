@@ -50,7 +50,7 @@
 				
 					<VBox class="sapUiSmallMargin">
 						<OverflowToolbar id="otb1">
-							<Label text="{i18n>CreateTradeRequest} {Trade_Id}" width="250px" class="vHlabe1clss"/>
+							<Label text="{i18n>CreateTradeRequest}-{Trade_Id}" width="250px" class="vHlabe1clss"/>
 							<ToolbarSpacer/>
 						</OverflowToolbar>
 					</VBox>
