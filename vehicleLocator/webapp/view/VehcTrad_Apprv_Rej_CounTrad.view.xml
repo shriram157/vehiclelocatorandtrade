@@ -50,7 +50,7 @@
 				
 					<VBox class="sapUiSmallMargin">
 						<OverflowToolbar id="otb1">
-							<Label text="{i18n>CreateTradeRequest}" width="250px" class="vHlabe1clss"/>
+							<Label text="{i18n>CreateTradeRequest} {Trade_Id}" width="250px" class="vHlabe1clss"/>
 							<ToolbarSpacer/>
 						</OverflowToolbar>
 					</VBox>
@@ -147,7 +147,7 @@
 									
 									
 							   	<Label text="{i18n>VehicleTrackingNumber}" id="vtnlabeid" visible="{detailView>/showVinDiplayOff}"/>
-								<Text text="{/OffredVehicle/Offered_Vtn}" id="vtnid" visible="{detailView>/showVinDiplayOff}"/>
+								<Text text="{Offered_Vtn}" id="vtnid" visible="{detailView>/showVinDiplayOff}"/>
 								
 								<!--	"{path:'TradeModel>kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'}-{TradeModel>name1}"-->
 								<Label text="{i18n>ModelYear}" id="ofrModellabl"/>
