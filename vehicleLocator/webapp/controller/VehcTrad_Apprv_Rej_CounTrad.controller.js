@@ -73,11 +73,17 @@ sap.ui.define([
 			//         local.getView().setModel(local.oViewModel, "LocalTradeModel");
 
 			/* SelectedPath	*/
+			
+			
+			
 			if (that.oSelectedItems != undefined && that.oSelectedItems != "SelectedFromTradeHistory") {
 				if (sap.ui.getCore().getModel("MyTradeRequestSelected") != undefined) {
 							this._oViewModel.setProperty("/showVinDiplayOff", false);
 					//		this.getView().byId("SimpleFormAproveTrReq").setModel(sap.ui.getCore().getModel("MyTradeRequestSelected"));
 					var StatusData = sap.ui.getCore().getModel("MyTradeRequestSelected").getData();
+
+						this._oViewModel.setProperty("/tradeId", StatusData.Trade_Id);
+					
 					var AcceptVisible = StatusData.FromRequesting;
 					var Status = StatusData.Trade_Status;
 					this.dnsStatus = StatusData.Trade_Status;
@@ -241,7 +247,7 @@ sap.ui.define([
 
 					//	this.getView().byId("SimpleFormAproveTrReq").setModel(sap.ui.getCore().getModel("MyTradeRequested"));
 					var StatusData = sap.ui.getCore().getModel("MyTradeRequested").getData();
-
+							this._oViewModel.setProperty("/tradeId", StatusData.Trade_Id);
 					if (StatusData.DNC == "Y") {
 
 						this._oViewModel.setProperty("/showOrderType", false);
@@ -518,6 +524,7 @@ sap.ui.define([
 			} else if (that.oSelectedItems != undefined && that.oSelectedItems == "SelectedFromTradeHistory") {
 				this.getView().byId("SimpleFormAproveTrReq").setModel(sap.ui.getCore().getModel("TradeRequestedHistory"));
 				var StatusData = sap.ui.getCore().getModel("TradeRequestedHistory").getData();
+							this._oViewModel.setProperty("/tradeId", StatusData.Trade_Id);
 				var Status = [];
 				Status.push(StatusData);
 
