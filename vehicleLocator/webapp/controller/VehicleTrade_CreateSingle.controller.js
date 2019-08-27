@@ -98,12 +98,12 @@ sap.ui.define([
 			}
 			
 				this.getView().setModel(oViewModel, "languageModel");
-
+		
 			var oReceivedDataString = oEvent.getParameter("arguments").SelectedTrade;
 			if (oReceivedDataString != undefined) {
 				if (oReceivedDataString != "VehicleTradeVehicle") {
 					
-					
+			
 						 
 					this.getView().byId("oOtherVehInfoid").setText("");
 					this.getView().byId("vtnlabeid").setVisible(false);
@@ -160,8 +160,7 @@ sap.ui.define([
 
 				} else if (oReceivedDataString == "VehicleTradeVehicle") {
 
-
-
+			
 
 					this.getView().byId("vtnlabeid").setVisible(true);
 					this.getView().byId("vtnid").setVisible(true);
@@ -329,7 +328,7 @@ sap.ui.define([
 		},
 
 		onSelecveh: function () {
-			debugger
+			
 
 			var that = this;
 			/*	sap.ui.core.BusyIndicator.show();     "MoyearCombo": MoyearCombo,
@@ -495,7 +494,7 @@ sap.ui.define([
 
 		},
 		onRequestVT: function () {
-			debugger;
+			
 
 			if (this.getView().byId("VT_CStradinRet").getSelectedKey() == "Yes" && this.getView().byId("FromFourth").getText() == "") {
 				var sTextFromi18n = this.getView().getModel("i18n").getResourceBundle().getText("pleaseSelectVehicle");
@@ -547,7 +546,7 @@ sap.ui.define([
 
 					success: function (oData) {
 
-						debugger;
+						
 						var Data = oData.d.results;
 					 
 
@@ -791,7 +790,7 @@ sap.ui.define([
 
 				success: function (oData) {
 
-					debugger;
+					
 					var Data = oData.d.results;
 					if (oData.d.results.length != 0) {
 						var CommentData = oData.d.results;
@@ -1161,7 +1160,7 @@ sap.ui.define([
 			}
 		},
 		onDummySummary: function () {
-			debugger
+	
 			this.getRouter().navTo("VehicleTrade_Summary");
 
 		},
