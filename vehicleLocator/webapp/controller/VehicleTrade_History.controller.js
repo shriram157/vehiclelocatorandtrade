@@ -13,7 +13,7 @@ sap.ui.define([
 	return BaseController.extend("vehicleLocator.controller.VehicleTrade_History", {
 		formatter: Formatter,
 		onInit: function () {
-			var _that = this;
+			var _that = this;   
 			this._mViewSettingsDialogs = {};
 			var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
 			var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
