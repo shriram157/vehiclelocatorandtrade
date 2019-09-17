@@ -1,0 +1,7 @@
+in package vehicletrade;
+using vehicleTrade as VT;
+
+extend entity VT.Trade_Request with {
+    @Comment : 'Transport Yes X or No'
+    AccessoryInstalled : EM.YES_NO_T;
+};
