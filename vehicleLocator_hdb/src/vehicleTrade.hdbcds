@@ -52,9 +52,6 @@ context vehicleTrade {
             @Comment : 'Offered Vehicle Proposed ETA To'
             Off_Proposed_ETA_To    : LocalDate;
             
-            @Comment : 'Transport Yes X or No'
-    		AccessoryInstalled : EM.YES_NO_T;
-
             @Comment : 'Created by'
             Created_By             : String(12);
 
