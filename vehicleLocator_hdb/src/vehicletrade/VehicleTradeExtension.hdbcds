@@ -1,7 +1,0 @@
-in package vehicletrade;
-using vehicleTrade as VT;
-
-extend entity VT.Trade_Request with {
-    @Comment : 'Accessory Installed Y or N'
-    AccessoryInstalled : String(1);
-};
