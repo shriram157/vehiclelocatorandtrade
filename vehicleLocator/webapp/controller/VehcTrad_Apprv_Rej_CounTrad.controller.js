@@ -2254,7 +2254,8 @@ sap.ui.define([
 				async: true,
 				success: function (result) {}
 			});
-			that.oTradeVehicleDescDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeVehicleDesc";
+			var query= "(Trade_Id='"+that.StatusData.Trade_Id+"',VTN='"+that.StatusData.VTN+"',SPRAS='"+that.StatusData.SPRAS+"')";
+			that.oTradeVehicleDescDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeVehicleDesc"+query;
 			/*	var oTradeVehicleDesc = that.oDataUrl + "/TradeVehicleDesc";*/
 			var ajax3 = $.ajax({
 				dataType: "json",
