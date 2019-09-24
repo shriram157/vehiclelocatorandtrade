@@ -228,7 +228,7 @@ sap.ui.define([
 
 						success: function (oData) {
 
-							debugger;
+							// debugger;
 							var Data = oData.d.results;
 							var Trade_Comment = Data.filter(function (x) {
 								return x["Trade_Id"] == Tradeid;
@@ -506,7 +506,7 @@ sap.ui.define([
 
 						success: function (oData) {
 
-							debugger;
+							// debugger;
 							var Data = oData.d.results;
 							var Trade_Comment = Data.filter(function (x) {
 								return x["Trade_Id"] == Tradeid;
@@ -757,7 +757,7 @@ sap.ui.define([
 
 					success: function (oData) {
 
-						debugger;
+						// debugger;
 						var Data = oData.d.results;
 						var Trade_Comment = Data.filter(function (x) {
 							return x["Trade_Id"] == Tradeid;
@@ -925,7 +925,7 @@ sap.ui.define([
 
 							success: function (oData) {
 
-								debugger;
+								// debugger;
 								var Data = oData.d.results;
 
 								// console.log("additional Comment", 	local.oViewModel);
@@ -985,7 +985,7 @@ sap.ui.define([
 
 		},
 		oAccept: function () {
-			debugger;
+			// debugger;
 			//  dated June 4th.  
 			sap.ui.core.BusyIndicator.show();
 			// also disable the accept button, preventing the user not to double click. 
@@ -1163,7 +1163,7 @@ sap.ui.define([
 							actions: [sap.m.MessageBox.Action.OK],
 							onClose: fnCallbackMessageBox1
 						});
-						debugger;
+						// debugger;
 
 					}
 				},
@@ -1706,7 +1706,7 @@ sap.ui.define([
 						that.oDataModel.update(UpdatedTreadeEntity, oEntry, {
 							merge: true
 						}, function (s) {
-							debugger
+							// debugger
 
 							if (dncBlockedDays != 0 && dncBlockedDays != "") {
 								that.DNCBlockoutDays();
@@ -2022,7 +2022,7 @@ sap.ui.define([
 			that.oDataModel.update(UpdatedTreadeEntity, oEntry, {
 				merge: true
 			}, function (s) {
-				debugger
+				// debugger
 
 				that.getRouter().navTo("VehicleTrade_Summary", {
 					DataClicked: "Yes"
@@ -2154,13 +2154,8 @@ sap.ui.define([
 			that.oDataModel.update(UpdatedTreadeEntity, oEntry, {
 				merge: true
 			}, function (s) {
-				debugger
+				// debugger
 
-				/*	that.TradeComment(oEntry);
-					that.TradeVehcles(oEntry);
-					that.TradeStatus(oEntry);
-					that.VehicleTrade_Summary();
-				*/
 				that.getRouter().navTo("VehicleTrade_Summary", {
 					DataClicked: "Yes"
 				});
@@ -2197,8 +2192,9 @@ sap.ui.define([
 				this.sPrefix = "";
 
 			}
+			//TradeRequest('TR047813')
 			this.nodeJsUrl = this.sPrefix;
-			that.TradeRequestoDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeRequest";
+			that.TradeRequestoDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeRequest('" + that.StatusData.Trade_Id + "')";
 			var ajax1 = $.ajax({
 				dataType: "json",
 				xhrFields: //
@@ -2213,20 +2209,16 @@ sap.ui.define([
 				async: true,
 				success: function (result) {}
 			});
-			that.TradeVehiclesDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeVehicles";
+			//(Trade_Id='TR047813',VTN='52800')
+			that.TradeVehiclesDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeVehicles(Trade_Id='" + that.StatusData.Trade_Id +
+				"',VTN='" + that.StatusData.VTN + "')";
 			/*var /zc_mmfields*/
 			var ajax2 = $.ajax({
 				dataType: "json",
 				xhrFields: //
 				{
 					withCredentials: true
-				}
-				/*,
-				      beforeSend: function (request)
-				           {
-				               request.setRequestHeader('Authorization', 'Basic ' + btoa(''));
-				           }*/
-				,
+				},
 				url: that.TradeVehiclesDataUrl,
 				async: true,
 				success: function (result) {}
@@ -2250,97 +2242,60 @@ sap.ui.define([
 			var that = this;
 			$.when(ajax1, ajax2, ajax3).done(function (TradeRequest, TradeVehicles, oTradeVehicleDesc) {
 				var Trade_Id = that.StatusData.Trade_Id;
-				var TradeRequest = TradeRequest[0].d.results;
-				TradeRequest = TradeRequest.filter(function (x) {
-					return x.Trade_Id == Trade_Id
-				});
 
-				/*	var TradeRequestModel = new sap.ui.model.json.JSONModel(TradeRequest);
-					sap.ui.getCore().setModel(TradeRequestModel, "TradeRequestModel");*/
+				var TradeRequest = TradeRequest[0].d;
+				// .results;
+				// if (!!TradeRequest) {
+				// 	TradeRequest = TradeRequest.filter(function (x) {
+				// 		return x.Trade_Id == Trade_Id
+				// 	});
+				// }
 
-				var TradeVehicles = TradeVehicles[0].d.results;
-				TradeVehicles = TradeVehicles.filter(function (x) {
-						return x["Trade_Id"] == Trade_Id
-					})
-					/*	var TradeVehiclesModel = new sap.ui.model.json.JSONModel(TradeVehicles);
-						sap.ui.getCore().setModel(TradeVehiclesModel, "TradeVehiclesModel");*/
+				var TradeVehicles = TradeVehicles[0].d;
+				// .results;
+				// if (!!TradeVehicles) {
+				// 	TradeVehicles = TradeVehicles.filter(function (x) {
+				// 		return x["Trade_Id"] == Trade_Id
+				// 	})
+				// }
 
-				var oTradeVehicleDesc = oTradeVehicleDesc[0].d.results;
-				if (!!oTradeVehicleDesc) {
-					oTradeVehicleDesc = oTradeVehicleDesc.filter(function (x) {
-						return x["Trade_Id"] == Trade_Id
-					})
+				var oTradeVehicleDesc = oTradeVehicleDesc[0].d;
+				// .results;
+				// if (!!oTradeVehicleDesc) {
+				// 	oTradeVehicleDesc = oTradeVehicleDesc.filter(function (x) {
+				// 		return x["Trade_Id"] == Trade_Id
+				// 	})
+				// }
+				// if (!!TradeRequest && !!TradeVehicles) {
+				// for (var i = 0; i < TradeRequest.length; i++) {
+				// 	for (var j = 0; j < TradeVehicles.length; j++) {
+				if (TradeRequest.Trade_Id == TradeVehicles.Trade_Id) {
+					/*TradeRequest[i].push(TradeVehicles[j]);*/
+					TradeVehicles.Requesting_Dealer = TradeRequest.Requesting_Dealer;
+					TradeVehicles.Requesting_Dealer_Name = TradeRequest.Requesting_Dealer_Name;
+					TradeVehicles.Requested_Dealer = TradeRequest.Requested_Dealer;
+					TradeVehicles.Requested_Dealer_Name = TradeRequest.Requested_Dealer_Name;
+					TradeVehicles.Requested_Vtn = TradeRequest.Requested_Vtn;
+					TradeVehicles.Offered_Vtn = TradeRequest.Offered_Vtn;
+					TradeVehicles.Req_Current_ETA_From = TradeRequest.Req_Current_ETA_From;
+					TradeVehicles.Req_Current_ETA_To = TradeRequest.Req_Current_ETA_To;
+					TradeVehicles.Req_Proposed_ETA_From = TradeRequest.Req_Proposed_ETA_From;
+					TradeVehicles.Req_Proposed_ETA_To = TradeRequest.Req_Proposed_ETA_To;
+					TradeVehicles.Off_Current_ETA_From = TradeRequest.Off_Current_ETA_From;
+					TradeVehicles.Off_Current_ETA_To = TradeRequest.Off_Current_ETA_To;
+					TradeVehicles.Off_Proposed_ETA_From = TradeRequest.Off_Proposed_ETA_From;
+					TradeVehicles.Off_Proposed_ETA_To = TradeRequest.Off_Proposed_ETA_To;
+					TradeVehicles.Created_By = TradeRequest.Created_By;
+					TradeVehicles.Created_On = TradeRequest.Created_On;
+					TradeVehicles.Changed_on = TradeRequest.Changed_on;
+					TradeVehicles.Trade_Id = TradeRequest.Trade_Id;
+					TradeVehicles.Trade_Return = TradeRequest.Trade_Return;
+					TradeVehicles.Trade_Status = TradeRequest.Trade_Status;
 				}
-				/*var oTradeVehicleDescModel = new sap.ui.model.json.JSONModel(oTradeVehicleDesc);
-				sap.ui.getCore().setModel(oTradeVehicleDescModel, "oTradeVehicleDescModel");*/
-				//	var filtered = [];
-				for (var i = 0; i < TradeRequest.length; i++) {
-					for (var j = 0; j < TradeVehicles.length; j++) {
-
-						if (TradeRequest[i].Trade_Id == TradeVehicles[j]["Trade_Id"]) {
-							/*TradeRequest[i].push(TradeVehicles[j]);*/
-
-							TradeVehicles[j].Requesting_Dealer = TradeRequest[i].Requesting_Dealer;
-							TradeVehicles[j].Requesting_Dealer_Name = TradeRequest[i].Requesting_Dealer_Name;
-							TradeVehicles[j].Requested_Dealer = TradeRequest[i].Requested_Dealer;
-							TradeVehicles[j].Requested_Dealer_Name = TradeRequest[i].Requested_Dealer_Name;
-							TradeVehicles[j].Requested_Vtn = TradeRequest[i].Requested_Vtn;
-							TradeVehicles[j].Offered_Vtn = TradeRequest[i].Offered_Vtn;
-							TradeVehicles[j].Req_Current_ETA_From = TradeRequest[i].Req_Current_ETA_From;
-							TradeVehicles[j].Req_Current_ETA_To = TradeRequest[i].Req_Current_ETA_To;
-							TradeVehicles[j].Req_Proposed_ETA_From = TradeRequest[i].Req_Proposed_ETA_From;
-							TradeVehicles[j].Req_Proposed_ETA_To = TradeRequest[i].Req_Proposed_ETA_To;
-							TradeVehicles[j].Off_Current_ETA_From = TradeRequest[i].Off_Current_ETA_From;
-							TradeVehicles[j].Off_Current_ETA_To = TradeRequest[i].Off_Current_ETA_To;
-							TradeVehicles[j].Off_Proposed_ETA_From = TradeRequest[i].Off_Proposed_ETA_From;
-							TradeVehicles[j].Off_Proposed_ETA_To = TradeRequest[i].Off_Proposed_ETA_To;
-
-							TradeVehicles[j].Created_By = TradeRequest[i].Created_By;
-							TradeVehicles[j].Created_On = TradeRequest[i].Created_On;
-							TradeVehicles[j].Changed_on = TradeRequest[i].Changed_on;
-							TradeVehicles[j].Trade_Id = TradeRequest[i].Trade_Id;
-							TradeVehicles[j].Trade_Return = TradeRequest[i].Trade_Return;
-							TradeVehicles[j].Trade_Status = TradeRequest[i].Trade_Status;
-
-							/*var realMerge = function (to, from) {
-
-    for (var n in from) {
-
-        if (typeof to[n] != 'object') {
-            to[n] = from[n];
-        } else if (typeof from[n] == 'object') {
-            to[n] = realMerge(to[n], from[n]);
-        }
-    }
-    return to;
-};
-	var merged = realMerge(TradeRequest[i],TradeVehicles[j]);*/
-
-						}
-						/*	else{
-						     	TradeRequest[i].APX = "";
-								TradeRequest[i].DNC = "";
-								TradeRequest[i].Ext_Colour = "";
-								TradeRequest[i].Int_Colour = "";
-								TradeRequest[i].Model = "";
-								TradeRequest[i].Model_Year = "";
-								TradeRequest[i].Order_Type = "";
-								TradeRequest[i].Series = "";
-								TradeRequest[i].Status = "";
-								TradeRequest[i].Suffix = "";
-								TradeRequest[i]["Trade_Id"] = "";
-								TradeRequest[i].VTN ="";	
-								
-								
-								
-								
-							}*/
-					}
-
-				}
+				// 	}
+				// }
 				var filtered = TradeVehicles;
-				//		var Spars = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language.slice(0, 1);
-				//	var Spars = "E";
+				// }
 				var Spars;
 				if (that.sCurrentLocaleD == "French") {
 					Spars = "F";
@@ -2349,337 +2304,292 @@ sap.ui.define([
 				}
 
 				var finalArray = [];
-				for (var k = 0; k < filtered.length; k++) {
-					for (var l = 0; l < oTradeVehicleDesc.length; l++) {
-						if (filtered[k].Trade_Id == oTradeVehicleDesc[l]["Trade_Id"] && filtered[k].VTN == oTradeVehicleDesc[l]["VTN"] &&
-							oTradeVehicleDesc[l].SPRAS == Spars) {
-							filtered[k].Ext_Colour_Desc = oTradeVehicleDesc[l].Ext_Colour_Desc;
-							filtered[k].Int_Colour_Desc = oTradeVehicleDesc[l].Int_Colour_Desc;
-							filtered[k].Model_Desc = oTradeVehicleDesc[l].Model_Desc;
-							filtered[k].SPRAS = oTradeVehicleDesc[l].SPRAS;
-							filtered[k].Series_Desc = oTradeVehicleDesc[l].Series_Desc;
-							filtered[k].Suffix_Desc = oTradeVehicleDesc[l].Suffix_Desc;
-
-							/*Ext_Colour_Desc: "50"
-							Int_Colour_Desc: "30"
-							Model_Desc: "40"
-							SPRAS: "1"
-							Series_Desc: "50"
-							Suffix_Desc: "30"
-							TradeVehicleDescs: {__deferred: {…}}
-							Trade_Id: "8"
-							VTN: "6" */
-
-							/*				var realMerge = function (to, from) {
-
-							    for (var n in from) {
-
-							    s    if (typeof to[n] != 'object') {
-							            to[n] = from[n];
-							        } else if (typeof from[n] == 'object') {
-							            to[n] = realMerge(to[n], from[n]);
-							        }
-							    }
-							    return to;
-							};*/
-							/*	var merged = realMerge(filtered[k],oTradeVehicleDesc[l]);
-												finalArray.push(merged);*/
-						}
-						/*else {
-					filtered[k].Ext_Colour_Desc = "";
-							filtered[k].Int_Colour_Desc = "";
-							filtered[k].Model_Desc ="";
-							filtered[k].SPRAS = "";
-							filtered[k].Series_Desc = "";
-							filtered[k].Suffix_Desc = "";	
-							
-							
-						}*/
-					}
-				}
-
-				///	
-				/*	TradeVehicles[j].=TradeRequest[i].Requesting_Dealer;
-									TradeVehicles[j].=TradeRequest[i].Requesting_Dealer_Name ;
-									TradeVehicles[j].=TradeRequest[i].Requested_Dealer;
-									TradeVehicles[j].=TradeRequest[i].Requested_Dealer_Name;
-									TradeVehicles[j]. = TradeRequest[i].Requested_Vtn;
-									TradeVehicles[j]. = TradeRequest[i].Offered_Vtn;
-								TradeVehicles[j]. = TradeRequest[i].Req_Current_ETA_From;
-								TradeVehicles[j]. = TradeRequest[i].Req_Current_ETA_To;
-								TradeVehicles[j]. = TradeRequest[i].Req_Proposed_ETA_From;
-								TradeVehicles[j]. = TradeRequest[i].Req_Proposed_ETA_To;
-									TradeVehicles[j]. = TradeRequest[i].Off_Current_ETA_From;
-										TradeVehicles[j]. = TradeRequest[i].Off_Current_ETA_To;
-											TradeVehicles[j]. = TradeRequest[i].Off_Proposed_ETA_From;
-												TradeVehicles[j]. = TradeRequest[i].Off_Proposed_ETA_To;
-												
-												TradeVehicles[j]. = TradeRequest[i].Created_By;
-											TradeVehicles[j]. = TradeRequest[i].Created_On;
-												TradeVehicles[j]. = TradeRequest[i].Changed_on;
-								TradeVehicles[j].=TradeRequest[i].Trade_Id;	*/
-
-				for (var n = 0; n < filtered.length; n++) {
-					if ("Requesting_Dealer" in filtered[n]) {
-						filtered[n].Requesting_Dealer = filtered[n].Requesting_Dealer;
-					} else {
-						filtered[n].Requesting_Dealer = "";
-					}
-
-					if ("Requesting_Dealer_Name" in filtered[n]) {
-						filtered[n].Requesting_Dealer_Name = filtered[n].Requesting_Dealer_Name;
-					} else {
-						filtered[n].Requesting_Dealer_Name = "";
-					}
-
-					if ("Requested_Dealer" in filtered[n]) {
-						filtered[n].Requested_Dealer = filtered[n].Requested_Dealer;
-					} else {
-						filtered[n].Requested_Dealer = "";
-					}
-
-					if ("Requested_Dealer_Name" in filtered[n]) {
-						filtered[n].Requested_Dealer_Name = filtered[n].Requested_Dealer_Name;
-					} else {
-						filtered[n].Requested_Dealer_Name = "";
-					}
-
-					if ("Requested_Vtn" in filtered[n]) {
-						filtered[n].Requested_Vtn = filtered[n].Requested_Vtn;
-					} else {
-						filtered[n].Requested_Vtn = "";
-					}
-
-					if ("Offered_Vtn" in filtered[n]) {
-						filtered[n].Offered_Vtn = filtered[n].Offered_Vtn;
-					} else {
-						filtered[n].Offered_Vtn = "";
-					}
-
-					if ("Req_Current_ETA_From" in filtered[n]) {
-						filtered[n].Req_Current_ETA_From = filtered[n].Req_Current_ETA_From;
-					} else {
-						filtered[n].Req_Current_ETA_From = "";
-					}
-
-					if ("Req_Current_ETA_To" in filtered[n]) {
-						filtered[n].Req_Current_ETA_To = filtered[n].Req_Current_ETA_To;
-					} else {
-						filtered[n].Req_Current_ETA_To = "";
-					}
-
-					if ("Req_Proposed_ETA_From" in filtered[n]) {
-						filtered[n].Req_Proposed_ETA_From = filtered[n].Req_Proposed_ETA_From;
-					} else {
-						filtered[n].Req_Proposed_ETA_From = "";
-					}
-
-					if ("Req_Proposed_ETA_To" in filtered[n]) {
-						filtered[n].Req_Proposed_ETA_To = filtered[n].Req_Proposed_ETA_To;
-					} else {
-						filtered[n].Req_Proposed_ETA_To = "";
-					}
-					if ("Off_Current_ETA_From" in filtered[n]) {
-						filtered[n].Off_Current_ETA_From = filtered[n].Off_Current_ETA_From;
-					} else {
-						filtered[n].Off_Current_ETA_From = "";
-					}
-
-					if ("Off_Current_ETA_To" in filtered[n]) {
-						filtered[n].Off_Current_ETA_To = filtered[n].Off_Current_ETA_To;
-					} else {
-						filtered[n].Off_Current_ETA_To = "";
-					}
-					if ("Off_Proposed_ETA_From" in filtered[n]) {
-						filtered[n].Off_Proposed_ETA_From = filtered[n].Off_Proposed_ETA_From;
-					} else {
-						filtered[n].Off_Proposed_ETA_From = "";
-					}
-					if ("Off_Proposed_ETA_To" in filtered[n]) {
-						filtered[n].Off_Proposed_ETA_To = filtered[n].Off_Proposed_ETA_To;
-					} else {
-						filtered[n].Off_Proposed_ETA_To = "";
-					}
-
-					if ("Created_By" in filtered[n]) {
-						filtered[n].Created_By = filtered[n].Created_By;
-					} else {
-						filtered[n].Created_By = "";
-					}
-					if ("Created_On" in filtered[n]) {
-						filtered[n].Created_On = filtered[n].Created_On;
-					} else {
-						filtered[n].Created_On = "";
-					}
-					if ("Changed_on" in filtered[n]) {
-						filtered[n].Changed_on = filtered[n].Changed_on;
-					} else {
-						filtered[n].Changed_on = "";
-					}
-
-					if ("Trade_Id" in filtered[n]) {
-						filtered[n].Trade_Id = filtered[n].Trade_Id;
-					} else {
-						filtered[n].Trade_Id = "";
-					}
-
-					if ("Ext_Colour_Desc" in filtered[n]) {
-						filtered[n].Ext_Colour_Desc = filtered[n].Ext_Colour_Desc;
-					} else {
-						filtered[n].Ext_Colour_Desc = "";
-					}
-
-					if ("Int_Colour_Desc" in filtered[n]) {
-						filtered[n].Int_Colour_Desc = filtered[n].Int_Colour_Desc;
-					} else {
-						filtered[n].Int_Colour_Desc = "";
-					}
-
-					if ("Model_Desc" in filtered[n]) {
-						filtered[n].Model_Desc = filtered[n].Model_Desc;
-					} else {
-						filtered[n].Model_Desc = "";
-					}
-
-					if ("SPRAS" in filtered[n]) {
-						filtered[n].SPRAS = filtered[n].SPRAS;
-					} else {
-						filtered[n].SPRAS = Spars;
-					}
-
-					if ("Series_Desc" in filtered[n]) {
-						filtered[n].Series_Desc = filtered[n].Series_Desc;
-					} else {
-						filtered[n].Series_Desc = "";
-					}
-
-					if ("Suffix_Desc" in filtered[n]) {
-						filtered[n].Suffix_Desc = filtered[n].Suffix_Desc;
-					} else {
-						filtered[n].Suffix_Desc = "";
-					}
-
-					if ("Trade_Return" in filtered[n]) {
-						filtered[n].Trade_Return = filtered[n].Trade_Return;
-					} else {
-						filtered[n].Trade_Return = "";
-					}
-
-					if ("Trade_Status" in filtered[n]) {
-						filtered[n].Trade_Status = filtered[n].Trade_Status;
-					} else {
-						filtered[n].Trade_Status = "";
-					}
+				// if (!!filtered) {
+				// for (var k = 0; k < filtered.length; k++) {
+				// if (!!oTradeVehicleDesc) {
+				// for (var l = 0; l < oTradeVehicleDesc.length; l++) {
+				if (filtered.Trade_Id == oTradeVehicleDesc.Trade_Id && filtered.VTN == oTradeVehicleDesc.VTN &&
+					oTradeVehicleDesc.SPRAS == Spars) {
+					filtered.Ext_Colour_Desc = oTradeVehicleDesc.Ext_Colour_Desc;
+					filtered.Int_Colour_Desc = oTradeVehicleDesc.Int_Colour_Desc;
+					filtered.Model_Desc = oTradeVehicleDesc.Model_Desc;
+					filtered.SPRAS = oTradeVehicleDesc.SPRAS;
+					filtered.Series_Desc = oTradeVehicleDesc.Series_Desc;
+					filtered.Suffix_Desc = oTradeVehicleDesc.Suffix_Desc;
 
 				}
+				// }
+				// }
+				// }
+				// for (var n = 0; n < filtered.length; n++) {
+					if ("Requesting_Dealer" in filtered) {
+						filtered.Requesting_Dealer = filtered.Requesting_Dealer;
+					} else {
+						filtered.Requesting_Dealer = "";
+					}
+
+					if ("Requesting_Dealer_Name" in filtered) {
+						filtered.Requesting_Dealer_Name = filtered.Requesting_Dealer_Name;
+					} else {
+						filtered.Requesting_Dealer_Name = "";
+					}
+
+					if ("Requested_Dealer" in filtered) {
+						filtered.Requested_Dealer = filtered.Requested_Dealer;
+					} else {
+						filtered.Requested_Dealer = "";
+					}
+
+					if ("Requested_Dealer_Name" in filtered) {
+						filtered.Requested_Dealer_Name = filtered.Requested_Dealer_Name;
+					} else {
+						filtered.Requested_Dealer_Name = "";
+					}
+
+					if ("Requested_Vtn" in filtered) {
+						filtered.Requested_Vtn = filtered.Requested_Vtn;
+					} else {
+						filtered.Requested_Vtn = "";
+					}
+
+					if ("Offered_Vtn" in filtered) {
+						filtered.Offered_Vtn = filtered.Offered_Vtn;
+					} else {
+						filtered.Offered_Vtn = "";
+					}
+
+					if ("Req_Current_ETA_From" in filtered) {
+						filtered.Req_Current_ETA_From = filtered.Req_Current_ETA_From;
+					} else {
+						filtered.Req_Current_ETA_From = "";
+					}
+
+					if ("Req_Current_ETA_To" in filtered) {
+						filtered.Req_Current_ETA_To = filtered.Req_Current_ETA_To;
+					} else {
+						filtered.Req_Current_ETA_To = "";
+					}
+
+					if ("Req_Proposed_ETA_From" in filtered) {
+						filtered.Req_Proposed_ETA_From = filtered.Req_Proposed_ETA_From;
+					} else {
+						filtered.Req_Proposed_ETA_From = "";
+					}
+
+					if ("Req_Proposed_ETA_To" in filtered) {
+						filtered.Req_Proposed_ETA_To = filtered.Req_Proposed_ETA_To;
+					} else {
+						filtered.Req_Proposed_ETA_To = "";
+					}
+					if ("Off_Current_ETA_From" in filtered) {
+						filtered.Off_Current_ETA_From = filtered.Off_Current_ETA_From;
+					} else {
+						filtered.Off_Current_ETA_From = "";
+					}
+
+					if ("Off_Current_ETA_To" in filtered) {
+						filtered.Off_Current_ETA_To = filtered.Off_Current_ETA_To;
+					} else {
+						filtered.Off_Current_ETA_To = "";
+					}
+					if ("Off_Proposed_ETA_From" in filtered) {
+						filtered.Off_Proposed_ETA_From = filtered.Off_Proposed_ETA_From;
+					} else {
+						filtered.Off_Proposed_ETA_From = "";
+					}
+					if ("Off_Proposed_ETA_To" in filtered) {
+						filtered.Off_Proposed_ETA_To = filtered.Off_Proposed_ETA_To;
+					} else {
+						filtered.Off_Proposed_ETA_To = "";
+					}
+
+					if ("Created_By" in filtered) {
+						filtered.Created_By = filtered.Created_By;
+					} else {
+						filtered.Created_By = "";
+					}
+					if ("Created_On" in filtered) {
+						filtered.Created_On = filtered.Created_On;
+					} else {
+						filtered.Created_On = "";
+					}
+					if ("Changed_on" in filtered) {
+						filtered.Changed_on = filtered.Changed_on;
+					} else {
+						filtered.Changed_on = "";
+					}
+
+					if ("Trade_Id" in filtered) {
+						filtered.Trade_Id = filtered.Trade_Id;
+					} else {
+						filtered.Trade_Id = "";
+					}
+
+					if ("Ext_Colour_Desc" in filtered) {
+						filtered.Ext_Colour_Desc = filtered.Ext_Colour_Desc;
+					} else {
+						filtered.Ext_Colour_Desc = "";
+					}
+
+					if ("Int_Colour_Desc" in filtered) {
+						filtered.Int_Colour_Desc = filtered.Int_Colour_Desc;
+					} else {
+						filtered.Int_Colour_Desc = "";
+					}
+
+					if ("Model_Desc" in filtered) {
+						filtered.Model_Desc = filtered.Model_Desc;
+					} else {
+						filtered.Model_Desc = "";
+					}
+
+					if ("SPRAS" in filtered) {
+						filtered.SPRAS = filtered.SPRAS;
+					} else {
+						filtered.SPRAS = Spars;
+					}
+
+					if ("Series_Desc" in filtered) {
+						filtered.Series_Desc = filtered.Series_Desc;
+					} else {
+						filtered.Series_Desc = "";
+					}
+
+					if ("Suffix_Desc" in filtered) {
+						filtered.Suffix_Desc = filtered.Suffix_Desc;
+					} else {
+						filtered.Suffix_Desc = "";
+					}
+
+					if ("Trade_Return" in filtered) {
+						filtered.Trade_Return = filtered.Trade_Return;
+					} else {
+						filtered.Trade_Return = "";
+					}
+
+					if ("Trade_Status" in filtered) {
+						filtered.Trade_Status = filtered.Trade_Status;
+					} else {
+						filtered.Trade_Status = "";
+					}
+
+				// }
 
 				var vtn = that.StatusData.Requested_Vtn;
 
-				var Requested = filtered.filter(function (x) {
-					return x.VTN == vtn;
-				});
-				var Requested = Requested[0];
-				var Offered = filtered.filter(function (x) {
-					return x.VTN != vtn;
-				});
-				if (Offered.length != 0 && Offered["0"].Trade_Return != "N") {
-					Offered = Offered[0];
-					var i18n = sap.ui.getCore().getModel("i18n").getResourceBundle();
-					var OtherVehicleInformation_text = i18n.getText("OfferVehicleInformation");
-					that.getView().byId("Offerevehid").setText(OtherVehicleInformation_text);
-
-					that.getView().byId("oRequesteddealer").setVisible(true);
-					that.getView().byId("offeredDealer").setVisible(true);
-					that.getView().byId("ofrModellabl").setVisible(true);
-					that.getView().byId("ofrserieslabl").setVisible(true);
-					that.getView().byId("ofrmodllabl").setVisible(true);
-					that.getView().byId("ofrsuffixlabl").setVisible(true);
-					that.getView().byId("ofrapxlabl").setVisible(true);
-					that.getView().byId("ofrextcolorlabl").setVisible(true);
-					that.getView().byId("ofrstatuslabl").setVisible(true);
-					that.getView().byId("ofrordrtypelabl").setVisible(true);
-					that.getView().byId("cetalaid").setVisible(true);
-					// that.getView().byId("fromqid").setVisible(true);
-					/*	that.getView().byId("fromlbid").setVisible(true);*/
-					// that.getView().byId("idlto").setVisible(true);
-					// that.getView().byId("tobid").setVisible(true);
-					// that.getView().byId("fmlbid").setVisible(true);
-
-					that.getView().byId("oRequesteddealer").setVisible(true);
-					that.getView().byId("ofrmodelyeartext").setVisible(true);
-					that.getView().byId("ofrseriestxt").setVisible(true);
-					that.getView().byId("ofrmodltxt").setVisible(true);
-					that.getView().byId("ofrsuffixstxt").setVisible(true);
-					that.getView().byId("ofrapxtxt").setVisible(true);
-					that.getView().byId("ofrexttxt").setVisible(true);
-					that.getView().byId("ofrstatustxt").setVisible(true);
-					that.getView().byId("ofrordtypetxt").setVisible(true);
-					that.getView().byId("ctqtid").setVisible(true);
-					that.getView().byId("txlab").setVisible(true);
-					that.getView().byId("prolabid").setVisible(true);
-					that.getView().byId("prptid").setVisible(true);
-					that.getView().byId("otxlabel").setVisible(true);
-
+				if (filtered.VTN == vtn) {
+					var Requested = filtered;
 				} else {
-					Offered = {};
-					that.getView().byId("Offerevehid").setText("");
-					that.getView().byId("offeredDealer").setVisible(false);
-					that.getView().byId("oRequesteddealer").setText("");
-					that.getView().byId("oRequesteddealer").setVisible(false);
+					var Offered = filtered;
+				}
+				// var Requested = Requested[0];
+				// var Requested= filtered.filter(function (x) {
+				// 	return x.VTN == vtn;
+				// });
 
-					that.getView().byId("ofrModellabl").setVisible(false);
-					that.getView().byId("ofrmodelyeartext").setText("");
-					that.getView().byId("ofrmodelyeartext").setVisible(false);
+				// var Offered = filtered.filter(function (x) {
+				// 	return x.VTN != vtn;
+				// });
+				if (!!Offered) {
+					if (Offered.length != 0 && Offered.Trade_Return != "N") {
+						Offered = Offered;
+						var i18n = sap.ui.getCore().getModel("i18n").getResourceBundle();
+						var OtherVehicleInformation_text = i18n.getText("OfferVehicleInformation");
+						that.getView().byId("Offerevehid").setText(OtherVehicleInformation_text);
 
-					that.getView().byId("ofrserieslabl").setVisible(false);
-					that.getView().byId("ofrseriestxt").setText("");
-					that.getView().byId("ofrseriestxt").setVisible(false);
+						that.getView().byId("oRequesteddealer").setVisible(true);
+						that.getView().byId("offeredDealer").setVisible(true);
+						that.getView().byId("ofrModellabl").setVisible(true);
+						that.getView().byId("ofrserieslabl").setVisible(true);
+						that.getView().byId("ofrmodllabl").setVisible(true);
+						that.getView().byId("ofrsuffixlabl").setVisible(true);
+						that.getView().byId("ofrapxlabl").setVisible(true);
+						that.getView().byId("ofrextcolorlabl").setVisible(true);
+						that.getView().byId("ofrstatuslabl").setVisible(true);
+						that.getView().byId("ofrordrtypelabl").setVisible(true);
+						that.getView().byId("cetalaid").setVisible(true);
+						// that.getView().byId("fromqid").setVisible(true);
+						/*	that.getView().byId("fromlbid").setVisible(true);*/
+						// that.getView().byId("idlto").setVisible(true);
+						// that.getView().byId("tobid").setVisible(true);
+						// that.getView().byId("fmlbid").setVisible(true);
 
-					that.getView().byId("ofrmodllabl").setVisible(false);
-					that.getView().byId("ofrmodltxt").setText("");
-					that.getView().byId("ofrmodltxt").setVisible(false);
+						that.getView().byId("oRequesteddealer").setVisible(true);
+						that.getView().byId("ofrmodelyeartext").setVisible(true);
+						that.getView().byId("ofrseriestxt").setVisible(true);
+						that.getView().byId("ofrmodltxt").setVisible(true);
+						that.getView().byId("ofrsuffixstxt").setVisible(true);
+						that.getView().byId("ofrapxtxt").setVisible(true);
+						that.getView().byId("ofrexttxt").setVisible(true);
+						that.getView().byId("ofrstatustxt").setVisible(true);
+						that.getView().byId("ofrordtypetxt").setVisible(true);
+						that.getView().byId("ctqtid").setVisible(true);
+						that.getView().byId("txlab").setVisible(true);
+						that.getView().byId("prolabid").setVisible(true);
+						that.getView().byId("prptid").setVisible(true);
+						that.getView().byId("otxlabel").setVisible(true);
 
-					that.getView().byId("ofrsuffixlabl").setVisible(false);
-					that.getView().byId("ofrsuffixstxt").setText("");
-					that.getView().byId("ofrsuffixstxt").setVisible(false);
+					} else {
+						Offered = {};
+						that.getView().byId("Offerevehid").setText("");
+						that.getView().byId("offeredDealer").setVisible(false);
+						that.getView().byId("oRequesteddealer").setText("");
+						that.getView().byId("oRequesteddealer").setVisible(false);
 
-					that.getView().byId("ofrapxlabl").setVisible(false);
-					that.getView().byId("ofrapxtxt").setText("");
-					that.getView().byId("ofrapxtxt").setVisible(false);
+						that.getView().byId("ofrModellabl").setVisible(false);
+						that.getView().byId("ofrmodelyeartext").setText("");
+						that.getView().byId("ofrmodelyeartext").setVisible(false);
 
-					that.getView().byId("ofrextcolorlabl").setVisible(false);
-					that.getView().byId("ofrexttxt").setText("");
-					that.getView().byId("ofrexttxt").setVisible(false);
+						that.getView().byId("ofrserieslabl").setVisible(false);
+						that.getView().byId("ofrseriestxt").setText("");
+						that.getView().byId("ofrseriestxt").setVisible(false);
 
-					that.getView().byId("ofrstatuslabl").setVisible(false);
-					that.getView().byId("ofrstatustxt").setText("");
-					that.getView().byId("ofrstatustxt").setVisible(false);
+						that.getView().byId("ofrmodllabl").setVisible(false);
+						that.getView().byId("ofrmodltxt").setText("");
+						that.getView().byId("ofrmodltxt").setVisible(false);
 
-					that.getView().byId("ofrordrtypelabl").setVisible(false);
-					that.getView().byId("ofrordtypetxt").setText("");
-					that.getView().byId("ofrordtypetxt").setVisible(false);
+						that.getView().byId("ofrsuffixlabl").setVisible(false);
+						that.getView().byId("ofrsuffixstxt").setText("");
+						that.getView().byId("ofrsuffixstxt").setVisible(false);
 
-					that.getView().byId("cetalaid").setVisible(false);
-					that.getView().byId("ctqtid").setText("");
-					that.getView().byId("ctqtid").setVisible(false);
+						that.getView().byId("ofrapxlabl").setVisible(false);
+						that.getView().byId("ofrapxtxt").setText("");
+						that.getView().byId("ofrapxtxt").setVisible(false);
 
-					// that.getView().byId("fromqid").setVisible(false);
-					that.getView().byId("txlab").setText("");
-					that.getView().byId("txlab").setVisible(false);
+						that.getView().byId("ofrextcolorlabl").setVisible(false);
+						that.getView().byId("ofrexttxt").setText("");
+						that.getView().byId("ofrexttxt").setVisible(false);
 
-					that.getView().byId("prolabid").setVisible(false);
+						that.getView().byId("ofrstatuslabl").setVisible(false);
+						that.getView().byId("ofrstatustxt").setText("");
+						that.getView().byId("ofrstatustxt").setVisible(false);
 
-					// that.getView().byId("tobid").setVisible(false);
-					that.getView().byId("prptid").setText("");
-					that.getView().byId("prptid").setVisible(false);
+						that.getView().byId("ofrordrtypelabl").setVisible(false);
+						that.getView().byId("ofrordtypetxt").setText("");
+						that.getView().byId("ofrordtypetxt").setVisible(false);
 
-					// that.getView().byId("fmlbid").setVisible(false);
-					/*	that.getView().byId("fromlbid").setVisible(false);*/
-					that.getView().byId("otxlabel").setText("");
-					that.getView().byId("otxlabel").setVisible(false);
+						that.getView().byId("cetalaid").setVisible(false);
+						that.getView().byId("ctqtid").setText("");
+						that.getView().byId("ctqtid").setVisible(false);
 
-					// that.getView().byId("idlto").setVisible(false);
+						// that.getView().byId("fromqid").setVisible(false);
+						that.getView().byId("txlab").setText("");
+						that.getView().byId("txlab").setVisible(false);
 
+						that.getView().byId("prolabid").setVisible(false);
+
+						// that.getView().byId("tobid").setVisible(false);
+						that.getView().byId("prptid").setText("");
+						that.getView().byId("prptid").setVisible(false);
+
+						// that.getView().byId("fmlbid").setVisible(false);
+						/*	that.getView().byId("fromlbid").setVisible(false);*/
+						that.getView().byId("otxlabel").setText("");
+						that.getView().byId("otxlabel").setVisible(false);
+
+						// that.getView().byId("idlto").setVisible(false);
+
+					}
 				}
 
 				var oModel = new sap.ui.model.json.JSONModel(Requested);
@@ -2689,7 +2599,7 @@ sap.ui.define([
 				//	that.getView().byId("SimpleFormAproveTrReq").getModel("ApprovRej").setProperty("/OffredVehicle", Offered);
 				that.getView().byId("SimpleFormAproveTrReq").bindElement("/");
 				that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
-				//	sap.ui.getCore().setModel(oModel, "oVehicleTrade_Summary");
+				//	sap.ui.getCore().setModel(oModel, "oVehicleTrade_Summary");();
 
 				sap.ui.core.BusyIndicator.hide();
 			});
