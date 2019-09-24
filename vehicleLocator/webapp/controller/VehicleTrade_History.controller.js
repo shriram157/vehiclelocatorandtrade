@@ -8,7 +8,7 @@ sap.ui.define([
 	"sap/ui/Device",
 	"sap/ui/model/Sorter",
 	"sap/ui/model/Filter"
-], function (BaseController, JSONModel, ResourceModel, MessageBox, History, Formatter, Device, Sorter,Filter) {
+], function (BaseController, JSONModel, ResourceModel, MessageBox, History, Formatter, Device, Sorter, Filter) {
 	"use strict";
 	var TableData;
 	return BaseController.extend("vehicleLocator.controller.VehicleTrade_History", {
@@ -175,7 +175,7 @@ sap.ui.define([
 				if (TableData[i].Requesting_Dealer == Dealer_No) {
 					TableData[i].RequestingDealerVisible = true;
 				} else {
-					TableData[i].RequestingDealerVisible = false;
+					TableData[i].RequestingDealerVisible1 = false;
 				}
 
 				var results = TableData[i].TradeVehicles.results;
@@ -252,6 +252,7 @@ sap.ui.define([
 			}
 			var model = new sap.ui.model.json.JSONModel(TableData);
 			that.getView().byId("tableVTH").setModel(model);
+			that.getView().byId("tableVTH1").setModel(model);
 
 		},
 		ExporttoExcellsheet: function () {
@@ -543,6 +544,22 @@ sap.ui.define([
 			// apply the selected sort and group settings
 			oBinding.sort(aSorters);
 			oBinding.refresh();
+
+			var oTable = this.byId("tableVTH1"),
+				mParams = oEvent.getParameters(),
+				oBinding = oTable.getBinding("items"),
+				sPath,
+				bDescending,
+				aSorters = [];
+
+			sPath = mParams.sortItem.getKey();
+			bDescending = mParams.sortDescending;
+			aSorters.push(new Sorter(sPath, bDescending));
+
+			// apply the selected sort and group settings
+			oBinding.sort(aSorters);
+			oBinding.refresh();
+
 		},
 
 		onBusinessPartnerSelected: function (oEvent) {
@@ -563,9 +580,8 @@ sap.ui.define([
 		},
 		fnApplyFiltersAndOrderingForVehicleTrade: function (oEvent) {
 			var aFilters = [];
-	
+
 			// based on the status that is presnet in the screen apply one more filter. 
-		
 
 			if (this.sSearchQuery) {
 				var oFilter = new Filter([
@@ -584,8 +600,6 @@ sap.ui.define([
 					new Filter("APX", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 				], false);
 
-				
-
 				var aFilters = new sap.ui.model.Filter([oFilter], true);
 
 				// aFilters.push(oFilter);
@@ -596,7 +610,11 @@ sap.ui.define([
 			this.byId("tableVTH")
 				.getBinding("items")
 				.filter(aFilters);
-				
+
+			this.byId("tableVTH1")
+				.getBinding("items")
+				.filter(aFilters);
+
 		}
 
 	});
