@@ -56,7 +56,7 @@
 							<ToolbarSpacer/>
 							<Button id="openMenVTH" class="VLbtn3" text="{i18n>ExporttoExcel}" type="Accept" press="ExporttoExcellsheet" width="auto"/>
 						</OverflowToolbar>
-						<VBox class="sapUiSmallMargin">
+							<ScrollContainer height='380px' width="100%" vertical='true'>
 							<!--	<Table id="tableVTH" width="auto" class="sapUiResponsiveMargin" items="{/}" growingThreshold="150">
 								<columns>
 									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
@@ -107,7 +107,7 @@
 									</ColumnListItem>
 								</items>
 							</Table>-->
-							<Table id="tableVTH" items="{ path: '/', sorter: { path: 'Changed_on', descending: true } }" class="sapUiContentPadding"
+							<Table id="tableVTH" items="{ path: '/', sorter: { path: 'Changed_on', descending: true } }" class="sapUiContentPadding headerFixClass"
 								ariaLabelledBy="title">
 								<headerToolbar>
 									<Toolbar>
@@ -193,7 +193,7 @@
 										<cells>
 											<Link id="tradeHId" text="{Trade_Id}" class="link" subtle="true" press="oTradeHistoryLinkPress" wrapping="false"/>
 											<!--<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="false"/>-->
-											<Text text="{= ${RequestingDealerVisible} === true ? ${i18n>To}:${i18n>From} }" wrapping="false"/>
+											<Text text="{i18n>To}" wrapping="false"/>
 											<Text
 												text="{= ${RequestingDealerVisible} === true ?${Requested_Dealer}:${Requesting_Dealer}}-{= ${RequestingDealerVisible} === true ?${Requested_Dealer_Name}:${Requesting_Dealer_Name}}"/>
 											<Text text="{Requested_Vtn}" wrapping="false"/>
@@ -206,7 +206,9 @@
 									</ColumnListItem>
 								</items>
 							</Table>
-							<Table id="tableVTH1" items="{ path: '/', sorter: { path: 'Changed_on', descending: true } }" class="sapUiContentPadding"
+						</ScrollContainer>
+							<ScrollContainer height='380px' width="100%" vertical='true'>
+							<Table id="tableVTH1" items="{ path: '/', sorter: { path: 'Changed_on', descending: true } }" class="sapUiContentPadding headerFixClass"
 								ariaLabelledBy="title">
 								<headerToolbar>
 									<!--<Toolbar>-->
@@ -292,7 +294,7 @@
 										<cells>
 											<Link id="tradeHId1" text="{Trade_Id}" class="link" subtle="true" press="oTradeHistoryLinkPress" wrapping="false"/>
 											<!--<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="false"/>-->
-											<Text text="{= ${RequestingDealerVisible1} === true ? ${i18n>To}:${i18n>From} }" wrapping="false"/>
+											<Text text="{i18n>From}" wrapping="false"/>
 											<Text
 												text="{= ${RequestingDealerVisible} === true ?${Requested_Dealer}:${Requesting_Dealer}}-{= ${RequestingDealerVisible} === true ?${Requested_Dealer_Name}:${Requesting_Dealer_Name}}"/>
 											<Text text="{Requested_Vtn}" wrapping="false"/>
@@ -305,7 +307,7 @@
 									</ColumnListItem>
 								</items>
 							</Table>
-						</VBox>
+					</ScrollContainer>
 					</VBox>
 				</content>
 			</Page>

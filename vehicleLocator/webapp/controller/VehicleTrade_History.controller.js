@@ -175,7 +175,7 @@ sap.ui.define([
 				if (TableData[i].Requesting_Dealer == Dealer_No) {
 					TableData[i].RequestingDealerVisible = true;
 				} else {
-					TableData[i].RequestingDealerVisible1 = false;
+					TableData[i].RequestingDealerVisible = false;
 				}
 
 				var results = TableData[i].TradeVehicles.results;
@@ -250,9 +250,16 @@ sap.ui.define([
 					}
 				}
 			}
-			var model = new sap.ui.model.json.JSONModel(TableData);
+			var filtered = TableData.filter(function (item) {
+				return item.RequestingDealerVisible == true;
+			});
+			var filtered1 = TableData.filter(function (item) {
+				return item.RequestingDealerVisible == false;
+			});
+			var model = new sap.ui.model.json.JSONModel(filtered);
+			var model1 = new sap.ui.model.json.JSONModel(filtered1);
 			that.getView().byId("tableVTH").setModel(model);
-			that.getView().byId("tableVTH1").setModel(model);
+			that.getView().byId("tableVTH1").setModel(model1);
 
 		},
 		ExporttoExcellsheet: function () {
@@ -544,22 +551,6 @@ sap.ui.define([
 			// apply the selected sort and group settings
 			oBinding.sort(aSorters);
 			oBinding.refresh();
-
-			var oTable = this.byId("tableVTH1"),
-				mParams = oEvent.getParameters(),
-				oBinding = oTable.getBinding("items"),
-				sPath,
-				bDescending,
-				aSorters = [];
-
-			sPath = mParams.sortItem.getKey();
-			bDescending = mParams.sortDescending;
-			aSorters.push(new Sorter(sPath, bDescending));
-
-			// apply the selected sort and group settings
-			oBinding.sort(aSorters);
-			oBinding.refresh();
-
 		},
 
 		onBusinessPartnerSelected: function (oEvent) {
@@ -608,10 +599,6 @@ sap.ui.define([
 			// based on the status field			
 
 			this.byId("tableVTH")
-				.getBinding("items")
-				.filter(aFilters);
-
-			this.byId("tableVTH1")
 				.getBinding("items")
 				.filter(aFilters);
 
