@@ -2476,11 +2476,12 @@ sap.ui.define([
 				// }
 
 				var vtn = that.StatusData.Requested_Vtn;
-
+				var Requested={};
+				var Offered={};
 				if (filtered.VTN == vtn) {
-					var Requested = filtered;
+					Requested = filtered;
 				} else {
-					var Offered = filtered;
+					Offered = filtered;
 				}
 				// var Requested = Requested[0];
 				// var Requested= filtered.filter(function (x) {
