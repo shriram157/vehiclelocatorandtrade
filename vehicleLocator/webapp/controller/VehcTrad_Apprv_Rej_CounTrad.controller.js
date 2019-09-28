@@ -1,4 +1,4 @@
-var local,sCurrentLocaleD;
+var local, sCurrentLocaleD;
 sap.ui.define([
 	"vehicleLocator/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
@@ -63,7 +63,7 @@ sap.ui.define([
 			}
 
 			var that = this;
-			local =this;
+			local = this;
 
 			// local.oViewModel = new sap.ui.model.json.JSONModel({
 			//             busy: false,
@@ -2331,19 +2331,31 @@ sap.ui.define([
 					// 		return x.Trade_Id == Trade_Id
 					// 	});
 					// }
-					if(!TradeVehiclesO[0]) TradeVehiclesO[0].d={};
-					var Vehicles = [TradeVehiclesO[0].d, TradeVehiclesR[0].d];
-					var TradeVehicles = Vehicles.filter(function (x) {
-						return x["Trade_Id"] == Trade_Id;
-					})
-
-					if(!TradeVehicleDescO[0]) TradeVehicleDescO[0].d={};
-					var VehicleDesc = [TradeVehicleDescO[0].d, TradeVehicleDescR[0].d];
-					var oTradeVehicleDesc = VehicleDesc.filter(function (x) {
+					if (TradeVehiclesO[0]) {
+						var Vehicles = [TradeVehiclesO[0].d, TradeVehiclesR[0].d];
+						var TradeVehicles = Vehicles.filter(function (x) {
 							return x["Trade_Id"] == Trade_Id;
-						})
-						// var OfferedVehicleDesc = TradeVehicleDescO[0].d;
-						// var RequestedVehicleDesc=TradeVehicleDescR[0].d;
+						});
+					} else {
+						var Vehicles = [TradeVehiclesR[0].d];
+						var TradeVehicles = Vehicles.filter(function (x) {
+							return x["Trade_Id"] == Trade_Id;
+						});
+					}
+
+					if (TradeVehicleDescO[0]) {
+						var VehicleDesc = [TradeVehicleDescO[0].d, TradeVehicleDescR[0].d];
+						var oTradeVehicleDesc = VehicleDesc.filter(function (x) {
+							return x["Trade_Id"] == Trade_Id;
+						});
+					} else {
+						var VehicleDesc = [TradeVehicleDescR[0].d];
+						var oTradeVehicleDesc = VehicleDesc.filter(function (x) {
+							return x["Trade_Id"] == Trade_Id;
+						});
+					}
+					// var OfferedVehicleDesc = TradeVehicleDescO[0].d;
+					// var RequestedVehicleDesc=TradeVehicleDescR[0].d;
 
 					console.log("Vehicles", Vehicles);
 					console.log("VehicleDesc", VehicleDesc);
