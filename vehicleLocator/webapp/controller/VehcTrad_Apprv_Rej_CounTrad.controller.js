@@ -2331,13 +2331,13 @@ sap.ui.define([
 					// 		return x.Trade_Id == Trade_Id
 					// 	});
 					// }
-					if(!TradeVehiclesO[0].d) TradeVehiclesO[0].d={};
+					if(!TradeVehiclesO[0]) TradeVehiclesO[0].d={};
 					var Vehicles = [TradeVehiclesO[0].d, TradeVehiclesR[0].d];
 					var TradeVehicles = Vehicles.filter(function (x) {
 						return x["Trade_Id"] == Trade_Id;
 					})
 
-					if(!TradeVehicleDescO[0].d) TradeVehicleDescO[0].d={};
+					if(!TradeVehicleDescO[0]) TradeVehicleDescO[0].d={};
 					var VehicleDesc = [TradeVehicleDescO[0].d, TradeVehicleDescR[0].d];
 					var oTradeVehicleDesc = VehicleDesc.filter(function (x) {
 							return x["Trade_Id"] == Trade_Id;
