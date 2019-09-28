@@ -2221,6 +2221,9 @@ sap.ui.define([
 				TradeRequest = TradeRequest.d;
 				var that = this;
 				that.StatusData = TradeRequest.StatusData;
+				if(!that.StatusData.SPRAS){
+					that.StatusData.SPRAS = "E";
+				}
 				that.nodeJsUrl = TradeRequest.nodeJsUrl;
 				if (TradeRequest.Trade_Return == "Y") {
 					that.TradeVehiclesDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeVehicles(Trade_Id='" + TradeRequest.Trade_Id +
