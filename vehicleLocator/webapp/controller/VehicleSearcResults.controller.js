@@ -1108,7 +1108,7 @@ sap.ui.define([
 
 				if (this.sCurrentLocale == 'EN') {
 
-					var newItem = new sap.ui.core.Item({
+					var newItem2 = new sap.ui.core.Item({
 						key: "2",
 						text: "Pipeline - Routable"
 					});
@@ -1118,12 +1118,12 @@ sap.ui.define([
 					this.getView().byId("VLRStatus").setSelectedKey("2");
 
 				} else {
-					var newItem = new sap.ui.core.Item({
+					var newItem2 = new sap.ui.core.Item({
 						key: "2",
 						text: "Chaîne d'approvisionnement – acheminable"
 					});
 
-					this.getView().byId("VLRStatus").insertItem(newItem);
+					this.getView().byId("VLRStatus").insertItem(newItem2);
 					this.getView().byId("VLRStatus").setSelectedItem("Chaîne d'approvisionnement – acheminable");
 					this.getView().byId("VLRStatus").setSelectedKey("2");
 
@@ -1133,7 +1133,7 @@ sap.ui.define([
 			if (Statusind1.length == 0) {
 				if (this.sCurrentLocale == 'EN') {
 
-					var newItem = new sap.ui.core.Item({
+					var newItem3 = new sap.ui.core.Item({
 						key: "1",
 						text: "Stock-Non-Routable"
 					});
@@ -1141,11 +1141,11 @@ sap.ui.define([
 
 				} else {
 
-					var newItem = new sap.ui.core.Item({
+					var newItem3 = new sap.ui.core.Item({
 						key: "1",
 						text: "Stock-non-acheminable"
 					});
-					this.getView().byId("VLRStatus").insertItem(newItem);
+					this.getView().byId("VLRStatus").insertItem(newItem3);
 
 				}
 			}
