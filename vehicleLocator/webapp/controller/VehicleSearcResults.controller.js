@@ -883,9 +883,7 @@ sap.ui.define([
 						SPRAS: "English"
 
 					});
-
 				}
-
 				this.getView().setModel(oViewModel, "languageModel");
 
 				var modelSearch = new sap.ui.model.json.JSONModel(Status);
@@ -952,6 +950,7 @@ sap.ui.define([
 				// Model.setSizeLimit(1000);
 				this.getView().byId("VLRColor").setModel(ModelColor);
 				// if (Color.length != 0) {
+				
 				if (this.getView().byId("VLRColor").getItems().filter(function (x) {
 						return x.mProperties.key == "all"
 					}).length == 0) {
@@ -966,29 +965,15 @@ sap.ui.define([
 						this.getView().byId("VLRColor").setSelectedItem("ALL");
 					} else {
 
-						var newItem = new sap.ui.core.Item({
+						var newItem1 = new sap.ui.core.Item({
 							key: "all",
 							text: "TOUS"
 						});
-						this.getView().byId("VLRColor").insertItem(newItem);
+						this.getView().byId("VLRColor").insertItem(newItem1);
 						this.getView().byId("VLRColor").setSelectedKey("all");
 						this.getView().byId("VLRColor").setSelectedItem("TOUS");
 
 					}
-
-					// }
-					// } else {
-					// 	if (this.getView().byId("VLRColor").getItems().filter(function (x) {
-					// 			return x.mProperties.key == "all"
-					// 		}).length == 0) {
-					// 		var newItem = new sap.ui.core.Item({
-					// 			key: "all",
-					// 			text: "ALL"
-					// 		});
-					// 		this.getView().byId("VLRColor").insertItem(newItem);
-					// 		this.getView().byId("VLRColor").setSelectedKey("all");
-					// 		this.getView().byId("VLRColor").setSelectedItem("ALL");
-					// 	}
 				}
 			}
 			// lets reset the model to initial before setting - the controller is not setting the selected value correctly without this. 
@@ -1000,37 +985,23 @@ sap.ui.define([
 			// Model.setSizeLimit(1000);
 			this.getView().byId("VLRSuffix").setModel(ModelSuffix);
 
-			// this.getView().byId("VLRSuffix").setSelectedItem(DefaultSuffix);
-			// for (var s = 0; s < SuffixData.length; s++) {
-			// 	if (DefaultSuffix == SuffixData[s].zzsuffix + "-" + SuffixData[s].suffix_desc_en + "/" + SuffixData[s].mrktg_int_desc_en) {
-			// 		this.getView().byId("VLRSuffix").setSelectedItem(SuffixData[s].zzsuffix + "-" + SuffixData[s].suffix_desc_en + "/" + SuffixData[s]
-			// 			.mrktg_int_desc_en);
-
-			// 	}
-			// }
-
 			if (SuffixData.length != 0) {
-
 				if (this.getView().byId("VLRSuffix").getItems().filter(function (x) {
 						return x.mProperties.key == "all"
 					}).length == 0) {
-
 					if (this.sCurrentLocale == 'EN') {
-						var newItem = new sap.ui.core.Item({
+						var newItem0 = new sap.ui.core.Item({
 							key: "all",
 							text: "ALL"
 						});
-						this.getView().byId("VLRSuffix").insertItem(newItem);
+						this.getView().byId("VLRSuffix").insertItem(newItem0);
 					} else {
-
 						var newItem2 = new sap.ui.core.Item({
 							key: "all",
 							text: "TOUS"
 						});
 						this.getView().byId("VLRSuffix").insertItem(newItem2);
-
 					}
-
 				}
 			}
 
@@ -1114,12 +1085,12 @@ sap.ui.define([
 					this.getView().byId("VLRStatus").setSelectedKey("2");
 
 				} else {
-					var newItem2 = new sap.ui.core.Item({
+					var newItem3 = new sap.ui.core.Item({
 						key: "2",
 						text: "Chaîne d'approvisionnement – acheminable"
 					});
 
-					this.getView().byId("VLRStatus").insertItem(newItem2);
+					this.getView().byId("VLRStatus").insertItem(newItem3);
 					this.getView().byId("VLRStatus").setSelectedItem("Chaîne d'approvisionnement – acheminable");
 					this.getView().byId("VLRStatus").setSelectedKey("2");
 
@@ -1133,15 +1104,15 @@ sap.ui.define([
 						key: "1",
 						text: "Stock-Non-Routable"
 					});
-					this.getView().byId("VLRStatus").insertItem(newItem);
+					this.getView().byId("VLRStatus").insertItem(newItem3);
 
 				} else {
 
-					var newItem3 = new sap.ui.core.Item({
+					var newItem4 = new sap.ui.core.Item({
 						key: "1",
 						text: "Stock-non-acheminable"
 					});
-					this.getView().byId("VLRStatus").insertItem(newItem3);
+					this.getView().byId("VLRStatus").insertItem(newItem4);
 
 				}
 			}
@@ -1171,39 +1142,24 @@ sap.ui.define([
 				}).length == 0) {
 				if (this.sCurrentLocale == 'EN') {
 
-					var newItem = new sap.ui.core.Item({
+					var newItem8 = new sap.ui.core.Item({
 						key: "all",
 						text: "ALL"
 					});
-					this.getView().byId("VLRDealer").insertItem(newItem);
+					this.getView().byId("VLRDealer").insertItem(newItem8);
 					this.getView().byId("VLRDealer").setSelectedItem("ALL");
 					this.getView().byId("VLRDealer").setSelectedKey("all");
 				} else {
 
-					var newItem = new sap.ui.core.Item({
+					var newItem9 = new sap.ui.core.Item({
 						key: "all",
 						text: "TOUS"
 					});
-					this.getView().byId("VLRDealer").insertItem(newItem);
+					this.getView().byId("VLRDealer").insertItem(newItem9);
 					this.getView().byId("VLRDealer").setSelectedItem("TOUS");
 					this.getView().byId("VLRDealer").setSelectedKey("all");
 
 				}
-
-				// }
-				// } else {
-				// 	if (this.getView().byId("VLRDealer").getItems().filter(function (x) {
-				// 			return x.mProperties.key == "all"
-				// 		}).length == 0) {
-
-				// 		var newItem = new sap.ui.core.Item({
-				// 			key: "all",
-				// 			text: "ALL"
-				// 		});
-				// 		this.getView().byId("VLRDealer").insertItem(newItem);
-				// 		this.getView().byId("VLRDealer").setSelectedItem("ALL");
-				// 		this.getView().byId("VLRDealer").setSelectedKey("all");
-				// 	}
 
 			}
 
