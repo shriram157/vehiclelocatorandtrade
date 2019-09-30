@@ -1080,7 +1080,7 @@ sap.ui.define([
 						text: "Pipeline - Routable"
 					});
 
-					this.getView().byId("VLRStatus").insertItem(newItem);
+					this.getView().byId("VLRStatus").insertItem(newItem2);
 					this.getView().byId("VLRStatus").setSelectedItem("Pipeline - Routable");
 					this.getView().byId("VLRStatus").setSelectedKey("2");
 
@@ -1100,11 +1100,11 @@ sap.ui.define([
 			if (Statusind1.length == 0) {
 				if (this.sCurrentLocale == 'EN') {
 
-					var newItem3 = new sap.ui.core.Item({
+					var newItem7 = new sap.ui.core.Item({
 						key: "1",
 						text: "Stock-Non-Routable"
 					});
-					this.getView().byId("VLRStatus").insertItem(newItem3);
+					this.getView().byId("VLRStatus").insertItem(newItem7);
 
 				} else {
 
