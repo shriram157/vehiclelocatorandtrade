@@ -495,18 +495,15 @@ sap.ui.define([
 				filterArray.push(new sap.ui.model.Filter("Hold_stat", sap.ui.model.FilterOperator.EQ, "N"));
 			}
 			var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelectedKey();
-			if(selectedAccessInstalled == "Yes"){
+			if (selectedAccessInstalled == "Yes") {
 				//filterArray.push(new sap.ui.model.Filter("non_D_flag", sap.ui.model.FilterOperator.Contains,"X" ));
-				filterArray.push(new sap.ui.model.Filter("pd_flag", sap.ui.model.FilterOperator.Contains,"D" ));
+				filterArray.push(new sap.ui.model.Filter("pd_flag", sap.ui.model.FilterOperator.Contains, "D"));
 				//filterArray.push(new sap.ui.model.Filter("non_D_flag", sap.ui.model.FilterOperator.Contains," " ));
-			}else if((selectedAccessInstalled == "No")){
+			} else if ((selectedAccessInstalled == "No")) {
 				filterArray.push(new sap.ui.model.Filter("pd_flag", sap.ui.model.FilterOperator.EQ, ""));
 				//filterArray.push(new sap.ui.model.Filter("non_D_flag", sap.ui.model.FilterOperator.Contains, "X"));
 				//filterArray.push(new sap.ui.model.Filter("non_D_flag", sap.ui.model.FilterOperator.Contains," " ));
 			}
-			
-			
-			
 
 			this.byId("table1VSR")
 				.getBinding("items")
@@ -680,7 +677,7 @@ sap.ui.define([
 		},
 
 		oTradeLinkPress: function (oEvt) {
-		
+
 			var that = this;
 			//that.oTableSelectPath = oEvt.getSource().getParent().getBindingContext().getPath().split("/")[1]; //guna
 			that.oTableSelectPath = oEvt.getSource().getParent().getBindingContext("vehicleSearchTableModel").getPath().split("/")[1];
@@ -891,9 +888,9 @@ sap.ui.define([
 
 				this.getView().setModel(oViewModel, "languageModel");
 
-				var model = new sap.ui.model.json.JSONModel(Status);
+				var modelSearch = new sap.ui.model.json.JSONModel(Status);
 				// model.setSizeLimit(1000);
-				this.getView().setModel(model, "vehicleSearchTableModel");
+				this.getView().setModel(modelSearch, "vehicleSearchTableModel");
 
 				var tableLength = this.getView().getModel("vehicleSearchTableModel").getData().length;
 				var oModelDetail = this.getView().getModel("detailView");
@@ -951,9 +948,9 @@ sap.ui.define([
 				Color = new Array();
 				for (var key in obj)
 					Color.push(obj[key]);
-				var Model = new sap.ui.model.json.JSONModel(Color);
+				var ModelColor = new sap.ui.model.json.JSONModel(Color);
 				// Model.setSizeLimit(1000);
-				this.getView().byId("VLRColor").setModel(Model);
+				this.getView().byId("VLRColor").setModel(ModelColor);
 				// if (Color.length != 0) {
 				if (this.getView().byId("VLRColor").getItems().filter(function (x) {
 						return x.mProperties.key == "all"
@@ -996,12 +993,12 @@ sap.ui.define([
 			}
 			// lets reset the model to initial before setting - the controller is not setting the selected value correctly without this. 
 			var oModel = [];
-			var oModel = new sap.ui.model.json.JSONModel(oModel);
-			this.getView().byId("VLRSuffix").setModel(oModel);
+			var oModelSuffix = new sap.ui.model.json.JSONModel(oModel);
+			this.getView().byId("VLRSuffix").setModel(oModelSuffix);
 
-			var Model = new sap.ui.model.json.JSONModel(SuffixData);
+			var ModelSuffix = new sap.ui.model.json.JSONModel(SuffixData);
 			// Model.setSizeLimit(1000);
-			this.getView().byId("VLRSuffix").setModel(Model);
+			this.getView().byId("VLRSuffix").setModel(ModelSuffix);
 
 			// this.getView().byId("VLRSuffix").setSelectedItem(DefaultSuffix);
 			// for (var s = 0; s < SuffixData.length; s++) {
@@ -1011,7 +1008,7 @@ sap.ui.define([
 
 			// 	}
 			// }
-			
+
 			if (SuffixData.length != 0) {
 
 				if (this.getView().byId("VLRSuffix").getItems().filter(function (x) {
@@ -1026,11 +1023,11 @@ sap.ui.define([
 						this.getView().byId("VLRSuffix").insertItem(newItem);
 					} else {
 
-						var newItem = new sap.ui.core.Item({
+						var newItem2 = new sap.ui.core.Item({
 							key: "all",
 							text: "TOUS"
 						});
-						this.getView().byId("VLRSuffix").insertItem(newItem);
+						this.getView().byId("VLRSuffix").insertItem(newItem2);
 
 					}
 
@@ -1066,7 +1063,7 @@ sap.ui.define([
 				}];
 			}
 			/*Status.splice(-1,1);*/
-			var Model = new sap.ui.model.json.JSONModel(StatusDataFilter);
+			var ModelStatus = new sap.ui.model.json.JSONModel(StatusDataFilter);
 			// Model.setSizeLimit(1000);
 
 			var StatusFilter = StatusDataFilter.filter(function (x) {
@@ -1077,23 +1074,22 @@ sap.ui.define([
 			});
 
 			/*Added changes for accesories installed dropdown start*/
-			var Model = new sap.ui.model.json.JSONModel(StatusDataFilter);
+			var Modelaccesories = new sap.ui.model.json.JSONModel(StatusDataFilter);
 			var accesoriesInstalledFilter = [{
-					"zaccesories": "All"
+				"zaccesories": "All"
 
-				}, {
-					"zaccesories": "Yes"
-				}
-				, {
-					"zaccesories": "No"
-				}];
-				Model.setData(accesoriesInstalledFilter);
-			this.getView().byId("AcceInstalledCobmo").setModel(Model);
+			}, {
+				"zaccesories": "Yes"
+			}, {
+				"zaccesories": "No"
+			}];
+			Modelaccesories.setData(accesoriesInstalledFilter);
+			this.getView().byId("AcceInstalledCobmo").setModel(Modelaccesories);
 			this.getView().byId("AcceInstalledCobmo").setSelectedKey("All");
-			
+
 			/*Added changes for accesories installed dropdown end*/
 
-			this.getView().byId("VLRStatus").setModel(Model);
+			this.getView().byId("VLRStatus").setModel(ModelStatus);
 			if (StatusFilter.length != 0) {
 
 				if (this.sCurrentLocale == 'EN') {
@@ -2611,7 +2607,7 @@ sap.ui.define([
 				DataClicked: "Yes"
 			});
 		},
-		onAccesoriesInstalledsChange: function(){
+		onAccesoriesInstalledsChange: function () {
 			this.onStatusChange();
 		}
 
