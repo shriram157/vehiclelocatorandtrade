@@ -2255,9 +2255,9 @@ sap.ui.define([
 				this.getView().setModel(sap.ui.getCore().getModel("SearchedData"), "VehicleLocatorScdScr");
 
 				var Status = sap.ui.getCore().getModel("SearchedData").getData();
-				var model = new sap.ui.model.json.JSONModel(Status);
+				var modelStatus = new sap.ui.model.json.JSONModel(Status);
 
-				this.getView().setModel(model, "vehicleSelectTableModel");
+				this.getView().setModel(modelStatus, "vehicleSelectTableModel");
 
 				var tableLength = this.getView().getModel("vehicleSelectTableModel").getData().length;
 				var oModelDetail = this.getView().getModel("detailView");
@@ -2308,9 +2308,9 @@ sap.ui.define([
 				Color = new Array();
 				for (var key in obj)
 					Color.push(obj[key]);
-				var Model = new sap.ui.model.json.JSONModel(Color);
+				var ModelColor = new sap.ui.model.json.JSONModel(Color);
 				// Model.setSizeLimit(1000);
-				this.getView().byId("VLRColor1").setModel(Model);
+				this.getView().byId("VLRColor1").setModel(ModelColor);
 				// if (Color.length != 0) {
 				if (this.getView().byId("VLRColor1").getItems().filter(function (x) {
 						return x.mProperties.key == "all"
@@ -2318,20 +2318,20 @@ sap.ui.define([
 
 					if (this.sCurrentLocale == "EN") {
 
-						var newItem = new sap.ui.core.Item({
+						var newItem0 = new sap.ui.core.Item({
 							key: "all",
 							text: "ALL"
 						});
-						this.getView().byId("VLRColor1").insertItem(newItem);
+						this.getView().byId("VLRColor1").insertItem(newItem0);
 						this.getView().byId("VLRColor1").setSelectedKey("all");
 						this.getView().byId("VLRColor1").setSelectedItem("ALL");
 					} else {
 						// for french
-						var newItem = new sap.ui.core.Item({
+						var newItem1 = new sap.ui.core.Item({
 							key: "all",
 							text: "TOUS"
 						});
-						this.getView().byId("VLRColor1").insertItem(newItem);
+						this.getView().byId("VLRColor1").insertItem(newItem1);
 						this.getView().byId("VLRColor1").setSelectedKey("all");
 						this.getView().byId("VLRColor1").setSelectedItem("TOUS");
 
@@ -2355,20 +2355,20 @@ sap.ui.define([
 
 					if (this.sCurrentLocale == 'EN') {
 
-						var newItem = new sap.ui.core.Item({
+						var newItem2 = new sap.ui.core.Item({
 							key: "all",
 							text: "ALL"
 						});
-						this.getView().byId("VLRDealer1").insertItem(newItem);
+						this.getView().byId("VLRDealer1").insertItem(newItem2);
 						this.getView().byId("VLRDealer1").setSelectedKey("all");
 						this.getView().byId("VLRDealer1").setSelectedItem("ALL");
 					} else {
 						// for french
-						var newItem = new sap.ui.core.Item({
+						var newItem3 = new sap.ui.core.Item({
 							key: "all",
 							text: "TOUS"
 						});
-						this.getView().byId("VLRDealer1").insertItem(newItem);
+						this.getView().byId("VLRDealer1").insertItem(newItem3);
 						this.getView().byId("VLRDealer1").setSelectedKey("all");
 						this.getView().byId("VLRDealer1").setSelectedItem("TOUS");
 
@@ -2381,21 +2381,21 @@ sap.ui.define([
 					}).length == 0) {
 
 					if (this.sCurrentLocale == 'EN') {
-						var newItem = new sap.ui.core.Item({
+						var newItem4 = new sap.ui.core.Item({
 							key: "all",
 							text: "ALL"
 						});
-						this.getView().byId("VLRDealer1").insertItem(newItem);
+						this.getView().byId("VLRDealer1").insertItem(newItem4);
 						this.getView().byId("VLRDealer1").setSelectedItem("ALL");
 						this.getView().byId("VLRDealer1").setSelectedKey("all");
 
 					} else {
-						var newItem = new sap.ui.core.Item({
+						var newItem5 = new sap.ui.core.Item({
 							key: "all",
 							text: "TOUS"
 						});
 
-						this.getView().byId("VLRDealer1").insertItem(newItem);
+						this.getView().byId("VLRDealer1").insertItem(newItem5);
 						this.getView().byId("VLRDealer1").setSelectedItem("TOUS");
 						this.getView().byId("VLRDealer1").setSelectedKey("all");
 
