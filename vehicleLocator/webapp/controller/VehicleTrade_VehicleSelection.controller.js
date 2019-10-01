@@ -582,6 +582,11 @@ sap.ui.define([
 			}
 
 			var Dealer = this.getView().byId("VLRDealer1").getSelectedKey();
+			var loggedinuser = sap.ui.getCore().getModel("LoggedInUser").getData().loggedInUser;
+			
+			if(loggedinuser){
+				Dealer = loggedinuser;
+			}
 
 			if (Dealer != "" && Dealer != "all") {
 
