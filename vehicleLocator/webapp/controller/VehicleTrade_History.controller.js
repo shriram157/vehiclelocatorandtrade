@@ -6,8 +6,9 @@ sap.ui.define([
 	"sap/ui/core/routing/History",
 	"vehicleLocator/Formatter/Formatter",
 	"sap/ui/Device",
-	"sap/ui/model/Sorter"
-], function (BaseController, JSONModel, ResourceModel, MessageBox, History, Formatter, Device, Sorter) {
+	"sap/ui/model/Sorter",
+	"sap/ui/model/Filter"
+], function (BaseController, JSONModel, ResourceModel, MessageBox, History, Formatter, Device, Sorter,Filter) {
 	"use strict";
 	var TableData;
 	return BaseController.extend("vehicleLocator.controller.VehicleTrade_History", {
@@ -557,6 +558,47 @@ sap.ui.define([
 			// call the function to get the relevant data to screen again. 
 			this.VehicleHistory_Summary();
 
+		},
+		onLiveChangeTradeHistory: function (oEvent) {
+			this.sSearchQuery = oEvent.getSource().getValue();
+			this.fnApplyFiltersAndOrderingForVehicleTrade();
+		},
+		fnApplyFiltersAndOrderingForVehicleTrade: function (oEvent) {
+			var aFilters = [];
+	
+			// based on the status that is presnet in the screen apply one more filter. 
+		
+
+			if (this.sSearchQuery) {
+				var oFilter = new Filter([
+					new Filter("Requesting_Dealer", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("Requested_Dealer", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("Requested_Dealer_Name", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("Requesting_Dealer_Name", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("Requested_Vtn", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("Model", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("Model_Desc", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("Suffix", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("Suffix_Desc", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("Int_Colour_Desc", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("Ext_Colour", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("Ext_Colour_Desc", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("APX", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+				], false);
+
+				
+
+				var aFilters = new sap.ui.model.Filter([oFilter], true);
+
+				// aFilters.push(oFilter);
+			}
+
+			// based on the status field			
+
+			this.byId("tableVTH")
+				.getBinding("items")
+				.filter(aFilters);
+				
 		}
 
 	});

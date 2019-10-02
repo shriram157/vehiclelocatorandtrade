@@ -129,6 +129,11 @@
 										<content>
 											<Title id="title" text="" titleStyle="H3"></Title>
 											<ToolbarSpacer/>
+											<SearchField id="searchTradeHistory" liveChange="onLiveChangeTradeHistory" showSearchButton="true" placeholder="{i18n>placeHolderText}">
+												<layoutData>
+													<OverflowToolbarLayoutData minWidth="200px" maxWidth="300px" shrinkable="true"/>
+												</layoutData>
+											</SearchField>
 											<Button tooltip="View Sort Settings" icon="sap-icon://sort" press="handleSortButtonPressed"/>
 											<!--<ToggleButton text="{i18n>Delete}" icon="sap-icon://delete" tooltip="" press="oDeletepress"/>-->
 										</content>
