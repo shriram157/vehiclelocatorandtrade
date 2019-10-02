@@ -40,7 +40,6 @@ sap.ui.define([
 				this.currentScopeUrl = "/userDetails/currentScopesForUser";
 
 			}
-			// debugger;
 			// detail view model instantiation. 
 			this._oViewModel = new sap.ui.model.json.JSONModel({
 				busy: false,
@@ -475,8 +474,6 @@ sap.ui.define([
 				if (that.getView().getModel("userAttributesModel") != undefined) {
 					var userAttributesModellen = that.getView().getModel("userAttributesModel").getData();
 					var BpDealer = that.getView().getModel("BpDealerModel").getData();
-					sap.ui.getCore().setModel(new sap.ui.model.json.JSONModel(), "LoggedInUser");
-					sap.ui.getCore().getModel("LoggedInUser").setProperty("/loggedInUser",BpDealer);
 					var BusinessPartner = BpDealer[0].BusinessPartnerKey;
 					//for(var i=0;i<userAttributesModellen.length;i++){
 					var oDealer = userAttributesModellen[0].DealerCode;

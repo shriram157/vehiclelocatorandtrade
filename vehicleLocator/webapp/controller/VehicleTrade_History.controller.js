@@ -6,9 +6,8 @@ sap.ui.define([
 	"sap/ui/core/routing/History",
 	"vehicleLocator/Formatter/Formatter",
 	"sap/ui/Device",
-	"sap/ui/model/Sorter",
-	"sap/ui/model/Filter"
-], function (BaseController, JSONModel, ResourceModel, MessageBox, History, Formatter, Device, Sorter, Filter) {
+	"sap/ui/model/Sorter"
+], function (BaseController, JSONModel, ResourceModel, MessageBox, History, Formatter, Device, Sorter) {
 	"use strict";
 	var TableData;
 	return BaseController.extend("vehicleLocator.controller.VehicleTrade_History", {
@@ -143,7 +142,7 @@ sap.ui.define([
 
 			var dateMinusThirty = new Date();
 			dateMinusThirty.setDate(dateMinusThirty.getDate() - 60);
-
+		
 			var Filter0 = new sap.ui.model.Filter('Requesting_Dealer', 'EndsWith', Dealer_No);
 			var Filter1 = new sap.ui.model.Filter('Requested_Dealer', 'EndsWith', Dealer_No);
 			var Filter2 = new sap.ui.model.Filter('Trade_Status', 'EQ', 'A');
@@ -151,14 +150,15 @@ sap.ui.define([
 			var Filter = new sap.ui.model.Filter([Filter0, Filter1], false);
 			var Filterall1 = new sap.ui.model.Filter([Filter, Filter2], true);
 			var Filterall = new sap.ui.model.Filter([Filterall1, Filter3], true);
+           
 
-			TableData = [];
+            TableData = []; 
 			oModel.read("/TradeRequest", {
-				filters: [Filterall],
-				urlParameters: {
-
-					"$expand": "TradeVehicles,TradeVehicleDesc"
-				},
+				filters: [Filterall], 
+			    urlParameters:{
+				
+				"$expand": "TradeVehicles,TradeVehicleDesc"
+			},
 				async: false,
 				success: function (oData, oResponse) {
 					//=====Filter on Vehicles=====================	
@@ -168,6 +168,7 @@ sap.ui.define([
 
 				}
 			});
+
 
 			for (var i = 0; i < TableData.length; i++) {
 				TableData[i].Requesting_Dealer = TableData[i].Requesting_Dealer.slice(-5);
@@ -238,7 +239,7 @@ sap.ui.define([
 					for (var k = 0; k < results.length; k++) {
 						if (results[k].VTN == TableData[i].Offered_Vtn && results[k].SPRAS == lang) {
 							// if (results.length > 0) {
-							if (TableData[i].OffredVehicle) {
+							if (TableData[i].OffredVehicle) { 
 								TableData[i].OffredVehicle.Model_Desc = results[k].Model_Desc;
 								TableData[i].OffredVehicle.Series_Desc = results[k].Series_Desc;
 								TableData[i].OffredVehicle.Suffix_Desc = results[k].Suffix_Desc;
@@ -250,16 +251,8 @@ sap.ui.define([
 					}
 				}
 			}
-			var filtered = TableData.filter(function (item) {
-				return item.RequestingDealerVisible == true;
-			});
-			var filtered1 = TableData.filter(function (item) {
-				return item.RequestingDealerVisible == false;
-			});
-			var model = new sap.ui.model.json.JSONModel(filtered);
-			var model1 = new sap.ui.model.json.JSONModel(filtered1);
+			var model = new sap.ui.model.json.JSONModel(TableData);
 			that.getView().byId("tableVTH").setModel(model);
-			that.getView().byId("tableVTH1").setModel(model1);
 
 		},
 		ExporttoExcellsheet: function () {
@@ -563,44 +556,6 @@ sap.ui.define([
 			this._oViewModel.setProperty("/DealerName", sSelectedDealerText);
 			// call the function to get the relevant data to screen again. 
 			this.VehicleHistory_Summary();
-
-		},
-		onLiveChangeTradeHistory: function (oEvent) {
-			this.sSearchQuery = oEvent.getSource().getValue();
-			this.fnApplyFiltersAndOrderingForVehicleTrade();
-		},
-		fnApplyFiltersAndOrderingForVehicleTrade: function (oEvent) {
-			var aFilters = [];
-
-			// based on the status that is presnet in the screen apply one more filter. 
-
-			if (this.sSearchQuery) {
-				var oFilter = new Filter([
-					new Filter("Requesting_Dealer", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-					new Filter("Requested_Dealer", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-					new Filter("Requested_Dealer_Name", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-					new Filter("Requesting_Dealer_Name", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-					new Filter("Requested_Vtn", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-					new Filter("Model", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-					new Filter("Model_Desc", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-					new Filter("Suffix", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-					new Filter("Suffix_Desc", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-					new Filter("Int_Colour_Desc", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-					new Filter("Ext_Colour", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-					new Filter("Ext_Colour_Desc", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-					new Filter("APX", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-				], false);
-
-				var aFilters = new sap.ui.model.Filter([oFilter], true);
-
-				// aFilters.push(oFilter);
-			}
-
-			// based on the status field			
-
-			this.byId("tableVTH")
-				.getBinding("items")
-				.filter(aFilters);
 
 		}
 

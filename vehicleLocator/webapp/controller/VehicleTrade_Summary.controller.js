@@ -197,20 +197,43 @@ sap.ui.define([
 					var theFirstDefaultDealer = this.theFirstDefaultDealerSelected;
 				}
 
-				// TODO: The below to be removed once tested
-				that.TradeRequestoDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeRequest?$filter=Requesting_Dealer eq '" +
-					this.theFirstDefaultDealerSelected + "' or Requested_Dealer eq '" + this.theFirstDefaultDealerSelected + "'";
+				// // TODO: The below to be removed once tested
+				// that.TradeRequestoDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeRequest?$filter=Requesting_Dealer eq '" +
+				// 	this.theFirstDefaultDealerSelected + "' or Requested_Dealer eq '" + this.theFirstDefaultDealerSelected + "'";
 
+				// var dateMinusThirty = new Date();
+				// dateMinusThirty.setDate(dateMinusThirty.getDate() - 30);
+
+				// var Filter0 = new sap.ui.model.Filter('Requesting_Dealer', 'EQ', this.theFirstDefaultDealerSelected);
+				// var Filter1 = new sap.ui.model.Filter('Requested_Dealer', 'EQ', this.theFirstDefaultDealerSelected);
+				// // var Filter2 = new sap.ui.model.Filter('Trade_Status', 'EQ', 'A');
+				// var Filter3 = new sap.ui.model.Filter('Changed_on', "GE", dateMinusThirty);
+				// var Filter = new sap.ui.model.Filter([Filter0, Filter1], false);
+				// // var Filterall1 = new sap.ui.model.Filter([Filter, Filter2], true);
+				// var Filterall = new sap.ui.model.Filter([Filter, Filter3], true);
+				
+				
+				
+				
 				var dateMinusThirty = new Date();
 				dateMinusThirty.setDate(dateMinusThirty.getDate() - 30);
 
-				var Filter0 = new sap.ui.model.Filter('Requesting_Dealer', 'EQ', this.theFirstDefaultDealerSelected);
-				var Filter1 = new sap.ui.model.Filter('Requested_Dealer', 'EQ', this.theFirstDefaultDealerSelected);
-				// var Filter2 = new sap.ui.model.Filter('Trade_Status', 'EQ', 'A');
+				var loggedDealerCode = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()["0"].DealerCode;
+
+				var Filter0 = new sap.ui.model.Filter('Requesting_Dealer', "EndsWith", this.theFirstDefaultDealerSelected);
+				var Filter1 = new sap.ui.model.Filter('Requested_Dealer', "EndsWith", this.theFirstDefaultDealerSelected);
+				var Filter2 = new sap.ui.model.Filter('Trade_Status', 'NE', "A");
 				var Filter3 = new sap.ui.model.Filter('Changed_on', "GE", dateMinusThirty);
-				var Filter = new sap.ui.model.Filter([Filter0, Filter1], false);
+				var Filter4 = new sap.ui.model.Filter([Filter0, Filter1], false);
+				var Filter = new sap.ui.model.Filter([Filter4, Filter2], true);
 				// var Filterall1 = new sap.ui.model.Filter([Filter, Filter2], true);
-				var Filterall = new sap.ui.model.Filter([Filter, Filter3], true);
+				var Filterall = new sap.ui.model.Filter([Filter, Filter4], true);		
+				
+				
+	
+				
+				
+				
 
 			} else { //  if a dealer user
 				this._oViewModel.setProperty("/visibleByDefault", false); // no combobox to be displayed. 

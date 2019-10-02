@@ -109,24 +109,6 @@
 									</VBox>
 								</items>
 							</FlexBox>
-								<FlexBox alignItems="Start" justifyContent="Start" direction="row">
-								<items>
-									<VBox>
-										<Label text="{i18n>AccessoryInstall}" labelFor="VLRColor" design="Bold" class="sapUiTinyMarginBegin sapUiSmallMarginTop">
-											<layoutData>
-												<l:GridData span="L2 M2 S8"/>
-											</layoutData>
-										</Label>
-										<ComboBox id="AcceInstalledCobmo" selectionChange="onAccesoriesInstalledsChange" class="sapUiTinyMarginBegin" items="{/}" width="300px">
-											<core:ListItem text="{zaccesories}" key="{zaccesories}"/>
-											<layoutData>
-												<l:GridData span="L2 M2 S8"/>
-											</layoutData>
-										</ComboBox>
-									</VBox>
-								</items>
-							</FlexBox>
-							
 							<CheckBox xmlns="sap.m" text="{i18n>ShowDoNotCall(DNC)Vehicles}" id="chknew" select="onStatusChange" class="sapUiLargeMarginEnd"/>
 							<CheckBox xmlns="sap.m" text="{i18n>ShowHoldVehicles}" id="chkexi" select="onStatusChange" class="sapUiLargeMarginBegin"/>
 							<CheckBox xmlns="sap.m" text="{i18n>IncludeSoldVehicles}" id="chkmov" select="onStatusChange" visible="false"/>

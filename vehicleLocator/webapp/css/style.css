@@ -470,9 +470,3 @@ user agent stylesheet table {
 .readonlycombo input
 {background-color: white !important;}
 
-.headerFixClass .sapMListTbl th {
-    position: sticky;
-    z-index: 9;
-    top: 0;
-}
-
