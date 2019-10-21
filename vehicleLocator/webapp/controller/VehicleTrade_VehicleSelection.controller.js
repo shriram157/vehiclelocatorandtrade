@@ -389,7 +389,7 @@ sap.ui.define([
 			});
 
 			/*Added changes for accesories installed dropdown start*/
-			var Model = new sap.ui.model.json.JSONModel(StatusDataFilter);
+			var accessoryModel = new sap.ui.model.json.JSONModel();
 			var accesoriesInstalledFilter = [{
 				"zaccesories": "All"
 
@@ -398,8 +398,8 @@ sap.ui.define([
 			}, {
 				"zaccesories": "No"
 			}];
-			Model.setData(accesoriesInstalledFilter);
-			this.getView().byId("AcceInstalledCobmo1").setModel(Model);
+			accessoryModel.setData(accesoriesInstalledFilter);
+			this.getView().byId("AcceInstalledCobmo1").setModel(accessoryModel);
 			this.getView().byId("AcceInstalledCobmo1").setSelectedKey("All");
 
 			/*Added changes for accesories installed dropdown end*/
@@ -941,7 +941,7 @@ sap.ui.define([
 					/*	 sap.ui.core.BusyIndicator.hide();*/
 				}
 			});
-
+that.onStatusChangeMultiple();
 		},
 
 		SeriesFilteredBinding: function () {

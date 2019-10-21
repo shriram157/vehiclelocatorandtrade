@@ -891,9 +891,9 @@ sap.ui.define([
 
 				this.getView().setModel(oViewModel, "languageModel");
 
-				var model = new sap.ui.model.json.JSONModel(Status);
+				var statusmodel = new sap.ui.model.json.JSONModel(Status);
 				// model.setSizeLimit(1000);
-				this.getView().setModel(model, "vehicleSearchTableModel");
+				this.getView().setModel(statusmodel, "vehicleSearchTableModel");
 
 				var tableLength = this.getView().getModel("vehicleSearchTableModel").getData().length;
 				var oModelDetail = this.getView().getModel("detailView");
@@ -999,9 +999,9 @@ sap.ui.define([
 			var oModel = new sap.ui.model.json.JSONModel(oModel);
 			this.getView().byId("VLRSuffix").setModel(oModel);
 
-			var Model = new sap.ui.model.json.JSONModel(SuffixData);
+			var suffixModel = new sap.ui.model.json.JSONModel(SuffixData);
 			// Model.setSizeLimit(1000);
-			this.getView().byId("VLRSuffix").setModel(Model);
+			this.getView().byId("VLRSuffix").setModel(suffixModel);
 
 			// this.getView().byId("VLRSuffix").setSelectedItem(DefaultSuffix);
 			// for (var s = 0; s < SuffixData.length; s++) {
@@ -1066,7 +1066,7 @@ sap.ui.define([
 				}];
 			}
 			/*Status.splice(-1,1);*/
-			var Model = new sap.ui.model.json.JSONModel(StatusDataFilter);
+			var statusDataModel = new sap.ui.model.json.JSONModel(StatusDataFilter);
 			// Model.setSizeLimit(1000);
 
 			var StatusFilter = StatusDataFilter.filter(function (x) {
@@ -1077,7 +1077,7 @@ sap.ui.define([
 			});
 
 			/*Added changes for accesories installed dropdown start*/
-			var Model = new sap.ui.model.json.JSONModel(StatusDataFilter);
+			var accessoryModel = new sap.ui.model.json.JSONModel();
 			var accesoriesInstalledFilter = [{
 					"zaccesories": "All"
 
@@ -1087,13 +1087,13 @@ sap.ui.define([
 				, {
 					"zaccesories": "No"
 				}];
-				Model.setData(accesoriesInstalledFilter);
-			this.getView().byId("AcceInstalledCobmo").setModel(Model);
+				accessoryModel.setData(accesoriesInstalledFilter);
+			this.getView().byId("AcceInstalledCobmo").setModel(accessoryModel);
 			this.getView().byId("AcceInstalledCobmo").setSelectedKey("All");
 			
 			/*Added changes for accesories installed dropdown end*/
 
-			this.getView().byId("VLRStatus").setModel(Model);
+			this.getView().byId("VLRStatus").setModel(statusDataModel);
 			if (StatusFilter.length != 0) {
 
 				if (this.sCurrentLocale == 'EN') {
