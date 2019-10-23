@@ -71,20 +71,21 @@
 								<FlexBox>
 									<items>
 										<VBox>
-											<Label text="{i18n>Status}" labelFor="VLRStatus1" design="Bold" class="sapUiTinyMarginBegin sapUiSmallMarginTop">
-												<layoutData>
+									<Label text="{i18n>ModelCode}" required="true" labelFor="McCmbo" design="Bold" class="sapUiTinyMarginBegin sapUiSmallMarginTop">
+									<layoutData>
 													<l:GridData span="L2 M2 S6"/>
 												</layoutData>
 											</Label>
-											<ComboBox id="VLRStatus1" selectionChange="onStatusChangeMultiple" items="{/}" class="sapUiTinyMarginBegin" width="300px">
-												<core:ListItem text="{path:'zz_trading_ind',formatter:'vehicleLocator.Formatter.Formatter.Status'}" key="{zz_trading_ind}"/>
-												<layoutData>
-													<l:GridData span="L2 M2 S6"/>
-												</layoutData>
-											</ComboBox>
-										</VBox>
+								<ComboBox placeholder="" selectedKey="" showSecondaryValues="true" width="90%" selectionChange="MCClickedVLS11" id="McCmbo"
+									 items="{ path:'ModelCode>/', sorter : [{ path:'Model', ascending : 'true' } ] }">
+									<core:ListItem text="{ModelCode>Model}-{=${ModelCode>SPRAS}==='English' ? ${ModelCode>ENModelDesc}:${ModelCode>FRModelDesc} }"
+										key="{ModelCode>Model}" additionalText=""/>
+									<!--	<core:ListItem text="{ModelCode>Model} - {ModelCode>ENModelDesc}" key="{ModelCode>Model}"/>-->
+								</ComboBox>
+								</VBox>
 									</items>
 								</FlexBox>
+								
 								
 								<FlexBox alignItems="Start" justifyContent="Start" direction="row">
 									<items>
@@ -95,7 +96,7 @@
 												</layoutData>
 											</Label>
 											<!--<ComboBox id="VLRSuffix" selectionChange="onSuffixChange" items="{/}" class="sapUiTinyMarginBegin" width="300px">-->
-											<ComboBox id="VLRSuffix1" selectionChange="SuffixFilter" items="{/}" class="sapUiTinyMarginBegin" width="300px">
+											<ComboBox id="VLRSuffix1" selectionChange="onStatusChange" items="{/}" class="sapUiTinyMarginBegin" width="300px">
 												<core:ListItem
 													text="{zzsuffix} - {=${SPRAS}==='English' ? ${suffix_desc_en}:${suffix_desc_fr} }/{=${SPRAS}==='English' ? ${mrktg_int_desc_en}:${mrktg_int_desc_fr} }"
 													key="{zzsuffix}"/>
@@ -118,6 +119,23 @@
 												<core:ListItem text="{zzextcol} - {=${languageModel>/SPRAS}==='English' ? ${mktg_desc_en}:${mktg_desc_fr} }" key="{zzextcol}"/>
 												<layoutData>
 													<l:GridData span="L2 M2 S8"/>
+												</layoutData>
+											</ComboBox>
+										</VBox>
+									</items>
+								</FlexBox>
+								<FlexBox>
+									<items>
+										<VBox>
+											<Label text="{i18n>Status}" labelFor="VLRStatus1" design="Bold" class="sapUiTinyMarginBegin sapUiSmallMarginTop">
+												<layoutData>
+													<l:GridData span="L2 M2 S6"/>
+												</layoutData>
+											</Label>
+											<ComboBox id="VLRStatus1" selectionChange="onStatusChangeMultiple" items="{/}" class="sapUiTinyMarginBegin" width="300px">
+												<core:ListItem text="{path:'zz_trading_ind',formatter:'vehicleLocator.Formatter.Formatter.Status'}" key="{zz_trading_ind}"/>
+												<layoutData>
+													<l:GridData span="L2 M2 S6"/>
 												</layoutData>
 											</ComboBox>
 										</VBox>
