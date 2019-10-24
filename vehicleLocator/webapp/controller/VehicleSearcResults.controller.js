@@ -2232,8 +2232,8 @@ sap.ui.define([
 
 			this.byId("table1VSR")
 				.getBinding("items")
-				.filter(aFilters)
-				.sort(aSorters);
+				.filter(aFilters);
+				// .sort(aSorters);
 		},
 
 		handleViewSettingsDialogButtonPressed: function (oEvt) {

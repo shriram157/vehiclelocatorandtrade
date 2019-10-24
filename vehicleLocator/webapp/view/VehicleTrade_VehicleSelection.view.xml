@@ -77,9 +77,9 @@
 												</layoutData>
 											</Label>
 								<ComboBox placeholder="" selectedKey="" showSecondaryValues="true" width="90%" selectionChange="MCClickedVLS11" id="McCmbo"
-									 items="{ path:'ModelCode>/', sorter : [{ path:'Model', ascending : 'true' } ] }">
-									<core:ListItem text="{ModelCode>Model}-{=${ModelCode>SPRAS}==='English' ? ${ModelCode>ENModelDesc}:${ModelCode>FRModelDesc} }"
-										key="{ModelCode>Model}" additionalText=""/>
+									 items="{ path:'/', sorter : [{ path:'Model', ascending : 'true' } ] }">
+									<core:ListItem text="{Model}-{=${SPRAS}==='English' ? ${ENModelDesc}:${FRModelDesc} }"
+										key="{Model}" additionalText=""/>
 									<!--	<core:ListItem text="{ModelCode>Model} - {ModelCode>ENModelDesc}" key="{ModelCode>Model}"/>-->
 								</ComboBox>
 								</VBox>

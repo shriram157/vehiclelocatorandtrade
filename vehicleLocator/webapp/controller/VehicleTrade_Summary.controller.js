@@ -5,6 +5,7 @@ sap.ui.define([
 	"sap/ui/model/resource/ResourceModel",
 	"sap/m/MessageBox",
 	"sap/ui/core/routing/History",
+	"sap/ui/model/Filter",
 	"vehicleLocator/Formatter/Formatter",
 	"sap/ui/table/SortOrder",
 	"sap/ui/model/Sorter"
@@ -72,7 +73,98 @@ sap.ui.define([
 			var that = this;
 			that.getRouter().navTo("VehicleTrade_ModelBlock_Summary");
 		},
+onLiveChange: function (oEvent) {
 
+			 this.sSearchQuery = oEvent.getSource()
+				.getValue();
+			this.fnApplyFiltersAndOrdering();
+
+		
+
+		},
+		fnApplyFiltersAndOrdering: function (oEvent) {
+			var aFilters = [];
+				// aSorters = [];
+
+			// aSorters.push(new Sorter("dealerId1", this.bDescending));
+			// based on the status that is presnet in the screen apply one more filter. 
+			
+
+			if (this.sSearchQuery) {
+				var oFilter = new sap.ui.model.Filter([
+					new sap.ui.model.Filter("Trade_Id", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					// new sap.ui.model.Filter("Created_On", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new sap.ui.model.Filter("Requesting_Dealer", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new sap.ui.model.Filter("Model", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new sap.ui.model.Filter("Model_Desc", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new sap.ui.model.Filter("Suffix", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new sap.ui.model.Filter("Suffix_Desc", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new sap.ui.model.Filter("Int_Colour_Desc", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new sap.ui.model.Filter("Ext_Colour", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new sap.ui.model.Filter("Ext_Colour_Desc", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new sap.ui.model.Filter("Trade_Return", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new sap.ui.model.Filter("Trade_Status", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					// new sap.ui.model.Filter("Changed_on", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+				], false);
+
+			                                 
+
+				aFilters.push(oFilter);
+			}
+
+			// based on the status field			
+
+			this.byId("table1Rts")
+				.getBinding("items")
+				.filter(aFilters);
+				// .sort(aSorters);
+		},
+		onLiveChangeMTR: function (oEvent) {
+
+			 this.sSearchQueryMTR = oEvent.getSource()
+				.getValue();
+			this.fnApplyFiltersAndOrderingMTR();
+
+		
+
+		},
+		fnApplyFiltersAndOrderingMTR: function (oEvent) {
+			var aFilters = [];
+				// aSorters = [];
+
+			// aSorters.push(new Sorter("dealerId1", this.bDescending));
+			// based on the status that is presnet in the screen apply one more filter. 
+			
+
+			if (this.sSearchQueryMTR) {
+				var oFilter = new sap.ui.model.Filter([
+					new sap.ui.model.Filter("Trade_Id", sap.ui.model.FilterOperator.Contains, this.sSearchQueryMTR),
+					// new sap.ui.model.Filter("Created_On", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new sap.ui.model.Filter("Requesting_Dealer", sap.ui.model.FilterOperator.Contains, this.sSearchQueryMTR),
+					new sap.ui.model.Filter("Model", sap.ui.model.FilterOperator.Contains, this.sSearchQueryMTR),
+					new sap.ui.model.Filter("Model_Desc", sap.ui.model.FilterOperator.Contains, this.sSearchQueryMTR),
+					new sap.ui.model.Filter("Suffix", sap.ui.model.FilterOperator.Contains, this.sSearchQueryMTR),
+					new sap.ui.model.Filter("Suffix_Desc", sap.ui.model.FilterOperator.Contains, this.sSearchQueryMTR),
+					new sap.ui.model.Filter("Int_Colour_Desc", sap.ui.model.FilterOperator.Contains, this.sSearchQueryMTR),
+					new sap.ui.model.Filter("Ext_Colour", sap.ui.model.FilterOperator.Contains, this.sSearchQueryMTR),
+					new sap.ui.model.Filter("Ext_Colour_Desc", sap.ui.model.FilterOperator.Contains, this.sSearchQueryMTR),
+					new sap.ui.model.Filter("Trade_Return", sap.ui.model.FilterOperator.Contains, this.sSearchQueryMTR),
+					new sap.ui.model.Filter("Trade_Status", sap.ui.model.FilterOperator.Contains, this.sSearchQueryMTR),
+					// new sap.ui.model.Filter("Changed_on", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+				], false);
+
+			                                 
+
+				aFilters.push(oFilter);
+			}
+
+			// based on the status field			
+
+			this.byId("table1vts")
+				.getBinding("items")
+				.filter(aFilters);
+				// .sort(aSorters);
+		},
 		oRequestLinkPress: function (oEvt) {
 			var that = this;
 
