@@ -131,6 +131,18 @@
 										<!--	<Link id="tradeHId" text="{Trade_Id}" class="link" subtle="true" press="oTradeHistoryLinkPress" wrapping="false"/>-->
 										<!--</t:template>-->
 									</Column>
+										<Column id="matnr">
+										<Text text="{i18n>VehicleTrackingNumber}"/>
+										<!--<t:template>-->
+										<!--	<Text text="{Requested_Vtn}" wrapping="false"/>-->
+										<!--</t:template>-->
+									</Column>
+									<Column>
+										<Text text="{i18n>VIN}"/>
+										<!--<t:template>-->
+										<!--	<Text text="{Requested_Vtn}" wrapping="false"/>-->
+										<!--</t:template>-->
+									</Column>
 									<!--<Column>-->
 									<!--	<Text text="{i18n>Status}"/>-->
 									<!--<t:template>-->
@@ -150,12 +162,7 @@
 										<!--<Text text="{path:'kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'} -{name1}" wrapping="false"/>-->
 										<!--</t:template>-->
 									</Column>
-									<Column id="matnr">
-										<Text text="{i18n>VehicleTrackingNumber}"/>
-										<!--<t:template>-->
-										<!--	<Text text="{Requested_Vtn}" wrapping="false"/>-->
-										<!--</t:template>-->
-									</Column>
+								
 									<Column>
 										<Text text="{i18n>Model}"/>
 										<!--<t:template>-->
@@ -193,10 +200,12 @@
 										<cells>
 											<Link id="tradeHId" text="{Trade_Id}" class="link" subtle="true" press="oTradeHistoryLinkPress" wrapping="false"/>
 											<!--<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="false"/>-->
+											<Text text="{Requested_Vtn}" wrapping="false"/>
+											<Text text="{Requested_Vin}" wrapping="false"/>
 											<Text text="{i18n>To}" wrapping="false"/>
 											<Text
 												text="{= ${RequestingDealerVisible} === true ?${Requested_Dealer}:${Requesting_Dealer}}-{= ${RequestingDealerVisible} === true ?${Requested_Dealer_Name}:${Requesting_Dealer_Name}}"/>
-											<Text text="{Requested_Vtn}" wrapping="false"/>
+										
 											<Text text="{Model}-{Model_Desc}"/>
 											<Text text="{Suffix} - {Suffix_Desc}/{Int_Colour_Desc}"/>
 											<Text text="{Ext_Colour}-{Ext_Colour_Desc}"/>
@@ -232,6 +241,18 @@
 										<!--	<Link id="tradeHId" text="{Trade_Id}" class="link" subtle="true" press="oTradeHistoryLinkPress" wrapping="false"/>-->
 										<!--</t:template>-->
 									</Column>
+										<Column id="matnr1">
+										<Text text="{i18n>VehicleTrackingNumber}"/>
+										<!--<t:template>-->
+										<!--	<Text text="{Requested_Vtn}" wrapping="false"/>-->
+										<!--</t:template>-->
+									</Column>
+										<Column>
+										<Text text="{i18n>VIN}"/>
+										<!--<t:template>-->
+										<!--	<Text text="{Requested_Vtn}" wrapping="false"/>-->
+										<!--</t:template>-->
+									</Column>
 									<!--<Column>-->
 									<!--	<Text text="{i18n>Status}"/>-->
 									<!--<t:template>-->
@@ -251,12 +272,7 @@
 										<!--<Text text="{path:'kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'} -{name1}" wrapping="false"/>-->
 										<!--</t:template>-->
 									</Column>
-									<Column id="matnr1">
-										<Text text="{i18n>VehicleTrackingNumber}"/>
-										<!--<t:template>-->
-										<!--	<Text text="{Requested_Vtn}" wrapping="false"/>-->
-										<!--</t:template>-->
-									</Column>
+								
 									<Column>
 										<Text text="{i18n>Model}"/>
 										<!--<t:template>-->
@@ -294,10 +310,12 @@
 										<cells>
 											<Link id="tradeHId1" text="{Trade_Id}" class="link" subtle="true" press="oTradeHistoryLinkPress" wrapping="false"/>
 											<!--<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="false"/>-->
+										<Text text="{Requested_Vtn}" wrapping="false"/>
+											<Text text="{Requested_Vin}" wrapping="false"/>
 											<Text text="{i18n>From}" wrapping="false"/>
 											<Text
 												text="{= ${RequestingDealerVisible} === true ?${Requested_Dealer}:${Requesting_Dealer}}-{= ${RequestingDealerVisible} === true ?${Requested_Dealer_Name}:${Requesting_Dealer_Name}}"/>
-											<Text text="{Requested_Vtn}" wrapping="false"/>
+											
 											<Text text="{Model}-{Model_Desc}"/>
 											<Text text="{Suffix} - {Suffix_Desc}/{Int_Colour_Desc}"/>
 											<Text text="{Ext_Colour}-{Ext_Colour_Desc}"/>
