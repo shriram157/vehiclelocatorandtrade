@@ -667,6 +667,28 @@ this.getView().byId("VLRColor1").setEnabled(false);
 				//filterArray.push(new sap.ui.model.Filter("non_D_flag", sap.ui.model.FilterOperator.Contains, "X"));
 				//filterArray.push(new sap.ui.model.Filter("non_D_flag", sap.ui.model.FilterOperator.Contains," " ));
 			}
+				var selectedModel = this.getView().byId("McCmbo").getSelectedKey();
+				if (selectedModel != "" && selectedModel != "all") {
+
+			filterArray.push(new sap.ui.model.Filter("matnr", sap.ui.model.FilterOperator.Contains, selectedModel));
+
+			} else if (selectedModel == "all") {
+
+				// var SelColor = this.getView().byId("table1VSR").getBinding("rows").getModel().getData(); //guna
+				var SelModel = this.getView().getModel("vehicleSelectTableModel").getData();
+				for (var i = 0; i < SelModel.length; i++) {
+				
+					filterArray.push(new sap.ui.model.Filter("matnr", sap.ui.model.FilterOperator.Contains, SelModel[i].matnr));
+				
+
+				}
+
+			}
+			// if (selectedAccessInstalled == "Yes") {
+				//filterArray.push(new sap.ui.model.Filter("non_D_flag", sap.ui.model.FilterOperator.Contains,"X" ));
+				
+				//filterArray.push(new sap.ui.model.Filter("non_D_flag", sap.ui.model.FilterOperator.Contains," " ));
+		
 
 			this.byId("vehicleSelectTable")
 				.getBinding("items")
@@ -945,6 +967,11 @@ this.getView().byId("VLRColor1").setEnabled(false);
 					/*	 sap.ui.core.BusyIndicator.hide();*/
 				}
 			});
+			this.getView().byId("VLRStatus1").setEnabled(false);
+this.getView().byId("AcceInstalledCobmo1").setEnabled(false);
+this.getView().byId("VLRSuffix1").setEnabled(false);
+this.getView().byId("VLRColor1").setEnabled(false);
+
 			that.oCatUrl = this.nodeJsUrl + "/Z_VEHICLE_CATALOGUE_SRV";
 				var ModelCode = that.oCatUrl + "/ZC_MODEL_DETAILS?$filter=TCISeries eq '" + Series + "'";
 			var ajax1 = $.ajax({
@@ -1112,6 +1139,8 @@ this.getView().byId("VLRColor1").setEnabled(false);
 				success: function (result) {
 					var Suffix = result.d.results;
 					var SuffixData=[];
+					if(Suffix.length!=0)
+					{
 				for (var i = 0; i < Suffix.length; i++) {
 					var obj = {};
 					obj.zzsuffix = Suffix[i].Suffix;
@@ -1151,7 +1180,6 @@ this.getView().byId("VLRColor1").setEnabled(false);
 					}
 
 				}
-				sap.ui.core.BusyIndicator.hide();
 					var SuffixModel = new sap.ui.model.json.JSONModel(Suffix);
 					sap.ui.getCore().setModel(SuffixModel, "suffixModel");
 						that.getView().byId("VLRStatus1").setEnabled(true);
@@ -1159,6 +1187,38 @@ that.getView().byId("AcceInstalledCobmo1").setEnabled(true);
 that.getView().byId("VLRSuffix1").setEnabled(true);
 that.getView().byId("VLRColor1").setEnabled(true);
 					that.SuffixDescription();
+					}
+					else
+					{
+							if (that.getView().byId("VLRSuffix1").getItems().filter(function (x) {
+						return x.mProperties.key == "all"
+					}).length == 0) {
+
+					if (that.sCurrentLocale == 'EN') {
+						var newItem = new sap.ui.core.Item({
+							key: "all",
+							text: "ALL"
+						});
+						that.getView().byId("VLRSuffix1").insertItem(newItem);
+					} else {
+
+						var newItem = new sap.ui.core.Item({
+							key: "all",
+							text: "TOUS"
+						});
+						that.getView().byId("VLRSuffix1").insertItem(newItem);
+
+					}
+
+				}
+	that.getView().byId("VLRStatus1").setEnabled(false);
+that.getView().byId("AcceInstalledCobmo1").setEnabled(false);
+that.getView().byId("VLRSuffix1").setEnabled(false);
+that.getView().byId("VLRColor1").setEnabled(false);
+that.getView().byId("VLRSuffix1").setSelectedKey("all");
+					}
+									sap.ui.core.BusyIndicator.hide();
+
 				},
 				error: function () {
 					sap.ui.core.BusyIndicator.hide();
