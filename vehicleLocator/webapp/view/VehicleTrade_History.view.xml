@@ -165,12 +165,7 @@
 										<!--<Text text="{path:'kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'} -{name1}" wrapping="false"/>-->
 										<!--</t:template>-->
 									</Column>
-									<Column id="matnr">
-										<Text text="{i18n>VehicleTrackingNumber}"/>
-										<!--<t:template>-->
-										<!--	<Text text="{Requested_Vtn}" wrapping="false"/>-->
-										<!--</t:template>-->
-									</Column>
+								
 									<Column>
 										<Text text="{i18n>Model}"/>
 										<!--<t:template>-->

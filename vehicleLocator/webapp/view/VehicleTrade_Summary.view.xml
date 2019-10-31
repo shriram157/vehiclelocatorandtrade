@@ -75,25 +75,34 @@
 										<!--<Title id="tableHeader2" text="{detailView>/tableCount}"/>-->
 										<Label text="{i18n>ReceivedTradeRequests}" class="flexdontclabllist"/>
 										<ToolbarSpacer/>
+							<SearchField id="searchVehicleList" liveChange="onLiveChange" showSearchButton="true" placeholder="{i18n>placeHolderText}">
+								<layoutData>
+									<OverflowToolbarLayoutData minWidth="200px" maxWidth="300px" shrinkable="true"/>
+								</layoutData>
+							</SearchField>
 										<Button tooltip="Sort table by selected fields" icon="sap-icon://sort" press="receivedTradeRequestSortDialogButtonPressed"
 											text="{i18n>Sorting}"/>
 									</OverflowToolbar>
+									
 								</headerToolbar>
 								<columns>
 									<Column id="ORequlinlId1" demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="5%">
 										<Text text="{i18n>Request}"/>
 									</Column>
-									<!--<Column demandPopin="true" minScreenWidth="Tablet" hAlign="Left">-->
-									<!--	<Text text="{i18n>Created}"/>-->
-									<!--</Column>-->
-									<Column demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="15%">
+									<Column demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="10%">
+										<Text text="{i18n>Created}"/>
+									</Column>
+									<Column demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="10%">
 										<Text text="{i18n>Dealer}"/>
 									</Column>
-									<Column demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="25%">
+									<Column demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="20%">
 										<Text text="{i18n>Model}"/>
 									</Column>
 									<Column id="oSuffixVT1" demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="15%">
 										<Text text="{i18n>Suffix}"/>
+									</Column>
+									<Column demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="20%">
+										<Text text="{i18n>Color}"/>
 									</Column>
 									<Column demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="5%">
 										<Text text="{i18n>TradeinReturn}"/>
@@ -101,9 +110,9 @@
 									<Column demandPopin="true" minScreenWidth="Tablet" width="10%">
 										<Text text="{i18n>Status}"/>
 									</Column>
-									<!--<Column demandPopin="true" minScreenWidth="Tablet">-->
-									<!--	<Text text="{i18n>StatusUpdatedDate}" wrapping="true"/>-->
-									<!--</Column>-->
+									<Column demandPopin="true" minScreenWidth="Tablet" width="5%">
+										<Text text="{i18n>StatusUpdatedDate}" wrapping="true"/>
+									</Column>
 								</columns>
 							</Table>
 							<ScrollContainer height="325px" vertical="true" focusable="true">
@@ -112,22 +121,31 @@
 									modeAnimationOn="true">
 									<columns>
 										<Column width="5%"></Column>
+										<Column width="10%"></Column>
+										<Column width="10%"></Column>
+										<Column width="20%"></Column>
 										<Column width="15%"></Column>
-										<Column width="25%"></Column>
-										<Column width="15%"></Column>
+										<Column width="20%"></Column>
 										<Column width="5%"></Column>
 										<Column width="10%"></Column>
+										<Column width="5%"></Column>
 									</columns>
 									<items>
 										<ColumnListItem type="Active" press="oMyRequestLinkPress" id="onlinkPress2">
 											<cells>
 												<Link id="otradIdz2" text="{receivedRequestTable>Trade_Id}" class="link" subtle="true" press="oMyRequestLinkPress" wrapping="true"/>
+												<Text text="{path:'receivedRequestTable>Created_On',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate' }" wrapping="true"/>
+
 												<Text
 													text="{path:'receivedRequestTable>Requesting_Dealer',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDealer'}-{receivedRequestTable>Requesting_Dealer_Name}"></Text>
 												<Text text="{receivedRequestTable>Model}-{receivedRequestTable>Model_Desc}" wrapping="true"/>
 												<Text text="{receivedRequestTable>Suffix}-{receivedRequestTable>Suffix_Desc}/{receivedRequestTable>Int_Colour_Desc}" wrapping="true"/>
+												<Text text="{receivedRequestTable>Ext_Colour}-{receivedRequestTable>Ext_Colour_Desc}}" wrapping="true"/>
+
 												<Text text="{path:'receivedRequestTable>Trade_Return',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryTrdReturn'}" wrapping="true"/>
 												<Text text="{path:'receivedRequestTable>Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="true"/>
+												<Text text="{path:'receivedRequestTable>Changed_on',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="true"/>
+
 											</cells>
 										</ColumnListItem>
 									</items>
@@ -161,6 +179,11 @@
 								<!--<Title id="tableHeader1" text="{detailView>/tableCount}"/>-->
 								<Label text="{i18n>MyTradeRequests}" class="flexdontclabllist"/>
 								<ToolbarSpacer/>
+							<SearchField  liveChange="onLiveChangeMTR" showSearchButton="true" placeholder="{i18n>placeHolderText}">
+								<layoutData>
+									<OverflowToolbarLayoutData minWidth="200px" maxWidth="300px" shrinkable="true"/>
+								</layoutData>
+							</SearchField>
 								<Button tooltip="Sort table by selected fields" icon="sap-icon://sort" press="handleViewSettingsDialogButtonPressed" text="{i18n>Sorting}"/>
 							</OverflowToolbar>
 						</headerToolbar>
@@ -174,19 +197,22 @@
 							<Column demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="10%">
 								<Text text="{i18n>Dealer}"/>
 							</Column>
-							<Column demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="25%">
+							<Column demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="20%">
 								<Text text="{i18n>Model}"/>
 							</Column>
 							<Column id="oSuffixVT" demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="15%">
 								<Text text="{i18n>Suffix}"/>
 							</Column>
+							<Column  demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="20%">
+								<Text text="{i18n>Color}"/>
+							</Column>
 							<Column demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="5%">
 								<Text text="{i18n>TradeinReturn}"/>
 							</Column>
-							<Column demandPopin="true" minScreenWidth="Tablet" width="5%">
+							<Column demandPopin="true" minScreenWidth="Tablet" width="10%">
 								<Text text="{i18n>Status}"/>
 							</Column>
-							<Column demandPopin="true" minScreenWidth="Tablet" width="10%">
+							<Column demandPopin="true" minScreenWidth="Tablet" width="5%">
 								<Text text="{i18n>StatusUpdatedDate}" wrapping="true"/>
 							</Column>
 						</columns>
@@ -204,14 +230,15 @@
 							<!--    </OverflowToolbar>-->
 							<!--</headerToolbar>-->
 							<columns>
-								<Column width="5%"></Column>
-								<Column width="10%"></Column>
-								<Column width="10%"></Column>
-								<Column width="25%"></Column>
-								<Column width="15%"></Column>
-								<Column width="5%"></Column>
-								<Column width="5%"></Column>
-								<Column width="10%"></Column>
+										<Column width="5%"></Column>
+										<Column width="10%"></Column>
+										<Column width="10%"></Column>
+										<Column width="20%"></Column>
+										<Column width="15%"></Column>
+										<Column width="20%"></Column>
+										<Column width="5%"></Column>
+										<Column width="10%"></Column>
+										<Column width="5%"></Column>
 								<!--<Column id="ORequlinlId" demandPopin="true" minScreenWidth="Tablet"   -->
 								<!--        hAlign="Left">-->
 								<!--    <Text text="{i18n>Request}" />-->
@@ -250,6 +277,8 @@
 											wrapping="true"/>
 										<Text text="{vehicleTradeSummaryTable>Model}-{vehicleTradeSummaryTable>Model_Desc}" wrapping="true"/>
 										<Text text="{vehicleTradeSummaryTable>Suffix}-{vehicleTradeSummaryTable>Suffix_Desc}/{vehicleTradeSummaryTable>Int_Colour_Desc}"
+											wrapping="true"/>
+										<Text text="{vehicleTradeSummaryTable>Ext_Colour}-{vehicleTradeSummaryTable>Ext_Colour_Desc}}"
 											wrapping="true"/>
 										<Text text="{path:'vehicleTradeSummaryTable>Trade_Return',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryTrdReturn'}"
 											wrapping="false"/>

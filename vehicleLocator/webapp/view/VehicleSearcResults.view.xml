@@ -116,7 +116,8 @@
 						</l:Grid>
 					</f:content>
 				</f:SimpleForm>
-				<Table showNoData="false" class="sapUiResponsiveMargin" alternateRowColors="true" width="98%" >
+					<ScrollContainer vertical="true" focusable="true" height="70%" width="99%" >
+				<Table showNoData="false" class="sapUiResponsiveMargin" alternateRowColors="true"  >
 					<headerToolbar >
 						<OverflowToolbar id="otbSubheader">
 							<Title id="tableHeader" text="{detailView>/tableCount}"/>
@@ -172,7 +173,7 @@
 					</columns>
 				</Table>
 				<!--Table with data without header row inside scroll container -->
-				<ScrollContainer vertical="true" focusable="true" height="70%" width="99%" >
+				<!--<ScrollContainer vertical="true" focusable="true" height="70%" width="99%" >-->
 					<Table id="table1VSR"  class="sapUiResponsiveMargin" alternateRowColors="true" 
 						items="{ path: 'vehicleSearchTableModel>/', sorter: { path: 'pstsp', ascending: true } }" noDataText="{i18n>NoData}"
 						updateFinished="onUpdateFinished" mode="{detailView>/zoneUserDelete}" modeAnimationOn="true" growing="true" growingThreshold="200">
