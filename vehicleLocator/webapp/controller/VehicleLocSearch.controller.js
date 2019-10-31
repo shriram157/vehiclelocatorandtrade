@@ -40,7 +40,6 @@ sap.ui.define([
 				this.currentScopeUrl = "/userDetails/currentScopesForUser";
 
 			}
-			debugger;
 			// detail view model instantiation. 
 			this._oViewModel = new sap.ui.model.json.JSONModel({
 				busy: false,

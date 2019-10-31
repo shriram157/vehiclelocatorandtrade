@@ -96,16 +96,15 @@ sap.ui.define(function () {
 				break;
 			case "DNC":
 				// return "DNC";
-				var sTextFromi18n = "DNC";     //this.getModel("i18n").getResourceBundle().getText("Mobility");
+				var sTextFromi18n = "DNC"; //this.getModel("i18n").getResourceBundle().getText("Mobility");
 				return sTextFromi18n;
-				break;	
+				break;
 			case "DN":
 				// return "DNC";
-				var sTextFromi18n = "DNC";     //this.getModel("i18n").getResourceBundle().getText("Mobility");
+				var sTextFromi18n = "DNC"; //this.getModel("i18n").getResourceBundle().getText("Mobility");
 				return sTextFromi18n;
-				break;			
-				
-				
+				break;
+
 			}
 
 		},
@@ -128,20 +127,20 @@ sap.ui.define(function () {
 			},*/
 		AccessoryInstall: function (non_D_flag, pd_flag) {
 			if (pd_flag == "" && non_D_flag == "") {
-					var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("No");
+				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("No");
 				return sTextFromi18n;
 				// return "No";
 			} else if (pd_flag == "" && non_D_flag == "X") {
-					var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("No");
+				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("No");
 				return sTextFromi18n;
 				// return "No";
 			} else if (pd_flag == "D" && non_D_flag == "") {
 				// return "Yes";
-								var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("Yes");
+				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("Yes");
 				return sTextFromi18n;
 			} else if (pd_flag == "D" && non_D_flag == "X") {
 				// return "Yes";
-								var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("Yes");
+				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("Yes");
 				return sTextFromi18n;
 			}
 
@@ -150,16 +149,16 @@ sap.ui.define(function () {
 		DNC: function (DNC) {
 			if (DNC == "X") {
 				// return "Yes";
-								var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("Yes");
+				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("Yes");
 				return sTextFromi18n;
 			} else if (DNC == null || DNC == "N") {
-					var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("No");
+				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("No");
 				return sTextFromi18n;
 				// return "No";
 			} else if (DNC == "Y") {
 
 				// return "Yes";
-								var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("Yes");
+				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("Yes");
 				return sTextFromi18n;
 			}
 
@@ -291,82 +290,85 @@ sap.ui.define(function () {
 				} else {
 					dateTo = dateTo;
 					var dataTo1 = Number(dateTo.replace(/[^A-Z\d\s]/gi, '').replace(/[^0-9\.]+/g, ""));
-					 var ValidTo = new Date(dataTo1);
- 
-				var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
-					pattern: "yyyy-MM-dd"
-				});
-				return oDateFormat.format(new Date(ValidTo));
- 
+					var ValidTo = new Date(dataTo1);
+
+					var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+						pattern: "yyyy-MM-dd"
+					});
+					return oDateFormat.format(new Date(ValidTo));
+
 				}
 
 			} else if (Created_On != null && Created_On.getMonth) {
-				
-				
+
 				var dateAsReceived = moment.tz(Created_On, "GMT");
 				var returnThisDate = moment(dateAsReceived).format('YYYY-MM-DD');
-				
+
 				// var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 				// 	pattern: "yyyy-MM-dd"
 				// });
-			
-					return returnThisDate;
+
+				return returnThisDate;
 			} else {
 				return "";
 			}
 		},
-		
-			TradeSummaryoDateModelBlock: function (Created_On) {
- 
-				
-				 var dateFormat = sap.ui.core.format.DateFormat.getDateInstance({
-				          pattern: "yyyy-MM-dd"
-				});
-				var returnThisDate = dateFormat.format(new Date(Created_On), true); // utc format to true will retain the date as sent from SAP GSR
- 
- 
-					return returnThisDate;
-			},
-			
-			TradeSummaryoDate: function (Created_On) {
-			if (Created_On != null && Created_On != "" && Created_On != "/Date(0)/" && !Created_On.getMonth) {
-				var dateTo = Created_On.split("(")[1];
-				if (Created_On.indexOf("+") != -1) {
-					/*dateTo = dateTo.split("+")[0];*/
-					Created_On = new Date(Created_On.split("(")[1].substring(0, 10) * 1000).toDateString().substring(4, 15);
-					var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
-						pattern: "yyyy-MM-dd"
-					});
-					return oDateFormat.format(new Date(Created_On));
 
-				} else {
-					dateTo = dateTo;
-					var dataTo1 = Number(dateTo.replace(/[^A-Z\d\s]/gi, '').replace(/[^0-9\.]+/g, ""));
-					// var ValidTo = new Date(dataTo1);
-					var ValidTo = new Date(dataTo1).toUTCString();
-					// var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
-					// 	pattern: "yyyy-MM-dd"
-					// });
+		TradeSummaryoDateModelBlock: function (Created_On) {
 
-					var dateAsReceived = moment.tz(ValidTo, "GMT");
+			var dateFormat = sap.ui.core.format.DateFormat.getDateInstance({
+				pattern: "yyyy-MM-dd"
+			});
+			var returnThisDate = dateFormat.format(new Date(Created_On), true); // utc format to true will retain the date as sent from SAP GSR
 
-					var returnThisDate = moment(dateAsReceived).format('YYYY-MM-DD');
+			return returnThisDate;
+		},
 
-					return returnThisDate;
-
-					// return ValidTo;
-					//return oDateFormat.format(new Date(ValidTo));
-					// return oDateFormat.format(new Date(ValidTo).toUTCString());
-				}
-
-			} else if (Created_On != null && Created_On.getMonth) {
-				var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
-					pattern: "yyyy-MM-dd"
-				});
-				return oDateFormat.format(Created_On);
+		TradeSummaryoDate: function (Created_On) {
+			var Oval;
+			if (Created_On) {
+				//var oText = val.toUTCString();
+				Oval = moment.utc(Created_On).format("YYYY-MM-DD");
 			} else {
-				return "";
+				Oval = null;
 			}
+			return Oval;
+
+			// 			if (Created_On != null && Created_On != "" && Created_On != "/Date(0)/" && !Created_On.getMonth) {
+			// 				var dateTo = Created_On.split("(")[1];
+			// 				if (Created_On.indexOf("+") != -1) {
+			// 					/*dateTo = dateTo.split("+")[0];*/
+			// 					Created_On = new Date(Created_On.split("(")[1].substring(0, 10) * 1000).toDateString().substring(4, 15);
+			// 					var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+			// 						pattern: "yyyy-MM-dd"
+			// 					});
+			// 					return oDateFormat.format(new Date(Created_On));
+
+			// 				} else {
+			// 					dateTo = dateTo;
+			// 					var dataTo1 = Number(dateTo.replace(/[^A-Z\d\s]/gi, '').replace(/[^0-9\.]+/g, ""));
+			// 					// var ValidTo = new Date(dataTo1);
+			// 					var ValidTo = new Date(dataTo1).toUTCString();
+			// 					// var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+			// 					// 	pattern: "yyyy-MM-dd"
+			// 					// });
+
+			// 					var dateAsReceived = moment.tz(ValidTo, "GMT");
+
+			// 					var returnThisDate = moment(dateAsReceived).format('YYYY-MM-DD');
+
+			// 					return returnThisDate;
+
+			// 				}
+
+			// 			} else if (Created_On != null && Created_On.getMonth) {
+			// 				var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+			// 					pattern: "yyyy-MM-dd"
+			// 				});
+			// 				return oDateFormat.format(Created_On);
+			// 			} else {
+			// 				return "";
+			// 			}
 		},
 		ProposedEtaToDate: function (Proposed_ETA_To) {
 			var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
