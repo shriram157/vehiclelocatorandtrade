@@ -260,16 +260,24 @@
 			}
 		},
 	     "resources": {
-            "js": [{
-                "uri": "lib/moment-with-locales.js"
-            },
-            {
-                "uri": "lib/moment-timezone-with-data.js"
-            }, {
-                "uri": "lib/underscore.js"
-            }, {
-               "uri": "lib/changeFabicon.js"
-            }
+            "js": [
+                    {
+                        "uri": "lib/moment.js"
+                    },
+                    {
+                        "uri": "lib/moment-with-locales.js"
+                    },
+                    {
+                        "uri": "lib/moment-timezone-with-data.js"
+                    }, {
+                        "uri": "lib/underscore.js"
+                    }, 
+                    {
+                       "uri": "lib/changeFabicon.js"
+                    },
+                    {
+        				"uri": "Formatter/Formatter.js"
+        			}
             
             ],
              "css": [{

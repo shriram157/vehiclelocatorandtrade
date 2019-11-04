@@ -12,7 +12,7 @@ sap.ui.define([
 	'sap/m/Text'
 ], function (BaseController, JSONModel, ResourceModel, MessageBox, History, Formatter, MessageToast, Button, Dialog, Text) {
 	"use strict";
-	var oController;
+	var oController,sCurrentLocaleD;
 	return BaseController.extend("vehicleLocator.controller.VehcTrad_Apprv_Rej_CounTrad", {
 		onInit: function () {
 			var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
@@ -228,7 +228,7 @@ sap.ui.define([
 
 						success: function (oData) {
 
-							// debugger;
+							debugger;
 							var Data = oData.d.results;
 							var Trade_Comment = Data.filter(function (x) {
 								return x["Trade_Id"] == Tradeid;
@@ -506,7 +506,7 @@ sap.ui.define([
 
 						success: function (oData) {
 
-							// debugger;
+							debugger;
 							var Data = oData.d.results;
 							var Trade_Comment = Data.filter(function (x) {
 								return x["Trade_Id"] == Tradeid;
@@ -757,7 +757,7 @@ sap.ui.define([
 
 					success: function (oData) {
 
-						// debugger;
+						debugger;
 						var Data = oData.d.results;
 						var Trade_Comment = Data.filter(function (x) {
 							return x["Trade_Id"] == Tradeid;
@@ -925,7 +925,7 @@ sap.ui.define([
 
 							success: function (oData) {
 
-								// debugger;
+								debugger;
 								var Data = oData.d.results;
 
 								// console.log("additional Comment", 	local.oViewModel);
@@ -985,7 +985,7 @@ sap.ui.define([
 
 		},
 		oAccept: function () {
-			// debugger;
+			debugger;
 			//  dated June 4th.  
 			sap.ui.core.BusyIndicator.show();
 			// also disable the accept button, preventing the user not to double click. 
@@ -1163,7 +1163,7 @@ sap.ui.define([
 							actions: [sap.m.MessageBox.Action.OK],
 							onClose: fnCallbackMessageBox1
 						});
-						// debugger;
+						debugger;
 
 					}
 				},
@@ -1706,7 +1706,7 @@ sap.ui.define([
 						that.oDataModel.update(UpdatedTreadeEntity, oEntry, {
 							merge: true
 						}, function (s) {
-							// debugger
+							debugger
 
 							if (dncBlockedDays != 0 && dncBlockedDays != "") {
 								that.DNCBlockoutDays();
@@ -2022,7 +2022,7 @@ sap.ui.define([
 			that.oDataModel.update(UpdatedTreadeEntity, oEntry, {
 				merge: true
 			}, function (s) {
-				// debugger
+				debugger
 
 				that.getRouter().navTo("VehicleTrade_Summary", {
 					DataClicked: "Yes"
@@ -2154,8 +2154,13 @@ sap.ui.define([
 			that.oDataModel.update(UpdatedTreadeEntity, oEntry, {
 				merge: true
 			}, function (s) {
-				// debugger
+				debugger
 
+				/*	that.TradeComment(oEntry);
+					that.TradeVehcles(oEntry);
+					that.TradeStatus(oEntry);
+					that.VehicleTrade_Summary();
+				*/
 				that.getRouter().navTo("VehicleTrade_Summary", {
 					DataClicked: "Yes"
 				});
@@ -2182,6 +2187,7 @@ sap.ui.define([
 
 		VehicleTrade_SummaryData: function (StatusData) {
 			var that = this;
+			local = this;
 			this.StatusData = StatusData;
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
@@ -2207,401 +2213,494 @@ sap.ui.define([
 					},*/
 				url: that.TradeRequestoDataUrl,
 				async: true,
-				success: function (result) {}
-			});
-			//(Trade_Id='TR047813',VTN='52800')
-			that.TradeVehiclesDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeVehicles(Trade_Id='" + that.StatusData.Trade_Id +
-				"',VTN='" + that.StatusData.VTN + "')";
-			/*var /zc_mmfields*/
-			var ajax2 = $.ajax({
-				dataType: "json",
-				xhrFields: //
-				{
-					withCredentials: true
-				},
-				url: that.TradeVehiclesDataUrl,
-				async: true,
-				success: function (result) {}
-			});
-			//adding filters against fix for 
-			var query = "(Trade_Id='" + that.StatusData.Trade_Id + "',VTN='" + that.StatusData.VTN + "',SPRAS='" + that.StatusData.SPRAS + "')";
-			that.oTradeVehicleDescDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeVehicleDesc" + query;
-			/*	var oTradeVehicleDesc = that.oDataUrl + "/TradeVehicleDesc";*/
-			var ajax3 = $.ajax({
-				dataType: "json",
-				xhrFields: //
-				{
-					withCredentials: true
-				},
-				url: that.oTradeVehicleDescDataUrl,
-				async: true,
-				success: function (result) {}
-			});
-
-			sap.ui.core.BusyIndicator.show();
-			var that = this;
-			$.when(ajax1, ajax2, ajax3).done(function (TradeRequest, TradeVehicles, oTradeVehicleDesc) {
-				var Trade_Id = that.StatusData.Trade_Id;
-
-				var TradeRequest = TradeRequest[0].d;
-				// .results;
-				// if (!!TradeRequest) {
-				// 	TradeRequest = TradeRequest.filter(function (x) {
-				// 		return x.Trade_Id == Trade_Id
-				// 	});
-				// }
-
-				var TradeVehicles = TradeVehicles[0].d;
-				// .results;
-				// if (!!TradeVehicles) {
-				// 	TradeVehicles = TradeVehicles.filter(function (x) {
-				// 		return x["Trade_Id"] == Trade_Id
-				// 	})
-				// }
-
-				var oTradeVehicleDesc = oTradeVehicleDesc[0].d;
-				// .results;
-				// if (!!oTradeVehicleDesc) {
-				// 	oTradeVehicleDesc = oTradeVehicleDesc.filter(function (x) {
-				// 		return x["Trade_Id"] == Trade_Id
-				// 	})
-				// }
-				// if (!!TradeRequest && !!TradeVehicles) {
-				// for (var i = 0; i < TradeRequest.length; i++) {
-				// 	for (var j = 0; j < TradeVehicles.length; j++) {
-				if (TradeRequest.Trade_Id == TradeVehicles.Trade_Id) {
-					/*TradeRequest[i].push(TradeVehicles[j]);*/
-					TradeVehicles.Requesting_Dealer = TradeRequest.Requesting_Dealer;
-					TradeVehicles.Requesting_Dealer_Name = TradeRequest.Requesting_Dealer_Name;
-					TradeVehicles.Requested_Dealer = TradeRequest.Requested_Dealer;
-					TradeVehicles.Requested_Dealer_Name = TradeRequest.Requested_Dealer_Name;
-					TradeVehicles.Requested_Vtn = TradeRequest.Requested_Vtn;
-					TradeVehicles.Offered_Vtn = TradeRequest.Offered_Vtn;
-					TradeVehicles.Req_Current_ETA_From = TradeRequest.Req_Current_ETA_From;
-					TradeVehicles.Req_Current_ETA_To = TradeRequest.Req_Current_ETA_To;
-					TradeVehicles.Req_Proposed_ETA_From = TradeRequest.Req_Proposed_ETA_From;
-					TradeVehicles.Req_Proposed_ETA_To = TradeRequest.Req_Proposed_ETA_To;
-					TradeVehicles.Off_Current_ETA_From = TradeRequest.Off_Current_ETA_From;
-					TradeVehicles.Off_Current_ETA_To = TradeRequest.Off_Current_ETA_To;
-					TradeVehicles.Off_Proposed_ETA_From = TradeRequest.Off_Proposed_ETA_From;
-					TradeVehicles.Off_Proposed_ETA_To = TradeRequest.Off_Proposed_ETA_To;
-					TradeVehicles.Created_By = TradeRequest.Created_By;
-					TradeVehicles.Created_On = TradeRequest.Created_On;
-					TradeVehicles.Changed_on = TradeRequest.Changed_on;
-					TradeVehicles.Trade_Id = TradeRequest.Trade_Id;
-					TradeVehicles.Trade_Return = TradeRequest.Trade_Return;
-					TradeVehicles.Trade_Status = TradeRequest.Trade_Status;
+				success: function (result) {
+					that.TradeRequest = result.d;
+					that.TradeRequest.StatusData = that.StatusData;
+					that.TradeRequest.nodeJsUrl = that.nodeJsUrl;
+					console.log("TradeRequest", that.TradeRequest);
 				}
-				// 	}
+			});
+			$.when(ajax1).done(function (TradeRequest) {
+
+				// local = this;
+				TradeRequest = TradeRequest.d;
+				var that = this;
+				that.StatusData = TradeRequest.StatusData;
+				// if(!that.StatusData.SPRAS){
+				// 	that.StatusData.SPRAS = "E";
 				// }
-				var filtered = TradeVehicles;
-				// }
-				var Spars;
-				if (that.sCurrentLocaleD == "French") {
-					Spars = "F";
+				that.nodeJsUrl = TradeRequest.nodeJsUrl;
+				if (TradeRequest.Trade_Return == "Y") {
+					that.TradeVehiclesDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeVehicles(Trade_Id='" + TradeRequest.Trade_Id +
+						"',VTN='" + TradeRequest.Requested_Vtn + "')";
+					/*var /zc_mmfields*/
+					var ajaxRequested_Vtn = $.ajax({
+						dataType: "json",
+						xhrFields: //
+						{
+							withCredentials: true
+						},
+						url: that.TradeVehiclesDataUrl,
+						async: true,
+						success: function (result) {}
+					});
+
+					//adding filters against fix for 
+					var query = "(Trade_Id='" + TradeRequest.Trade_Id + "',VTN='" + TradeRequest.Requested_Vtn + "',SPRAS='" + that.StatusData.SPRAS +
+						"')";
+					that.oTradeVehicleDescDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeVehicleDesc" + query;
+					/*	var oTradeVehicleDesc = that.oDataUrl + "/TradeVehicleDesc";*/
+					var ajaxRequested_Vtn3 = $.ajax({
+						dataType: "json",
+						xhrFields: //
+						{
+							withCredentials: true
+						},
+						url: that.oTradeVehicleDescDataUrl,
+						async: true,
+						success: function (result) {}
+					});
+					that.TradeVehiclesDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeVehicles(Trade_Id='" + TradeRequest.Trade_Id +
+						"',VTN='" + TradeRequest.Offered_Vtn + "')";
+					/*var /zc_mmfields*/
+					var ajaxOffered_Vtn = $.ajax({
+						dataType: "json",
+						xhrFields: //
+						{
+							withCredentials: true
+						},
+						url: that.TradeVehiclesDataUrl,
+						async: true,
+						success: function (result) {}
+					});
+
+					//adding filters against fix for 
+					var query = "(Trade_Id='" + TradeRequest.Trade_Id + "',VTN='" + TradeRequest.Offered_Vtn + "',SPRAS='" + that.StatusData.SPRAS +
+						"')";
+					that.oTradeVehicleDescDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeVehicleDesc" + query;
+					/*	var oTradeVehicleDesc = that.oDataUrl + "/TradeVehicleDesc";*/
+					var ajaxOffered_Vtn3 = $.ajax({
+						dataType: "json",
+						xhrFields: //
+						{
+							withCredentials: true
+						},
+						url: that.oTradeVehicleDescDataUrl,
+						async: true,
+						success: function (result) {}
+					});
 				} else {
-					Spars = "E";
+					//(Trade_Id='TR047813',VTN='52800')
+					that.TradeVehiclesDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeVehicles(Trade_Id='" + TradeRequest.Trade_Id +
+						"',VTN='" + TradeRequest.Requested_Vtn + "')";
+					/*var /zc_mmfields*/
+					var ajaxRequested_Vtn = $.ajax({
+						dataType: "json",
+						xhrFields: //
+						{
+							withCredentials: true
+						},
+						url: that.TradeVehiclesDataUrl,
+						async: true,
+						success: function (result) {}
+					});
+
+					//adding filters against fix for 
+					var query = "(Trade_Id='" + TradeRequest.Trade_Id + "',VTN='" + TradeRequest.Requested_Vtn + "',SPRAS='" + that.StatusData.SPRAS +
+						"')";
+					that.oTradeVehicleDescDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeVehicleDesc" + query;
+					/*	var oTradeVehicleDesc = that.oDataUrl + "/TradeVehicleDesc";*/
+					var ajaxRequested_Vtn3 = $.ajax({
+						dataType: "json",
+						xhrFields: //
+						{
+							withCredentials: true
+						},
+						url: that.oTradeVehicleDescDataUrl,
+						async: true,
+						success: function (result) {}
+					});
 				}
 
-				var finalArray = [];
-				// if (!!filtered) {
-				// for (var k = 0; k < filtered.length; k++) {
-				// if (!!oTradeVehicleDesc) {
-				// for (var l = 0; l < oTradeVehicleDesc.length; l++) {
-				if (filtered.Trade_Id == oTradeVehicleDesc.Trade_Id && filtered.VTN == oTradeVehicleDesc.VTN &&
-					oTradeVehicleDesc.SPRAS == Spars) {
-					filtered.Ext_Colour_Desc = oTradeVehicleDesc.Ext_Colour_Desc;
-					filtered.Int_Colour_Desc = oTradeVehicleDesc.Int_Colour_Desc;
-					filtered.Model_Desc = oTradeVehicleDesc.Model_Desc;
-					filtered.SPRAS = oTradeVehicleDesc.SPRAS;
-					filtered.Series_Desc = oTradeVehicleDesc.Series_Desc;
-					filtered.Suffix_Desc = oTradeVehicleDesc.Suffix_Desc;
+				sap.ui.core.BusyIndicator.show();
+				var that = this;
+				if (!ajaxOffered_Vtn) ajaxOffered_Vtn = {};
+				if (!ajaxOffered_Vtn3) ajaxOffered_Vtn3 = {};
+				// if (ajaxOffered_Vtn && ajaxRequested_Vtn) {
+				$.when(ajaxOffered_Vtn, ajaxRequested_Vtn, ajaxRequested_Vtn3, ajaxOffered_Vtn3).done(function (TradeVehiclesO, TradeVehiclesR,
+					TradeVehicleDescR, TradeVehicleDescO) {
+					// local = this;
+					var Trade_Id = that.StatusData.Trade_Id;
 
-				}
-				// }
-				// }
-				// }
-				// for (var n = 0; n < filtered.length; n++) {
-					if ("Requesting_Dealer" in filtered) {
-						filtered.Requesting_Dealer = filtered.Requesting_Dealer;
+					// var TradeRequest = TradeRequest; //TradeRequest[0].d;
+					// .results;
+					// if (!!TradeRequest) {
+					// 	TradeRequest = TradeRequest.filter(function (x) {
+					// 		return x.Trade_Id == Trade_Id
+					// 	});
+					// }
+					if (TradeVehiclesO[0]) {
+						var Vehicles = [TradeVehiclesO[0].d, TradeVehiclesR[0].d];
+						var TradeVehicles = Vehicles.filter(function (x) {
+							return x["Trade_Id"] == Trade_Id;
+						});
 					} else {
-						filtered.Requesting_Dealer = "";
-					}
-
-					if ("Requesting_Dealer_Name" in filtered) {
-						filtered.Requesting_Dealer_Name = filtered.Requesting_Dealer_Name;
-					} else {
-						filtered.Requesting_Dealer_Name = "";
+						var Vehicles = [TradeVehiclesR[0].d];
+						var TradeVehicles = Vehicles.filter(function (x) {
+							return x["Trade_Id"] == Trade_Id;
+						});
 					}
 
-					if ("Requested_Dealer" in filtered) {
-						filtered.Requested_Dealer = filtered.Requested_Dealer;
+					if (TradeVehicleDescO[0]) {
+						var VehicleDesc = [TradeVehicleDescO[0].d, TradeVehicleDescR[0].d];
+						var oTradeVehicleDesc = VehicleDesc.filter(function (x) {
+							return x["Trade_Id"] == Trade_Id;
+						});
 					} else {
-						filtered.Requested_Dealer = "";
+						var VehicleDesc = [TradeVehicleDescR[0].d];
+						var oTradeVehicleDesc = VehicleDesc.filter(function (x) {
+							return x["Trade_Id"] == Trade_Id;
+						});
+					}
+					// var OfferedVehicleDesc = TradeVehicleDescO[0].d;
+					// var RequestedVehicleDesc=TradeVehicleDescR[0].d;
+
+					console.log("Vehicles", Vehicles);
+					console.log("VehicleDesc", VehicleDesc);
+					console.log("oTradeVehicleDesc", oTradeVehicleDesc);
+					console.log("TradeVehicles", TradeVehicles);
+
+					// if (!!TradeRequest && !!TradeVehicles) {
+					// for (var i = 0; i < TradeRequest.length; i++) {
+					for (var j = 0; j < TradeVehicles.length; j++) {
+						if (TradeRequest.Trade_Id == TradeVehicles[j].Trade_Id) {
+							/*TradeRequest[i].push(TradeVehicles[j]);*/
+							TradeVehicles[j].Requesting_Dealer = TradeRequest.Requesting_Dealer;
+							TradeVehicles[j].Requesting_Dealer_Name = TradeRequest.Requesting_Dealer_Name;
+							TradeVehicles[j].Requested_Dealer = TradeRequest.Requested_Dealer;
+							TradeVehicles[j].Requested_Dealer_Name = TradeRequest.Requested_Dealer_Name;
+							TradeVehicles[j].Requested_Vtn = TradeRequest.Requested_Vtn;
+							TradeVehicles[j].Offered_Vtn = TradeRequest.Offered_Vtn;
+							TradeVehicles[j].Req_Current_ETA_From = TradeRequest.Req_Current_ETA_From;
+							TradeVehicles[j].Req_Current_ETA_To = TradeRequest.Req_Current_ETA_To;
+							TradeVehicles[j].Req_Proposed_ETA_From = TradeRequest.Req_Proposed_ETA_From;
+							TradeVehicles[j].Req_Proposed_ETA_To = TradeRequest.Req_Proposed_ETA_To;
+							TradeVehicles[j].Off_Current_ETA_From = TradeRequest.Off_Current_ETA_From;
+							TradeVehicles[j].Off_Current_ETA_To = TradeRequest.Off_Current_ETA_To;
+							TradeVehicles[j].Off_Proposed_ETA_From = TradeRequest.Off_Proposed_ETA_From;
+							TradeVehicles[j].Off_Proposed_ETA_To = TradeRequest.Off_Proposed_ETA_To;
+
+							TradeVehicles[j].Created_By = TradeRequest.Created_By;
+							TradeVehicles[j].Created_On = TradeRequest.Created_On;
+							TradeVehicles[j].Changed_on = TradeRequest.Changed_on;
+							TradeVehicles[j].Trade_Id = TradeRequest.Trade_Id;
+							TradeVehicles[j].Trade_Return = TradeRequest.Trade_Return;
+							TradeVehicles[j].Trade_Status = TradeRequest.Trade_Status;
+						}
+					}
+					// }
+					var filtered = TradeVehicles;
+					// }
+					var Spars;
+					if (sCurrentLocaleD == "French") {
+						Spars = "F";
+					} else {
+						Spars = "E";
 					}
 
-					if ("Requested_Dealer_Name" in filtered) {
-						filtered.Requested_Dealer_Name = filtered.Requested_Dealer_Name;
-					} else {
-						filtered.Requested_Dealer_Name = "";
+					var finalArray = [];
+					// if (!!filtered) {
+					for (var k = 0; k < filtered.length; k++) {
+						// if (!!oTradeVehicleDesc) {
+						for (var l = 0; l < oTradeVehicleDesc.length; l++) {
+							if (filtered[k].Trade_Id == oTradeVehicleDesc[l]["Trade_Id"] && filtered[k].VTN == oTradeVehicleDesc[l]["VTN"] &&
+								oTradeVehicleDesc[l].SPRAS == Spars) {
+								filtered[k].Ext_Colour_Desc = oTradeVehicleDesc[l].Ext_Colour_Desc;
+								filtered[k].Int_Colour_Desc = oTradeVehicleDesc[l].Int_Colour_Desc;
+								filtered[k].Model_Desc = oTradeVehicleDesc[l].Model_Desc;
+								filtered[k].SPRAS = oTradeVehicleDesc[l].SPRAS;
+								filtered[k].Series_Desc = oTradeVehicleDesc[l].Series_Desc;
+								filtered[k].Suffix_Desc = oTradeVehicleDesc[l].Suffix_Desc;
+							}
+						}
+					}
+					// }
+					for (var n = 0; n < filtered.length; n++) {
+						if ("Requesting_Dealer" in filtered[n]) {
+							filtered[n].Requesting_Dealer = filtered[n].Requesting_Dealer;
+						} else {
+							filtered[n].Requesting_Dealer = "";
+						}
+
+						if ("Requesting_Dealer_Name" in filtered[n]) {
+							filtered[n].Requesting_Dealer_Name = filtered[n].Requesting_Dealer_Name;
+						} else {
+							filtered[n].Requesting_Dealer_Name = "";
+						}
+
+						if ("Requested_Dealer" in filtered[n]) {
+							filtered[n].Requested_Dealer = filtered[n].Requested_Dealer;
+						} else {
+							filtered[n].Requested_Dealer = "";
+						}
+
+						if ("Requested_Dealer_Name" in filtered[n]) {
+							filtered[n].Requested_Dealer_Name = filtered[n].Requested_Dealer_Name;
+						} else {
+							filtered[n].Requested_Dealer_Name = "";
+						}
+
+						if ("Requested_Vtn" in filtered[n]) {
+							filtered[n].Requested_Vtn = filtered[n].Requested_Vtn;
+						} else {
+							filtered[n].Requested_Vtn = "";
+						}
+
+						if ("Offered_Vtn" in filtered[n]) {
+							filtered[n].Offered_Vtn = filtered[n].Offered_Vtn;
+						} else {
+							filtered[n].Offered_Vtn = "";
+						}
+
+						if ("Req_Current_ETA_From" in filtered[n]) {
+							filtered[n].Req_Current_ETA_From = filtered[n].Req_Current_ETA_From;
+						} else {
+							filtered[n].Req_Current_ETA_From = "";
+						}
+
+						if ("Req_Current_ETA_To" in filtered[n]) {
+							filtered[n].Req_Current_ETA_To = filtered[n].Req_Current_ETA_To;
+						} else {
+							filtered[n].Req_Current_ETA_To = "";
+						}
+
+						if ("Req_Proposed_ETA_From" in filtered[n]) {
+							filtered[n].Req_Proposed_ETA_From = filtered[n].Req_Proposed_ETA_From;
+						} else {
+							filtered[n].Req_Proposed_ETA_From = "";
+						}
+
+						if ("Req_Proposed_ETA_To" in filtered[n]) {
+							filtered[n].Req_Proposed_ETA_To = filtered[n].Req_Proposed_ETA_To;
+						} else {
+							filtered[n].Req_Proposed_ETA_To = "";
+						}
+						if ("Off_Current_ETA_From" in filtered[n]) {
+							filtered[n].Off_Current_ETA_From = filtered[n].Off_Current_ETA_From;
+						} else {
+							filtered[n].Off_Current_ETA_From = "";
+						}
+
+						if ("Off_Current_ETA_To" in filtered[n]) {
+							filtered[n].Off_Current_ETA_To = filtered[n].Off_Current_ETA_To;
+						} else {
+							filtered[n].Off_Current_ETA_To = "";
+						}
+						if ("Off_Proposed_ETA_From" in filtered[n]) {
+							filtered[n].Off_Proposed_ETA_From = filtered[n].Off_Proposed_ETA_From;
+						} else {
+							filtered[n].Off_Proposed_ETA_From = "";
+						}
+						if ("Off_Proposed_ETA_To" in filtered[n]) {
+							filtered[n].Off_Proposed_ETA_To = filtered[n].Off_Proposed_ETA_To;
+						} else {
+							filtered[n].Off_Proposed_ETA_To = "";
+						}
+
+						if ("Created_By" in filtered[n]) {
+							filtered[n].Created_By = filtered[n].Created_By;
+						} else {
+							filtered[n].Created_By = "";
+						}
+						if ("Created_On" in filtered[n]) {
+							filtered[n].Created_On = filtered[n].Created_On;
+						} else {
+							filtered[n].Created_On = "";
+						}
+						if ("Changed_on" in filtered[n]) {
+							filtered[n].Changed_on = filtered[n].Changed_on;
+						} else {
+							filtered[n].Changed_on = "";
+						}
+
+						if ("Trade_Id" in filtered[n]) {
+							filtered[n].Trade_Id = filtered[n].Trade_Id;
+						} else {
+							filtered[n].Trade_Id = "";
+						}
+
+						if ("Ext_Colour_Desc" in filtered[n]) {
+							filtered[n].Ext_Colour_Desc = filtered[n].Ext_Colour_Desc;
+						} else {
+							filtered[n].Ext_Colour_Desc = "";
+						}
+
+						if ("Int_Colour_Desc" in filtered[n]) {
+							filtered[n].Int_Colour_Desc = filtered[n].Int_Colour_Desc;
+						} else {
+							filtered[n].Int_Colour_Desc = "";
+						}
+
+						if ("Model_Desc" in filtered[n]) {
+							filtered[n].Model_Desc = filtered[n].Model_Desc;
+						} else {
+							filtered[n].Model_Desc = "";
+						}
+
+						if ("SPRAS" in filtered[n]) {
+							filtered[n].SPRAS = filtered[n].SPRAS;
+						} else {
+							filtered[n].SPRAS = Spars;
+						}
+
+						if ("Series_Desc" in filtered[n]) {
+							filtered[n].Series_Desc = filtered[n].Series_Desc;
+						} else {
+							filtered[n].Series_Desc = "";
+						}
+
+						if ("Suffix_Desc" in filtered[n]) {
+							filtered[n].Suffix_Desc = filtered[n].Suffix_Desc;
+						} else {
+							filtered[n].Suffix_Desc = "";
+						}
+
+						if ("Trade_Return" in filtered[n]) {
+							filtered[n].Trade_Return = filtered[n].Trade_Return;
+						} else {
+							filtered[n].Trade_Return = "";
+						}
+
+						if ("Trade_Status" in filtered[n]) {
+							filtered[n].Trade_Status = filtered[n].Trade_Status;
+						} else {
+							filtered[n].Trade_Status = "";
+						}
+
 					}
 
-					if ("Requested_Vtn" in filtered) {
-						filtered.Requested_Vtn = filtered.Requested_Vtn;
-					} else {
-						filtered.Requested_Vtn = "";
-					}
+					var vtn = that.StatusData.Requested_Vtn;
 
-					if ("Offered_Vtn" in filtered) {
-						filtered.Offered_Vtn = filtered.Offered_Vtn;
-					} else {
-						filtered.Offered_Vtn = "";
-					}
-
-					if ("Req_Current_ETA_From" in filtered) {
-						filtered.Req_Current_ETA_From = filtered.Req_Current_ETA_From;
-					} else {
-						filtered.Req_Current_ETA_From = "";
-					}
-
-					if ("Req_Current_ETA_To" in filtered) {
-						filtered.Req_Current_ETA_To = filtered.Req_Current_ETA_To;
-					} else {
-						filtered.Req_Current_ETA_To = "";
-					}
-
-					if ("Req_Proposed_ETA_From" in filtered) {
-						filtered.Req_Proposed_ETA_From = filtered.Req_Proposed_ETA_From;
-					} else {
-						filtered.Req_Proposed_ETA_From = "";
-					}
-
-					if ("Req_Proposed_ETA_To" in filtered) {
-						filtered.Req_Proposed_ETA_To = filtered.Req_Proposed_ETA_To;
-					} else {
-						filtered.Req_Proposed_ETA_To = "";
-					}
-					if ("Off_Current_ETA_From" in filtered) {
-						filtered.Off_Current_ETA_From = filtered.Off_Current_ETA_From;
-					} else {
-						filtered.Off_Current_ETA_From = "";
-					}
-
-					if ("Off_Current_ETA_To" in filtered) {
-						filtered.Off_Current_ETA_To = filtered.Off_Current_ETA_To;
-					} else {
-						filtered.Off_Current_ETA_To = "";
-					}
-					if ("Off_Proposed_ETA_From" in filtered) {
-						filtered.Off_Proposed_ETA_From = filtered.Off_Proposed_ETA_From;
-					} else {
-						filtered.Off_Proposed_ETA_From = "";
-					}
-					if ("Off_Proposed_ETA_To" in filtered) {
-						filtered.Off_Proposed_ETA_To = filtered.Off_Proposed_ETA_To;
-					} else {
-						filtered.Off_Proposed_ETA_To = "";
-					}
-
-					if ("Created_By" in filtered) {
-						filtered.Created_By = filtered.Created_By;
-					} else {
-						filtered.Created_By = "";
-					}
-					if ("Created_On" in filtered) {
-						filtered.Created_On = filtered.Created_On;
-					} else {
-						filtered.Created_On = "";
-					}
-					if ("Changed_on" in filtered) {
-						filtered.Changed_on = filtered.Changed_on;
-					} else {
-						filtered.Changed_on = "";
-					}
-
-					if ("Trade_Id" in filtered) {
-						filtered.Trade_Id = filtered.Trade_Id;
-					} else {
-						filtered.Trade_Id = "";
-					}
-
-					if ("Ext_Colour_Desc" in filtered) {
-						filtered.Ext_Colour_Desc = filtered.Ext_Colour_Desc;
-					} else {
-						filtered.Ext_Colour_Desc = "";
-					}
-
-					if ("Int_Colour_Desc" in filtered) {
-						filtered.Int_Colour_Desc = filtered.Int_Colour_Desc;
-					} else {
-						filtered.Int_Colour_Desc = "";
-					}
-
-					if ("Model_Desc" in filtered) {
-						filtered.Model_Desc = filtered.Model_Desc;
-					} else {
-						filtered.Model_Desc = "";
-					}
-
-					if ("SPRAS" in filtered) {
-						filtered.SPRAS = filtered.SPRAS;
-					} else {
-						filtered.SPRAS = Spars;
-					}
-
-					if ("Series_Desc" in filtered) {
-						filtered.Series_Desc = filtered.Series_Desc;
-					} else {
-						filtered.Series_Desc = "";
-					}
-
-					if ("Suffix_Desc" in filtered) {
-						filtered.Suffix_Desc = filtered.Suffix_Desc;
-					} else {
-						filtered.Suffix_Desc = "";
-					}
-
-					if ("Trade_Return" in filtered) {
-						filtered.Trade_Return = filtered.Trade_Return;
-					} else {
-						filtered.Trade_Return = "";
-					}
-
-					if ("Trade_Status" in filtered) {
-						filtered.Trade_Status = filtered.Trade_Status;
-					} else {
-						filtered.Trade_Status = "";
-					}
-
-				// }
-
-				var vtn = that.StatusData.Requested_Vtn;
-
-				if (filtered.VTN == vtn) {
-					var Requested = filtered;
-				} else {
-					var Offered = filtered;
-				}
-				// var Requested = Requested[0];
-				// var Requested= filtered.filter(function (x) {
-				// 	return x.VTN == vtn;
-				// });
-
-				// var Offered = filtered.filter(function (x) {
-				// 	return x.VTN != vtn;
-				// });
-				if (!!Offered) {
-					if (Offered.length != 0 && Offered.Trade_Return != "N") {
-						Offered = Offered;
+					var Requested = filtered.filter(function (x) {
+						return x.VTN == vtn;
+					});
+					var Requested = Requested[0];
+					var Offered = filtered.filter(function (x) {
+						return x.VTN != vtn;
+					});
+					if (Offered.length != 0 && Offered[0].Trade_Return != "N") {
+						Offered = Offered[0];
 						var i18n = sap.ui.getCore().getModel("i18n").getResourceBundle();
 						var OtherVehicleInformation_text = i18n.getText("OfferVehicleInformation");
-						that.getView().byId("Offerevehid").setText(OtherVehicleInformation_text);
+						local.getView().byId("Offerevehid").setText(OtherVehicleInformation_text);
 
-						that.getView().byId("oRequesteddealer").setVisible(true);
-						that.getView().byId("offeredDealer").setVisible(true);
-						that.getView().byId("ofrModellabl").setVisible(true);
-						that.getView().byId("ofrserieslabl").setVisible(true);
-						that.getView().byId("ofrmodllabl").setVisible(true);
-						that.getView().byId("ofrsuffixlabl").setVisible(true);
-						that.getView().byId("ofrapxlabl").setVisible(true);
-						that.getView().byId("ofrextcolorlabl").setVisible(true);
-						that.getView().byId("ofrstatuslabl").setVisible(true);
-						that.getView().byId("ofrordrtypelabl").setVisible(true);
-						that.getView().byId("cetalaid").setVisible(true);
+						local.getView().byId("oRequesteddealer").setVisible(true);
+						local.getView().byId("offeredDealer").setVisible(true);
+						local.getView().byId("ofrModellabl").setVisible(true);
+						local.getView().byId("ofrserieslabl").setVisible(true);
+						local.getView().byId("ofrmodllabl").setVisible(true);
+						local.getView().byId("ofrsuffixlabl").setVisible(true);
+						local.getView().byId("ofrapxlabl").setVisible(true);
+						local.getView().byId("ofrextcolorlabl").setVisible(true);
+						local.getView().byId("ofrstatuslabl").setVisible(true);
+						local.getView().byId("ofrordrtypelabl").setVisible(true);
+						local.getView().byId("cetalaid").setVisible(true);
 						// that.getView().byId("fromqid").setVisible(true);
 						/*	that.getView().byId("fromlbid").setVisible(true);*/
 						// that.getView().byId("idlto").setVisible(true);
 						// that.getView().byId("tobid").setVisible(true);
 						// that.getView().byId("fmlbid").setVisible(true);
 
-						that.getView().byId("oRequesteddealer").setVisible(true);
-						that.getView().byId("ofrmodelyeartext").setVisible(true);
-						that.getView().byId("ofrseriestxt").setVisible(true);
-						that.getView().byId("ofrmodltxt").setVisible(true);
-						that.getView().byId("ofrsuffixstxt").setVisible(true);
-						that.getView().byId("ofrapxtxt").setVisible(true);
-						that.getView().byId("ofrexttxt").setVisible(true);
-						that.getView().byId("ofrstatustxt").setVisible(true);
-						that.getView().byId("ofrordtypetxt").setVisible(true);
-						that.getView().byId("ctqtid").setVisible(true);
-						that.getView().byId("txlab").setVisible(true);
-						that.getView().byId("prolabid").setVisible(true);
-						that.getView().byId("prptid").setVisible(true);
-						that.getView().byId("otxlabel").setVisible(true);
+						local.getView().byId("oRequesteddealer").setVisible(true);
+						local.getView().byId("ofrmodelyeartext").setVisible(true);
+						local.getView().byId("ofrseriestxt").setVisible(true);
+						local.getView().byId("ofrmodltxt").setVisible(true);
+						local.getView().byId("ofrsuffixstxt").setVisible(true);
+						local.getView().byId("ofrapxtxt").setVisible(true);
+						local.getView().byId("ofrexttxt").setVisible(true);
+						local.getView().byId("ofrstatustxt").setVisible(true);
+						local.getView().byId("ofrordtypetxt").setVisible(true);
+						local.getView().byId("ctqtid").setVisible(true);
+						local.getView().byId("txlab").setVisible(true);
+						local.getView().byId("prolabid").setVisible(true);
+						local.getView().byId("prptid").setVisible(true);
+						local.getView().byId("otxlabel").setVisible(true);
 
 					} else {
 						Offered = {};
-						that.getView().byId("Offerevehid").setText("");
-						that.getView().byId("offeredDealer").setVisible(false);
-						that.getView().byId("oRequesteddealer").setText("");
-						that.getView().byId("oRequesteddealer").setVisible(false);
+						local.getView().byId("Offerevehid").setText("");
+						local.getView().byId("offeredDealer").setVisible(false);
+						local.getView().byId("oRequesteddealer").setText("");
+						local.getView().byId("oRequesteddealer").setVisible(false);
 
-						that.getView().byId("ofrModellabl").setVisible(false);
-						that.getView().byId("ofrmodelyeartext").setText("");
-						that.getView().byId("ofrmodelyeartext").setVisible(false);
+						local.getView().byId("ofrModellabl").setVisible(false);
+						local.getView().byId("ofrmodelyeartext").setText("");
+						local.getView().byId("ofrmodelyeartext").setVisible(false);
 
-						that.getView().byId("ofrserieslabl").setVisible(false);
-						that.getView().byId("ofrseriestxt").setText("");
-						that.getView().byId("ofrseriestxt").setVisible(false);
+						local.getView().byId("ofrserieslabl").setVisible(false);
+						local.getView().byId("ofrseriestxt").setText("");
+						local.getView().byId("ofrseriestxt").setVisible(false);
 
-						that.getView().byId("ofrmodllabl").setVisible(false);
-						that.getView().byId("ofrmodltxt").setText("");
-						that.getView().byId("ofrmodltxt").setVisible(false);
+						local.getView().byId("ofrmodllabl").setVisible(false);
+						local.getView().byId("ofrmodltxt").setText("");
+						local.getView().byId("ofrmodltxt").setVisible(false);
 
-						that.getView().byId("ofrsuffixlabl").setVisible(false);
-						that.getView().byId("ofrsuffixstxt").setText("");
-						that.getView().byId("ofrsuffixstxt").setVisible(false);
+						local.getView().byId("ofrsuffixlabl").setVisible(false);
+						local.getView().byId("ofrsuffixstxt").setText("");
+						local.getView().byId("ofrsuffixstxt").setVisible(false);
 
-						that.getView().byId("ofrapxlabl").setVisible(false);
-						that.getView().byId("ofrapxtxt").setText("");
-						that.getView().byId("ofrapxtxt").setVisible(false);
+						local.getView().byId("ofrapxlabl").setVisible(false);
+						local.getView().byId("ofrapxtxt").setText("");
+						local.getView().byId("ofrapxtxt").setVisible(false);
 
-						that.getView().byId("ofrextcolorlabl").setVisible(false);
-						that.getView().byId("ofrexttxt").setText("");
-						that.getView().byId("ofrexttxt").setVisible(false);
+						local.getView().byId("ofrextcolorlabl").setVisible(false);
+						local.getView().byId("ofrexttxt").setText("");
+						local.getView().byId("ofrexttxt").setVisible(false);
 
-						that.getView().byId("ofrstatuslabl").setVisible(false);
-						that.getView().byId("ofrstatustxt").setText("");
-						that.getView().byId("ofrstatustxt").setVisible(false);
+						local.getView().byId("ofrstatuslabl").setVisible(false);
+						local.getView().byId("ofrstatustxt").setText("");
+						local.getView().byId("ofrstatustxt").setVisible(false);
 
-						that.getView().byId("ofrordrtypelabl").setVisible(false);
-						that.getView().byId("ofrordtypetxt").setText("");
-						that.getView().byId("ofrordtypetxt").setVisible(false);
+						local.getView().byId("ofrordrtypelabl").setVisible(false);
+						local.getView().byId("ofrordtypetxt").setText("");
+						local.getView().byId("ofrordtypetxt").setVisible(false);
 
-						that.getView().byId("cetalaid").setVisible(false);
-						that.getView().byId("ctqtid").setText("");
-						that.getView().byId("ctqtid").setVisible(false);
+						local.getView().byId("cetalaid").setVisible(false);
+						local.getView().byId("ctqtid").setText("");
+						local.getView().byId("ctqtid").setVisible(false);
 
-						// that.getView().byId("fromqid").setVisible(false);
-						that.getView().byId("txlab").setText("");
-						that.getView().byId("txlab").setVisible(false);
+						// local.getView().byId("fromqid").setVisible(false);
+						local.getView().byId("txlab").setText("");
+						local.getView().byId("txlab").setVisible(false);
 
-						that.getView().byId("prolabid").setVisible(false);
+						local.getView().byId("prolabid").setVisible(false);
 
-						// that.getView().byId("tobid").setVisible(false);
-						that.getView().byId("prptid").setText("");
-						that.getView().byId("prptid").setVisible(false);
+						// local.getView().byId("tobid").setVisible(false);
+						local.getView().byId("prptid").setText("");
+						local.getView().byId("prptid").setVisible(false);
 
-						// that.getView().byId("fmlbid").setVisible(false);
-						/*	that.getView().byId("fromlbid").setVisible(false);*/
-						that.getView().byId("otxlabel").setText("");
-						that.getView().byId("otxlabel").setVisible(false);
+						// local.getView().byId("fmlbid").setVisible(false);
+						/*	local.getView().byId("fromlbid").setVisible(false);*/
+						local.getView().byId("otxlabel").setText("");
+						local.getView().byId("otxlabel").setVisible(false);
 
-						// that.getView().byId("idlto").setVisible(false);
+						// local.getView().byId("idlto").setVisible(false);
 
 					}
-				}
+					// }
 
-				var oModel = new sap.ui.model.json.JSONModel(Requested);
-				sap.ui.getCore().setModel(oModel, "ApprovRej");
-				sap.ui.getCore().getModel("ApprovRej").setProperty("/OffredVehicle", Offered);
-				that.getView().byId("SimpleFormAproveTrReq").setModel(sap.ui.getCore().getModel("ApprovRej"));
-				//	that.getView().byId("SimpleFormAproveTrReq").getModel("ApprovRej").setProperty("/OffredVehicle", Offered);
-				that.getView().byId("SimpleFormAproveTrReq").bindElement("/");
-				that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
-				//	sap.ui.getCore().setModel(oModel, "oVehicleTrade_Summary");();
+					var oModel = new sap.ui.model.json.JSONModel(Requested);
+					sap.ui.getCore().setModel(oModel, "ApprovRej");
+					sap.ui.getCore().getModel("ApprovRej").setProperty("/OffredVehicle", Offered);
+					local.getView().byId("SimpleFormAproveTrReq").setModel(sap.ui.getCore().getModel("ApprovRej"));
+					//	local.getView().byId("SimpleFormAproveTrReq").getModel("ApprovRej").setProperty("/OffredVehicle", Offered);
+					local.getView().byId("SimpleFormAproveTrReq").bindElement("/");
+					local.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
+					//	sap.ui.getCore().setModel(oModel, "oVehicleTrade_Summary");();
 
-				sap.ui.core.BusyIndicator.hide();
+					sap.ui.core.BusyIndicator.hide();
+				});
+				// }
 			});
 
 		},
@@ -2657,7 +2756,7 @@ sap.ui.define([
 				});
 				this.getView().setModel(i18nModel, "i18n");
 				this.sCurrentLocale = 'FR';
-				this.sCurrentLocaleD = 'French';
+				sCurrentLocaleD = 'French';
 
 			} else {
 				var i18nModel = new sap.ui.model.resource.ResourceModel({
@@ -2667,7 +2766,7 @@ sap.ui.define([
 				});
 				this.getView().setModel(i18nModel, "i18n");
 				this.sCurrentLocale = 'EN';
-				this.sCurrentLocaleD = 'English';
+				sCurrentLocaleD = 'English';
 
 			}
 

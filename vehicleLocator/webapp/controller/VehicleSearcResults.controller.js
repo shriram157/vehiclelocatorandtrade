@@ -494,19 +494,6 @@ sap.ui.define([
 				/*filterArray.push(new sap.ui.model.Filter("Hold_stat", sap.ui.model.FilterOperator.EQ, "Y"));*/
 				filterArray.push(new sap.ui.model.Filter("Hold_stat", sap.ui.model.FilterOperator.EQ, "N"));
 			}
-			var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelectedKey();
-			if(selectedAccessInstalled == "Yes"){
-				//filterArray.push(new sap.ui.model.Filter("non_D_flag", sap.ui.model.FilterOperator.Contains,"X" ));
-				filterArray.push(new sap.ui.model.Filter("pd_flag", sap.ui.model.FilterOperator.Contains,"D" ));
-				//filterArray.push(new sap.ui.model.Filter("non_D_flag", sap.ui.model.FilterOperator.Contains," " ));
-			}else if((selectedAccessInstalled == "No")){
-				filterArray.push(new sap.ui.model.Filter("pd_flag", sap.ui.model.FilterOperator.EQ, ""));
-				//filterArray.push(new sap.ui.model.Filter("non_D_flag", sap.ui.model.FilterOperator.Contains, "X"));
-				//filterArray.push(new sap.ui.model.Filter("non_D_flag", sap.ui.model.FilterOperator.Contains," " ));
-			}
-			
-			
-			
 
 			this.byId("table1VSR")
 				.getBinding("items")
@@ -680,7 +667,7 @@ sap.ui.define([
 		},
 
 		oTradeLinkPress: function (oEvt) {
-		
+			debugger;
 			var that = this;
 			//that.oTableSelectPath = oEvt.getSource().getParent().getBindingContext().getPath().split("/")[1]; //guna
 			that.oTableSelectPath = oEvt.getSource().getParent().getBindingContext("vehicleSearchTableModel").getPath().split("/")[1];
@@ -1011,7 +998,7 @@ sap.ui.define([
 
 			// 	}
 			// }
-			
+			debugger;
 			if (SuffixData.length != 0) {
 
 				if (this.getView().byId("VLRSuffix").getItems().filter(function (x) {
@@ -2611,9 +2598,6 @@ sap.ui.define([
 				DataClicked: "Yes"
 			});
 		},
-		onAccesoriesInstalledsChange: function(){
-			this.onStatusChange();
-		}
 
 	});
 });

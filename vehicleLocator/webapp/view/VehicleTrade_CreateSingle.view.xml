@@ -66,8 +66,6 @@
 									id="Zextcolo"/>
 								<Label text="{i18n>APX}"/>
 								<Text text="{TradeModel>zzapx}" id="oApx"/>
-								<Label text="{i18n>AccessoryInstall}"/>
-								<Text text="{parts: [{path: 'TradeModel>non_D_flag'},{path: 'TradeModel&gt;pd_flag'}], formatter : 'vehicleLocator.Formatter.Formatter.AccessoryInstall'}" id="oAccesIn"/>
 								<Label text="{i18n>Status}"/>
 								<Text text="{path:'TradeModel>zz_trading_ind',formatter:'vehicleLocator.Formatter.Formatter.Status'}" id="oStatus"/>
 								<Label text="{i18n>OrderType}"/>

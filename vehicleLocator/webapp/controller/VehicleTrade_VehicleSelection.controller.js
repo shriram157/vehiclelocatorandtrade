@@ -1438,6 +1438,7 @@ var modelDataNoDuplicates = that.removeDuplicates(oCombine, "zzsuffix");
 			}
 
 		},
+
 		SeriesFilteredBinding: function () {
 			if (sap.ui.getCore().getModel("oVehicleSelectionResults") != undefined) {
 				var oVehicleModel = sap.ui.getCore().getModel("oVehicleSelectionResults");
@@ -2621,7 +2622,7 @@ var modelDataNoDuplicates = that.removeDuplicates(oCombine, "zzsuffix");
 				return "";
 			}
 		},
-		onUpdateFinished: function (oEvent) {
+				onUpdateFinished: function (oEvent) {
 
 			var oTable = this.getView().byId("vehicleSelectTable");
 
