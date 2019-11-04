@@ -610,9 +610,9 @@ this.getView().byId("VLRColor1").setEnabled(false);
 			} else if (Suffix == "all") {
 				var suffixisNotequaltoAll = false;
 				var SelSuffix = this.getView().byId("VLRSuffix1").getModel().getData();
-				for (var i = 0; i < SelSuffix.length; i++) {
-					filterArray.push(new sap.ui.model.Filter("zzsuffix", sap.ui.model.FilterOperator.Contains, SelSuffix[i].zzsuffix));
-				}
+				// for (var i = 0; i < SelSuffix.length; i++) {
+				// 	filterArray.push(new sap.ui.model.Filter("zzsuffix", sap.ui.model.FilterOperator.Contains, SelSuffix[i].zzsuffix));
+				// }
 			}
 			var Color = this.getView().byId("VLRColor1").getSelectedKey();
 			if (Color != "" && Color != "all") {
