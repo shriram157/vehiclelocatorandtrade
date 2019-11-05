@@ -146,12 +146,24 @@
 										<!--	<Link id="tradeHId" text="{Trade_Id}" class="link" subtle="true" press="oTradeHistoryLinkPress" wrapping="false"/>-->
 										<!--</t:template>-->
 									</Column>
-									<Column>
-										<Text text="{i18n>Status}"/>
+										<Column id="matnr">
+										<Text text="{i18n>VehicleTrackingNumber}"/>
 										<!--<t:template>-->
-										<!--	<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="false"/>-->
+										<!--	<Text text="{Requested_Vtn}" wrapping="false"/>-->
 										<!--</t:template>-->
 									</Column>
+									<Column>
+										<Text text="{i18n>VIN}"/>
+										<!--<t:template>-->
+										<!--	<Text text="{Requested_Vtn}" wrapping="false"/>-->
+										<!--</t:template>-->
+									</Column>
+									<!--<Column>-->
+									<!--	<Text text="{i18n>Status}"/>-->
+									<!--<t:template>-->
+									<!--	<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="false"/>-->
+									<!--</t:template>-->
+									<!--</Column>-->
 									<Column>
 										<Text text="{i18n>From_To}"/>
 										<!--<t:template>-->
@@ -205,13 +217,15 @@
 									<ColumnListItem type="Inactive" press="detailItems">
 										<cells>
 											<Link id="tradeHId" text="{Trade_Id}" class="link" subtle="true" press="oTradeHistoryLinkPress" wrapping="false"/>
-											<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="false"/>
-											<Text text="{= ${RequestingDealerVisible} === true ? ${i18n>To}:${i18n>From} }" wrapping="false"/>
+											<!--<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="false"/>-->
+											<Text text="{Requested_Vtn}" wrapping="false"/>
+											<Text text="{Requested_Vin}" wrapping="false"/>
+											<Text text="{i18n>To}" wrapping="false"/>
 											<Text
 												text="{= ${RequestingDealerVisible} === true ?${Requested_Dealer}:${Requesting_Dealer}}-{= ${RequestingDealerVisible} === true ?${Requested_Dealer_Name}:${Requesting_Dealer_Name}}"/>
-											<Text text="{Requested_Vtn}" wrapping="false"/>
-											<Text text="{Model}-{Model_Desc}" />
-											<Text text="{Suffix} - {Suffix_Desc}/{Int_Colour_Desc}" />
+										
+											<Text text="{Model}-{Model_Desc}"/>
+											<Text text="{Suffix} - {Suffix_Desc}/{Int_Colour_Desc}"/>
 											<Text text="{Ext_Colour}-{Ext_Colour_Desc}"/>
 											<Text text="{APX}" />
 									
@@ -220,7 +234,117 @@
 									</ColumnListItem>
 								</items>
 							</Table>
-						</VBox>
+						</ScrollContainer>
+							<ScrollContainer height='380px' width="100%" vertical='true'>
+							<Table id="tableVTH1" items="{ path: '/', sorter: { path: 'Changed_on', descending: true } }" class="sapUiContentPadding headerFixClass"
+								ariaLabelledBy="title">
+								<headerToolbar>
+									<!--<Toolbar>-->
+									<!--	<content>-->
+									<!--		<Title id="title" text="" titleStyle="H3"></Title>-->
+									<!--		<ToolbarSpacer/>-->
+									<!--		<SearchField id="searchTradeHistory" liveChange="onLiveChangeTradeHistory" showSearchButton="true" placeholder="{i18n>placeHolderText}">-->
+									<!--			<layoutData>-->
+									<!--				<OverflowToolbarLayoutData minWidth="200px" maxWidth="300px" shrinkable="true"/>-->
+									<!--			</layoutData>-->
+									<!--		</SearchField>-->
+									<!--		<Button tooltip="View Sort Settings" icon="sap-icon://sort" press="handleSortButtonPressed"/>-->
+											<!--<ToggleButton text="{i18n>Delete}" icon="sap-icon://delete" tooltip="" press="oDeletepress"/>-->
+									<!--	</content>-->
+									<!--</Toolbar>-->
+								</headerToolbar>
+								<columns>
+									<Column id="TradecolId1">
+										<Text text="{i18n>RequestNo}"/>
+										<!--<t:template>-->
+										<!--	<Link id="tradeHId" text="{Trade_Id}" class="link" subtle="true" press="oTradeHistoryLinkPress" wrapping="false"/>-->
+										<!--</t:template>-->
+									</Column>
+										<Column id="matnr1">
+										<Text text="{i18n>VehicleTrackingNumber}"/>
+										<!--<t:template>-->
+										<!--	<Text text="{Requested_Vtn}" wrapping="false"/>-->
+										<!--</t:template>-->
+									</Column>
+										<Column>
+										<Text text="{i18n>VIN}"/>
+										<!--<t:template>-->
+										<!--	<Text text="{Requested_Vtn}" wrapping="false"/>-->
+										<!--</t:template>-->
+									</Column>
+									<!--<Column>-->
+									<!--	<Text text="{i18n>Status}"/>-->
+									<!--<t:template>-->
+									<!--	<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="false"/>-->
+									<!--</t:template>-->
+									<!--</Column>-->
+									<Column>
+										<Text text="{i18n>From_To}"/>
+										<!--<t:template>-->
+										<!--	<Text text="{= ${RequestingDealerVisible} === true ?'To':'From'}" wrapping="false"/>-->
+										<!--</t:template>-->
+									</Column>
+									<Column>
+										<Text text="{i18n>Dealer}"/>
+										<!--<t:template>-->
+										<!--	<Text text="{= ${RequestingDealerVisible} === true ?${Requested_Dealer}:${Requesting_Dealer}}-{= ${RequestingDealerVisible} === true ?${Requested_Dealer_Name}:${Requesting_Dealer_Name}}"/>-->
+										<!--<Text text="{path:'kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'} -{name1}" wrapping="false"/>-->
+										<!--</t:template>-->
+									</Column>
+								
+									<Column>
+										<Text text="{i18n>Model}"/>
+										<!--<t:template>-->
+										<!--	<Text text="{Model}-{Model_Desc}" wrapping="false"/>-->
+										<!--</t:template>-->
+									</Column>
+									<Column id="Suffix1">
+										<Text text="{i18n>Suffix}"/>
+										<!--<t:template>-->
+										<!--	<Text text="{Suffix} - {Suffix_Desc}/{Int_Colour_Desc}" wrapping="false"/>-->
+										<!--</t:template>-->
+									</Column>
+									<Column >
+										<Text text="{i18n>ExteriorColor}"/>
+										<!--<t:template>-->
+										<!--	<Text text="{Ext_Colour}-{Ext_Colour_Desc}" wrapping="false"/>-->
+										<!--</t:template>-->
+									</Column>
+									<Column >
+										<Text text="{i18n>APX}" width="auto"/>
+										<!--<t:template>-->
+										<!--	<Text text="{APX}" wrapping="false"/>-->
+										<!--</t:template>-->
+									</Column>
+									<Column >
+										<Text text="{i18n>Accepted}"/>
+										<!--<t:template>-->
+										<!--	<Text text="{path:'Changed_on', formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false" />-->
+										<!--formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false"-->
+										<!--</t:template>-->
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem type="Inactive" press="detailItems">
+										<cells>
+											<Link id="tradeHId1" text="{Trade_Id}" class="link" subtle="true" press="oTradeHistoryLinkPress" wrapping="false"/>
+											<!--<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="false"/>-->
+										<Text text="{Requested_Vtn}" wrapping="false"/>
+											<Text text="{Requested_Vin}" wrapping="false"/>
+											<Text text="{i18n>From}" wrapping="false"/>
+											<Text
+												text="{= ${RequestingDealerVisible} === true ?${Requested_Dealer}:${Requesting_Dealer}}-{= ${RequestingDealerVisible} === true ?${Requested_Dealer_Name}:${Requesting_Dealer_Name}}"/>
+											
+											<Text text="{Model}-{Model_Desc}"/>
+											<Text text="{Suffix} - {Suffix_Desc}/{Int_Colour_Desc}"/>
+											<Text text="{Ext_Colour}-{Ext_Colour_Desc}"/>
+											<Text text="{APX}"/>
+											<Text text="{path:'Changed_on', formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDateTradeHistory'}" wrapping="false"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+					</ScrollContainer>
 					</VBox>
 				</content>
 			</Page>

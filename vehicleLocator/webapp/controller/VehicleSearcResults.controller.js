@@ -1063,7 +1063,24 @@ sap.ui.define([
 				return (x.zz_trading_ind == "1");
 			});
 
-			this.getView().byId("VLRStatus").setModel(Model);
+			/*Added changes for accesories installed dropdown start*/
+			var accessoryModel = new sap.ui.model.json.JSONModel();
+			var accesoriesInstalledFilter = [{
+					"zaccesories": "All"
+
+				}, {
+					"zaccesories": "Yes"
+				}
+				, {
+					"zaccesories": "No"
+				}];
+				accessoryModel.setData(accesoriesInstalledFilter);
+			this.getView().byId("AcceInstalledCobmo").setModel(accessoryModel);
+			this.getView().byId("AcceInstalledCobmo").setSelectedKey("All");
+			
+			/*Added changes for accesories installed dropdown end*/
+
+			this.getView().byId("VLRStatus").setModel(statusDataModel);
 			if (StatusFilter.length != 0) {
 
 				if (this.sCurrentLocale == 'EN') {

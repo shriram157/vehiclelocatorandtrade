@@ -42,6 +42,7 @@ sap.ui.define([
 			this.getRouter().getRoute("VehcTrad_Apprv_Rej_CounTrad").attachPatternMatched(this.onRouteMatched, this);
 		},
 		onRouteMatched: function (oEvent) {
+			//trial comment for push
 
 			this.getView().byId("oComments").setValue(""); //1803
 
