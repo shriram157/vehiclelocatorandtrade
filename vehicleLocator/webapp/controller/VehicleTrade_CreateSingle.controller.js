@@ -118,6 +118,9 @@ sap.ui.define([
 					this.getView().byId("suffid").setVisible(false);
 					this.getView().byId("apxlabelid").setVisible(false);
 					this.getView().byId("apxid").setVisible(false);
+					this.getView().byId("acclabelid").setVisible(false);
+					
+					this.getView().byId("accid").setVisible(false);
 					this.getView().byId("extcollabelid").setVisible(false);
 					this.getView().byId("extcolod").setVisible(false);
 
@@ -175,6 +178,9 @@ sap.ui.define([
 					this.getView().byId("suffid").setVisible(true);
 					this.getView().byId("apxlabelid").setVisible(true);
 					this.getView().byId("apxid").setVisible(true);
+					this.getView().byId("acclabelid").setVisible(true);
+					
+					this.getView().byId("accid").setVisible(true);
 					this.getView().byId("extcollabelid").setVisible(true);
 					this.getView().byId("extcolod").setVisible(true);
 
@@ -283,6 +289,9 @@ sap.ui.define([
 				this.getView().byId("suffid").setVisible(false);
 				this.getView().byId("apxlabelid").setVisible(false);
 				this.getView().byId("apxid").setVisible(false);
+				this.getView().byId("acclabelid").setVisible(false);
+					
+					this.getView().byId("accid").setVisible(false);
 				this.getView().byId("extcollabelid").setVisible(false);
 				this.getView().byId("extcolod").setVisible(false);
 
