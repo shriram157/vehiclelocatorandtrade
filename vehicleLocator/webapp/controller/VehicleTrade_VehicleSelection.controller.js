@@ -898,7 +898,7 @@ this.getView().byId("VLRColor1").setEnabled(false);
 			}
 
 			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer1 + "')/Set?$filter=zzseries eq'" + Series +
-				"'and kunnr eq '" + oDealer +
+				"'and kunnr eq '" + oDealer +"'and zz_trading_ind ne 1'"+
 				"'&$format=json";
 
 			$.ajax({
@@ -1211,7 +1211,7 @@ that.getView().byId("VLRColor1").setEnabled(true);
 					}
 
 				}
-	that.getView().byId("VLRStatus1").setEnabled(false);
+	that.getView().byId("VLRStatus1").setEnabled(true);
 that.getView().byId("AcceInstalledCobmo1").setEnabled(false);
 that.getView().byId("VLRSuffix1").setEnabled(false);
 that.getView().byId("VLRColor1").setEnabled(false);
