@@ -66,6 +66,9 @@
 									id="Zextcolo"/>
 								<Label text="{i18n>APX}"/>
 								<Text text="{TradeModel>zzapx}" id="oApx"/>
+								<Label text="{i18n>AccessoryInstall}"/>
+								<Text text="{parts: [{path: 'TradeModel>non_D_flag'},{path: 'TradeModel&gt;pd_flag'}], formatter : 'vehicleLocator.Formatter.Formatter.AccessoryInstall'}" id="oAccesIn"/>
+						
 								<Label text="{i18n>Status}"/>
 								<Text text="{path:'TradeModel>zz_trading_ind',formatter:'vehicleLocator.Formatter.Formatter.Status'}" id="oStatus"/>
 								<Label text="{i18n>OrderType}"/>
@@ -143,6 +146,9 @@
 									id="extcolod" visible="false"/>
 								<Label text="{i18n>APX}" id="apxlabelid" visible="false"/>
 								<Text text="{TradeModel>/VehicleTradeVehicle/zzapx}" id="apxid" visible="false"/>
+								<Label text="{i18n>AccessoryInstall}" id="acclabelid" visible="false"/>
+								<Text text="{parts: [{path: 'TradeModel>/VehicleTradeVehicle/non_D_flag'},{path: 'TradeModel&gt;/VehicleTradeVehicle/pd_flag'}], formatter : 'vehicleLocator.Formatter.Formatter.AccessoryInstall'}" id="accid" visible="false"/>
+							
 								<Label text="{i18n>Status}" visible="false" id="ofvestats"/>
 								<Text text="{path:'TradeModel>/VehicleTradeVehicle/zz_trading_ind',formatter:'vehicleLocator.Formatter.Formatter.Status'}"
 									id="offeredStatus" visible="false"/>

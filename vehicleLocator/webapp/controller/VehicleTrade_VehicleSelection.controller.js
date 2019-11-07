@@ -623,26 +623,26 @@ this.getView().byId("VLRColor1").setEnabled(false);
 
 				// var SelColor = this.getView().byId("table1VSR").getBinding("rows").getModel().getData(); //guna
 				var SelColor = this.getView().getModel("vehicleSelectTableModel").getData();
-				for (var i = 0; i < SelColor.length; i++) {
-					// if (Status == "1") {
-					// 	if ( SelColor[i].zz_trading_ind == "1") {
-					// 		 if (suffixisNotequaltoAll == true && SelColor[i].zzsuffix == Suffix ) {
-					// 		filterArray.push(new sap.ui.model.Filter("zzextcol", sap.ui.model.FilterOperator.Contains, SelColor[i].zzextcol));
-					// 		 } else if (suffixisNotequaltoAll == false ){
-					// 		 	filterArray.push(new sap.ui.model.Filter("zzextcol", sap.ui.model.FilterOperator.Contains, SelColor[i].zzextcol));	
-					// 		 }
-					// 	}
-					// } else {
-					// 	if (SelColor[i].zz_trading_ind == "2" || SelColor[i].zz_trading_ind == "3") {
-					// 								 if (suffixisNotequaltoAll == true && SelColor[i].zzsuffix == Suffix ) {
-					// 		filterArray.push(new sap.ui.model.Filter("zzextcol", sap.ui.model.FilterOperator.Contains, SelColor[i].zzextcol));
-					// 		 } else if (suffixisNotequaltoAll == false){
-					filterArray.push(new sap.ui.model.Filter("zzextcol", sap.ui.model.FilterOperator.Contains, SelColor[i].zzextcol));
-					// 		 }
-					// 	}
-					// }
+				// for (var i = 0; i < SelColor.length; i++) {
+				// 	// if (Status == "1") {
+				// 	// 	if ( SelColor[i].zz_trading_ind == "1") {
+				// 	// 		 if (suffixisNotequaltoAll == true && SelColor[i].zzsuffix == Suffix ) {
+				// 	// 		filterArray.push(new sap.ui.model.Filter("zzextcol", sap.ui.model.FilterOperator.Contains, SelColor[i].zzextcol));
+				// 	// 		 } else if (suffixisNotequaltoAll == false ){
+				// 	// 		 	filterArray.push(new sap.ui.model.Filter("zzextcol", sap.ui.model.FilterOperator.Contains, SelColor[i].zzextcol));	
+				// 	// 		 }
+				// 	// 	}
+				// 	// } else {
+				// 	// 	if (SelColor[i].zz_trading_ind == "2" || SelColor[i].zz_trading_ind == "3") {
+				// 	// 								 if (suffixisNotequaltoAll == true && SelColor[i].zzsuffix == Suffix ) {
+				// 	// 		filterArray.push(new sap.ui.model.Filter("zzextcol", sap.ui.model.FilterOperator.Contains, SelColor[i].zzextcol));
+				// 	// 		 } else if (suffixisNotequaltoAll == false){
+				// 	filterArray.push(new sap.ui.model.Filter("zzextcol", sap.ui.model.FilterOperator.Contains, SelColor[i].zzextcol));
+				// 	// 		 }
+				// 	// 	}
+				// 	// }
 
-				}
+				// }
 
 			}
 
@@ -676,12 +676,12 @@ this.getView().byId("VLRColor1").setEnabled(false);
 
 				// var SelColor = this.getView().byId("table1VSR").getBinding("rows").getModel().getData(); //guna
 				var SelModel = this.getView().getModel("vehicleSelectTableModel").getData();
-				for (var i = 0; i < SelModel.length; i++) {
+				// for (var i = 0; i < SelModel.length; i++) {
 				
-					filterArray.push(new sap.ui.model.Filter("matnr", sap.ui.model.FilterOperator.Contains, SelModel[i].matnr));
+				// 	filterArray.push(new sap.ui.model.Filter("matnr", sap.ui.model.FilterOperator.Contains, SelModel[i].matnr));
 				
 
-				}
+				// }
 
 			}
 			// if (selectedAccessInstalled == "Yes") {
@@ -846,6 +846,8 @@ this.getView().byId("VLRColor1").setEnabled(false);
 			sap.ui.core.BusyIndicator.show();
 			var oDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerKey;
 			var Series = this.getView().byId("oVt_SeriesCmbo").getSelectedKey();
+var status = this.getView().byId("VLRStatus1").getSelectedKey();
+// var dnc = this.getView().byId("VLRStatus1").getSelectedKey();
 
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
@@ -898,7 +900,7 @@ this.getView().byId("VLRColor1").setEnabled(false);
 			}
 
 			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer1 + "')/Set?$filter=zzseries eq'" + Series +
-				"'and kunnr eq '" + oDealer +
+				"'and kunnr eq '" + oDealer +"'and zz_trading_ind eq '"+status+"'and dnc_ind eq 'N"+
 				"'&$format=json";
 
 			$.ajax({
@@ -1211,7 +1213,7 @@ that.getView().byId("VLRColor1").setEnabled(true);
 					}
 
 				}
-	that.getView().byId("VLRStatus1").setEnabled(false);
+	that.getView().byId("VLRStatus1").setEnabled(true);
 that.getView().byId("AcceInstalledCobmo1").setEnabled(false);
 that.getView().byId("VLRSuffix1").setEnabled(false);
 that.getView().byId("VLRColor1").setEnabled(false);
