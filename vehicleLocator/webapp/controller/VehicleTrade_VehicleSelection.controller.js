@@ -846,6 +846,8 @@ this.getView().byId("VLRColor1").setEnabled(false);
 			sap.ui.core.BusyIndicator.show();
 			var oDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerKey;
 			var Series = this.getView().byId("oVt_SeriesCmbo").getSelectedKey();
+var status = this.getView().byId("VLRStatus1").getSelectedKey();
+// var dnc = this.getView().byId("VLRStatus1").getSelectedKey();
 
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
@@ -898,7 +900,7 @@ this.getView().byId("VLRColor1").setEnabled(false);
 			}
 
 			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer1 + "')/Set?$filter=zzseries eq'" + Series +
-				"'and kunnr eq '" + oDealer +"'and zz_trading_ind ne 1'"+
+				"'and kunnr eq '" + oDealer +"'and zz_trading_ind eq '"+status+"'and dnc_ind eq 'N"+
 				"'&$format=json";
 
 			$.ajax({
