@@ -22,6 +22,28 @@ sap.ui.define(function () {
 			}
 
 		},
+				AccInstall: function (zaccesories) {
+			switch (zaccesories) {
+			case "Yes":
+
+				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("Yes");
+				return sTextFromi18n;
+			
+				break;
+			case "No":
+			
+				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("No");
+				return sTextFromi18n;
+				break;
+			case "All": //Update this
+				
+				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("All");
+				return sTextFromi18n;
+				break;
+
+			}
+
+		},
 		oTradeStatusBinding: function (Trade_return) {
 			switch (Trade_return) {
 			case "Yes":

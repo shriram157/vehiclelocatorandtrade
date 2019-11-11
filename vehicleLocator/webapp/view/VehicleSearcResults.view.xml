@@ -118,7 +118,7 @@
 											</layoutData>
 										</Label>
 										<ComboBox id="AcceInstalledCobmo" selectionChange="onAccesoriesInstalledsChange" class="sapUiTinyMarginBegin" items="{/}" width="300px">
-											<core:ListItem text="{zaccesories}" key="{zaccesories}"/>
+											<core:ListItem text="{path:'zaccesories',formatter:'vehicleLocator.Formatter.Formatter.AccInstall'}" key="{zaccesories}"/>
 											<layoutData>
 												<l:GridData span="L2 M2 S8"/>
 											</layoutData>
@@ -167,22 +167,22 @@
 						<Column id="ID_DealerNet1" demandPopin="true" width="12rem" minScreenWidth="Tablet" hAlign="Left">
 							<Text text="{i18n>Color}"/>
 						</Column>
-						<Column id="zzapx1" demandPopin="true" minScreenWidth="Tablet" width="3rem">
+						<Column id="zzapx1" demandPopin="true" minScreenWidth="Tablet" width="3rem" hAlign="Left">
 							<Text text="{i18n>APX}" id="nameColumnTitle1"/>
 						</Column>
-						<Column id="ID_Profit1" demandPopin="true" minScreenWidth="Tablet" width="8rem">
+						<Column id="ID_Profit1" demandPopin="true" minScreenWidth="Tablet" width="8rem" hAlign="Left">
 							<Text text="{i18n>OrderType}"/>
 						</Column>
 						<Column id="ETAFrom1" hAlign="Left" demandPopin="true" minScreenWidth="Tablet" width="8rem">
 							<Text text="{i18n>ETAFrom}"/>
 						</Column>
-						<Column id="pstsp1" demandPopin="true" minScreenWidth="Tablet" width="8rem">
+						<Column id="pstsp1" demandPopin="true" minScreenWidth="Tablet" width="8rem" hAlign="Left">
 							<Text text="{i18n>ETATo}"/>
 						</Column>
 						<Column id="accessoryInstall1" demandPopin="true" minScreenWidth="Tablet" width="3rem" hAlign="Left">
 							<Text text="{i18n>AccessoryInstall}" wrapping="true"/>
 						</Column>
-						<Column id="city1" demandPopin="true" minScreenWidth="Tablet" width="8rem"  >
+						<Column id="city1" demandPopin="true" minScreenWidth="Tablet" width="8rem" hAlign="Left" >
 							<Text text="{i18n>City}" wrapping="true"/>
 						</Column>
 						<Column id="Province1" demandPopin="true" width="8rem" minScreenWidth="Tablet" hAlign="Left">

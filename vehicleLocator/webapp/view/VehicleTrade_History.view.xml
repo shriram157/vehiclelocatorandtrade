@@ -1,6 +1,4 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="vehicleLocator.controller.VehicleTrade_History"
-	xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:uxap="sap.uxap" xmlns:t="sap.ui.table" xmlns:u="sap.ui.unified"
-	xmlns:tnt="sap.tnt" xmlns:f="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml">
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:uxap="sap.uxap" xmlns:t="sap.ui.table" xmlns:u="sap.ui.unified" xmlns:tnt="sap.tnt" xmlns:f="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml" controllerName="vehicleLocator.controller.VehicleTrade_History">
 	<App>
 		<pages class="oImgsampl" height="200px">
 			<Page showNavButton="false" navButtonPress="onBack">
@@ -39,17 +37,12 @@
 						
 										    <Label text="{i18n>Dealer}" required="true" visible="{detailView>/visibleByDefault}"/>   
 											    
-												<ComboBox showSecondaryValues="true" required="true" visible="{detailView>/visibleByDefault}" fieldGroupIds="requiredField"
-													editable="{detailView>/editAllowed}" width="20rem"   value="{BpDealerModelZone>/BusinessPartnerKey}"
-													filterSecondaryValues="true" id="dealerID" enabled="{detailView>/onlyShownoEditForChange}"
-													items="{path: 'BpDealerModelZone>/', sorter: { path: 'dummyFieldForSort' }, length:750 }" selectedKey="{BusinessPartnerKey}"
-													selectionChange="onBusinessPartnerSelected" showValueStateMessage="false" textAlign="Begin">
-													<core:ListItem key="{BpDealerModelZone>BusinessPartnerKey}" text="{BpDealerModelZone>BusinessPartner}"
-														additionalText="{BpDealerModelZone>BusinessPartnerName}"/>
+												<ComboBox showSecondaryValues="true" required="true" visible="{detailView>/visibleByDefault}" fieldGroupIds="requiredField" editable="{detailView>/editAllowed}" width="20rem" value="{BpDealerModelZone>/BusinessPartnerKey}" filterSecondaryValues="true" id="dealerID" enabled="{detailView>/onlyShownoEditForChange}" items="{path: 'BpDealerModelZone>/', sorter: { path: 'dummyFieldForSort' }, length:750 }" selectedKey="{BusinessPartnerKey}" selectionChange="onBusinessPartnerSelected" showValueStateMessage="false" textAlign="Begin">
+													<core:ListItem key="{BpDealerModelZone>BusinessPartnerKey}" text="{BpDealerModelZone>BusinessPartner}" additionalText="{BpDealerModelZone>BusinessPartnerName}"/>
 						
 												</ComboBox>
 											    
-										   <Label text="{detailView>/DealerName}" />    
+										   <Label text="{detailView>/DealerName}"/>    
 						
 						
 						
@@ -58,21 +51,21 @@
 						
 						
 						
-						<ToolbarSpacer></ToolbarSpacer>
+						<ToolbarSpacer/>
 						<Button text="{i18n>LocateVechicles}" type="Transparent" press="VehicleLocSearchPressVH"/>
 						<Button text="{i18n>TradeSummary}" type="Transparent" press="TradeSummaryLinkPressTH"/>
 						<Button text="{i18n>ModelBlock}" type="Transparent" press="BlockSummarypressTH"/>
 						
-							<Button   class="VLbtn2" text="{i18n>Back}" type="Transparent" press="onNavBack" width="auto"/>
+							<Button class="VLbtn2" text="{i18n>Back}" type="Transparent" press="onNavBack" width="auto"/>
 						<!--	</Toolbar>-->
 					</tnt:ToolHeader>
 					<VBox>
 						<OverflowToolbar id="otb1" class="otbVT_Hist">
 							<Label text="{i18n>VehicleTradeHistory}" width="auto" class="vHlabe1clss"/>
 							<ToolbarSpacer/>
-							<Button id="openMenVTH" class="VLbtn3" text="{i18n>ExporttoExcel}"  type="Accept" press="ExporttoExcellsheet" width="auto"/>
+							<Button id="openMenVTH" class="VLbtn3" text="{i18n>ExporttoExcel}" type="Accept" press="ExporttoExcellsheet" width="auto"/>
 						</OverflowToolbar>
-						<ScrollContainer height='380px' width="100%" vertical='true'>
+						<ScrollContainer height="380px" width="100%" vertical="true">
 							<!--	<Table id="tableVTH" width="auto" class="sapUiResponsiveMargin" items="{/}" growingThreshold="150">
 								<columns>
 									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
@@ -123,12 +116,11 @@
 									</ColumnListItem>
 								</items>
 							</Table>-->
-							<Table id="tableVTH" items="{ path: '/', sorter: { path: 'Changed_on', descending: true } }" class="sapUiContentPadding headerFixClass"
-								ariaLabelledBy="title">
+							<Table id="tableVTH" items="{ path: '/', sorter: { path: 'Changed_on', descending: true } }" class="sapUiContentPadding headerFixClass" ariaLabelledBy="title" headerText="Trade">
 								<headerToolbar>
 									<Toolbar>
 										<content>
-											<Title id="title" text="" titleStyle="H3"></Title>
+											<Title id="title" text="Trade Out" titleStyle="H3"/>
 											<ToolbarSpacer/>
 											<SearchField id="searchTradeHistory" liveChange="onLiveChangeTradeHistory" showSearchButton="true" placeholder="{i18n>placeHolderText}">
 												<layoutData>
@@ -166,7 +158,7 @@
 									<!--</t:template>-->
 									<!--</Column>-->
 									<Column>
-										<Text text="{i18n>From_To}"/>
+										<Text text="{i18n>To}"/>
 										<!--<t:template>-->
 										<!--	<Text text="{= ${RequestingDealerVisible} === true ?'To':'From'}" wrapping="false"/>-->
 										<!--</t:template>-->
@@ -186,28 +178,28 @@
 										<!--</t:template>-->
 									</Column>
 									<Column id="Suffix">
-										<Text text="{i18n>Suffix}" />
+										<Text text="{i18n>Suffix}"/>
 										<!--<t:template>-->
 										<!--	<Text text="{Suffix} - {Suffix_Desc}/{Int_Colour_Desc}" wrapping="false"/>-->
 										<!--</t:template>-->
 									</Column>
-									<Column >
-										<Text text="{i18n>ExteriorColor}" />
+									<Column>
+										<Text text="{i18n>ExteriorColor}"/>
 										<!--<t:template>-->
 										<!--	<Text text="{Ext_Colour}-{Ext_Colour_Desc}" wrapping="false"/>-->
 										<!--</t:template>-->
 									</Column>				
  
 				
-									<Column >
+									<Column>
 										<Text text="{i18n>APX}" width="auto"/>
 										<!--<t:template>-->
 										<!--	<Text text="{APX}" wrapping="false"/>-->
 										<!--</t:template>-->
 									</Column>
 
-									<Column >
-										<Text text="{i18n>Accepted}" />
+									<Column>
+										<Text text="{i18n>Accepted}"/>
 										<!--<t:template>-->
 										<!--	<Text text="{path:'Changed_on', formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false" />-->
 										<!--formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false"-->
@@ -222,13 +214,12 @@
 											<Text text="{Requested_Vtn}" wrapping="false"/>
 											<Text text="{Requested_Vin}" wrapping="false"/>
 											<Text text="{i18n>To}" wrapping="false"/>
-											<Text
-												text="{= ${RequestingDealerVisible} === true ?${Requested_Dealer}:${Requesting_Dealer}}-{= ${RequestingDealerVisible} === true ?${Requested_Dealer_Name}:${Requesting_Dealer_Name}}"/>
+											<Text text="{= ${RequestingDealerVisible} === true ?${Requested_Dealer}:${Requesting_Dealer}}-{= ${RequestingDealerVisible} === true ?${Requested_Dealer_Name}:${Requesting_Dealer_Name}}"/>
 										
 											<Text text="{Model}-{Model_Desc}"/>
 											<Text text="{Suffix} - {Suffix_Desc}/{Int_Colour_Desc}"/>
 											<Text text="{Ext_Colour}-{Ext_Colour_Desc}"/>
-											<Text text="{APX}" />
+											<Text text="{APX}"/>
 									
 											<Text text="{path:'Changed_on', formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDateTradeHistory'}" wrapping="false"/>
 										</cells>
@@ -236,9 +227,8 @@
 								</items>
 							</Table>
 						</ScrollContainer>
-							<ScrollContainer height='380px' width="100%" vertical='true'>
-							<Table id="tableVTH1" items="{ path: '/', sorter: { path: 'Changed_on', descending: true } }" class="sapUiContentPadding headerFixClass"
-								ariaLabelledBy="title">
+							<ScrollContainer height="380px" width="100%" vertical="true">
+							<Table id="tableVTH1" items="{ path: '/', sorter: { path: 'Changed_on', descending: true } }" class="sapUiContentPadding headerFixClass" ariaLabelledBy="title" headerText="Trade In">
 								<headerToolbar>
 									<!--<Toolbar>-->
 									<!--	<content>-->
@@ -280,7 +270,7 @@
 									<!--</t:template>-->
 									<!--</Column>-->
 									<Column>
-										<Text text="{i18n>From_To}"/>
+										<Text text="{i18n>From}"/>
 										<!--<t:template>-->
 										<!--	<Text text="{= ${RequestingDealerVisible} === true ?'To':'From'}" wrapping="false"/>-->
 										<!--</t:template>-->
@@ -305,19 +295,19 @@
 										<!--	<Text text="{Suffix} - {Suffix_Desc}/{Int_Colour_Desc}" wrapping="false"/>-->
 										<!--</t:template>-->
 									</Column>
-									<Column >
+									<Column>
 										<Text text="{i18n>ExteriorColor}"/>
 										<!--<t:template>-->
 										<!--	<Text text="{Ext_Colour}-{Ext_Colour_Desc}" wrapping="false"/>-->
 										<!--</t:template>-->
 									</Column>
-									<Column >
+									<Column>
 										<Text text="{i18n>APX}" width="auto"/>
 										<!--<t:template>-->
 										<!--	<Text text="{APX}" wrapping="false"/>-->
 										<!--</t:template>-->
 									</Column>
-									<Column >
+									<Column>
 										<Text text="{i18n>Accepted}"/>
 										<!--<t:template>-->
 										<!--	<Text text="{path:'Changed_on', formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false" />-->
@@ -333,8 +323,7 @@
 										<Text text="{Requested_Vtn}" wrapping="false"/>
 											<Text text="{Requested_Vin}" wrapping="false"/>
 											<Text text="{i18n>From}" wrapping="false"/>
-											<Text
-												text="{= ${RequestingDealerVisible} === true ?${Requested_Dealer}:${Requesting_Dealer}}-{= ${RequestingDealerVisible} === true ?${Requested_Dealer_Name}:${Requesting_Dealer_Name}}"/>
+											<Text text="{= ${RequestingDealerVisible} === true ?${Requested_Dealer}:${Requesting_Dealer}}-{= ${RequestingDealerVisible} === true ?${Requested_Dealer_Name}:${Requesting_Dealer_Name}}"/>
 											
 											<Text text="{Model}-{Model_Desc}"/>
 											<Text text="{Suffix} - {Suffix_Desc}/{Int_Colour_Desc}"/>
