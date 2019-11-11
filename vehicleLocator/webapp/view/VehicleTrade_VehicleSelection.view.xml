@@ -150,7 +150,7 @@
 												</layoutData>
 											</Label>
 											<ComboBox id="AcceInstalledCobmo1" selectionChange="onAccesoriesInstalledsChange" class="sapUiTinyMarginBegin" items="{/}" width="300px">
-												<core:ListItem text="{zaccesories}" key="{zaccesories}"/>
+												<core:ListItem text="{path:'zaccesories',formatter:'vehicleLocator.Formatter.Formatter.AccInstall'}" key="{zaccesories}"/>
 												<layoutData>
 													<l:GridData span="L2 M2 S8"/>
 												</layoutData>
