@@ -81,7 +81,8 @@
 								
 								<Label text="{i18n>APX}"/>
 								<Text text="{APX}"/>
-
+								<Label text="{i18n>AccessoryInstall}"/>
+								<Text text="{AccessoryInstall}"/>
 								<Label text="{i18n>Status}"/>
 								<Text text="{path:'Status',formatter:'vehicleLocator.Formatter.Formatter.Status'}"/>
 								<Label text="{i18n>OrderType}" visible="{detailView>/showOrderType}"/>
@@ -142,7 +143,8 @@
 							
 								<Label text="{i18n>APX}" id="apxid"/>
 								<Text text="{/OffredVehicle/APX}" id="apxTid"/>
-								
+								<Label text="{i18n>AccessoryInstall}" id="accid"/>
+								<Text text="{/OffredVehicle/AccessoryInstall}" id="accTid"/>
 								<Label text="{i18n>Status}" id="sttid"/>
 								<Text text="{path:'/OffredVehicle/Status',formatter:'vehicleLocator.Formatter.Formatter.Status'}" id="stdId"/>
 								<Label text="{i18n>OrderType}" id="ordtyp"/>
