@@ -995,7 +995,7 @@ this.getView().byId("VLRColor1").setEnabled(false);
 				success: function (result) {
 					var oResults = result.d.results;
 					var oResults = oResults.filter(function (x) {
-						return (x.TCISeries == Series);
+						return (x.TCISeries == Series&&(x.Modelyear==that.oSelectedYear||x.Modelyear==that.oSelectedYear-2||x.Modelyear==that.oSelectedYear-1||x.Modelyear==that.oSelectedYear+1));
 
 					});
 					var obj = {};
