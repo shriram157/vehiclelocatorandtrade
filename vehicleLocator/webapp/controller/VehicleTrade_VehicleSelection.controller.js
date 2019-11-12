@@ -901,9 +901,9 @@ var status = this.getView().byId("VLRStatus1").getSelectedKey();
 			}
 
 			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer1 + "')/Set?$filter=zzseries eq'" + Series +
-				"'and kunnr eq '" + oDealer +"'and zz_trading_ind eq '"+status+"'and dnc_ind eq 'N"+
+				"'and kunnr eq '" + oDealer +
 				"'&$format=json";
-
+// "'and zz_trading_ind eq '"+status+"'and dnc_ind eq 'N"+
 			$.ajax({
 				url: SeriesUrl,
 				type: "GET",
@@ -916,7 +916,10 @@ var status = this.getView().byId("VLRStatus1").getSelectedKey();
 				success: function (odata, oresponse) {
 
 					var a = odata.d.results;
+var a = a.filter(function (x) {
+						return (x.zz_trading_ind == status);
 
+					});
 					/*var filtered_ODealer = a.filter(function (x) {
 							return (x.kunnr==oDealer);
 						});*/
@@ -992,7 +995,7 @@ this.getView().byId("VLRColor1").setEnabled(false);
 				success: function (result) {
 					var oResults = result.d.results;
 					var oResults = oResults.filter(function (x) {
-						return (x.Modelyear == that.oSelectedYear && x.TCISeries == Series);
+						return (x.TCISeries == Series);
 
 					});
 					var obj = {};
