@@ -106,12 +106,13 @@ sap.ui.define([
 				var i = 0;
 				var modelData = [];
 				that.oSelectedYearTemp = that.oSelectedYear - 2;
-				do {
+				// do {
 
-					that.oSelectedYear = that.oSelectedYearTemp + i;
+				// 	that.oSelectedYear = that.oSelectedYearTemp + i;
 
 					that.receivedCounter = 0;
-					var SeriesUrl = that.oDataUrl + "/ZC_MODEL_DETAILS?$filter=Modelyear eq '" + that.oSelectedYear + "'";
+					// var SeriesUrl = that.oDataUrl + "/ZC_MODEL_DETAILS?$filter=Modelyear eq '" + that.oSelectedYear + "'";
+					var SeriesUrl = that.oDataUrl + "/ZC_MODEL_DETAILS";
 
 					var ajax1 = $.ajax({
 						dataType: "json",
@@ -126,24 +127,24 @@ sap.ui.define([
 						url: SeriesUrl,
 						async: true,
 						success: function (result) {
-							// var receivedData = result.d.results;
+							var modelData = result.d.results;
 
-							that.receivedCounter = that.receivedCounter + 1;
-							$.each(result.d.results, function (i, receivedData) {
+							// that.receivedCounter = that.receivedCounter + 1;
+							// $.each(result.d.results, function (i, receivedData) {
 
-								modelData.push({
+								// modelData.push({
 
-									ENModelDesc: receivedData.ENModelDesc,
-									FRModelDesc: receivedData.FRModelDesc,
-									Model: receivedData.Model,
-									Modelyear: receivedData.Modelyear,
-									TCISeries: receivedData.TCISeries,
-									suffix: receivedData.suffix
+								// 	ENModelDesc: receivedData.ENModelDesc,
+								// 	FRModelDesc: receivedData.FRModelDesc,
+								// 	Model: receivedData.Model,
+								// 	Modelyear: receivedData.Modelyear,
+								// 	TCISeries: receivedData.TCISeries,
+								// 	suffix: receivedData.suffix
 
-								});
-							});
+								// });
+							// });
 
-							if (that.receivedCounter == 4) { // all the data received. 
+							// if (that.receivedCounter == 4) { // all the data received. 
 
 								//console.log([...new Set(modelData)]) 
 								// var modelDataNoDuplicates = uniq(modelData);
@@ -156,14 +157,14 @@ sap.ui.define([
 								sap.ui.getCore().setModel(SeriesModel, "SeriesModel");
 								that.SuffixDescrioptionBinding();
 
-							}
+							// }
 						}
 					});
 
-					i++;
+				// 	i++;
 
-				}
-				while (i < 4);
+				// }
+				// while (i < 4);
 
 				// function uniqBy(a, key) {
 				//     var seen = {};
