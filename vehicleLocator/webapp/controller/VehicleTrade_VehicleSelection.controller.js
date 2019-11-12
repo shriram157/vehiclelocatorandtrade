@@ -128,7 +128,10 @@ sap.ui.define([
 						async: true,
 						success: function (result) {
 							var modelData = result.d.results;
+								 modelData = modelData.filter(function (x) {
+						return (x.Modelyear==that.oSelectedYear||x.Modelyear==that.oSelectedYear-2||x.Modelyear==that.oSelectedYear-1||x.Modelyear==that.oSelectedYear+1);
 
+					});
 							// that.receivedCounter = that.receivedCounter + 1;
 							// $.each(result.d.results, function (i, receivedData) {
 
