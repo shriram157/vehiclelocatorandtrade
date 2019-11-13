@@ -56,6 +56,21 @@
 								<FlexBox>
 									<items>
 										<VBox>
+											<Label text="{i18n>ModelYear}" labelFor="oVt_MoyrCmbo" design="Bold" class="sapUiTinyMarginBegin sapUiSmallMarginTop">
+												<layoutData>
+													<l:GridData span="L2 M2 S6"/>
+												</layoutData>
+											</Label>
+											<ComboBox placeholder="" width="140%" showSecondaryValues="true" filterSecondaryValues="true" selectionChange="handleoVt_MoyrChange"
+												id="oVt_MoyrCmbo" items="{/}">
+												<core:ListItem text="{year}" key="{year}" additionalText=""/>
+											</ComboBox>
+										</VBox>
+									</items>
+								</FlexBox>
+								<FlexBox>
+									<items>
+										<VBox>
 											<Label text="{i18n>Series}" labelFor="oVt_SeriesCmbo" design="Bold" class="sapUiTinyMarginBegin sapUiSmallMarginTop">
 												<layoutData>
 													<l:GridData span="L2 M2 S6"/>
@@ -76,7 +91,7 @@
 													<l:GridData span="L2 M2 S6"/>
 												</layoutData>
 											</Label>
-								<ComboBox placeholder="" selectedKey="" showSecondaryValues="true" width="90%" selectionChange="MCClickedVLS11" id="McCmbo"
+								<ComboBox placeholder="" selectedKey="" showSecondaryValues="true" width="140%" selectionChange="MCClickedVLS11" id="McCmbo"
 									 items="{ path:'/', sorter : [{ path:'Model', ascending : 'true' } ] }">
 									<core:ListItem text="{Model}-{=${SPRAS}==='English' ? ${ENModelDesc}:${FRModelDesc} }"
 										key="{Model}" additionalText=""/>
@@ -96,7 +111,7 @@
 												</layoutData>
 											</Label>
 											<!--<ComboBox id="VLRSuffix" selectionChange="onSuffixChange" items="{/}" class="sapUiTinyMarginBegin" width="300px">-->
-											<ComboBox id="VLRSuffix1" selectionChange="onStatusChange" items="{/}" class="sapUiTinyMarginBegin" width="300px">
+											<ComboBox id="VLRSuffix1" selectionChange="onStatusChange" items="{/}" class="sapUiTinyMarginBegin" width="140%">
 												<core:ListItem
 													text="{zzsuffix} - {=${SPRAS}==='English' ? ${suffix_desc_en}:${suffix_desc_fr} }/{=${SPRAS}==='English' ? ${mrktg_int_desc_en}:${mrktg_int_desc_fr} }"
 													key="{zzsuffix}"/>
@@ -115,7 +130,7 @@
 													<l:GridData span="L2 M2 S8"/>
 												</layoutData>
 											</Label>
-											<ComboBox id="VLRColor1" selectionChange="onColourChange" class="sapUiTinyMarginBegin" items="{/}" width="300px">
+											<ComboBox id="VLRColor1" selectionChange="onColourChange" class="sapUiTinyMarginBegin" items="{/}" width="140%">
 												<core:ListItem text="{zzextcol} - {=${languageModel>/SPRAS}==='English' ? ${mktg_desc_en}:${mktg_desc_fr} }" key="{zzextcol}"/>
 												<layoutData>
 													<l:GridData span="L2 M2 S8"/>
@@ -132,7 +147,7 @@
 													<l:GridData span="L2 M2 S6"/>
 												</layoutData>
 											</Label>
-											<ComboBox id="VLRStatus1" selectionChange="onStatusChangeMultiple" items="{/}" class="sapUiTinyMarginBegin" width="300px">
+											<ComboBox id="VLRStatus1" selectionChange="onStatusChangeMultiple" items="{/}" class="sapUiTinyMarginBegin" width="140%">
 												<core:ListItem text="{path:'zz_trading_ind',formatter:'vehicleLocator.Formatter.Formatter.Status'}" key="{zz_trading_ind}"/>
 												<layoutData>
 													<l:GridData span="L2 M2 S6"/>
@@ -149,7 +164,7 @@
 													<l:GridData span="L2 M2 S8"/>
 												</layoutData>
 											</Label>
-											<ComboBox id="AcceInstalledCobmo1" selectionChange="onAccesoriesInstalledsChange" class="sapUiTinyMarginBegin" items="{/}" width="300px">
+											<ComboBox id="AcceInstalledCobmo1" selectionChange="onAccesoriesInstalledsChange" class="sapUiTinyMarginBegin" items="{/}" width="140%">
 												<core:ListItem text="{path:'zaccesories',formatter:'vehicleLocator.Formatter.Formatter.AccInstall'}" key="{zaccesories}"/>
 												<layoutData>
 													<l:GridData span="L2 M2 S8"/>
