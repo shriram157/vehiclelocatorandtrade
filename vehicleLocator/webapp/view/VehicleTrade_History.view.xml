@@ -157,12 +157,12 @@
 									<!--	<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="false"/>-->
 									<!--</t:template>-->
 									<!--</Column>-->
-									<Column>
-										<Text text="{i18n>To}"/>
+									<!--<Column>-->
+									<!--	<Text text="{i18n>To}"/>-->
 										<!--<t:template>-->
 										<!--	<Text text="{= ${RequestingDealerVisible} === true ?'To':'From'}" wrapping="false"/>-->
 										<!--</t:template>-->
-									</Column>
+									<!--</Column>-->
 									<Column>
 										<Text text="{i18n>Dealer}"/>
 										<!--<t:template>-->
@@ -213,7 +213,7 @@
 											<!--<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="false"/>-->
 											<Text text="{Requested_Vtn}" wrapping="false"/>
 											<Text text="{Requested_Vin}" wrapping="false"/>
-											<Text text="{i18n>To}" wrapping="false"/>
+											<!--<Text text="{i18n>To}" wrapping="false"/>-->
 											<Text text="{= ${RequestingDealerVisible} === true ?${Requested_Dealer}:${Requesting_Dealer}}-{= ${RequestingDealerVisible} === true ?${Requested_Dealer_Name}:${Requesting_Dealer_Name}}"/>
 										
 											<Text text="{Model}-{Model_Desc}"/>
@@ -269,12 +269,12 @@
 									<!--	<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="false"/>-->
 									<!--</t:template>-->
 									<!--</Column>-->
-									<Column>
-										<Text text="{i18n>From}"/>
+									<!--<Column>-->
+									<!--	<Text text="{i18n>From}"/>-->
 										<!--<t:template>-->
 										<!--	<Text text="{= ${RequestingDealerVisible} === true ?'To':'From'}" wrapping="false"/>-->
 										<!--</t:template>-->
-									</Column>
+									<!--</Column>-->
 									<Column>
 										<Text text="{i18n>Dealer}"/>
 										<!--<t:template>-->
@@ -322,7 +322,7 @@
 											<!--<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="false"/>-->
 										<Text text="{Requested_Vtn}" wrapping="false"/>
 											<Text text="{Requested_Vin}" wrapping="false"/>
-											<Text text="{i18n>From}" wrapping="false"/>
+											<!--<Text text="{i18n>From}" wrapping="false"/>-->
 											<Text text="{= ${RequestingDealerVisible} === true ?${Requested_Dealer}:${Requesting_Dealer}}-{= ${RequestingDealerVisible} === true ?${Requested_Dealer_Name}:${Requesting_Dealer_Name}}"/>
 											
 											<Text text="{Model}-{Model_Desc}"/>
