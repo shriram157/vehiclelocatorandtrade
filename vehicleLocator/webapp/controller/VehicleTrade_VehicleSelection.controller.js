@@ -281,6 +281,7 @@ this.getView().byId("VLRStatus1").setEnabled(false);
 this.getView().byId("AcceInstalledCobmo1").setEnabled(false);
 this.getView().byId("VLRSuffix1").setEnabled(false);
 this.getView().byId("VLRColor1").setEnabled(false);
+this.getView().byId("McCmbo").setEnabled(false);
 
 			this.getView().byId("VLRStatus1").setModel(Model);
 			if (StatusFilter.length != 0) {
@@ -428,13 +429,28 @@ this.getView().byId("VLRColor1").setEnabled(false);
 		handleoVt_MoyrChange:function(){
 			var that = this;
 				that.getView().byId("oVt_SeriesCmbo").setSelectedKey("");
-			// if (Model != undefined) {
-			// 		that.getView().byId("oVt_SeriesCmbo").setModel(Model);
-			// 	var SeleKey = Model.getProperty("/SelectedSeries");
-			// 	that.getView().byId("oVt_SeriesCmbo").setSelectedKey(SeleKey);
-			// 	that.handleoVt_SeriesChange();
-			// } else if(that.getView().byId("oVt_SeriesCmbo").getModel()==undefined&&Model==undefined) {
+					// that.oJsonModelVLS = new sap.ui.model.json.JSONModel([]);
+			// that.getView().byId("SeriesCmbo").setModel(that.oJsonModelVLS);
+			// that.getView().byId("oVt_SeriesCmbo").getModel().refresh(true);
+		
 
+			// that.getView().setModel(null, "Suffix");
+
+			// that.getView().setModel(null, "SeriesData");
+			// that.getView().setModel(null, "ModelCode");
+			// that.getView().setModel(null, "ModelCode");
+
+			that.getView().byId("McCmbo").setValue(null);
+			that.getView().byId("VLRSuffix1").setValue(null);
+			this.getView().byId("McCmbo").setEnabled(false);
+			// that.getView().byId("SeriesCmbo").setSelectedKey("");
+					this.getView().byId("VLRStatus1").setEnabled(false);
+this.getView().byId("AcceInstalledCobmo1").setEnabled(false);
+this.getView().byId("VLRSuffix1").setEnabled(false);
+this.getView().byId("VLRColor1").setEnabled(false);
+			that.getView().byId("McCmbo").setSelectedKey("");
+			
+sap.ui.getCore().setModel(null, "oVehicleSelectionResults");
 			if (that.getView().byId("oVt_SeriesCmbo").getModel() == undefined) {
 				var that = this;
 				/*var Array = [];*/
@@ -997,6 +1013,7 @@ var a = a.filter(function (x) {
 this.getView().byId("AcceInstalledCobmo1").setEnabled(false);
 this.getView().byId("VLRSuffix1").setEnabled(false);
 this.getView().byId("VLRColor1").setEnabled(false);
+this.getView().byId("McCmbo").setEnabled(true);
 
 			that.oCatUrl = this.nodeJsUrl + "/Z_VEHICLE_CATALOGUE_SRV";
 				var ModelCode = that.oCatUrl + "/ZC_MODEL_DETAILS?$filter=Modelyear eq '" + that.oSelectedYear +
