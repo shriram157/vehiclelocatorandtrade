@@ -389,7 +389,7 @@ sap.ui.define([
         		 	if(oDealer1.length == 10){
 		 	oDealer1=oDealer1.slice(-5);
 					 }	
-			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer1 + "')/Set?$filter=zzseries eq'" + Series + "'and kunnr eq '" + oDealer +
+			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer1 + "')/Set?$filter=kunnr eq '" + oDealer +
 				"'&$format=json";
 
 			$.ajax({

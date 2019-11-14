@@ -252,8 +252,18 @@ sap.ui.define([
 					}
 				}
 			}
-			var model = new sap.ui.model.json.JSONModel(TableData);
+			
+			var filtered = TableData.filter(function (item) {
+				return item.RequestingDealerVisible == true;
+			});
+			var filtered1 = TableData.filter(function (item) {
+				return item.RequestingDealerVisible == false;
+			});
+			var model = new sap.ui.model.json.JSONModel(filtered);
+			var model1 = new sap.ui.model.json.JSONModel(filtered1);
 			that.getView().byId("tableVTH").setModel(model);
+			that.getView().byId("tableVTH1").setModel(model1);
+
 
 		},
 		ExporttoExcellsheet: function () {
