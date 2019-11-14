@@ -525,6 +525,10 @@ sap.ui.define([
 			this.createViewSettingsDialog("vehicleLocator.fragment.TradeHistorySortDialog").open();
 
 		},
+		handleSortButtonPressed1: function () {
+			this.createViewSettingsDialog("vehicleLocator.fragment.TradeHistorySortDialog1").open();
+
+		},
 		createViewSettingsDialog: function (sDialogFragmentName) {
 			var oDialog = this._mViewSettingsDialogs[sDialogFragmentName];
 
@@ -556,7 +560,22 @@ sap.ui.define([
 			oBinding.sort(aSorters);
 			oBinding.refresh();
 		},
+	handleSortDialogConfirm1: function (oEvent) {
+			var oTable = this.byId("tableVTH1"),
+				mParams = oEvent.getParameters(),
+				oBinding = oTable.getBinding("items"),
+				sPath,
+				bDescending,
+				aSorters = [];
 
+			sPath = mParams.sortItem.getKey();
+			bDescending = mParams.sortDescending;
+			aSorters.push(new Sorter(sPath, bDescending));
+
+			// apply the selected sort and group settings
+			oBinding.sort(aSorters);
+			oBinding.refresh();
+		},
 		onBusinessPartnerSelected: function (oEvent) {
 
 			var sSelectedDealer = oEvent.getParameter("\selectedItem").getProperty("key");
@@ -606,6 +625,47 @@ sap.ui.define([
 			// based on the status field			
 
 			this.byId("tableVTH")
+				.getBinding("items")
+				.filter(aFilters);
+				
+		},
+			onLiveChangeTradeHistory: function (oEvent) {
+			this.sSearchQuery = oEvent.getSource().getValue();
+			this.fnApplyFiltersAndOrderingForVehicleTrade1();
+		},
+			fnApplyFiltersAndOrderingForVehicleTrade1: function (oEvent) {
+			var aFilters = [];
+	
+			// based on the status that is presnet in the screen apply one more filter. 
+		
+
+			if (this.sSearchQuery) {
+				var oFilter = new Filter([
+					new Filter("Requesting_Dealer", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("Requested_Dealer", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("Requested_Dealer_Name", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("Requesting_Dealer_Name", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("Requested_Vtn", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("Model", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("Model_Desc", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("Suffix", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("Suffix_Desc", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("Int_Colour_Desc", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("Ext_Colour", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("Ext_Colour_Desc", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("APX", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+				], false);
+
+				
+
+				var aFilters = new sap.ui.model.Filter([oFilter], true);
+
+				// aFilters.push(oFilter);
+			}
+
+			// based on the status field			
+
+			this.byId("tableVTH1")
 				.getBinding("items")
 				.filter(aFilters);
 				
