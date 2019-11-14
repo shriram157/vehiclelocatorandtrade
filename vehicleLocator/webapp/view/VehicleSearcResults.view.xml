@@ -187,7 +187,7 @@
 						</Column>
 						<Column id="Province1" demandPopin="true" width="8rem" minScreenWidth="Tablet" hAlign="Left">
 							<Text text="{i18n>Province}"/>
-						</Column>zzz
+						</Column>
 					</columns>
 				</Table>
 				<!--Table with data without header row inside scroll container -->
