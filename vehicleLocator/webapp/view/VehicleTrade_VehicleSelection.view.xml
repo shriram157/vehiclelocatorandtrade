@@ -130,7 +130,7 @@
 													<l:GridData span="L2 M2 S8"/>
 												</layoutData>
 											</Label>
-											<ComboBox id="VLRColor1" selectionChange="onColourChange" class="sapUiTinyMarginBegin" items="{/}" width="140%">
+											<ComboBox id="VLRColor1" selectionChange="onStatusChange" class="sapUiTinyMarginBegin" items="{/}" width="140%">
 												<core:ListItem text="{zzextcol} - {=${languageModel>/SPRAS}==='English' ? ${mktg_desc_en}:${mktg_desc_fr} }" key="{zzextcol}"/>
 												<layoutData>
 													<l:GridData span="L2 M2 S8"/>
@@ -147,7 +147,7 @@
 													<l:GridData span="L2 M2 S6"/>
 												</layoutData>
 											</Label>
-											<ComboBox id="VLRStatus1" selectionChange="onStatusChangeMultiple" items="{/}" class="sapUiTinyMarginBegin" width="140%">
+											<ComboBox id="VLRStatus1" selectionChange="onStatusChange" items="{/}" class="sapUiTinyMarginBegin" width="140%">
 												<core:ListItem text="{path:'zz_trading_ind',formatter:'vehicleLocator.Formatter.Formatter.Status'}" key="{zz_trading_ind}"/>
 												<layoutData>
 													<l:GridData span="L2 M2 S6"/>
