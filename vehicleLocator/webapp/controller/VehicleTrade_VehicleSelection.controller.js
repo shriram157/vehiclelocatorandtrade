@@ -198,6 +198,7 @@ this.getView().byId("VLRSuffix1").setEnabled(false);
 this.getView().byId("VLRColor1").setEnabled(false);
 this.getView().byId("McCmbo").setEnabled(false);
 that.getView().byId("oVt_SeriesCmbo").setEnabled(false);
+that.getView().byId("chknew1").setEnabled(false);
 			this.getView().byId("VLRStatus1").setModel(Model);
 			this.getView().byId("VLRStatus1").setSelectedKey("");
 			// if (StatusFilter.length != 0) {
@@ -359,6 +360,8 @@ that.getView().byId("oVt_SeriesCmbo").setEnabled(false);
 			that.getView().byId("oVt_SeriesCmbo").setEnabled(true);
 					this.getView().byId("VLRStatus1").setEnabled(true);
 this.getView().byId("AcceInstalledCobmo1").setEnabled(true);
+that.getView().byId("chknew1").setEnabled(true);
+
 this.getView().byId("VLRSuffix1").setEnabled(false);
 this.getView().byId("VLRColor1").setEnabled(false);
 			// that.getView().byId("McCmbo").setSelectedKey("");
@@ -372,7 +375,7 @@ this.getView().byId("VLRColor1").setEnabled(false);
 
 // table.setModel(oModel1, "oVehicleSelectionResults");
 // sap.ui.getCore().setModel(null, "oVehicleSelectionResults");
-			if (that.getView().byId("oVt_SeriesCmbo").getModel() == undefined) {
+			// if (that.getView().byId("oVt_SeriesCmbo").getModel() == undefined) {
 				var that = this;
 				/*var Array = [];*/
 				sap.ui.core.BusyIndicator.show();
@@ -532,7 +535,7 @@ that.onStatusChange();
 
 				//	that.SeriesBinding(that.oSelectedYear);
 
-			}
+			// }
 		},
 		onStatusChange: function () {
 
@@ -980,8 +983,10 @@ var status = this.getView().byId("VLRStatus1").getSelectedKey();
 // 					/*	 sap.ui.core.BusyIndicator.hide();*/
 // 				}
 // 			});
-			this.getView().byId("VLRStatus1").setEnabled(false);
-this.getView().byId("AcceInstalledCobmo1").setEnabled(false);
+			this.getView().byId("VLRStatus1").setEnabled(true);
+this.getView().byId("AcceInstalledCobmo1").setEnabled(true);
+this.getView().byId("chknew1").setEnabled(true);
+
 this.getView().byId("VLRSuffix1").setEnabled(false);
 this.getView().byId("VLRColor1").setEnabled(false);
 this.getView().byId("McCmbo").setEnabled(true);
@@ -1228,7 +1233,7 @@ that.getView().byId("VLRColor1").setEnabled(true);
 
 				}
 	that.getView().byId("VLRStatus1").setEnabled(true);
-that.getView().byId("AcceInstalledCobmo1").setEnabled(false);
+that.getView().byId("AcceInstalledCobmo1").setEnabled(true);
 that.getView().byId("VLRSuffix1").setEnabled(false);
 that.getView().byId("VLRColor1").setEnabled(false);
 that.getView().byId("VLRSuffix1").setSelectedKey("all");
@@ -1238,8 +1243,8 @@ that.getView().byId("VLRSuffix1").setSelectedKey("all");
 				},
 				error: function () {
 					sap.ui.core.BusyIndicator.hide();
-						that.getView().byId("VLRStatus1").setEnabled(false);
-that.getView().byId("AcceInstalledCobmo1").setEnabled(false);
+						that.getView().byId("VLRStatus1").setEnabled(true);
+that.getView().byId("AcceInstalledCobmo1").setEnabled(true);
 that.getView().byId("VLRSuffix1").setEnabled(false);
 that.getView().byId("VLRColor1").setEnabled(false);
 that.getView().byId("VLRSuffix1").setSelectedKey("all");
