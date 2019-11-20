@@ -986,7 +986,7 @@ var status = this.getView().byId("VLRStatus1").getSelectedKey();
 			this.getView().byId("VLRStatus1").setEnabled(true);
 this.getView().byId("AcceInstalledCobmo1").setEnabled(true);
 this.getView().byId("chknew1").setEnabled(true);
-
+this.getView().byId("VLRSuffix1").setSelectedKey("all");
 this.getView().byId("VLRSuffix1").setEnabled(false);
 this.getView().byId("VLRColor1").setEnabled(false);
 this.getView().byId("McCmbo").setEnabled(true);
