@@ -3091,7 +3091,7 @@ if (this.getView().byId("oVt_SeriesCmbo").getItems().filter(function (x) {
 
 			
 		
-			var SuffixURL = that.oDataUrl + "/ZVMS_CDS_APX?$filter=model_year eq '" + Model_Year +
+			var SuffixURL = that.oDataUrl + "/ZVMS_CDS_COLOUR?$filter=model_year eq '" + Model_Year +
 				"' and model eq '" + Model+"'and suffix eq '" + suffix+"'";
 
 			var ajax3 = $.ajax({
