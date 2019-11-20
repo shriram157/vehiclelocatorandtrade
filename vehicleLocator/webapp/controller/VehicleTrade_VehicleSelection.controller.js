@@ -3088,37 +3088,11 @@ if (this.getView().byId("oVt_SeriesCmbo").getItems().filter(function (x) {
 			var Model_Year = that.oSelectedYear;
 			var suffix=that.getView().byId("VLRSuffix1").getSelectedKey();
 			this.nodeJsUrl = this.sPrefix + "/node";
-			var oDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerKey;
 
-	var oReceivedData = sap.ui.getCore().SelectedTrade;
-			if (oReceivedData !== undefined) {
-				var requestDealerToSAP = oReceivedData.kunnr;
-				var oDealer1 = requestDealerToSAP;
-
-			} else {
-				// may be from block summary. 
-				// var oDropDownSelectedDealer = sap.ui.getCore().dropDownSelectionData;
-				var oDropDownSelectedDealer = sap.ui.getCore().getModel("dropDownSelectionData").getData();
-				if (oDropDownSelectedDealer !== undefined) {
-					var requestDealerToSAP = oDropDownSelectedDealer.dropDownSelectedBP;
-					var oDealer1 = requestDealerToSAP;
-				}
-			}
-			if (oDealer1 !== undefined) {
-				if (oDealer1.length == 10) {
-
-					oDealer1 = oDealer1.slice(-5);
-				} else {
-					oDealer1 = "";
-				}
-			} else {
-				oDealer1 = "";
-			}
-
-			// Z_VEHICLE_MASTER_SRV/ZVMS_CDS_ETA_consolidate(Req_dealer=%2742354%27)/Set?$filter=kunnr%20eq%20%272400042120%27%20and%20matnr%20eq%20%27YZ3DCT%27%20and%20zzmoyr%20eq%20%272018%27%20and%20zzsuffix%20eq%20%27AL%27&$format=json
-		this.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_CATALOGUE_SRV";
-			var SuffixURL = this.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='"+oDealer1+"')/Set?$filter=zzmoyr eq '" + Model_Year +
-				"' and matnr eq '" + Model+"'and zzsuffix eq '" + suffix+"'and kunnr eq '" + oDealer+"'";
+			
+		
+			var SuffixURL = that.oDataUrl + "/ZVMS_CDS_APX?$filter=model_year eq '" + Model_Year +
+				"' and model eq '" + Model+"'and suffix eq '" + suffix+"'";
 
 			var ajax3 = $.ajax({
 				dataType: "json",
