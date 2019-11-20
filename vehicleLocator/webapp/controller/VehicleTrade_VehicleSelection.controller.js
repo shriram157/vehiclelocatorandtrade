@@ -3166,7 +3166,7 @@ that.getView().byId("VLRColor1").setEnabled(true);
 							text: "ALL"
 						});
 						that.getView().byId("VLRColor1").insertItem(newItem);
-					} else {/
+					} else {
 
 						var newItem = new sap.ui.core.Item({
 							key: "all",
