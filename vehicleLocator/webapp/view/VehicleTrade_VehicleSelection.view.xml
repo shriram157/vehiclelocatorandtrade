@@ -111,7 +111,7 @@
 												</layoutData>
 											</Label>
 											<!--<ComboBox id="VLRSuffix" selectionChange="onSuffixChange" items="{/}" class="sapUiTinyMarginBegin" width="300px">-->
-											<ComboBox id="VLRSuffix1" selectionChange="onStatusChange" items="{/}" class="sapUiTinyMarginBegin" width="140%">
+											<ComboBox id="VLRSuffix1" selectionChange="onSuffixChange" items="{/}" class="sapUiTinyMarginBegin" width="140%">
 												<core:ListItem
 													text="{zzsuffix} - {=${SPRAS}==='English' ? ${suffix_desc_en}:${suffix_desc_fr} }/{=${SPRAS}==='English' ? ${mrktg_int_desc_en}:${mrktg_int_desc_fr} }"
 													key="{zzsuffix}"/>

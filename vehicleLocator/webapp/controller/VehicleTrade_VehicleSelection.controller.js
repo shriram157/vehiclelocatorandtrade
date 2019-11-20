@@ -1085,65 +1085,65 @@ that.onStatusChange();
 
 			that.oDataUrl = this.nodeJsUrl + "/Z_DEALER_TRADE_REQUEST_SRV";
 			that.oVehicleURL=this.nodeJsUrl + "/Z_VEHICLE_CATALOGUE_SRV";
-			var Status = this.getView().byId("VLRStatus1").getSelectedKey();
-			if (Status == "1") {
-				// var Color=this.getView().byId("table1VSR").getModel().getData().filter(function(x){return x.zz_trading_ind=="1"})
+			// var Status = this.getView().byId("VLRStatus1").getSelectedKey();
+			// if (Status == "1") {
+			// 	// var Color=this.getView().byId("table1VSR").getModel().getData().filter(function(x){return x.zz_trading_ind=="1"})
 
-				var suffix = this.getView().getModel("vehicleSelectTableModel").getData().filter(function (x) {
-					return x.zz_trading_ind == "1"
-				});
-			} else {
-				// var Color=this.getView().byId("table1VSR").getModel().getData().filter(function(x){return (x.zz_trading_ind=="2"||x.zz_trading_ind=="3")})
-				var suffix = this.getView().getModel("vehicleSelectTableModel").getData().filter(function (x) {
-					return (x.zz_trading_ind == "2" || x.zz_trading_ind == "3")
-				});
-			}
+			// 	var suffix = this.getView().getModel("vehicleSelectTableModel").getData().filter(function (x) {
+			// 		return x.zz_trading_ind == "1"
+			// 	});
+			// } else {
+			// 	// var Color=this.getView().byId("table1VSR").getModel().getData().filter(function(x){return (x.zz_trading_ind=="2"||x.zz_trading_ind=="3")})
+			// 	var suffix = this.getView().getModel("vehicleSelectTableModel").getData().filter(function (x) {
+			// 		return (x.zz_trading_ind == "2" || x.zz_trading_ind == "3")
+			// 	});
+			// }
 			//	var Color = sap.ui.getCore().getModel("SearchedData").getData();
-			var obj = {};
-			for (var i = 0, len = suffix.length; i < len; i++)
-				obj[suffix[i]['zzsuffix']] = suffix[i];
-			suffix = new Array();
-			for (var key in obj)
-				suffix.push(obj[key]);
-			var suffixModel = new sap.ui.model.json.JSONModel(suffix);
+			// var obj = {};
+			// for (var i = 0, len = suffix.length; i < len; i++)
+			// 	obj[suffix[i]['zzsuffix']] = suffix[i];
+			// suffix = new Array();
+			// for (var key in obj)
+			// 	suffix.push(obj[key]);
+			// var suffixModel = new sap.ui.model.json.JSONModel(suffix);
 			// Model.setSizeLimit(1000);
-			var selctedsuffix = this.getView().byId("VLRSuffix1").getSelectedKey();
+			// var selctedsuffix = this.getView().byId("VLRSuffix1").getSelectedKey();
 			// this.getView().byId("VLRSuffix1").setModel(suffixModel);
 			// if (Color.length != 0) {
-			if (this.getView().byId("VLRSuffix1").getItems().filter(function (x) {
-					return x.mProperties.key == "all"
-				}).length == 0) {
+			// if (this.getView().byId("VLRSuffix1").getItems().filter(function (x) {
+			// 		return x.mProperties.key == "all"
+			// 	}).length == 0) {
 
-				if (this.sCurrentLocale == 'EN') {
-					var newItem = new sap.ui.core.Item({
-						key: "all",
-						text: "ALL"
-					});
+			// 	if (this.sCurrentLocale == 'EN') {
+			// 		var newItem = new sap.ui.core.Item({
+			// 			key: "all",
+			// 			text: "ALL"
+			// 		});
 
-				} else {
-					var newItem = new sap.ui.core.Item({
-						key: "all",
-						text: "TOUS"
-					});
+			// 	} else {
+			// 		var newItem = new sap.ui.core.Item({
+			// 			key: "all",
+			// 			text: "TOUS"
+			// 		});
 
-				}
+			// 	}
 
-				var SelctKey = suffix.filter(function (x) {
-					return x.zzsuffix == selctedsuffix;
-				});
-				this.getView().byId("VLRSuffix1").insertItem(newItem);
+			// 	var SelctKey = suffix.filter(function (x) {
+			// 		return x.zzsuffix == selctedsuffix;
+			// 	});
+			// 	this.getView().byId("VLRSuffix1").insertItem(newItem);
 
-				/*this.getView().byId("VLRColor").setSelectedKey("all");
-				this.getView().byId("VLRColor").setSelectedItem("ALL");*/
-				if (selctedsuffix == "" || SelctKey.length == 0) {
+			// 	/*this.getView().byId("VLRColor").setSelectedKey("all");
+			// 	this.getView().byId("VLRColor").setSelectedItem("ALL");*/
+			// 	if (selctedsuffix == "" || SelctKey.length == 0) {
 
 				
 
-					this.getView().byId("VLRSuffix1").setSelectedKey("all");
-				} else {
-					this.getView().byId("VLRSuffix1").setSelectedKey(selctedsuffix);
-				}
-			}
+			// 		this.getView().byId("VLRSuffix1").setSelectedKey("all");
+			// 	} else {
+			// 		this.getView().byId("VLRSuffix1").setSelectedKey(selctedsuffix);
+			// 	}
+			// }
 			
 		
 			var SuffixURL = that.oDataUrl + "/ZC_suffix_VL?$filter=ModelYear eq '" + that.oSelectedYear +
@@ -1206,7 +1206,7 @@ that.onStatusChange();
 						that.getView().byId("VLRStatus1").setEnabled(true);
 that.getView().byId("AcceInstalledCobmo1").setEnabled(true);
 that.getView().byId("VLRSuffix1").setEnabled(true);
-that.getView().byId("VLRColor1").setEnabled(true);
+that.getView().byId("VLRColor1").setEnabled(false);
 					that.SuffixDescription();
 					}
 					else
@@ -3069,6 +3069,134 @@ if (this.getView().byId("oVt_SeriesCmbo").getItems().filter(function (x) {
 			// }
 			this.onStatusChange();
 
+		},
+		onSuffixChange: function(){
+			var that = this;
+			// that.oJsonModelVLS = new sap.ui.model.json.JSONModel([]);
+			// that.getView().setModel(that.oJsonModelVLS, "Suffix");
+			sap.ui.core.BusyIndicator.show();
+			var sLocation = window.location.host;
+			var sLocation_conf = sLocation.search("webide");
+
+			if (sLocation_conf == 0) {
+				this.sPrefix = "/vehicleLocatorNode";
+			} else {
+				this.sPrefix = "";
+
+			}
+			var Model = that.getView().byId("McCmbo").getSelectedKey();
+			var Model_Year = that.oSelectedYear;
+			var suffix=that.getView().byId("VLRSuffix1").getSelectedKey();
+			this.nodeJsUrl = this.sPrefix + "/node";
+
+			
+		
+			var SuffixURL = that.oDataUrl + "/ZVMS_CDS_APX?$filter=zzmoyr eq '" + Model_Year +
+				"' and zzmodel eq '" + Model+"'and zzsuffix eq '" + suffix+"'";
+
+			var ajax3 = $.ajax({
+				dataType: "json",
+				xhrFields: //
+				{
+					withCredentials: true
+				},
+				url: SuffixURL,
+				async: true,
+				success: function (result) {
+					var Suffix = result.d.results;
+					var SuffixData=[];
+					if(Suffix.length!=0)
+					{
+				for (var i = 0; i < Suffix.length; i++) {
+					var obj = {};
+					obj.zzextcol = Suffix[i].zzextcol;
+					obj.mktg_desc_en = Suffix[i].mktg_desc_en;
+					obj.mktg_desc_fr = Suffix[i].mktg_desc_fr;
+					// obj.mrktg_int_desc_en = Suffix[i].mrktg_int_desc_en;
+					// obj.mrktg_int_desc_fr = Suffix[i].mrktg_int_desc_fr;
+					// obj.int_c = Suffix[i].int_c;
+					// obj.SPRAS = Suffix[i].SPRAS;
+					SuffixData.push(obj);
+				}
+						// var suffixDataNoDuplicates = that.removeDuplicates(SuffixData, "zzsuffix");
+
+								// modelDataNoDuplicates = Array.from(new Set(modelData.map(JSON.stringify))).map(JSON.parse);
+
+								var suffixModel = new sap.ui.model.json.JSONModel(SuffixData);
+// var Model = new sap.ui.model.json.JSONModel(suffixModel);
+			// that.getView().byId("VLRSuffix1").setModel(suffixModel);
+				if (that.getView().byId("VLRColor1").getItems().filter(function (x) {
+						return x.mProperties.key == "all"
+					}).length == 0) {
+
+					if (that.sCurrentLocale == 'EN') {
+						var newItem = new sap.ui.core.Item({
+							key: "all",
+							text: "ALL"
+						});
+						that.getView().byId("VLRColor1").insertItem(newItem);
+					} else {
+
+						var newItem = new sap.ui.core.Item({
+							key: "all",
+							text: "TOUS"
+						});
+						that.getView().byId("VLRColor1").insertItem(newItem);
+
+					}
+
+				}
+					var SuffixModel = new sap.ui.model.json.JSONModel(Suffix);
+					that.getView().byId("VLRColor1").setModel(SuffixModel);
+						that.getView().byId("VLRStatus1").setEnabled(true);
+that.getView().byId("AcceInstalledCobmo1").setEnabled(true);
+that.getView().byId("VLRSuffix1").setEnabled(true);
+that.getView().byId("VLRColor1").setEnabled(true);
+					// that.SuffixDescription();
+					}
+					else
+					{
+							if (that.getView().byId("VLRColor1").getItems().filter(function (x) {
+						return x.mProperties.key == "all"
+					}).length == 0) {
+
+					if (that.sCurrentLocale == 'EN') {
+						var newItem = new sap.ui.core.Item({
+							key: "all",
+							text: "ALL"
+						});
+						that.getView().byId("VLRColor1").insertItem(newItem);
+					} else {/
+
+						var newItem = new sap.ui.core.Item({
+							key: "all",
+							text: "TOUS"
+						});
+						that.getView().byId("VLRColor1").insertItem(newItem);
+
+					}
+
+				}
+	that.getView().byId("VLRStatus1").setEnabled(true);
+that.getView().byId("AcceInstalledCobmo1").setEnabled(true);
+that.getView().byId("VLRSuffix1").setEnabled(true);
+that.getView().byId("VLRColor1").setEnabled(false);
+that.getView().byId("VLRColor1").setSelectedKey("all");
+					}
+									sap.ui.core.BusyIndicator.hide();
+
+				},
+				error: function () {
+					sap.ui.core.BusyIndicator.hide();
+						that.getView().byId("VLRStatus1").setEnabled(true);
+that.getView().byId("AcceInstalledCobmo1").setEnabled(true);
+that.getView().byId("VLRSuffix1").setEnabled(true);
+that.getView().byId("VLRColor1").setEnabled(false);
+that.getView().byId("VLRColor1").setSelectedKey("all");
+				}
+			});
+			that.onStatusChange();
+		
 		},
 		onAccesoriesInstalledsChange: function(){
 			this.onStatusChange();

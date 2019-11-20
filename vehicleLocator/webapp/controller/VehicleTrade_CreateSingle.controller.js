@@ -428,6 +428,7 @@ sap.ui.define([
 						"F3",
 						"F4",
 						"F5"
+						"DM"
 					];
 					/*	var oExcludeOrdrtype = filtered_ODealer.filter(function (objFromA) {
 							return !ExcludeOrdType.find(function (objFromB) {
@@ -444,7 +445,7 @@ sap.ui.define([
 
 					//        var oJsonModel = new sap.ui.model.json.JSONModel(oExcludeOrdrtype);
 					var IncludeOrdertype = oExcludeOrdrtype.filter(function (x) {
-						return (x.zzordertype == "SO" || x.zzordertype == "DM");
+						return (x.zzordertype == "SO" );
 					});
 					var oJsonModel = new sap.ui.model.json.JSONModel(IncludeOrdertype);
 					// need to change language - 2603				 
