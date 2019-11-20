@@ -1223,7 +1223,7 @@ sap.ui.define([
 
 			var yeararray = [];
 			var n = (d.getFullYear()) + 1;
-			for (var i = 0; i < 4; i++) {
+			for (var i = 0; i < 3; i++) {
 				var obj = {};
 				obj.year = n - i;
 				yeararray.push(obj);

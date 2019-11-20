@@ -472,7 +472,16 @@ sap.ui.define([
 				}
 
 			}
-
+var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelectedKey();
+			if (selectedAccessInstalled == "Yes") {
+				//filterArray.push(new sap.ui.model.Filter("non_D_flag", sap.ui.model.FilterOperator.Contains,"X" ));
+				filterArray.push(new sap.ui.model.Filter("pd_flag", sap.ui.model.FilterOperator.Contains, "D"));
+				//filterArray.push(new sap.ui.model.Filter("non_D_flag", sap.ui.model.FilterOperator.Contains," " ));
+			} else if ((selectedAccessInstalled == "No")) {
+				filterArray.push(new sap.ui.model.Filter("pd_flag", sap.ui.model.FilterOperator.EQ, ""));
+				//filterArray.push(new sap.ui.model.Filter("non_D_flag", sap.ui.model.FilterOperator.Contains, "X"));
+				//filterArray.push(new sap.ui.model.Filter("non_D_flag", sap.ui.model.FilterOperator.Contains," " ));
+			}
 			var ShowDoNotCallVehicles = this.getView().byId("chknew").getSelected();
 			if (ShowDoNotCallVehicles == true) {
 
@@ -1270,6 +1279,9 @@ sap.ui.define([
 			this._selectedDealerModel.setProperty("/Dealer_No", sSelectedMatnr);
 			this._selectedDealerModel.setProperty("/Dealer_Name", sSelectedMatnrText);
 
+		},
+		onAccesoriesInstalledsChange: function(){
+			this.onStatusChange();
 		},
 		handleExporttohecls: function () {
 

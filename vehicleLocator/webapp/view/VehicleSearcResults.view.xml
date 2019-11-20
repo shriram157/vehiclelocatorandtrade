@@ -142,7 +142,7 @@
 							<ToolbarSpacer/>
 							<SearchField id="searchVehicleList" liveChange="onLiveChange" showSearchButton="true" placeholder="{i18n>placeHolderText}">
 								<layoutData>
-									<OverflowToolbarLayoutData minWidth="200px" maxWidth="300px" shrinkable="true"/>
+									<OverflowToolbarLayoutData shrinkable="true"/>
 								</layoutData>
 							</SearchField>
 							<Button tooltip="{i18n>bToolTip}" icon="sap-icon://sort" press="handleViewSettingsDialogButtonPressed" text="{i18n>Sorting}"/>
@@ -153,7 +153,7 @@
 							<Text text="{i18n>Trade}" id="nameColumnTitle2"/>
 						</Column>
 						<Column id="zzvtn1" demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="6rem">
-							<Text text="VTN"/>
+							<Text text="{i18n>VTN}"/>
 						</Column>
 						<Column id="dealerId1" demandPopin="true" minScreenWidth="Tablet" width="12rem" hAlign="Left">
 							<Text text="{i18n>Dealer}"/>
@@ -223,7 +223,7 @@
 							<!--     <Column hAlign="Left" width="14%" />-->
 						</columns>
 						<items>
-							<ColumnListItem id="onlinkPress" type="Navigation" unread="true"  >
+							<ColumnListItem id="onlinkPress" unread="true"  >
 								<cells>
 									<Link id="tradeId1" text="{i18n>Trade}" class="link" subtle="true" press="oTradeLinkPress" wrapping="false" width="5rem"/>
 									<Text text="{vehicleSearchTableModel>zzvtn}" wrapping="false" width="6rem"/>

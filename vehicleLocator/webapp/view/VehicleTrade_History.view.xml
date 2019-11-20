@@ -120,7 +120,7 @@
 								<headerToolbar>
 									<Toolbar>
 										<content>
-											<Title id="title" text="Trade Out" titleStyle="H3"/>
+											<Title id="title" text="{i18n>TradeOut}" titleStyle="H3"/>
 											<ToolbarSpacer/>
 											<SearchField id="searchTradeHistory" liveChange="onLiveChangeTradeHistory" showSearchButton="true" placeholder="{i18n>placeHolderText}">
 												<layoutData>
@@ -157,12 +157,12 @@
 									<!--	<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="false"/>-->
 									<!--</t:template>-->
 									<!--</Column>-->
-									<Column>
-										<Text text="{i18n>To}"/>
+									<!--<Column>-->
+									<!--	<Text text="{i18n>To}"/>-->
 										<!--<t:template>-->
 										<!--	<Text text="{= ${RequestingDealerVisible} === true ?'To':'From'}" wrapping="false"/>-->
 										<!--</t:template>-->
-									</Column>
+									<!--</Column>-->
 									<Column>
 										<Text text="{i18n>Dealer}"/>
 										<!--<t:template>-->
@@ -213,7 +213,7 @@
 											<!--<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="false"/>-->
 											<Text text="{Requested_Vtn}" wrapping="false"/>
 											<Text text="{Requested_Vin}" wrapping="false"/>
-											<Text text="{i18n>To}" wrapping="false"/>
+											<!--<Text text="{i18n>To}" wrapping="false"/>-->
 											<Text text="{= ${RequestingDealerVisible} === true ?${Requested_Dealer}:${Requesting_Dealer}}-{= ${RequestingDealerVisible} === true ?${Requested_Dealer_Name}:${Requesting_Dealer_Name}}"/>
 										
 											<Text text="{Model}-{Model_Desc}"/>
@@ -228,21 +228,21 @@
 							</Table>
 						</ScrollContainer>
 							<ScrollContainer height="380px" width="100%" vertical="true">
-							<Table id="tableVTH1" items="{ path: '/', sorter: { path: 'Changed_on', descending: true } }" class="sapUiContentPadding headerFixClass" ariaLabelledBy="title" headerText="Trade In">
+							<Table id="tableVTH1" items="{ path: '/', sorter: { path: 'Changed_on', descending: true } }" class="sapUiContentPadding headerFixClass" ariaLabelledBy="title" headerText="{i18n>TradeIn}">
 								<headerToolbar>
-									<!--<Toolbar>-->
-									<!--	<content>-->
-									<!--		<Title id="title" text="" titleStyle="H3"></Title>-->
-									<!--		<ToolbarSpacer/>-->
-									<!--		<SearchField id="searchTradeHistory" liveChange="onLiveChangeTradeHistory" showSearchButton="true" placeholder="{i18n>placeHolderText}">-->
-									<!--			<layoutData>-->
-									<!--				<OverflowToolbarLayoutData minWidth="200px" maxWidth="300px" shrinkable="true"/>-->
-									<!--			</layoutData>-->
-									<!--		</SearchField>-->
-									<!--		<Button tooltip="View Sort Settings" icon="sap-icon://sort" press="handleSortButtonPressed"/>-->
-											<!--<ToggleButton text="{i18n>Delete}" icon="sap-icon://delete" tooltip="" press="oDeletepress"/>-->
-									<!--	</content>-->
-									<!--</Toolbar>-->
+									<Toolbar>
+										<content>
+											<Title id="title1" text="{i18n>TradeIn}" titleStyle="H3"></Title>
+											<ToolbarSpacer/>
+											<SearchField id="searchTradeHistory1" liveChange="onLiveChangeTradeHistory1" showSearchButton="true" placeholder="{i18n>placeHolderText}">
+												<layoutData>
+													<OverflowToolbarLayoutData minWidth="200px" maxWidth="300px" shrinkable="true"/>
+												</layoutData>
+											</SearchField>
+											<Button tooltip="View Sort Settings" icon="sap-icon://sort" press="handleSortButtonPressed1"/>
+											<!--<ToggleButton text="{i18n>Delete}" icon="sap-icon://delete" tooltip="" press="oDeletepress1"/>-->
+										</content>
+									</Toolbar>
 								</headerToolbar>
 								<columns>
 									<Column id="TradecolId1">
@@ -269,12 +269,12 @@
 									<!--	<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="false"/>-->
 									<!--</t:template>-->
 									<!--</Column>-->
-									<Column>
-										<Text text="{i18n>From}"/>
+									<!--<Column>-->
+									<!--	<Text text="{i18n>From}"/>-->
 										<!--<t:template>-->
 										<!--	<Text text="{= ${RequestingDealerVisible} === true ?'To':'From'}" wrapping="false"/>-->
 										<!--</t:template>-->
-									</Column>
+									<!--</Column>-->
 									<Column>
 										<Text text="{i18n>Dealer}"/>
 										<!--<t:template>-->
@@ -322,7 +322,7 @@
 											<!--<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="false"/>-->
 										<Text text="{Requested_Vtn}" wrapping="false"/>
 											<Text text="{Requested_Vin}" wrapping="false"/>
-											<Text text="{i18n>From}" wrapping="false"/>
+											<!--<Text text="{i18n>From}" wrapping="false"/>-->
 											<Text text="{= ${RequestingDealerVisible} === true ?${Requested_Dealer}:${Requesting_Dealer}}-{= ${RequestingDealerVisible} === true ?${Requested_Dealer_Name}:${Requesting_Dealer_Name}}"/>
 											
 											<Text text="{Model}-{Model_Desc}"/>
