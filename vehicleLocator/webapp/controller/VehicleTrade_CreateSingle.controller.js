@@ -427,7 +427,7 @@ sap.ui.define([
 						"F2",
 						"F3",
 						"F4",
-						"F5"
+						"F5",
 						"DM"
 					];
 					/*	var oExcludeOrdrtype = filtered_ODealer.filter(function (objFromA) {
