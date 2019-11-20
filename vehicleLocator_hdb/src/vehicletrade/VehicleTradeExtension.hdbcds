@@ -5,3 +5,8 @@ extend entity VT.Trade_Request with {
     @Comment : 'Accessory Installed Y or N'
     AccessoryInstalled : String(1);
 };
+
+extend entity VT.Vehicle with {
+    @Comment : 'Accessory Installed Y or N'
+    AccessoryInstalled : String(1);
+};
