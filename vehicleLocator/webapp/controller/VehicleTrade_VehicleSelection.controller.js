@@ -3125,7 +3125,10 @@ if (this.getView().byId("oVt_SeriesCmbo").getItems().filter(function (x) {
 								var suffixModel = new sap.ui.model.json.JSONModel(SuffixData);
 // var Model = new sap.ui.model.json.JSONModel(suffixModel);
 			// that.getView().byId("VLRSuffix1").setModel(suffixModel);
-				if (that.getView().byId("VLRColor1").getItems().filter(function (x) {
+			
+					var SuffixModel = new sap.ui.model.json.JSONModel(Suffix);
+					that.getView().byId("VLRColor1").setModel(SuffixModel);
+						if (that.getView().byId("VLRColor1").getItems().filter(function (x) {
 						return x.mProperties.key == "all"
 					}).length == 0) {
 
@@ -3146,12 +3149,11 @@ if (this.getView().byId("oVt_SeriesCmbo").getItems().filter(function (x) {
 					}
 
 				}
-					var SuffixModel = new sap.ui.model.json.JSONModel(Suffix);
-					that.getView().byId("VLRColor1").setModel(SuffixModel);
 						that.getView().byId("VLRStatus1").setEnabled(true);
 that.getView().byId("AcceInstalledCobmo1").setEnabled(true);
 that.getView().byId("VLRSuffix1").setEnabled(true);
 that.getView().byId("VLRColor1").setEnabled(true);
+that.getView().byId("VLRColor1").setSelectedKey("all");
 					// that.SuffixDescription();
 					}
 					else
