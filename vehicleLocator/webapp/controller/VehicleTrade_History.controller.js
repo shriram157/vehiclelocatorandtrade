@@ -600,6 +600,7 @@ sap.ui.define([
 
 			if (this.sSearchQuery) {
 				var oFilter = new Filter([
+					new Filter("Trade_Id", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("Requesting_Dealer", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("Requested_Dealer", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("Requested_Dealer_Name", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
@@ -629,7 +630,7 @@ sap.ui.define([
 				.filter(aFilters);
 				
 		},
-			onLiveChangeTradeHistory: function (oEvent) {
+			onLiveChangeTradeHistory1: function (oEvent) {
 			this.sSearchQuery = oEvent.getSource().getValue();
 			this.fnApplyFiltersAndOrderingForVehicleTrade1();
 		},
@@ -641,6 +642,7 @@ sap.ui.define([
 
 			if (this.sSearchQuery) {
 				var oFilter = new Filter([
+					new Filter("Trade_Id", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("Requesting_Dealer", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("Requested_Dealer", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("Requested_Dealer_Name", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
@@ -658,7 +660,7 @@ sap.ui.define([
 
 				
 
-				var aFilters = new sap.ui.model.Filter([oFilter], true);
+				aFilters = new sap.ui.model.Filter([oFilter], true);
 
 				// aFilters.push(oFilter);
 			}
