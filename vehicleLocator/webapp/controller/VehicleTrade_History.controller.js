@@ -279,6 +279,19 @@ sap.ui.define([
 				this.JSONToCSVConvertor(items, "ExportGreen", true);
 			}
 		},
+		ExporttoExcellsheet1: function () {
+
+			var Context = this.getView().byId("tableVTH1").getBinding("items").getContexts();
+			if (Context.length == 0) {
+				sap.m.MessageBox.warning("No data is available to export");
+				return;
+			} else {
+				var items = Context.map(function (oEvent) {
+					return oEvent.getObject();
+				});
+				this.JSONToCSVConvertor(items, "ExportGreen", true);
+			}
+		},
 		JSONToCSVConvertor: function (JSONData, ReportTitle, ShowLabel) {
 			var zthat = this;
 			var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
