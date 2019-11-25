@@ -136,8 +136,8 @@
 												<Link id="otradIdz2" text="{receivedRequestTable>Trade_Id}" class="link" subtle="true" press="oMyRequestLinkPress" wrapping="true"/>
 												<Text text="{path:'receivedRequestTable>Created_On',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate' }" wrapping="true"/>
 
-												<Text
-													text="{path:'receivedRequestTable>Requesting_Dealer',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDealer'}-{receivedRequestTable>Requesting_Dealer_Name}"></Text>
+												<Text									
+													text="{= ${receivedRequestTable>RequestingDealerVisible} === true ?${receivedRequestTable>Requested_Dealer}:${receivedRequestTable>Requesting_Dealer}}-{= ${receivedRequestTable>RequestingDealerVisible} === true ?${receivedRequestTable>Requested_Dealer_Name}:${receivedRequestTable>Requesting_Dealer_Name}}"></Text>
 												<Text text="{receivedRequestTable>Model}-{receivedRequestTable>Model_Desc}" wrapping="true"/>
 												<Text text="{receivedRequestTable>Suffix}-{receivedRequestTable>Suffix_Desc}/{receivedRequestTable>Int_Colour_Desc}" wrapping="true"/>
 												<Text text="{receivedRequestTable>Ext_Colour}-{receivedRequestTable>Ext_Colour_Desc}}" wrapping="true"/>
@@ -272,8 +272,9 @@
 										<Link id="otradIdz" text="{vehicleTradeSummaryTable>Trade_Id}" class="link" subtle="true" press="oRequestLinkPress" wrapping="true"/>
 										<Text text="{path:'vehicleTradeSummaryTable>Created_On',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate' }" wrapping="true"/>
 										<!--<Text text="{path:'vehicleTradeSummaryTable>Created_On', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'yyyy-MM-dd', strictParsing: true , UTC: true } }" wrapping="true" />	-->
+									<!--{= ${vehicleTradeSummaryTable>RequestingDealerVisible} === true ?${vehicleTradeSummaryTable>Requested_Dealer}:${vehicleTradeSummaryTable>Requesting_Dealer}}-{= ${vehicleTradeSummaryTable>RequestingDealerVisible} === true ?${vehicleTradeSummaryTable>Requested_Dealer_Name}:${vehicleTradeSummaryTable>Requesting_Dealer_Name}}-->
 										<Text
-											text="{path:'vehicleTradeSummaryTable>Requested_Dealer',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDealer'}-{vehicleTradeSummaryTable>Requested_Dealer_Name}"
+											text="{= ${vehicleTradeSummaryTable>RequestingDealerVisible} === true ?${vehicleTradeSummaryTable>Requested_Dealer}:${vehicleTradeSummaryTable>Requesting_Dealer}}-{= ${vehicleTradeSummaryTable>RequestingDealerVisible} === true ?${vehicleTradeSummaryTable>Requested_Dealer_Name}:${vehicleTradeSummaryTable>Requesting_Dealer_Name}}"
 											wrapping="true"/>
 										<Text text="{vehicleTradeSummaryTable>Model}-{vehicleTradeSummaryTable>Model_Desc}" wrapping="true"/>
 										<Text text="{vehicleTradeSummaryTable>Suffix}-{vehicleTradeSummaryTable>Suffix_Desc}/{vehicleTradeSummaryTable>Int_Colour_Desc}"

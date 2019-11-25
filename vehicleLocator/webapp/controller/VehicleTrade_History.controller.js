@@ -254,10 +254,10 @@ sap.ui.define([
 			}
 			
 			var filtered = TableData.filter(function (item) {
-				return item.RequestingDealerVisible == true;
+				return ((item.Trade_Return == 'Y') || (item.RequestingDealerVisible == true));
 			});
 			var filtered1 = TableData.filter(function (item) {
-				return item.RequestingDealerVisible == false;
+				return ((item.Trade_Return == 'Y') || (item.RequestingDealerVisible == false));
 			});
 			var model = new sap.ui.model.json.JSONModel(filtered);
 			var model1 = new sap.ui.model.json.JSONModel(filtered1);
