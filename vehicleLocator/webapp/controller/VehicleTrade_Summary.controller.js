@@ -386,13 +386,6 @@ onLiveChange: function (oEvent) {
 
 			var TradeRequest = this.TradeRequest;
 			for (var i = 0; i < TradeRequest.length; i++) {
-					TradeRequest[i].Requesting_Dealer = TradeRequest[i].Requesting_Dealer.slice(-5);
-				TradeRequest[i].Requested_Dealer = TradeRequest[i].Requested_Dealer.slice(-5);
-					if (TradeRequest[i].Requesting_Dealer == loggedDealerCode) {
-					TradeRequest[i].RequestingDealerVisible = true;
-				} else {
-					TradeRequest[i].RequestingDealerVisible = false;
-				}
 				var TradeVehicles = TradeRequest[i].TradeVehicles.results;
 				var oTradeVehicleDesc = TradeRequest[i].TradeVehicleDesc.results;
 				for (var j = 0; j < TradeVehicles.length; j++) {
@@ -689,8 +682,8 @@ onLiveChange: function (oEvent) {
 						return x.Requesting_Dealer != null;
 					});
 					var RequesttingDealer = RequesttingDealer1.filter(function (x) {
-						return (x.Trade_Return=='Y')||(x.Requesting_Dealer.slice(-5) == Dealer && (x.Trade_Status == "A" || x.Trade_Status == "S" || x.Trade_Status == "C" ||
-							x.Trade_Status == "X" || x.Trade_Status == "R" || x.Trade_Status == "F"));
+						return x.Requesting_Dealer.slice(-5) == Dealer && (x.Trade_Status == "A" || x.Trade_Status == "S" || x.Trade_Status == "C" ||
+							x.Trade_Status == "X" || x.Trade_Status == "R" || x.Trade_Status == "F");
 					});
 					var model = new sap.ui.model.json.JSONModel(RequesttingDealer);
 					model.setSizeLimit(1000);
@@ -741,8 +734,8 @@ onLiveChange: function (oEvent) {
 						return x.Requested_Dealer != null;
 					});
 					var RequestedDealer = RequestedDealer1.filter(function (x) {
-						return (x.Trade_Return=='Y')||(x.Requested_Dealer.slice(-5) == Dealer && (x.Trade_Status == "A" || x.Trade_Status == "S" || x.Trade_Status == "C" ||
-							x.Trade_Status == "X" || x.Trade_Status == "R" || x.Trade_Status == "F"));
+						return x.Requested_Dealer.slice(-5) == Dealer && (x.Trade_Status == "A" || x.Trade_Status == "S" || x.Trade_Status == "C" ||
+							x.Trade_Status == "X" || x.Trade_Status == "R" || x.Trade_Status == "F");
 					});
 					var model = new sap.ui.model.json.JSONModel(RequestedDealer);
 					model.setSizeLimit(1000);

@@ -65,7 +65,8 @@
 							<ToolbarSpacer/>
 							<Button id="openMenVTH" class="VLbtn3" text="{i18n>ExporttoExcel}" type="Accept" press="ExporttoExcellsheet" width="auto"/>
 						</OverflowToolbar>
-						<ScrollContainer height="380px" width="100%" vertical="true">
+														<Table showNoData="false">
+
 							<!--	<Table id="tableVTH" width="auto" class="sapUiResponsiveMargin" items="{/}" growingThreshold="150">
 								<columns>
 									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
@@ -116,7 +117,6 @@
 									</ColumnListItem>
 								</items>
 							</Table>-->
-							<Table id="tableVTH" items="{ path: '/', sorter: { path: 'Changed_on', descending: true } }" class="sapUiContentPadding headerFixClass" ariaLabelledBy="title" headerText="Trade">
 								<headerToolbar>
 									<Toolbar>
 										<content>
@@ -132,21 +132,22 @@
 										</content>
 									</Toolbar>
 								</headerToolbar>
+
 								<columns>
-									<Column id="TradecolId">
+									<Column id="TradecolId" width="12em">
 										<Text text="{i18n>RequestNo}"/>
 										<!--<t:template>-->
 										<!--	<Link id="tradeHId" text="{Trade_Id}" class="link" subtle="true" press="oTradeHistoryLinkPress" wrapping="false"/>-->
 										<!--</t:template>-->
 									</Column>
-										<Column id="matnr">
+										<Column id="matnr" width="12em">
 										<Text text="{i18n>VehicleTrackingNumber}"/>
 										<!--<t:template>-->
 										<!--	<Text text="{Requested_Vtn}" wrapping="false"/>-->
 										<!--</t:template>-->
 									</Column>
-									<Column>
-										<Text text="{i18n>VIN}"/>
+									<Column width="12em">
+										<Text text="{i18n>VIN}" />
 										<!--<t:template>-->
 										<!--	<Text text="{Requested_Vtn}" wrapping="false"/>-->
 										<!--</t:template>-->
@@ -163,7 +164,7 @@
 										<!--	<Text text="{= ${RequestingDealerVisible} === true ?'To':'From'}" wrapping="false"/>-->
 										<!--</t:template>-->
 									<!--</Column>-->
-									<Column>
+									<Column width="12em">
 										<Text text="{i18n>Dealer}"/>
 										<!--<t:template>-->
 										<!--	<Text text="{= ${RequestingDealerVisible} === true ?${Requested_Dealer}:${Requesting_Dealer}}-{= ${RequestingDealerVisible} === true ?${Requested_Dealer_Name}:${Requesting_Dealer_Name}}"/>-->
@@ -171,19 +172,19 @@
 										<!--</t:template>-->
 									</Column>
 								
-									<Column>
+									<Column width="12em">
 										<Text text="{i18n>Model}"/>
 										<!--<t:template>-->
 										<!--	<Text text="{Model}-{Model_Desc}" wrapping="false"/>-->
 										<!--</t:template>-->
 									</Column>
-									<Column id="Suffix">
+									<Column id="Suffix" width="12em">
 										<Text text="{i18n>Suffix}"/>
 										<!--<t:template>-->
 										<!--	<Text text="{Suffix} - {Suffix_Desc}/{Int_Colour_Desc}" wrapping="false"/>-->
 										<!--</t:template>-->
 									</Column>
-									<Column>
+									<Column width="12em">
 										<Text text="{i18n>ExteriorColor}"/>
 										<!--<t:template>-->
 										<!--	<Text text="{Ext_Colour}-{Ext_Colour_Desc}" wrapping="false"/>-->
@@ -191,14 +192,14 @@
 									</Column>				
  
 				
-									<Column>
-										<Text text="{i18n>APX}" width="auto"/>
+									<Column width="12em">
+										<Text text="{i18n>APX}"/>
 										<!--<t:template>-->
 										<!--	<Text text="{APX}" wrapping="false"/>-->
 										<!--</t:template>-->
 									</Column>
 
-									<Column>
+									<Column width="12em">
 										<Text text="{i18n>Accepted}"/>
 										<!--<t:template>-->
 										<!--	<Text text="{path:'Changed_on', formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false" />-->
@@ -206,34 +207,52 @@
 										<!--</t:template>-->
 									</Column>
 								</columns>
+								</Table>
+									<ScrollContainer height="380px" width="100%" vertical="true">
+
+								<Table id="tableVTH" items="{ path: '/', sorter: { path: 'Changed_on', descending: true } }" >
+
 								<items>
 									<ColumnListItem type="Inactive" press="detailItems">
 										<cells>
-											<Link id="tradeHId" text="{Trade_Id}" class="link" subtle="true" press="oTradeHistoryLinkPress" wrapping="false"/>
+											<Link id="tradeHId" text="{Trade_Id}" width="12em" class="link" subtle="true" press="oTradeHistoryLinkPress" wrapping="false"/>
 											<!--<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="false"/>-->
-											<Text text="{Requested_Vtn}" wrapping="false"/>
-											<Text text="{Requested_Vin}" wrapping="false"/>
+											<Text text="{Requested_Vtn}" wrapping="false" width="12em"/>
+											<Text text="{Requested_Vin}" wrapping="false" width="12em"/>
 											<!--<Text text="{i18n>To}" wrapping="false"/>-->
-											<Text text="{= ${RequestingDealerVisible} === true ?${Requested_Dealer}:${Requesting_Dealer}}-{= ${RequestingDealerVisible} === true ?${Requested_Dealer_Name}:${Requesting_Dealer_Name}}"/>
+											<Text width="12em" text="{= ${RequestingDealerVisible} === true ?${Requested_Dealer}:${Requesting_Dealer}}-{= ${RequestingDealerVisible} === true ?${Requested_Dealer_Name}:${Requesting_Dealer_Name}}"/>
 										
-											<Text text="{Model}-{Model_Desc}"/>
-											<Text text="{Suffix} - {Suffix_Desc}/{Int_Colour_Desc}"/>
-											<Text text="{Ext_Colour}-{Ext_Colour_Desc}"/>
-											<Text text="{APX}"/>
+											<Text width="12em" text="{Model}-{Model_Desc}"/>
+											<Text width="12em" text="{Suffix} - {Suffix_Desc}/{Int_Colour_Desc}"/>
+											<Text width="12em" text="{Ext_Colour}-{Ext_Colour_Desc}"/>
+											<Text width="12em" text="{APX}"/>
 									
 											<Text text="{path:'Changed_on', formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDateTradeHistory'}" wrapping="false"/>
 										</cells>
 									</ColumnListItem>
 								</items>
+									<columns>
+                    <Column width="12em"></Column>
+                    <Column width="12em"></Column>
+                    <Column width="12em"></Column>
+                    <Column width="12em"></Column>
+                    <Column width="12em"></Column>
+                    <Column width="12em"></Column>
+                    <Column width="12em"></Column>
+                    <Column width="12em"></Column>
+                    <Column width="12em"></Column>
+
+                  </columns>
 							</Table>
 						</ScrollContainer>
+						
 						<OverflowToolbar id="otb2" class="otbVT_Hist">
 							<!--<Label text="{i18n>VehicleTradeHistory}" width="auto" class="vHlabe1clss"/>-->
 							<ToolbarSpacer/>
 							<Button id="openMenVTH1" class="VLbtn3" text="{i18n>ExporttoExcel}" type="Accept" press="ExporttoExcellsheet1" width="auto"/>
 						</OverflowToolbar>
-							<ScrollContainer height="380px" width="100%" vertical="true">
-							<Table id="tableVTH1" items="{ path: '/', sorter: { path: 'Changed_on', descending: true } }" class="sapUiContentPadding headerFixClass" ariaLabelledBy="title" headerText="{i18n>TradeIn}">
+						<!--<ScrollContainer  width="100%" vertical="true">-->
+							<Table showNoData="false">
 								<headerToolbar>
 									<Toolbar>
 										<content>
@@ -250,20 +269,20 @@
 									</Toolbar>
 								</headerToolbar>
 								<columns>
-									<Column id="TradecolId1">
-										<Text text="{i18n>RequestNo}"/>
+									<Column id="TradecolId1" width="12em">
+										<Text text="{i18n>RequestNo}" />
 										<!--<t:template>-->
 										<!--	<Link id="tradeHId" text="{Trade_Id}" class="link" subtle="true" press="oTradeHistoryLinkPress" wrapping="false"/>-->
 										<!--</t:template>-->
 									</Column>
-										<Column id="matnr1">
+										<Column id="matnr1" width="12em">
 										<Text text="{i18n>VehicleTrackingNumber}"/>
 										<!--<t:template>-->
 										<!--	<Text text="{Requested_Vtn}" wrapping="false"/>-->
 										<!--</t:template>-->
 									</Column>
-										<Column>
-										<Text text="{i18n>VIN}"/>
+										<Column width="12em">
+										<Text text="{i18n>VIN}" />
 										<!--<t:template>-->
 										<!--	<Text text="{Requested_Vtn}" wrapping="false"/>-->
 										<!--</t:template>-->
@@ -280,46 +299,52 @@
 										<!--	<Text text="{= ${RequestingDealerVisible} === true ?'To':'From'}" wrapping="false"/>-->
 										<!--</t:template>-->
 									<!--</Column>-->
-									<Column>
-										<Text text="{i18n>Dealer}"/>
+									<Column width="12em">
+										<Text text="{i18n>Dealer}" />
 										<!--<t:template>-->
 										<!--	<Text text="{= ${RequestingDealerVisible} === true ?${Requested_Dealer}:${Requesting_Dealer}}-{= ${RequestingDealerVisible} === true ?${Requested_Dealer_Name}:${Requesting_Dealer_Name}}"/>-->
 										<!--<Text text="{path:'kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'} -{name1}" wrapping="false"/>-->
 										<!--</t:template>-->
 									</Column>
 								
-									<Column>
+									<Column width="12em">
 										<Text text="{i18n>Model}"/>
 										<!--<t:template>-->
 										<!--	<Text text="{Model}-{Model_Desc}" wrapping="false"/>-->
 										<!--</t:template>-->
 									</Column>
-									<Column id="Suffix1">
-										<Text text="{i18n>Suffix}"/>
+									<Column id="Suffix1" width="12em">
+										<Text text="{i18n>Suffix}" />
 										<!--<t:template>-->
 										<!--	<Text text="{Suffix} - {Suffix_Desc}/{Int_Colour_Desc}" wrapping="false"/>-->
 										<!--</t:template>-->
 									</Column>
-									<Column>
+									<Column width="12em">
 										<Text text="{i18n>ExteriorColor}"/>
 										<!--<t:template>-->
 										<!--	<Text text="{Ext_Colour}-{Ext_Colour_Desc}" wrapping="false"/>-->
 										<!--</t:template>-->
 									</Column>
-									<Column>
-										<Text text="{i18n>APX}" width="auto"/>
+									<Column width="12em">
+										<Text text="{i18n>APX}" />
 										<!--<t:template>-->
 										<!--	<Text text="{APX}" wrapping="false"/>-->
 										<!--</t:template>-->
 									</Column>
-									<Column>
-										<Text text="{i18n>Accepted}"/>
+									<Column width="12em">
+										<Text text="{i18n>Accepted}" />
 										<!--<t:template>-->
 										<!--	<Text text="{path:'Changed_on', formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false" />-->
 										<!--formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false"-->
 										<!--</t:template>-->
 									</Column>
 								</columns>
+								</Table>
+								<!--</ScrollContainer>-->
+								<ScrollContainer height="380px" width="100%" vertical="true">
+
+								<Table id="tableVTH1" items="{ path: '/', sorter: { path: 'Changed_on', descending: true } }"  >
+
 								<items>
 									<ColumnListItem type="Inactive" press="detailItems">
 										<cells>
@@ -338,6 +363,18 @@
 										</cells>
 									</ColumnListItem>
 								</items>
+								<columns>
+                    <Column width="12em"></Column>
+                    <Column width="12em"></Column>
+                    <Column width="12em"></Column>
+                    <Column width="12em"></Column>
+                    <Column width="12em"></Column>
+                    <Column width="12em"></Column>
+                    <Column width="12em"></Column>
+                    <Column width="12em"></Column>
+                    <Column width="12em"></Column>
+
+                  </columns>
 							</Table>
 					</ScrollContainer>
 					</VBox>
