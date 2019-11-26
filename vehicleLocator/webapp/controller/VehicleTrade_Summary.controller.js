@@ -17,6 +17,8 @@ sap.ui.define([
 
 		onInit: function () {
 			var _that = this;
+			//var LoggedInDealerCode2="42120";//uncomment for local testing
+			//var LoggedInDealer="Don Valley North";//uncomment for local testing
 			var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
 			var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, "");
 			this.getView().byId("oDealerCode7").setText(LoggedInDealerCode2);
