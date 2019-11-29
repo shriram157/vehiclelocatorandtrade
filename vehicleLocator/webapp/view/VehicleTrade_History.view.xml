@@ -217,15 +217,15 @@
 										<cells>
 											<Link id="tradeHId" text="{Trade_Id}" width="12em" class="link" subtle="true" press="oTradeHistoryLinkPress" wrapping="false"/>
 											<!--<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="false"/>-->
-											<Text text="{Requested_Vtn}" wrapping="false" width="12em"/>
+											<Text text="{OffredVehicle/Requested_VTN}" wrapping="false" width="12em"/>
 											<Text text="{Requested_Vin}" wrapping="false" width="12em"/>
 											<!--<Text text="{i18n>To}" wrapping="false"/>-->
-											<Text width="12em" text="{= ${RequestingDealerVisible} === true ?${Requested_Dealer}:${Requesting_Dealer}}-{= ${RequestingDealerVisible} === true ?${Requested_Dealer_Name}:${Requesting_Dealer_Name}}"/>
+											<Text width="12em" text="{= ${RequestingDealerVisible} === true ?${Requested_Dealer}:${OffredVehicle/Requesting_Dealer}}-{= ${RequestingDealerVisible} === true ?${Requested_Dealer_Name}:${OffredVehicle/Requesting_Dealer_Name}}"/>
 										
-											<Text width="12em" text="{Model}-{Model_Desc}"/>
-											<Text width="12em" text="{Suffix} - {Suffix_Desc}/{Int_Colour_Desc}"/>
-											<Text width="12em" text="{Ext_Colour}-{Ext_Colour_Desc}"/>
-											<Text width="12em" text="{APX}"/>
+											<Text width="12em" text="{OffredVehicle/Model}-{OffredVehicle/Model_Desc}"/>
+											<Text width="12em" text="{OffredVehicle/Suffix} - {OffredVehicle/Suffix_Desc}/{Int_Colour_Desc}"/>
+											<Text width="12em" text="{OffredVehicle/Ext_Colour}-{OffredVehicle/Ext_Colour_Desc}"/>
+											<Text width="12em" text="{OffredVehicle/APX}"/>
 									
 											<Text text="{path:'Changed_on', formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDateTradeHistory'}" wrapping="false"/>
 										</cells>
