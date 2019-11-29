@@ -262,6 +262,14 @@ sap.ui.define([
 							TableData[i].Int_Colour_Desc = results[j].Int_Colour_Desc;
 							TableData[i].Colour = results[j].Int_Colour;
 							TableData[i].Ext_Colour_Desc = results[j].Ext_Colour_Desc;
+								if (TableData[i].OffredVehicle) { 
+								TableData[i].OffredVehicle.Model_Desc = results[j].Model_Desc;
+								TableData[i].OffredVehicle.Series_Desc = results[j].Series_Desc;
+								TableData[i].OffredVehicle.Suffix_Desc = results[j].Suffix_Desc;
+								TableData[i].Int_Colour_Desc = results[j].Int_Colour_Desc;
+								TableData[i].OffredVehicle.Colour = results[j].Int_Colour;
+								TableData[i].OffredVehicle.Ext_Colour_Desc = results[j].Ext_Colour_Desc;
+							}
 						}
 					}
 
