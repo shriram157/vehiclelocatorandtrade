@@ -249,7 +249,7 @@
 						<OverflowToolbar id="otb2" class="otbVT_Hist">
 							<!--<Label text="{i18n>VehicleTradeHistory}" width="auto" class="vHlabe1clss"/>-->
 							<ToolbarSpacer/>
-							<Button id="openMenVTH1" class="VLbtn3" text="{i18n>ExporttoExcel}" type="Accept" press="ExporttoExcellsheet1" width="auto"/>
+							<!--<Button id="openMenVTH1" class="VLbtn3" text="{i18n>ExporttoExcel}" type="Accept" press="ExporttoExcellsheet1" width="auto"/>-->
 						</OverflowToolbar>
 						<!--<ScrollContainer  width="100%" vertical="true">-->
 							<Table showNoData="false">

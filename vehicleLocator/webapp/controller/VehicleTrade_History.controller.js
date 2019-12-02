@@ -293,7 +293,7 @@ sap.ui.define([
 					}
 				}
 			}
-			
+			this.tableData= TableData;
 			var filtered = TableData.filter(function (item) {
 				return ((item.Trade_Return == 'Y') || (item.RequestingDealerVisible == true));
 			});
@@ -317,7 +317,7 @@ sap.ui.define([
 				var items = Context.map(function (oEvent) {
 					return oEvent.getObject();
 				});
-				this.JSONToCSVConvertor(items, "ExportGreen", true);
+				this.JSONToCSVConvertor(this.tableData, "ExportGreen", true);
 			}
 		},
 		ExporttoExcellsheet1: function () {
@@ -345,7 +345,7 @@ sap.ui.define([
 			var i18n = sap.ui.getCore().getModel("i18n").getResourceBundle();
 			var RequestNo = i18n.getText("RequestNo");
 			// var Status = i18n.getText("Status");
-			// var From_To = i18n.getText("From_To");
+			var From_To = i18n.getText("From_To");
 		
 			var VehicleTrackingNumber = i18n.getText("VehicleTrackingNumber");
 			var VIN = i18n.getText("VIN");
@@ -359,7 +359,7 @@ sap.ui.define([
 
 			row += RequestNo + ",";
 			// row += Status + ",";
-			// row += From_To + ",";
+			row += From_To + ",";
 			
 			row += VehicleTrackingNumber + ",";
 			row += VIN + ",";
@@ -378,13 +378,13 @@ sap.ui.define([
 				var row = "";
 
 				if (arrData[i].RequestingDealerVisible == true) {
-					// var RequestingDealerVisible = "To";
+					var RequestingDealerVisible = "To";
 					var SelectedDealer = arrData[i].Requested_Dealer;
 					var SelectedDealerName = arrData[i].Requested_Dealer_Name;
 					var DelearData = SelectedDealer + "-" + SelectedDealerName;
 
 				} else {
-					// var RequestingDealerVisible = "From";
+					var RequestingDealerVisible = "From";
 
 					var SelectedDealer = arrData[i].Requesting_Dealer;
 					var SelectedDealerName = arrData[i].Requesting_Dealer_Name;
@@ -424,7 +424,7 @@ sap.ui.define([
 				var dateAsReceived = moment.tz((arrData[i].Changed_on), "GMT");
 				var dateformated = moment(dateAsReceived).format("YYYY-MM-DD");
 
-				row += '="' + arrData[i].Trade_Id + '",="' + arrData[i].Requested_Vtn + '",="' + arrData[i].Requested_Vin + '",="' + DelearData + '",="' + arrData[i].Model + '","' + arrData[i].Suffix +
+				row += '="' + arrData[i].Trade_Id + '",="' + RequestingDealerVisible + '",="' + arrData[i].Requested_Vtn + '",="' + arrData[i].Requested_Vin + '",="' + DelearData + '",="' + arrData[i].Model + '","' + arrData[i].Suffix +
 				
 					'","' + arrData[i].Ext_Colour + 
 					'","' + arrData[i].APX +
