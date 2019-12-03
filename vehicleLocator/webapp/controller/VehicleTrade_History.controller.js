@@ -194,9 +194,10 @@ sap.ui.define([
 						TableData[i].APX = results[x].APX;
 						TableData[i].Order_Type = results[x].Order_Type;
 						TableData[i].Status = results[x].Status;
-
-					} else if (TableData[i].Offered_Vtn == results[x].VTN) {
-						TableData[i].OffredVehicle = {};
+						if(TableData[i].Trade_Return=='N')
+						{
+								TableData[i].OffredVehicle = {};
+						TableData[i].OffredVehicle.Requested_VTN = TableData[i].Requested_Vtn;
 						TableData[i].OffredVehicle.Requesting_Dealer = TableData[i].Requesting_Dealer;
 						TableData[i].OffredVehicle.Requesting_Dealer_Name = TableData[i].Requesting_Dealer_Name;
 						TableData[i].OffredVehicle.Model_Year = results[x].Model_Year;
@@ -209,6 +210,38 @@ sap.ui.define([
 						TableData[i].OffredVehicle.APX = results[x].APX;
 						TableData[i].OffredVehicle.Order_Type = results[x].Order_Type;
 						TableData[i].OffredVehicle.Status = results[x].Status;
+						}
+
+					} else if (TableData[i].Offered_Vtn == results[x].VTN) {
+						TableData[i].OffredVehicle = {};
+						TableData[i].OffredVehicle.Requested_VTN = TableData[i].Offered_Vtn;
+						TableData[i].OffredVehicle.Requesting_Dealer = TableData[i].Requesting_Dealer;
+						TableData[i].OffredVehicle.Requesting_Dealer_Name = TableData[i].Requesting_Dealer_Name;
+						TableData[i].OffredVehicle.Model_Year = results[x].Model_Year;
+						TableData[i].OffredVehicle.Model = results[x].Model;
+						TableData[i].OffredVehicle.Series = results[x].Series;
+						TableData[i].OffredVehicle.Suffix = results[x].Suffix;
+						TableData[i].OffredVehicle.Colour = results[x].Int_Colour;
+						TableData[i].Int_Colour_Desc = results[x].Int_Colour_Desc;// interior Color Suffix issue
+						TableData[i].OffredVehicle.Ext_Colour = results[x].Ext_Colour;
+						TableData[i].OffredVehicle.APX = results[x].APX;
+						TableData[i].OffredVehicle.Order_Type = results[x].Order_Type;
+						TableData[i].OffredVehicle.Status = results[x].Status;
+							if(TableData[i].Trade_Return=='N')
+						{
+						TableData[i].Requested_Vtn=	TableData[i].Offered_Vtn;
+						TableData[i].Model_Year = results[x].Model_Year;
+						TableData[i].Model = results[x].Model;
+						TableData[i].Series = results[x].Series;
+						TableData[i].Suffix = results[x].Suffix;
+						TableData[i].Colour = results[x].Int_Colour;
+						TableData[i].Ext_Colour = results[x].Ext_Colour;
+						TableData[i].Int_Colour_Desc = results[x].Int_Colour_Desc;// Interior Color Suffix issue
+						TableData[i].APX = results[x].APX;
+						TableData[i].Order_Type = results[x].Order_Type;
+						TableData[i].Status = results[x].Status;
+							
+						}
 					}
 
 				}
@@ -229,6 +262,14 @@ sap.ui.define([
 							TableData[i].Int_Colour_Desc = results[j].Int_Colour_Desc;
 							TableData[i].Colour = results[j].Int_Colour;
 							TableData[i].Ext_Colour_Desc = results[j].Ext_Colour_Desc;
+								if (TableData[i].OffredVehicle) { 
+								TableData[i].OffredVehicle.Model_Desc = results[j].Model_Desc;
+								TableData[i].OffredVehicle.Series_Desc = results[j].Series_Desc;
+								TableData[i].OffredVehicle.Suffix_Desc = results[j].Suffix_Desc;
+								TableData[i].Int_Colour_Desc = results[j].Int_Colour_Desc;
+								TableData[i].OffredVehicle.Colour = results[j].Int_Colour;
+								TableData[i].OffredVehicle.Ext_Colour_Desc = results[j].Ext_Colour_Desc;
+							}
 						}
 					}
 
@@ -252,12 +293,12 @@ sap.ui.define([
 					}
 				}
 			}
-			
+			this.tableData= TableData;
 			var filtered = TableData.filter(function (item) {
-				return item.RequestingDealerVisible == true;
+				return ((item.Trade_Return == 'Y') || (item.RequestingDealerVisible == true));
 			});
 			var filtered1 = TableData.filter(function (item) {
-				return item.RequestingDealerVisible == false;
+				return ((item.Trade_Return == 'Y') || (item.RequestingDealerVisible == false));
 			});
 			var model = new sap.ui.model.json.JSONModel(filtered);
 			var model1 = new sap.ui.model.json.JSONModel(filtered1);
@@ -276,11 +317,24 @@ sap.ui.define([
 				var items = Context.map(function (oEvent) {
 					return oEvent.getObject();
 				});
+				this.JSONToCSVConvertor(this.tableData, "ExportGreen", true);
+			}
+		},
+		ExporttoExcellsheet1: function () {
+
+			var Context = this.getView().byId("tableVTH1").getBinding("items").getContexts();
+			if (Context.length == 0) {
+				sap.m.MessageBox.warning("No data is available to export");
+				return;
+			} else {
+				var items = Context.map(function (oEvent) {
+					return oEvent.getObject();
+				});
 				this.JSONToCSVConvertor(items, "ExportGreen", true);
 			}
 		},
 		JSONToCSVConvertor: function (JSONData, ReportTitle, ShowLabel) {
-			var zthat = this;
+			var that = this;
 			var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
 			var CSV = "";
 			if (ShowLabel) {
@@ -290,25 +344,31 @@ sap.ui.define([
 
 			var i18n = sap.ui.getCore().getModel("i18n").getResourceBundle();
 			var RequestNo = i18n.getText("RequestNo");
-			var Status = i18n.getText("Status");
+			// var Status = i18n.getText("Status");
 			var From_To = i18n.getText("From_To");
-			var Dealer = i18n.getText("Dealer");
+		
 			var VehicleTrackingNumber = i18n.getText("VehicleTrackingNumber");
+			var VIN = i18n.getText("VIN");
+			var Dealer = i18n.getText("Dealer");
 			var Model = i18n.getText("Model");
 			var Suffix = i18n.getText("Suffix");
-			var APX = i18n.getText("APX");
+			
 			var ExteriorColor = i18n.getText("ExteriorColor");
+			var APX = i18n.getText("APX");
 			var Accepted = i18n.getText("Accepted");
 
 			row += RequestNo + ",";
-			row += Status + ",";
+			// row += Status + ",";
 			row += From_To + ",";
-			row += Dealer + ",";
+			
 			row += VehicleTrackingNumber + ",";
+			row += VIN + ",";
+			row += Dealer + ",";
 			row += Model + ",";
 			row += Suffix + ",";
-			row += APX + ",";
+			
 			row += ExteriorColor + ",";
+			row += APX + ",";
 			row += Accepted + ",";
 
 			CSV += row + '\r\n';
@@ -335,28 +395,28 @@ sap.ui.define([
 				arrData[i].Suffix = arrData[i].Suffix + "-" + arrData[i].Suffix_Desc + "/" + arrData[i].Int_Colour_Desc;
 				arrData[i].Ext_Colour = arrData[i].Ext_Colour + "-" + arrData[i].Ext_Colour_Desc;
 				/*	arrData[i].zzsuffix = arrData[i].zzsuffix + "-" + arrData[i].suffix_desc_en;*/
-				var tstatus;
-				switch (arrData[i].Trade_Status) {
-				case "A":
-					tstatus = "Accepted";
-					break;
-				case "C":
-					tstatus = "Countered";
-					break;
-				case "X": //Update this
-					tstatus = "Canceled";
-					break;
-				case "R": //Update this
-					tstatus = "Rejected";
-					break;
-				case "S": //Update this
-					tstatus = "Sent";
-					break;
-				case "F": //Update this
-					tstatus = "Failed";
-					break;
+				// var tstatus;
+				// switch (arrData[i].Trade_Status) {
+				// case "A":
+				// 	tstatus = "Accepted";
+				// 	break;
+				// case "C":
+				// 	tstatus = "Countered";
+				// 	break;
+				// case "X": //Update this
+				// 	tstatus = "Canceled";
+				// 	break;
+				// case "R": //Update this
+				// 	tstatus = "Rejected";
+				// 	break;
+				// case "S": //Update this
+				// 	tstatus = "Sent";
+				// 	break;
+				// case "F": //Update this
+				// 	tstatus = "Failed";
+				// 	break;
 
-				}
+				// }
 				// var dateformated = this.formatoDate(arrData[i].Changed_on);
 
 				// var dateformated = this.TradeSummaryoDateTradeHistory(arrData[i].Changed_on);
@@ -364,10 +424,11 @@ sap.ui.define([
 				var dateAsReceived = moment.tz((arrData[i].Changed_on), "GMT");
 				var dateformated = moment(dateAsReceived).format("YYYY-MM-DD");
 
-				row += '="' + arrData[i].Trade_Id + '","' + tstatus + '","' + RequestingDealerVisible +
-					'",="' + DelearData + '",="' + arrData[i].Requested_Vtn + '",="' + arrData[i].Model + '","' + arrData[i].Suffix +
+				row += '="' + arrData[i].Trade_Id + '",="' + RequestingDealerVisible + '",="' + arrData[i].Requested_Vtn + '",="' + arrData[i].Requested_Vin + '",="' + DelearData + '",="' + arrData[i].Model + '","' + arrData[i].Suffix +
+				
+					'","' + arrData[i].Ext_Colour + 
 					'","' + arrData[i].APX +
-					'","' + arrData[i].Ext_Colour + '","' + dateformated + '",';
+					'","' + dateformated + '",';
 				//}
 				row.slice(1, row.length);
 				CSV += row + '\r\n';
@@ -600,6 +661,7 @@ sap.ui.define([
 
 			if (this.sSearchQuery) {
 				var oFilter = new Filter([
+					new Filter("Trade_Id", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("Requesting_Dealer", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("Requested_Dealer", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("Requested_Dealer_Name", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
@@ -629,7 +691,7 @@ sap.ui.define([
 				.filter(aFilters);
 				
 		},
-			onLiveChangeTradeHistory: function (oEvent) {
+			onLiveChangeTradeHistory1: function (oEvent) {
 			this.sSearchQuery = oEvent.getSource().getValue();
 			this.fnApplyFiltersAndOrderingForVehicleTrade1();
 		},
@@ -641,6 +703,7 @@ sap.ui.define([
 
 			if (this.sSearchQuery) {
 				var oFilter = new Filter([
+					new Filter("Trade_Id", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("Requesting_Dealer", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("Requested_Dealer", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("Requested_Dealer_Name", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
@@ -658,7 +721,7 @@ sap.ui.define([
 
 				
 
-				var aFilters = new sap.ui.model.Filter([oFilter], true);
+				aFilters = new sap.ui.model.Filter([oFilter], true);
 
 				// aFilters.push(oFilter);
 			}
