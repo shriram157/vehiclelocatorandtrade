@@ -278,6 +278,11 @@ sap.ui.define([
 						that.getView().byId("offeredDealer").setVisible(false);
 						that.getView().byId("oRequesteddealer").setText("");
 						that.getView().byId("oRequesteddealer").setVisible(false);
+						that.getView().byId("oAccesIn").setText("");
+						that.getView().byId("oAccesIn").setVisible(false);
+						that.getView().byId("accid").setVisible(false);
+						
+						
 
 						that.getView().byId("ofrModellabl").setVisible(false);
 						that.getView().byId("ofrmodelyeartext").setText("");
@@ -355,6 +360,9 @@ sap.ui.define([
 						that.getView().byId("ofrsuffixlabl").setVisible(true);
 
 						that.getView().byId("ofrsuffixstxt").setVisible(true);
+						// that.getView().byId("oAccesIn").setText("");
+						that.getView().byId("oAccesIn").setVisible(true);
+						that.getView().byId("accid").setVisible(true);
 
 						that.getView().byId("ofrapxlabl").setVisible(true);
 
@@ -539,6 +547,9 @@ sap.ui.define([
 					that.getView().byId("ofrModellabl").setVisible(false);
 					that.getView().byId("ofrmodelyeartext").setText("");
 					that.getView().byId("ofrmodelyeartext").setVisible(false);
+					that.getView().byId("oAccesIn").setText("");
+						that.getView().byId("oAccesIn").setVisible(false);
+						that.getView().byId("accid").setVisible(false);
 
 					that.getView().byId("ofrserieslabl").setVisible(false);
 					that.getView().byId("ofrseriestxt").setText("");
@@ -599,7 +610,9 @@ sap.ui.define([
 					that.getView().byId("ofrModellabl").setVisible(true);
 
 					that.getView().byId("ofrmodelyeartext").setVisible(true);
-
+// that.getView().byId("oAccesIn").setText("");
+						that.getView().byId("oAccesIn").setVisible(true);
+						that.getView().byId("accid").setVisible(true);
 					that.getView().byId("ofrserieslabl").setVisible(true);
 
 					that.getView().byId("ofrseriestxt").setVisible(true);
@@ -1023,7 +1036,7 @@ sap.ui.define([
 
 			/*	var oApx = this.getView().byId("oapx").getText();*/
 			var oApx = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.APX;
-
+			var oInstall = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.AccessoryInstalled;
 			var oIntcolorcode = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Int_Colour;
 
 			if (sap.ui.getCore().getModel("ApprovRej").getProperty("/OffredVehicle") != {} && Object.keys(sap.ui.getCore().getModel("ApprovRej")
@@ -1035,6 +1048,7 @@ sap.ui.define([
 				var oWnModelcode = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.Model;
 				var oWnoExtcolorcode = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.Ext_Colour;
 				var oWnoApx = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.APX;
+				var oAccInstall = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.AccessoryInstalled;
 				var oWnoIntcolorcode = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.Int_Colour;
 			} else {
 				var RequestingDealer = "";
@@ -1044,6 +1058,7 @@ sap.ui.define([
 				var oWnModelcode = "";
 				var oWnoExtcolorcode = "";
 				var oWnoApx = "";
+				var oAccInstall = "";
 				var oWnoIntcolorcode = "";
 
 			}
@@ -1077,7 +1092,8 @@ sap.ui.define([
 				"' or Modelyear eq '" + oWnModelyear + "')  and (Modelcode eq '" + oModelcode + "' or Modelcode eq '" + oWnModelcode +
 				"' )and ( Interiorcolorcode eq '" + oIntcolorcode + "' or Interiorcolorcode eq '" + oWnoIntcolorcode +
 				"') and ( Exteriorcolorcode eq '" + oExtcolorcode + "' or Exteriorcolorcode eq '" + oWnoExtcolorcode + "' ) and ( APX eq '" + oApx +
-				"' or APX eq '" + oWnoApx + "' ) and  ( VTN eq '" + oVehTrano + "' or VTN eq '" + oWningVTN + "') and ( UpdatedBy eq '" +
+				"' or APX eq '" + oWnoApx + "' ) and  ( AccessoryInstalled eq '" +oAccInstall  +
+				"' or AccessoryInstalled eq '" + oInstall + "' ) and ( VTN eq '" + oVehTrano + "' or VTN eq '" + oWningVTN + "') and ( UpdatedBy eq '" +
 				loggedUserId + "') &$format=json";
 
 			$.ajax({
@@ -2602,6 +2618,9 @@ sap.ui.define([
 						local.getView().byId("ofrmodllabl").setVisible(true);
 						local.getView().byId("ofrsuffixlabl").setVisible(true);
 						local.getView().byId("ofrapxlabl").setVisible(true);
+						// that.getView().byId("oAccesIn").setText("");
+						local.getView().byId("oAccesIn").setVisible(true);
+						local.getView().byId("accid").setVisible(true);
 						local.getView().byId("ofrextcolorlabl").setVisible(true);
 						local.getView().byId("ofrstatuslabl").setVisible(true);
 						local.getView().byId("ofrordrtypelabl").setVisible(true);
@@ -2637,7 +2656,9 @@ sap.ui.define([
 						local.getView().byId("ofrModellabl").setVisible(false);
 						local.getView().byId("ofrmodelyeartext").setText("");
 						local.getView().byId("ofrmodelyeartext").setVisible(false);
-
+local.getView().byId("oAccesIn").setText("");
+						local.getView().byId("oAccesIn").setVisible(false);
+						local.getView().byId("accid").setVisible(false);
 						local.getView().byId("ofrserieslabl").setVisible(false);
 						local.getView().byId("ofrseriestxt").setText("");
 						local.getView().byId("ofrseriestxt").setVisible(false);
@@ -2883,7 +2904,10 @@ sap.ui.define([
 
 			this.idCb.attachBrowserEvent("keyup", function (event) {
 				var len = this.getItems().length;
-				var enteredText = this.getValue();
+				var enteredText = this.getValue()
+				
+				
+				
 				var bExists = false;
 				for (var i = 0; i < len; i++) {
 					var itemText = this.getItems()[i].getProperty("text");

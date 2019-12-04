@@ -199,6 +199,8 @@ this.getView().byId("VLRColor1").setEnabled(false);
 this.getView().byId("McCmbo").setEnabled(false);
 that.getView().byId("oVt_SeriesCmbo").setEnabled(false);
 that.getView().byId("chknew1").setEnabled(false);
+that.getView().byId("chkexi").setEnabled(false);
+
 			this.getView().byId("VLRStatus1").setModel(Model);
 			this.getView().byId("VLRStatus1").setSelectedKey("");
 			// if (StatusFilter.length != 0) {
@@ -361,6 +363,8 @@ that.getView().byId("chknew1").setEnabled(false);
 					this.getView().byId("VLRStatus1").setEnabled(true);
 this.getView().byId("AcceInstalledCobmo1").setEnabled(true);
 that.getView().byId("chknew1").setEnabled(true);
+that.getView().byId("chkexi").setEnabled(true);
+
 
 this.getView().byId("VLRSuffix1").setEnabled(false);
 this.getView().byId("VLRColor1").setEnabled(false);
@@ -662,7 +666,16 @@ that.onStatusChange();
 				/*	filterArray.push(new sap.ui.model.Filter("dnc_ind", sap.ui.model.FilterOperator.EQ, "Y"));*/
 				filterArray.push(new sap.ui.model.Filter("dnc_ind", sap.ui.model.FilterOperator.EQ, "N"));
 			}
+		var ShowHoldVehicles = this.getView().byId("chkexi").getSelected();
+			if (ShowHoldVehicles == true) {
 
+				/*	filterArray.push(new sap.ui.model.Filter("dnc_ind", sap.ui.model.FilterOperator.EQ, "Y"));*/
+				filterArray.push(new sap.ui.model.Filter("Hold_stat", sap.ui.model.FilterOperator.EQ, "Y"));
+			} else if (ShowHoldVehicles == false) {
+
+				/*	filterArray.push(new sap.ui.model.Filter("dnc_ind", sap.ui.model.FilterOperator.EQ, "Y"));*/
+				filterArray.push(new sap.ui.model.Filter("Hold_stat", sap.ui.model.FilterOperator.EQ, "N"));
+			}
 			var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo1").getSelectedKey();
 			if (selectedAccessInstalled == "Yes") {
 				//filterArray.push(new sap.ui.model.Filter("non_D_flag", sap.ui.model.FilterOperator.Contains,"X" ));
@@ -986,6 +999,7 @@ var status = this.getView().byId("VLRStatus1").getSelectedKey();
 			this.getView().byId("VLRStatus1").setEnabled(true);
 this.getView().byId("AcceInstalledCobmo1").setEnabled(true);
 this.getView().byId("chknew1").setEnabled(true);
+that.getView().byId("chkexi").setEnabled(true);
 this.getView().byId("VLRSuffix1").setSelectedKey("all");
 this.getView().byId("VLRSuffix1").setEnabled(false);
 this.getView().byId("VLRColor1").setEnabled(false);

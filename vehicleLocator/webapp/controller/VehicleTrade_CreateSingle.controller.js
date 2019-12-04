@@ -934,9 +934,19 @@ sap.ui.define([
 			var omodelYearReq = that.getView().byId("zzMoyr").getText();
 			var oApxReq = that.getView().byId("oApx").getText();
 			var oSeriesReq = that.getView().getModel("TradeModel").getData().zzseries;
-			var oexteriorReq = that.getView().byId("Zextcolo").getText().split("-")[0].trim();;
+			var oexteriorReq = that.getView().byId("Zextcolo").getText().split("-")[0].trim();
 			var ointeriorReq = that.getView().getModel("TradeModel").oData.zzintcol;
 			var ovtnReq = that.getView().getModel("TradeModel").oData.zzvtn;
+			var ovinReq = that.getView().getModel("TradeModel").oData.vhvin;
+			var accIns = that.getView().byId("oAccesIn").getText();
+			if(accIns=='Yes')
+			{
+				accIns='Y';
+			}
+			else
+			{
+				accIns='N';
+			}
 			var ostatusReq = that.getView().getModel("TradeModel").getData().zz_trading_ind;
 
 			var oOrdertypeReq = that.getView().getModel("TradeModel").getData().zzordertype;
@@ -955,7 +965,9 @@ sap.ui.define([
 				Series: oSeriesReq,
 				Status: ostatusReq,
 				Suffix: oSuffixReq,
-				VTN: ovtnReq
+				VTN: ovtnReq,
+				VIN:ovinReq,
+				AccessoryInstalled:accIns
 			};
 			oEntry2["Trade_Id"] = oEntry.Trade_Id;
 			var oVehicleDetails = [];
@@ -971,6 +983,16 @@ sap.ui.define([
 				var Series = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzseries;
 				var exterior = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzextcol;
 				var vtn = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzvtn;
+				var vin = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.vhvin;
+				var accInstalled = that.getView().byId("accid").getText();
+				if(accInstalled=="Yes")
+				{
+					accInstalled ='Y';
+				}
+				else
+				{
+					accInstalled ='N';
+				}
 				var ostatus = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zz_trading_ind;
 				var oOrdertype = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzordertype;
 						oOrdertype = oOrdertype.substring(0, 2);			
@@ -986,7 +1008,9 @@ sap.ui.define([
 					Series: Series,
 					Status: ostatus,
 					Suffix: Suffix,
-					VTN: vtn
+					VTN: vtn,
+					VIN:vin,
+					AccessoryInstalled:accInstalled
 				};
 				oEntry1["Trade_Id"] = oEntry.Trade_Id;
 				oVehicleDetails.push(oEntry1);

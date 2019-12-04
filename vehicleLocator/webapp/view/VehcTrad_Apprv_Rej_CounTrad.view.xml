@@ -62,6 +62,8 @@
 								<core:Title text="{i18n>RequestedVehicleInformation}"/>
 								<Label text="{i18n>VehicleTrackingNumber}" id="ovtnIdText"/>
 								<Text text="{Requested_Vtn}" id="ovtnId"/>
+								<Label text="{i18n>VIN}" id="ovinIdText"/>
+								<Text text="{VIN}" id="ovinId"/>
 								<Label text="{i18n>ModelYear}"/>
 								<Text text="{Model_Year}" id="oMdlyear"/>
 								<Label text="{i18n>Series}"/>
@@ -74,7 +76,8 @@
 								<Text text="{Ext_Colour}-{Ext_Colour_Desc}" id="extco"/>							
 								<Label text="{i18n>APX}"/>
 								<Text text="{APX}" id="oapx"/>
-
+								<Label text="{i18n>AccessoryInstall}" />
+								<Text text="{path:'AccessoryInstalled',formatter:'vehicleLocator.Formatter.Formatter.DNC'}" />
 								<Label text="{i18n>Status}"/>
 								<Text text="{path:'Status',formatter:'vehicleLocator.Formatter.Formatter.Status'}" id="ostatus"/>
 								<Label text="{i18n>OrderType}" visible="{detailView>/showOrderType}" />
@@ -149,7 +152,8 @@
 									
 							   	<Label text="{i18n>VehicleTrackingNumber}" id="vtnlabeid" visible="{detailView>/showVinDiplayOff}"/>
 								<Text text="{Offered_Vtn}" id="vtnid" visible="{detailView>/showVinDiplayOff}"/>
-								
+								  	<Label text="{i18n>VIN}" id="vinlabeid" visible="{detailView>/showVinDiplayOff}"/>
+								<Text text="{/OffredVehicle/VIN}" id="vinid" visible="{detailView>/showVinDiplayOff}"/>
 								<!--	"{path:'TradeModel>kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'}-{TradeModel>name1}"-->
 								<Label text="{i18n>ModelYear}" id="ofrModellabl"/>
 								<Text text="{/OffredVehicle/Model_Year}" id="ofrmodelyeartext"/>
@@ -166,7 +170,9 @@
 							
 								<Label text="{i18n>APX}" id="ofrapxlabl"/>
 								<Text text="{/OffredVehicle/APX}" id="ofrapxtxt"/>
-
+								<Label text="{i18n>AccessoryInstall}" id="accid"/>
+								<Text text="{path:'/OffredVehicle/AccessoryInstalled',formatter:'vehicleLocator.Formatter.Formatter.DNC'}" id="oAccesIn"/>
+						
 								<Label text="{i18n>Status}" id="ofrstatuslabl"/>
 								<Text text="{path:'/OffredVehicle/Status',formatter:'vehicleLocator.Formatter.Formatter.Status'}" id="ofrstatustxt"/>
 								<Label text="{i18n>OrderType}" id="ofrordrtypelabl"/>
