@@ -190,6 +190,8 @@ sap.ui.define([
 						TableData[i].Suffix = results[x].Suffix;
 						TableData[i].Colour = results[x].Int_Colour;
 						TableData[i].Ext_Colour = results[x].Ext_Colour;
+						TableData[i].AccessoryInstalled = results[x].AccessoryInstalled;
+						TableData[i].VIN = results[x].VIN;
 						TableData[i].Int_Colour_Desc = results[x].Int_Colour_Desc;// Interior Color Suffix issue
 						TableData[i].APX = results[x].APX;
 						TableData[i].Order_Type = results[x].Order_Type;
@@ -207,6 +209,8 @@ sap.ui.define([
 						TableData[i].OffredVehicle.Colour = results[x].Int_Colour;
 						TableData[i].Int_Colour_Desc = results[x].Int_Colour_Desc;// interior Color Suffix issue
 						TableData[i].OffredVehicle.Ext_Colour = results[x].Ext_Colour;
+						TableData[i].OffredVehicle.AccessoryInstalled = results[x].AccessoryInstalled;
+						TableData[i].OffredVehicle.VIN = results[x].VIN;
 						TableData[i].OffredVehicle.APX = results[x].APX;
 						TableData[i].OffredVehicle.Order_Type = results[x].Order_Type;
 						TableData[i].OffredVehicle.Status = results[x].Status;
@@ -224,6 +228,9 @@ sap.ui.define([
 						TableData[i].OffredVehicle.Colour = results[x].Int_Colour;
 						TableData[i].Int_Colour_Desc = results[x].Int_Colour_Desc;// interior Color Suffix issue
 						TableData[i].OffredVehicle.Ext_Colour = results[x].Ext_Colour;
+						TableData[i].OffredVehicle.AccessoryInstalled = results[x].AccessoryInstalled;
+						TableData[i].OffredVehicle.VIN = results[x].VIN;
+
 						TableData[i].OffredVehicle.APX = results[x].APX;
 						TableData[i].OffredVehicle.Order_Type = results[x].Order_Type;
 						TableData[i].OffredVehicle.Status = results[x].Status;
@@ -236,6 +243,8 @@ sap.ui.define([
 						TableData[i].Suffix = results[x].Suffix;
 						TableData[i].Colour = results[x].Int_Colour;
 						TableData[i].Ext_Colour = results[x].Ext_Colour;
+						TableData[i].AccessoryInstalled = results[x].AccessoryInstalled;
+						TableData[i].VIN = results[x].VIN;
 						TableData[i].Int_Colour_Desc = results[x].Int_Colour_Desc;// Interior Color Suffix issue
 						TableData[i].APX = results[x].APX;
 						TableData[i].Order_Type = results[x].Order_Type;
@@ -378,13 +387,13 @@ sap.ui.define([
 				var row = "";
 
 				if (arrData[i].RequestingDealerVisible == true) {
-					var RequestingDealerVisible = "To";
+					var RequestingDealerVisible = i18n.getText("TradeOut");
 					var SelectedDealer = arrData[i].Requested_Dealer;
 					var SelectedDealerName = arrData[i].Requested_Dealer_Name;
 					var DelearData = SelectedDealer + "-" + SelectedDealerName;
 
 				} else {
-					var RequestingDealerVisible = "From";
+					var RequestingDealerVisible = i18n.getText("TradeIn");
 
 					var SelectedDealer = arrData[i].Requesting_Dealer;
 					var SelectedDealerName = arrData[i].Requesting_Dealer_Name;
