@@ -2,6 +2,14 @@ in package vehicletrade;
 using vehicleTrade as VT;
 
 extend entity VT.Trade_Request with {
+    @Comment : 'Vehicle VIN'
+    VIN : String(35);
+};
+
+extend entity VT.Vehicle with {
     @Comment : 'Accessory Installed Y or N'
     AccessoryInstalled : String(1);
+    @Comment : 'Vehicle VIN'
+    VIN : String(35);
 };
+

@@ -1184,8 +1184,18 @@ sap.ui.define([
 
 					}
 				},
-				error: function () {
-					/*	alert("Error");*/
+				error: function (err) {
+					if(err.status === 504 || err.statusCode === 504 )
+					{
+					var Message = that.getView().getModel("i18n").getResourceBundle().getText("messageTradeTimeOut", [that.Tradeid]);
+					sap.m.MessageBox.error(Message, {
+						actions: [sap.m.MessageBox.Action.OK],
+						onClose: function () {
+
+							that.getRouter().navTo("VehicleLocSearch");
+						}
+					});
+					}
 				}
 
 			});
