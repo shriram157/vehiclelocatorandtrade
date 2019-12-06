@@ -1092,8 +1092,7 @@ sap.ui.define([
 				"' or Modelyear eq '" + oWnModelyear + "')  and (Modelcode eq '" + oModelcode + "' or Modelcode eq '" + oWnModelcode +
 				"' )and ( Interiorcolorcode eq '" + oIntcolorcode + "' or Interiorcolorcode eq '" + oWnoIntcolorcode +
 				"') and ( Exteriorcolorcode eq '" + oExtcolorcode + "' or Exteriorcolorcode eq '" + oWnoExtcolorcode + "' ) and ( APX eq '" + oApx +
-				"' or APX eq '" + oWnoApx + "' ) and  ( AccessoryInstalled eq '" +oAccInstall  +
-				"' or AccessoryInstalled eq '" + oInstall + "' ) and ( VTN eq '" + oVehTrano + "' or VTN eq '" + oWningVTN + "') and ( UpdatedBy eq '" +
+				"' or APX eq '" + oWnoApx + "' )  and ( VTN eq '" + oVehTrano + "' or VTN eq '" + oWningVTN + "') and ( UpdatedBy eq '" +
 				loggedUserId + "') &$format=json";
 
 			$.ajax({
