@@ -350,8 +350,8 @@
 										<cells>
 											<Link id="tradeHId1" text="{Trade_Id}" class="link" subtle="true" press="oTradeHistoryLinkPress" wrapping="false"/>
 											<!--<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="false"/>-->
-										<Text text="{= ${RequestingDealerVisible} === false ?${Requested_Vtn}:${OffredVehicle/Requested_VTN}}" wrapping="false"/>
-											<Text text="{= ${RequestingDealerVisible} === false ?${VIN}:${OffredVehicle/VIN}}" wrapping="false"/>
+										<Text id= "txt_in_VTN" text="{= ${RequestingDealerVisible} === false ?${Requested_Vtn}:${OffredVehicle/Requested_VTN}}" wrapping="false"/>
+											<Text id= "txt_in_VIN" text="{= ${RequestingDealerVisible} === false ?${VIN}:${OffredVehicle/VIN}}" wrapping="false"/>
 											<!--<Text text="{i18n>From}" wrapping="false"/>-->
 											<Text text="{= ${RequestingDealerVisible} === true ?${Requested_Dealer}:${Requesting_Dealer}}-{= ${RequestingDealerVisible} === true ?${Requested_Dealer_Name}:${Requesting_Dealer_Name}}"/>
 											
