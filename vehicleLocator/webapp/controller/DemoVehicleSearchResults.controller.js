@@ -536,10 +536,16 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 
 			var tableLength = iCount; //tableData.length;
 			var oModelDetail = this.getView().getModel("detailView");
-
+var typ= this.RoutedData.type;
+if(typ=="1B")
+{
+			var sExpectedText = this.getView().getModel("i18n").getResourceBundle().getText("preregvehicleCount", [tableLength]);
+			oModelDetail.setProperty("/tableCount", sExpectedText);
+}
+else{
 			var sExpectedText = this.getView().getModel("i18n").getResourceBundle().getText("demovehicleCount", [tableLength]);
 			oModelDetail.setProperty("/tableCount", sExpectedText);
-
+}
 		},
 
 		DealarandColorBinding: function () {
