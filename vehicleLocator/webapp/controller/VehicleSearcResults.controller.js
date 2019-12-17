@@ -1295,7 +1295,7 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 					Obj.selectedSuffix = DefaultSuffix;
 					Obj.LoginUser = LoginUser;
 					Obj.userTypeReceived = this.userTypeReceived;
-						Obj.type = "1B";
+						Obj.type = "2C";
 					sap.ui.core.BusyIndicator.hide();
 
 					// if (that.userTypeReceived == "Zone_User" || that.userTypeReceived == "National") {
@@ -1320,7 +1320,7 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 					Obj.selectedSuffix = DefaultSuffix;
 					Obj.LoginUser = LoginUser;
 					Obj.userTypeReceived = this.userTypeReceived;
-						Obj.type = "2C";
+						Obj.type = "1B";
 					sap.ui.core.BusyIndicator.hide();
 
 					// if (that.userTypeReceived == "Zone_User" || that.userTypeReceived == "National") {
