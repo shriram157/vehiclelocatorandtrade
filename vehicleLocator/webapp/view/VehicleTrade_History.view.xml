@@ -120,7 +120,7 @@
 								<headerToolbar>
 									<Toolbar>
 										<content>
-											<Title id="title" text="{i18n>TradeOut}" titleStyle="H3"/>
+											<Title id="title" text="{i18n>TradeIn}" titleStyle="H3"/>
 											<ToolbarSpacer/>
 											<SearchField id="searchTradeHistory" liveChange="onLiveChangeTradeHistory" showSearchButton="true" placeholder="{i18n>placeHolderText}">
 												<layoutData>
@@ -256,7 +256,7 @@
 								<headerToolbar>
 									<Toolbar>
 										<content>
-											<Title id="title1" text="{i18n>TradeIn}" titleStyle="H3"></Title>
+											<Title id="title1" text="{i18n>TradeOut}" titleStyle="H3"></Title>
 											<ToolbarSpacer/>
 											<SearchField id="searchTradeHistory1" liveChange="onLiveChangeTradeHistory1" showSearchButton="true" placeholder="{i18n>placeHolderText}">
 												<layoutData>
