@@ -428,7 +428,7 @@ sap.ui.define([
 			//loop is to extract each row
 			for (var i = 0; i < arrData.length; i++) {
 				var row = "";
-				var RequestingDealerVisible = i18n.getText("TradeOut");
+				var RequestingDealerVisible = i18n.getText("TradeIn");
 				if (arrData[i].RequestingDealerVisible == true) {
 					
 					var SelectedDealer = arrData[i].Requested_Dealer;
@@ -515,7 +515,7 @@ sap.ui.define([
 			//loop is to extract each row
 			for (var i = 0; i < arrData.length; i++) {
 				var row = "";
-				var RequestingDealerVisible = i18n.getText("TradeIn");
+				var RequestingDealerVisible = i18n.getText("TradeOut");
 				if (arrData[i].RequestingDealerVisible == true) {
 					// var RequestingDealerVisible = i18n.getText("TradeOut");
 					var SelectedDealer = arrData[i].Requested_Dealer;
