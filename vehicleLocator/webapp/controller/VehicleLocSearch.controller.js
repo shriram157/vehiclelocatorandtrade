@@ -1471,8 +1471,8 @@ sap.ui.define([
 
 				var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=matnr eq '" + McCmbo +
 					"' and endswith (zzintcol,'" + "" + "') and zzseries eq '" + SeriesCmbo + "' and zzmoyr eq '" + MoyearCombo + "'&$format=json";
-	var DemoSeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=matnr eq '" + McCmbo +
-					"' and endswith (zzintcol,'" + "" + "') and zzseries eq '" + SeriesCmbo + "' and (vhusg eq '1B' or vhusg eq '2C') and zzmoyr eq '" + MoyearCombo + "'&$format=json";
+				var DemoSeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=matnr eq '" + McCmbo +
+					"' and endswith (zzintcol,'" + "" + "') and zzseries eq '" + SeriesCmbo + "' and  zzmoyr eq '" + MoyearCombo + "'&$format=json";
 
 			} else {
 				// var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '" + McCmbo + "' and endswith (zzintcol,'" + this.intercolor +
@@ -1482,7 +1482,7 @@ sap.ui.define([
 					"' and endswith (zzintcol,'" + this.intercolor + "') and zzseries eq '" + SeriesCmbo + "' and zzmoyr eq '" +
 					MoyearCombo + "'&$format=json";
 				var DemoSeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=matnr eq '" + McCmbo +
-					"' and endswith (zzintcol,'" + this.intercolor + "') and zzseries eq '" + SeriesCmbo + "' and (vhusg eq '1B' or vhusg eq '2C') and zzmoyr eq '" +
+					"' and endswith (zzintcol,'" + this.intercolor + "') and zzseries eq '" + SeriesCmbo + "'  and zzmoyr eq '" +
 					MoyearCombo + "'&$format=json";
 			}
 
@@ -1592,7 +1592,7 @@ sap.ui.define([
 					// 	}).length == 0;
 					// });
 					var  tempTabData = FilterDeleade_OrderTypefiltered_zone.filter(function(x){
-						return x.vhusg=="1B" || x.vhusg == "2C";
+						// return x.vhusg=="1B" || x.vhusg == "2C";
 					}
 					
 					);
