@@ -347,16 +347,16 @@ sap.ui.define([
 		},
 		ExporttoExcellsheet: function () {
 
-			var Context = this.getView().byId("tableVTH").getBinding("items").getContexts();
-			if (Context.length == 0) {
-				sap.m.MessageBox.warning("No data is available to export");
-				return;
-			} else {
-				var items = Context.map(function (oEvent) {
-					return oEvent.getObject();
-				});
+			// var Context = this.getView().byId("tableVTH").getBinding("items").getContexts();
+			// if (Context.length == 0) {
+			// 	sap.m.MessageBox.warning("No data is available to export");
+			// 	return;
+			// } else {
+			// 	var items = Context.map(function (oEvent) {
+			// 		return oEvent.getObject();
+			// 	});
 				this.JSONToCSVConvertor(this.tableData, "ExportGreen", true);
-			}
+			// }
 		},
 		ExporttoExcellsheet1: function () {
 
