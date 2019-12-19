@@ -1592,7 +1592,7 @@ sap.ui.define([
 					// 	}).length == 0;
 					// });
 					var  tempTabData = FilterDeleade_OrderTypefiltered_zone.filter(function(x){
-						// return x.vhusg=="1B" || x.vhusg == "2C";
+						return x.vhusg=="1B" || x.vhusg == "2C";
 					}
 					
 					);

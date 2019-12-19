@@ -129,7 +129,7 @@
 							<CheckBox xmlns="sap.m" text="{i18n>IncludeFleetVehicles}" id="chkadd" select="onStatusChange" visible="false"/>
 						<!--<l:content>-->
 						<!--    <SegmentedButton xmlns="sap.m" id="button7">-->
-						<!--        <Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:t="sap.ui.table" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:uxap="sap.uxap" xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form" xmlns:tnt="sap.tnt" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" text="{i18n>1B}" press="PreregisteredVehiclepress" id="button8">-->
+						        <Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:t="sap.ui.table" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:uxap="sap.uxap" xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form" xmlns:tnt="sap.tnt" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" text="{i18n>1B}" press="PreregisteredVehiclepress" id="button8">
 						<!--            </Button>-->
 						<!--        <Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:t="sap.ui.table" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:uxap="sap.uxap" xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form" xmlns:tnt="sap.tnt" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" text="{i18n>2C}" press="DemoVehiclepress" id="button9">-->
 						<!--            </Button></SegmentedButton>-->
