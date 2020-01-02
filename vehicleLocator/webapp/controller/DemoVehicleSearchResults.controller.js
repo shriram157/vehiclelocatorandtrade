@@ -1277,7 +1277,8 @@ else{
 			}
 			// just run the status change filter one time on every route matched. 
 			//          this.comingFromRoutematchedEvent = true;
-			this.onStatusChange();
+			//changes commented for 1B
+			// this.onStatusChange();
 
 		},
 
