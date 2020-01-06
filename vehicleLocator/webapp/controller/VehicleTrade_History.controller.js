@@ -492,7 +492,7 @@ sap.ui.define([
 				
 					'","' + Ext_Colour_Data + 
 					'","' + APXData +
-					'","' + dateformated + '",';
+					'",="' + dateformated + '",';
 				//}
 				row.slice(1, row.length);
 				CSV += row + '\r\n';
@@ -578,7 +578,7 @@ var ModelData = arrData[i].OffredVehicle.Model + "-" + arrData[i].OffredVehicle.
 				
 					'","' + Ext_Colour_Data + 
 					'","' + APXData +
-					'","' + dateformated + '",';
+					'",="' + dateformated + '",';
 				//}
 				row.slice(1, row.length);
 				CSV += row + '\r\n';
