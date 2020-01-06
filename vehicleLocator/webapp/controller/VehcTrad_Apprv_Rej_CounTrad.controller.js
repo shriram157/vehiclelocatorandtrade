@@ -76,10 +76,11 @@ sap.ui.define([
 			//         local.getView().setModel(local.oViewModel, "LocalTradeModel");
 
 			/* SelectedPath	*/
+		
 
 			if (that.oSelectedItems != undefined && that.oSelectedItems != "SelectedFromTradeHistory") {
 				if (sap.ui.getCore().getModel("MyTradeRequestSelected") != undefined) {
-					this._oViewModel.setProperty("/showVinDiplayOff", false);
+					// this._oViewModel.setProperty("/showVinDiplayOff", true);
 					//		this.getView().byId("SimpleFormAproveTrReq").setModel(sap.ui.getCore().getModel("MyTradeRequestSelected"));
 					var StatusData = sap.ui.getCore().getModel("MyTradeRequestSelected").getData();
 
@@ -90,6 +91,7 @@ sap.ui.define([
 					this.dnsStatus = StatusData.Trade_Status;
 					var TradeId = StatusData.Trade_Id;
 					this.VehicleTrade_SummaryData(StatusData);
+					
 					//  for the DNC = Y do not show order type. 
 					if (this.dnsStatus == "Y") {
 
@@ -273,132 +275,132 @@ sap.ui.define([
 
 					if (StatusData.Trade_Return == "N") {
 
-						this._oViewModel.setProperty("/showVinDiplayOff", false);
-						// this.getView().byId("offervehidContent").setVisible(false);
+						// this._oViewModel.setProperty("/showVinDiplayOff", false);
+						// this.getView().byId("offervehidContent").setVisible(true);
 						// Offered = {};
-						that.getView().byId("Offerevehid").setText("");
-						that.getView().byId("offeredDealer").setVisible(false);
-						that.getView().byId("oRequesteddealer").setText("");
-						that.getView().byId("oRequesteddealer").setVisible(false);
-						that.getView().byId("oAccesIn").setText("");
-						that.getView().byId("oAccesIn").setVisible(false);
-						that.getView().byId("accid").setVisible(false);
+						// that.getView().byId("Offerevehid").setText("");
+						// that.getView().byId("offeredDealer").setVisible(true);
+						// // that.getView().byId("oRequesteddealer").setText("");
+						// that.getView().byId("oRequesteddealer").setVisible(true);
+						// // that.getView().byId("oAccesIn").setText("");
+						// that.getView().byId("oAccesIn").setVisible(true);
+						// that.getView().byId("accid").setVisible(true);
 						
 						
 
-						that.getView().byId("ofrModellabl").setVisible(false);
-						that.getView().byId("ofrmodelyeartext").setText("");
-						that.getView().byId("ofrmodelyeartext").setVisible(false);
+						// that.getView().byId("ofrModellabl").setVisible(true);
+						// // that.getView().byId("ofrmodelyeartext").setText("");
+						// that.getView().byId("ofrmodelyeartext").setVisible(true);
 
-						that.getView().byId("ofrserieslabl").setVisible(false);
-						that.getView().byId("ofrseriestxt").setText("");
-						that.getView().byId("ofrseriestxt").setVisible(false);
+						// that.getView().byId("ofrserieslabl").setVisible(true);
+						// // that.getView().byId("ofrseriestxt").setText("");
+						// that.getView().byId("ofrseriestxt").setVisible(true);
 
-						that.getView().byId("ofrmodllabl").setVisible(false);
-						that.getView().byId("ofrmodltxt").setText("");
-						that.getView().byId("ofrmodltxt").setVisible(false);
+						// that.getView().byId("ofrmodllabl").setVisible(true);
+						// // that.getView().byId("ofrmodltxt").setText("");
+						// that.getView().byId("ofrmodltxt").setVisible(true);
 
-						that.getView().byId("ofrsuffixlabl").setVisible(false);
-						that.getView().byId("ofrsuffixstxt").setText("");
-						that.getView().byId("ofrsuffixstxt").setVisible(false);
+						// that.getView().byId("ofrsuffixlabl").setVisible(true);
+						// // that.getView().byId("ofrsuffixstxt").setText("");
+						// that.getView().byId("ofrsuffixstxt").setVisible(true);
 
-						that.getView().byId("ofrapxlabl").setVisible(false);
-						that.getView().byId("ofrapxtxt").setText("");
-						that.getView().byId("ofrapxtxt").setVisible(false);
+						// that.getView().byId("ofrapxlabl").setVisible(true);
+						// // that.getView().byId("ofrapxtxt").setText("");
+						// that.getView().byId("ofrapxtxt").setVisible(true);
 
-						that.getView().byId("ofrextcolorlabl").setVisible(false);
-						that.getView().byId("ofrexttxt").setText("");
-						that.getView().byId("ofrexttxt").setVisible(false);
+						// that.getView().byId("ofrextcolorlabl").setVisible(true);
+						// // that.getView().byId("ofrexttxt").setText("");
+						// that.getView().byId("ofrexttxt").setVisible(true);
 
-						that.getView().byId("ofrstatuslabl").setVisible(false);
-						that.getView().byId("ofrstatustxt").setText("");
-						that.getView().byId("ofrstatustxt").setVisible(false);
+						// that.getView().byId("ofrstatuslabl").setVisible(true);
+						// // that.getView().byId("ofrstatustxt").setText("");
+						// that.getView().byId("ofrstatustxt").setVisible(true);
 
-						that.getView().byId("ofrordrtypelabl").setVisible(false);
-						that.getView().byId("ofrordtypetxt").setText("");
-						that.getView().byId("ofrordtypetxt").setVisible(false);
+						// that.getView().byId("ofrordrtypelabl").setVisible(true);
+						// // that.getView().byId("ofrordtypetxt").setText("");
+						// that.getView().byId("ofrordtypetxt").setVisible(true);
 
-						that.getView().byId("cetalaid").setVisible(false);
-						that.getView().byId("ctqtid").setText("");
-						that.getView().byId("ctqtid").setVisible(false);
+						// that.getView().byId("cetalaid").setVisible(true);
+						// // that.getView().byId("ctqtid").setText("");
+						// that.getView().byId("ctqtid").setVisible(true);
 
-						// that.getView().byId("fromqid").setVisible(false);
-						that.getView().byId("txlab").setText("");
-						that.getView().byId("txlab").setVisible(false);
+						// // // that.getView().byId("fromqid").setVisible(false);
+						// // that.getView().byId("txlab").setText("");
+						// that.getView().byId("txlab").setVisible(true);
 
-						that.getView().byId("prolabid").setVisible(false);
+						// that.getView().byId("prolabid").setVisible(true);
 
-						// that.getView().byId("tobid").setVisible(false);
-						that.getView().byId("prptid").setText("");
-						that.getView().byId("prptid").setVisible(false);
+						// // // that.getView().byId("tobid").setVisible(false);
+						// // that.getView().byId("prptid").setText("");
+						// that.getView().byId("prptid").setVisible(true);
 
-						// that.getView().byId("fmlbid").setVisible(false);
-						/*	that.getView().byId("fromlbid").setVisible(false);*/
-						that.getView().byId("otxlabel").setText("");
-						that.getView().byId("otxlabel").setVisible(false);
+						// // // that.getView().byId("fmlbid").setVisible(false);
+						// // /*	that.getView().byId("fromlbid").setVisible(false);*/
+						// // that.getView().byId("otxlabel").setText("");
+						// that.getView().byId("otxlabel").setVisible(true);
 
-						// that.getView().byId("idlto").setVisible(false);
+						// that.getView().byId("idlto").setVisible(true);
 
 					} else if (StatusData.Trade_Return == "Y") {
 
-						this._oViewModel.setProperty("/showVinDiplayOff", true); //2207
+						// this._oViewModel.setProperty("/showVinDiplayOff", true); //2207
 
-						that.getView().byId("offeredDealer").setVisible(true);
+						// that.getView().byId("offeredDealer").setVisible(true);
 
-						that.getView().byId("oRequesteddealer").setVisible(true);
+						// that.getView().byId("oRequesteddealer").setVisible(true);
 
-						that.getView().byId("ofrModellabl").setVisible(true);
+						// that.getView().byId("ofrModellabl").setVisible(true);
 
-						that.getView().byId("ofrmodelyeartext").setVisible(true);
+						// that.getView().byId("ofrmodelyeartext").setVisible(true);
 
-						that.getView().byId("ofrserieslabl").setVisible(true);
+						// that.getView().byId("ofrserieslabl").setVisible(true);
 
-						that.getView().byId("ofrseriestxt").setVisible(true);
+						// that.getView().byId("ofrseriestxt").setVisible(true);
 
-						that.getView().byId("ofrmodllabl").setVisible(true);
+						// that.getView().byId("ofrmodllabl").setVisible(true);
 
-						that.getView().byId("ofrmodltxt").setVisible(true);
+						// that.getView().byId("ofrmodltxt").setVisible(true);
 
-						that.getView().byId("ofrsuffixlabl").setVisible(true);
+						// that.getView().byId("ofrsuffixlabl").setVisible(true);
 
-						that.getView().byId("ofrsuffixstxt").setVisible(true);
-						// that.getView().byId("oAccesIn").setText("");
-						that.getView().byId("oAccesIn").setVisible(true);
-						that.getView().byId("accid").setVisible(true);
+						// that.getView().byId("ofrsuffixstxt").setVisible(true);
+						// // that.getView().byId("oAccesIn").setText("");
+						// that.getView().byId("oAccesIn").setVisible(true);
+						// that.getView().byId("accid").setVisible(true);
 
-						that.getView().byId("ofrapxlabl").setVisible(true);
+						// that.getView().byId("ofrapxlabl").setVisible(true);
 
-						that.getView().byId("ofrapxtxt").setVisible(true);
+						// that.getView().byId("ofrapxtxt").setVisible(true);
 
-						that.getView().byId("ofrextcolorlabl").setVisible(true);
+						// that.getView().byId("ofrextcolorlabl").setVisible(true);
 
-						that.getView().byId("ofrexttxt").setVisible(true);
+						// that.getView().byId("ofrexttxt").setVisible(true);
 
-						that.getView().byId("ofrstatuslabl").setVisible(true);
+						// that.getView().byId("ofrstatuslabl").setVisible(true);
 
-						that.getView().byId("ofrstatustxt").setVisible(true);
+						// that.getView().byId("ofrstatustxt").setVisible(true);
 
-						that.getView().byId("ofrordrtypelabl").setVisible(true);
+						// that.getView().byId("ofrordrtypelabl").setVisible(true);
 
-						that.getView().byId("ofrordtypetxt").setVisible(true);
+						// that.getView().byId("ofrordtypetxt").setVisible(true);
 
-						that.getView().byId("cetalaid").setVisible(true);
+						// that.getView().byId("cetalaid").setVisible(true);
 
-						that.getView().byId("ctqtid").setVisible(true);
+						// that.getView().byId("ctqtid").setVisible(true);
 
-						// that.getView().byId("fromqid").setVisible(true);
+						// // that.getView().byId("fromqid").setVisible(true);
 
-						that.getView().byId("txlab").setVisible(true);
+						// that.getView().byId("txlab").setVisible(true);
 
-						that.getView().byId("prolabid").setVisible(true);
+						// that.getView().byId("prolabid").setVisible(true);
 
-						// that.getView().byId("tobid").setVisible(true);
+						// // that.getView().byId("tobid").setVisible(true);
 
-						that.getView().byId("prptid").setVisible(true);
+						// that.getView().byId("prptid").setVisible(true);
 
-						// that.getView().byId("fmlbid").setVisible(true);
+						// // that.getView().byId("fmlbid").setVisible(true);
 
-						that.getView().byId("otxlabel").setVisible(true);
+						// that.getView().byId("otxlabel").setVisible(true);
 
 						// that.getView().byId("idlto").setVisible(true);
 
@@ -535,131 +537,426 @@ sap.ui.define([
 				this._oViewModel.setProperty("/tradeId", StatusData.Trade_Id);
 				var Status = [];
 				Status.push(StatusData);
+					this.getView().byId("SimpleFormAproveTrReq").bindElement("/");
+					this.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
+if(this.getView().byId("ovtnId").getText()=="")
+			{
+										// this.getView().byId("requForm").setVisible(false);
+										
 
+						this._oViewModel.setProperty("/showVinDiplayOff", false);
+						// this.getView().byId("offervehidContent").setVisible(true);
+						// Offered = {};
+						// this.getView().byId("Offerevehid").setText("");
+						// this.getView().byId("offeredDealer").setVisible(true);
+						// this.getView().byId("oRequesteddealer").setText("");
+						// this.getView().byId("oRequesteddealer").setVisible(true);
+						// this.getView().byId("oAccesIn").setText("");
+						// this.getView().byId("ovinIdText").setVisible(true);
+						// this.getView().byId("ovinId").setVisible(true);
+						
+						
+
+						this.getView().byId("oMdlyearLbl").setVisible(false);
+						// this.getView().byId("ofrmodelyeartext").setText("");
+						this.getView().byId("oMdlyear").setVisible(false);
+
+						this.getView().byId("oSeriesLbl").setVisible(false);
+						// this.getView().byId("ofrseriestxt").setText("");
+						this.getView().byId("oSeries").setVisible(false);
+
+						this.getView().byId("oModelLbl").setVisible(false);
+						// this.getView().byId("ofrmodltxt").setText("");
+						this.getView().byId("oModel").setVisible(false);
+
+						this.getView().byId("oSuffixLbl").setVisible(false);
+						// this.getView().byId("ofrsuffixstxt").setText("");
+						this.getView().byId("intdesr").setVisible(false);
+
+						this.getView().byId("extcoLbl").setVisible(false);
+						// this.getView().byId("ofrapxtxt").setText("");
+						this.getView().byId("extco").setVisible(false);
+
+						this.getView().byId("oapxLbl").setVisible(false);
+						// this.getView().byId("ofrexttxt").setText("");
+						this.getView().byId("oapx").setVisible(false);
+
+						this.getView().byId("ostatusLbl").setVisible(false);
+						// this.getView().byId("ofrstatustxt").setText("");
+						this.getView().byId("ostatus").setVisible(false);
+
+						this.getView().byId("ordTypLbl").setVisible(false);
+						// this.getView().byId("ofrordtypetxt").setText("");
+						this.getView().byId("oOdrtype").setVisible(false);
+
+						this.getView().byId("cetalabid").setVisible(false);
+						// this.getView().byId("ctqtid").setText("");
+						this.getView().byId("ctetid").setVisible(false);
+
+						// // this.getView().byId("fromqid").setVisible(false);
+						// this.getView().byId("txlab").setText("");
+						this.getView().byId("txtlab").setVisible(false);
+
+this.getView().byId("prlabid").setVisible(false);
+						this.getView().byId("prpetid").setVisible(false);
+						this.getView().byId("VT_ARCTDnc").setVisible(false);
+this.getView().byId("VT_ARCTDncLbl").setVisible(false);
+this.getView().byId("ovtnIdText").setVisible(false);
+this.getView().byId("ovtnId").setVisible(false);
+this.getView().byId("ovinIdText").setVisible(false);
+this.getView().byId("ovinId").setVisible(false);
+
+
+
+
+						// // this.getView().byId("tobid").setVisible(false);
+						// this.getView().byId("prptid").setText("");
+						this.getView().byId("accInstLbl").setVisible(false);
+
+						// // this.getView().byId("fmlbid").setVisible(false);
+						// /*	this.getView().byId("fromlbid").setVisible(false);*/
+						// this.getView().byId("otxlabel").setText("");
+						this.getView().byId("otxtlabel").setVisible(false);
+
+						this.getView().byId("accInst").setVisible(false);
+
+					
+
+			}
+			else{
+					this._oViewModel.setProperty("/showVinDiplayOff", true);
+					this.getView().byId("oMdlyearLbl").setVisible(true);
+						// this.getView().byId("ofrmodelyeartext").setText("");
+						this.getView().byId("oMdlyear").setVisible(true);
+
+						this.getView().byId("oSeriesLbl").setVisible(true);
+						// this.getView().byId("ofrseriestxt").setText("");
+						this.getView().byId("oSeries").setVisible(true);
+
+						this.getView().byId("oModelLbl").setVisible(true);
+						// this.getView().byId("ofrmodltxt").setText("");
+						this.getView().byId("oModel").setVisible(true);
+
+						this.getView().byId("oSuffixLbl").setVisible(true);
+						// this.getView().byId("ofrsuffixstxt").setText("");
+						this.getView().byId("intdesr").setVisible(true);
+
+						this.getView().byId("extcoLbl").setVisible(true);
+						// this.getView().byId("ofrapxtxt").setText("");
+						this.getView().byId("extco").setVisible(true);
+
+						this.getView().byId("oapxLbl").setVisible(true);
+						// this.getView().byId("ofrexttxt").setText("");
+						this.getView().byId("oapx").setVisible(true);
+
+						this.getView().byId("ostatusLbl").setVisible(true);
+						// this.getView().byId("ofrstatustxt").setText("");
+						this.getView().byId("ostatus").setVisible(true);
+
+						this.getView().byId("ordTypLbl").setVisible(true);
+						// this.getView().byId("ofrordtypetxt").setText("");
+						this.getView().byId("oOdrtype").setVisible(true);
+
+						this.getView().byId("cetalabid").setVisible(true);
+						// this.getView().byId("ctqtid").setText("");
+						this.getView().byId("ctetid").setVisible(true);
+
+						// // this.getView().byId("fromqid").setVisible(false);
+						// this.getView().byId("txlab").setText("");
+						this.getView().byId("txtlab").setVisible(true);
+						this.getView().byId("prlabid").setVisible(true);
+						this.getView().byId("prpetid").setVisible(true);
+						this.getView().byId("VT_ARCTDnc").setVisible(true);
+this.getView().byId("VT_ARCTDncLbl").setVisible(true);
+this.getView().byId("ovtnIdText").setVisible(true);
+this.getView().byId("ovtnId").setVisible(true);
+this.getView().byId("ovinIdText").setVisible(true);
+this.getView().byId("ovinId").setVisible(true);
+						// // this.getView().byId("tobid").setVisible(false);
+						// this.getView().byId("prptid").setText("");
+						this.getView().byId("accInstLbl").setVisible(true);
+
+						// // this.getView().byId("fmlbid").setVisible(false);
+						// /*	this.getView().byId("fromlbid").setVisible(false);*/
+						// this.getView().byId("otxlabel").setText("");
+						this.getView().byId("otxtlabel").setVisible(true);
+
+						this.getView().byId("accInst").setVisible(true);
+										// this.getView().byId("requForm").setVisible(true);
+
+			}
+				if(this.getView().byId("vtnid").getText()=="")
+				
+			{
+										// this.getView().byId("offervehidContent").setVisible(false);
+										
+
+						this._oViewModel.setProperty("/showVinDiplayOff", false);
+						// this.getView().byId("offervehidContent").setVisible(true);
+						// Offered = {};
+						this.getView().byId("Offerevehid").setText("");
+						this.getView().byId("offeredDealer").setVisible(false);
+						this.getView().byId("oRequesteddealer").setText("");
+						this.getView().byId("oRequesteddealer").setVisible(false);
+						this.getView().byId("oAccesIn").setText("");
+						this.getView().byId("oAccesIn").setVisible(false);
+						this.getView().byId("accid").setVisible(false);
+						
+						
+
+						this.getView().byId("ofrModellabl").setVisible(false);
+						this.getView().byId("ofrmodelyeartext").setText("");
+						this.getView().byId("ofrmodelyeartext").setVisible(false);
+
+						this.getView().byId("ofrserieslabl").setVisible(false);
+						this.getView().byId("ofrseriestxt").setText("");
+						this.getView().byId("ofrseriestxt").setVisible(false);
+
+						this.getView().byId("ofrmodllabl").setVisible(false);
+						this.getView().byId("ofrmodltxt").setText("");
+						this.getView().byId("ofrmodltxt").setVisible(false);
+
+						this.getView().byId("ofrsuffixlabl").setVisible(false);
+						// this.getView().byId("ofrsuffixstxt").setText("");
+						this.getView().byId("ofrsuffixstxt").setVisible(false);
+
+						this.getView().byId("ofrapxlabl").setVisible(false);
+						// this.getView().byId("ofrapxtxt").setText("");
+						this.getView().byId("ofrapxtxt").setVisible(false);
+
+						this.getView().byId("ofrextcolorlabl").setVisible(false);
+						// this.getView().byId("ofrexttxt").setText("");
+						this.getView().byId("ofrexttxt").setVisible(false);
+
+						this.getView().byId("ofrstatuslabl").setVisible(false);
+						// this.getView().byId("ofrstatustxt").setText("");
+						this.getView().byId("ofrstatustxt").setVisible(false);
+
+						this.getView().byId("ofrordrtypelabl").setVisible(false);
+						// this.getView().byId("ofrordtypetxt").setText("");
+						this.getView().byId("ofrordtypetxt").setVisible(false);
+
+						this.getView().byId("cetalaid").setVisible(false);
+						// this.getView().byId("ctqtid").setText("");
+						this.getView().byId("ctqtid").setVisible(false);
+
+						// // this.getView().byId("fromqid").setVisible(false);
+						// this.getView().byId("txlab").setText("");
+						this.getView().byId("txlab").setVisible(false);
+
+						this.getView().byId("prolabid").setVisible(false);
+
+						// // this.getView().byId("tobid").setVisible(false);
+						// this.getView().byId("prptid").setText("");
+						this.getView().byId("prptid").setVisible(false);
+
+						// // this.getView().byId("fmlbid").setVisible(false);
+						// /*	this.getView().byId("fromlbid").setVisible(false);*/
+						// this.getView().byId("otxlabel").setText("");
+						this.getView().byId("otxlabel").setVisible(false);
+
+						// this.getView().byId("idlto").setVisible(false);
+
+					
+
+			}
+			else{
+										// this.getView().byId("offervehidContent").setVisible(true);
+										
+
+						this._oViewModel.setProperty("/showVinDiplayOff", true);
+						// this.getView().byId("offervehidContent").setVisible(true);
+						// Offered = {};
+						// this.getView().byId("Offerevehid").setText("");
+						this.getView().byId("offeredDealer").setVisible(true);
+						// this.getView().byId("oRequesteddealer").setText("");
+						this.getView().byId("oRequesteddealer").setVisible(true);
+						// this.getView().byId("oAccesIn").setText("");
+						this.getView().byId("oAccesIn").setVisible(true);
+						this.getView().byId("accid").setVisible(true);
+						
+						
+
+						this.getView().byId("ofrModellabl").setVisible(true);
+						// this.getView().byId("ofrmodelyeartext").setText("");
+						this.getView().byId("ofrmodelyeartext").setVisible(true);
+
+						this.getView().byId("ofrserieslabl").setVisible(true);
+						// this.getView().byId("ofrseriestxt").setText("");
+						this.getView().byId("ofrseriestxt").setVisible(true);
+
+						this.getView().byId("ofrmodllabl").setVisible(true);
+						// this.getView().byId("ofrmodltxt").setText("");
+						this.getView().byId("ofrmodltxt").setVisible(true);
+
+						this.getView().byId("ofrsuffixlabl").setVisible(true);
+						// this.getView().byId("ofrsuffixstxt").setText("");
+						this.getView().byId("ofrsuffixstxt").setVisible(true);
+
+						this.getView().byId("ofrapxlabl").setVisible(true);
+						// this.getView().byId("ofrapxtxt").setText("");
+						this.getView().byId("ofrapxtxt").setVisible(true);
+
+						this.getView().byId("ofrextcolorlabl").setVisible(true);
+						// this.getView().byId("ofrexttxt").setText("");
+						this.getView().byId("ofrexttxt").setVisible(true);
+
+						this.getView().byId("ofrstatuslabl").setVisible(true);
+						// this.getView().byId("ofrstatustxt").setText("");
+						this.getView().byId("ofrstatustxt").setVisible(true);
+
+						this.getView().byId("ofrordrtypelabl").setVisible(true);
+						// this.getView().byId("ofrordtypetxt").setText("");
+						this.getView().byId("ofrordtypetxt").setVisible(true);
+
+						this.getView().byId("cetalaid").setVisible(true);
+						// this.getView().byId("ctqtid").setText("");
+						this.getView().byId("ctqtid").setVisible(true);
+
+						// // this.getView().byId("fromqid").setVisible(false);
+						// this.getView().byId("txlab").setText("");
+						this.getView().byId("txlab").setVisible(true);
+
+						this.getView().byId("prolabid").setVisible(true);
+
+						// // this.getView().byId("tobid").setVisible(false);
+						// this.getView().byId("prptid").setText("");
+						this.getView().byId("prptid").setVisible(true);
+
+						// // this.getView().byId("fmlbid").setVisible(false);
+						// /*	this.getView().byId("fromlbid").setVisible(false);*/
+						// this.getView().byId("otxlabel").setText("");
+						this.getView().byId("otxlabel").setVisible(true);
+
+						// that.getView().byId("idlto").setVisible(true);
+
+					
+
+			}
 				if (StatusData.Trade_Return == "N") {
 					// this.getView().byId("offervehidContent").setVisible(false);
 					// Offered = {};
 
-					this._oViewModel.setProperty("/showVinDiplayOff", false);
-					that.getView().byId("Offerevehid").setText("");
-					that.getView().byId("offeredDealer").setVisible(false);
-					that.getView().byId("oRequesteddealer").setText("");
-					that.getView().byId("oRequesteddealer").setVisible(false);
+					// this._oViewModel.setProperty("/showVinDiplayOff", true);
+					// // that.getView().byId("Offerevehid").setText("");
+					// that.getView().byId("offeredDealer").setVisible(true);
+					// // that.getView().byId("oRequesteddealer").setText("");
+					// that.getView().byId("oRequesteddealer").setVisible(true);
 
-					that.getView().byId("ofrModellabl").setVisible(false);
-					that.getView().byId("ofrmodelyeartext").setText("");
-					that.getView().byId("ofrmodelyeartext").setVisible(false);
-					that.getView().byId("oAccesIn").setText("");
-						that.getView().byId("oAccesIn").setVisible(false);
-						that.getView().byId("accid").setVisible(false);
+					// that.getView().byId("ofrModellabl").setVisible(true);
+					// // that.getView().byId("ofrmodelyeartext").setText("");
+					// that.getView().byId("ofrmodelyeartext").setVisible(true);
+					// // that.getView().byId("oAccesIn").setText("");
+					// 	that.getView().byId("oAccesIn").setVisible(true);
+					// 	that.getView().byId("accid").setVisible(true);
 
-					that.getView().byId("ofrserieslabl").setVisible(false);
-					that.getView().byId("ofrseriestxt").setText("");
-					that.getView().byId("ofrseriestxt").setVisible(false);
+					// that.getView().byId("ofrserieslabl").setVisible(true);
+					// // that.getView().byId("ofrseriestxt").setText("");
+					// that.getView().byId("ofrseriestxt").setVisible(true);
 
-					that.getView().byId("ofrmodllabl").setVisible(false);
-					that.getView().byId("ofrmodltxt").setText("");
-					that.getView().byId("ofrmodltxt").setVisible(false);
+					// that.getView().byId("ofrmodllabl").setVisible(true);
+					// // that.getView().byId("ofrmodltxt").setText("");
+					// that.getView().byId("ofrmodltxt").setVisible(true);
 
-					that.getView().byId("ofrsuffixlabl").setVisible(false);
-					that.getView().byId("ofrsuffixstxt").setText("");
-					that.getView().byId("ofrsuffixstxt").setVisible(false);
+					// that.getView().byId("ofrsuffixlabl").setVisible(true);
+					// // that.getView().byId("ofrsuffixstxt").setText("");
+					// that.getView().byId("ofrsuffixstxt").setVisible(true);
 
-					that.getView().byId("ofrapxlabl").setVisible(false);
-					that.getView().byId("ofrapxtxt").setText("");
-					that.getView().byId("ofrapxtxt").setVisible(false);
+					// that.getView().byId("ofrapxlabl").setVisible(true);
+					// // that.getView().byId("ofrapxtxt").setText("");
+					// that.getView().byId("ofrapxtxt").setVisible(true);
 
-					that.getView().byId("ofrextcolorlabl").setVisible(false);
-					that.getView().byId("ofrexttxt").setText("");
-					that.getView().byId("ofrexttxt").setVisible(false);
+					// that.getView().byId("ofrextcolorlabl").setVisible(true);
+					// // that.getView().byId("ofrexttxt").setText("");
+					// that.getView().byId("ofrexttxt").setVisible(true);
 
-					that.getView().byId("ofrstatuslabl").setVisible(false);
-					that.getView().byId("ofrstatustxt").setText("");
-					that.getView().byId("ofrstatustxt").setVisible(false);
+					// that.getView().byId("ofrstatuslabl").setVisible(true);
+					// // that.getView().byId("ofrstatustxt").setText("");
+					// that.getView().byId("ofrstatustxt").setVisible(true);
 
-					that.getView().byId("ofrordrtypelabl").setVisible(false);
-					that.getView().byId("ofrordtypetxt").setText("");
-					that.getView().byId("ofrordtypetxt").setVisible(false);
+					// that.getView().byId("ofrordrtypelabl").setVisible(true);
+					// // that.getView().byId("ofrordtypetxt").setText("");
+					// that.getView().byId("ofrordtypetxt").setVisible(true);
 
-					that.getView().byId("cetalaid").setVisible(false);
-					that.getView().byId("ctqtid").setText("");
-					that.getView().byId("ctqtid").setVisible(false);
+					// that.getView().byId("cetalaid").setVisible(true);
+					// // that.getView().byId("ctqtid").setText("");
+					// that.getView().byId("ctqtid").setVisible(true);
 
-					// that.getView().byId("fromqid").setVisible(false);
-					that.getView().byId("txlab").setText("");
-					that.getView().byId("txlab").setVisible(false);
+					// // that.getView().byId("fromqid").setVisible(false);
+					// // that.getView().byId("txlab").setText("");
+					// that.getView().byId("txlab").setVisible(true);
 
-					that.getView().byId("prolabid").setVisible(false);
+					// that.getView().byId("prolabid").setVisible(true);
 
-					// that.getView().byId("tobid").setVisible(false);
-					that.getView().byId("prptid").setText("");
-					that.getView().byId("prptid").setVisible(false);
+					// // that.getView().byId("tobid").setVisible(false);
+					// // that.getView().byId("prptid").setText("");
+					// that.getView().byId("prptid").setVisible(true);
 
-					// that.getView().byId("fmlbid").setVisible(false);
-					/*	that.getView().byId("fromlbid").setVisible(false);*/
-					that.getView().byId("otxlabel").setText("");
-					that.getView().byId("otxlabel").setVisible(false);
+					// // that.getView().byId("fmlbid").setVisible(false);
+					// /*	that.getView().byId("fromlbid").setVisible(false);*/
+					// // that.getView().byId("otxlabel").setText("");
+					// that.getView().byId("otxlabel").setVisible(true);
 
 					// that.getView().byId("idlto").setVisible(false);
 
 				} else if (StatusData.Trade_Return == "Y") {
-					this._oViewModel.setProperty("/showVinDiplayOff", true);
+// 					this._oViewModel.setProperty("/showVinDiplayOff", true);
 
-					that.getView().byId("offeredDealer").setVisible(true);
+// 					that.getView().byId("offeredDealer").setVisible(true);
 
-					that.getView().byId("oRequesteddealer").setVisible(true);
+// 					that.getView().byId("oRequesteddealer").setVisible(true);
 
-					that.getView().byId("ofrModellabl").setVisible(true);
+// 					that.getView().byId("ofrModellabl").setVisible(true);
 
-					that.getView().byId("ofrmodelyeartext").setVisible(true);
-// that.getView().byId("oAccesIn").setText("");
-						that.getView().byId("oAccesIn").setVisible(true);
-						that.getView().byId("accid").setVisible(true);
-					that.getView().byId("ofrserieslabl").setVisible(true);
+// 					that.getView().byId("ofrmodelyeartext").setVisible(true);
+// // that.getView().byId("oAccesIn").setText("");
+// 						that.getView().byId("oAccesIn").setVisible(true);
+// 						that.getView().byId("accid").setVisible(true);
+// 					that.getView().byId("ofrserieslabl").setVisible(true);
 
-					that.getView().byId("ofrseriestxt").setVisible(true);
+// 					that.getView().byId("ofrseriestxt").setVisible(true);
 
-					that.getView().byId("ofrmodllabl").setVisible(true);
+// 					that.getView().byId("ofrmodllabl").setVisible(true);
 
-					that.getView().byId("ofrmodltxt").setVisible(true);
+// 					that.getView().byId("ofrmodltxt").setVisible(true);
 
-					that.getView().byId("ofrsuffixlabl").setVisible(true);
+// 					that.getView().byId("ofrsuffixlabl").setVisible(true);
 
-					that.getView().byId("ofrsuffixstxt").setVisible(true);
+// 					that.getView().byId("ofrsuffixstxt").setVisible(true);
 
-					that.getView().byId("ofrapxlabl").setVisible(true);
+// 					that.getView().byId("ofrapxlabl").setVisible(true);
 
-					that.getView().byId("ofrapxtxt").setVisible(true);
+// 					that.getView().byId("ofrapxtxt").setVisible(true);
 
-					that.getView().byId("ofrextcolorlabl").setVisible(true);
+// 					that.getView().byId("ofrextcolorlabl").setVisible(true);
 
-					that.getView().byId("ofrexttxt").setVisible(true);
+// 					that.getView().byId("ofrexttxt").setVisible(true);
 
-					that.getView().byId("ofrstatuslabl").setVisible(true);
+// 					that.getView().byId("ofrstatuslabl").setVisible(true);
 
-					that.getView().byId("ofrstatustxt").setVisible(true);
+// 					that.getView().byId("ofrstatustxt").setVisible(true);
 
-					that.getView().byId("ofrordrtypelabl").setVisible(true);
+// 					that.getView().byId("ofrordrtypelabl").setVisible(true);
 
-					that.getView().byId("ofrordtypetxt").setVisible(true);
+// 					that.getView().byId("ofrordtypetxt").setVisible(true);
 
-					that.getView().byId("cetalaid").setVisible(true);
+// 					that.getView().byId("cetalaid").setVisible(true);
 
-					that.getView().byId("ctqtid").setVisible(true);
+// 					that.getView().byId("ctqtid").setVisible(true);
 
-					// that.getView().byId("fromqid").setVisible(true);
+// 					// that.getView().byId("fromqid").setVisible(true);
 
-					that.getView().byId("txlab").setVisible(true);
+// 					that.getView().byId("txlab").setVisible(true);
 
-					that.getView().byId("prolabid").setVisible(true);
+// 					that.getView().byId("prolabid").setVisible(true);
 
-					// that.getView().byId("tobid").setVisible(true);
+// 					// that.getView().byId("tobid").setVisible(true);
 
-					that.getView().byId("prptid").setVisible(true);
+// 					that.getView().byId("prptid").setVisible(true);
 
-					// that.getView().byId("fmlbid").setVisible(true);
+// 					// that.getView().byId("fmlbid").setVisible(true);
 
-					that.getView().byId("otxlabel").setVisible(true);
+// 					that.getView().byId("otxlabel").setVisible(true);
 
 					// that.getView().byId("idlto").setVisible(true);
 
@@ -944,7 +1241,7 @@ sap.ui.define([
 								debugger;
 								var Data = oData.d.results;
 
-								// console.log("additional Comment", 	local.oViewModel);
+								// console.log("additional Comment", 	this.oViewModel);
 								console.log("trade id", TradeId);
 
 								var oComTrade_Comment = Data.filter(function (x) {
@@ -2623,100 +2920,100 @@ sap.ui.define([
 						var OtherVehicleInformation_text = i18n.getText("OfferVehicleInformation");
 						local.getView().byId("Offerevehid").setText(OtherVehicleInformation_text);
 
-						local.getView().byId("oRequesteddealer").setVisible(true);
-						local.getView().byId("offeredDealer").setVisible(true);
-						local.getView().byId("ofrModellabl").setVisible(true);
-						local.getView().byId("ofrserieslabl").setVisible(true);
-						local.getView().byId("ofrmodllabl").setVisible(true);
-						local.getView().byId("ofrsuffixlabl").setVisible(true);
-						local.getView().byId("ofrapxlabl").setVisible(true);
-						// that.getView().byId("oAccesIn").setText("");
-						local.getView().byId("oAccesIn").setVisible(true);
-						local.getView().byId("accid").setVisible(true);
-						local.getView().byId("ofrextcolorlabl").setVisible(true);
-						local.getView().byId("ofrstatuslabl").setVisible(true);
-						local.getView().byId("ofrordrtypelabl").setVisible(true);
-						local.getView().byId("cetalaid").setVisible(true);
+						// local.getView().byId("oRequesteddealer").setVisible(true);
+						// local.getView().byId("offeredDealer").setVisible(true);
+						// local.getView().byId("ofrModellabl").setVisible(true);
+						// local.getView().byId("ofrserieslabl").setVisible(true);
+						// local.getView().byId("ofrmodllabl").setVisible(true);
+						// local.getView().byId("ofrsuffixlabl").setVisible(true);
+						// local.getView().byId("ofrapxlabl").setVisible(true);
+						// // that.getView().byId("oAccesIn").setText("");
+						// local.getView().byId("oAccesIn").setVisible(true);
+						// local.getView().byId("accid").setVisible(true);
+						// local.getView().byId("ofrextcolorlabl").setVisible(true);
+						// local.getView().byId("ofrstatuslabl").setVisible(true);
+						// local.getView().byId("ofrordrtypelabl").setVisible(true);
+						// local.getView().byId("cetalaid").setVisible(true);
 						// that.getView().byId("fromqid").setVisible(true);
 						/*	that.getView().byId("fromlbid").setVisible(true);*/
 						// that.getView().byId("idlto").setVisible(true);
 						// that.getView().byId("tobid").setVisible(true);
 						// that.getView().byId("fmlbid").setVisible(true);
 
-						local.getView().byId("oRequesteddealer").setVisible(true);
-						local.getView().byId("ofrmodelyeartext").setVisible(true);
-						local.getView().byId("ofrseriestxt").setVisible(true);
-						local.getView().byId("ofrmodltxt").setVisible(true);
-						local.getView().byId("ofrsuffixstxt").setVisible(true);
-						local.getView().byId("ofrapxtxt").setVisible(true);
-						local.getView().byId("ofrexttxt").setVisible(true);
-						local.getView().byId("ofrstatustxt").setVisible(true);
-						local.getView().byId("ofrordtypetxt").setVisible(true);
-						local.getView().byId("ctqtid").setVisible(true);
-						local.getView().byId("txlab").setVisible(true);
-						local.getView().byId("prolabid").setVisible(true);
-						local.getView().byId("prptid").setVisible(true);
-						local.getView().byId("otxlabel").setVisible(true);
+						// local.getView().byId("oRequesteddealer").setVisible(true);
+						// local.getView().byId("ofrmodelyeartext").setVisible(true);
+						// local.getView().byId("ofrseriestxt").setVisible(true);
+						// local.getView().byId("ofrmodltxt").setVisible(true);
+						// local.getView().byId("ofrsuffixstxt").setVisible(true);
+						// local.getView().byId("ofrapxtxt").setVisible(true);
+						// local.getView().byId("ofrexttxt").setVisible(true);
+						// local.getView().byId("ofrstatustxt").setVisible(true);
+						// local.getView().byId("ofrordtypetxt").setVisible(true);
+						// local.getView().byId("ctqtid").setVisible(true);
+						// local.getView().byId("txlab").setVisible(true);
+						// local.getView().byId("prolabid").setVisible(true);
+						// local.getView().byId("prptid").setVisible(true);
+						// local.getView().byId("otxlabel").setVisible(true);
 
 					} else {
 						Offered = {};
-						local.getView().byId("Offerevehid").setText("");
-						local.getView().byId("offeredDealer").setVisible(false);
-						local.getView().byId("oRequesteddealer").setText("");
-						local.getView().byId("oRequesteddealer").setVisible(false);
+						// local.getView().byId("Offerevehid").setText("");
+// 						local.getView().byId("offeredDealer").setVisible(true);
+// 						// local.getView().byId("oRequesteddealer").setText("");
+// 						local.getView().byId("oRequesteddealer").setVisible(true);
 
-						local.getView().byId("ofrModellabl").setVisible(false);
-						local.getView().byId("ofrmodelyeartext").setText("");
-						local.getView().byId("ofrmodelyeartext").setVisible(false);
-local.getView().byId("oAccesIn").setText("");
-						local.getView().byId("oAccesIn").setVisible(false);
-						local.getView().byId("accid").setVisible(false);
-						local.getView().byId("ofrserieslabl").setVisible(false);
-						local.getView().byId("ofrseriestxt").setText("");
-						local.getView().byId("ofrseriestxt").setVisible(false);
+// 						local.getView().byId("ofrModellabl").setVisible(true);
+// 						// local.getView().byId("ofrmodelyeartext").setText("");
+// 						local.getView().byId("ofrmodelyeartext").setVisible(true);
+// // local.getView().byId("oAccesIn").setText("");
+// 						local.getView().byId("oAccesIn").setVisible(true);
+// 						local.getView().byId("accid").setVisible(true);
+// 						local.getView().byId("ofrserieslabl").setVisible(true);
+// 						// local.getView().byId("ofrseriestxt").setText("");
+// 						local.getView().byId("ofrseriestxt").setVisible(true);
 
-						local.getView().byId("ofrmodllabl").setVisible(false);
-						local.getView().byId("ofrmodltxt").setText("");
-						local.getView().byId("ofrmodltxt").setVisible(false);
+// 						local.getView().byId("ofrmodllabl").setVisible(true);
+// 						// local.getView().byId("ofrmodltxt").setText("");
+// 						local.getView().byId("ofrmodltxt").setVisible(true);
 
-						local.getView().byId("ofrsuffixlabl").setVisible(false);
-						local.getView().byId("ofrsuffixstxt").setText("");
-						local.getView().byId("ofrsuffixstxt").setVisible(false);
+// 						local.getView().byId("ofrsuffixlabl").setVisible(true);
+// 						// local.getView().byId("ofrsuffixstxt").setText("");
+// 						local.getView().byId("ofrsuffixstxt").setVisible(true);
 
-						local.getView().byId("ofrapxlabl").setVisible(false);
-						local.getView().byId("ofrapxtxt").setText("");
-						local.getView().byId("ofrapxtxt").setVisible(false);
+// 						local.getView().byId("ofrapxlabl").setVisible(true);
+// 						// local.getView().byId("ofrapxtxt").setText("");
+// 						local.getView().byId("ofrapxtxt").setVisible(true);
 
-						local.getView().byId("ofrextcolorlabl").setVisible(false);
-						local.getView().byId("ofrexttxt").setText("");
-						local.getView().byId("ofrexttxt").setVisible(false);
+// 						local.getView().byId("ofrextcolorlabl").setVisible(true);
+// 						// local.getView().byId("ofrexttxt").setText("");
+// 						local.getView().byId("ofrexttxt").setVisible(true);
 
-						local.getView().byId("ofrstatuslabl").setVisible(false);
-						local.getView().byId("ofrstatustxt").setText("");
-						local.getView().byId("ofrstatustxt").setVisible(false);
+// 						local.getView().byId("ofrstatuslabl").setVisible(true);
+// 						// local.getView().byId("ofrstatustxt").setText("");
+// 						local.getView().byId("ofrstatustxt").setVisible(true);
 
-						local.getView().byId("ofrordrtypelabl").setVisible(false);
-						local.getView().byId("ofrordtypetxt").setText("");
-						local.getView().byId("ofrordtypetxt").setVisible(false);
+// 						local.getView().byId("ofrordrtypelabl").setVisible(true);
+// 						// local.getView().byId("ofrordtypetxt").setText("");
+// 						local.getView().byId("ofrordtypetxt").setVisible(true);
 
-						local.getView().byId("cetalaid").setVisible(false);
-						local.getView().byId("ctqtid").setText("");
-						local.getView().byId("ctqtid").setVisible(false);
+// 						local.getView().byId("cetalaid").setVisible(true);
+// 						// local.getView().byId("ctqtid").setText("");
+// 						local.getView().byId("ctqtid").setVisible(true);
 
 						// local.getView().byId("fromqid").setVisible(false);
-						local.getView().byId("txlab").setText("");
-						local.getView().byId("txlab").setVisible(false);
+						// local.getView().byId("txlab").setText("");
+						// local.getView().byId("txlab").setVisible(true);
 
-						local.getView().byId("prolabid").setVisible(false);
+						// local.getView().byId("prolabid").setVisible(true);
 
-						// local.getView().byId("tobid").setVisible(false);
-						local.getView().byId("prptid").setText("");
-						local.getView().byId("prptid").setVisible(false);
+						// // local.getView().byId("tobid").setVisible(false);
+						// // local.getView().byId("prptid").setText("");
+						// local.getView().byId("prptid").setVisible(true);
 
-						// local.getView().byId("fmlbid").setVisible(false);
-						/*	local.getView().byId("fromlbid").setVisible(false);*/
-						local.getView().byId("otxlabel").setText("");
-						local.getView().byId("otxlabel").setVisible(false);
+						// // local.getView().byId("fmlbid").setVisible(false);
+						// /*	local.getView().byId("fromlbid").setVisible(false);*/
+						// // local.getView().byId("otxlabel").setText("");
+						// local.getView().byId("otxlabel").setVisible(true);
 
 						// local.getView().byId("idlto").setVisible(false);
 
@@ -2738,8 +3035,302 @@ local.getView().byId("oAccesIn").setText("");
 					local.getView().byId("SimpleFormAproveTrReq").bindElement("/");
 					local.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
 					//	sap.ui.getCore().setModel(oModel, "oVehicleTrade_Summary");();
+	if(local.getView().byId("ovtnId").getText()=="")
+			{
+										// local.getView().byId("requForm").setVisible(false);
+										
 
+						local._oViewModel.setProperty("/showVinDiplayOff", false);
+						// this.getView().byId("offervehidContent").setVisible(true);
+						// Offered = {};
+						// local.getView().byId("Offerevehid").setText("");
+						// local.getView().byId("offeredDealer").setVisible(true);
+						// local.getView().byId("oRequesteddealer").setText("");
+						// local.getView().byId("oRequesteddealer").setVisible(true);
+						// local.getView().byId("oAccesIn").setText("");
+						// local.getView().byId("ovinIdText").setVisible(true);
+						// local.getView().byId("ovinId").setVisible(true);
+						
+						
+
+						local.getView().byId("oMdlyearLbl").setVisible(false);
+						// local.getView().byId("ofrmodelyeartext").setText("");
+						local.getView().byId("oMdlyear").setVisible(false);
+
+						local.getView().byId("oSeriesLbl").setVisible(false);
+						// local.getView().byId("ofrseriestxt").setText("");
+						local.getView().byId("oSeries").setVisible(false);
+
+						local.getView().byId("oModelLbl").setVisible(false);
+						// local.getView().byId("ofrmodltxt").setText("");
+						local.getView().byId("oModel").setVisible(false);
+
+						local.getView().byId("oSuffixLbl").setVisible(false);
+						// local.getView().byId("ofrsuffixstxt").setText("");
+						local.getView().byId("intdesr").setVisible(false);
+
+						local.getView().byId("extcoLbl").setVisible(false);
+						// local.getView().byId("ofrapxtxt").setText("");
+						local.getView().byId("extco").setVisible(false);
+
+						local.getView().byId("oapxLbl").setVisible(false);
+						// local.getView().byId("ofrexttxt").setText("");
+						local.getView().byId("oapx").setVisible(false);
+
+						local.getView().byId("ostatusLbl").setVisible(false);
+						// local.getView().byId("ofrstatustxt").setText("");
+						local.getView().byId("ostatus").setVisible(false);
+
+						local.getView().byId("ordTypLbl").setVisible(false);
+						// local.getView().byId("ofrordtypetxt").setText("");
+						local.getView().byId("oOdrtype").setVisible(false);
+
+						local.getView().byId("cetalabid").setVisible(false);
+						// local.getView().byId("ctqtid").setText("");
+						local.getView().byId("ctetid").setVisible(false);
+
+						// // local.getView().byId("fromqid").setVisible(false);
+						// local.getView().byId("txlab").setText("");
+						local.getView().byId("txtlab").setVisible(false);
+
+local.getView().byId("prlabid").setVisible(false);
+						local.getView().byId("prpetid").setVisible(false);
+						local.getView().byId("VT_ARCTDnc").setVisible(false);
+local.getView().byId("VT_ARCTDncLbl").setVisible(false);
+local.getView().byId("ovtnIdText").setVisible(false);
+local.getView().byId("ovtnId").setVisible(false);
+local.getView().byId("ovinIdText").setVisible(false);
+local.getView().byId("ovinId").setVisible(false);
+
+
+
+
+						// // local.getView().byId("tobid").setVisible(false);
+						// local.getView().byId("prptid").setText("");
+						local.getView().byId("accInstLbl").setVisible(false);
+
+						// // local.getView().byId("fmlbid").setVisible(false);
+						// /*	local.getView().byId("fromlbid").setVisible(false);*/
+						// local.getView().byId("otxlabel").setText("");
+						local.getView().byId("otxtlabel").setVisible(false);
+
+						local.getView().byId("accInst").setVisible(false);
+
+					
+
+			}
+			else{
+					local._oViewModel.setProperty("/showVinDiplayOff", true);
+					local.getView().byId("oMdlyearLbl").setVisible(true);
+						// local.getView().byId("ofrmodelyeartext").setText("");
+						local.getView().byId("oMdlyear").setVisible(true);
+
+						local.getView().byId("oSeriesLbl").setVisible(true);
+						// local.getView().byId("ofrseriestxt").setText("");
+						local.getView().byId("oSeries").setVisible(true);
+
+						local.getView().byId("oModelLbl").setVisible(true);
+						// local.getView().byId("ofrmodltxt").setText("");
+						local.getView().byId("oModel").setVisible(true);
+
+						local.getView().byId("oSuffixLbl").setVisible(true);
+						// local.getView().byId("ofrsuffixstxt").setText("");
+						local.getView().byId("intdesr").setVisible(true);
+
+						local.getView().byId("extcoLbl").setVisible(true);
+						// local.getView().byId("ofrapxtxt").setText("");
+						local.getView().byId("extco").setVisible(true);
+
+						local.getView().byId("oapxLbl").setVisible(true);
+						// local.getView().byId("ofrexttxt").setText("");
+						local.getView().byId("oapx").setVisible(true);
+
+						local.getView().byId("ostatusLbl").setVisible(true);
+						// local.getView().byId("ofrstatustxt").setText("");
+						local.getView().byId("ostatus").setVisible(true);
+
+						local.getView().byId("ordTypLbl").setVisible(true);
+						// local.getView().byId("ofrordtypetxt").setText("");
+						local.getView().byId("oOdrtype").setVisible(true);
+
+						local.getView().byId("cetalabid").setVisible(true);
+						// local.getView().byId("ctqtid").setText("");
+						local.getView().byId("ctetid").setVisible(true);
+
+						// // local.getView().byId("fromqid").setVisible(false);
+						// local.getView().byId("txlab").setText("");
+						local.getView().byId("txtlab").setVisible(true);
+						local.getView().byId("prlabid").setVisible(true);
+						local.getView().byId("prpetid").setVisible(true);
+						local.getView().byId("VT_ARCTDnc").setVisible(true);
+local.getView().byId("VT_ARCTDncLbl").setVisible(true);
+local.getView().byId("ovtnIdText").setVisible(true);
+local.getView().byId("ovtnId").setVisible(true);
+local.getView().byId("ovinIdText").setVisible(true);
+local.getView().byId("ovinId").setVisible(true);
+						// // local.getView().byId("tobid").setVisible(false);
+						// local.getView().byId("prptid").setText("");
+						local.getView().byId("accInstLbl").setVisible(true);
+
+						// // local.getView().byId("fmlbid").setVisible(false);
+						// /*	local.getView().byId("fromlbid").setVisible(false);*/
+						// local.getView().byId("otxlabel").setText("");
+						local.getView().byId("otxtlabel").setVisible(true);
+
+						local.getView().byId("accInst").setVisible(true);
+										// local.getView().byId("requForm").setVisible(true);
+
+			}
+				if(local.getView().byId("vtnid").getText()=="")
+				
+			{
+										// local.getView().byId("offervehidContent").setVisible(false);
+										
+
+						local._oViewModel.setProperty("/showVinDiplayOff", false);
+						// this.getView().byId("offervehidContent").setVisible(true);
+						// Offered = {};
+						local.getView().byId("Offerevehid").setText("");
+						local.getView().byId("offeredDealer").setVisible(false);
+						local.getView().byId("oRequesteddealer").setText("");
+						local.getView().byId("oRequesteddealer").setVisible(false);
+						local.getView().byId("oAccesIn").setText("");
+						local.getView().byId("oAccesIn").setVisible(false);
+						local.getView().byId("accid").setVisible(false);
+						
+						
+
+						local.getView().byId("ofrModellabl").setVisible(false);
+						local.getView().byId("ofrmodelyeartext").setText("");
+						local.getView().byId("ofrmodelyeartext").setVisible(false);
+
+						local.getView().byId("ofrserieslabl").setVisible(false);
+						local.getView().byId("ofrseriestxt").setText("");
+						local.getView().byId("ofrseriestxt").setVisible(false);
+
+						local.getView().byId("ofrmodllabl").setVisible(false);
+						local.getView().byId("ofrmodltxt").setText("");
+						local.getView().byId("ofrmodltxt").setVisible(false);
+
+						local.getView().byId("ofrsuffixlabl").setVisible(false);
+						// local.getView().byId("ofrsuffixstxt").setText("");
+						local.getView().byId("ofrsuffixstxt").setVisible(false);
+
+						local.getView().byId("ofrapxlabl").setVisible(false);
+						// local.getView().byId("ofrapxtxt").setText("");
+						local.getView().byId("ofrapxtxt").setVisible(false);
+
+						local.getView().byId("ofrextcolorlabl").setVisible(false);
+						// local.getView().byId("ofrexttxt").setText("");
+						local.getView().byId("ofrexttxt").setVisible(false);
+
+						local.getView().byId("ofrstatuslabl").setVisible(false);
+						// local.getView().byId("ofrstatustxt").setText("");
+						local.getView().byId("ofrstatustxt").setVisible(false);
+
+						local.getView().byId("ofrordrtypelabl").setVisible(false);
+						// local.getView().byId("ofrordtypetxt").setText("");
+						local.getView().byId("ofrordtypetxt").setVisible(false);
+
+						local.getView().byId("cetalaid").setVisible(false);
+						// local.getView().byId("ctqtid").setText("");
+						local.getView().byId("ctqtid").setVisible(false);
+
+						// // local.getView().byId("fromqid").setVisible(false);
+						// local.getView().byId("txlab").setText("");
+						local.getView().byId("txlab").setVisible(false);
+
+						local.getView().byId("prolabid").setVisible(false);
+
+						// // local.getView().byId("tobid").setVisible(false);
+						// local.getView().byId("prptid").setText("");
+						local.getView().byId("prptid").setVisible(false);
+
+						// // local.getView().byId("fmlbid").setVisible(false);
+						// /*	local.getView().byId("fromlbid").setVisible(false);*/
+						// local.getView().byId("otxlabel").setText("");
+						local.getView().byId("otxlabel").setVisible(false);
+
+						// local.getView().byId("idlto").setVisible(false);
+
+					
+
+			}
+			else{
+										// local.getView().byId("offervehidContent").setVisible(true);
+										
+
+						local._oViewModel.setProperty("/showVinDiplayOff", true);
+						// this.getView().byId("offervehidContent").setVisible(true);
+						// Offered = {};
+						// local.getView().byId("Offerevehid").setText("");
+						local.getView().byId("offeredDealer").setVisible(true);
+						// local.getView().byId("oRequesteddealer").setText("");
+						local.getView().byId("oRequesteddealer").setVisible(true);
+						// local.getView().byId("oAccesIn").setText("");
+						local.getView().byId("oAccesIn").setVisible(true);
+						local.getView().byId("accid").setVisible(true);
+						
+						
+
+						local.getView().byId("ofrModellabl").setVisible(true);
+						// local.getView().byId("ofrmodelyeartext").setText("");
+						local.getView().byId("ofrmodelyeartext").setVisible(true);
+
+						local.getView().byId("ofrserieslabl").setVisible(true);
+						// local.getView().byId("ofrseriestxt").setText("");
+						local.getView().byId("ofrseriestxt").setVisible(true);
+
+						local.getView().byId("ofrmodllabl").setVisible(true);
+						// local.getView().byId("ofrmodltxt").setText("");
+						local.getView().byId("ofrmodltxt").setVisible(true);
+
+						local.getView().byId("ofrsuffixlabl").setVisible(true);
+						// local.getView().byId("ofrsuffixstxt").setText("");
+						local.getView().byId("ofrsuffixstxt").setVisible(true);
+
+						local.getView().byId("ofrapxlabl").setVisible(true);
+						// local.getView().byId("ofrapxtxt").setText("");
+						local.getView().byId("ofrapxtxt").setVisible(true);
+
+						local.getView().byId("ofrextcolorlabl").setVisible(true);
+						// local.getView().byId("ofrexttxt").setText("");
+						local.getView().byId("ofrexttxt").setVisible(true);
+
+						local.getView().byId("ofrstatuslabl").setVisible(true);
+						// local.getView().byId("ofrstatustxt").setText("");
+						local.getView().byId("ofrstatustxt").setVisible(true);
+
+						local.getView().byId("ofrordrtypelabl").setVisible(true);
+						// local.getView().byId("ofrordtypetxt").setText("");
+						local.getView().byId("ofrordtypetxt").setVisible(true);
+
+						local.getView().byId("cetalaid").setVisible(true);
+						// local.getView().byId("ctqtid").setText("");
+						local.getView().byId("ctqtid").setVisible(true);
+
+						// // local.getView().byId("fromqid").setVisible(false);
+						// local.getView().byId("txlab").setText("");
+						local.getView().byId("txlab").setVisible(true);
+
+						local.getView().byId("prolabid").setVisible(true);
+
+						// // local.getView().byId("tobid").setVisible(false);
+						// local.getView().byId("prptid").setText("");
+						local.getView().byId("prptid").setVisible(true);
+
+						// // local.getView().byId("fmlbid").setVisible(false);
+						// /*	local.getView().byId("fromlbid").setVisible(false);*/
+						// local.getView().byId("otxlabel").setText("");
+						local.getView().byId("otxlabel").setVisible(true);
+
+						// that.getView().byId("idlto").setVisible(true);
+
+					
+
+			}
 					sap.ui.core.BusyIndicator.hide();
+					
 				});
 				// }
 			});
