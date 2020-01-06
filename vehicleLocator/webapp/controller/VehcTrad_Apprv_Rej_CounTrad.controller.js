@@ -17,6 +17,7 @@ sap.ui.define([
 		onInit: function () {
 			var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
 			var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
+			// this.LoggedInDealer=LoggedInDealer;
 			this.getView().byId("oDealerCode5").setText(LoggedInDealerCode2);
 			this.getView().byId("oDealerAprvRejCntoffr").setText(LoggedInDealer);
 			var _that = this;
@@ -43,7 +44,8 @@ sap.ui.define([
 		},
 		onRouteMatched: function (oEvent) {
 			//trial comment for push
-
+// var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
+			// this.LoggedInDealer=LoggedInDealer;
 			this.getView().byId("oComments").setValue(""); //1803
 
 			if (oEvent.getParameter("arguments").selectedmyTr != undefined) {
@@ -2611,6 +2613,7 @@ sap.ui.define([
 						return x.VTN == vtn;
 					});
 					var Requested = Requested[0];
+					
 					var Offered = filtered.filter(function (x) {
 						return x.VTN != vtn;
 					});
@@ -2719,7 +2722,14 @@ local.getView().byId("oAccesIn").setText("");
 
 					}
 					// }
+								var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
 
+	// var Dealer_No= this.LoggedInDealer;
+					if (Requested.Requesting_Dealer.slice(-5) == LoggedInDealerCode2) {
+					Requested.RequestingDealerVisible = true;
+				} else {
+					Requested.RequestingDealerVisible = false;
+				}
 					var oModel = new sap.ui.model.json.JSONModel(Requested);
 					sap.ui.getCore().setModel(oModel, "ApprovRej");
 					sap.ui.getCore().getModel("ApprovRej").setProperty("/OffredVehicle", Offered);
