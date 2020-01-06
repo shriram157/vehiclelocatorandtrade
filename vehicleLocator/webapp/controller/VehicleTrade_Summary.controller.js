@@ -179,7 +179,13 @@ onLiveChange: function (oEvent) {
 			if (that.oTableSelectObj != undefined) {
 
 				var SelectedPath = oEvt.getSource().getBindingContext("vehicleTradeSummaryTable").getPath().split("/")[1];
+				var Dealer_No= this.theFirstDefaultDealerSelected;
 				that.oTableSelectObj.FromRequesting = true;
+					if (that.oTableSelectObj.Requesting_Dealer == Dealer_No) {
+					that.oTableSelectObj.RequestingDealerVisible = true;
+				} else {
+					that.oTableSelectObj.RequestingDealerVisible = false;
+				}
 				var model = new sap.ui.model.json.JSONModel(that.oTableSelectObj);
 				model.setSizeLimit(1000);
 				/*	sap.ui.getCore().setModel(model, "MyTradeRequestSelected");
@@ -206,6 +212,12 @@ onLiveChange: function (oEvent) {
 
 				var SelectedPath = oEvent.getSource().getBindingContext("receivedRequestTable").getPath().split("/")[1];
 				that.oRecTableSelectObj.FromRequesting = false;
+					var Dealer_No= this.theFirstDefaultDealerSelected;
+					if (that.oRecTableSelectObj.Requesting_Dealer == Dealer_No) {
+					that.oRecTableSelectObj.RequestingDealerVisible = true;
+				} else {
+					that.oRecTableSelectObj.RequestingDealerVisible = false;
+				}
 				var model = new sap.ui.model.json.JSONModel(that.oRecTableSelectObj);
 				model.setSizeLimit(1000);
 				/*	sap.ui.getCore().setModel(model, "MyTradeRequested");

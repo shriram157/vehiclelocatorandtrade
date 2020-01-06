@@ -61,38 +61,38 @@
 							<form:content>
 								<core:Title text="{i18n>RequestedVehicleInformation}"/>
 								<Label text="{i18n>VehicleTrackingNumber}" id="ovtnIdText"/>
-								<Text text="{Requested_Vtn}" id="ovtnId"/>
+								<Text text="{= ${RequestingDealerVisible} === false ?${Requested_Vtn}:${Offered_Vtn}}" id="ovtnId"/>
 								<Label text="{i18n>VIN}" id="ovinIdText"/>
-								<Text text="{VIN}" id="ovinId"/>
+								<Text text="{= ${RequestingDealerVisible} === false ?${VIN}:${/OffredVehicle/VIN}}" id="ovinId"/>
 								<Label text="{i18n>ModelYear}"/>
-								<Text text="{Model_Year}" id="oMdlyear"/>
+								<Text text="{= ${RequestingDealerVisible} === false ?${Model_Year}:${/OffredVehicle/Model_Year}}" id="oMdlyear"/>
 								<Label text="{i18n>Series}"/>
-								<Text text="{Series_Desc}" id="oSeries"/>
+								<Text text="{= ${RequestingDealerVisible} === false ?${Series_Desc}:${/OffredVehicle/Series_Desc}}" id="oSeries"/>
 								<Label text="{i18n>Model}"/>
-								<Text text="{Model}-{Model_Desc}" id="oModel"/>
+								<Text text="{= ${RequestingDealerVisible} === false ?${Model}:${OffredVehicle/Model}}-{=${RequestingDealerVisible} === false ?${Model_Desc}:${OffredVehicle/Model_Desc}}" id="oModel"/>
 								<Label text="{i18n>Suffix}"/>
-								<Text text="{Suffix}-{Suffix_Desc}/{Int_Colour_Desc}" id="intdesr"/>
+								<Text text="{= ${RequestingDealerVisible} === false ?${Suffix}:${OffredVehicle/Suffix}}-{=${RequestingDealerVisible} === false ?${Suffix_Desc}:${OffredVehicle/Suffix_Desc}}/{=${RequestingDealerVisible} === false ?${Int_Colour_Desc}:${OffredVehicle/Int_Colour_Desc}}" id="intdesr"/>
 								<Label text="{i18n>ExteriorColor}"/>
-								<Text text="{Ext_Colour}-{Ext_Colour_Desc}" id="extco"/>							
+								<Text text="{= ${RequestingDealerVisible} === false ?${Ext_Colour}:${OffredVehicle/Ext_Colour}}-{=${RequestingDealerVisible} === false ?${Ext_Colour_Desc}:${OffredVehicle/Ext_Colour_Desc}}" id="extco"/>							
 								<Label text="{i18n>APX}"/>
-								<Text text="{APX}" id="oapx"/>
+								<Text text="{= ${RequestingDealerVisible} === false ?${APX}:${/OffredVehicle/APX}}" id="oapx"/>
 								<Label text="{i18n>AccessoryInstall}" />
-								<Text text="{path:'AccessoryInstalled',formatter:'vehicleLocator.Formatter.Formatter.DNC'}" />
+								<Text text="{= ${RequestingDealerVisible} === false ?${path:'AccessoryInstalled',formatter:'vehicleLocator.Formatter.Formatter.DNC'}:${path:'/OffredVehicle/AccessoryInstalled',formatter:'vehicleLocator.Formatter.Formatter.DNC'}}" />
 								<Label text="{i18n>Status}"/>
-								<Text text="{path:'Status',formatter:'vehicleLocator.Formatter.Formatter.Status'}" id="ostatus"/>
+								<Text text="{= ${RequestingDealerVisible} === false ?${path:'Status',formatter:'vehicleLocator.Formatter.Formatter.Status'}:${path:'/OffredVehicle/Status',formatter:'vehicleLocator.Formatter.Formatter.Status'}}" id="ostatus"/>
 								<Label text="{i18n>OrderType}" visible="{detailView>/showOrderType}" />
-								<Text text="{path:'Order_Type',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" id="oOdrtype" visible="{detailView>/showOrderType}"/>
+								<Text text="{= ${RequestingDealerVisible} === false ?${path:'Order_Type',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}:${path:'/OffredVehicle/Order_Type',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}}" id="oOdrtype" visible="{detailView>/showOrderType}"/>
 								<Label text="{i18n>CurrentETA} - {i18n>From}" id="cetalabid"/>
 								<VBox>
 									<HBox>
-										<Text text="{path:'Req_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="ctetid"
+										<Text text="{= ${RequestingDealerVisible} === false ?${path:'Req_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'Off_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="ctetid"
 											class="sapUiSmallMarginEnd">
 			 
 										</Text>
 										<!--<Text text="{i18n>From}" id="frmid"/>-->
 									<!--</HBox>-->
 									<!--<HBox>-->
-										<Text text="{i18n>To} : {path:'Req_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="txtlab"
+										<Text text="{i18n>To} : {= ${RequestingDealerVisible} === false ?${path:'Req_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'Off_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="txtlab"
 											class="sapUiSmallMarginEnd"></Text>
 										<!--<Text text="{i18n>To}" id="tolbid"/>-->
 									 
@@ -101,13 +101,13 @@
 								<Label text="{i18n>PropsedETAtoNewDealer} - {i18n>From}" id="prlabid"  wrapping="true"/>
 								<VBox>
 									<HBox>
-										<Text text="{path:'Req_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="prpetid"
+										<Text text="{= ${RequestingDealerVisible} === false ?${path:'Req_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'Off_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="prpetid"
 											class="sapUiSmallMarginEnd"></Text>
 										<!--<Text text="{i18n>From}" id="fmlabid"/>-->
 									<!--</HBox>-->
 								 
 									<!--<HBox>-->
-										<Text text="{i18n>To} : {path:'Req_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="otxtlabel"
+										<Text text="{i18n>To} : {= ${RequestingDealerVisible} === false ?${path:'Req_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'Off_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="otxtlabel"
 											class="sapUiSmallMarginEnd"></Text>
 										<!--<Text text="{i18n>To}" id="idlbltxt"/>-->
 									</HBox>
@@ -145,48 +145,50 @@
 								<Label text="Dealer" id="offeredDealer"/>
 		
 								<Text
-									text="{path:'/OffredVehicle/Requesting_Dealer',formatter:'vehicleLocator.Formatter.Formatter.Dealer'}-{/OffredVehicle/Requesting_Dealer_Name}"
-									id="oRequesteddealer"/>
+									text="{= ${RequestingDealerVisible} === true ?${path:'Requested_Dealer',formatter:'vehicleLocator.Formatter.Formatter.Dealer'}:${path:'Requesting_Dealer',formatter:'vehicleLocator.Formatter.Formatter.Dealer'}}-{= ${RequestingDealerVisible} === true ?${Requested_Dealer_Name}:${Requesting_Dealer_Name}}"
+id="oRequesteddealer"/>
+									<!--text="{path:'/OffredVehicle/Requesting_Dealer',formatter:'vehicleLocator.Formatter.Formatter.Dealer'}-{/OffredVehicle/Requesting_Dealer_Name}"-->
+									
 									
 									
 									
 							   	<Label text="{i18n>VehicleTrackingNumber}" id="vtnlabeid" visible="{detailView>/showVinDiplayOff}"/>
-								<Text text="{Offered_Vtn}" id="vtnid" visible="{detailView>/showVinDiplayOff}"/>
+								<Text text="{= ${RequestingDealerVisible} === true ?${Requested_Vtn}:${Offered_Vtn}}" id="vtnid" visible="{detailView>/showVinDiplayOff}"/>
 								  	<Label text="{i18n>VIN}" id="vinlabeid" visible="{detailView>/showVinDiplayOff}"/>
-								<Text text="{/OffredVehicle/VIN}" id="vinid" visible="{detailView>/showVinDiplayOff}"/>
+								<Text text="{= ${RequestingDealerVisible} === true ?${VIN}:${/OffredVehicle/VIN}}" id="vinid" visible="{detailView>/showVinDiplayOff}"/>
 								<!--	"{path:'TradeModel>kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'}-{TradeModel>name1}"-->
 								<Label text="{i18n>ModelYear}" id="ofrModellabl"/>
-								<Text text="{/OffredVehicle/Model_Year}" id="ofrmodelyeartext"/>
+								<Text text="{= ${RequestingDealerVisible} === true ?${Model_Year}:${/OffredVehicle/Model_Year}}" id="ofrmodelyeartext"/>
 								<Label text="{i18n>Series}" id="ofrserieslabl"/>
-								<Text text="{/OffredVehicle/Series_Desc}" id="ofrseriestxt"/>
+								<Text text="{= ${RequestingDealerVisible} === true ?${Series_Desc}:${/OffredVehicle/Series_Desc}}" id="ofrseriestxt"/>
 								<Label text="{i18n>Model}" id="ofrmodllabl"/>
-								<Text text="{/OffredVehicle/Model}-{/OffredVehicle/Model_Desc}" id="ofrmodltxt"/>
+								<Text text="{= ${RequestingDealerVisible} === true ?${Model}:${OffredVehicle/Model}}-{=${RequestingDealerVisible} === true ?${Model_Desc}:${OffredVehicle/Model_Desc}}" id="ofrmodltxt"/>
 								<Label text="{i18n>Suffix}" id="ofrsuffixlabl"/>
-								<Text text="{/OffredVehicle/Suffix}-{/OffredVehicle/Suffix_Desc}/{/OffredVehicle/Int_Colour_Desc}" id="ofrsuffixstxt"/>
+								<Text text="{= ${RequestingDealerVisible} === true ?${Suffix}:${OffredVehicle/Suffix}}-{=${RequestingDealerVisible} === true ?${Suffix_Desc}:${OffredVehicle/Suffix_Desc}}/{=${RequestingDealerVisible} === true ?${Int_Colour_Desc}:${OffredVehicle/Int_Colour_Desc}}" id="ofrsuffixstxt"/>
 						
 							<Label text="{i18n>ExteriorColor}" id="ofrextcolorlabl"/>
-								<Text text="{/OffredVehicle/Ext_Colour}-{/OffredVehicle/Ext_Colour_Desc}" id="ofrexttxt"/>
+								<Text text="{= ${RequestingDealerVisible} === true ?${Ext_Colour}:${OffredVehicle/Ext_Colour}}-{=${RequestingDealerVisible} === true ?${Ext_Colour_Desc}:${OffredVehicle/Ext_Colour_Desc}}" id="ofrexttxt"/>
 							
 							
 								<Label text="{i18n>APX}" id="ofrapxlabl"/>
-								<Text text="{/OffredVehicle/APX}" id="ofrapxtxt"/>
+								<Text text="{= ${RequestingDealerVisible} === true ?${APX}:${/OffredVehicle/APX}}" id="ofrapxtxt"/>
 								<Label text="{i18n>AccessoryInstall}" id="accid"/>
-								<Text text="{path:'/OffredVehicle/AccessoryInstalled',formatter:'vehicleLocator.Formatter.Formatter.DNC'}" id="oAccesIn"/>
+								<Text text="{= ${RequestingDealerVisible} === true ?${path:'AccessoryInstalled',formatter:'vehicleLocator.Formatter.Formatter.DNC'}:${path:'/OffredVehicle/AccessoryInstalled',formatter:'vehicleLocator.Formatter.Formatter.DNC'}}" id="oAccesIn"/>
 						
 								<Label text="{i18n>Status}" id="ofrstatuslabl"/>
-								<Text text="{path:'/OffredVehicle/Status',formatter:'vehicleLocator.Formatter.Formatter.Status'}" id="ofrstatustxt"/>
+								<Text text="{= ${RequestingDealerVisible} === true ?${path:'Status',formatter:'vehicleLocator.Formatter.Formatter.Status'}:${path:'/OffredVehicle/Status',formatter:'vehicleLocator.Formatter.Formatter.Status'}}" id="ofrstatustxt"/>
 								<Label text="{i18n>OrderType}" id="ofrordrtypelabl"/>
-								<Text text="{path:'/OffredVehicle/Order_Type',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" id="ofrordtypetxt"/>
+								<Text text="{= ${RequestingDealerVisible} === true ?${path:'Order_Type',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}:${path:'/OffredVehicle/Order_Type',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}}" id="ofrordtypetxt"/>
 								<Label text="{i18n>CurrentETA} - {i18n>From}" id="cetalaid"></Label>
 								<VBox>
 									<HBox>
-										<Text text="{path:'Off_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="ctqtid"
+										<Text text="{= ${RequestingDealerVisible} === true ?${path:'Req_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'Off_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="ctqtid"
 											class="sapUiSmallMarginEnd"></Text>
 										<!--<Text text="{i18n>From}" id="fromqid"/>-->
 									<!--</HBox>-->
 									<!--<HBox>-->
 									 
-										<Text text="{i18n>To} : {path:'Off_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="txlab"
+										<Text text="{i18n>To} : {= ${RequestingDealerVisible} === true ?${path:'Req_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'Off_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="txlab"
 											class="sapUiSmallMarginEnd"></Text>
 										<!--<Text text="{i18n>To}" id="tobid"/>-->
 									</HBox>
@@ -195,13 +197,13 @@
 								<Label text="{i18n>PropsedETAtoNewDealer} - {i18n>From}" id="prolabid"  wrapping="true"/>
 								<VBox>
 									<HBox>
-										<Text text="{path:'Off_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="prptid"
+										<Text text="{= ${RequestingDealerVisible} === true ?${path:'Req_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'Off_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="prptid"
 											class="sapUiSmallMarginEnd"></Text>
 										<!--<Text text="{i18n>From}" id="fmlbid"/>-->
 									<!--</HBox>-->
 									<!--<HBox>-->
 									 
-										<Text text="{i18n>To} : {path:'Off_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" id="otxlabel"
+										<Text text="{i18n>To} : {= ${RequestingDealerVisible} === true ?${path:'Req_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'Off_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="otxlabel"
 											class="sapUiSmallMarginEnd"></Text>
 										<!--<Text text="{i18n>To}" id="idlto"/>-->
 									</HBox>
