@@ -123,8 +123,8 @@
 								</items>
 							</FlexBox>
 							
-							<CheckBox xmlns="sap.m" text="{i18n>ShowDoNotCall(DNC)Vehicles}" id="chknew" select="onStatusChange" class="sapUiLargeMarginEnd"/>
-							<CheckBox xmlns="sap.m" text="{i18n>ShowHoldVehicles}" id="chkexi" select="onStatusChange" class="sapUiLargeMarginBegin"/>
+							<CheckBox xmlns="sap.m" text="{i18n>ShowDoNotCall(DNC)Vehicles}" id="chknew" select="onStatusChange" class="sapUiTinyMarginBegin sapUiMediumMarginTop"/>
+							<CheckBox xmlns="sap.m" text="{i18n>ShowHoldVehicles}" id="chkexi" select="onStatusChange" class="sapUiTinyMarginBegin sapUiMediumMarginTop"/>
 							<CheckBox xmlns="sap.m" text="{i18n>IncludeSoldVehicles}" id="chkmov" select="onStatusChange" visible="false"/>
 							<CheckBox xmlns="sap.m" text="{i18n>IncludeFleetVehicles}" id="chkadd" select="onStatusChange" visible="false"/>
 						<!--<l:content>-->
