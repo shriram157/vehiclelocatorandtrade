@@ -3115,7 +3115,14 @@ local.getView().byId("ovinId").setVisible(false);
 						local.getView().byId("otxtlabel").setVisible(false);
 
 						local.getView().byId("accInst").setVisible(false);
+// if (this.getView().byId("VT_ARCTtrdinStatus").getText() == "Rejected") {
+						local.getView().byId("ovtnId").setVisible(false);
+						local.getView().byId("ovtnIdText").setVisible(false);
+						// this.getView().byId("vtnlabeid").setVisible(false);
+						// this.getView().byId("vtnid").setVisible(false);
 
+				
+					
 					
 
 			}
@@ -3179,7 +3186,19 @@ local.getView().byId("ovinId").setVisible(true);
 
 						local.getView().byId("accInst").setVisible(true);
 										// local.getView().byId("requForm").setVisible(true);
+if (local.getView().byId("VT_ARCTtrdinStatus").getText() == "Rejected") {
+						local.getView().byId("ovtnId").setVisible(false);
+						local.getView().byId("ovtnIdText").setVisible(false);
+						// this.getView().byId("vtnlabeid").setVisible(false);
+						// this.getView().byId("vtnid").setVisible(false);
 
+					} else {
+
+						local.getView().byId("ovtnId").setVisible(true);
+						local.getView().byId("ovtnIdText").setVisible(true);
+						// this.getView().byId("vtnlabeid").setVisible(true);
+						// this.getView().byId("vtnid").setVisible(true);
+					}
 			}
 				if(local.getView().byId("vtnid").getText()=="")
 				
@@ -3253,7 +3272,19 @@ local.getView().byId("ovinId").setVisible(true);
 
 						// local.getView().byId("idlto").setVisible(false);
 
-					
+					// if (this.getView().byId("VT_ARCTtrdinStatus").getText() == "Rejected") {
+						local.getView().byId("vtnId").setVisible(false);
+						local.getView().byId("vtnlabeid").setVisible(false);
+						// this.getView().byId("vtnlabeid").setVisible(false);
+						// this.getView().byId("vtnid").setVisible(false);
+
+					// } else {
+
+					// 	local.getView().byId("ovtnId").setVisible(true);
+					// 	local.getView().byId("ovtnIdText").setVisible(true);
+					// 	// this.getView().byId("vtnlabeid").setVisible(true);
+					// 	// this.getView().byId("vtnid").setVisible(true);
+					// }
 
 			}
 			else{
@@ -3326,7 +3357,19 @@ local.getView().byId("ovinId").setVisible(true);
 
 						// that.getView().byId("idlto").setVisible(true);
 
-					
+					if (local.getView().byId("VT_ARCTtrdinStatus").getText() == "Rejected") {
+						// local.getView().byId("ovtnId").setVisible(false);
+						// local.getView().byId("ovtnIdText").setVisible(false);
+						local.getView().byId("vtnlabeid").setVisible(false);
+						local.getView().byId("vtnid").setVisible(false);
+
+					} else {
+
+						// local.getView().byId("ovtnId").setVisible(true);
+						// local.getView().byId("ovtnIdText").setVisible(true);
+						local.getView().byId("vtnlabeid").setVisible(true);
+						local.getView().byId("vtnid").setVisible(true);
+					}
 
 			}
 					sap.ui.core.BusyIndicator.hide();
