@@ -3040,7 +3040,7 @@ this.getView().byId("ovinId").setVisible(true);
 										// local.getView().byId("requForm").setVisible(false);
 										
 
-						local._oViewModel.setProperty("/showVinDiplayOff", false);
+						// local._oViewModel.setProperty("/showVinDiplayOff", false);
 						// this.getView().byId("offervehidContent").setVisible(true);
 						// Offered = {};
 						// local.getView().byId("Offerevehid").setText("");
@@ -3127,7 +3127,7 @@ local.getView().byId("ovinId").setVisible(false);
 
 			}
 			else{
-					local._oViewModel.setProperty("/showVinDiplayOff", true);
+					// local._oViewModel.setProperty("/showVinDiplayOff", true);
 					local.getView().byId("oMdlyearLbl").setVisible(true);
 						// local.getView().byId("ofrmodelyeartext").setText("");
 						local.getView().byId("oMdlyear").setVisible(true);
@@ -3171,10 +3171,10 @@ local.getView().byId("ovinId").setVisible(false);
 						local.getView().byId("prpetid").setVisible(true);
 						local.getView().byId("VT_ARCTDnc").setVisible(true);
 local.getView().byId("VT_ARCTDncLbl").setVisible(true);
-local.getView().byId("ovtnIdText").setVisible(true);
-local.getView().byId("ovtnId").setVisible(true);
-local.getView().byId("ovinIdText").setVisible(true);
-local.getView().byId("ovinId").setVisible(true);
+// local.getView().byId("ovtnIdText").setVisible(true);
+// local.getView().byId("ovtnId").setVisible(true);
+// local.getView().byId("ovinIdText").setVisible(true);
+// local.getView().byId("ovinId").setVisible(true);
 						// // local.getView().byId("tobid").setVisible(false);
 						// local.getView().byId("prptid").setText("");
 						local.getView().byId("accInstLbl").setVisible(true);
@@ -3189,6 +3189,8 @@ local.getView().byId("ovinId").setVisible(true);
 if (local.getView().byId("VT_ARCTtrdinStatus").getText() == "Rejected") {
 						local.getView().byId("ovtnId").setVisible(false);
 						local.getView().byId("ovtnIdText").setVisible(false);
+						local.getView().byId("ovinIdText").setVisible(false);
+local.getView().byId("ovinId").setVisible(false);
 						// this.getView().byId("vtnlabeid").setVisible(false);
 						// this.getView().byId("vtnid").setVisible(false);
 
@@ -3196,6 +3198,8 @@ if (local.getView().byId("VT_ARCTtrdinStatus").getText() == "Rejected") {
 
 						local.getView().byId("ovtnId").setVisible(true);
 						local.getView().byId("ovtnIdText").setVisible(true);
+						local.getView().byId("ovinIdText").setVisible(true);
+local.getView().byId("ovinId").setVisible(true);
 						// this.getView().byId("vtnlabeid").setVisible(true);
 						// this.getView().byId("vtnid").setVisible(true);
 					}
@@ -3206,7 +3210,7 @@ if (local.getView().byId("VT_ARCTtrdinStatus").getText() == "Rejected") {
 										// local.getView().byId("offervehidContent").setVisible(false);
 										
 
-						local._oViewModel.setProperty("/showVinDiplayOff", false);
+						// local._oViewModel.setProperty("/showVinDiplayOff", false);
 						// this.getView().byId("offervehidContent").setVisible(true);
 						// Offered = {};
 						local.getView().byId("Offerevehid").setText("");
@@ -3275,6 +3279,7 @@ if (local.getView().byId("VT_ARCTtrdinStatus").getText() == "Rejected") {
 					// if (this.getView().byId("VT_ARCTtrdinStatus").getText() == "Rejected") {
 						local.getView().byId("vtnId").setVisible(false);
 						local.getView().byId("vtnlabeid").setVisible(false);
+						local._oViewModel.setProperty("/showVinDiplayOff", false);
 						// this.getView().byId("vtnlabeid").setVisible(false);
 						// this.getView().byId("vtnid").setVisible(false);
 
@@ -3362,6 +3367,7 @@ if (local.getView().byId("VT_ARCTtrdinStatus").getText() == "Rejected") {
 						// local.getView().byId("ovtnIdText").setVisible(false);
 						local.getView().byId("vtnlabeid").setVisible(false);
 						local.getView().byId("vtnid").setVisible(false);
+						local._oViewModel.setProperty("/showVinDiplayOff", false);
 
 					} else {
 
@@ -3369,6 +3375,7 @@ if (local.getView().byId("VT_ARCTtrdinStatus").getText() == "Rejected") {
 						// local.getView().byId("ovtnIdText").setVisible(true);
 						local.getView().byId("vtnlabeid").setVisible(true);
 						local.getView().byId("vtnid").setVisible(true);
+						local._oViewModel.setProperty("/showVinDiplayOff", true);
 					}
 
 			}
