@@ -7,6 +7,7 @@
  
         <sortItems  >
             <ViewSettingsItem selected="true" key="kunnr" text="{i18n>DealerNumber}" />
+            <ViewSettingsItem key="zzvtn" text="{i18n>VTN}" />
             <ViewSettingsItem key="matnr" text="{i18n>Model}" />
             <ViewSettingsItem key="zzsuffix" text="{i18n>Suffix}" />
             <ViewSettingsItem key="zzapx" text="{i18n>APX}" />
