@@ -151,7 +151,7 @@
 						<OverflowToolbar id="otbSubheader">
 							<Title id="tableHeader" text="{detailView>/tableCount}"/>
 							<ToolbarSpacer/>
-							<Button id="openMenu4" class="VLbtn2" text="{i18n>ExporttoVehicles}" press="handleExporttohecls" width="auto"/>
+							<Button id="openMenu4" class="VLbtn2" type="Accept" text="{i18n>ExporttoVehicles}" press="handleExporttohecls" width="auto"/>
 
 							<Button tooltip="{i18n>bToolTip}" icon="sap-icon://sort" press="handleViewSettingsDialogButtonPressed" text="{i18n>Sorting}"/>
 					

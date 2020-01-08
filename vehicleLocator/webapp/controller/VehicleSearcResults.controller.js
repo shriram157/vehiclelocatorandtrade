@@ -1378,6 +1378,7 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 			}
 
 			var i18n = sap.ui.getCore().getModel("i18n").getResourceBundle();
+			var VTN = i18n.getText("VTN");
 			var Dealer = i18n.getText("Dealer");
 			var Model = i18n.getText("Model");
 			var Suffix = i18n.getText("Suffix");
@@ -1390,11 +1391,13 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 			var City = i18n.getText("City");
 			var Province = i18n.getText("Province");
 
+			row += VTN + ",";
 			row += Dealer + ",";
 			row += Model + ",";
 			row += Suffix + ",";
-			row += APX + ",";
 			row += Color + ",";
+			row += APX + ",";
+			
 			row += OrderType + ",";
 			row += ETAFrom + ",";
 			row += ETATo + ",";
@@ -1407,7 +1410,7 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 			//loop is to extract each row
 			for (var i = 0; i < arrData.length; i++) {
 				var row = "";
-
+				var zzvtn = (arrData[i].zzvtn);
 				var kunnr = (arrData[i].kunnr).slice(-5) + "-" + arrData[i].name1;
 				// var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language; //2603
 				var SPRAS = this.sCurrentLocaleD;
@@ -1542,8 +1545,8 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 					var z_pd_flag = this.getView().getModel("i18n").getResourceBundle().getText("Yes");
 				}
 
-				row += '="' + kunnr + '","' + matnr + '","' + zzsuffix +
-					'",="' + arrData[i].zzapx + '",="' + zzextcol + '",="' + zzordertype + '","' + zzadddata4 +
+				row += '="' + zzvtn + '",="' + kunnr + '","' + matnr + '","' + zzsuffix +
+					'",="' + zzextcol + '",="' + arrData[i].zzapx + '",="' + zzordertype + '","' + zzadddata4 +
 					'","' + pstsp +
 					'","' + z_pd_flag + '","' + arrData[i].ort01 + '","' + arrData[i].bezei + '",';
 				//}

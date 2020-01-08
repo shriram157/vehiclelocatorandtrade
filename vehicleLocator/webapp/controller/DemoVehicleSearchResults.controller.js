@@ -1366,7 +1366,7 @@ else{
 			//loop is to extract each row
 			for (var i = 0; i < arrData.length; i++) {
 				var row = "";
-var vtndata = arrData[i].VTN;
+var vtndata = arrData[i].zzvtn;
 				var kunnr = (arrData[i].kunnr).slice(-5) + "-" + arrData[i].name1;
 				// var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language; //2603
 				var SPRAS = this.sCurrentLocaleD;
