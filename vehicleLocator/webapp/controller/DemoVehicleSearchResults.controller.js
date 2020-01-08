@@ -1501,7 +1501,7 @@ var vtndata = arrData[i].zzvtn;
 					var z_pd_flag = this.getView().getModel("i18n").getResourceBundle().getText("Yes");
 				}
 
-				row +='="'+vtndata+ ',="' + kunnr + '","' + matnr + '","' + zzsuffix +
+				row +='="'+vtndata+ '",="' + kunnr + '","' + matnr + '","' + zzsuffix +
 			'",="' + zzextcol + 	'",="' + arrData[i].zzapx + '",="' + zzordertype + '","' + zzadddata4 +
 					'","' + pstsp +
 					'","' + z_pd_flag + '","' + arrData[i].ort01 + '","' + arrData[i].bezei + '",';
@@ -2266,7 +2266,7 @@ var vtndata = arrData[i].zzvtn;
 		handleViewSettingsDialogButtonPressed: function (oEvt) {
 			// this._oResponsivePopover = sap.ui.xmlfragment("vehicleLocator.fragment.VehicleSearchResult", this);
 			if (!this._sortDialog) {
-				this._sortDialog = sap.ui.xmlfragment("vehicleSortDialog", "vehicleLocator.fragment.vehicleSortDialog", this);
+				this._sortDialog = sap.ui.xmlfragment("DemovehicleSortDialog", "vehicleLocator.fragment.DemovehicleSortDialog", this);
 			}
 			this.getView().addDependent(this._sortDialog);
 
