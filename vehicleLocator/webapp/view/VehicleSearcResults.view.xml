@@ -157,7 +157,7 @@
 					
 						<SearchField id="searchVehicleList" liveChange="onLiveChange" showSearchButton="true" placeholder="{i18n>placeHolderText}">
 								<layoutData>
-									<OverflowToolbarLayoutData shrinkable="true"/>
+									<OverflowToolbarLayoutData minWidth="200px" maxWidth="200px" shrinkable="true"/>
 								</layoutData>
 							</SearchField>
 						</OverflowToolbar>

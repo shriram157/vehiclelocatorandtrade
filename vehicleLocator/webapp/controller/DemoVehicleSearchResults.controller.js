@@ -1501,7 +1501,7 @@ var vtndata = arrData[i].zzvtn;
 					var z_pd_flag = this.getView().getModel("i18n").getResourceBundle().getText("Yes");
 				}
 
-				row +='="'+vtndata+ '="' + kunnr + '","' + matnr + '","' + zzsuffix +
+				row +='="'+vtndata+ ',="' + kunnr + '","' + matnr + '","' + zzsuffix +
 			'",="' + zzextcol + 	'",="' + arrData[i].zzapx + '",="' + zzordertype + '","' + zzadddata4 +
 					'","' + pstsp +
 					'","' + z_pd_flag + '","' + arrData[i].ort01 + '","' + arrData[i].bezei + '",';
