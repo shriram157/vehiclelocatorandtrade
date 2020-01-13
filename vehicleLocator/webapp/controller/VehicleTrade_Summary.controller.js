@@ -873,9 +873,10 @@ onLiveChange: function (oEvent) {
 			var sPath = mParams.sortItem
 				.getKey();
 			var bDescending = mParams.sortDescending;
-			aSorters.push(new Sorter(sPath,
+			aSorters.push(new sap.ui.model.Sorter(sPath,
 				bDescending));
 			oBinding.sort(aSorters);
+			oBinding.refresh();
 
 		},
 		handleCancel: function (oEvent) {
@@ -910,7 +911,7 @@ onLiveChange: function (oEvent) {
 			var sPath = mParams.sortItem
 				.getKey();
 			var bDescending = mParams.sortDescending;
-			aSorters.push(new Sorter(sPath,
+			aSorters.push(new sap.ui.model.Sorter(sPath,
 				bDescending));
 			oBinding.sort(aSorters);
 

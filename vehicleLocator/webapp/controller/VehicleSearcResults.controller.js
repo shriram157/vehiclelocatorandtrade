@@ -1547,7 +1547,7 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 
 				row += '="' + zzvtn + '",="' + kunnr + '","' + matnr + '","' + zzsuffix +
 					'",="' + zzextcol + '",="' + arrData[i].zzapx + '",="' + zzordertype + '","' + zzadddata4 +
-					'","' + pstsp +
+					'",="' + pstsp +
 					'","' + z_pd_flag + '","' + arrData[i].ort01 + '","' + arrData[i].bezei + '",';
 				//}
 				row.slice(1, row.length);
