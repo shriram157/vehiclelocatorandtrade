@@ -1585,13 +1585,15 @@ sap.ui.define([
 
 					// }
 
-
+var FilterZonestock = FilterDeleade_OrderTypefiltered_zone.filter(function (x) {
+							return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "SO");
+						});
 					// var tempTabData = FilterZonestock.filter(function (array_el) {
 					// 	return oZoneIncludeData.filter(function (anotherOne_el) {
 					// 		return (anotherOne_el == array_el.kunnr && array_el.zzordertype == "DM");
 					// 	}).length == 0;
 					// });
-					var  tempTabData = FilterDeleade_OrderTypefiltered_zone.filter(function(x){
+					var  tempTabData =FilterZonestock .filter(function(x){
 						return x.vhusg=="1B" || x.vhusg == "2C";
 					}
 					

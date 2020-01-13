@@ -27,7 +27,6 @@ xmlns:uxap="sap.uxap" xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form" xmln
 					<Label id="oDealersearchresults" width="auto"/>
 					<ToolbarSpacer/>
 					<Button id="openMenu3" class="VLbtn1" text="{i18n>PullVehicles}" type="Transparent" press="handlePressPullvehcls" width="auto" visible="{detailView>/visiblePull}"/>
-					<Button id="openMenu4" class="VLbtn2" text="{i18n>ExporttoVehicles}" type="Transparent" press="handleExporttohecls" width="auto"/>
 					<Button id="openMenu5" class="VLbtn3" text="{i18n>BacktoSerach}" type="Transparent" press="handlebacksearch" width="auto"/>
 					
 									<!--<Button class="VLbtn2" text="{i18n>Back}" type="Transparent" press="onNavBack" width="auto"/>-->
@@ -130,10 +129,11 @@ xmlns:uxap="sap.uxap" xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form" xmln
 						<OverflowToolbar id="otbSubheader">
 							<Title id="tableHeader" text="{detailView>/tableCount}"/>
 							<ToolbarSpacer/>
+							<Button id="openMenu4" class="VLbtn2" text="{i18n>ExporttoVehicles}" type="Transparent" press="handleExporttohecls" width="auto"/>
 							<Button tooltip="Sort table by selected fields" icon="sap-icon://sort" press="handleViewSettingsDialogButtonPressed" text="{i18n>Sorting}"/>
 						</OverflowToolbar>
 					</headerToolbar>
-					<columns width="99%">
+					<columns>
 						<!--<Column id="tradeText1" demandPopin="true" minScreenWidth="Tablet" width="6rem" hAlign="Left">-->
 						<!--	<Text text="{i18n>Trade}" id="nameColumnTitle2"/>-->
 						<!--</Column>-->
