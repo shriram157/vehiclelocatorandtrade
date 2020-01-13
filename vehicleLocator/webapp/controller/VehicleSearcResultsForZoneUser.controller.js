@@ -405,6 +405,31 @@ sap.ui.define([
 			}
 
 		},
+		PreregisteredVehiclepress:function(oEvent){
+				var Obj = {};
+				
+					// var RoutedData = JSON.parse(oEvent.getParameter("arguments").LoginUser);
+					var LoginUser = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].UserType[0];
+			DefaultSuffix = (this.RoutedData.selectedSuffix).replace(/\//g, "%2F");
+					Obj.selectedSuffix = DefaultSuffix;
+					Obj.LoginUser = LoginUser;
+					Obj.userTypeReceived = this.userTypeReceived;
+						Obj.type = "1B";
+					sap.ui.core.BusyIndicator.hide();
+
+					// if (that.userTypeReceived == "Zone_User" || that.userTypeReceived == "National") {
+
+					// 	that.getRouter().navTo("VehicleSearcResultsForZoneUser", {
+					// 		LoginUser: JSON.stringify(Obj)
+					// 	});
+
+					// } else {
+
+						this.getRouter().navTo("DemoVehicleSearchResults", {
+							LoginUser: JSON.stringify(Obj)
+						});
+					// }
+		},
 		onStatusChange: function () {
 
 			var filterArray = [];
@@ -1310,7 +1335,7 @@ sap.ui.define([
 
 				row += '="' + kunnr + '","' + matnr + '","' + zzsuffix +
 					'",="' + arrData[i].zzapx + '",="' + zzextcol + '",="' + zzordertype + '","' + zzadddata4 +
-					'","' + pstsp +
+					'",="' + pstsp +
 					'","' + z_pd_flag + '","' + arrData[i].ort01 + '","' + arrData[i].bezei + '",';
 				//}
 				row.slice(1, row.length);

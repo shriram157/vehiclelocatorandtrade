@@ -95,7 +95,7 @@
 												<l:GridData span="L2 M2 S8"/>
 											</layoutData>
 										</Label>
-										<ComboBox id="VLRColor" selectionChange="onColourChange" class="sapUiTinyMarginBegin" items="{/}" width="300px">
+										<ComboBox id="VLRColor" selectionChange="onColourChange" class="sapUiTinyMarginBegin" items="{path: '/', sorter: {path: 'zzextcol',  ascending: true } }" width="300px">
 											<core:ListItem text="{zzextcol} - {=${languageModel>/SPRAS}==='English' ? ${mktg_desc_en}:${mktg_desc_fr} }" key="{zzextcol}"/>
 											<layoutData>
 												<l:GridData span="L2 M2 S8"/>
@@ -145,8 +145,8 @@
 						</l:Grid>
 					</f:content>
 				</f:SimpleForm>
-					<ScrollContainer vertical="true" focusable="true" height="70%" width="99%">
-				<Table showNoData="false" class="sapUiResponsiveMargin" alternateRowColors="true">
+					<!--<ScrollContainer vertical="true" focusable="true" height="70%" width="99%">-->
+				<Table showNoData="false" class="sapUiResponsiveMargin" alternateRowColors="true" width="99%">
 					<headerToolbar>
 						<OverflowToolbar id="otbSubheader">
 							<Title id="tableHeader" text="{detailView>/tableCount}"/>
@@ -205,7 +205,7 @@
 					</columns>
 				</Table>
 				<!--Table with data without header row inside scroll container -->
-				<!--<ScrollContainer vertical="true" focusable="true" height="70%" width="99%" >-->
+				<ScrollContainer vertical="true" focusable="true" height="70%" width="99%" >
 					<Table id="table1VSR" class="sapUiResponsiveMargin" alternateRowColors="true" items="{ path: 'vehicleSearchTableModel>/', sorter: { path: 'pstsp', ascending: true } }" noDataText="{i18n>NoData}" updateFinished="onUpdateFinished" mode="{detailView>/zoneUserDelete}" modeAnimationOn="true" growing="true" growingThreshold="200">
 						<columns>
 							<Column hAlign="Left" width="5rem"/>
