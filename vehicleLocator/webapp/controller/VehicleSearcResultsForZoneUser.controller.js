@@ -410,7 +410,7 @@ sap.ui.define([
 				
 					// var RoutedData = JSON.parse(oEvent.getParameter("arguments").LoginUser);
 					var LoginUser = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].UserType[0];
-			DefaultSuffix = (this.RoutedData.selectedSuffix).replace(/\//g, "%2F");
+			DefaultSuffix = this.getView().byId("VLRSuffix").getSelectedKey();
 					Obj.selectedSuffix = DefaultSuffix;
 					Obj.LoginUser = LoginUser;
 					Obj.userTypeReceived = this.userTypeReceived;
@@ -1334,7 +1334,7 @@ sap.ui.define([
 				}
 
 				row += '="' + kunnr + '","' + matnr + '","' + zzsuffix +
-					'",="' + arrData[i].zzapx + '",="' + zzextcol + '",="' + zzordertype + '","' + zzadddata4 +
+					'",="' + arrData[i].zzapx + '",="' + zzextcol + '",="' + zzordertype + '",="' + zzadddata4 +
 					'",="' + pstsp +
 					'","' + z_pd_flag + '","' + arrData[i].ort01 + '","' + arrData[i].bezei + '",';
 				//}
