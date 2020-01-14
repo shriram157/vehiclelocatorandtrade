@@ -72,7 +72,7 @@ sap.ui.define([
 						var sLocation_conf = sLocation.search("webide");
 						if (sLocation_conf == 0) {
 					   //var userType = "Zone_User"; // TODO: Remove before deployment locatyest only - GSR
-					 var userType = "Dealer_User"; // TODO: Remove before deployment locatyest only - GSR
+					 var userType = "Zone_User"; // TODO: Remove before deployment locatyest only - GSR
 					// var userType = "TCI_User";		
 
 						}
@@ -1481,7 +1481,7 @@ sap.ui.define([
 				var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=matnr eq '" + McCmbo +
 					"' and endswith (zzintcol,'" + this.intercolor + "') and zzseries eq '" + SeriesCmbo + "' and zzmoyr eq '" +
 					MoyearCombo + "'&$format=json";
-				var DemoSeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate_V2(Req_dealer='" + oDealer + "')/Set?$filter=matnr eq '" + McCmbo +
+				var DemoSeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_VHUSG(Req_dealer='" + oDealer + "')/Set?$filter=matnr eq '" + McCmbo +
 					"' and endswith (zzintcol,'" + this.intercolor + "') and zzseries eq '" + SeriesCmbo + "'  and zzmoyr eq '" +
 					MoyearCombo + "'&$format=json";
 			}
