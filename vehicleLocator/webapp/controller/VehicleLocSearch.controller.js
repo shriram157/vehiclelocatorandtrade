@@ -72,7 +72,7 @@ sap.ui.define([
 						var sLocation_conf = sLocation.search("webide");
 						if (sLocation_conf == 0) {
 					   //var userType = "Zone_User"; // TODO: Remove before deployment locatyest only - GSR
-					 var userType = "Zone_User"; // TODO: Remove before deployment locatyest only - GSR
+					 var userType = "Dealer_User"; // TODO: Remove before deployment locatyest only - GSR
 					// var userType = "TCI_User";		
 
 						}
@@ -1586,7 +1586,7 @@ sap.ui.define([
 					// }
 
 var FilterZonestock = FilterDeleade_OrderTypefiltered_zone.filter(function (x) {
-							return x.kunnr.slice(-5) != Dealer && (x.zzordertype == "SO");
+							return x.kunnr.slice(-5) != Dealer && (x.zzordertype != "SR");
 						});
 					// var tempTabData = FilterZonestock.filter(function (array_el) {
 					// 	return oZoneIncludeData.filter(function (anotherOne_el) {
