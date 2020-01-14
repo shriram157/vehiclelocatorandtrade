@@ -1334,7 +1334,7 @@ sap.ui.define([
 				}
 
 				row += '="' + kunnr + '","' + matnr + '","' + zzsuffix +
-					'",="' + arrData[i].zzapx + '",="' + zzextcol + '",="' + zzordertype + '","' + zzadddata4 +
+					'",="' + arrData[i].zzapx + '",="' + zzextcol + '",="' + zzordertype + '",="' + zzadddata4 +
 					'",="' + pstsp +
 					'","' + z_pd_flag + '","' + arrData[i].ort01 + '","' + arrData[i].bezei + '",';
 				//}
