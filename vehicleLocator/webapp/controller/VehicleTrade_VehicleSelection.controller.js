@@ -44,6 +44,161 @@ sap.ui.define([
 
 		onRouteMatched: function (oEvent) {
 			//debugger;
+			var oDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerKey;
+
+			// var Series = this.getOwnerComponent().SelectedMSMData[0].SeriesCmbo;
+
+			var sLocation = window.location.host;
+			var sLocation_conf = sLocation.search("webide");
+
+			if (sLocation_conf == 0) {
+				this.sPrefix = "/vehicleLocatorNode";
+			} else {
+				this.sPrefix = "";
+
+			}
+
+			this.nodeJsUrl = this.sPrefix + "/node";
+			this.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_MASTER_SRV";
+
+			// that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
+
+			// var userAttributesModellen =  sap.ui.getCore().getModel("LoginuserAttributesModel").getData();
+			// var oDealer1 = userAttributesModellen[0].DealerCode;
+			// if (oDealer1 == undefined){
+			// 	oDealer1 = "";
+			// }
+			var oReceivedData = sap.ui.getCore().SelectedTrade;
+			// this.RequestingDealerToSendToSAP= oReceivedData.kunnr;
+				if (oReceivedData !== undefined) {
+				var requestDealerToSAP = oReceivedData.kunnr;
+				var oDealer1 = requestDealerToSAP;
+
+			} else {
+				// may be from block summary. 
+				// var oDropDownSelectedDealer = sap.ui.getCore().dropDownSelectionData;
+				var oDropDownSelectedDealer = sap.ui.getCore().getModel("dropDownSelectionData").getData();
+				if (oDropDownSelectedDealer !== undefined) {
+					var requestDealerToSAP = oDropDownSelectedDealer.dropDownSelectedBP;
+					var oDealer1 = requestDealerToSAP;
+				}
+			}
+            // var oDealer1 = this.RequestingDealerToSendToSAP;
+                       // var oDealer1 = this.requestedDealerToSAP;
+        		 	if(oDealer1.length == 10){
+		 	oDealer1=oDealer1.slice(-5);
+					 }	
+			var SeriesUrl = this.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer1 + "')/Set?$filter=kunnr eq '" + oDealer +
+				"'&$format=json";
+var that = this;
+			$.ajax({
+				url: SeriesUrl,
+				type: "GET",
+				dataType: 'json',
+				xhrFields: //
+				{
+					withCredentials: true
+				},
+
+				success: function (odata, oresponse) {
+
+					var a = odata.d.results;
+
+					/*var filtered_ODealer = a.filter(function (x) {
+							return (x.kunnr==oDealer);
+						});*/
+					//	var Dealer = sap.ui.getCore().LoginDetails.DealerCode;
+					var userAttributesModellen = sap.ui.getCore().getModel("LoginuserAttributesModel").getData();
+					/*var Dealer=userAttributesModellen[0].DealerCode[0];*/
+					var Dealer = userAttributesModellen[0].DealerCode;
+					var FilterDelearNotnull = a.filter(function (x) {
+						return x.kunnr != null;
+					});
+					/*	var FilterDeleade_OrderTypefiltered_zone=FilterDeleade_OrderTypefilteNotnull.filter(function(x){return x.kunnr.slice(-5)==Dealer &&(x.zzordertype=="DM" ||x.zzordertype=="SO")});*/
+
+					//	var FilterDeleade_OrderTypefiltered_zone
+					var filtered_ODealer = FilterDelearNotnull.filter(function (x) {
+						return x.kunnr.slice(-5) == Dealer;
+					});
+					var ExcludeOrdType = [
+						"RS",
+						"F1",
+						"F2",
+						"F3",
+						"F4",
+						"F5",
+						"DM"
+					];
+					/*	var oExcludeOrdrtype = filtered_ODealer.filter(function (objFromA) {
+							return !ExcludeOrdType.find(function (objFromB) {
+								return objFromA.zzordertype === objFromB;
+							});
+						});*/
+
+					var oExcludeOrdrtype = [];
+					for (var i = filtered_ODealer.length - 1; i >= 0; --i) {
+						if (ExcludeOrdType.indexOf((filtered_ODealer[i].zzordertype)) == -1) {
+							oExcludeOrdrtype.push(filtered_ODealer[i]);
+						}
+					}
+
+					//        var oJsonModel = new sap.ui.model.json.JSONModel(oExcludeOrdrtype);
+					var IncludeOrdertype = oExcludeOrdrtype.filter(function (x) {
+						return (x.zzordertype == "SO" );
+					});
+					var oJsonModel = new sap.ui.model.json.JSONModel(IncludeOrdertype);
+					// need to change language - 2603				 
+					//for (var i =0; i< oJsonModel.oData.length; i++) {
+					//	oJsonModel.oData[i].mktg_desc_en = oJsonModel.oData[i].mktg_desc_fr;  //
+					//	oJsonModel.oData[i].model_desc_en = oJsonModel.oData[i].model_desc_fr;  //
+					//	oJsonModel.oData[i].mrktg_int_desc_en = oJsonModel.oData[i].mrktg_int_desc_fr; 
+					//	oJsonModel.oData[i].suffix_desc_en = oJsonModel.oData[i].suffix_desc_fr; 
+					//	oJsonModel.oData[i].zzseries_desc_en = oJsonModel.oData[i].zzseries_desc_fr; 
+					//}
+
+					//	var oJsonModel = new sap.ui.model.json.JSONModel(IncludeOrdertype);
+					/*var includeDnc = oExcludeOrdrtype.filter(function (x) {
+										return x.dnc_ind == "Y";
+									});
+									var includeHoldStatus = includeDnc.filter(function (x) {
+										return x.Hold_stat == "Y";
+									});
+									var oJsonModel = new sap.ui.model.json.JSONModel(includeHoldStatus);*/
+					//comment this line
+
+					///////
+					
+				// for dnc ind lets put that as DNC
+				
+								//  put the DNC indicator to the screen. 
+				// var oModelVehicleSelectTable = this.getView().getModel("vehicleSelectTableModel");
+				// var oModelVehicleSelectTableData = this.getView().getModel("vehicleSelectTableModel").getData();
+
+				// for (var i = 0; i < oJsonModel.length; i++) {
+				// 	if (oJsonModel[i].dnc_ind == "Y") {
+				// 		oJsonModel[i].zzordertype = "DNC";
+				// 	}
+				// }
+				for (var i = 0; i < oJsonModel.oData.length; i++) {
+					if (oJsonModel.oData[i].dnc_ind == "Y") {
+						oJsonModel.oData[i].zzordertype = "DNC";
+					}
+				}
+	
+					
+					oJsonModel.setSizeLimit(15000);
+					sap.ui.getCore().setModel(oJsonModel, "oVehicleSelectionResults");
+								var oModeltemp = that.getView().setModel(oJsonModel, "vehicleSelectTableModel");
+				oModeltemp.updateBindings(true);
+
+					/*  sap.ui.core.BusyIndicator.hide();*/
+
+				},
+				error: function () {
+				
+					/*	 sap.ui.core.BusyIndicator.hide();*/
+				}
+			});
 				if (sap.ui.getCore().getModel("oVehicleSelectionResults") != undefined) {
 				var oVehicleModel = sap.ui.getCore().getModel("oVehicleSelectionResults");
 
