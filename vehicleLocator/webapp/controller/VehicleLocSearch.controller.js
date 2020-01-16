@@ -1469,19 +1469,19 @@ sap.ui.define([
 				// var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '" + McCmbo + "' and endswith (zzintcol,'" + '' +
 				// 	"') and zzmoyr eq '" + MoyearCombo + "'&$format=json";
 
-				var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=matnr eq '" + McCmbo +
+				var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate('" + oDealer + "')/Set?$filter=matnr eq '" + McCmbo +
 					"' and endswith (zzintcol,'" + "" + "') and zzseries eq '" + SeriesCmbo + "' and zzmoyr eq '" + MoyearCombo + "'&$format=json";
-				var DemoSeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_VHUSG(Req_dealer='" + oDealer + "')/Set?$filter=matnr eq '" + McCmbo +
+				var DemoSeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_VHUSG('" + oDealer + "')/Set?$filter=matnr eq '" + McCmbo +
 					"' and endswith (zzintcol,'" + "" + "') and zzseries eq '" + SeriesCmbo + "' and  zzmoyr eq '" + MoyearCombo + "' and  vhusg eq '1B' &$format=json";
 
 			} else {
 				// var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '" + McCmbo + "' and endswith (zzintcol,'" + this.intercolor +
 				// 	"') and zzsuffix eq '" + SuffCmbo + "' and zzmoyr eq '" + MoyearCombo + "'&$format=json";
 
-				var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer + "')/Set?$filter=matnr eq '" + McCmbo +
+				var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate('" + oDealer + "')/Set?$filter=matnr eq '" + McCmbo +
 					"' and endswith (zzintcol,'" + this.intercolor + "') and zzseries eq '" + SeriesCmbo + "' and zzmoyr eq '" +
 					MoyearCombo + "'&$format=json";
-				var DemoSeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_VHUSG(Req_dealer='" + oDealer + "')/Set?$filter=matnr eq '" + McCmbo +
+				var DemoSeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_VHUSG('" + oDealer + "')/Set?$filter=matnr eq '" + McCmbo +
 					"' and endswith (zzintcol,'" + this.intercolor + "') and zzseries eq '" + SeriesCmbo + "'  and zzmoyr eq '" +
 					MoyearCombo + "'&$format=json";
 			}
