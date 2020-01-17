@@ -491,7 +491,7 @@ sap.ui.define([
 				row += '="' + arrData[i].Trade_Id + '",="' + RequestingDealerVisible + '",="' + VTNData + '",="' + VINData + '",="' + DelearData + '",="' + ModelData + '","' + SuffixData +
 				
 					'","' + Ext_Colour_Data + 
-					'","' + APXData +
+					'",="' + APXData +
 					'",="' + dateformated + '",';
 				//}
 				row.slice(1, row.length);
@@ -577,7 +577,7 @@ var ModelData = arrData[i].OffredVehicle.Model + "-" + arrData[i].OffredVehicle.
 					row += '="' + arrData[i].Trade_Id + '",="' + RequestingDealerVisible + '",="' + VTNData + '",="' + VINData + '",="' + DelearData + '",="' + ModelData + '","' + SuffixData +
 				
 					'","' + Ext_Colour_Data + 
-					'","' + APXData +
+					'",="' + APXData +
 					'",="' + dateformated + '",';
 				//}
 				row.slice(1, row.length);
