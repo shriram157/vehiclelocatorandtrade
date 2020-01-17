@@ -88,7 +88,7 @@ sap.ui.define([
         		 	if(oDealer1.length == 10){
 		 	oDealer1=oDealer1.slice(-5);
 					 }	
-			var SeriesUrl = this.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer1 + "')/Set?$filter=kunnr eq '" + oDealer +
+			var SeriesUrl = this.oDataUrl + "/ZVMS_CDS_ETA_consolidate('" + oDealer1 + "')/Set?$filter=kunnr eq '" + oDealer +
 				"'&$format=json";
 var that = this;
 			$.ajax({
@@ -1076,7 +1076,7 @@ var status = this.getView().byId("VLRStatus1").getSelectedKey();
 				oDealer1 = "";
 			}
 
-			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate(Req_dealer='" + oDealer1 + "')/Set?$filter=zzseries eq'" + Series +
+			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate('" + oDealer1 + "')/Set?$filter=zzseries eq'" + Series +
 				"'and kunnr eq '" + oDealer +
 				"'and zzmoyr eq '" + that.oSelectedYear +
 				"'&$format=json";
