@@ -1502,8 +1502,8 @@ var vtndata = arrData[i].zzvtn;
 				}
 
 				row +='="'+vtndata+ '",="' + kunnr + '","' + matnr + '","' + zzsuffix +
-			'",="' + zzextcol + 	'",="' + arrData[i].zzapx + '",="' + zzordertype + '","' + zzadddata4 +
-					'","' + pstsp +
+			'",="' + zzextcol + 	'",="' + arrData[i].zzapx + '",="' + zzordertype + '",="' + zzadddata4 +
+					'",="' + pstsp +
 					'","' + z_pd_flag + '","' + arrData[i].ort01 + '","' + arrData[i].bezei + '",';
 				//}
 				row.slice(1, row.length);
