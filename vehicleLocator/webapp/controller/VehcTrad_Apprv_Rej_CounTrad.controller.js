@@ -3277,7 +3277,7 @@ local.getView().byId("ovinId").setVisible(true);
 						// local.getView().byId("idlto").setVisible(false);
 
 					// if (this.getView().byId("VT_ARCTtrdinStatus").getText() == "Rejected") {
-						local.getView().byId("vtnId").setVisible(false);
+						local.getView().byId("vtnid").setVisible(false);
 						local.getView().byId("vtnlabeid").setVisible(false);
 						local._oViewModel.setProperty("/showVinDiplayOff", false);
 						// this.getView().byId("vtnlabeid").setVisible(false);
