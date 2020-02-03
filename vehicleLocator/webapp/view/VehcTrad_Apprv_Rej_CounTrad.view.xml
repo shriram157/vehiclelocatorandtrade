@@ -59,7 +59,7 @@
 						<form:SimpleForm id="SimpleFormAproveTrReq" editable="true" layout="ResponsiveGridLayout" labelSpanM="12" adjustLabelSpan="false"
 							emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2">
 							<form:content id = "requForm">
-								<core:Title text="{i18n>RequestedVehicleInformation}"/>
+								<core:Title text="{i18n>InboundVehicleInformation}"/>
 								<Label text="{i18n>VehicleTrackingNumber}" id="ovtnIdText"/>
 								<Text text="{= ${RequestingDealerVisible} === true ?${Requested_Vtn}:${Offered_Vtn}}" id="ovtnId"/>
 								<Label text="{i18n>VIN}" id="ovinIdText"/>
@@ -141,7 +141,7 @@
 							</form:content>		
 
 								<form:content id="offervehidContent">	
-								<core:Title text="{i18n>OfferVehicleInformation}" id="Offerevehid"/>
+								<core:Title text="{i18n>OutboundVehicleInformation}" id="Offerevehid"/>
 								<Label text="Dealer" id="offeredDealer"/>
 		
 								<Text
