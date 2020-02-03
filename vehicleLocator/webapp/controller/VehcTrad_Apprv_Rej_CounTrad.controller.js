@@ -2917,7 +2917,7 @@ this.getView().byId("ovinId").setVisible(true);
 					if (Offered.length != 0 && Offered[0].Trade_Return != "N") {
 						Offered = Offered[0];
 						var i18n = sap.ui.getCore().getModel("i18n").getResourceBundle();
-						var OtherVehicleInformation_text = i18n.getText("OutboundVehicleInformation ");
+						var OtherVehicleInformation_text = i18n.getText("OutboundVehicleInformation");
 						local.getView().byId("Offerevehid").setText(OtherVehicleInformation_text);
 
 						// local.getView().byId("oRequesteddealer").setVisible(true);
