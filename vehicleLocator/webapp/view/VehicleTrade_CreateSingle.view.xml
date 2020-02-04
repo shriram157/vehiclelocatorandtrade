@@ -37,7 +37,7 @@
 						<form:SimpleForm id="SimpleFormDispla20" editable="true" layout="ResponsiveGridLayout" labelSpanM="12" adjustLabelSpan="false"
 							emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2">
 							<form:content>
-								<core:Title text="{i18n>RequestedVehicleInformation}"/>
+								<core:Title text="{i18n>InboundVehicleInformation}"/>
 								<Label text="{i18n>Dealer}"/>
 								<Text text="{path:'TradeModel>kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'}-{TradeModel>name1}" id="dealrid"/>
 							
@@ -111,7 +111,7 @@
 									<!--	<Text text="{i18n>To}" id="idlabltxt" wrapping='true'/>-->
 									<!--</HBox>-->
 								</VBox>
-								<core:Title text="{i18n>OfferVehicleInformation}" id="oOtherVehInfoid"/>
+								<core:Title text="{i18n>OutboundVehicleInformation}" id="oOtherVehInfoid"/>
 								<!--	<VBox id="oVboxOtherVehicleInformation" visible="false">-->
 								<Text text="{TradeModel>/VehicleTradeVehicle/FromFourth}" id="FromFourth" visible="false"/>
 								<Label text="{i18n>VehicleTrackingNumber}" id="vtnlabeid" visible="true"/>
