@@ -214,7 +214,7 @@ sap.ui.define([
 
 					var oModeli18n = this.getView().getModel("i18n");
 					// this._oResourceBundle = oModeli18n.getResourceBundle();			
-					var OtherVehicleInformation_text = oModeli18n.getResourceBundle().getText("OfferVehicleInformation");
+					var OtherVehicleInformation_text = oModeli18n.getResourceBundle().getText("OutboundVehicleInformation");
 
 					this.getView().byId("oOtherVehInfoid").setText(OtherVehicleInformation_text);
 					this.getView().setModel(sap.ui.getCore().getModel("TradeModel"), "TradeModel");
