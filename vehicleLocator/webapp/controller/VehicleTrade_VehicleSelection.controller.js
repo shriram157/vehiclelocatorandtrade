@@ -1069,6 +1069,7 @@ var status = this.getView().byId("VLRStatus1").getSelectedKey();
 				if (oDealer1.length == 10) {
 
 					oDealer1 = oDealer1.slice(-5);
+					
 				} else {
 					oDealer1 = "";
 				}
