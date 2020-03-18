@@ -1,6 +1,6 @@
 {
 	"dependencies": {
-		"@sap/xsenv": "1.2.9",
+		"@sap/xsenv": "^2.2.0",
 		"@sap/xsjs": "3.3.7"
 	},
 	"description": "Vehicle Locator XSJS Application for XSoDATA Services",
@@ -15,7 +15,7 @@
 		"test": "node testrun.js"
 	},
 	"engines": {
-		"node": "8.x"
+		"node": "10.x"
 	},
 	"version": "3.0.0"
 }
