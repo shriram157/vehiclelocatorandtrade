@@ -1,4 +1,4 @@
-var filterArray ;
+ 
 sap.ui.define([
 	/*"sap/ui/core/mvc/Controller"*/
 	"vehicleLocator/controller/BaseController",
@@ -702,7 +702,7 @@ that.onStatusChange();
 			//  when the control is reached here, we need to clear the filterbox
 			this.getView().byId("searchMyVehicleList").setValue("");
 
-			 filterArray = [];
+			 var filterArray = [];
 			/*	this.getView().byId("table1VSR").getBinding("items").filter([]);*/
 			// this.getView().byId("table1VSR").getBinding("rows").filter([]); guna
 
@@ -2563,14 +2563,30 @@ var modelDataNoDuplicates = that.removeDuplicates(oCombine, "zzsuffix");
 
 				], false);
 				// this.sSearchQuery);
-				filterArray .push(oFilter);
+				// filterArray.push(oFilter);
 			}
+						var Status = this.getView().byId("VLRStatus1").getSelectedKey();
+						var oFilter1;
+				if (Status == "1") {
+
+					oFilter1 = new Filter([
+						new Filter("zz_trading_ind", sap.ui.model.FilterOperator.Contains, Status)
+					]);
+
+				} else {
+
+					oFilter1 = new Filter([
+						new Filter("zz_trading_ind", sap.ui.model.FilterOperator.NE, "1")
+					]);
+
+				}
+				var aFilters = new sap.ui.model.Filter([oFilter1, oFilter], true);
 
 			this.byId("vehicleSelectTable")
 				.getBinding("items")
-				.filter(filterArray)
+				.filter(aFilters)
 				.sort(aSorters);
-
+			// filterArray=[];
 		},
 
 		handleViewSettingsDialogButtonPressed: function (oEvt) {
