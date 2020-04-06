@@ -37,8 +37,8 @@
 						<form:SimpleForm id="SimpleFormDispla20" editable="true" layout="ResponsiveGridLayout" labelSpanM="12" adjustLabelSpan="false"
 							emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2">
 							<form:content>
-								<core:Title text="{i18n>InboundVehicleInformation}"/>
-								<Label text="{i18n>Dealer}"/>
+								<core:Title text="{i18n>InboundVehicleInformation}" id = "OtherVehInfoid"/>
+								<Label text="{i18n>Dealer}" id = "dealridreq"/>
 								<Text text="{path:'TradeModel>kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'}-{TradeModel>name1}" id="dealrid"/>
 							
 								<Label text="{i18n>VehicleTrackingNumber}" id="vtnlabeidReq" visible="true"/>
@@ -47,31 +47,31 @@
 	                            	<Label text="{i18n>VIN}" id="vinLabelId" visible="{detailView>/showVinDiplayReq}"/>
 								<Text text="{TradeModel>vhvin}" id="VINReq" visible="{detailView>/showVinDiplayReq}"/>              
 							
-								<Label text="{i18n>ModelYear}"/>
+								<Label text="{i18n>ModelYear}" id = "moyrLabelReq"/>
 								<Text text="{TradeModel>zzmoyr}" id="zzMoyr"/>
-								<Label text="{i18n>Series}"/>
+								<Label text="{i18n>Series}" id = "seriesLabelReq"/>
 								<!--<Text text="{TradeModel>zzseries_desc_en}" id="oSeries"/>-->
 								<Text text="{=${languageModel>/SPRAS}==='English' ? ${TradeModel>zzseries_desc_en}:${TradeModel>zzseries_desc_fr} }" id="oSeries"/>
-								<Label text="{i18n>Model}"/>
+								<Label text="{i18n>Model}" id="modLabelReq"/>
 								<!--<Text text="{TradeModel>matnr}-{TradeModel>model_desc_en}" id="oZmodel"/>-->
 								<Text text="{TradeModel>matnr} - {=${languageModel>/SPRAS}==='English' ? ${TradeModel>model_desc_en}:${TradeModel>model_desc_fr} }"
 									id="oZmodel"/>
-								<Label text="{i18n>Suffix}"/>
+								<Label text="{i18n>Suffix}" id="sufLabelReq"/>
 								<!--<Text text="{TradeModel>zzsuffix}-{TradeModel>suffix_desc_en}/{TradeModel>mrktg_int_desc_en}" id="oZsuffix"/>-->
 								<Text
 									text="{TradeModel>zzsuffix} - {=${languageModel>/SPRAS}==='English' ? ${TradeModel>suffix_desc_en}:${TradeModel>suffix_desc_fr} }/{=${languageModel>/SPRAS}==='English' ? ${TradeModel>mrktg_int_desc_en}:${TradeModel>mrktg_int_desc_fr} }"
 									id="oZsuffix"/>
-								<Label text="{i18n>ExteriorColor}"/>
+								<Label text="{i18n>ExteriorColor}" id="extLabelReq"/>
 								<Text text="{TradeModel>zzextcol} - {=${languageModel>/SPRAS}==='English' ? ${TradeModel>mktg_desc_en}:${TradeModel>mktg_desc_fr} }"
 									id="Zextcolo"/>
-								<Label text="{i18n>APX}"/>
+								<Label text="{i18n>APX}" id="apxLabelReq"/>
 								<Text text="{TradeModel>zzapx}" id="oApx"/>
-								<Label text="{i18n>AccessoryInstall}"/>
+								<Label text="{i18n>AccessoryInstall}" id="accLabelReq"/>
 								<Text text="{parts: [{path: 'TradeModel>non_D_flag'},{path: 'TradeModel&gt;pd_flag'}], formatter : 'vehicleLocator.Formatter.Formatter.AccessoryInstall'}" id="oAccesIn"/>
 						
-								<Label text="{i18n>Status}"/>
+								<Label text="{i18n>Status}" id="statusLabelReq"/>
 								<Text text="{path:'TradeModel>zz_trading_ind',formatter:'vehicleLocator.Formatter.Formatter.Status'}" id="oStatus"/>
-								<Label text="{i18n>OrderType}"/>
+								<Label text="{i18n>OrderType}" id="ordLabelReq"/>
 								<Text text="{path:'TradeModel>zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" id="oOrdertype"/>
 								<!--<Label text="{i18n>ExteriorColor}"/>-->
 								<!--	<Text text="{TradeModel>zzextcol} - {=${languageModel>/SPRAS}==='English' ? ${TradeModel>mktg_desc_en}:${TradeModel>mktg_desc_fr} }" id="Zextcolo" />-->
@@ -114,6 +114,9 @@
 								<core:Title text="{i18n>OutboundVehicleInformation}" id="oOtherVehInfoid"/>
 								<!--	<VBox id="oVboxOtherVehicleInformation" visible="false">-->
 								<Text text="{TradeModel>/VehicleTradeVehicle/FromFourth}" id="FromFourth" visible="false"/>
+								<Label text="{i18n>Dealer}"/>
+								<Text text="{path:'TradeModel>/VehicleTradeVehicle/kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'}-{TradeModel>/VehicleTradeVehicle/name1}" id="outdealrid"/>
+						
 								<Label text="{i18n>VehicleTrackingNumber}" id="vtnlabeid" visible="true"/>
 								<Text text="{TradeModel>/VehicleTradeVehicle/zzvtn}" id="vtnid" visible="true"/>
 								

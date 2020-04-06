@@ -780,7 +780,7 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 						sap.ui.getCore().SelectedTradeStatus = "";
 						if (that.oTableSelectPath != undefined) {
 							that.getRouter().navTo("VehicleTrade_CreateSingle", {
-								SelectedTrade: that.oTableSelectPath
+								SelectedTrade: "VehicleSearchResults"
 							});
 							that.oTableSelect = undefined;
 						} else {
@@ -795,7 +795,7 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 						sap.ui.getCore().SelectedTradeStatus = "";
 						if (that.oTableSelectPath != undefined) {
 							that.getRouter().navTo("VehicleTrade_CreateSingle", {
-								SelectedTrade: that.oTableSelectPath
+								SelectedTrade: "VehicleSearchResults"
 							});
 							that.oTableSelect = undefined;
 						} else {
@@ -812,7 +812,7 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 					var plsSelectTrade = that._oResourceBundle.getText("plsSelectTrade");
 					if (that.oTableSelectPath != undefined) {
 						that.getRouter().navTo("VehicleTrade_CreateSingle", {
-							SelectedTrade: that.oTableSelectPath
+							SelectedTrade: "VehicleSearchResults"
 						});
 						that.oTableSelect = undefined;
 					} else {

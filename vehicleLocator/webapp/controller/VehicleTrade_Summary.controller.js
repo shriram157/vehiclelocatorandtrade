@@ -403,7 +403,7 @@ onLiveChange: function (oEvent) {
 				var TradeVehicles = TradeRequest[i].TradeVehicles.results;
 				var oTradeVehicleDesc = TradeRequest[i].TradeVehicleDesc.results;
 				for (var j = 0; j < TradeVehicles.length; j++) {
-					if (TradeRequest[i].Requested_Vtn == TradeVehicles[j].VTN) {
+					if ((TradeRequest[i].Requested_Vtn == TradeVehicles[j].VTN)||(TradeRequest[i].Offered_Vtn == TradeVehicles[j].VTN)) {
 
 						TradeRequest[i].APX = TradeVehicles[j].APX;
 						TradeRequest[i].DNC = TradeVehicles[j].DNC;

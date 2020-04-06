@@ -52,7 +52,7 @@
 										   
 				
 						<ToolbarSpacer></ToolbarSpacer>
-						
+						<Button text="{i18n>PushTrade}" type="Transparent" press="PushTradeLinkPress" id = "pushTradeId"/>
 						<Button text="{i18n>TradeSummary}" type="Transparent" press="TradeSummaryLinkPress"/>
 						<Button text="{i18n>TradeHistory}" type="Transparent" press="TradeHistoryLinkPress"/>
 						<Button text="{i18n>ModelBlock}" type="Transparent" press="BlockSummarypress"/>
