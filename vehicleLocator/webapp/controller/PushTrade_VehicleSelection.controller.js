@@ -889,7 +889,7 @@ that.onStatusChange();
 
 				// var Dealer=this.getView().byId("table1VSR").getModel().getData().filter(function(x){return x.zz_trading_ind=="1"}) guna
 				var Dealer = this.getView().getModel("vehicleSelectTableModel").getData().filter(function (x) {
-					return x.zz_trading_ind == "1"
+					return x.zz_trading_ind == "1";
 				});
 
 			} else {
