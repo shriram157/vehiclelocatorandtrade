@@ -1,3 +1,4 @@
+ 
 sap.ui.define([
 	/*"sap/ui/core/mvc/Controller"*/
 	"vehicleLocator/controller/BaseController",
@@ -701,7 +702,7 @@ that.onStatusChange();
 			//  when the control is reached here, we need to clear the filterbox
 			this.getView().byId("searchMyVehicleList").setValue("");
 
-			var filterArray = [];
+			 var filterArray = [];
 			/*	this.getView().byId("table1VSR").getBinding("items").filter([]);*/
 			// this.getView().byId("table1VSR").getBinding("rows").filter([]); guna
 
@@ -820,6 +821,7 @@ that.onStatusChange();
 
 				/*	filterArray.push(new sap.ui.model.Filter("dnc_ind", sap.ui.model.FilterOperator.EQ, "Y"));*/
 				filterArray.push(new sap.ui.model.Filter("dnc_ind", sap.ui.model.FilterOperator.EQ, "N"));
+				filterArray.push(new sap.ui.model.Filter("dnc_ind", sap.ui.model.FilterOperator.EQ, ""));
 			}
 		var ShowHoldVehicles = this.getView().byId("chkexi").getSelected();
 			if (ShowHoldVehicles == true) {
@@ -830,6 +832,7 @@ that.onStatusChange();
 
 				/*	filterArray.push(new sap.ui.model.Filter("dnc_ind", sap.ui.model.FilterOperator.EQ, "Y"));*/
 				filterArray.push(new sap.ui.model.Filter("Hold_stat", sap.ui.model.FilterOperator.EQ, "N"));
+				filterArray.push(new sap.ui.model.Filter("Hold_stat", sap.ui.model.FilterOperator.EQ, ""));
 			}
 			var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo1").getSelectedKey();
 			if (selectedAccessInstalled == "Yes") {
@@ -1077,10 +1080,10 @@ var status = this.getView().byId("VLRStatus1").getSelectedKey();
 				oDealer1 = "";
 			}
 
-			var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate('" + oDealer1 + "')/Set?$filter=zzseries eq'" + Series +
-				"'and kunnr eq '" + oDealer +
-				"'and zzmoyr eq '" + that.oSelectedYear +
-				"'&$format=json";
+			// var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate('" + oDealer1 + "')/Set?$filter=zzseries eq'" + Series +
+			// 	"'and kunnr eq '" + oDealer +
+			// 	"'and zzmoyr eq '" + that.oSelectedYear +
+			// 	"'&$format=json";
 // "'and zz_trading_ind eq '"+status+"'and dnc_ind eq 'N"+
 // 			$.ajax({
 // 				url: SeriesUrl,
@@ -2560,14 +2563,30 @@ var modelDataNoDuplicates = that.removeDuplicates(oCombine, "zzsuffix");
 
 				], false);
 				// this.sSearchQuery);
-				aFilters.push(oFilter);
+				// filterArray.push(oFilter);
 			}
+						var Status = this.getView().byId("VLRStatus1").getSelectedKey();
+						var oFilter1;
+				if (Status == "1") {
+
+					oFilter1 = new Filter([
+						new Filter("zz_trading_ind", sap.ui.model.FilterOperator.Contains, Status)
+					]);
+
+				} else {
+
+					oFilter1 = new Filter([
+						new Filter("zz_trading_ind", sap.ui.model.FilterOperator.NE, "1")
+					]);
+
+				}
+				var aFilters = new sap.ui.model.Filter([oFilter1, oFilter], true);
 
 			this.byId("vehicleSelectTable")
 				.getBinding("items")
 				.filter(aFilters)
 				.sort(aSorters);
-
+			// filterArray=[];
 		},
 
 		handleViewSettingsDialogButtonPressed: function (oEvt) {
