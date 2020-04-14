@@ -488,7 +488,7 @@ attributes.push(bpAttributes);
 						// LoggedInDealerCode1 = data.Dealer;
 						var LoggedInDealerCode1 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
 			var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
-			this.getView().byId("oDealerCode4").setText(LoggedInDealerCode2);
+			this.getView().byId("oDealerCode4").setText(LoggedInDealerCode1);
 			this.getView().byId("oDealerOwnVehiSele").setText(LoggedInDealer);
 						// var LoggedInDealerCode1 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
 						// var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
