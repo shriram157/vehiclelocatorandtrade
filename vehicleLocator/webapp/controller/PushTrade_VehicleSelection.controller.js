@@ -16,6 +16,7 @@ sap.ui.define([
 			var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
 			this.getView().byId("oDealerCode4").setText(LoggedInDealerCode2);
 			this.getView().byId("oDealerOwnVehiSele").setText(LoggedInDealer);
+
 			// var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
 			// var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
 			// this.getView().byId("oDealerCode4").setText(LoggedInDealerCode2);
@@ -48,7 +49,10 @@ sap.ui.define([
 
 		onRouteMatched: function (oEvent) {
 			//debugger;
-		
+					this.SelectedDealer = this.getView().byId("VLRDealer").setSelectedKey(null);
+					var jsm = new sap.ui.model.json.JSONModel(null);
+
+	this.getView().setModel(jsmodel, "vehicleSelectTableModel");
 			// var oDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerKey;
 			var d = new Date();
 	var yeararray = [];

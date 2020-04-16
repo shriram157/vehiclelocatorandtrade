@@ -430,10 +430,17 @@ sap.ui.define([
 							this.getView().byId("oUpdatebtn").setVisible(AcceptVisible);*/
 						this.getView().byId("oacceptbtn").setVisible(!AcceptVisible);
 						this.getView().byId("oRejectbtn").setVisible(!AcceptVisible);
-						this.getView().byId("oCounterofrbtn").setVisible(!AcceptVisible);
+						// this.getView().byId("oCounterofrbtn").setVisible(!AcceptVisible);
 						this.getView().byId("oCancelbtn").setVisible(!AcceptVisible);
 						this.getView().byId("oUpdatebtn").setVisible(!AcceptVisible);
+	if(this.getView().byId("ovtnId").getText()!=""){
+						this.getView().byId("oCounterofrbtn").setVisible(!AcceptVisible);
+						}
+						else
+						{
+							this.getView().byId("oCounterofrbtn").setVisible(AcceptVisible);
 
+						}
 					}
 
 					var Status = [];
@@ -1379,15 +1386,15 @@ this.getView().byId("ovinId").setVisible(true);
 				var oAccInstall = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.AccessoryInstalled;
 				var oWnoIntcolorcode = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.Int_Colour;
 			} else {
-				var RequestingDealer = "";
-				var oWningVTN = "";
-				var oWnModelyear = "";
-				var oWnSuffixcode = "";
-				var oWnModelcode = "";
-				var oWnoExtcolorcode = "";
-				var oWnoApx = "";
-				var oAccInstall = "";
-				var oWnoIntcolorcode = "";
+			var RequestingDealer = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requesting_Dealer;
+				var oWningVTN = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Offered_Vtn;
+				var oWnModelyear = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Model_Year;
+				var oWnSuffixcode = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Suffix;
+				var oWnModelcode = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Model;
+				var oWnoExtcolorcode = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Ext_Colour;
+				var oWnoApx = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.APX;
+				var oAccInstall = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.AccessoryInstalled;
+				var oWnoIntcolorcode = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Int_Colour;
 
 			}
 
@@ -3421,9 +3428,9 @@ local.getView().byId("ovinId").setVisible(true);
 						// this.getView().byId("offervehidContent").setVisible(true);
 						// Offered = {};
 						local.getView().byId("Offerevehid").setText("");
-						local.getView().byId("offeredDealer").setVisible(false);
-						local.getView().byId("oRequesteddealer").setText("");
-						local.getView().byId("oRequesteddealer").setVisible(false);
+						local.getView().byId("offeredDealer").setVisible(true);
+						// local.getView().byId("oRequesteddealer").setText("");
+						// local.getView().byId("oRequesteddealer").setVisible(false);
 						local.getView().byId("oAccesIn").setText("");
 						local.getView().byId("oAccesIn").setVisible(false);
 						local.getView().byId("accid").setVisible(false);
