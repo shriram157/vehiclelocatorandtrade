@@ -893,7 +893,9 @@ if(that.getView().byId("FromFourth").getText() == "FromPush")
 			{
 				var Requested_Dealer = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.kunnr;
 						var Requested_Dealer_Name = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.name1;
-}
+
+				Created_By= truncateString(Requested_Dealer_Name, 12);
+			}
 
 				// this.getView().byId("FromFourth").setText("");
 				that.getView().byId("oSeleBtn").setVisible(false);

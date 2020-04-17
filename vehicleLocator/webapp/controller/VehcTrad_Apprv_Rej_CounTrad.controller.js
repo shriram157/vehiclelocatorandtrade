@@ -1385,16 +1385,34 @@ this.getView().byId("ovinId").setVisible(true);
 				var oWnoApx = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.APX;
 				var oAccInstall = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.AccessoryInstalled;
 				var oWnoIntcolorcode = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.Int_Colour;
-			} else {
-			var RequestingDealer = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requesting_Dealer;
-				var oWningVTN = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Offered_Vtn;
-				var oWnModelyear = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Model_Year;
-				var oWnSuffixcode = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Suffix;
-				var oWnModelcode = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Model;
-				var oWnoExtcolorcode = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Ext_Colour;
-				var oWnoApx = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.APX;
-				var oAccInstall = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.AccessoryInstalled;
-				var oWnoIntcolorcode = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Int_Colour;
+		RequstingDealer_Actual=this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.Requested_Dealer;
+			RequstedDealer="";
+				var oVehTrano = "";
+
+			/*var oModelyear = this.getView().byId("oMdlyear").getText();*/
+			var oModelyear = "";
+
+			var oSuffixcode = "";
+
+			var oModelcode = "";
+
+			/*	var oIntcolorcode = this.getView().byId("intdesr").gettext();*/
+			var oExtcolorcode = "";
+
+			/*	var oApx = this.getView().byId("oapx").getText();*/
+			var oApx = "";
+			var oInstall = "";
+			var oIntcolorcode = "";
+					} else {
+			var RequestingDealer = "";
+				var oWningVTN = "";
+				var oWnModelyear = "";
+				var oWnSuffixcode = "";
+				var oWnModelcode = "";
+				var oWnoExtcolorcode = "";
+				var oWnoApx = "";
+				var oAccInstall = "";
+				var oWnoIntcolorcode ="";
 
 			}
 
@@ -2028,7 +2046,7 @@ this.getView().byId("ovinId").setVisible(true);
 						var Requesting_Dealer = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requesting_Dealer;
 						var Requesting_Dealer_Name = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requesting_Dealer_Name;
 						var Requested_Vtn = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Vtn;
-						if(this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Vtn==undefined)
+						if(that.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Vtn==undefined)
 			{
 						var Offered_Vtn = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.Offered_Vtn;
 						var Trade_Return = that.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.Trade_Return;
