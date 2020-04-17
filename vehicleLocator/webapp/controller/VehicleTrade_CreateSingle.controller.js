@@ -888,7 +888,7 @@ var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getDat
 			 
 						var Requested_Dealer = that.getView().getModel("TradeModel").oData.kunnr;
 						var Requested_Dealer_Name = that.getView().byId("dealrid").getText().substr(that.getView().byId("dealrid").getText().indexOf(
-							"-") + 1);
+							"-") + 1).trim();
 if(that.getView().byId("FromFourth").getText() == "FromPush")
 			{
 				var Requested_Dealer = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.kunnr;
