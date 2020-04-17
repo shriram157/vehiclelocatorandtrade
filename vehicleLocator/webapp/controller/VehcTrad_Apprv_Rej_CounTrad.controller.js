@@ -121,7 +121,7 @@ sap.ui.define([
 						// this.getView().byId("oCounterofrbtn").setVisible(!AcceptVisible);
 						this.getView().byId("oCancelbtn").setVisible(AcceptVisible);
 						this.getView().byId("oUpdatebtn").setVisible(AcceptVisible);
-							if(this.getView().byId("ovtnId").getText()!=""){
+							if(StatusData.Requested_Vtn==null){
 						this.getView().byId("oCounterofrbtn").setVisible(AcceptVisible);
 						}
 						else
@@ -421,7 +421,7 @@ sap.ui.define([
 						this.getView().byId("oRejectbtn").setVisible(!AcceptVisible);
 						this.getView().byId("oCounterofrbtn").setVisible(!AcceptVisible);
 						this.getView().byId("oCancelbtn").setVisible(AcceptVisible);
-						if(this.getView().byId("ovtnId").getText()!=""){
+						if(StatusData.Requested_Vtn==null){
 						this.getView().byId("oUpdatebtn").setVisible(AcceptVisible);
 						}
 						else
