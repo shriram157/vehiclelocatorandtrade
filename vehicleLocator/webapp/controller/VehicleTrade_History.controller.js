@@ -172,9 +172,14 @@ sap.ui.define([
 
 
 			for (var i = 0; i < TableData.length; i++) {
+				if(TableData[i].Requesting_Dealer!=null){
 				TableData[i].Requesting_Dealer = TableData[i].Requesting_Dealer.slice(-5);
+				}
+				if(TableData[i].Requested_Dealer!=null){
+				
 				TableData[i].Requested_Dealer = TableData[i].Requested_Dealer.slice(-5);
-				if (TableData[i].Requesting_Dealer == Dealer_No) {
+				}
+				if ((TableData[i].Requesting_Dealer == Dealer_No)||(TableData[i].Requested_Vtn == null)) {
 					TableData[i].RequestingDealerVisible = true;
 				} else {
 					TableData[i].RequestingDealerVisible = false;
