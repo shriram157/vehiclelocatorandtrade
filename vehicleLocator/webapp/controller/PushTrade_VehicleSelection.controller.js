@@ -50,7 +50,7 @@ sap.ui.define([
 		onRouteMatched: function (oEvent) {
 			//debugger;
 					this.SelectedDealer = this.getView().byId("VLRDealer").setSelectedKey(null);
-					var jsm = new sap.ui.model.json.JSONModel(null);
+					var jsmodel = new sap.ui.model.json.JSONModel(null);
 
 	this.getView().setModel(jsmodel, "vehicleSelectTableModel");
 			// var oDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerKey;
