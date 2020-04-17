@@ -118,9 +118,17 @@ sap.ui.define([
 					if (AcceptVisible == false && (Status == "S")) {
 						this.getView().byId("oacceptbtn").setVisible(!AcceptVisible);
 						this.getView().byId("oRejectbtn").setVisible(!AcceptVisible);
-						this.getView().byId("oCounterofrbtn").setVisible(!AcceptVisible);
+						// this.getView().byId("oCounterofrbtn").setVisible(!AcceptVisible);
 						this.getView().byId("oCancelbtn").setVisible(AcceptVisible);
 						this.getView().byId("oUpdatebtn").setVisible(AcceptVisible);
+							if(this.getView().byId("ovtnId").getText()!=""){
+						this.getView().byId("oCounterofrbtn").setVisible(AcceptVisible);
+						}
+						else
+						{
+							this.getView().byId("oCounterofrbtn").setVisible(!AcceptVisible);
+
+						}
 						/*	this.getView().byId("oacceptbtn").setVisible(!AcceptVisible);
 							this.getView().byId("oRejectbtn").setVisible(!AcceptVisible);
 							this.getView().byId("oCounterofrbtn").setVisible(!AcceptVisible);
@@ -430,17 +438,10 @@ sap.ui.define([
 							this.getView().byId("oUpdatebtn").setVisible(AcceptVisible);*/
 						this.getView().byId("oacceptbtn").setVisible(!AcceptVisible);
 						this.getView().byId("oRejectbtn").setVisible(!AcceptVisible);
-						// this.getView().byId("oCounterofrbtn").setVisible(!AcceptVisible);
+						this.getView().byId("oCounterofrbtn").setVisible(!AcceptVisible);
 						this.getView().byId("oCancelbtn").setVisible(!AcceptVisible);
 						this.getView().byId("oUpdatebtn").setVisible(!AcceptVisible);
-	if(this.getView().byId("ovtnId").getText()!=""){
-						this.getView().byId("oCounterofrbtn").setVisible(AcceptVisible);
-						}
-						else
-						{
-							this.getView().byId("oCounterofrbtn").setVisible(!AcceptVisible);
 
-						}
 					}
 
 					var Status = [];
@@ -1676,7 +1677,10 @@ this.getView().byId("ovinId").setVisible(true);
 		
 			if(this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Vtn==undefined)
 			{
-				
+				var Requesting_Dealer = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requesting_Dealer;
+			var Requesting_Dealer_Name = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requesting_Dealer_Name;
+		
+			var Requested_Vtn = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Vtn;	
 			var Requested_Vtn = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.Requested_Vtn;
 			var Offered_Vtn = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.Offered_Vtn;
 			var Trade_Return = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.Trade_Return;
