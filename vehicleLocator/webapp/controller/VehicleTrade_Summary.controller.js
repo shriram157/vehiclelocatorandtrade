@@ -322,7 +322,7 @@ onLiveChange: function (oEvent) {
 				
 				
 				var dateMinusThirty = new Date();
-				dateMinusThirty.setDate(dateMinusThirty.getDate() - 30);
+				dateMinusThirty.setDate(dateMinusThirty.getDate() - 60);
 
 				var loggedDealerCode = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()["0"].DealerCode;
 
@@ -331,7 +331,7 @@ onLiveChange: function (oEvent) {
 				var Filter2 = new sap.ui.model.Filter('Trade_Status', 'NE', "A");
 				var Filter3 = new sap.ui.model.Filter('Changed_on', "GE", dateMinusThirty);
 				var Filter4 = new sap.ui.model.Filter([Filter0, Filter1], false);
-				var Filter = new sap.ui.model.Filter([Filter4, Filter2], true);
+				var Filter = new sap.ui.model.Filter([Filter4, Filter2, Filter3], true);
 				// var Filterall1 = new sap.ui.model.Filter([Filter, Filter2], true);
 				var Filterall = new sap.ui.model.Filter([Filter, Filter4], true);		
 				
@@ -351,7 +351,7 @@ onLiveChange: function (oEvent) {
 				///  performance improvement changes
 
 				var dateMinusThirty = new Date();
-				dateMinusThirty.setDate(dateMinusThirty.getDate() - 30);
+				dateMinusThirty.setDate(dateMinusThirty.getDate() - 60);
 
 				var loggedDealerCode = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()["0"].DealerCode;
 
@@ -360,7 +360,7 @@ onLiveChange: function (oEvent) {
 				var Filter2 = new sap.ui.model.Filter('Trade_Status', 'NE', "A");
 				var Filter3 = new sap.ui.model.Filter('Changed_on', "GE", dateMinusThirty);
 				var Filter4 = new sap.ui.model.Filter([Filter0, Filter1], false);
-				var Filter = new sap.ui.model.Filter([Filter4, Filter2], true);
+				var Filter = new sap.ui.model.Filter([Filter4, Filter2,Filter3], true);
 				// var Filterall1 = new sap.ui.model.Filter([Filter, Filter2], true);
 				var Filterall = new sap.ui.model.Filter([Filter, Filter4], true);
 
@@ -382,8 +382,8 @@ onLiveChange: function (oEvent) {
 			oModel.read("/TradeRequest", {
 				filters: [Filterall],
 				urlParameters: {
-
-					"$expand": "TradeVehicles,TradeVehicleDesc"
+					"$expand": "TradeVehicles,TradeVehicleDesc",
+					"$top":1000
 				},
 				async: false,
 				success: function (oData, oResponse) {
