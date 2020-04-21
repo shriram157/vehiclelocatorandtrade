@@ -3520,7 +3520,7 @@ local.getView().byId("ovinId").setVisible(true);
 						local.getView().byId("Offerevehid").setText("");
 						local.getView().byId("offeredDealer").setVisible(true);
 						// local.getView().byId("oRequesteddealer").setText("");
-						// local.getView().byId("oRequesteddealer").setVisible(false);
+						local.getView().byId("oRequesteddealer").setVisible(false);
 						local.getView().byId("oAccesIn").setText("");
 						local.getView().byId("oAccesIn").setVisible(false);
 						local.getView().byId("accid").setVisible(false);
