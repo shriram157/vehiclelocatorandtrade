@@ -422,11 +422,11 @@ sap.ui.define([
 						this.getView().byId("oCounterofrbtn").setVisible(!AcceptVisible);
 						this.getView().byId("oCancelbtn").setVisible(AcceptVisible);
 						if(StatusData.Requested_Vtn==null){
-						this.getView().byId("oUpdatebtn").setVisible(AcceptVisible);
+						this.getView().byId("oUpdatebtn").setVisible(!AcceptVisible);
 						}
 						else
 						{
-							this.getView().byId("oUpdatebtn").setVisible(!AcceptVisible);
+							this.getView().byId("oUpdatebtn").setVisible(AcceptVisible);
 
 						}
 					} else {
@@ -2279,12 +2279,14 @@ if(Created_By==undefined)
 				}),
 				endButton: new Button({
 					text: nomsg,
-
+	
 					type: 'Reject',
 					id: 'oNo',
 					press: function () {
 						/*	sap.m.MessageBox.warning('No');*/
 						dialog.close();
+							this.getView().byId("oacceptbtn").setVisible(true);
+			this.getView().byId("oRejectbtn").setVisible(true);
 					}
 				}),
 				afterClose: function () {
