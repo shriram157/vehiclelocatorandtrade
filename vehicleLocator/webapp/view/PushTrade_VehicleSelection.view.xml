@@ -61,7 +61,7 @@
 												<l:GridData span="L2 M2 S6"/>
 											</layoutData>
 										</Label>
-										<ComboBox id="VLRDealer" selectionChange="onDealerChange" items="{BpDealerModelZone>/}" class="sapUiTinyMarginBegin" width="140%">
+										<ComboBox id="VLRDealer" change="onDealerChange" items="{BpDealerModelZone>/}" class="sapUiTinyMarginBegin" width="140%">
 											<core:ListItem text="{BpDealerModelZone>BusinessPartner} - {BpDealerModelZone>BusinessPartnerName}" key="{BpDealerModelZone>BusinessPartnerKey}"/>
 											<layoutData>
 												<l:GridData span="L2 M2 S6"/>
