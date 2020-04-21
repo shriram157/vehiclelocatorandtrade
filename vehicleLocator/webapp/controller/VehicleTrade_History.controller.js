@@ -184,7 +184,6 @@ sap.ui.define([
 				}
 				else if ((TableData[i].Requesting_Dealer != Dealer_No)&&(TableData[i].Requested_Vtn == null)){
 										TableData[i].RequestingDealerVisible = true;
-
 					}
 					else {
 					TableData[i].RequestingDealerVisible = false;
