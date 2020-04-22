@@ -2285,8 +2285,8 @@ if(Created_By==undefined)
 					press: function () {
 						/*	sap.m.MessageBox.warning('No');*/
 						dialog.close();
-							this.getView().byId("oacceptbtn").setVisible(true);
-			this.getView().byId("oRejectbtn").setVisible(true);
+							that.getView().byId("oacceptbtn").setVisible(true);
+			that.getView().byId("oRejectbtn").setVisible(true);
 					}
 				}),
 				afterClose: function () {

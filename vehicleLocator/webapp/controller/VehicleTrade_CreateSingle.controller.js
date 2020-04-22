@@ -227,6 +227,7 @@ var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getDat
 				else
 				{
 										var Data ;
+										oReceivedDataString=oReceivedDataString.replace("%2F", "/")
 										Data= JSON.parse(oReceivedDataString);
 
 
@@ -1037,7 +1038,7 @@ if(that.getView().byId("FromFourth").getText() == "FromPush")
 		 
 			// https://uat-vehiclelocatorandtrade.scp.toyota.ca/xsodata/vehicleTrade_SRV.xsodata/TradeComment(Trade_Id='TR000086',Comment_Id='01')
 			
-				that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment(Trade_Id='"+ that.Trade_Id + "',Comment_Id='01')";
+				that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id eq '" + that.Trade_Id + "'";
 			
 			$.ajax({
 				url: that.oDataUrl,
