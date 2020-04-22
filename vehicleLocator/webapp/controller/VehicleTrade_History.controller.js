@@ -194,11 +194,11 @@ sap.ui.define([
 					else {
 					TableData[i].RequestingDealerVisible = false;
 							if(TableData[i].Requested_Vtn == null){
-					TableData[i].Requested_Dealer = TableData[i].Requesting_Dealer;
-										TableData[i].Requesting_Dealer= Dealer_No;
-										var dealerName = TableData[i].Requested_Dealer_Name;
-										TableData[i].Requested_Dealer_Name = TableData[i].Requesting_Dealer_Name;
-										TableData[i].Requesting_Dealer_Name= dealerName;
+					TableData[i].Requesting_Dealer = TableData[i].Requested_Dealer;
+										TableData[i].Requested_Dealer= Dealer_No;
+										var dealerName = TableData[i].Requesting_Dealer_Name;
+										TableData[i].Requesting_Dealer_Name = TableData[i].Requested_Dealer_Name;
+										TableData[i].Requested_Dealer_Name= dealerName;
 					}
 				}
 
