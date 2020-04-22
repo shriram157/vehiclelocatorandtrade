@@ -184,9 +184,22 @@ sap.ui.define([
 				}
 				else if ((TableData[i].Requesting_Dealer != Dealer_No)&&(TableData[i].Requested_Vtn == null)){
 										TableData[i].RequestingDealerVisible = true;
+					TableData[i].Requested_Dealer = TableData[i].Requesting_Dealer;
+										TableData[i].Requesting_Dealer= Dealer_No;
+										var dealerName = TableData[i].Requested_Dealer_Name;
+										TableData[i].Requested_Dealer_Name = TableData[i].Requesting_Dealer_Name;
+										TableData[i].Requesting_Dealer_Name= dealerName;
+					
 					}
 					else {
 					TableData[i].RequestingDealerVisible = false;
+							if(TableData[i].Requested_Vtn == null){
+					TableData[i].Requested_Dealer = TableData[i].Requesting_Dealer;
+										TableData[i].Requesting_Dealer= Dealer_No;
+										var dealerName = TableData[i].Requested_Dealer_Name;
+										TableData[i].Requested_Dealer_Name = TableData[i].Requesting_Dealer_Name;
+										TableData[i].Requesting_Dealer_Name= dealerName;
+					}
 				}
 
 				var results = TableData[i].TradeVehicles.results;
