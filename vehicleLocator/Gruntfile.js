@@ -58,14 +58,9 @@ module.exports = function (grunt) {
 		"shell:npmPrune"
 	]);
 	grunt.registerTask("default", [
-		
+		"clean",
 		"lint",
-		
+		"build",
 		"updateDistToNodeJsStructure"
 	]);
 };
-
-
-	// "clean",
-	// 	"lint",
-	// 	"build",
