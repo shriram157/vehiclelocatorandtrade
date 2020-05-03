@@ -120,7 +120,7 @@
 								<headerToolbar>
 									<Toolbar>
 										<content>
-											<Title id="title" text="{i18n>TradeOut}" titleStyle="H3"/>
+											<Title id="title" text="{i18n>TradeIn}" titleStyle="H3"/>
 											<ToolbarSpacer/>
 											<SearchField id="searchTradeHistory" liveChange="onLiveChangeTradeHistory" showSearchButton="true" placeholder="{i18n>placeHolderText}">
 												<layoutData>
@@ -219,7 +219,7 @@
 											<!--<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="false"/>-->
 											<Text text="{= ${RequestingDealerVisible} === true ?${Requested_Vtn}:${OffredVehicle/Requested_VTN}}" wrapping="false" width="12em"/>
 											
-											<Text text="{Requested_Vin}" wrapping="false" width="12em"/>
+											<Text text="{= ${RequestingDealerVisible} === true ?${VIN}:${OffredVehicle/VIN}}" wrapping="false" width="12em"/>
 											<!--<Text text="{i18n>To}" wrapping="false"/>-->
 											<Text width="12em" text="{= ${RequestingDealerVisible} === true ?${Requested_Dealer}:${OffredVehicle/Requesting_Dealer}}-{= ${RequestingDealerVisible} === true ?${Requested_Dealer_Name}:${OffredVehicle/Requesting_Dealer_Name}}"/>
 											<Text width="12em" text="{= ${RequestingDealerVisible} === true ?${Model}:${OffredVehicle/Model}}-{=${RequestingDealerVisible} === true ?${Model_Desc}:${OffredVehicle/Model_Desc}}"/>
@@ -256,7 +256,7 @@
 								<headerToolbar>
 									<Toolbar>
 										<content>
-											<Title id="title1" text="{i18n>TradeIn}" titleStyle="H3"></Title>
+											<Title id="title1" text="{i18n>TradeOut}" titleStyle="H3"></Title>
 											<ToolbarSpacer/>
 											<SearchField id="searchTradeHistory1" liveChange="onLiveChangeTradeHistory1" showSearchButton="true" placeholder="{i18n>placeHolderText}">
 												<layoutData>
@@ -350,8 +350,8 @@
 										<cells>
 											<Link id="tradeHId1" text="{Trade_Id}" class="link" subtle="true" press="oTradeHistoryLinkPress" wrapping="false"/>
 											<!--<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="false"/>-->
-										<Text text="{= ${RequestingDealerVisible} === false ?${Requested_Vtn}:${OffredVehicle/Requested_VTN}}" wrapping="false"/>
-											<Text text="{Requested_Vin}" wrapping="false"/>
+										<Text id= "txt_in_VTN" text="{= ${RequestingDealerVisible} === false ?${Requested_Vtn}:${OffredVehicle/Requested_VTN}}" wrapping="false"/>
+											<Text id= "txt_in_VIN" text="{= ${RequestingDealerVisible} === false ?${VIN}:${OffredVehicle/VIN}}" wrapping="false"/>
 											<!--<Text text="{i18n>From}" wrapping="false"/>-->
 											<Text text="{= ${RequestingDealerVisible} === true ?${Requested_Dealer}:${Requesting_Dealer}}-{= ${RequestingDealerVisible} === true ?${Requested_Dealer_Name}:${Requesting_Dealer_Name}}"/>
 											

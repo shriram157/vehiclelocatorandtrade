@@ -190,6 +190,17 @@ sap.ui.define([
 						TableData[i].Suffix = results[x].Suffix;
 						TableData[i].Colour = results[x].Int_Colour;
 						TableData[i].Ext_Colour = results[x].Ext_Colour;
+						TableData[i].AccessoryInstalled = results[x].AccessoryInstalled;
+						if(results[x].VIN!= null)
+						{
+							
+						
+						TableData[i].VIN = results[x].VIN;
+						}
+						else
+						{
+							TableData[i].VIN = "";
+						}
 						TableData[i].Int_Colour_Desc = results[x].Int_Colour_Desc;// Interior Color Suffix issue
 						TableData[i].APX = results[x].APX;
 						TableData[i].Order_Type = results[x].Order_Type;
@@ -207,6 +218,15 @@ sap.ui.define([
 						TableData[i].OffredVehicle.Colour = results[x].Int_Colour;
 						TableData[i].Int_Colour_Desc = results[x].Int_Colour_Desc;// interior Color Suffix issue
 						TableData[i].OffredVehicle.Ext_Colour = results[x].Ext_Colour;
+						TableData[i].OffredVehicle.AccessoryInstalled = results[x].AccessoryInstalled;
+						if(results[x].VIN!= null)
+						{
+						TableData[i].OffredVehicle.VIN = results[x].VIN;
+						}
+						else
+						{
+								TableData[i].OffredVehicle.VIN ="";
+						}
 						TableData[i].OffredVehicle.APX = results[x].APX;
 						TableData[i].OffredVehicle.Order_Type = results[x].Order_Type;
 						TableData[i].OffredVehicle.Status = results[x].Status;
@@ -224,6 +244,15 @@ sap.ui.define([
 						TableData[i].OffredVehicle.Colour = results[x].Int_Colour;
 						TableData[i].Int_Colour_Desc = results[x].Int_Colour_Desc;// interior Color Suffix issue
 						TableData[i].OffredVehicle.Ext_Colour = results[x].Ext_Colour;
+						TableData[i].OffredVehicle.AccessoryInstalled = results[x].AccessoryInstalled;
+							if(results[x].VIN!= null)
+						{
+						TableData[i].OffredVehicle.VIN = results[x].VIN;
+						}
+						else
+						{
+								TableData[i].OffredVehicle.VIN = "";
+						}
 						TableData[i].OffredVehicle.APX = results[x].APX;
 						TableData[i].OffredVehicle.Order_Type = results[x].Order_Type;
 						TableData[i].OffredVehicle.Status = results[x].Status;
@@ -236,6 +265,15 @@ sap.ui.define([
 						TableData[i].Suffix = results[x].Suffix;
 						TableData[i].Colour = results[x].Int_Colour;
 						TableData[i].Ext_Colour = results[x].Ext_Colour;
+						TableData[i].AccessoryInstalled = results[x].AccessoryInstalled;
+							if(results[x].VIN!= null)
+						{
+						TableData[i].VIN = results[x].VIN;
+						}
+						else
+						{
+							TableData[i].VIN = "";
+						}
 						TableData[i].Int_Colour_Desc = results[x].Int_Colour_Desc;// Interior Color Suffix issue
 						TableData[i].APX = results[x].APX;
 						TableData[i].Order_Type = results[x].Order_Type;
@@ -309,16 +347,16 @@ sap.ui.define([
 		},
 		ExporttoExcellsheet: function () {
 
-			var Context = this.getView().byId("tableVTH").getBinding("items").getContexts();
-			if (Context.length == 0) {
-				sap.m.MessageBox.warning("No data is available to export");
-				return;
-			} else {
-				var items = Context.map(function (oEvent) {
-					return oEvent.getObject();
-				});
+			// var Context = this.getView().byId("tableVTH").getBinding("items").getContexts();
+			// if (Context.length == 0) {
+			// 	sap.m.MessageBox.warning("No data is available to export");
+			// 	return;
+			// } else {
+			// 	var items = Context.map(function (oEvent) {
+			// 		return oEvent.getObject();
+			// 	});
 				this.JSONToCSVConvertor(this.tableData, "ExportGreen", true);
-			}
+			// }
 		},
 		ExporttoExcellsheet1: function () {
 
@@ -334,15 +372,16 @@ sap.ui.define([
 			}
 		},
 		JSONToCSVConvertor: function (JSONData, ReportTitle, ShowLabel) {
+			
 			var that = this;
-			var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
-			var CSV = "";
+			var Context = this.getView().byId("tableVTH").getBinding("items").getContexts();
+			var Context1 = this.getView().byId("tableVTH1").getBinding("items").getContexts();
+				var i18n = sap.ui.getCore().getModel("i18n").getResourceBundle();
+					var CSV = "";
 			if (ShowLabel) {
 				var row = "";
 				row = row.slice(0, -1);
 			}
-
-			var i18n = sap.ui.getCore().getModel("i18n").getResourceBundle();
 			var RequestNo = i18n.getText("RequestNo");
 			// var Status = i18n.getText("Status");
 			var From_To = i18n.getText("From_To");
@@ -372,28 +411,53 @@ sap.ui.define([
 			row += Accepted + ",";
 
 			CSV += row + '\r\n';
+			if (Context.length == 0 && Context1.length == 0) {
+				sap.m.MessageBox.warning("No data is available to export");
+				return;
+			} else {
+				var items = Context.map(function (oEvent) {
+					return oEvent.getObject();
+				});
+				// this.JSONToCSVConvertor(this.tableData, "ExportGreen", true);
+			
+			var arrData = typeof items != 'object' ? JSON.parse(items) : items;
+		
+
+		
 
 			//loop is to extract each row
 			for (var i = 0; i < arrData.length; i++) {
 				var row = "";
-
+				var RequestingDealerVisible = i18n.getText("TradeIn");
 				if (arrData[i].RequestingDealerVisible == true) {
-					var RequestingDealerVisible = "To";
+					
 					var SelectedDealer = arrData[i].Requested_Dealer;
 					var SelectedDealerName = arrData[i].Requested_Dealer_Name;
 					var DelearData = SelectedDealer + "-" + SelectedDealerName;
+						var ModelData = arrData[i].Model + "-" + arrData[i].Model_Desc;
+				var SuffixData = arrData[i].Suffix + "-" + arrData[i].Suffix_Desc + "/" + arrData[i].Int_Colour_Desc;
+				var Ext_Colour_Data = arrData[i].Ext_Colour + "-" + arrData[i].Ext_Colour_Desc;
+				var VTNData = arrData[i].Requested_Vtn;
+				var VINData = arrData[i].VIN;
+				var APXData = arrData[i].APX;
 
 				} else {
-					var RequestingDealerVisible = "From";
+					// var RequestingDealerVisible = i18n.getText("TradeIn");
 
 					var SelectedDealer = arrData[i].Requesting_Dealer;
 					var SelectedDealerName = arrData[i].Requesting_Dealer_Name;
 					var DelearData = SelectedDealer + "-" + SelectedDealerName;
+						var ModelData = arrData[i].OffredVehicle.Model + "-" + arrData[i].OffredVehicle.Model_Desc;
+				var SuffixData = arrData[i].OffredVehicle.Suffix + "-" + arrData[i].OffredVehicle.Suffix_Desc + "/" + arrData[i].OffredVehicle.Int_Colour_Desc;
+				var Ext_Colour_Data = arrData[i].OffredVehicle.Ext_Colour + "-" + arrData[i].OffredVehicle.Ext_Colour_Desc;
+				var VTNData = arrData[i].OffredVehicle.Requested_VTN;
+				var VINData = arrData[i].OffredVehicle.VIN;
+				var APXData = arrData[i].OffredVehicle.APX;
 				}
 
-				arrData[i].Model = arrData[i].Model + "-" + arrData[i].Model_Desc;
-				arrData[i].Suffix = arrData[i].Suffix + "-" + arrData[i].Suffix_Desc + "/" + arrData[i].Int_Colour_Desc;
-				arrData[i].Ext_Colour = arrData[i].Ext_Colour + "-" + arrData[i].Ext_Colour_Desc;
+				// arrData[i].Model = arrData[i].Model + "-" + arrData[i].Model_Desc;
+				// arrData[i].Suffix = arrData[i].Suffix + "-" + arrData[i].Suffix_Desc + "/" + arrData[i].Int_Colour_Desc;
+				// arrData[i].Ext_Colour = arrData[i].Ext_Colour + "-" + arrData[i].Ext_Colour_Desc;
 				/*	arrData[i].zzsuffix = arrData[i].zzsuffix + "-" + arrData[i].suffix_desc_en;*/
 				// var tstatus;
 				// switch (arrData[i].Trade_Status) {
@@ -424,14 +488,101 @@ sap.ui.define([
 				var dateAsReceived = moment.tz((arrData[i].Changed_on), "GMT");
 				var dateformated = moment(dateAsReceived).format("YYYY-MM-DD");
 
-				row += '="' + arrData[i].Trade_Id + '",="' + RequestingDealerVisible + '",="' + arrData[i].Requested_Vtn + '",="' + arrData[i].Requested_Vin + '",="' + DelearData + '",="' + arrData[i].Model + '","' + arrData[i].Suffix +
+				row += '="' + arrData[i].Trade_Id + '",="' + RequestingDealerVisible + '",="' + VTNData + '",="' + VINData + '",="' + DelearData + '",="' + ModelData + '","' + SuffixData +
 				
-					'","' + arrData[i].Ext_Colour + 
-					'","' + arrData[i].APX +
-					'","' + dateformated + '",';
+					'","' + Ext_Colour_Data + 
+					'",="' + APXData +
+					'",="' + dateformated + '",';
 				//}
 				row.slice(1, row.length);
 				CSV += row + '\r\n';
+			}
+			
+			// if (Context1.length == 0) {
+			// 	sap.m.MessageBox.warning("No data is available to export");
+			// 	return;
+			// } else {
+				var items1 = Context1.map(function (oEvent) {
+					return oEvent.getObject();
+				});
+				// this.JSONToCSVConvertor(this.tableData, "ExportGreen", true);
+			
+			var arrData = typeof items1 != 'object' ? JSON.parse(items1) : items1;
+		
+
+		
+
+			//loop is to extract each row
+			for (var i = 0; i < arrData.length; i++) {
+				var row = "";
+				var RequestingDealerVisible = i18n.getText("TradeOut");
+				if (arrData[i].RequestingDealerVisible == true) {
+					// var RequestingDealerVisible = i18n.getText("TradeOut");
+					var SelectedDealer = arrData[i].Requested_Dealer;
+					var SelectedDealerName = arrData[i].Requested_Dealer_Name;
+					var DelearData = SelectedDealer + "-" + SelectedDealerName;
+var ModelData = arrData[i].OffredVehicle.Model + "-" + arrData[i].OffredVehicle.Model_Desc;
+				var SuffixData = arrData[i].OffredVehicle.Suffix + "-" + arrData[i].OffredVehicle.Suffix_Desc + "/" + arrData[i].OffredVehicle.Int_Colour_Desc;
+				var Ext_Colour_Data = arrData[i].OffredVehicle.Ext_Colour + "-" + arrData[i].OffredVehicle.Ext_Colour_Desc;
+				var VTNData = arrData[i].OffredVehicle.Requested_VTN;
+				var VINData = arrData[i].OffredVehicle.VIN;
+				var APXData = arrData[i].OffredVehicle.APX;
+				} else {
+					
+
+					var SelectedDealer = arrData[i].Requesting_Dealer;
+					var SelectedDealerName = arrData[i].Requesting_Dealer_Name;
+					var DelearData = SelectedDealer + "-" + SelectedDealerName;
+						var ModelData = arrData[i].Model + "-" + arrData[i].Model_Desc;
+				var SuffixData = arrData[i].Suffix + "-" + arrData[i].Suffix_Desc + "/" + arrData[i].Int_Colour_Desc;
+				var Ext_Colour_Data = arrData[i].Ext_Colour + "-" + arrData[i].Ext_Colour_Desc;
+				var VTNData = arrData[i].Requested_Vtn;
+				var VINData = arrData[i].VIN;
+				var APXData = arrData[i].APX;
+				}
+
+				// arrData[i].Model = arrData[i].Model + "-" + arrData[i].Model_Desc;
+				// arrData[i].Suffix = arrData[i].Suffix + "-" + arrData[i].Suffix_Desc + "/" + arrData[i].Int_Colour_Desc;
+				// arrData[i].Ext_Colour = arrData[i].Ext_Colour + "-" + arrData[i].Ext_Colour_Desc;
+				/*	arrData[i].zzsuffix = arrData[i].zzsuffix + "-" + arrData[i].suffix_desc_en;*/
+				// var tstatus;
+				// switch (arrData[i].Trade_Status) {
+				// case "A":
+				// 	tstatus = "Accepted";
+				// 	break;
+				// case "C":
+				// 	tstatus = "Countered";
+				// 	break;
+				// case "X": //Update this
+				// 	tstatus = "Canceled";
+				// 	break;
+				// case "R": //Update this
+				// 	tstatus = "Rejected";
+				// 	break;
+				// case "S": //Update this
+				// 	tstatus = "Sent";
+				// 	break;
+				// case "F": //Update this
+				// 	tstatus = "Failed";
+				// 	break;
+
+				// }
+				// var dateformated = this.formatoDate(arrData[i].Changed_on);
+
+				// var dateformated = this.TradeSummaryoDateTradeHistory(arrData[i].Changed_on);
+
+				var dateAsReceived = moment.tz((arrData[i].Changed_on), "GMT");
+				var dateformated = moment(dateAsReceived).format("YYYY-MM-DD");
+
+					row += '="' + arrData[i].Trade_Id + '",="' + RequestingDealerVisible + '",="' + VTNData + '",="' + VINData + '",="' + DelearData + '",="' + ModelData + '","' + SuffixData +
+				
+					'","' + Ext_Colour_Data + 
+					'",="' + APXData +
+					'",="' + dateformated + '",';
+				//}
+				row.slice(1, row.length);
+				CSV += row + '\r\n';
+			}
 			}
 			if (CSV == "") {
 				/*	alert("Invalid data");*/

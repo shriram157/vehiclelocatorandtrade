@@ -3,19 +3,22 @@ sap.ui.define(function () {
 		Status: function (zz_trading_ind) {
 			switch (zz_trading_ind) {
 			case "1":
-
-				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("StockNonRoutable");
+				var sTextFromi18n = sap.ui.getCore().getModel("i18n").getResourceBundle().getText("StockNonRoutable");
+				// var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("StockNonRoutable");
 				return sTextFromi18n;
 				// return "Stock-Non-Routable";
 				break;
 			case "2":
 				// return "Pipeline – Routable";
-				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("PipelineRoutable");
+				var sTextFromi18n = sap.ui.getCore().getModel("i18n").getResourceBundle().getText("PipelineRoutable");
+
+				// var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("PipelineRoutable");
 				return sTextFromi18n;
 				break;
 			case "3": //Update this
 				// return "Pipeline – Routable";
-				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("PipelineRoutable");
+				var sTextFromi18n = sap.ui.getCore().getModel("i18n").getResourceBundle().getText("PipelineRoutable");
+				// var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("PipelineRoutable");
 				return sTextFromi18n;
 				break;
 
@@ -25,19 +28,20 @@ sap.ui.define(function () {
 				AccInstall: function (zaccesories) {
 			switch (zaccesories) {
 			case "Yes":
+				var sTextFromi18n = sap.ui.getCore().getModel("i18n").getResourceBundle().getText("Yes");
 
-				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("Yes");
+				// var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("Yes");
 				return sTextFromi18n;
 			
 				break;
 			case "No":
-			
-				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("No");
+				var sTextFromi18n = sap.ui.getCore().getModel("i18n").getResourceBundle().getText("No");
+				// var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("No");
 				return sTextFromi18n;
 				break;
 			case "All": //Update this
-				
-				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("All");
+				var sTextFromi18n = sap.ui.getCore().getModel("i18n").getResourceBundle().getText("All");
+				// var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("All");
 				return sTextFromi18n;
 				break;
 
@@ -62,67 +66,91 @@ sap.ui.define(function () {
 			switch (zzordertype) {
 			case "SO":
 				// return "STOCK Open";
-				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("Stockopen");
+				var sTextFromi18n = sap.ui.getCore().getModel("i18n").getResourceBundle().getText("Stockopen");
+				// var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("Stockopen");
 				return sTextFromi18n;
 
 				break;
 			case "SR":
 				// return "STOCK Restricted";
-				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("StockRestricted");
+				var sTextFromi18n = sap.ui.getCore().getModel("i18n").getResourceBundle().getText("StockRestricted");
+				// var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("StockRestricted");
 				return sTextFromi18n;
 				break;
 			case "DM":
 				// return "DEMO";
-				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("Demo");
+								var sTextFromi18n = sap.ui.getCore().getModel("i18n").getResourceBundle().getText("Demo");
+
+				// var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("Demo");
 				return sTextFromi18n;
 				break;
 			case "BA":
 				// return "BANK ALLOC";
-				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("BankAllocatation");
+								var sTextFromi18n = sap.ui.getCore().getModel("i18n").getResourceBundle().getText("BankAllocatation");
+
+				// var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("BankAllocatation");
 				return sTextFromi18n;
 				break;
 			case "LS":
 				// return "LAUNCH Stock";
-				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("LaunchStock");
+								var sTextFromi18n = sap.ui.getCore().getModel("i18n").getResourceBundle().getText("LaunchStock");
+
+				// var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("LaunchStock");
 				return sTextFromi18n;
 				break;
 			case "RS":
 				// return "RETAIL SOLD";
-				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("RetailSold");
+								var sTextFromi18n = sap.ui.getCore().getModel("i18n").getResourceBundle().getText("RetailSold");
+
+				// var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("RetailSold");
 				return sTextFromi18n;
 				break;
 			case "F1":
 				// return "DLR RAC";
-				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("Dlrrac");
+								var sTextFromi18n = sap.ui.getCore().getModel("i18n").getResourceBundle().getText("Dlrrac");
+
+				// var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("Dlrrac");
 				return sTextFromi18n;
 				break;
 			case "F2":
 				// return "DLR ELITE";
-				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("DlrElite");
+								var sTextFromi18n = sap.ui.getCore().getModel("i18n").getResourceBundle().getText("DlrElite");
+
+				// var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("DlrElite");
 				return sTextFromi18n;
 				break;
 			case "F3":
 				// return "NAT RAC";
-				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("Natrac");
+								var sTextFromi18n = sap.ui.getCore().getModel("i18n").getResourceBundle().getText("Natrac");
+
+				// var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("Natrac");
 				return sTextFromi18n;
 				break;
 			case "F4":
 				// return "NAT ELITE";
-				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("NatElite");
+								var sTextFromi18n = sap.ui.getCore().getModel("i18n").getResourceBundle().getText("NatElite");
+
+				// var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("NatElite");
 				return sTextFromi18n;
 				break;
 			case "F5":
 				// return "MOBILITY";
-				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("Mobility");
+								var sTextFromi18n = sap.ui.getCore().getModel("i18n").getResourceBundle().getText("Mobility");
+
+				// var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("Mobility");
 				return sTextFromi18n;
 				break;
 			case "DNC":
 				// return "DNC";
+								// var sTextFromi18n = sap.ui.getCore().getModel("i18n").getResourceBundle().getText("Stockopen");
+
 				var sTextFromi18n = "DNC"; //this.getModel("i18n").getResourceBundle().getText("Mobility");
 				return sTextFromi18n;
 				break;
 			case "DN":
 				// return "DNC";
+								// var sTextFromi18n = sap.ui.getCore().getModel("i18n").getResourceBundle().getText("Stockopen");
+
 				var sTextFromi18n = "DNC"; //this.getModel("i18n").getResourceBundle().getText("Mobility");
 				return sTextFromi18n;
 				break;
@@ -171,16 +199,20 @@ sap.ui.define(function () {
 		DNC: function (DNC) {
 			if (DNC == "X") {
 				// return "Yes";
-				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("Yes");
+								var sTextFromi18n = sap.ui.getCore().getModel("i18n").getResourceBundle().getText("Yes");
+
+				// var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("Yes");
 				return sTextFromi18n;
 			} else if (DNC == null || DNC == "N") {
-				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("No");
+				var sTextFromi18n = sap.ui.getCore().getModel("i18n").getResourceBundle().getText("No");
 				return sTextFromi18n;
 				// return "No";
 			} else if (DNC == "Y") {
 
 				// return "Yes";
-				var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("Yes");
+												var sTextFromi18n = sap.ui.getCore().getModel("i18n").getResourceBundle().getText("Yes");
+
+				// var sTextFromi18n = this.getModel("i18n").getResourceBundle().getText("Yes");
 				return sTextFromi18n;
 			}
 

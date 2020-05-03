@@ -12,7 +12,7 @@ sap.ui.define([
 ], function (Controller, BaseController, ResourceModel, JSONModel, Sorter, Filter, Formatter, SortOrder) {
 	"use strict";
 
-	return BaseController.extend("vehicleLocator.controller.VehicleSearcResults", {
+	return BaseController.extend("vehicleLocator.controller.DemoVehicleSearchResults", {
 
 		onInit: function () {
 			//define JSON model oDealersearchresults
@@ -31,7 +31,7 @@ sap.ui.define([
 
 			sap.ushell.components.tableSearchResults = this.getView().byId("table1VSR");
 
-			this.getView().setModel(sap.ui.getCore().getModel("SearchedData"), "VehicleLocatorScdScr");
+			this.getView().setModel(sap.ui.getCore().getModel("DemoSearchedData"), "VehicleLocatorScdScr");
 
 			// initialize  local models and data calls
 
@@ -51,7 +51,7 @@ sap.ui.define([
 			this._setTheLogo();
 			this.comingFromSuffixChange = false;
 			//	this.getRouter().attachRouteMatched(this.onRouteMatched, this);
-			this.getRouter().getRoute("VehicleSearcResults").attachPatternMatched(this.onRouteMatched, this);
+			this.getRouter().getRoute("DemoVehicleSearchResults").attachPatternMatched(this.onRouteMatched, this);
 		},
 
 		onSuffixChange: function (oEvent) {
@@ -200,7 +200,7 @@ sap.ui.define([
 
 						var oDumModel = new sap.ui.model.json.JSONModel(tempTabData);
 						oDumModel.setSizeLimit(100000);
-						sap.ui.getCore().setModel(oDumModel, "SearchedData");
+						sap.ui.getCore().setModel(oDumModel, "DemoSearchedData");
 						that.comingFromSuffixChange = true;
 						that.SuffixFilter();
 						// that.onStatusChange();  // this is called inside the suffix filter so commenting out 
@@ -350,9 +350,9 @@ sap.ui.define([
 
 						var oDumModel = new sap.ui.model.json.JSONModel(filteredArray);
 						oDumModel.setSizeLimit(100000);
-						sap.ui.getCore().setModel(oDumModel, "SearchedData");
+						sap.ui.getCore().setModel(oDumModel, "DemoSearchedData");
 
-						var Status = sap.ui.getCore().getModel("SearchedData").getData();
+						var Status = sap.ui.getCore().getModel("DemoSearchedData").getData();
 
 						// 10th May,  if the Hold_stat is received as blank make it "N"
 
@@ -536,10 +536,16 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 
 			var tableLength = iCount; //tableData.length;
 			var oModelDetail = this.getView().getModel("detailView");
-
-			var sExpectedText = this.getView().getModel("i18n").getResourceBundle().getText("tableCount", [tableLength]);
+var typ= this.RoutedData.type;
+if(typ=="1B")
+{
+			var sExpectedText = this.getView().getModel("i18n").getResourceBundle().getText("preregvehicleCount", [tableLength]);
 			oModelDetail.setProperty("/tableCount", sExpectedText);
-
+}
+else{
+			var sExpectedText = this.getView().getModel("i18n").getResourceBundle().getText("demovehicleCount", [tableLength]);
+			oModelDetail.setProperty("/tableCount", sExpectedText);
+}
 		},
 
 		DealarandColorBinding: function () {
@@ -830,8 +836,14 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 		onRouteMatched: function (oEvent) {
 			//debugger;
 			// if the user is retruning by pressing the back button,  then it is better, that we dont refresh the data again. 
-			var Status = sap.ui.getCore().getModel("SearchedData").getData();
-
+			var RoutedData = JSON.parse(oEvent.getParameter("arguments").LoginUser);
+			DefaultSuffix = (RoutedData.selectedSuffix).replace(/\//g, "%2F");
+			var type=(RoutedData.type).replace(/\//g, "%2F");
+			this.RoutedData = RoutedData;
+			var StatusFilter = sap.ui.getCore().getModel("DemoSearchedData").getData();
+			var Status = StatusFilter.filter(function (x) {
+				return (x.vhusg == type);
+			});
 			// 10th May,  if the Hold_stat is received as blank make it "N"
 
 			for (var i = 0; i < Status.length; i++) {
@@ -849,9 +861,7 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 
 			}
 
-			var RoutedData = JSON.parse(oEvent.getParameter("arguments").LoginUser);
-			this.RoutedData= RoutedData;
-			DefaultSuffix = (RoutedData.selectedSuffix).replace(/\//g, "%2F");
+			
 			//	this.getView().byId("VLRSuffix").removeAllItems();
 			var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
 			var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
@@ -866,8 +876,8 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 				this.getView().byId("table1VSR").setSelectionMode("None");
 
 			}
-			if (sap.ui.getCore().getModel("SearchedData") && sap.ui.getCore().getModel("oSuffieldmodel") != undefined) {
-				this.getView().setModel(sap.ui.getCore().getModel("SearchedData"), "VehicleLocatorScdScr");
+			if (sap.ui.getCore().getModel("DemoSearchedData") && sap.ui.getCore().getModel("oSuffieldmodel") != undefined) {
+				this.getView().setModel(sap.ui.getCore().getModel("DemoSearchedData"), "VehicleLocatorScdScr");
 
 				/*	this.getView().setModel(sap.ui.getCore().getModel("oSuffieldmodel"),"VehicleLocatorScdScr");*/
 
@@ -901,7 +911,7 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 				var oProductNameColumn = this.getView().byId("matnr");
 				// this.getView().byId("table1VSR").sort(oProductNameColumn, SortOrder.Ascending);   // guna
 
-				var Dealer = sap.ui.getCore().getModel("SearchedData").getData();
+				var Dealer = sap.ui.getCore().getModel("DemoSearchedData").getData();
 
 				var Suffix = sap.ui.getCore().getModel("VehicleLocatorSuffix").getData();
 
@@ -923,7 +933,7 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 					obj.SPRAS = Suffix[i].SPRAS;
 					SuffixData.push(obj);
 				}
-				var Color = sap.ui.getCore().getModel("SearchedData").getData();
+				var Color = sap.ui.getCore().getModel("DemoSearchedData").getData();
 				var obj = {};
 
 				if (DefaultSuffix == 'ALL' || DefaultSuffix == 'TOUS') {
@@ -993,7 +1003,7 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 			}
 			// lets reset the model to initial before setting - the controller is not setting the selected value correctly without this. 
 			var oModel = [];
-			var oModel = new sap.ui.model.json.JSONModel(oModel);
+			oModel = new sap.ui.model.json.JSONModel(oModel);
 			this.getView().byId("VLRSuffix").setModel(oModel);
 
 			var suffixModel = new sap.ui.model.json.JSONModel(SuffixData);
@@ -1267,7 +1277,8 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 			}
 			// just run the status change filter one time on every route matched. 
 			//          this.comingFromRoutematchedEvent = true;
-			this.onStatusChange();
+			//changes commented for 1B
+			// this.onStatusChange();
 
 		},
 
@@ -1280,61 +1291,6 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 			this._selectedDealerModel.setProperty("/Dealer_No", sSelectedMatnr);
 			this._selectedDealerModel.setProperty("/Dealer_Name", sSelectedMatnrText);
 
-		},
-		// DemoVehiclepress:function(oEvent){
-		// 	that.getRouter().navTo("DemoVehicleSearchResults", {
-		// 					LoginUser: JSON.stringify(Obj)
-		// 				});
-		// },
-		DemoVehiclepress:function(oEvent){
-				var Obj = {};
-				
-					// var RoutedData = JSON.parse(oEvent.getParameter("arguments").LoginUser);
-					var LoginUser = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].UserType[0];
-			DefaultSuffix = (this.RoutedData.selectedSuffix).replace(/\//g, "%2F");
-					Obj.selectedSuffix = DefaultSuffix;
-					Obj.LoginUser = LoginUser;
-					Obj.userTypeReceived = this.userTypeReceived;
-						Obj.type = "2C";
-					sap.ui.core.BusyIndicator.hide();
-
-					// if (that.userTypeReceived == "Zone_User" || that.userTypeReceived == "National") {
-
-					// 	that.getRouter().navTo("VehicleSearcResultsForZoneUser", {
-					// 		LoginUser: JSON.stringify(Obj)
-					// 	});
-
-					// } else {
-
-						this.getRouter().navTo("DemoVehicleSearchResults", {
-							LoginUser: JSON.stringify(Obj)
-						});
-					// }
-		},
-			PreregisteredVehiclepress:function(oEvent){
-				var Obj = {};
-				
-					// var RoutedData = JSON.parse(oEvent.getParameter("arguments").LoginUser);
-					var LoginUser = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].UserType[0];
-			DefaultSuffix = (this.RoutedData.selectedSuffix).replace(/\//g, "%2F");
-					Obj.selectedSuffix = DefaultSuffix;
-					Obj.LoginUser = LoginUser;
-					Obj.userTypeReceived = this.userTypeReceived;
-						Obj.type = "1B";
-					sap.ui.core.BusyIndicator.hide();
-
-					// if (that.userTypeReceived == "Zone_User" || that.userTypeReceived == "National") {
-
-					// 	that.getRouter().navTo("VehicleSearcResultsForZoneUser", {
-					// 		LoginUser: JSON.stringify(Obj)
-					// 	});
-
-					// } else {
-
-						this.getRouter().navTo("DemoVehicleSearchResults", {
-							LoginUser: JSON.stringify(Obj)
-						});
-					// }
 		},
 		onAccesoriesInstalledsChange: function(){
 			this.onStatusChange();
@@ -1378,26 +1334,26 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 			}
 
 			var i18n = sap.ui.getCore().getModel("i18n").getResourceBundle();
-			var VTN = i18n.getText("VTN");
+			var VTN=i18n.getText("VTN");
 			var Dealer = i18n.getText("Dealer");
 			var Model = i18n.getText("Model");
 			var Suffix = i18n.getText("Suffix");
-			var APX = i18n.getText("APX");
 			var Color = i18n.getText("Color");
+			var APX = i18n.getText("APX");
+			
 			var OrderType = i18n.getText("OrderType");
 			var ETAFrom = i18n.getText("ETAFrom");
 			var ETATo = i18n.getText("ETATo");
 			var AccessoryInstall = i18n.getText("AccessoryInstall");
 			var City = i18n.getText("City");
 			var Province = i18n.getText("Province");
-
+		
 			row += VTN + ",";
 			row += Dealer + ",";
 			row += Model + ",";
 			row += Suffix + ",";
 			row += Color + ",";
 			row += APX + ",";
-			
 			row += OrderType + ",";
 			row += ETAFrom + ",";
 			row += ETATo + ",";
@@ -1410,7 +1366,7 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 			//loop is to extract each row
 			for (var i = 0; i < arrData.length; i++) {
 				var row = "";
-				var zzvtn = (arrData[i].zzvtn);
+var vtndata = arrData[i].zzvtn;
 				var kunnr = (arrData[i].kunnr).slice(-5) + "-" + arrData[i].name1;
 				// var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language; //2603
 				var SPRAS = this.sCurrentLocaleD;
@@ -1545,8 +1501,8 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 					var z_pd_flag = this.getView().getModel("i18n").getResourceBundle().getText("Yes");
 				}
 
-				row += '="' + zzvtn + '",="' + kunnr + '","' + matnr + '","' + zzsuffix +
-					'",="' + zzextcol + '",="' + arrData[i].zzapx + '",="' + zzordertype + '",="' + zzadddata4 +
+				row +='="'+vtndata+ '",="' + kunnr + '","' + matnr + '","' + zzsuffix +
+			'",="' + zzextcol + 	'",="' + arrData[i].zzapx + '",="' + zzordertype + '",="' + zzadddata4 +
 					'",="' + pstsp +
 					'","' + z_pd_flag + '","' + arrData[i].ort01 + '","' + arrData[i].bezei + '",';
 				//}
@@ -1596,9 +1552,22 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 		},
 
 		handlebacksearch: function () {
+			
 			this.getView().byId("chknew").setSelected(false);
 			this.getView().byId("chkexi").setSelected(false);
-			this.getRouter().navTo("VehicleLocSearch");
+				var Obj = {};
+				
+					// var RoutedData = JSON.parse(oEvent.getParameter("arguments").LoginUser);
+					var LoginUser = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].UserType[0];
+			DefaultSuffix = (this.RoutedData.selectedSuffix).replace(/\//g, "%2F");
+					Obj.selectedSuffix = DefaultSuffix;
+					Obj.LoginUser = LoginUser;
+					Obj.userTypeReceived = this.userTypeReceived;
+					
+				this.getRouter().navTo("VehicleSearcResults", {
+							LoginUser: JSON.stringify(Obj)
+						});
+			// this.getRouter().navTo("VehicleLocSearch");
 			// this.getView().byId("VLRSuffix").updateBindings();
 			//when the back button is presssed, lets reset the existing model. 
 			var Status = [];
@@ -1608,10 +1577,10 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 		},
 		SuffixFilter: function () {
 
-			if (sap.ui.getCore().getModel("SearchedData") && sap.ui.getCore().getModel("oSuffieldmodel") != undefined) {
-				this.getView().setModel(sap.ui.getCore().getModel("SearchedData"), "VehicleLocatorScdScr");
+			if (sap.ui.getCore().getModel("DemoSearchedData") && sap.ui.getCore().getModel("oSuffieldmodel") != undefined) {
+				this.getView().setModel(sap.ui.getCore().getModel("DemoSearchedData"), "VehicleLocatorScdScr");
 
-				var Status = sap.ui.getCore().getModel("SearchedData").getData();
+				var Status = sap.ui.getCore().getModel("DemoSearchedData").getData();
 				var model = new sap.ui.model.json.JSONModel(Status);
 				// model.setSizeLimit(1000);
 				// this.getView().byId("table1VSR").setModel(model); //guna
@@ -1625,7 +1594,7 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 
 				var oProductNameColumn = this.getView().byId("matnr");
 				// this.getView().byId("table1VSR").sort(oProductNameColumn, SortOrder.Ascending); //guna
-				var Dealer = sap.ui.getCore().getModel("SearchedData").getData();
+				var Dealer = sap.ui.getCore().getModel("DemoSearchedData").getData();
 
 				var Suffix = sap.ui.getCore().getModel("VehicleLocatorSuffix").getData();
 				// var SPRAS = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language; //2603
@@ -1645,7 +1614,7 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 					obj.SPRAS = Suffix[i].SPRAS;
 					SuffixData.push(obj);
 				}
-				var Color = sap.ui.getCore().getModel("SearchedData").getData();
+				var Color = sap.ui.getCore().getModel("DemoSearchedData").getData();
 				var obj = {};
 
 				var Status = this.getView().byId("VLRStatus").getSelectedKey();
@@ -1875,10 +1844,10 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 		},
 		Nodata: function () {
 
-			//	if (sap.ui.getCore().getModel("SearchedData") && sap.ui.getCore().getModel("oSuffieldmodel") != undefined) {
-			//	this.getView().setModel(sap.ui.getCore().getModel("SearchedData"), "VehicleLocatorScdScr");
+			//	if (sap.ui.getCore().getModel("DemoSearchedData") && sap.ui.getCore().getModel("oSuffieldmodel") != undefined) {
+			//	this.getView().setModel(sap.ui.getCore().getModel("DemoSearchedData"), "VehicleLocatorScdScr");
 
-			//	var Status = sap.ui.getCore().getModel("SearchedData").getData();
+			//	var Status = sap.ui.getCore().getModel("DemoSearchedData").getData();
 			var model = new sap.ui.model.json.JSONModel([]);
 			// model.setSizeLimit(1000);
 			// this.getView().byId("table1VSR").setModel(model); //guna
@@ -2034,7 +2003,7 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 		// 			return (x.zz_trading_ind == "2" || x.zz_trading_ind == "3")
 		// 		});
 		// 	}
-		// 	//	var Color = sap.ui.getCore().getModel("SearchedData").getData();
+		// 	//	var Color = sap.ui.getCore().getModel("DemoSearchedData").getData();
 		// 	var obj = {};
 		// 	for (var i = 0, len = Color.length; i < len; i++)
 		// 		obj[Color[i]['zzextcol']] = Color[i];
@@ -2175,7 +2144,7 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 					return (x.zz_trading_ind == "2" || x.zz_trading_ind == "3")
 				});
 			}
-			//	var Color = sap.ui.getCore().getModel("SearchedData").getData();
+			//	var Color = sap.ui.getCore().getModel("DemoSearchedData").getData();
 			var obj = {};
 			for (var i = 0, len = Color.length; i < len; i++)
 				obj[Color[i]['zzextcol']] = Color[i];
@@ -2297,7 +2266,7 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 		handleViewSettingsDialogButtonPressed: function (oEvt) {
 			// this._oResponsivePopover = sap.ui.xmlfragment("vehicleLocator.fragment.VehicleSearchResult", this);
 			if (!this._sortDialog) {
-				this._sortDialog = sap.ui.xmlfragment("vehicleSortDialog", "vehicleLocator.fragment.vehicleSortDialog", this);
+				this._sortDialog = sap.ui.xmlfragment("DemovehicleSortDialog", "vehicleLocator.fragment.DemovehicleSortDialog", this);
 			}
 			this.getView().addDependent(this._sortDialog);
 
@@ -2479,7 +2448,7 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 				}
 
 			}
-			//	var Color = sap.ui.getCore().getModel("SearchedData").getData();
+			//	var Color = sap.ui.getCore().getModel("DemoSearchedData").getData();
 			var obj = {};
 			for (var i = 0, len = Color.length; i < len; i++)
 				obj[Color[i]['zzextcol']] = Color[i];

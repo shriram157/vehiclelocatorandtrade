@@ -179,7 +179,13 @@ onLiveChange: function (oEvent) {
 			if (that.oTableSelectObj != undefined) {
 
 				var SelectedPath = oEvt.getSource().getBindingContext("vehicleTradeSummaryTable").getPath().split("/")[1];
+				var Dealer_No= this.theFirstDefaultDealerSelected;
 				that.oTableSelectObj.FromRequesting = true;
+					if (that.oTableSelectObj.Requesting_Dealer == Dealer_No) {
+					that.oTableSelectObj.RequestingDealerVisible = true;
+				} else {
+					that.oTableSelectObj.RequestingDealerVisible = false;
+				}
 				var model = new sap.ui.model.json.JSONModel(that.oTableSelectObj);
 				model.setSizeLimit(1000);
 				/*	sap.ui.getCore().setModel(model, "MyTradeRequestSelected");
@@ -206,6 +212,12 @@ onLiveChange: function (oEvent) {
 
 				var SelectedPath = oEvent.getSource().getBindingContext("receivedRequestTable").getPath().split("/")[1];
 				that.oRecTableSelectObj.FromRequesting = false;
+					var Dealer_No= this.theFirstDefaultDealerSelected;
+					if (that.oRecTableSelectObj.Requesting_Dealer == Dealer_No) {
+					that.oRecTableSelectObj.RequestingDealerVisible = true;
+				} else {
+					that.oRecTableSelectObj.RequestingDealerVisible = false;
+				}
 				var model = new sap.ui.model.json.JSONModel(that.oRecTableSelectObj);
 				model.setSizeLimit(1000);
 				/*	sap.ui.getCore().setModel(model, "MyTradeRequested");
@@ -310,7 +322,7 @@ onLiveChange: function (oEvent) {
 				
 				
 				var dateMinusThirty = new Date();
-				dateMinusThirty.setDate(dateMinusThirty.getDate() - 30);
+				dateMinusThirty.setDate(dateMinusThirty.getDate() - 60);
 
 				var loggedDealerCode = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()["0"].DealerCode;
 
@@ -319,7 +331,7 @@ onLiveChange: function (oEvent) {
 				var Filter2 = new sap.ui.model.Filter('Trade_Status', 'NE', "A");
 				var Filter3 = new sap.ui.model.Filter('Changed_on', "GE", dateMinusThirty);
 				var Filter4 = new sap.ui.model.Filter([Filter0, Filter1], false);
-				var Filter = new sap.ui.model.Filter([Filter4, Filter2], true);
+				var Filter = new sap.ui.model.Filter([Filter4, Filter2, Filter3], true);
 				// var Filterall1 = new sap.ui.model.Filter([Filter, Filter2], true);
 				var Filterall = new sap.ui.model.Filter([Filter, Filter4], true);		
 				
@@ -339,7 +351,7 @@ onLiveChange: function (oEvent) {
 				///  performance improvement changes
 
 				var dateMinusThirty = new Date();
-				dateMinusThirty.setDate(dateMinusThirty.getDate() - 30);
+				dateMinusThirty.setDate(dateMinusThirty.getDate() - 60);
 
 				var loggedDealerCode = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()["0"].DealerCode;
 
@@ -348,7 +360,7 @@ onLiveChange: function (oEvent) {
 				var Filter2 = new sap.ui.model.Filter('Trade_Status', 'NE', "A");
 				var Filter3 = new sap.ui.model.Filter('Changed_on', "GE", dateMinusThirty);
 				var Filter4 = new sap.ui.model.Filter([Filter0, Filter1], false);
-				var Filter = new sap.ui.model.Filter([Filter4, Filter2], true);
+				var Filter = new sap.ui.model.Filter([Filter4, Filter2,Filter3], true);
 				// var Filterall1 = new sap.ui.model.Filter([Filter, Filter2], true);
 				var Filterall = new sap.ui.model.Filter([Filter, Filter4], true);
 
@@ -370,8 +382,8 @@ onLiveChange: function (oEvent) {
 			oModel.read("/TradeRequest", {
 				filters: [Filterall],
 				urlParameters: {
-
-					"$expand": "TradeVehicles,TradeVehicleDesc"
+					"$expand": "TradeVehicles,TradeVehicleDesc",
+					"$top":1000
 				},
 				async: false,
 				success: function (oData, oResponse) {
@@ -861,9 +873,10 @@ onLiveChange: function (oEvent) {
 			var sPath = mParams.sortItem
 				.getKey();
 			var bDescending = mParams.sortDescending;
-			aSorters.push(new Sorter(sPath,
+			aSorters.push(new sap.ui.model.Sorter(sPath,
 				bDescending));
 			oBinding.sort(aSorters);
+			oBinding.refresh();
 
 		},
 		handleCancel: function (oEvent) {
@@ -898,7 +911,7 @@ onLiveChange: function (oEvent) {
 			var sPath = mParams.sortItem
 				.getKey();
 			var bDescending = mParams.sortDescending;
-			aSorters.push(new Sorter(sPath,
+			aSorters.push(new sap.ui.model.Sorter(sPath,
 				bDescending));
 			oBinding.sort(aSorters);
 
