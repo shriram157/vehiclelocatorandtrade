@@ -103,8 +103,8 @@ sap.ui.define([
 			var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
 			this.getView().byId("oDealerCode3").setText(LoggedInDealerCode2);
 			this.getView().byId("oDealerCreat_singl").setText(LoggedInDealer);
-					
-						 
+					this.getView().byId("outlabedealrid").setVisible(false);
+					this.getView().byId("outdealrid").setVisible(false);
 					this.getView().byId("oOtherVehInfoid").setText("");
 					this.getView().byId("vtnlabeid").setVisible(false);
 					// this.getView().byId("vtnid").setVisible(false);
@@ -227,7 +227,7 @@ var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getDat
 				else
 				{
 										var Data ;
-										oReceivedDataString=oReceivedDataString.replace("%2F", "/")
+										oReceivedDataString=oReceivedDataString.replace("%2F", "/");
 										Data= JSON.parse(oReceivedDataString);
 
 

@@ -114,7 +114,7 @@
 								<core:Title text="{i18n>OutboundVehicleInformation}" id="oOtherVehInfoid"/>
 								<!--	<VBox id="oVboxOtherVehicleInformation" visible="false">-->
 								<Text text="{TradeModel>/VehicleTradeVehicle/FromFourth}" id="FromFourth" visible="false"/>
-								<Label text="{i18n>Dealer}"/>
+								<Label text="{i18n>Dealer}" id="outlabedealrid"/>
 								<Text text="{path:'TradeModel>/VehicleTradeVehicle/kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'}-{TradeModel>/VehicleTradeVehicle/name1}" id="outdealrid"/>
 						
 								<Label text="{i18n>VehicleTrackingNumber}" id="vtnlabeid" visible="true"/>
