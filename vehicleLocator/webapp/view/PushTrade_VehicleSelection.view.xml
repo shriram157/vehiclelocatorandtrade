@@ -91,7 +91,7 @@
 								<FlexBox>
 									<items>
 										<VBox>
-											<Label text="{i18n>ModelYear}" labelFor="oVt_MoyrCmbo" design="Bold" class="sapUiTinyMarginBegin sapUiSmallMarginTop">
+											<Label text="{i18n>ModelYear}" labelFor="oVt_MoyrCmbo" design="Bold" required="true" class="sapUiTinyMarginBegin sapUiSmallMarginTop">
 												<layoutData>
 													<l:GridData span="L2 M2 S6"/>
 												</layoutData>
@@ -113,7 +113,7 @@
 											</Label>
 											<ComboBox placeholder="" width="140%" showSecondaryValues="true" filterSecondaryValues="true" selectionChange="handleoVt_SeriesChange"
 												id="oVt_SeriesCmbo" items="{/}">
-												<core:ListItem text="{=${SPRAS}==='English' ? ${TCISeriesDescriptionEN}:${TCISeriesDescriptionFR} }" key="{TCISeries}" additionalText=""/>
+												<core:ListItem text="{=${SPRAS}==='English' ? ${TCISeriesDescriptionEN}:${TCISeriesDescriptionFR} }" key="{TCISeries}" />
 											</ComboBox>
 										</VBox>
 									</items>
@@ -121,7 +121,7 @@
 								<FlexBox>
 									<items>
 										<VBox>
-									<Label text="{i18n>ModelCode}" required="true" labelFor="McCmbo" design="Bold" class="sapUiTinyMarginBegin sapUiSmallMarginTop">
+									<Label text="{i18n>ModelCode}"  labelFor="McCmbo" design="Bold" class="sapUiTinyMarginBegin sapUiSmallMarginTop">
 									<layoutData>
 													<l:GridData span="L2 M2 S6"/>
 												</layoutData>
