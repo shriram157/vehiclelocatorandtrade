@@ -98,7 +98,7 @@
 											</Label>
 											<ComboBox placeholder="" width="140%" showSecondaryValues="true" filterSecondaryValues="true" selectionChange="handleoVt_MoyrChange"
 												id="oVt_MoyrCmbo" items="{/}">
-												<core:ListItem text="{year}" key="{year}" additionalText=""/>
+												<core:ListItem text="{year}" key="{year}" />
 											</ComboBox>
 										</VBox>
 									</items>
@@ -111,10 +111,16 @@
 													<l:GridData span="L2 M2 S6"/>
 												</layoutData>
 											</Label>
-											<ComboBox placeholder="" width="140%" showSecondaryValues="true" filterSecondaryValues="true" selectionChange="handleoVt_SeriesChange"
-												id="oVt_SeriesCmbo" items="{/}">
-												<core:ListItem text="{=${SPRAS}==='English' ? ${TCISeriesDescriptionEN}:${TCISeriesDescriptionFR} }" key="{TCISeries}" />
-											</ComboBox>
+											<ComboBox placeholder="" selectedKey="" showSecondaryValues="true" width="140%" selectionChange="handleoVt_SeriesChange" id="oVt_SeriesCmbo"
+									 items="{/}">
+									<core:ListItem text="{=${SPRAS}==='English' ? ${TCISeriesDescriptionEN}:${TCISeriesDescriptionFR}}"
+										key="{TCISeries}" />
+									<!--	<core:ListItem text="{ModelCode>Model} - {ModelCode>ENModelDesc}" key="{ModelCode>Model}"/>-->
+								</ComboBox>
+											<!--<ComboBox placeholder="" width="140%" showSecondaryValues="true" filterSecondaryValues="true" selectionChange="handleoVt_SeriesChange"-->
+											<!--	id="oVt_SeriesCmbo" items="{/}">-->
+											<!--	<core:ListItem text="{=${SPRAS}==='English' ? ${TCISeriesDescriptionEN}:${TCISeriesDescriptionFR} }" key="{TCISeries}" />-->
+											<!--</ComboBox>-->
 										</VBox>
 									</items>
 								</FlexBox>
@@ -129,7 +135,7 @@
 								<ComboBox placeholder="" selectedKey="" showSecondaryValues="true" width="140%" selectionChange="MCClickedVLS11" id="McCmbo"
 									 items="{ path:'/', sorter : [{ path:'Model', ascending : 'true' } ] }">
 									<core:ListItem text="{Model}-{=${SPRAS}==='English' ? ${ENModelDesc}:${FRModelDesc} }"
-										key="{Model}" additionalText=""/>
+										key="{Model}" />
 									<!--	<core:ListItem text="{ModelCode>Model} - {ModelCode>ENModelDesc}" key="{ModelCode>Model}"/>-->
 								</ComboBox>
 								</VBox>
