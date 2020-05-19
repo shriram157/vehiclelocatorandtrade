@@ -1387,23 +1387,23 @@ this.getView().byId("ovinId").setVisible(true);
 				var oAccInstall = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.AccessoryInstalled;
 				var oWnoIntcolorcode = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.Int_Colour;
 		RequstingDealer_Actual=this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.Requested_Dealer;
-			RequstedDealer="";
-				var oVehTrano = "";
+			// RequstedDealer="";
+			// 	var oVehTrano = "";
 
-			/*var oModelyear = this.getView().byId("oMdlyear").getText();*/
-			var oModelyear = "";
+			// /*var oModelyear = this.getView().byId("oMdlyear").getText();*/
+			// var oModelyear = "";
 
-			var oSuffixcode = "";
+			// var oSuffixcode = "";
 
-			var oModelcode = "";
+			// var oModelcode = "";
 
-			/*	var oIntcolorcode = this.getView().byId("intdesr").gettext();*/
-			var oExtcolorcode = "";
+			// /*	var oIntcolorcode = this.getView().byId("intdesr").gettext();*/
+			// var oExtcolorcode = "";
 
-			/*	var oApx = this.getView().byId("oapx").getText();*/
-			var oApx = "";
-			var oInstall = "";
-			var oIntcolorcode = "";
+			// /*	var oApx = this.getView().byId("oapx").getText();*/
+			// var oApx = "";
+			// var oInstall = "";
+			// var oIntcolorcode = "";
 					} else {
 			var RequestingDealer = "";
 				var oWningVTN = "";
