@@ -1359,6 +1359,7 @@ this.getView().byId("ovinId").setVisible(true);
 			}
 			else{
 			var oVehTrano = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.VTN;
+			RequstedDealer="";
 
 			/*var oModelyear = this.getView().byId("oMdlyear").getText();*/
 			var oModelyear = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Model_Year;
@@ -2833,7 +2834,7 @@ var Offered_Vtn = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.
 				}
 				if (TradeRequest.Trade_Return == "Y") {
 					that.TradeVehiclesDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeVehicles(Trade_Id='" + TradeRequest.Trade_Id +
-						"',VTN='" + TradeRequest.Requested_Vtn + "')";
+						"',VTN='" + vtn + "')";
 					/*var /zc_mmfields*/
 					var ajaxRequested_Vtn = $.ajax({
 						dataType: "json",
