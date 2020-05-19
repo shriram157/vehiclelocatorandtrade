@@ -1340,26 +1340,26 @@ this.getView().byId("ovinId").setVisible(true);
 			/*var oVehTrano = this.getView().byId("ovtnId").getText();*/
 			if(this.getView().byId("SimpleFormAproveTrReq").getModel().oData.VTN==undefined)
 			{
-					var oVehTrano = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.VTN;
-
+					var oVehTrano = "";
+RequstedDealer="";
 			/*var oModelyear = this.getView().byId("oMdlyear").getText();*/
-			var oModelyear = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.Model_Year;
+			var oModelyear = "";
 
-			var oSuffixcode = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.Suffix;
+			var oSuffixcode = "";
 
-			var oModelcode = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.Model;
+			var oModelcode = "";
 
 			/*	var oIntcolorcode = this.getView().byId("intdesr").gettext();*/
-			var oExtcolorcode = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.Ext_Colour;
+			var oExtcolorcode = "";
 
 			/*	var oApx = this.getView().byId("oapx").getText();*/
-			var oApx = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.APX;
-			var oInstall = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.AccessoryInstalled;
-			var oIntcolorcode = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.Int_Colour;
+			var oApx = "";
+			var oInstall = "";
+			var oIntcolorcode = "";
 			}
 			else{
 			var oVehTrano = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.VTN;
-			RequstedDealer="";
+			
 
 			/*var oModelyear = this.getView().byId("oMdlyear").getText();*/
 			var oModelyear = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Model_Year;
