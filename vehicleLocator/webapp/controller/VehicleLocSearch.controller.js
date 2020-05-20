@@ -266,9 +266,16 @@ sap.ui.define([
 							"The Dealer data not received,  check the URL Division, Logged in ID, clear the Browser Cache, Pick the Right ID and Retry"
 						);
 					}
+										if (that.userTypeReceived == "Dealer_User") {
+						that.getView().byId("pushTradeId").setVisible(true);
 
 
-             
+}
+             else
+             {
+             							that.getView().byId("pushTradeId").setVisible(false);
+
+             }
 					//  set your model or use the model below - 
 					if (that.userTypeReceived != "National") {
 
@@ -2050,6 +2057,12 @@ var FilterZonestock = FilterDeleade_OrderTypefiltered_zone.filter(function (x) {
 				DataClicked: "Yes"
 			});
 
+		},
+		PushTradeLinkPress:function(){
+						var that = this;
+			that.getRouter().navTo("PushTrade_VehicleSelection", {
+				SelectedVehicleFrom: "VehileTrade_CreateSingle"
+			});
 		},
 
 		TradeHistoryLinkPress: function () {

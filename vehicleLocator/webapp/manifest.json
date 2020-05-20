@@ -190,6 +190,10 @@
 				"name": "VehicleTrade_VehicleSelection",
 				"target": "VehicleTrade_VehicleSelection"
 			}, {
+				"pattern": "PushTrade_VehicleSelection/:SelectedVehicleFrom:",
+				"name": "PushTrade_VehicleSelection",
+				"target": "PushTrade_VehicleSelection"
+			}, {
 				"pattern": "VehcTrad_Apprv_Rej_CounTrad/:selectedmyTr:",
 				"name": "VehcTrad_Apprv_Rej_CounTrad",
 				"target": "VehcTrad_Apprv_Rej_CounTrad"
@@ -263,6 +267,11 @@
 				},
 				"VehicleTrade_VehicleSelection": {
 					"viewName": "VehicleTrade_VehicleSelection",
+					"async": true,
+					"clearControlAggregation": false
+				},
+				"PushTrade_VehicleSelection": {
+					"viewName": "PushTrade_VehicleSelection",
 					"async": true,
 					"clearControlAggregation": false
 				}
