@@ -1187,7 +1187,11 @@ if(that.getView().byId("FromFourth").getText() == "FromPush")
 			var oexteriorReq = that.getView().byId("Zextcolo").getText().split("-")[0].trim();
 			var ointeriorReq = that.getView().getModel("TradeModel").oData.zzintcol;
 			var ovtnReq = that.getView().getModel("TradeModel").oData.zzvtn;
-			var ovinReq = that.getView().getModel("TradeModel").oData.vhvin;
+			var ovinReq = "";
+			if(that.getView().byId("VINReq").getVisible())
+			{
+			ovinReq = that.getView().getModel("TradeModel").oData.vhvin;
+			}
 			var accIns = that.getView().byId("oAccesIn").getText();
 			if(accIns=='Yes')
 			{
@@ -1233,7 +1237,11 @@ if(that.getView().byId("FromFourth").getText() == "FromPush")
 				var Series = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzseries;
 				var exterior = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzextcol;
 				var vtn = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzvtn;
-				var vin = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.vhvin;
+				var vin= "";
+				if(that.getView().byId("vinVinIdOff").getVisible())
+				{
+				vin = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.vhvin;
+				}
 				var accInstalled = that.getView().byId("accid").getText();
 				if(accInstalled=="Yes")
 				{
