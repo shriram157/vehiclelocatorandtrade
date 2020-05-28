@@ -14,10 +14,7 @@ sap.ui.define([
 
 		onInit: function () {
 			var _that = this;
-			var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
-			var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
-			this.getView().byId("oDealerCode3").setText(LoggedInDealerCode2);
-			this.getView().byId("oDealerCreat_singl").setText(LoggedInDealer);
+			
 			//Global date format
 			jQuery.sap.require("sap.ui.core.format.DateFormat");
 			_that.oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
@@ -76,7 +73,7 @@ sap.ui.define([
 		onRouteMatched: function (oEvent) {
                  
                  
-     
+
                  
            	var oModelDetail = this.getView().getModel("detailView");
 			this.getView().byId("oTypeHere").setValue(""); //1803
@@ -101,10 +98,13 @@ sap.ui.define([
 
 			var oReceivedDataString = oEvent.getParameter("arguments").SelectedTrade;
 			if (oReceivedDataString != undefined) {
-				if (oReceivedDataString != "VehicleTradeVehicle") {
-					
-					
-						 
+				if (oReceivedDataString == "VehicleSearchResults") {
+					var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
+			var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
+			this.getView().byId("oDealerCode3").setText(LoggedInDealerCode2);
+			this.getView().byId("oDealerCreat_singl").setText(LoggedInDealer);
+					this.getView().byId("outlabedealrid").setVisible(false);
+					this.getView().byId("outdealrid").setVisible(false);
 					this.getView().byId("oOtherVehInfoid").setText("");
 					this.getView().byId("vtnlabeid").setVisible(false);
 					// this.getView().byId("vtnid").setVisible(false);
@@ -163,7 +163,10 @@ sap.ui.define([
 
 				} else if (oReceivedDataString == "VehicleTradeVehicle") {
 
-
+var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
+			var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
+			this.getView().byId("oDealerCode3").setText(LoggedInDealerCode2);
+			this.getView().byId("oDealerCreat_singl").setText(LoggedInDealer);
 
 
 					this.getView().byId("vtnlabeid").setVisible(true);
@@ -207,7 +210,6 @@ sap.ui.define([
 					// this.getView().byId("vinLableIdOff").setVisible(true);
 					// this.getView().byId("vinVinIdOff").setVisible(true);	
 					 oModelDetail.setProperty("/showVinDiplayOff", true);
-					
 
 					// var i18n = sap.ui.getCore().getModel("i18n").getResourceBundle();
 					// var OtherVehicleInformation_text = i18n.getText("OfferVehicleInformation");
@@ -221,6 +223,79 @@ sap.ui.define([
 
 					this.getView().byId("SimpleFormDispla20").bindElement("TradeModel>/");
 
+				}
+				else
+				{
+										var Data ;
+										oReceivedDataString=oReceivedDataString.replace("%2F", "/");
+										Data= JSON.parse(oReceivedDataString);
+
+
+// var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
+// 			var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
+// 			this.getView().byId("oDealerCode3").setText(LoggedInDealerCode2);
+// 			this.getView().byId("oDealerCreat_singl").setText(LoggedInDealer);
+
+
+					this.getView().byId("vtnlabeid").setVisible(true);
+					this.getView().byId("vtnid").setVisible(true);
+					this.getView().byId("moylablid").setVisible(true);
+					this.getView().byId("yearid").setVisible(true);
+					this.getView().byId("serielabelid").setVisible(true);
+					this.getView().byId("seiresid").setVisible(true);
+					this.getView().byId("modlabelid").setVisible(true);
+					this.getView().byId("modlid").setVisible(true);
+					this.getView().byId("sufflabeid").setVisible(true);
+					this.getView().byId("suffid").setVisible(true);
+					this.getView().byId("apxlabelid").setVisible(true);
+					this.getView().byId("apxid").setVisible(true);
+					this.getView().byId("acclabelid").setVisible(true);
+					
+					this.getView().byId("accid").setVisible(true);
+					this.getView().byId("extcollabelid").setVisible(true);
+					this.getView().byId("extcolod").setVisible(true);
+
+					this.getView().byId("oCtraid").setVisible(true);
+					this.getView().byId("ctrtaid").setVisible(true);
+					// this.getView().byId("fromLabeeid").setVisible(true);
+					/*	this.getView().byId("labidtxt").setVisible(true);*/
+					this.getView().byId("labetxteid").setVisible(true);
+					// this.getView().byId("ototid").setVisible(true);
+					/*	this.getView().byId("otitxt").setVisible(true);*/
+					this.getView().byId("propetid").setVisible(true);
+					this.getView().byId("perpid").setVisible(true);
+					// this.getView().byId("frlabid").setVisible(true);
+					this.getView().byId("fmlabid").setVisible(true);
+					this.getView().byId("idlabeal").setVisible(true);
+					// this.getView().byId("textide").setVisible(true);
+
+					this.getView().byId("ofvestats").setVisible(true);
+					this.getView().byId("offeredStatus").setVisible(true);
+					this.getView().byId("offordetype").setVisible(true);
+					this.getView().byId("oofferedOrdertype").setVisible(true);
+					
+					
+					// this.getView().byId("vinLableIdOff").setVisible(true);
+					// this.getView().byId("vinVinIdOff").setVisible(true);	
+					 oModelDetail.setProperty("/showVinDiplayOff", true);
+
+					// var i18n = sap.ui.getCore().getModel("i18n").getResourceBundle();
+					// var OtherVehicleInformation_text = i18n.getText("OfferVehicleInformation");
+
+					var oModeli18n = this.getView().getModel("i18n");
+					// this._oResourceBundle = oModeli18n.getResourceBundle();			
+					var OtherVehicleInformation_text = oModeli18n.getResourceBundle().getText("OutboundVehicleInformation");
+
+					this.getView().byId("oOtherVehInfoid").setText(OtherVehicleInformation_text);
+					// this.getView().setModel(sap.ui.getCore().getModel("TradeModel"), "TradeModel");
+										var oModel = new sap.ui.model.json.JSONModel();
+					this.getView().setModel(oModel, "TradeModel");
+					// sap.ui.getCore().getModel("TradeModel").setProperty("/VehicleTradeVehicle", Data);
+							this.getView().getModel("TradeModel").setProperty("/VehicleTradeVehicle", Data);
+
+					this.getView().byId("SimpleFormDispla20").bindElement("TradeModel>/");
+
+				
 				}
 			}
 // defect 11177 -  do not show 	dnc indicator based on order type		
@@ -256,7 +331,68 @@ sap.ui.define([
 				} else if (selVT_CStradinRet == "No") {
 					this.getView().byId("oSeleBtn").setEnabled(false);
 				}*/
+     if((this.getView().byId("FromFourth").getText()=="FromPush"))
+     {
+     	this.getView().byId("VT_CStradinRet").setSelectedKey("No");
+     					
+				this.getView().byId("dealridreq").setVisible(false);
+				this.getView().byId("dealrid").setVisible(false);
 
+				// this.getView().byId("FromFourth").setText("");
+				this.getView().byId("oSeleBtn").setVisible(false);
+				this.getView().byId("OtherVehInfoid").setText("");
+				this.getView().byId("vtnlabeidReq").setVisible(false);
+				this.getView().byId("vinLabelId").setVisible(false);
+				this.getView().byId("moyrLabelReq").setVisible(false);
+				this.getView().byId("zzMoyr").setVisible(false);
+				this.getView().byId("seriesLabelReq").setVisible(false);
+				this.getView().byId("oSeries").setVisible(false);
+				this.getView().byId("modLabelReq").setVisible(false);
+				this.getView().byId("oZmodel").setVisible(false);
+				this.getView().byId("sufLabelReq").setVisible(false);
+				this.getView().byId("oZsuffix").setVisible(false);
+				this.getView().byId("apxLabelReq").setVisible(false);
+				this.getView().byId("oApx").setVisible(false);
+				this.getView().byId("accLabelReq").setVisible(false);
+					
+					this.getView().byId("oAccesIn").setVisible(false);
+				this.getView().byId("extLabelReq").setVisible(false);
+				this.getView().byId("Zextcolo").setVisible(false);
+
+				this.getView().byId("statusLabelReq").setVisible(false);
+				this.getView().byId("oStatus").setVisible(false);
+				this.getView().byId("ordLabelReq").setVisible(false);
+				this.getView().byId("oOrdertype").setVisible(false);
+
+				this.getView().byId("cetalabelid").setVisible(false);
+				this.getView().byId("ctaid").setVisible(false);
+				// this.getView().byId("fromLabeeid").setVisible(false);
+				/*	this.getView().byId("labidtxt").setVisible(false);*/
+				this.getView().byId("totxtid").setVisible(false);
+				// this.getView().byId("ototid").setVisible(false);
+				/*	this.getView().byId("otitxt").setVisible(false);*/
+				this.getView().byId("prpdlabid").setVisible(false);
+				this.getView().byId("prpid").setVisible(false);
+				// this.getView().byId("frlabid").setVisible(false);
+				this.getView().byId("otextlabel").setVisible(false);
+				this.getView().byId("vtnidReq").setVisible(false);
+				// this.getView().byId("textide").setVisible(false);
+				this.getView().byId("VT_CStradinRet").setEnabled(false);
+
+				// var Requested_Dealer = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.Requested_Dealer;
+				// 		var Requested_Dealer_Name = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.Requested_Dealer_Name.substr(that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.Requested_Dealer_Name.indexOf(
+				// 			"-") + 1);
+
+				/*var oReceivedData = sap.ui.getCore().VehicheSearcResults[this.oReceivedDataString];
+				var oModel = new sap.ui.model.json.JSONModel(oReceivedData);
+
+				this.getView().setModel(oModel, "TradeModel");
+				sap.ui.getCore().setModel(oModel, "TradeModel");
+				this.getView().byId("SimpleFormDispla20").bindElement("TradeModel>/");*/
+			
+			
+
+     }
 			if (sap.ui.getCore().SelectedTradeStatus != undefined) {
 				this.getView().byId("VT_CStradinRet").setSelectedKey(sap.ui.getCore().SelectedTradeStatus);
 				if (sap.ui.getCore().SelectedTradeStatus == "Yes") {
@@ -272,7 +408,7 @@ sap.ui.define([
 			sap.ui.getCore().SelectedTradeStatus = this.getView().byId("VT_CStradinRet").getSelectedKey();
 			if (selVT_CStradinRet == "Yes") {
 				this.getView().byId("oSeleBtn").setVisible(true);
-			} else if (selVT_CStradinRet == "No") {
+			} else if (selVT_CStradinRet == "No" &&	this.getView().byId("FromFourth").getText() != "FromPush") {
 
 				this.getView().byId("FromFourth").setText("");
 				this.getView().byId("oSeleBtn").setVisible(false);
@@ -320,6 +456,60 @@ sap.ui.define([
 				this.getView().setModel(oModel, "TradeModel");
 				sap.ui.getCore().setModel(oModel, "TradeModel");
 				this.getView().byId("SimpleFormDispla20").bindElement("TradeModel>/");*/
+			}
+			else if(this.getView().byId("FromFourth").getText() == "FromPush")
+			{
+				
+
+				// this.getView().byId("FromFourth").setText("");
+				this.getView().byId("oSeleBtn").setVisible(false);
+				this.getView().byId("OtherVehInfoid").setText("");
+				this.getView().byId("dealridreq").setVisible(false);
+				this.getView().byId("dealrid").setVisible(false);
+				this.getView().byId("vtnlabeidReq").setVisible(false);
+				this.getView().byId("vinLabelId").setVisible(false);
+				this.getView().byId("moyrLabelReq").setVisible(false);
+				this.getView().byId("zzMoyr").setVisible(false);
+				this.getView().byId("seriesLabelReq").setVisible(false);
+				this.getView().byId("oSeries").setVisible(false);
+				this.getView().byId("modLabelReq").setVisible(false);
+				this.getView().byId("oZmodel").setVisible(false);
+				this.getView().byId("sufLabelReq").setVisible(false);
+				this.getView().byId("oZsuffix").setVisible(false);
+				this.getView().byId("apxLabelReq").setVisible(false);
+				this.getView().byId("oApx").setVisible(false);
+				this.getView().byId("accLabelReq").setVisible(false);
+					
+					this.getView().byId("oAccesIn").setVisible(false);
+				this.getView().byId("extLabelReq").setVisible(false);
+				this.getView().byId("Zextcolo").setVisible(false);
+
+				this.getView().byId("statusLabelReq").setVisible(false);
+				this.getView().byId("oStatus").setVisible(false);
+				this.getView().byId("ordLabelReq").setVisible(false);
+				this.getView().byId("oOrdertype").setVisible(false);
+
+				this.getView().byId("cetalabelid").setVisible(false);
+				this.getView().byId("ctaid").setVisible(false);
+				// this.getView().byId("fromLabeeid").setVisible(false);
+				/*	this.getView().byId("labidtxt").setVisible(false);*/
+				this.getView().byId("totxtid").setVisible(false);
+				// this.getView().byId("ototid").setVisible(false);
+				/*	this.getView().byId("otitxt").setVisible(false);*/
+				this.getView().byId("prpdlabid").setVisible(false);
+				this.getView().byId("prpid").setVisible(false);
+				// this.getView().byId("frlabid").setVisible(false);
+				this.getView().byId("otextlabel").setVisible(false);
+				this.getView().byId("vtnidReq").setVisible(false);
+				// this.getView().byId("textide").setVisible(false);
+
+				/*var oReceivedData = sap.ui.getCore().VehicheSearcResults[this.oReceivedDataString];
+				var oModel = new sap.ui.model.json.JSONModel(oReceivedData);
+
+				this.getView().setModel(oModel, "TradeModel");
+				sap.ui.getCore().setModel(oModel, "TradeModel");
+				this.getView().byId("SimpleFormDispla20").bindElement("TradeModel>/");*/
+			
 			}
 
 			/*	var selVT_CStradinRet = this.getView().byId("VT_CStradinRet").getSelectedKey();
@@ -699,8 +889,63 @@ sap.ui.define([
 			 
 						var Requested_Dealer = that.getView().getModel("TradeModel").oData.kunnr;
 						var Requested_Dealer_Name = that.getView().byId("dealrid").getText().substr(that.getView().byId("dealrid").getText().indexOf(
-							"-") + 1);
+							"-") + 1).trim();
+if(that.getView().byId("FromFourth").getText() == "FromPush")
+			{
+				var Requested_Dealer = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.kunnr;
+						var Requested_Dealer_Name = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.name1;
 
+				Created_By= truncateString(Requested_Dealer_Name, 12);
+			}
+
+				// this.getView().byId("FromFourth").setText("");
+				that.getView().byId("oSeleBtn").setVisible(false);
+				that.getView().byId("OtherVehInfoid").setText("");
+				that.getView().byId("vtnlabeidReq").setVisible(false);
+				that.getView().byId("vinLabelId").setVisible(false);
+				that.getView().byId("moyrLabelReq").setVisible(false);
+				that.getView().byId("zzMoyr").setVisible(false);
+				that.getView().byId("seriesLabelReq").setVisible(false);
+				that.getView().byId("oSeries").setVisible(false);
+				that.getView().byId("modLabelReq").setVisible(false);
+				that.getView().byId("oZmodel").setVisible(false);
+				that.getView().byId("sufLabelReq").setVisible(false);
+				that.getView().byId("oZsuffix").setVisible(false);
+				that.getView().byId("apxLabelReq").setVisible(false);
+				that.getView().byId("oApx").setVisible(false);
+				that.getView().byId("accLabelReq").setVisible(false);
+					
+					that.getView().byId("oAccesIn").setVisible(false);
+				that.getView().byId("extLabelReq").setVisible(false);
+				that.getView().byId("Zextcolo").setVisible(false);
+
+				that.getView().byId("statusLabelReq").setVisible(false);
+				that.getView().byId("oStatus").setVisible(false);
+				that.getView().byId("ordLabelReq").setVisible(false);
+				that.getView().byId("oOrdertype").setVisible(false);
+
+				that.getView().byId("cetalabelid").setVisible(false);
+				that.getView().byId("ctaid").setVisible(false);
+				// this.getView().byId("fromLabeeid").setVisible(false);
+				/*	this.getView().byId("labidtxt").setVisible(false);*/
+				that.getView().byId("totxtid").setVisible(false);
+				// this.getView().byId("ototid").setVisible(false);
+				/*	this.getView().byId("otitxt").setVisible(false);*/
+				that.getView().byId("prpdlabid").setVisible(false);
+				that.getView().byId("prpid").setVisible(false);
+				// this.getView().byId("frlabid").setVisible(false);
+				that.getView().byId("otextlabel").setVisible(false);
+				that.getView().byId("vtnidReq").setVisible(false);
+				// this.getView().byId("textide").setVisible(false);
+
+				/*var oReceivedData = sap.ui.getCore().VehicheSearcResults[this.oReceivedDataString];
+				var oModel = new sap.ui.model.json.JSONModel(oReceivedData);
+
+				this.getView().setModel(oModel, "TradeModel");
+				sap.ui.getCore().setModel(oModel, "TradeModel");
+				this.getView().byId("SimpleFormDispla20").bindElement("TradeModel>/");*/
+			
+			
 						var oEntry = {
 
 							"Trade_Id": Trade_Id,
@@ -793,7 +1038,7 @@ sap.ui.define([
 		 
 			// https://uat-vehiclelocatorandtrade.scp.toyota.ca/xsodata/vehicleTrade_SRV.xsodata/TradeComment(Trade_Id='TR000086',Comment_Id='01')
 			
-				that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment(Trade_Id='"+ that.Trade_Id + "',Comment_Id='01')";
+				that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id eq '" + that.Trade_Id + "'";
 			
 			$.ajax({
 				url: that.oDataUrl,
@@ -930,6 +1175,9 @@ sap.ui.define([
 			});
 			var oCommentdate = new Date(oDateFormat.format(new Date()));
 			oCommentdate.setDate(oCommentdate.getDate() + 1);
+						var oVehicleDetails = [];
+
+			if (that.getView().byId("FromFourth").getText() != "FromPush") {
 
 			var oSuffixReq = that.getView().byId("oZsuffix").getText().split("-")[0].trim();
 			var omodelReq = that.getView().byId("oZmodel").getText().split("-")[0].trim();
@@ -972,9 +1220,9 @@ sap.ui.define([
 				AccessoryInstalled:accIns
 			};
 			oEntry2["Trade_Id"] = oEntry.Trade_Id;
-			var oVehicleDetails = [];
 			oVehicleDetails.push(oEntry2);
-			if (that.getView().byId("FromFourth").getText() == "FromFourth") {
+			}
+			if ((that.getView().byId("FromFourth").getText() == "FromFourth")||(that.getView().byId("FromFourth").getText() == "FromPush")) {
 				var Suffix = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzsuffix;
 
 				var intColor = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzintcol;
@@ -1080,7 +1328,7 @@ sap.ui.define([
 
 			// ENTRY1 VALUES DESCRIPTION;
 			var Tradestatus = [];
-
+if(that.getView().byId("FromFourth").getText() != "FromPush"){
 			var oVTN = that.getView().getModel("TradeModel").getData().zzvtn;
 			var oModel_DescReq = that.getView().getModel("TradeModel").getData().model_desc_en;
 			var oSeries_DescReq = that.getView().getModel("TradeModel").getData().zzseries_desc_en;
@@ -1122,8 +1370,8 @@ sap.ui.define([
 			Entry2["Trade_Id"] = oEntry.Trade_Id;
 			Entry2["VTN"] = oVTN;
 			Tradestatus.push(Entry2);
-
-			if (that.getView().byId("FromFourth").getText() == "FromFourth") {
+}
+			if ((that.getView().byId("FromFourth").getText() == "FromFourth")||(that.getView().byId("FromFourth").getText() == "FromPush")) {
 				var oVTN = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzvtn;
 				var oModel_Desc = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.model_desc_en;
 				var oSeries_Desc = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzseries_desc_en;

@@ -1,5 +1,5 @@
 <mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
-	controllerName="vehicleLocator.controller.VehicleTrade_VehicleSelection" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form"
+	controllerName="vehicleLocator.controller.PushTrade_VehicleSelection" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form"
 	xmlns:uxap="sap.uxap" xmlns:tnt="sap.tnt" xmlns:t="sap.ui.table" xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form"
 	xmlns:html="http://www.w3.org/1999/xhtml">
 	<App>
@@ -13,7 +13,7 @@
 							<Text class="clCustomFont" text="{i18n>PageTitle}"/>
 						</contentLeft>
 						<contentRight>
-							<!--<Button   class="VLbtn2" text="{i18n>Back}" type="Transparent" press="onNavBack" width="auto"/>-->
+							<!--<Button   class="VLbtn2" text="{i18n>Back}" type="Transparent" press="onBack" width="auto"/>-->
 							<!--<Link text="{i18n>Back}" class="clCustomFont sapUiSmallMargin" press="handlebacksearch"/>-->
 						</contentRight>
 					</Bar>
@@ -35,10 +35,10 @@
 						<Label id="oDealerCode4" width="auto"/>
 						<Label id="oDealerOwnVehiSele" width="auto"/>
 						<ToolbarSpacer/>
-						<Button class="VLbtn2" text="{i18n>Back}" type="Transparent" press="onNavBack" width="auto"/>
+						<Button class="VLbtn2" text="{i18n>Back}" type="Transparent" press="onBack" width="auto"/>
 					</tnt:ToolHeader>
 					<OverflowToolbar id="otb1">
-						<Label text="{i18n>VehicleTrade-VehicleSelection}" width="auto" class="vHlabe1clss"/>
+						<Label text="{i18n>CounterTrade-VehicleSelection}" width="auto" class="vHlabe1clss"/>
 						<ToolbarSpacer/>
 					</OverflowToolbar>
 					<!--<Toolbar class="toolbar1">
@@ -53,6 +53,23 @@
 						layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024" class="sapUiSizeCompact">
 						<f:content>
 							<l:Grid class="sapUiSmallMarginTop" containerQuery="true" hSpacing="1">
+										<FlexBox>
+								<items>
+									<VBox>
+										<Label text="{i18n>Dealer}" labelFor="VLRDealer" design="Bold" class="sapUiTinyMarginBegin sapUiSmallMarginTop">
+											<layoutData>
+												<l:GridData span="L2 M2 S6"/>
+											</layoutData>
+										</Label>
+										<ComboBox id="VLRDealer" change="onDealerChange" items="{BpDealerModelZone>/}" class="sapUiTinyMarginBegin" width="140%">
+											<core:ListItem text="{BpDealerModelZone>BusinessPartner} - {BpDealerModelZone>BusinessPartnerName}" key="{BpDealerModelZone>BusinessPartnerKey}"/>
+											<layoutData>
+												<l:GridData span="L2 M2 S6"/>
+											</layoutData>
+										</ComboBox>
+									</VBox>
+								</items>
+							</FlexBox>
 									<FlexBox>
 									<items>
 										<VBox>
@@ -70,10 +87,11 @@
 										</VBox>
 									</items>
 								</FlexBox>
+						
 								<FlexBox>
 									<items>
 										<VBox>
-											<Label text="{i18n>ModelYear}" labelFor="oVt_MoyrCmbo" design="Bold" class="sapUiTinyMarginBegin sapUiSmallMarginTop">
+											<Label text="{i18n>ModelYear}" labelFor="oVt_MoyrCmbo" design="Bold" required="true" class="sapUiTinyMarginBegin sapUiSmallMarginTop">
 												<layoutData>
 													<l:GridData span="L2 M2 S6"/>
 												</layoutData>
@@ -93,24 +111,23 @@
 													<l:GridData span="L2 M2 S6"/>
 												</layoutData>
 											</Label>
-								<ComboBox placeholder="" selectedKey="" showSecondaryValues="true" width="140%" selectionChange="handleoVt_SeriesChange" id="oVt_SeriesCmbo"
+											<ComboBox placeholder="" selectedKey="" showSecondaryValues="true" width="140%" selectionChange="handleoVt_SeriesChange" id="oVt_SeriesCmbo"
 									 items="{/}">
 									<core:ListItem text="{=${SPRAS}==='English' ? ${TCISeriesDescriptionEN}:${TCISeriesDescriptionFR}}"
 										key="{TCISeries}" />
 									<!--	<core:ListItem text="{ModelCode>Model} - {ModelCode>ENModelDesc}" key="{ModelCode>Model}"/>-->
 								</ComboBox>
-								<!--			<ComboBox placeholder="" width="140%" showSecondaryValues="true" filterSecondaryValues="true" selectionChange="handleoVt_SeriesChange"-->
-								<!--				id="oVt_SeriesCmbo" items="{/}">-->
-								<!--				<core:ListItem text="{=${SPRAS}==='English' ? ${TCISeriesDescriptionEN}:${TCISeriesDescriptionFR}}"-->
-								<!--				key="{TCISeries}" />-->
-								<!--			</ComboBox>-->
+											<!--<ComboBox placeholder="" width="140%" showSecondaryValues="true" filterSecondaryValues="true" selectionChange="handleoVt_SeriesChange"-->
+											<!--	id="oVt_SeriesCmbo" items="{/}">-->
+											<!--	<core:ListItem text="{=${SPRAS}==='English' ? ${TCISeriesDescriptionEN}:${TCISeriesDescriptionFR} }" key="{TCISeries}" />-->
+											<!--</ComboBox>-->
 										</VBox>
 									</items>
 								</FlexBox>
 								<FlexBox>
 									<items>
 										<VBox>
-									<Label text="{i18n>ModelCode}" required="true" labelFor="McCmbo" design="Bold" class="sapUiTinyMarginBegin sapUiSmallMarginTop">
+									<Label text="{i18n>ModelCode}"  labelFor="McCmbo" design="Bold" class="sapUiTinyMarginBegin sapUiSmallMarginTop">
 									<layoutData>
 													<l:GridData span="L2 M2 S6"/>
 												</layoutData>

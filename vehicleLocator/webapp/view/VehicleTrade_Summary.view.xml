@@ -140,7 +140,7 @@
 													text="{path:'receivedRequestTable>Requesting_Dealer',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDealer'}-{receivedRequestTable>Requesting_Dealer_Name}"></Text>
 												<Text text="{receivedRequestTable>Model}-{receivedRequestTable>Model_Desc}" wrapping="true"/>
 												<Text text="{receivedRequestTable>Suffix}-{receivedRequestTable>Suffix_Desc}/{receivedRequestTable>Int_Colour_Desc}" wrapping="true"/>
-												<Text text="{receivedRequestTable>Ext_Colour}-{receivedRequestTable>Ext_Colour_Desc}}" wrapping="true"/>
+												<Text text="{receivedRequestTable>Ext_Colour}-{receivedRequestTable>Ext_Colour_Desc}" wrapping="true"/>
 
 												<Text text="{path:'receivedRequestTable>Trade_Return',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryTrdReturn'}" wrapping="true"/>
 												<Text text="{path:'receivedRequestTable>Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="true"/>
@@ -278,7 +278,7 @@
 										<Text text="{vehicleTradeSummaryTable>Model}-{vehicleTradeSummaryTable>Model_Desc}" wrapping="true"/>
 										<Text text="{vehicleTradeSummaryTable>Suffix}-{vehicleTradeSummaryTable>Suffix_Desc}/{vehicleTradeSummaryTable>Int_Colour_Desc}"
 											wrapping="true"/>
-										<Text text="{vehicleTradeSummaryTable>Ext_Colour}-{vehicleTradeSummaryTable>Ext_Colour_Desc}}"
+										<Text text="{vehicleTradeSummaryTable>Ext_Colour}-{vehicleTradeSummaryTable>Ext_Colour_Desc}"
 											wrapping="true"/>
 										<Text text="{path:'vehicleTradeSummaryTable>Trade_Return',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryTrdReturn'}"
 											wrapping="false"/>
