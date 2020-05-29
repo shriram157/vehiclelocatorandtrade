@@ -770,10 +770,12 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 						that.selectedTrade.Proposed_ETA_From = Data.Calculate;
 						//that.selectedTrade=escape(JSON.stringify(that.selectedTrade));
 
-						if (that.selectedTrade.mmsta >= "M275" && that.selectedTrade.vhvin != "") {
-							that.selectedTrade.dispalyVin = true;
-						} else {
+
+						var patt1 = /P*/;
+						if (that.selectedTrade.mmsta < "M275" || patt1.test(that.selectedTrade.mmsta) || that.selectedTrade.vhvin == "") {
 							that.selectedTrade.dispalyVin = false;
+						} else {
+							that.selectedTrade.dispalyVin = true;
 						}
 
 						sap.ui.getCore().SelectedTrade = that.selectedTrade;
