@@ -93,7 +93,7 @@ sap.ui.define([
 					if (oDealer.length == 10) {
 						oDealer = oDealer.slice(-5);
 					}
-						sap.ui.core.BusyIndicator.show(0);
+					sap.ui.core.BusyIndicator.show(0);
 					var that = this;
 					var SeriesUrl = oDataUrl + "/ZVMS_CDS_ETA_consolidate('" + oDealer + "')/Set?$filter=zzvtn eq '" + StatusData.VTN +
 						"' and kunnr eq '" + StatusData.Requested_Dealer + "'&$format=json";
@@ -107,19 +107,20 @@ sap.ui.define([
 
 						success: function (odata, oresponse) {
 							var a = odata.d.results;
+							var patt1 = /P*/;
 
 							for (var k = 0; k < a.length; k++) {
 								if (StatusData.VTN == a[k].zzvtn) {
 									if (!!a[k].vhvin && a[k].vhvin !== "") {
-										if (a[k].mmsta >= "M275") {
-											that._oViewModel.setProperty("/showVinDiplayOff", true);
-										} else {
+										if (a[k].mmsta < "M275" || patt1.test(a[k].mmsta)) {
 											that._oViewModel.setProperty("/showVinDiplayOff", false);
+										} else {
+											that._oViewModel.setProperty("/showVinDiplayOff", true);
 										}
 									}
 								}
 							}
-								sap.ui.core.BusyIndicator.hide();
+							sap.ui.core.BusyIndicator.hide();
 
 						},
 						error: function (s, result) {
@@ -303,7 +304,7 @@ sap.ui.define([
 					//	this.getView().byId("SimpleFormAproveTrReq").setModel(sap.ui.getCore().getModel("MyTradeRequested"));
 					var StatusData = sap.ui.getCore().getModel("MyTradeRequested").getData();
 					this._oViewModel.setProperty("/tradeId", StatusData.Trade_Id);
-				
+
 					if (StatusData.DNC == "Y") {
 
 						this._oViewModel.setProperty("/showOrderType", false);
@@ -327,46 +328,47 @@ sap.ui.define([
 					}
 
 					if (StatusData.Trade_Return == "N") {
-								var oDealer = StatusData.Requesting_Dealer;
-					if (oDealer.length == 10) {
-						oDealer = oDealer.slice(-5);
-					}
+						var oDealer = StatusData.Requesting_Dealer;
+						if (oDealer.length == 10) {
+							oDealer = oDealer.slice(-5);
+						}
 						sap.ui.core.BusyIndicator.show(0);
-					var that = this;
-					var SeriesUrl = oDataUrl + "/ZVMS_CDS_ETA_consolidate('" + oDealer + "')/Set?$filter=zzvtn eq '" + StatusData.VTN +
-						"' and kunnr eq '" + StatusData.Requested_Dealer + "'&$format=json";
-					$.ajax({
-						url: SeriesUrl,
-						type: "GET",
-						dataType: 'json',
-						xhrFields: {
-							withCredentials: true
-						},
+						var that = this;
+						var SeriesUrl = oDataUrl + "/ZVMS_CDS_ETA_consolidate('" + oDealer + "')/Set?$filter=zzvtn eq '" + StatusData.VTN +
+							"' and kunnr eq '" + StatusData.Requested_Dealer + "'&$format=json";
+						$.ajax({
+							url: SeriesUrl,
+							type: "GET",
+							dataType: 'json',
+							xhrFields: {
+								withCredentials: true
+							},
 
-						success: function (odata, oresponse) {
-							var a = odata.d.results;
+							success: function (odata, oresponse) {
+								var a = odata.d.results;
+								var patt1 = /P*/;
 
-							for (var k = 0; k < a.length; k++) {
-								if (StatusData.VTN == a[k].zzvtn) {
-									if (!!a[k].vhvin && a[k].vhvin !== "") {
-										if (a[k].mmsta >= "M275") {
-											that.getView().byId("ovinId").setVisible(true);
-										} else {
-											that.getView().byId("ovinId").setVisible(false);
+								for (var k = 0; k < a.length; k++) {
+									if (StatusData.VTN == a[k].zzvtn) {
+										if (!!a[k].vhvin && a[k].vhvin !== "") {
+											if (a[k].mmsta < "M275" || patt1.test(a[k].mmsta)) {
+												that.getView().byId("ovinId").setVisible(false);
+											} else {
+												that.getView().byId("ovinId").setVisible(true);
+											}
 										}
 									}
 								}
-							}
 								sap.ui.core.BusyIndicator.hide();
 
-						},
-						error: function (s, result) {
-							debugger;
-							var a = s;
-							sap.ui.core.BusyIndicator.hide();
-							/*	sap.m.MessageBox.warning("No Data");*/
-						}
-					});
+							},
+							error: function (s, result) {
+								debugger;
+								var a = s;
+								sap.ui.core.BusyIndicator.hide();
+								/*	sap.m.MessageBox.warning("No Data");*/
+							}
+						});
 
 						// this._oViewModel.setProperty("/showVinDiplayOff", false);
 						// this.getView().byId("offervehidContent").setVisible(true);
@@ -433,47 +435,47 @@ sap.ui.define([
 						// that.getView().byId("idlto").setVisible(true);
 
 					} else if (StatusData.Trade_Return == "Y") {
-								var oDealer = StatusData.Requesting_Dealer;
-					if (oDealer.length == 10) {
-						oDealer = oDealer.slice(-5);
-					}
+						var oDealer = StatusData.Requesting_Dealer;
+						if (oDealer.length == 10) {
+							oDealer = oDealer.slice(-5);
+						}
 						sap.ui.core.BusyIndicator.show(0);
-					var that = this;
-					var SeriesUrl = oDataUrl + "/ZVMS_CDS_ETA_consolidate('" + oDealer + "')/Set?$filter=zzvtn eq '" + StatusData.VTN +
-						"' and kunnr eq '" + StatusData.Requested_Dealer + "'&$format=json";
-					$.ajax({
-						url: SeriesUrl,
-						type: "GET",
-						dataType: 'json',
-						xhrFields: {
-							withCredentials: true
-						},
+						var that = this;
+						var SeriesUrl = oDataUrl + "/ZVMS_CDS_ETA_consolidate('" + oDealer + "')/Set?$filter=zzvtn eq '" + StatusData.VTN +
+							"' and kunnr eq '" + StatusData.Requested_Dealer + "'&$format=json";
+						$.ajax({
+							url: SeriesUrl,
+							type: "GET",
+							dataType: 'json',
+							xhrFields: {
+								withCredentials: true
+							},
 
-						success: function (odata, oresponse) {
-							var a = odata.d.results;
+							success: function (odata, oresponse) {
+								var a = odata.d.results;
+								var patt1 = /P*/;
 
-							for (var k = 0; k < a.length; k++) {
-								if (StatusData.VTN == a[k].zzvtn) {
-									if (!!a[k].vhvin && a[k].vhvin !== "") {
-										if (a[k].mmsta >= "M275") {
-											that._oViewModel.setProperty("/showVinDiplayOff", true);
-										} else {
-											that._oViewModel.setProperty("/showVinDiplayOff", false);
+								for (var k = 0; k < a.length; k++) {
+									if (StatusData.VTN == a[k].zzvtn) {
+										if (!!a[k].vhvin && a[k].vhvin !== "") {
+											if (a[k].mmsta < "M275" || patt1.test(a[k].mmsta)) {
+												that._oViewModel.setProperty("/showVinDiplayOff", false);
+											} else {
+												that._oViewModel.setProperty("/showVinDiplayOff", true);
+											}
 										}
 									}
 								}
-							}
 								sap.ui.core.BusyIndicator.hide();
 
-						},
-						error: function (s, result) {
-							debugger;
-							var a = s;
-							sap.ui.core.BusyIndicator.hide();
-							/*	sap.m.MessageBox.warning("No Data");*/
-						}
-					});
-
+							},
+							error: function (s, result) {
+								debugger;
+								var a = s;
+								sap.ui.core.BusyIndicator.hide();
+								/*	sap.m.MessageBox.warning("No Data");*/
+							}
+						});
 
 						// this._oViewModel.setProperty("/showVinDiplayOff", true); //2207
 
@@ -950,12 +952,12 @@ sap.ui.define([
 
 				}
 				if (StatusData.Trade_Return == "N") {
-					
-						var oDealer = StatusData.Requesting_Dealer;
+
+					var oDealer = StatusData.Requesting_Dealer;
 					if (oDealer.length == 10) {
 						oDealer = oDealer.slice(-5);
 					}
-						sap.ui.core.BusyIndicator.show(0);
+					sap.ui.core.BusyIndicator.show(0);
 					var that = this;
 					var SeriesUrl = oDataUrl + "/ZVMS_CDS_ETA_consolidate('" + oDealer + "')/Set?$filter=zzvtn eq '" + StatusData.VTN +
 						"' and kunnr eq '" + StatusData.Requested_Dealer + "'&$format=json";
@@ -969,19 +971,20 @@ sap.ui.define([
 
 						success: function (odata, oresponse) {
 							var a = odata.d.results;
+							var patt1 = /P*/;
 
 							for (var k = 0; k < a.length; k++) {
 								if (StatusData.VTN == a[k].zzvtn) {
 									if (!!a[k].vhvin && a[k].vhvin !== "") {
-										if (a[k].mmsta >= "M275") {
-											that.getView().byId("ovinId").setVisible(true);
-										} else {
+										if (a[k].mmsta < "M275" || patt1.test(a[k].mmsta)) {
 											that.getView().byId("ovinId").setVisible(false);
+										} else {
+											that.getView().byId("ovinId").setVisible(true);
 										}
 									}
 								}
 							}
-								sap.ui.core.BusyIndicator.hide();
+							sap.ui.core.BusyIndicator.hide();
 
 						},
 						error: function (s, result) {
@@ -1057,12 +1060,12 @@ sap.ui.define([
 					// that.getView().byId("idlto").setVisible(false);
 
 				} else if (StatusData.Trade_Return == "Y") {
-					
-						var oDealer = StatusData.Requesting_Dealer;
+
+					var oDealer = StatusData.Requesting_Dealer;
 					if (oDealer.length == 10) {
 						oDealer = oDealer.slice(-5);
 					}
-						sap.ui.core.BusyIndicator.show(0);
+					sap.ui.core.BusyIndicator.show(0);
 					var that = this;
 					var SeriesUrl = oDataUrl + "/ZVMS_CDS_ETA_consolidate('" + oDealer + "')/Set?$filter=zzvtn eq '" + StatusData.VTN +
 						"' and kunnr eq '" + StatusData.Requested_Dealer + "'&$format=json";
@@ -1076,19 +1079,20 @@ sap.ui.define([
 
 						success: function (odata, oresponse) {
 							var a = odata.d.results;
+							var patt1 = /P*/;
 
 							for (var k = 0; k < a.length; k++) {
 								if (StatusData.VTN == a[k].zzvtn) {
 									if (!!a[k].vhvin && a[k].vhvin !== "") {
-										if (a[k].mmsta >= "M275") {
-											that._oViewModel.setProperty("/showVinDiplayOff", true);
-										} else {
+										if (a[k].mmsta < "M275" || patt1.test(a[k].mmsta)) {
 											that._oViewModel.setProperty("/showVinDiplayOff", false);
+										} else {
+											that._oViewModel.setProperty("/showVinDiplayOff", true);
 										}
 									}
 								}
 							}
-								sap.ui.core.BusyIndicator.hide();
+							sap.ui.core.BusyIndicator.hide();
 
 						},
 						error: function (s, result) {
