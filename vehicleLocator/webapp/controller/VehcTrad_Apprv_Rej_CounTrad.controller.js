@@ -66,8 +66,10 @@ sap.ui.define([
 			}
 
 			var that = this;
-
-			var nodeJsUrl = this.sPrefix + "/node";
+		//	var sPrefix = "/vehicleLocatorNode";//local run comment before deployment
+		//	var nodeJsUrl = sPrefix + "/node";//local run comment before deployment
+			var nodeJsUrl = this.sPrefix + "/node";//local run uncomment before deployment
+			
 			var oDataUrl = nodeJsUrl + "/Z_VEHICLE_MASTER_SRV";
 			var oDataModel = new sap.ui.model.odata.ODataModel(oDataUrl, true);
 
@@ -120,6 +122,8 @@ sap.ui.define([
 									}
 								}
 							}
+							that.getView().setModel(that._oViewModel, "detailView");
+							that._oViewModel.refresh(true);
 							sap.ui.core.BusyIndicator.hide();
 
 						},
@@ -352,13 +356,17 @@ sap.ui.define([
 									if (StatusData.VTN == a[k].zzvtn) {
 										if (!!a[k].vhvin && a[k].vhvin !== "") {
 											if (a[k].mmsta < "M275" || patt1.test(a[k].mmsta)) {
-												that.getView().byId("ovinId").setVisible(false);
+												//that.getView().byId("ovinId").setVisible(false);
+												that._oViewModel.setProperty("/showVinDisplayOffInbound", false);
 											} else {
-												that.getView().byId("ovinId").setVisible(true);
+												//that.getView().byId("ovinId").setVisible(true);
+												that._oViewModel.setProperty("/showVinDisplayOffInbound", true);
 											}
 										}
 									}
 								}
+								that.getView().setModel(that._oViewModel, "detailView");
+							that._oViewModel.refresh(true);
 								sap.ui.core.BusyIndicator.hide();
 
 							},
@@ -466,6 +474,8 @@ sap.ui.define([
 										}
 									}
 								}
+								that.getView().setModel(that._oViewModel, "detailView");
+							that._oViewModel.refresh(true);
 								sap.ui.core.BusyIndicator.hide();
 
 							},
@@ -799,8 +809,8 @@ sap.ui.define([
 					this.getView().byId("VT_ARCTDncLbl").setVisible(true);
 					this.getView().byId("ovtnIdText").setVisible(true);
 					this.getView().byId("ovtnId").setVisible(true);
-					this.getView().byId("ovinIdText").setVisible(true);
-					this.getView().byId("ovinId").setVisible(true);
+				//	this.getView().byId("ovinIdText").setVisible(true);
+				//	this.getView().byId("ovinId").setVisible(true);
 					// // this.getView().byId("tobid").setVisible(false);
 					// this.getView().byId("prptid").setText("");
 					this.getView().byId("accInstLbl").setVisible(true);
@@ -977,13 +987,17 @@ sap.ui.define([
 								if (StatusData.VTN == a[k].zzvtn) {
 									if (!!a[k].vhvin && a[k].vhvin !== "") {
 										if (a[k].mmsta < "M275" || patt1.test(a[k].mmsta)) {
-											that.getView().byId("ovinId").setVisible(false);
+										//	that.getView().byId("ovinId").setVisible(false);
+											that._oViewModel.setProperty("/showVinDisplayOffInbound", false);
 										} else {
-											that.getView().byId("ovinId").setVisible(true);
+										//	that.getView().byId("ovinId").setVisible(true);
+												that._oViewModel.setProperty("/showVinDisplayOffInbound", true);
 										}
 									}
 								}
 							}
+							that.getView().setModel(that._oViewModel, "detailView");
+							that._oViewModel.refresh(true);
 							sap.ui.core.BusyIndicator.hide();
 
 						},
@@ -1092,6 +1106,8 @@ sap.ui.define([
 									}
 								}
 							}
+							that.getView().setModel(that._oViewModel, "detailView");
+							that._oViewModel.refresh(true);
 							sap.ui.core.BusyIndicator.hide();
 
 						},
@@ -3661,8 +3677,8 @@ sap.ui.define([
 
 							local.getView().byId("ovtnId").setVisible(true);
 							local.getView().byId("ovtnIdText").setVisible(true);
-							local.getView().byId("ovinIdText").setVisible(true);
-							local.getView().byId("ovinId").setVisible(true);
+						//	local.getView().byId("ovinIdText").setVisible(true);
+						//	local.getView().byId("ovinId").setVisible(true);
 							// this.getView().byId("vtnlabeid").setVisible(true);
 							// this.getView().byId("vtnid").setVisible(true);
 						}
@@ -3754,7 +3770,7 @@ sap.ui.define([
 					} else {
 						// local.getView().byId("offervehidContent").setVisible(true);
 
-						local._oViewModel.setProperty("/showVinDiplayOff", true);
+					//	local._oViewModel.setProperty("/showVinDiplayOff", true);
 						// this.getView().byId("offervehidContent").setVisible(true);
 						// Offered = {};
 						// local.getView().byId("Offerevehid").setText("");
@@ -3831,7 +3847,7 @@ sap.ui.define([
 							// local.getView().byId("ovtnIdText").setVisible(true);
 							local.getView().byId("vtnlabeid").setVisible(true);
 							local.getView().byId("vtnid").setVisible(true);
-							local._oViewModel.setProperty("/showVinDiplayOff", true);
+						//	local._oViewModel.setProperty("/showVinDiplayOff", true);
 						}
 
 					}
