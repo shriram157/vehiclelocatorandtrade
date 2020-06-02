@@ -771,12 +771,12 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 						//that.selectedTrade=escape(JSON.stringify(that.selectedTrade));
 
 
-						var patt1 = /^P/;
-						if (that.selectedTrade.mmsta < "M275" || patt1.test(that.selectedTrade.mmsta) || that.selectedTrade.vhvin == "") {
+					//	var patt1 = /^P/;
+					//	if (that.selectedTrade.mmsta < "M275" || patt1.test(that.selectedTrade.mmsta) || that.selectedTrade.vhvin == "") {
 							that.selectedTrade.dispalyVin = false;
-						} else {
-							that.selectedTrade.dispalyVin = true;
-						}
+					//	} else {
+					//		that.selectedTrade.dispalyVin = true;
+					//	}
 
 						sap.ui.getCore().SelectedTrade = that.selectedTrade;
 						sap.ui.getCore().SelectedTradeStatus = "";
