@@ -68,7 +68,7 @@ sap.ui.define([
 			var that = this;
 			//	var sPrefix = "/vehicleLocatorNode";//local run comment before deployment
 			//	var nodeJsUrl = sPrefix + "/node";//local run comment before deployment
-			var nodeJsUrl = this.sPrefix + "/node"; //local run uncomment before deployment
+			var nodeJsUrl = "/node"; //local run uncomment before deployment
 
 			var oDataUrl = nodeJsUrl + "/Z_VEHICLE_MASTER_SRV";
 			var oDataModel = new sap.ui.model.odata.ODataModel(oDataUrl, true);
