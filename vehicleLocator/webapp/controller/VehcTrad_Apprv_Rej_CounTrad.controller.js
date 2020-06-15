@@ -66,9 +66,9 @@ sap.ui.define([
 			}
 
 			var that = this;
-			//	var sPrefix = "/vehicleLocatorNode";//local run comment before deployment
-			//	var nodeJsUrl = sPrefix + "/node";//local run comment before deployment
-			var nodeJsUrl = "/node"; //local run uncomment before deployment
+				//var sPrefix = "/vehicleLocatorNode";//local run comment before deployment
+				//var nodeJsUrl = sPrefix + "/node";//local run comment before deployment
+				var nodeJsUrl = "/node"; //local run uncomment before deployment
 
 			var oDataUrl = nodeJsUrl + "/Z_VEHICLE_MASTER_SRV";
 			var oDataModel = new sap.ui.model.odata.ODataModel(oDataUrl, true);
@@ -99,7 +99,7 @@ sap.ui.define([
 					this._oViewModel.setProperty("/showVinDiplayOff", false);
 					this._oViewModel.setProperty("/showVinDisplayOffInbound", false);
 					this.getView().setModel(this._oViewModel, "detailView");
-					this._oViewModel.refresh(true);
+					this.getView().getModel("detailView").refresh(true);
 
 					/*
 										var oDealer = StatusData.Requesting_Dealer;
@@ -499,7 +499,7 @@ sap.ui.define([
 
 					} else if (StatusData.Trade_Return == "Y") {
 						that._oViewModel.setProperty("/showVinDisplayOffInbound", false);
-						that._oViewModel.setProperty("/showVinDisplayOff", false);
+						that._oViewModel.setProperty("/showVinDiplayOff", false);
 						/*						var oDealer = StatusData.Requested_Dealer;
 												if (oDealer.length == 10) {
 													oDealer = oDealer.slice(-5);
@@ -651,7 +651,8 @@ sap.ui.define([
 						// that.getView().byId("idlto").setVisible(true);
 
 					}
-
+					this.getView().setModel(this._oViewModel, "detailView");
+					this.getView().getModel("detailView").refresh(true);
 					if (AcceptVisible == true && (Status == "S" || Status == "C")) {
 						this.getView().byId("oacceptbtn").setVisible(!AcceptVisible);
 						this.getView().byId("oRejectbtn").setVisible(!AcceptVisible);
@@ -1367,7 +1368,7 @@ sap.ui.define([
 								}
 							}
 							that.getView().setModel(that._oViewModel, "detailView");
-							that._oViewModel.refresh(true);
+						that.getView().getModel("detailView").refresh(true);
 							sap.ui.core.BusyIndicator.hide();
 
 						},
@@ -1381,7 +1382,7 @@ sap.ui.define([
 					this._oViewModel.setProperty("/showVinDiplayOff", false);
 					this._oViewModel.setProperty("/showVinDisplayOffInbound", false);
 					this.getView().setModel(this._oViewModel, "detailView");
-					this._oViewModel.refresh(true);
+					this.getView().getModel("detailView").refresh(true);
 
 				}
 				var oStatusModel = new sap.ui.model.json.JSONModel(Status);
@@ -3869,11 +3870,14 @@ sap.ui.define([
 
 						local.getView().byId("accInst").setVisible(true);
 						// local.getView().byId("requForm").setVisible(true);
+								local._oViewModel.setProperty("/showVinDiplayOff", false);
+					local._oViewModel.setProperty("/showVinDisplayOffInbound", false);
+					
 						if (local.getView().byId("VT_ARCTtrdinStatus").getText() == "Rejected") {
 							local.getView().byId("ovtnId").setVisible(false);
 							local.getView().byId("ovtnIdText").setVisible(false);
-							local.getView().byId("ovinIdText").setVisible(false);
-							local.getView().byId("ovinId").setVisible(false);
+							//local.getView().byId("ovinIdText").setVisible(false);
+							//local.getView().byId("ovinId").setVisible(false);
 							// this.getView().byId("vtnlabeid").setVisible(false);
 							// this.getView().byId("vtnid").setVisible(false);
 
@@ -4038,13 +4042,15 @@ sap.ui.define([
 
 						// that.getView().byId("idlto").setVisible(true);
 
+						local._oViewModel.setProperty("/showVinDiplayOff", false);
+					
+					local._oViewModel.setProperty("/showVinDisplayOffInbound", false);
 						if (local.getView().byId("VT_ARCTtrdinStatus").getText() == "Rejected") {
 							// local.getView().byId("ovtnId").setVisible(false);
 							// local.getView().byId("ovtnIdText").setVisible(false);
 							local.getView().byId("vtnlabeid").setVisible(false);
 							local.getView().byId("vtnid").setVisible(false);
-							local._oViewModel.setProperty("/showVinDiplayOff", false);
-
+					
 						} else {
 
 							// local.getView().byId("ovtnId").setVisible(true);
