@@ -499,7 +499,7 @@ sap.ui.define([
 
 					} else if (StatusData.Trade_Return == "Y") {
 						that._oViewModel.setProperty("/showVinDisplayOffInbound", false);
-						that._oViewModel.setProperty("/showVinDisplayOffInbound", false);
+						that._oViewModel.setProperty("/showVinDisplayOff", false);
 						/*						var oDealer = StatusData.Requested_Dealer;
 												if (oDealer.length == 10) {
 													oDealer = oDealer.slice(-5);
