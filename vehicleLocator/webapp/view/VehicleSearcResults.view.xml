@@ -248,6 +248,7 @@
 									<Text text="{vehicleSearchTableModel>zzsuffix} - {=${languageModel>/SPRAS}==='English' ? ${vehicleSearchTableModel>suffix_desc_en}:${vehicleSearchTableModel>suffix_desc_fr} }/{=${languageModel>/SPRAS}==='English' ? ${vehicleSearchTableModel>mrktg_int_desc_en}:${vehicleSearchTableModel>mrktg_int_desc_fr} }" wrapping="true" width="12rem"/>
 									<Text text="{vehicleSearchTableModel>zzextcol} - {=${languageModel>/SPRAS}==='English' ? ${vehicleSearchTableModel>mktg_desc_en}:${vehicleSearchTableModel>mktg_desc_fr} }" wrapping="true" width="12rem"/>
 									<Text text="{vehicleSearchTableModel>zzapx}" wrapping="true" width="3rem"/>
+									
 									<Text text="{path:'vehicleSearchTableModel>zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" wrapping="false" visible="{vehicleSearchTableModel>visibleOrderType}" width="6rem"/>
 									<Text text="{path:'vehicleSearchTableModel>zzadddata4',formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinEtaFromDate1'}" wrapping="false" width="6rem"/>
 									<Text text="{path:'vehicleSearchTableModel>pstsp',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate1'}" wrapping="false" width="6rem"/>
