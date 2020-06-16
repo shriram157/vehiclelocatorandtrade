@@ -50,6 +50,11 @@
     cursor: pointer;
 }
 
+.fixedHeader{
+	position: fixed !important;
+    top: 8rem;
+    width: 96% !important;
+}
 .sapContrastPlus.clCustomHeaderBg {
     background-color: #fff!important;
     color: #2f3c48;

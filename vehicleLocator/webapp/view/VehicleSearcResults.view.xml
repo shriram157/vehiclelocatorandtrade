@@ -131,7 +131,7 @@
 							<FlexBox alignItems="Start" justifyContent="Start">
 								<items>
 									<VBox>
-						        <Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:t="sap.ui.table" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:uxap="sap.uxap" xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form" xmlns:tnt="sap.tnt" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" text="{i18n>1B}" press="PreregisteredVehiclepress" id="button8" >
+						        <Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:t="sap.ui.table" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:uxap="sap.uxap" xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form" xmlns:tnt="sap.tnt" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" text="{i18n>1B}" press="PreregisteredVehiclepress" id="button8">
 						            </Button>
 						           <!--<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:t="sap.ui.table" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:uxap="sap.uxap" xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form" xmlns:tnt="sap.tnt" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" text="{i18n>2C}" press="DemoVehiclepress" id="button9">-->
 						            <!--</Button>-->
@@ -147,7 +147,7 @@
 				</f:SimpleForm>
 					<!--<ScrollContainer vertical="true" focusable="true" height="70%" width="99%">-->
 						<!--<ScrollContainer vertical="true" >-->
-				<Table showNoData="false" class="sapUiResponsiveMargin" alternateRowColors="true" width="99%">
+				<Table showNoData="false" class="sapUiResponsiveMargin" alternateRowColors="true" width="auto">
 					<headerToolbar>
 						<OverflowToolbar id="otbSubheader">
 							<Title id="tableHeader" text="{detailView>/tableCount}"/>
@@ -163,20 +163,40 @@
 							</SearchField>
 						</OverflowToolbar>
 					</headerToolbar>
-					<columns>
-						<Column id="tradeText1" demandPopin="true" minScreenWidth="Tablet" width="5rem" hAlign="Left">
+					
+				</Table>
+				<!--</ScrollContainer>-->
+				<!--Table with data without header row inside scroll container -->
+				<ScrollContainer vertical="true" focusable="true" height="70%">
+					<Table id="table1VSR" class="sapUiResponsiveMargin" alternateRowColors="true" items="{ path: 'vehicleSearchTableModel>/', sorter: { path: 'pstsp', ascending: true } }" noDataText="{i18n>NoData}" updateFinished="onUpdateFinished" mode="{detailView>/zoneUserDelete}" modeAnimationOn="true" growing="true" growingThreshold="200" sticky="ColumnHeaders" growingScrollToLoad="true">
+						<!--<columns>-->
+							<!--<Column hAlign="Left" width="5rem"/>-->
+							<!--<Column hAlign="Left" width="6rem"/>-->
+							<!--<Column hAlign="Left" width="12rem"/>-->
+							<!--<Column hAlign="Left" width="10rem"/>-->
+							<!--<Column hAlign="Left" width="15rem"/>-->
+							<!--<Column hAlign="Left" width="12rem"/>-->
+							<!--<Column hAlign="Left" width="3rem"/>-->
+							<!--<Column hAlign="Left" width="8rem"/>-->
+							<!--<Column hAlign="Left" width="8rem"/>-->
+							<!--<Column hAlign="Left" width="8rem"/>-->
+							<!--<Column hAlign="Left" width="3rem"/>-->
+							<!--<Column hAlign="Left" width="8rem"/>-->
+							<!--<Column hAlign="Left" width="8rem"/>-->
+							<columns>
+						<Column id="tradeText1" demandPopin="true" minScreenWidth="Tablet" width="4rem" hAlign="Left">
 							<Text text="{i18n>Trade}" id="nameColumnTitle2"/>
 						</Column>
-						<Column id="zzvtn1" demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="6rem">
+						<Column id="zzvtn1" demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="5rem">
 							<Text text="{i18n>VTN}"/>
 						</Column>
-						<Column id="dealerId1" demandPopin="true" minScreenWidth="Tablet" width="12rem" hAlign="Left">
+						<Column id="dealerId1" demandPopin="true" minScreenWidth="Tablet" width="10rem" hAlign="Left">
 							<Text text="{i18n>Dealer}"/>
 						</Column>
 						<Column id="matnr1" demandPopin="true" minScreenWidth="Tablet" width="10rem" hAlign="Left">
 							<Text text="{i18n>Model}"/>
 						</Column>
-						<Column id="suffix1" demandPopin="true" width="15rem" minScreenWidth="Tablet" hAlign="Left">
+						<Column id="suffix1" demandPopin="true" width="12rem" minScreenWidth="Tablet" hAlign="Left">
 							<Text text="{i18n>Suffix}"/>
 						</Column>
 						<Column id="ID_DealerNet1" demandPopin="true" width="12rem" minScreenWidth="Tablet" hAlign="Left">
@@ -185,44 +205,25 @@
 						<Column id="zzapx1" demandPopin="true" minScreenWidth="Tablet" width="3rem" hAlign="Left">
 							<Text text="{i18n>APX}" id="nameColumnTitle1"/>
 						</Column>
-						<Column id="ID_Profit1" demandPopin="true" minScreenWidth="Tablet" width="8rem" hAlign="Left">
+						<Column id="ID_Profit1" demandPopin="true" minScreenWidth="Tablet" width="6rem" hAlign="Left">
 							<Text text="{i18n>OrderType}"/>
 						</Column>
-						<Column id="ETAFrom1" hAlign="Left" demandPopin="true" minScreenWidth="Tablet" width="8rem">
+						<Column id="ETAFrom1" hAlign="Left" demandPopin="true" minScreenWidth="Tablet" width="6rem">
 							<Text text="{i18n>ETAFrom}"/>
 						</Column>
-						<Column id="pstsp1" demandPopin="true" minScreenWidth="Tablet" width="8rem" hAlign="Left">
+						<Column id="pstsp1" demandPopin="true" minScreenWidth="Tablet" width="6rem" hAlign="Left">
 							<Text text="{i18n>ETATo}"/>
 						</Column>
-						<Column id="accessoryInstall1" demandPopin="true" minScreenWidth="Tablet" width="3rem" hAlign="Left">
+						<Column id="accessoryInstall1" demandPopin="true" minScreenWidth="Tablet" width="5rem" hAlign="Left">
 							<Text text="{i18n>AccessoryInstall}" wrapping="true"/>
 						</Column>
-						<Column id="city1" demandPopin="true" minScreenWidth="Tablet" width="8rem" hAlign="Left">
+						<Column id="city1" demandPopin="true" minScreenWidth="Tablet" width="6rem" hAlign="Left">
 							<Text text="{i18n>City}" wrapping="true"/>
 						</Column>
-						<Column id="Province1" demandPopin="true" width="8rem" minScreenWidth="Tablet" hAlign="Left">
+						<Column id="Province1" demandPopin="true" width="6rem" minScreenWidth="Tablet" hAlign="Left">
 							<Text text="{i18n>Province}"/>
 						</Column>
 					</columns>
-				</Table>
-				<!--</ScrollContainer>-->
-				<!--Table with data without header row inside scroll container -->
-				<ScrollContainer vertical="true" focusable="true" height="70%" width="99%" >
-					<Table id="table1VSR" class="sapUiResponsiveMargin" alternateRowColors="true" items="{ path: 'vehicleSearchTableModel>/', sorter: { path: 'pstsp', ascending: true } }" noDataText="{i18n>NoData}" updateFinished="onUpdateFinished" mode="{detailView>/zoneUserDelete}" modeAnimationOn="true" growing="true" growingThreshold="200">
-						<columns>
-							<Column hAlign="Left" width="5rem"/>
-							<Column hAlign="Left" width="6rem"/>
-							<Column hAlign="Left" width="12rem"/>
-							<Column hAlign="Left" width="10rem"/>
-							<Column hAlign="Left" width="15rem"/>
-							<Column hAlign="Left" width="12rem"/>
-							<Column hAlign="Left" width="3rem"/>
-							<Column hAlign="Left" width="8rem"/>
-							<Column hAlign="Left" width="8rem"/>
-							<Column hAlign="Left" width="8rem"/>
-							<Column hAlign="Left" width="3rem"/>
-							<Column hAlign="Left" width="8rem"/>
-							<Column hAlign="Left" width="8rem"/>
 							<!--<Column width="7%" hAlign="Left" />-->
 							<!--      <Column width="15%" hAlign="Left" />-->
 							<!--      <Column width="10%" hAlign="Left" />-->
@@ -235,7 +236,7 @@
 							<!--      <Column hAlign="Left" width="5%"/>-->
 							<!--      <Column hAlign="Left" width="10%"/>-->
 							<!--     <Column hAlign="Left" width="14%" />-->
-						</columns>
+						<!--</columns>-->
 						<items>
 							<ColumnListItem id="onlinkPress" unread="true">
 								<cells>
