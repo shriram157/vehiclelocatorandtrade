@@ -248,7 +248,7 @@
                     <Column width="12em"></Column>
                     <Column width="12em"></Column>
                     <Column width="12em"></Column>
-					<Column width="12em"></Column>
+					<Column width="12em" visible="false"></Column>
                   </columns>
 							</Table>
 						</ScrollContainer>
@@ -389,8 +389,7 @@
                     <Column width="12em"></Column>
                     <Column width="12em"></Column>
                     <Column width="12em"></Column>
-					                   <Column width="12em"></Column>
-
+					<Column width="12em" visible="false"></Column>
                   </columns>
 							</Table>
 					</ScrollContainer>
