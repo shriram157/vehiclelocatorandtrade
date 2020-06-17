@@ -637,7 +637,8 @@ var ModelData = arrData[i].OffredVehicle.Model + "-" + arrData[i].OffredVehicle.
 			var that = this;
 
 			that.oRecTableSelectObj = oEvent.getSource().getBindingContext().getObject();
-
+		 var trade_type=oEvent.getSource().getParent().mAggregations.cells[9].mProperties.text;
+		 that.oRecTableSelectObj.trade_type = trade_type;
 			if (that.oRecTableSelectObj != undefined) {
 
 				var model = new sap.ui.model.json.JSONModel(that.oRecTableSelectObj);

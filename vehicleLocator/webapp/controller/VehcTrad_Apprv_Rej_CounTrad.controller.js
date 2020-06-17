@@ -1330,14 +1330,47 @@ sap.ui.define([
 					// that.getView().byId("idlto").setVisible(true);
 
 				}
-				if (StatusData.VIN !== "") {
-					var oDealer = StatusData.Requested_Dealer;
+				
+				var VIN=[],dealerO=[], trade_type=StatusData.trade_type;
+				if(StatusData.RequestingDealerVisible && StatusData.trade_type == "outbound")
+				{
+                    VIN.push(StatusData.OffredVehicle.VIN);
+                    dealerO.push(StatusData.Requesting_Dealer);
+                    VIN.push(StatusData.OffredVehicle.VIN);
+                    dealerO.push(StatusData.Requested_Dealer);
+				}
+				else if(StatusData.trade_type == "outbound")
+				{
+					VIN.push(StatusData.VIN);
+                    dealerO.push(StatusData.Requested_Dealer);
+                    VIN.push(StatusData.VIN);
+                    dealerO.push(StatusData.Requesting_Dealer);
+				}
+				if(StatusData.RequestingDealerVisible && StatusData.trade_type == "inbound")
+				{
+                    	VIN.push(StatusData.VIN);
+                    dealerO.push(StatusData.Requested_Dealer);
+                    VIN.push(StatusData.VIN);
+                    dealerO.push(StatusData.Requesting_Dealer);
+                   
+				}
+				else if(StatusData.trade_type == "inbound")
+				{
+					VIN.push(StatusData.OffredVehicle.VIN);
+                    dealerO.push(StatusData.Requesting_Dealer);
+                    VIN.push(StatusData.OffredVehicle.VIN);
+                    dealerO.push(StatusData.Requested_Dealer);	
+				}
+				if (VIN.length !== 0) {
+					for(var j=0;j<VIN.length; j++)
+					{
+					var oDealer = dealerO[j];
 					if (oDealer.length == 10) {
 						oDealer = oDealer.slice(-5);
 					}
 					sap.ui.core.BusyIndicator.show(0);
 					var that = this;
-					var SeriesUrl = oDataUrl + "/ZVMS_CDS_ETA_consolidate('" + oDealer + "')/Set?$filter=vhvin eq '" + StatusData.VIN +
+					var SeriesUrl = oDataUrl + "/ZVMS_CDS_ETA_consolidate('" + oDealer + "')/Set?$filter=vhvin eq '" + VIN[j] +
 						"'&$format=json";
 					$.ajax({
 						url: SeriesUrl,
@@ -1351,21 +1384,32 @@ sap.ui.define([
 							var a = odata.d.results;
 							var patt1 = /^P/;
 
+							if(a.length > 0)
+							{
 							for (var k = 0; k < a.length; k++) {
-								if (StatusData.VIN == a[k].vhvin) {
-
+					
 									if (a[k].mmsta < "M275" || patt1.test(a[k].mmsta) || a[k].vhvin == "") {
 										//	that.getView().byId("ovinId").setVisible(false);
 										that._oViewModel.setProperty("/showVinDiplayOff", false);
 										that._oViewModel.setProperty("/showVinDisplayOffInbound", false);
 									} else {
 										//	that.getView().byId("ovinId").setVisible(true);
-
+										if(trade_type == "inbound")
+										{
+											that._oViewModel.setProperty("/showVinDisplayOffInbound", true);
+										
+											that._oViewModel.setProperty("/showVinDiplayOff", false);
+										}
+										else
+										{
 										that._oViewModel.setProperty("/showVinDiplayOff", true);
-										that._oViewModel.setProperty("/showVinDisplayOffInbound", true);
+											that._oViewModel.setProperty("/showVinDisplayOffInbound", false);
+										}
+										
 									}
 
-								}
+								
+							}
 							}
 							that.getView().setModel(that._oViewModel, "detailView");
 						that.getView().getModel("detailView").refresh(true);
@@ -1378,6 +1422,7 @@ sap.ui.define([
 							sap.ui.core.BusyIndicator.hide();
 						}
 					});
+					}
 				} else {
 					this._oViewModel.setProperty("/showVinDiplayOff", false);
 					this._oViewModel.setProperty("/showVinDisplayOffInbound", false);
