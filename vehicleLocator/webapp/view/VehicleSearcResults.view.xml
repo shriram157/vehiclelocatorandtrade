@@ -196,10 +196,10 @@
 						<Column id="matnr1" demandPopin="true" minScreenWidth="Tablet" width="10rem" hAlign="Left">
 							<Text text="{i18n>Model}"/>
 						</Column>
-						<Column id="suffix1" demandPopin="true" width="12rem" minScreenWidth="Tablet" hAlign="Left">
+						<Column id="suffix1" demandPopin="true" width="10rem" minScreenWidth="Tablet" hAlign="Left">
 							<Text text="{i18n>Suffix}"/>
 						</Column>
-						<Column id="ID_DealerNet1" demandPopin="true" width="12rem" minScreenWidth="Tablet" hAlign="Left">
+						<Column id="ID_DealerNet1" demandPopin="true" width="10rem" minScreenWidth="Tablet" hAlign="Left">
 							<Text text="{i18n>Color}"/>
 						</Column>
 						<Column id="zzapx1" demandPopin="true" minScreenWidth="Tablet" width="3rem" hAlign="Left">
@@ -245,8 +245,8 @@
 									<Text text="{path:'vehicleSearchTableModel>kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'} - {vehicleSearchTableModel>name1}" wrapping="true" width="12rem"/>
 									<!--<Text text="{vehicleSearchTableModel>matnr} - {vehicleSearchTableModel>model_desc_en}" wrapping="true"/>-->
 									<Text text="{vehicleSearchTableModel>matnr} - {=${languageModel>/SPRAS}==='English' ? ${vehicleSearchTableModel>model_desc_en}:${vehicleSearchTableModel>model_desc_fr} }" wrapping="true" width="10rem"/>
-									<Text text="{vehicleSearchTableModel>zzsuffix} - {=${languageModel>/SPRAS}==='English' ? ${vehicleSearchTableModel>suffix_desc_en}:${vehicleSearchTableModel>suffix_desc_fr} }/{=${languageModel>/SPRAS}==='English' ? ${vehicleSearchTableModel>mrktg_int_desc_en}:${vehicleSearchTableModel>mrktg_int_desc_fr} }" wrapping="true" width="12rem"/>
-									<Text text="{vehicleSearchTableModel>zzextcol} - {=${languageModel>/SPRAS}==='English' ? ${vehicleSearchTableModel>mktg_desc_en}:${vehicleSearchTableModel>mktg_desc_fr} }" wrapping="true" width="12rem"/>
+									<Text text="{vehicleSearchTableModel>zzsuffix} - {=${languageModel>/SPRAS}==='English' ? ${vehicleSearchTableModel>suffix_desc_en}:${vehicleSearchTableModel>suffix_desc_fr} }/{=${languageModel>/SPRAS}==='English' ? ${vehicleSearchTableModel>mrktg_int_desc_en}:${vehicleSearchTableModel>mrktg_int_desc_fr} }" wrapping="true" width="10rem"/>
+									<Text text="{vehicleSearchTableModel>zzextcol} - {=${languageModel>/SPRAS}==='English' ? ${vehicleSearchTableModel>mktg_desc_en}:${vehicleSearchTableModel>mktg_desc_fr} }" wrapping="true" width="10rem"/>
 									<Text text="{vehicleSearchTableModel>zzapx}" wrapping="true" width="3rem"/>
 									
 									<Text text="{path:'vehicleSearchTableModel>zzordertype',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}" wrapping="false" visible="{vehicleSearchTableModel>visibleOrderType}" width="6rem"/>
