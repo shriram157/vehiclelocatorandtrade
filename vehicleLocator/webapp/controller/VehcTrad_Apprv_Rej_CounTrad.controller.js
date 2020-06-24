@@ -1362,7 +1362,19 @@ sap.ui.define([
                     dealerO.push(StatusData.Requested_Dealer);	
 				}
 				if (VIN.length !== 0) {
-					for(var j=0;j<VIN.length; j++)
+					
+						if(trade_type == "inbound")
+										{
+											this._oViewModel.setProperty("/showVinDisplayOffInbound", true);
+										
+											this._oViewModel.setProperty("/showVinDiplayOff", false);
+										}
+										else
+										{
+										this._oViewModel.setProperty("/showVinDiplayOff", true);
+											this._oViewModel.setProperty("/showVinDisplayOffInbound", false);
+										}
+				/*	for(var j=0;j<VIN.length; j++)
 					{
 					var oDealer = dealerO[j];
 					if (oDealer.length == 10) {
@@ -1372,6 +1384,7 @@ sap.ui.define([
 					var that = this;
 					var SeriesUrl = oDataUrl + "/ZVMS_CDS_ETA_consolidate('" + oDealer + "')/Set?$filter=vhvin eq '" + VIN[j] +
 						"'&$format=json";
+				
 					$.ajax({
 						url: SeriesUrl,
 						type: "GET",
@@ -1422,14 +1435,15 @@ sap.ui.define([
 							sap.ui.core.BusyIndicator.hide();
 						}
 					});
-					}
+					}*/
 				} else {
 					this._oViewModel.setProperty("/showVinDiplayOff", false);
 					this._oViewModel.setProperty("/showVinDisplayOffInbound", false);
-					this.getView().setModel(this._oViewModel, "detailView");
-					this.getView().getModel("detailView").refresh(true);
+					
 
 				}
+					this.getView().setModel(this._oViewModel, "detailView");
+					this.getView().getModel("detailView").refresh(true);
 				var oStatusModel = new sap.ui.model.json.JSONModel(Status);
 				var Dnc = StatusData.DNC;
 				// if (Dnc == "Y" || Dnc == "X") {
