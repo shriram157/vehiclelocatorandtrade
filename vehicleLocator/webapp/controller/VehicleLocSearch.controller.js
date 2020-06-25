@@ -1483,7 +1483,7 @@ this.getView().byId("SuffCmbo").setFilterFunction(function (sTerm, oItem) {
 				}
 			}
 
-			if (SuffCmbo == 'ALL' || SuffCmbo == 'TOUS') {
+			if (SuffCmbo == 'ALL' || SuffCmbo == 'TOUS' || SuffCmbo.includes("*")) {
 				// var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '" + McCmbo + "' and endswith (zzintcol,'" + '' +
 				// 	"') and zzmoyr eq '" + MoyearCombo + "'&$format=json";
 
