@@ -1482,8 +1482,8 @@ this.getView().byId("SuffCmbo").setFilterFunction(function (sTerm, oItem) {
 					oDealer = oDealer.slice(-5);
 				}
 			}
-
-			if (SuffCmbo == 'ALL' || SuffCmbo == 'TOUS' || SuffCmbo.includes("*")) {
+var Suff = this.getView().byId("SuffCmbo").getValue();
+			if (SuffCmbo == 'ALL' || SuffCmbo == 'TOUS' || Suff.includes("*")) {
 				// var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '" + McCmbo + "' and endswith (zzintcol,'" + '' +
 				// 	"') and zzmoyr eq '" + MoyearCombo + "'&$format=json";
 
