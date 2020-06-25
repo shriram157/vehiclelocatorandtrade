@@ -434,7 +434,7 @@ sap.ui.define([
 			if (Suffix != "" && Suffix != "all") {
 				var suffixisNotequaltoAll = true;
 				filterArray.push(new sap.ui.model.Filter("zzsuffix", sap.ui.model.FilterOperator.Contains, Suffix));
-			} else if (Suffix == "all") {
+			} else if (Suffix == "all" || Suffix == "") {
 				var suffixisNotequaltoAll = false;
 				var SelSuffix = this.getView().byId("VLRSuffix").getModel().getData();
 				for (var i = 0; i < SelSuffix.length; i++) {
@@ -830,6 +830,10 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 		onRouteMatched: function (oEvent) {
 			//debugger;
 			// if the user is retruning by pressing the back button,  then it is better, that we dont refresh the data again. 
+		this.getView().byId("VLRSuffix").setFilterFunction(function (sTerm, oItem) {
+				sTerm = sTerm.split("*")[0];
+				return oItem.getKey().match(new RegExp("^" + sTerm, "i"));
+			});
 			var Status = sap.ui.getCore().getModel("SearchedData").getData();
 
 			// 10th May,  if the Hold_stat is received as blank make it "N"
