@@ -3301,6 +3301,7 @@ sap.ui.define([
 					});
 
 					//adding filters against fix for 
+					if (TradeRequest.Requested_Vtn != null) {
 					var query = "(Trade_Id='" + TradeRequest.Trade_Id + "',VTN='" + TradeRequest.Requested_Vtn + "',SPRAS='" + that.StatusData.SPRAS +
 						"')";
 					that.oTradeVehicleDescDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeVehicleDesc" + query;
@@ -3315,6 +3316,7 @@ sap.ui.define([
 						async: true,
 						success: function (result) {}
 					});
+					}
 					that.TradeVehiclesDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeVehicles(Trade_Id='" + TradeRequest.Trade_Id +
 						"',VTN='" + TradeRequest.Offered_Vtn + "')";
 					/*var /zc_mmfields*/
@@ -3381,6 +3383,8 @@ sap.ui.define([
 				var that = this;
 				if (!ajaxOffered_Vtn) ajaxOffered_Vtn = {};
 				if (!ajaxOffered_Vtn3) ajaxOffered_Vtn3 = {};
+				if (!ajaxRequested_Vtn3) ajaxRequested_Vtn3 = {};
+				
 				// if (ajaxOffered_Vtn && ajaxRequested_Vtn) {
 				$.when(ajaxOffered_Vtn, ajaxRequested_Vtn, ajaxRequested_Vtn3, ajaxOffered_Vtn3).done(function (TradeVehiclesO, TradeVehiclesR,
 					TradeVehicleDescR, TradeVehicleDescO) {
@@ -3406,13 +3410,20 @@ sap.ui.define([
 						});
 					}
 
-					if (TradeVehicleDescO[0]) {
+					if (TradeVehicleDescO[0] && TradeVehicleDescR[0]) {
 						var VehicleDesc = [TradeVehicleDescO[0].d, TradeVehicleDescR[0].d];
 						var oTradeVehicleDesc = VehicleDesc.filter(function (x) {
 							return x["Trade_Id"] == Trade_Id;
 						});
-					} else {
+					} else if (TradeVehicleDescR[0]){
 						var VehicleDesc = [TradeVehicleDescR[0].d];
+						var oTradeVehicleDesc = VehicleDesc.filter(function (x) {
+							return x["Trade_Id"] == Trade_Id;
+						});
+					}
+					else
+					{
+						var VehicleDesc = [TradeVehicleDescO[0].d];
 						var oTradeVehicleDesc = VehicleDesc.filter(function (x) {
 							return x["Trade_Id"] == Trade_Id;
 						});
