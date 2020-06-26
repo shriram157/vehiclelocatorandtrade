@@ -415,6 +415,24 @@ onLiveChange: function (oEvent) {
 				var oTradeVehicleDesc = TradeRequest[i].TradeVehicleDesc.results;
 				for (var j = 0; j < TradeVehicles.length; j++) {
 				//	if ((TradeRequest[i].Requested_Vtn == TradeVehicles[j].VTN)||(TradeRequest[i].Offered_Vtn == TradeVehicles[j].VTN)) {
+					if (TradeRequest[i].Requested_Vtn == null && TradeRequest[i].Requesting_Dealer.slice(-5) == Dealer && TradeRequest[i].Offered_Vtn == TradeVehicles[j].VTN)
+					{
+						TradeRequest[i].APX = TradeVehicles[j].APX;
+						TradeRequest[i].DNC = TradeVehicles[j].DNC;
+						TradeRequest[i].Ext_Colour = TradeVehicles[j].Ext_Colour;
+						TradeRequest[i].Int_Colour = TradeVehicles[j].Int_Colour;
+						TradeRequest[i].Model = TradeVehicles[j].Model;
+						TradeRequest[i].Model_Year = TradeVehicles[j].Model_Year;
+						TradeRequest[i].Order_Type = TradeVehicles[j].Order_Type;
+						TradeRequest[i].Series = TradeVehicles[j].Series;
+						TradeRequest[i].Status = TradeVehicles[j].Status;
+						TradeRequest[i].Suffix = TradeVehicles[j].Suffix;
+						TradeRequest[i].Trade_Id = TradeVehicles[j].Trade_Id;
+						// TradeRequest[i].requestedVTN = TradeVehicles[j].VTN;
+						TradeRequest[i].VTN          = TradeVehicles[j].VTN;
+	                    // TradeRequest[i].offeredVTN = TradeRequest[i].Offered_Vtn;
+					}
+					
 					if (TradeRequest[i].Requested_Vtn == TradeVehicles[j].VTN && TradeRequest[i].Requesting_Dealer.slice(-5) == Dealer)
 					{
 						TradeRequest[i].APX = TradeVehicles[j].APX;

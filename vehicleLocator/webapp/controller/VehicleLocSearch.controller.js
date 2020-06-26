@@ -249,15 +249,15 @@ sap.ui.define([
 						// 	"searchTermReceivedDealerName": "42357"
 						// });
 
-						// BpDealer.push({
-						// 	"BusinessPartnerKey": "2400042193",
-						// 	"BusinessPartner": "42193",
+					//	 BpDealer.push({
+					//	 	"BusinessPartnerKey": "2400042193",
+					//		"BusinessPartner": "42193",
 
-						// 	"BusinessPartnerName": "Bailey toyota...", //item.OrganizationBPName1 //item.BusinessPartnerFullName
-						// 	"Division": "10",
-						// 	"BusinessPartnerType": "Z001",
-						// 	"searchTermReceivedDealerName": "42193"
-						// });
+					//		"BusinessPartnerName": "Bailey toyota...", //item.OrganizationBPName1 //item.BusinessPartnerFullName
+					//		"Division": "10",
+					//	 	"BusinessPartnerType": "Z001",
+					//	 	"searchTermReceivedDealerName": "42193"
+					//	 });
 
 					}
 
@@ -382,6 +382,12 @@ sap.ui.define([
 
 							} else {
 								userAttributes.push({
+									//DealerCode: "42193",
+									//Language: "English",
+									//LoggedinUserFirstName: "User",
+									//LoggedinUserLastName: "42193",
+									//UserType: "Dealer",
+									//Zone: undefined
 
 									DealerCode: "42120",
 									Language: "English",
