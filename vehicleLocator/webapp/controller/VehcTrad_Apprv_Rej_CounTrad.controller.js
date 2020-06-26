@@ -3707,6 +3707,11 @@ sap.ui.define([
 						} else {
 							Requested.RequestingDealerVisible = false;
 						}
+						
+						if(Requested.RequestingDealerVisible == false && local.TradeRequest.StatusData.FromRequesting == true)
+						{
+							Requested.RequestingDealerVisible = true;
+						}
 						var oModel = new sap.ui.model.json.JSONModel(Requested);
 
 					} else {
