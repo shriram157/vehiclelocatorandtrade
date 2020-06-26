@@ -397,14 +397,47 @@ onLiveChange: function (oEvent) {
 
 				}
 			});
+			if (that.userType == "Zone") {
+						var Dealer = that.theFirstDefaultDealerSelected;
 
+					} else {
+
+						var userAttributesModellen = sap.ui.getCore().getModel("LoginuserAttributesModel").getData();
+
+						var Dealer = userAttributesModellen[0].DealerCode; //security login code		
+			}
+				if (Dealer.length == 10) {
+						Dealer = Dealer.slice(-5);
+					}
 			var TradeRequest = this.TradeRequest;
 			for (var i = 0; i < TradeRequest.length; i++) {
 				var TradeVehicles = TradeRequest[i].TradeVehicles.results;
 				var oTradeVehicleDesc = TradeRequest[i].TradeVehicleDesc.results;
 				for (var j = 0; j < TradeVehicles.length; j++) {
-					if ((TradeRequest[i].Requested_Vtn == TradeVehicles[j].VTN)||(TradeRequest[i].Offered_Vtn == TradeVehicles[j].VTN)) {
+				//	if ((TradeRequest[i].Requested_Vtn == TradeVehicles[j].VTN)||(TradeRequest[i].Offered_Vtn == TradeVehicles[j].VTN)) {
+					if (TradeRequest[i].Requested_Vtn == TradeVehicles[j].VTN && TradeRequest[i].Requesting_Dealer.slice(-5) == Dealer)
+					{
+						TradeRequest[i].APX = TradeVehicles[j].APX;
+						TradeRequest[i].DNC = TradeVehicles[j].DNC;
+						TradeRequest[i].Ext_Colour = TradeVehicles[j].Ext_Colour;
+						TradeRequest[i].Int_Colour = TradeVehicles[j].Int_Colour;
+						TradeRequest[i].Model = TradeVehicles[j].Model;
+						TradeRequest[i].Model_Year = TradeVehicles[j].Model_Year;
+						TradeRequest[i].Order_Type = TradeVehicles[j].Order_Type;
+						TradeRequest[i].Series = TradeVehicles[j].Series;
+						TradeRequest[i].Status = TradeVehicles[j].Status;
+						TradeRequest[i].Suffix = TradeVehicles[j].Suffix;
+						TradeRequest[i].Trade_Id = TradeVehicles[j].Trade_Id;
+						// TradeRequest[i].requestedVTN = TradeVehicles[j].VTN;
+						TradeRequest[i].VTN          = TradeVehicles[j].VTN;
+	                    // TradeRequest[i].offeredVTN = TradeRequest[i].Offered_Vtn;
+					}
 
+				}
+				for (var j = 0; j < TradeVehicles.length; j++) {
+				//	if ((TradeRequest[i].Requested_Vtn == TradeVehicles[j].VTN)||(TradeRequest[i].Offered_Vtn == TradeVehicles[j].VTN)) {
+					if (TradeRequest[i].Offered_Vtn == TradeVehicles[j].VTN && TradeRequest[i].Requested_Dealer.slice(-5) == Dealer)
+					{
 						TradeRequest[i].APX = TradeVehicles[j].APX;
 						TradeRequest[i].DNC = TradeVehicles[j].DNC;
 						TradeRequest[i].Ext_Colour = TradeVehicles[j].Ext_Colour;
