@@ -40,24 +40,8 @@ sap.ui.define([
 				this.currentScopeUrl = "/userDetails/currentScopesForUser";
 
 			}
-			// detail view model instantiation. 
-			this._oViewModel = new sap.ui.model.json.JSONModel({
-				busy: false,
-				delay: 0,
-				visibleForNational: false,
-				editAllowed: true,
-				onlyShownoEditForChange: true,
-				texttoshow: ""
-
-			});
-
-			this.getView().setModel(this._oViewModel, "detailView");
-
-			//  ajax call to BP Data and Scope Data
-			var oModelDetailview = this.getView().getModel("detailView");
 			var that = this;
-
-			sap.ui.core.BusyIndicator.show(); // lets wait until the dealer data is received
+					sap.ui.core.BusyIndicator.show(); // lets wait until the dealer data is received
 			$.ajax({
 				url: this.sPrefix + this.currentScopeUrl,
 				type: "GET",
@@ -102,6 +86,24 @@ sap.ui.define([
 				}
 
 			});
+			// detail view model instantiation. 
+			this._oViewModel = new sap.ui.model.json.JSONModel({
+				busy: false,
+				delay: 0,
+				visibleForNational: false,
+				editAllowed: true,
+				onlyShownoEditForChange: true,
+				texttoshow: ""
+
+			});
+
+			this.getView().setModel(this._oViewModel, "detailView");
+
+			//  ajax call to BP Data and Scope Data
+			var oModelDetailview = this.getView().getModel("detailView");
+			var that = this;
+
+			
 
 			//---------------------------------------------security -----------------------------------------------------End
 
@@ -149,6 +151,11 @@ sap.ui.define([
 		},
 
 		onRouteMatched: function (oEvent) {
+			var that = this;
+	that.getView().byId("SeriesCmbo").setSelectedKey("");
+			//	 that.getView().byId("SeriesCmbo").setSelectedItem("");
+			that.getView().byId("McCmbo").setSelectedKey("");
+			that.getView().byId("SuffCmbo").setSelectedKey("");
 this.getView().byId("SuffCmbo").setFilterFunction(function (sTerm, oItem) {
 				sTerm = sTerm.split("*")[0];
 				return oItem.getKey().match(new RegExp("^" + sTerm, "i"));
