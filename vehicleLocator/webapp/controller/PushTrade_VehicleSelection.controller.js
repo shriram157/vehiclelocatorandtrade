@@ -131,26 +131,14 @@ sap.ui.define([
 
 			}
 
-			// var obj = {};
-			// for (var i = 0, len = Status.length; i < len; i++)
-			// 	obj[Status[i]['zz_trading_ind']] = Status[i];
-			// Status = new Array();
-			// for (var key in obj)
-			// 	Status.push(obj[key]);
-			// var StatusDataFilter = [];
-			// for (var i = 0; i < Status.length; i++) {
-			// 	if (Status[i].zz_trading_ind == "1" || Status[i].zz_trading_ind == "2") {
-			// 		StatusDataFilter.push(Status[i]);
-			// 	}
-			// }
-			// if (StatusDataFilter.length == 0) {
+		
 			var StatusDataFilter = [{
 				"zz_trading_ind": "1"
 
 			}, {
 				"zz_trading_ind": "2"
 			}];
-			// }
+			
 			var Model = new sap.ui.model.json.JSONModel(StatusDataFilter);
 			// var StatusFilter = StatusDataFilter.filter(function (x) {
 			// 	return (x.zz_trading_ind == "2" || x.zz_trading_ind == "3");
@@ -426,21 +414,12 @@ sap.ui.define([
 						);
 					}
 
-					//  set your model or use the model below - 
-					// if (that.userTypeReceived != "National") {
-
-					// 	that.getView().setModel(new sap.ui.model.json.JSONModel(BpDealer), "BpDealerModel");
-					// 	sap.ui.getCore().setModel(new sap.ui.model.json.JSONModel(BpDealer), "LoginBpDealerModel");
-
-					// 	this._oViewModel.setProperty("/visibleForNational", false);
-					// } else {
-					// var BpDealerTemp = [...BpDealer];
+				
 					var BpDealerTemp = BpDealer.slice();
 					var confirmStockCode = "";
 					for (var i = 0; i < BpDealerTemp.length; i++) {
 						// if (i == 0) {
 						// 	BpDealerTemp.splice(0, 1);
-
 						// }
 
 						if (BpDealerTemp[i].BusinessPartnerKey) {
@@ -477,11 +456,7 @@ sap.ui.define([
 						}
 					}
 
-					// that.getView().setModel(new sap.ui.model.json.JSONModel(BpDealer2), "BpDealerModel");
-					// sap.ui.getCore().setModel(new sap.ui.model.json.JSONModel(BpDealer2), "LoginBpDealerModel");
-					// that.getView().setModel(new sap.ui.model.json.JSONModel(BpDealerTemp), "BpDealerModelZone");
-					// var data = _thatVD.oVehicleDetailsJSON.getData().selectedVehicleData[0];
-					// LoggedInDealerCode1 = data.Dealer;
+				
 					var LoggedInDealerCode1 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
 					var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
 					this.getView().byId("oDealerCode4").setText(LoggedInDealerCode1);
