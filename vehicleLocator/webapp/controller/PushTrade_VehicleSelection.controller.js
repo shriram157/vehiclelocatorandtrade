@@ -800,16 +800,7 @@ sap.ui.define([
 					filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.Contains, Status));
 				} else {
 					filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.NE, "1"));
-					// filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.Contains, "2"));
-					//filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.Contains, "3"));
-
-					//filterArray.push(new sap.ui.model.Filter({
-					//       and: false,
-					//       filters: [
-					//          new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.EQ, "2"),
-					//          new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.EQ, "3")
-					//       ]})
-					//  );			
+				
 
 				}
 			}
@@ -819,20 +810,7 @@ sap.ui.define([
 
 			}
 
-			// var Dealer = this.getView().byId("VLRDealer1").getSelectedKey();
-
-			// if (Dealer != "" && Dealer != "all") {
-
-			// 	filterArray.push(new sap.ui.model.Filter("kunnr", sap.ui.model.FilterOperator.Contains, Dealer));
-			// } else if (Dealer == "all") {
-
-			// 	// var SelDealers = this.getView().byId("table1VSR").getBinding("rows").getModel().getData();    //guna
-			// 	var SelDealers = this.getView().getModel("vehicleSelectTableModel").getData();
-
-			// 	for (var i = 0; i < SelDealers.length; i++) {
-			// 		filterArray.push(new sap.ui.model.Filter("kunnr", sap.ui.model.FilterOperator.Contains, SelDealers[i].kunnr));
-			// 	}
-			// var Color = this.getView().byId("VLRColor1").getSelectedKey();
+		
 			if (SelectedSeries != "" && SelectedSeries != "all") {
 
 				filterArray.push(new sap.ui.model.Filter("zzseries", sap.ui.model.FilterOperator.Contains, SelectedSeries));
