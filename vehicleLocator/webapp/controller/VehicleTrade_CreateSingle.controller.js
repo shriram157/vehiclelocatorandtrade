@@ -735,6 +735,7 @@ var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getDat
 
 				}
 				this.nodeJsUrl = this.sPrefix;
+				sap.ui.core.BusyIndicator.show(0);
 				// that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeRequest";
 //  date 14th June.  The above odata call eventually going to cause performance bottle neck the objective here is to get the highest trade id and this can be done with the 
 // below syntax. 
@@ -1003,15 +1004,19 @@ if(that.getView().byId("FromFourth").getText() == "FromPush")
 							//	}
 							that.TradeStatus(oEntry);
 							/*	that.VehicleTrade_Summary();*/
-
+						
+						//	sap.ui.core.BusyIndicator.hide();
 							//	that.getRouter().navTo("VehicleTrade_Summary");
-						}, function () {
-
+						}, function (err) {
+							MessageBox.error(JSON.parse(err.response.body).error.message.value);
+							
+sap.ui.core.BusyIndicator.hide();
 						});
 
 					},
-					error: function (response) {
-
+					error: function (err) {
+							MessageBox.error(JSON.parse(err.response.body).error.message.value);
+sap.ui.core.BusyIndicator.hide();
 					}
 				});
 
@@ -1159,7 +1164,11 @@ if(that.getView().byId("FromFourth").getText() == "FromPush")
 
 			that.oDataModel.create("/TradeComment", oTradeComment, null, function (s) {
 				that.getView().byId("oTypeHere").setValue("");
-			}, function () {
+				
+sap.ui.core.BusyIndicator.hide();
+			}, function (err) {
+				MessageBox.error(JSON.parse(err.response.body).error.message.value);
+sap.ui.core.BusyIndicator.hide();
 
 			});
 
@@ -1292,7 +1301,11 @@ if(that.getView().byId("FromFourth").getText() == "FromPush")
 			for (var i = 0; i < oVehicleDetails.length; i++) {
 				that.oDataModel.create("/TradeVehicles", oVehicleDetails[i], null, function (s) {
 					/*	alert("ok");*/
-				}, function () {
+				//	MessageBox.error(JSON.parse(err.response.body).error.message.value);
+//sap.ui.core.BusyIndicator.hide();
+				}, function (err) {
+					MessageBox.error(JSON.parse(err.response.body).error.message.value);
+sap.ui.core.BusyIndicator.hide();
 
 				});
 			}
@@ -1436,11 +1449,15 @@ if(that.getView().byId("FromFourth").getText() != "FromPush"){
 			});
 			for (var i = 0; i < Tradestatus.length; i++) {
 				that.oDataModel.create("/TradeVehicleDesc", Tradestatus[i], null, function (s) {
+				//	MessageBox.error(JSON.parse(err.response.body).error.message.value);
+
 					that.getRouter().navTo("VehicleTrade_Summary", {
 						DataClicked: "Yes"
 					});
-				}, function () {
-
+					sap.ui.core.BusyIndicator.hide();
+				}, function (err) {
+MessageBox.error(JSON.parse(err.response.body).error.message.value);
+sap.ui.core.BusyIndicator.hide();
 				});
 			}
 		},
