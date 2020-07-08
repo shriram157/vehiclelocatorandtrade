@@ -431,9 +431,17 @@ sap.ui.define([
 			if (Suffix != this.getView().byId("VLRSuffix").getSelectedKey()) {
 				Suffix = this.getView().byId("VLRSuffix").getSelectedKey();
 			}
-			if (Suffix != "" && Suffix != "all") {
+			var value = this.getView().byId("VLRSuffix").getValue();
+				if(value.includes("*")&& value.length==2)
+				{
+					var suf = value.slice(0,1);
+					filterArray.push(new sap.ui.model.Filter("zzsuffix", sap.ui.model.FilterOperator.StartsWith, suf));
+				}
+			else if (Suffix != "" && Suffix != "all") {
 				var suffixisNotequaltoAll = true;
+			
 				filterArray.push(new sap.ui.model.Filter("zzsuffix", sap.ui.model.FilterOperator.Contains, Suffix));
+				
 			} else if (Suffix == "all" || Suffix == "") {
 				var suffixisNotequaltoAll = false;
 				var SelSuffix = this.getView().byId("VLRSuffix").getModel().getData();
