@@ -1040,7 +1040,7 @@ sap.ui.define([
 
 					},
 					error: function (err) {
-						that.simulateServerRequest();
+					//	that.simulateServerRequest();
 						MessageBox.error(JSON.parse(err.response.body).error.message.value);
 
 					}
@@ -1278,8 +1278,20 @@ sap.ui.define([
 				};
 				oEntry2["Trade_Id"] = oEntry.Trade_Id;
 				oVehicleDetails.push(oEntry2);
+					for (var i = 0; i < oVehicleDetails.length; i++) {
+							that.oDataModel.create("/TradeVehicles", oVehicleDetails[i], null, function (s) {
+								/*	alert("ok");*/
+								//	MessageBox.error(JSON.parse(err.response.body).error.message.value);
+								//sap.ui.core.BusyIndicator.hide();
+							}, function (err) {
+								that.simulateServerRequest();
+								MessageBox.error(JSON.parse(err.response.body).error.message.value);
+
+							});
+						}
 			}
 			if ((that.getView().byId("FromFourth").getText() == "FromFourth") || (that.getView().byId("FromFourth").getText() == "FromPush")) {
+				oVehicleDetails=[];
 				var Suffix = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzsuffix;
 
 				var intColor = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzintcol;
