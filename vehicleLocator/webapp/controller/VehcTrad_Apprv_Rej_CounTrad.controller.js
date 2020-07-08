@@ -1363,7 +1363,7 @@ sap.ui.define([
 				}
 				if (VIN.length !== 0) {
 					
-						if(trade_type == "inbound")
+					/*	if(trade_type == "inbound")
 										{
 											this._oViewModel.setProperty("/showVinDisplayOffInbound", true);
 										
@@ -1373,8 +1373,8 @@ sap.ui.define([
 										{
 										this._oViewModel.setProperty("/showVinDiplayOff", true);
 											this._oViewModel.setProperty("/showVinDisplayOffInbound", false);
-										}
-				/*	for(var j=0;j<VIN.length; j++)
+										}*/
+					for(var j=0;j<VIN.length; j++)
 					{
 					var oDealer = dealerO[j];
 					if (oDealer.length == 10) {
@@ -1411,12 +1411,12 @@ sap.ui.define([
 										{
 											that._oViewModel.setProperty("/showVinDisplayOffInbound", true);
 										
-											that._oViewModel.setProperty("/showVinDiplayOff", false);
+											//that._oViewModel.setProperty("/showVinDiplayOff", false);
 										}
 										else
 										{
 										that._oViewModel.setProperty("/showVinDiplayOff", true);
-											that._oViewModel.setProperty("/showVinDisplayOffInbound", false);
+											//that._oViewModel.setProperty("/showVinDisplayOffInbound", false);
 										}
 										
 									}
@@ -1435,7 +1435,7 @@ sap.ui.define([
 							sap.ui.core.BusyIndicator.hide();
 						}
 					});
-					}*/
+					}
 				} else {
 					this._oViewModel.setProperty("/showVinDiplayOff", false);
 					this._oViewModel.setProperty("/showVinDisplayOffInbound", false);
@@ -3275,9 +3275,22 @@ sap.ui.define([
 				TradeRequest = TradeRequest.d;
 				var that = this;
 				that.StatusData = TradeRequest.StatusData;
-				// if(!that.StatusData.SPRAS){
-				// 	that.StatusData.SPRAS = "E";
-				// }
+				if(TradeRequest.StatusData)
+				{
+				that.StatusData = TradeRequest.StatusData;
+				}
+				
+				 if(!that.StatusData.SPRAS){
+				 	if(that.sCurrentLocale == 'EN')
+				 	{
+				 	that.StatusData.SPRAS = "E";
+				 	}
+				 	else
+				 	{
+					that.StatusData.SPRAS = "F";
+				 		
+				 	}
+				 }
 				that.nodeJsUrl = TradeRequest.nodeJsUrl;
 				var vtn;
 				if (TradeRequest.Requested_Vtn != null) {
