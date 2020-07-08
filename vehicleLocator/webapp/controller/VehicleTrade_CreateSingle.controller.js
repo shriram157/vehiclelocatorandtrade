@@ -1324,7 +1324,7 @@ sap.ui.define([
 		
 				var oDataUrl = nodeJsUrl + "/Z_VEHICLE_MASTER_SRV";
 
-				var oDealer = that.getView().getModel("TradeModel").getData().kunnr;
+				var oDealer = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.kunnr;
 				if (oDealer.length == 10) {
 					oDealer = oDealer.slice(-5);
 				}
