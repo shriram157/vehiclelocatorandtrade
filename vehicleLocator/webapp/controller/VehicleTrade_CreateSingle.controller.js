@@ -724,7 +724,7 @@ sap.ui.define([
 			this._oBusyDialog.open();
 
 		},
-		
+
 		onRequestVT: function () {
 			debugger;
 
@@ -792,8 +792,8 @@ sap.ui.define([
 								return result * sortOrder;
 							};
 						};
-							that.onOpenDialog();
-			
+						that.onOpenDialog();
+
 						Data.sort(dynamicSort("Trade_Id"));
 						if (Data.length != 0) {
 							var databasevalue = Data[Data.length - 1].Trade_Id.substr(2, 8);
@@ -1209,6 +1209,26 @@ sap.ui.define([
 			var oCommentdate = new Date(oDateFormat.format(new Date()));
 			oCommentdate.setDate(oCommentdate.getDate() + 1);
 			var oVehicleDetails = [];
+			var sLocation = window.location.host;
+			var sLocation_conf = sLocation.search("webide");
+
+			if (sLocation_conf == 0) {
+				that.sPrefix = "/VehicleLocator_Xsodata";
+			} else {
+				that.sPrefix = "";
+
+			}
+			that.nodeJsUrl = that.sPrefix;
+			that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
+
+			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
+			that.oDataModel.setHeaders({
+				"Content-Type": "application/json",
+				"X-Requested-With": "XMLHttpRequest",
+				"DataServiceVersion": "2.0",
+				"Accept": "application/json",
+				"Method": "POST"
+			});
 
 			if (that.getView().byId("FromFourth").getText() != "FromPush") {
 
@@ -1220,7 +1240,14 @@ sap.ui.define([
 				var oexteriorReq = that.getView().byId("Zextcolo").getText().split("-")[0].trim();
 				var ointeriorReq = that.getView().getModel("TradeModel").oData.zzintcol;
 				var ovtnReq = that.getView().getModel("TradeModel").oData.zzvtn;
-				var ovinReq = that.getView().getModel("TradeModel").oData.vhvin;
+				var ovinReq = ""
+			
+				if (!that.getView().getModel("TradeModel").oData.dispalyVin1) {
+					ovinReq = ""
+				} else {
+					ovinReq = that.getView().getModel("TradeModel").oData.vhvin;
+				}
+
 				var accIns = that.getView().byId("oAccesIn").getText();
 				if (accIns == 'Yes') {
 					accIns = 'Y';
@@ -1263,7 +1290,7 @@ sap.ui.define([
 				var Series = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzseries;
 				var exterior = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzextcol;
 				var vtn = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzvtn;
-				var vin = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.vhvin;
+				that.vin = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.vhvin;
 				var accInstalled = that.getView().byId("accid").getText();
 				if (accInstalled == "Yes") {
 					accInstalled = 'Y';
@@ -1274,58 +1301,92 @@ sap.ui.define([
 				var oOrdertype = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzordertype;
 				oOrdertype = oOrdertype.substring(0, 2);
 				var DNC = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.dnc_ind;
-				var oEntry1 = {
-					APX: Apx,
-					DNC: DNC,
-					Ext_Colour: exterior,
-					Int_Colour: intColor,
-					Model: model,
-					Model_Year: modelYear,
-					Order_Type: oOrdertype,
-					Series: Series,
-					Status: ostatus,
-					Suffix: Suffix,
-					VTN: vtn,
-					VIN: vin,
-					AccessoryInstalled: accInstalled
-				};
-				oEntry1["Trade_Id"] = oEntry.Trade_Id;
-				oVehicleDetails.push(oEntry1);
-			}
-
-			var sLocation = window.location.host;
-			var sLocation_conf = sLocation.search("webide");
-
-			if (sLocation_conf == 0) {
-				that.sPrefix = "/VehicleLocator_Xsodata";
+				var sPrefix = "";
+				if (sLocation_conf == 0) {
+				sPrefix = "/vehicleLocatorNode";
 			} else {
-				that.sPrefix = "";
+				sPrefix = "";
 
 			}
-			that.nodeJsUrl = that.sPrefix;
-			that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
+				var nodeJsUrl = sPrefix + "/node"; //local run comment before deployment
+		
+				var oDataUrl = nodeJsUrl + "/Z_VEHICLE_MASTER_SRV";
 
-			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
-			that.oDataModel.setHeaders({
-				"Content-Type": "application/json",
-				"X-Requested-With": "XMLHttpRequest",
-				"DataServiceVersion": "2.0",
-				"Accept": "application/json",
-				"Method": "POST"
-			});
+				var oDealer = that.getView().getModel("TradeModel").getData().kunnr;
+				if (oDealer.length == 10) {
+					oDealer = oDealer.slice(-5);
+				}
+				sap.ui.core.BusyIndicator.show(0);
+				var that = this;
+				var SeriesUrl = oDataUrl + "/ZVMS_CDS_ETA_consolidate('" + oDealer + "')/Set?$filter=vhvin eq '" + that.vin +
+					"'&$format=json";
+
+				$.ajax({
+					url: SeriesUrl,
+					type: "GET",
+					dataType: 'json',
+					xhrFields: {
+						withCredentials: true
+					},
+
+					success: function (odata, oresponse) {
+						var a = odata.d.results;
+						var patt1 = /^P/;
+
+						for (var k = 0; k < a.length; k++) {
+							if (vtn == a[k].zzvtn) {
+
+								if (a[k].mmsta < "M275" || patt1.test(a[k].mmsta) || a[k].vhvin == "") {
+									that.vin = "";
+								}
+
+							}
+						}
+						var oEntry1 = {
+							APX: Apx,
+							DNC: DNC,
+							Ext_Colour: exterior,
+							Int_Colour: intColor,
+							Model: model,
+							Model_Year: modelYear,
+							Order_Type: oOrdertype,
+							Series: Series,
+							Status: ostatus,
+							Suffix: Suffix,
+							VTN: vtn,
+							VIN: that.vin,
+							AccessoryInstalled: accInstalled
+						};
+						oEntry1["Trade_Id"] = oEntry.Trade_Id;
+						oVehicleDetails.push(oEntry1);
+
+						for (var i = 0; i < oVehicleDetails.length; i++) {
+							that.oDataModel.create("/TradeVehicles", oVehicleDetails[i], null, function (s) {
+								/*	alert("ok");*/
+								//	MessageBox.error(JSON.parse(err.response.body).error.message.value);
+								//sap.ui.core.BusyIndicator.hide();
+							}, function (err) {
+								that.simulateServerRequest();
+								MessageBox.error(JSON.parse(err.response.body).error.message.value);
+
+							});
+						}
+
+						sap.ui.core.BusyIndicator.hide();
+
+					},
+					error: function (s, result) {
+						debugger;
+						var a = s;
+						sap.ui.core.BusyIndicator.hide();
+
+					}
+				});
+
+			}
 
 			/*	that.oDataModel.create("/TradeVehicles", oEntry1, null, function (s) {*/
-			for (var i = 0; i < oVehicleDetails.length; i++) {
-				that.oDataModel.create("/TradeVehicles", oVehicleDetails[i], null, function (s) {
-					/*	alert("ok");*/
-					//	MessageBox.error(JSON.parse(err.response.body).error.message.value);
-					//sap.ui.core.BusyIndicator.hide();
-				}, function (err) {
-					that.simulateServerRequest();
-					MessageBox.error(JSON.parse(err.response.body).error.message.value);
 
-				});
-			}
 		},
 
 		TradeStatus: function (oEntry) {
