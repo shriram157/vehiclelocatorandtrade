@@ -1610,6 +1610,7 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 		handlebacksearch: function () {
 			this.getView().byId("chknew").setSelected(false);
 			this.getView().byId("chkexi").setSelected(false);
+			this.getView().byId("VLRSuffix").setValue("");
 			this.getRouter().navTo("VehicleLocSearch");
 			// this.getView().byId("VLRSuffix").updateBindings();
 			//when the back button is presssed, lets reset the existing model. 
