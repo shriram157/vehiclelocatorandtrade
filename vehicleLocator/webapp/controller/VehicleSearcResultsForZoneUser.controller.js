@@ -474,7 +474,7 @@ sap.ui.define([
 			if (Suffix != "" && Suffix != "all") {
 
 				filterArray.push(new sap.ui.model.Filter("zzsuffix", sap.ui.model.FilterOperator.Contains, Suffix));
-			} else if (Suffix == "all") {
+			} else if (Suffix == "all"|| Suffix == "") {
 				var SelSuffix = this.getView().byId("VLRSuffix").getModel().getData();
 				for (var i = 0; i < SelSuffix.length; i++) {
 					filterArray.push(new sap.ui.model.Filter("zzsuffix", sap.ui.model.FilterOperator.Contains, SelSuffix[i].zzsuffix));

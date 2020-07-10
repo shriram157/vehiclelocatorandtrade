@@ -40,24 +40,8 @@ sap.ui.define([
 				this.currentScopeUrl = "/userDetails/currentScopesForUser";
 
 			}
-			// detail view model instantiation. 
-			this._oViewModel = new sap.ui.model.json.JSONModel({
-				busy: false,
-				delay: 0,
-				visibleForNational: false,
-				editAllowed: true,
-				onlyShownoEditForChange: true,
-				texttoshow: ""
-
-			});
-
-			this.getView().setModel(this._oViewModel, "detailView");
-
-			//  ajax call to BP Data and Scope Data
-			var oModelDetailview = this.getView().getModel("detailView");
 			var that = this;
-
-			sap.ui.core.BusyIndicator.show(); // lets wait until the dealer data is received
+					sap.ui.core.BusyIndicator.show(); // lets wait until the dealer data is received
 			$.ajax({
 				url: this.sPrefix + this.currentScopeUrl,
 				type: "GET",
@@ -102,6 +86,24 @@ sap.ui.define([
 				}
 
 			});
+			// detail view model instantiation. 
+			this._oViewModel = new sap.ui.model.json.JSONModel({
+				busy: false,
+				delay: 0,
+				visibleForNational: false,
+				editAllowed: true,
+				onlyShownoEditForChange: true,
+				texttoshow: ""
+
+			});
+
+			this.getView().setModel(this._oViewModel, "detailView");
+
+			//  ajax call to BP Data and Scope Data
+			var oModelDetailview = this.getView().getModel("detailView");
+			var that = this;
+
+			
 
 			//---------------------------------------------security -----------------------------------------------------End
 
@@ -140,13 +142,24 @@ sap.ui.define([
 			this._setTheLogo();
 
 			this.bindMonthYear();
-
+// this.getView().byId("SuffCmbo").setFilterFunction(function (sTerm, oItem) {
+			// 	sTerm = sTerm.split("*")[0];
+			// 	return oItem.getKey().match(new RegExp("^" + sTerm, "i"));
+			// });
 			this.getRouter().getRoute("VehicleLocSearch").attachPatternMatched(this.onRouteMatched, this);
 
 		},
 
 		onRouteMatched: function (oEvent) {
-
+			var that = this;
+	that.getView().byId("SeriesCmbo").setSelectedKey("");
+			//	 that.getView().byId("SeriesCmbo").setSelectedItem("");
+			that.getView().byId("McCmbo").setSelectedKey("");
+			that.getView().byId("SuffCmbo").setSelectedKey("");
+this.getView().byId("SuffCmbo").setFilterFunction(function (sTerm, oItem) {
+				sTerm = sTerm.split("*")[0];
+				return oItem.getKey().match(new RegExp("^" + sTerm, "i"));
+			});
 			this._setTheLanguage();
 			//resetting the data to its initial state.	
 			var tempTabData = [];
@@ -1287,9 +1300,15 @@ sap.ui.define([
 			var SeriesCmbo = that.getView().byId("SeriesCmbo").getSelectedKey();
 			//	var oSeries = that.getView().byId("SeriesCmbo").getSelectedKey();
 			var McCmbo = that.getView().byId("McCmbo").getSelectedKey();
+				var SuffCmbo;
 			//	var oMcCmbo  = that.getView().byId("McCmbo").getSelectedKey();
-			var SuffCmbo = that.getView().byId("SuffCmbo").getSelectedKey();
-
+			if(that.getView().byId("SuffCmbo").getValue().includes("*"))
+			{
+				SuffCmbo = "";
+			}
+			else{
+			SuffCmbo = that.getView().byId("SuffCmbo").getSelectedKey();
+}
 			if (SuffCmbo == 'undefined' || SuffCmbo == "") {
 				var SuffCmbo = that.getView().byId("SuffCmbo").getValue();
 				if (SuffCmbo == " - ALL/") { //gsr
@@ -1404,7 +1423,12 @@ sap.ui.define([
 			}
 
 			this.getOwnerComponent().SelectedZone = SelectedZone;
+			if(that.getView().byId("SuffCmbo").getSelectedItem()!=null && !(that.getView().byId("SuffCmbo").getValue().includes("*"))){
 			this.getOwnerComponent().suffixSelectedValue = that.getView().byId("SuffCmbo").getSelectedItem().getText();
+			}
+			else{
+				this.getOwnerComponent().suffixSelectedValue ="";
+			}
 			/*this.getRouter().navTo("VehicleSearcResults");*/
 			this.getOwnerComponent().SelectedMSMData = [{
 				"MoyearCombo": MoyearCombo,
@@ -1477,8 +1501,8 @@ sap.ui.define([
 					oDealer = oDealer.slice(-5);
 				}
 			}
-
-			if (SuffCmbo == 'ALL' || SuffCmbo == 'TOUS') {
+var Suff = this.getView().byId("SuffCmbo").getValue();
+			if (SuffCmbo == 'ALL' || SuffCmbo == 'TOUS' || Suff.includes("*")) {
 				// var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=matnr eq '" + McCmbo + "' and endswith (zzintcol,'" + '' +
 				// 	"') and zzmoyr eq '" + MoyearCombo + "'&$format=json";
 
@@ -1818,6 +1842,7 @@ var FilterZonestock = FilterDeleade_OrderTypefiltered_zone.filter(function (x) {
 				arr.push(allItem[i].getText());
 			}
 			var that = this;
+			var selectMandtFields = that._oResourceBundle.getText("selectMandtFields");
 			if (arr.indexOf(value) < 0 && combo_IdSel == "") {
 				combo_Id.setValueState("Error");
 				that.getView().byId("SeriesErrMsgStrip").setText(selectMandtFields);
@@ -1836,10 +1861,49 @@ var FilterZonestock = FilterDeleade_OrderTypefiltered_zone.filter(function (x) {
 			var arr = [];
 			that.value = combo_Id.getValue().trim();
 			for (var i = 0; i < allItem.length; i++) {
-				arr.push(allItem[i].getText());
+				// arr.push(allItem[i].getText());
+				if(that.value.includes("*") && that.value.length == 2)
+				{
+					// var p= that.value.slice(0,1);
+					if(allItem[i].getText().slice(0,1)==that.value.slice(0,1))
+					{
+						arr.push(allItem[i].getText());
+					}
+				}
+				else
+				{
+					arr.push(allItem[i].getText());
+				}
 			}
+		var Suffix = sap.ui.getCore().getModel("VehicleLocatorSuffix").getData();
+				var SuffixData = [];
+				if(that.value.includes("*") && that.value.length == 2)
+				{
+				for (var j = 0; j < Suffix.length; j++) {
+					
+				
+					var obj = {};
+					if(Suffix[j].Suffix.startsWith(that.value.slice(0,1)))
+					{
+					obj.Suffix = Suffix[j].Suffix;
+					obj.SuffixDescriptionEN = Suffix[j].SuffixDescriptionEN;
+					obj.SuffixDescriptionFR = Suffix[j].SuffixDescriptionFR;
+					obj.mrktg_int_desc_en = Suffix[j].mrktg_int_desc_en;
+					obj.mrktg_int_desc_fr = Suffix[j].mrktg_int_desc_fr;
+					obj.int_c = Suffix[j].int_c;
+					obj.SPRAS = Suffix[j].SPRAS;
+					SuffixData.push(obj);
+					}
+				}
+				
+				var suffixModel = new sap.ui.model.json.JSONModel(SuffixData);
+				sap.ui.getCore().setModel(suffixModel, "VehicleLocatorSuffix");
+				this.getOwnerComponent().suffixSelectedValue = "";
+				
+}
 			var that = this;
-			if ((arr.indexOf(that.value) < 0 && combo_IdSel == "") && (that.value != "- ALL/")) {
+			var selectMandtFields = that._oResourceBundle.getText("selectMandtFields");
+			if ((arr.indexOf(that.value) < 0 && combo_IdSel == "") && (that.value != "- ALL/") && !(that.value.includes("*"))) {
 				combo_Id.setValueState("Error");
 				combo_Id.setValue();
 				that.getView().byId("SeriesErrMsgStrip").setText(selectMandtFields);
@@ -1855,13 +1919,27 @@ var FilterZonestock = FilterDeleade_OrderTypefiltered_zone.filter(function (x) {
 				if(SPRAS!="English"){*/
 			/*this.SelectedExteriorColorCode = oEvent.getParameter("selectedItem").oBindingContexts.Suffix.getObject().ExteriorColorCode;
 			this.SelectedTrimInteriorColor = oEvent.getParameter("selectedItem").oBindingContexts.Suffix.getObject().TrimInteriorColor;*/
-
+if(oEvent.getParameter("selectedItem")!=null)
+{
 			if (oEvent.getParameter("selectedItem").getText() != "ALL" && oEvent.getParameter("selectedItem").getText() != "TOUS") {
 				this.intercolor = oEvent.getParameter("selectedItem").oBindingContexts.Suffix.getObject().int_c;
 			}
+}
+else
+{
+	this.intercolor="";
+}                          
 			sap.ui.getCore().SuffixSelectedKey = this.getView().byId("SuffCmbo").getSelectedKey();
+			if(this.getView().byId("SuffCmbo").getSelectedItem()!=null){
 			sap.ui.getCore().SuffixSelectedItem = this.getView().byId("SuffCmbo").getSelectedItem().getText();
 			selectedSuffix = this.getView().byId("SuffCmbo").getSelectedItem().getText();
+			}
+			else
+			{
+				sap.ui.getCore().SuffixSelectedItem ="";
+				selectedSuffix ="";
+			}
+			// selectedSuffix = this.getView().byId("SuffCmbo").getSelectedItem().getText();
 			/*	}
 				else{
 					
@@ -1881,7 +1959,7 @@ var FilterZonestock = FilterDeleade_OrderTypefiltered_zone.filter(function (x) {
 			//GSR 0505
 			// this.getOwnerComponent().suffixSelectedIndex = this.getView().byId("SuffCmbo").getSelectedItem().getBindingContext("Suffix").getPath()
 			// 	.split("/")[1] - 0;
-			this.getOwnerComponent().suffixSelectedValue = this.getView().byId("SuffCmbo").getSelectedItem().getText();
+			this.getOwnerComponent().suffixSelectedValue = selectedSuffix;
 		},
 		//	}
 

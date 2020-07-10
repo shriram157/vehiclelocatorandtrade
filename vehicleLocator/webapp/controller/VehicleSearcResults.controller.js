@@ -431,10 +431,18 @@ sap.ui.define([
 			if (Suffix != this.getView().byId("VLRSuffix").getSelectedKey()) {
 				Suffix = this.getView().byId("VLRSuffix").getSelectedKey();
 			}
-			if (Suffix != "" && Suffix != "all") {
+			var value = this.getView().byId("VLRSuffix").getValue();
+				if(value.includes("*")&& value.length==2)
+				{
+					var suf = value.slice(0,1);
+					filterArray.push(new sap.ui.model.Filter("zzsuffix", sap.ui.model.FilterOperator.StartsWith, suf));
+				}
+			else if (Suffix != "" && Suffix != "all") {
 				var suffixisNotequaltoAll = true;
+			
 				filterArray.push(new sap.ui.model.Filter("zzsuffix", sap.ui.model.FilterOperator.Contains, Suffix));
-			} else if (Suffix == "all") {
+				
+			} else if (Suffix == "all" || Suffix == "") {
 				var suffixisNotequaltoAll = false;
 				var SelSuffix = this.getView().byId("VLRSuffix").getModel().getData();
 				for (var i = 0; i < SelSuffix.length; i++) {
@@ -832,6 +840,10 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 		onRouteMatched: function (oEvent) {
 			//debugger;
 			// if the user is retruning by pressing the back button,  then it is better, that we dont refresh the data again. 
+		this.getView().byId("VLRSuffix").setFilterFunction(function (sTerm, oItem) {
+				sTerm = sTerm.split("*")[0];
+				return oItem.getKey().match(new RegExp("^" + sTerm, "i"));
+			});
 			var Status = sap.ui.getCore().getModel("SearchedData").getData();
 
 			// 10th May,  if the Hold_stat is received as blank make it "N"
@@ -1600,6 +1612,7 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 		handlebacksearch: function () {
 			this.getView().byId("chknew").setSelected(false);
 			this.getView().byId("chkexi").setSelected(false);
+			this.getView().byId("VLRSuffix").setValue("");
 			this.getRouter().navTo("VehicleLocSearch");
 			// this.getView().byId("VLRSuffix").updateBindings();
 			//when the back button is presssed, lets reset the existing model. 
