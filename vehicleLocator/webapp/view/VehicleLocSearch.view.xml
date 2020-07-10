@@ -143,6 +143,8 @@
 										additionalText=""/>-->
 									<!--{MarktgIntDescEN MarktgIntDescEN , MarketingTrimInteriorDescEN} /{Suffix>InteriorDescriptionEN} -->
 								</ComboBox>
+								<Label text=""/>
+								<Text text="{i18n>WildSearch}"/>
 								<!--{SuffixDescriptionEN}- -->
 								<!--<Select id="VLSSuffix" change="onVlsMoSuffix" width="90%" forceSelection="true" class="sapUiSizeCompact VLSSSelectSuffix" items="{}">
 									<core:ListItem key="{}" text="{jsonDatamodel>Suffix}"/>
