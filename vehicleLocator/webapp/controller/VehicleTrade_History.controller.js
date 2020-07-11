@@ -282,7 +282,7 @@ sap.ui.define([
 // }
 					} else if (TableData[i].Offered_Vtn == results[x].VTN) {
 						TableData[i].OffredVehicle = {};
-						TableData[i].OffredVehicle.Requested_VTN = TableData[i].Offered_Vtn;
+						// TableData[i].OffredVehicle.Requested_VTN = TableData[i].Offered_Vtn;
 						TableData[i].OffredVehicle.Offered_Vtn = TableData[i].Offered_Vtn;
 						
 						TableData[i].OffredVehicle.Requesting_Dealer = TableData[i].Requesting_Dealer;
@@ -524,7 +524,7 @@ sap.ui.define([
 						var ModelData = arrData[i].OffredVehicle.Model + "-" + arrData[i].OffredVehicle.Model_Desc;
 				var SuffixData = arrData[i].OffredVehicle.Suffix + "-" + arrData[i].OffredVehicle.Suffix_Desc + "/" + arrData[i].OffredVehicle.Int_Colour_Desc;
 				var Ext_Colour_Data = arrData[i].OffredVehicle.Ext_Colour + "-" + arrData[i].OffredVehicle.Ext_Colour_Desc;
-				var VTNData = arrData[i].OffredVehicle.Requested_VTN;
+				var VTNData = arrData[i].OffredVehicle.Offered_Vtn;
 				var VINData = arrData[i].OffredVehicle.VIN;
 				var APXData = arrData[i].OffredVehicle.APX;
 				}
@@ -598,7 +598,7 @@ sap.ui.define([
 var ModelData = arrData[i].OffredVehicle.Model + "-" + arrData[i].OffredVehicle.Model_Desc;
 				var SuffixData = arrData[i].OffredVehicle.Suffix + "-" + arrData[i].OffredVehicle.Suffix_Desc + "/" + arrData[i].OffredVehicle.Int_Colour_Desc;
 				var Ext_Colour_Data = arrData[i].OffredVehicle.Ext_Colour + "-" + arrData[i].OffredVehicle.Ext_Colour_Desc;
-				var VTNData = arrData[i].OffredVehicle.Requested_VTN;
+				var VTNData = arrData[i].OffredVehicle.Offered_Vtn;
 				var VINData = arrData[i].OffredVehicle.VIN;
 				var APXData = arrData[i].OffredVehicle.APX;
 				} else {

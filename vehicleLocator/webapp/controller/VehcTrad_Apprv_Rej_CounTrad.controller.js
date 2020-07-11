@@ -1682,7 +1682,7 @@ RequstedDealer="";
 			var Requesting_Dealer_Name = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requesting_Dealer_Name;
 		
 			var Requested_Vtn = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Vtn;	
-			var Requested_Vtn = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.Requested_Vtn;
+			// var Requested_Vtn = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.Requested_Vtn;
 			var Offered_Vtn = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.Offered_Vtn;
 			var Trade_Return = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.Trade_Return;
 			var Req_Current_ETA_From = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.Req_Current_ETA_From;
@@ -1891,7 +1891,7 @@ if(Created_By==undefined)
 			if(this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Vtn==undefined)
 			{
 				
-			var Requested_Vtn = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.Requested_Vtn;
+			var Requested_Vtn = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.Requested_Vtn;
 			var Offered_Vtn = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.Offered_Vtn;
 			var Trade_Return = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.Trade_Return;
 			var Req_Current_ETA_From = this.getView().byId("SimpleFormAproveTrReq").getModel().oData.OffredVehicle.Req_Current_ETA_From;
