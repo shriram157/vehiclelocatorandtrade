@@ -230,7 +230,7 @@ sap.ui.define([
 						if(TableData[i].Trade_Return=='N')
 						{
 								TableData[i].OffredVehicle = {};
-						TableData[i].OffredVehicle.Requested_VTN = TableData[i].Requested_Vtn;
+						TableData[i].OffredVehicle.Offered_Vtn = TableData[i].Requested_Vtn;
 						TableData[i].OffredVehicle.Requesting_Dealer = TableData[i].Requesting_Dealer;
 						TableData[i].OffredVehicle.Requesting_Dealer_Name = TableData[i].Requesting_Dealer_Name;
 						TableData[i].OffredVehicle.Model_Year = results[x].Model_Year;
@@ -253,10 +253,38 @@ sap.ui.define([
 						TableData[i].OffredVehicle.Order_Type = results[x].Order_Type;
 						TableData[i].OffredVehicle.Status = results[x].Status;
 						}
-
+// else{
+// 								TableData[i].OffredVehicle = {};
+// 						TableData[i].OffredVehicle.Offered_Vtn = TableData[i].Offered_Vtn;
+// 						TableData[i].OffredVehicle.Requesting_Dealer = TableData[i].Requested_Dealer;
+// 						TableData[i].OffredVehicle.Requesting_Dealer_Name = TableData[i].Requested_Dealer_Name;
+// 						TableData[i].OffredVehicle.Model_Year = results[x].Model_Year;
+// 						TableData[i].OffredVehicle.Model = results[x].Model;
+// 						TableData[i].OffredVehicle.Series = results[x].Series;
+// 						TableData[i].OffredVehicle.Suffix = results[x].Suffix;
+// 						TableData[i].OffredVehicle.Colour = results[x].Int_Colour;
+// 						TableData[i].Int_Colour_Desc = results[x].Int_Colour_Desc;// interior Color Suffix issue
+// 						TableData[i].OffredVehicle.Ext_Colour = results[x].Ext_Colour;
+// 						TableData[i].OffredVehicle.AccessoryInstalled = results[x].AccessoryInstalled;
+// 						if(results[x].VIN!= null)
+// 						{
+// 						TableData[i].OffredVehicle.VIN = results[x].VIN;
+// 						}
+// 						else
+// 						{
+// 								TableData[i].OffredVehicle.VIN ="";
+// 						}
+// 						TableData[i].OffredVehicle.APX = results[x].APX;
+// 						TableData[i].OffredVehicle.Order_Type = results[x].Order_Type;
+// 						TableData[i].OffredVehicle.Status = results[x].Status;
+						
+	
+// }
 					} else if (TableData[i].Offered_Vtn == results[x].VTN) {
 						TableData[i].OffredVehicle = {};
 						TableData[i].OffredVehicle.Requested_VTN = TableData[i].Offered_Vtn;
+						TableData[i].OffredVehicle.Offered_Vtn = TableData[i].Offered_Vtn;
+						
 						TableData[i].OffredVehicle.Requesting_Dealer = TableData[i].Requesting_Dealer;
 						TableData[i].OffredVehicle.Requesting_Dealer_Name = TableData[i].Requesting_Dealer_Name;
 						TableData[i].OffredVehicle.Model_Year = results[x].Model_Year;
@@ -302,6 +330,30 @@ sap.ui.define([
 						TableData[i].Status = results[x].Status;
 							
 						}
+						// else
+						// {
+						// TableData[i].Requested_Vtn=	TableData[i].Requested_Vtn;
+						// TableData[i].Model_Year = results[x].Model_Year;
+						// TableData[i].Model = results[x].Model;
+						// TableData[i].Series = results[x].Series;
+						// TableData[i].Suffix = results[x].Suffix;
+						// TableData[i].Colour = results[x].Int_Colour;
+						// TableData[i].Ext_Colour = results[x].Ext_Colour;
+						// TableData[i].AccessoryInstalled = results[x].AccessoryInstalled;
+						// 	if(results[x].VIN!= null)
+						// {
+						// TableData[i].VIN = results[x].VIN;
+						// }
+						// else
+						// {
+						// 	TableData[i].VIN = "";
+						// }
+						// TableData[i].Int_Colour_Desc = results[x].Int_Colour_Desc;// Interior Color Suffix issue
+						// TableData[i].APX = results[x].APX;
+						// TableData[i].Order_Type = results[x].Order_Type;
+						// TableData[i].Status = results[x].Status;
+							
+						// }
 					}
 
 				}
