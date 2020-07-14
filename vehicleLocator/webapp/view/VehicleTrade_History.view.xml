@@ -221,7 +221,7 @@
 										<cells>
 											<Link id="tradeHId" text="{Trade_Id}" width="12em" class="link" subtle="true" press="oTradeHistoryLinkPress" wrapping="false"/>
 											<!--<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="false"/>-->
-											<Text text="{= ${RequestingDealerVisible} === true ?${Requested_Vtn}:${OffredVehicle/Requested_VTN}}" wrapping="false" width="12em"/>
+											<Text text="{= ${RequestingDealerVisible} === true ?${Requested_Vtn}:${OffredVehicle/Offered_Vtn}}" wrapping="false" width="12em"/>
 											
 											<Text text="{= ${RequestingDealerVisible} === true ?${VIN}:${OffredVehicle/VIN}}" wrapping="false" width="12em"/>
 											<!--Text text="{parts:['RequestingDealerVisible','Requested_Dealer','Requesting_Dealer','VIN','OffredVehicle/VIN'], formatter:'vehicleLocator.Formatter.Formatter.TradeHistoryVIN'}" wrapping="false" width="12em"/-->
@@ -361,7 +361,7 @@
 										<cells>
 											<Link id="tradeHId1" text="{Trade_Id}" class="link" subtle="true" press="oTradeHistoryLinkPress" wrapping="false"/>
 											<!--<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="false"/>-->
-										<Text id= "txt_in_VTN" text="{= ${RequestingDealerVisible} === false ?${Requested_Vtn}:${OffredVehicle/Requested_VTN}}" wrapping="false"/>
+										<Text id= "txt_in_VTN" text="{= ${RequestingDealerVisible} === false ?${Requested_Vtn}:${OffredVehicle/Offered_Vtn}}" wrapping="false"/>
 											<Text id= "txt_in_VIN" text="{= ${RequestingDealerVisible} === false ?${VIN}:${OffredVehicle/VIN}}" wrapping="false"/>
 											<!--<Text text="{i18n>From}" wrapping="false"/>-->
 											

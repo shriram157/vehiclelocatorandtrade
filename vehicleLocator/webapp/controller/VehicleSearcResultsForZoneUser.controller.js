@@ -471,7 +471,13 @@ sap.ui.define([
 			if (Suffix != this.getView().byId("VLRSuffix").getSelectedKey()) {
 				Suffix = this.getView().byId("VLRSuffix").getSelectedKey();
 			}
-			if (Suffix != "" && Suffix != "all") {
+				var value = this.getView().byId("VLRSuffix").getValue();
+				if(value.includes("*")&& value.length==2)
+				{
+					var suf = value.slice(0,1);
+					filterArray.push(new sap.ui.model.Filter("zzsuffix", sap.ui.model.FilterOperator.StartsWith, suf));
+				}
+			else if (Suffix != "" && Suffix != "all") {
 
 				filterArray.push(new sap.ui.model.Filter("zzsuffix", sap.ui.model.FilterOperator.Contains, Suffix));
 			} else if (Suffix == "all"|| Suffix == "") {
@@ -1471,102 +1477,102 @@ sap.ui.define([
 				}
 			}
 
-			if (SuffixData.length != 0) {
+			// if (SuffixData.length != 0) {
 
-			}
+			// }
 
-			var obj = {};
-			for (var i = 0, len = Status.length; i < len; i++)
-				obj[Status[i]['zz_trading_ind']] = Status[i];
-			Status = new Array();
-			for (var key in obj)
-				Status.push(obj[key]);
+			// var obj = {};
+			// for (var i = 0, len = Status.length; i < len; i++)
+			// 	obj[Status[i]['zz_trading_ind']] = Status[i];
+			// Status = new Array();
+			// for (var key in obj)
+			// 	Status.push(obj[key]);
 
-			/*Status.splice(-1,1);*/
-			var StatusDataFilter = [];
-			for (var i = 0; i < Status.length; i++) {
-				if (Status[i].zz_trading_ind == "1" || Status[i].zz_trading_ind == "2") {
-					StatusDataFilter.push(Status[i]);
-				}
-			}
-			if (StatusDataFilter.length == 0) {
-				StatusDataFilter = [{
-					"zz_trading_ind": "1"
+			// /*Status.splice(-1,1);*/
+			// var StatusDataFilter = [];
+			// for (var i = 0; i < Status.length; i++) {
+			// 	if (Status[i].zz_trading_ind == "1" || Status[i].zz_trading_ind == "2") {
+			// 		StatusDataFilter.push(Status[i]);
+			// 	}
+			// }
+			// if (StatusDataFilter.length == 0) {
+			// 	StatusDataFilter = [{
+			// 		"zz_trading_ind": "1"
 
-				}, {
-					"zz_trading_ind": "2"
-				}];
-			}
-			var Model = new sap.ui.model.json.JSONModel(StatusDataFilter);
-			// Model.setSizeLimit(1000);
+			// 	}, {
+			// 		"zz_trading_ind": "2"
+			// 	}];
+			// }
+			// var Model = new sap.ui.model.json.JSONModel(StatusDataFilter);
+			// // Model.setSizeLimit(1000);
 
-			var StatusFilter = StatusDataFilter.filter(function (x) {
-				return (x.zz_trading_ind == "2" || x.zz_trading_ind == "3");
-			});
-			var Statusind1 = StatusDataFilter.filter(function (x) {
-				return (x.zz_trading_ind == "1");
-			});
+			// var StatusFilter = StatusDataFilter.filter(function (x) {
+			// 	return (x.zz_trading_ind == "2" || x.zz_trading_ind == "3");
+			// });
+			// var Statusind1 = StatusDataFilter.filter(function (x) {
+			// 	return (x.zz_trading_ind == "1");
+			// });
 
-			this.getView().byId("VLRStatus").setModel(Model);
-			if (StatusFilter.length != 0) {
-				if (this.sCurrentLocale == 'EN') {
-					this.getView().byId("VLRStatus").setSelectedItem("Pipeline - Routable");
-				} else {
-					this.getView().byId("VLRStatus").setSelectedItem("Chaîne d'approvisionnement – acheminable");
-				}
-				this.getView().byId("VLRStatus").setSelectedKey(sap.ui.getCore().SelectedStauts);
-			} else if (StatusDataFilter.length != 0) {
-				if (this.sCurrentLocale == 'EN') {
+			// this.getView().byId("VLRStatus").setModel(Model);
+			// if (StatusFilter.length != 0) {
+			// 	if (this.sCurrentLocale == 'EN') {
+			// 		this.getView().byId("VLRStatus").setSelectedItem("Pipeline - Routable");
+			// 	} else {
+			// 		this.getView().byId("VLRStatus").setSelectedItem("Chaîne d'approvisionnement – acheminable");
+			// 	}
+			// 	this.getView().byId("VLRStatus").setSelectedKey(sap.ui.getCore().SelectedStauts);
+			// } else if (StatusDataFilter.length != 0) {
+			// 	if (this.sCurrentLocale == 'EN') {
 
-					var newItem = new sap.ui.core.Item({
-						key: "2",
-						text: "Pipeline - Routable"
-					});
+			// 		var newItem = new sap.ui.core.Item({
+			// 			key: "2",
+			// 			text: "Pipeline - Routable"
+			// 		});
 
-					this.getView().byId("VLRStatus").insertItem(newItem);
-					this.getView().byId("VLRStatus").setSelectedItem("Pipeline - Routable");
-					this.getView().byId("VLRStatus").setSelectedKey("2");
+			// 		this.getView().byId("VLRStatus").insertItem(newItem);
+			// 		this.getView().byId("VLRStatus").setSelectedItem("Pipeline - Routable");
+			// 		this.getView().byId("VLRStatus").setSelectedKey("2");
 
-				} else {
-					var newItem = new sap.ui.core.Item({
-						key: "2",
-						text: "Chaîne d'approvisionnement – acheminable"
-					});
+			// 	} else {
+			// 		var newItem = new sap.ui.core.Item({
+			// 			key: "2",
+			// 			text: "Chaîne d'approvisionnement – acheminable"
+			// 		});
 
-					this.getView().byId("VLRStatus").insertItem(newItem);
-					this.getView().byId("VLRStatus").setSelectedItem("Chaîne d'approvisionnement – acheminable");
-					this.getView().byId("VLRStatus").setSelectedKey("2");
+			// 		this.getView().byId("VLRStatus").insertItem(newItem);
+			// 		this.getView().byId("VLRStatus").setSelectedItem("Chaîne d'approvisionnement – acheminable");
+			// 		this.getView().byId("VLRStatus").setSelectedKey("2");
 
-				}
+			// 	}
 
-				if (Statusind1.length == 0) {
-					// var newItem = new sap.ui.core.Item({
-					// 	key: "1",
-					// 	text: "Stock-Non-Routable"
-					// });
-					// this.getView().byId("VLRStatus").insertItem(newItem);
+			// 	if (Statusind1.length == 0) {
+			// 		// var newItem = new sap.ui.core.Item({
+			// 		// 	key: "1",
+			// 		// 	text: "Stock-Non-Routable"
+			// 		// });
+			// 		// this.getView().byId("VLRStatus").insertItem(newItem);
 
-					if (this.sCurrentLocale == 'EN') {
+			// 		if (this.sCurrentLocale == 'EN') {
 
-						var newItem = new sap.ui.core.Item({
-							key: "1",
-							text: "Stock-Non-Routable"
-						});
-						this.getView().byId("VLRStatus").insertItem(newItem);
+			// 			var newItem = new sap.ui.core.Item({
+			// 				key: "1",
+			// 				text: "Stock-Non-Routable"
+			// 			});
+			// 			this.getView().byId("VLRStatus").insertItem(newItem);
 
-					} else {
+			// 		} else {
 
-						var newItem = new sap.ui.core.Item({
-							key: "1",
-							text: "Stock-non-acheminable"
-						});
-						this.getView().byId("VLRStatus").insertItem(newItem);
+			// 			var newItem = new sap.ui.core.Item({
+			// 				key: "1",
+			// 				text: "Stock-non-acheminable"
+			// 			});
+			// 			this.getView().byId("VLRStatus").insertItem(newItem);
 
-					}
+			// 		}
 
-				}
+			// 	}
 
-			}
+			// }
 			/*	if(StatusFilter.length!=0){
 						this.getView().byId("VLRStatus").setSelectedItem("Pipeline - Routable");
 	this.getView().byId("VLRStatus").setSelectedKey("1");
