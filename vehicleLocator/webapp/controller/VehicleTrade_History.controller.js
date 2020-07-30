@@ -223,7 +223,7 @@ sap.ui.define([
 						{
 							TableData[i].VIN = "";
 						}
-						TableData[i].Int_Colour_Desc = results[x].Int_Colour_Desc;// Interior Color Suffix issue
+						//TableData[i].Int_Colour_Desc = results[x].Int_Colour_Desc;// Interior Color Suffix issue
 						TableData[i].APX = results[x].APX;
 						TableData[i].Order_Type = results[x].Order_Type;
 						TableData[i].Status = results[x].Status;
@@ -238,7 +238,7 @@ sap.ui.define([
 						TableData[i].OffredVehicle.Series = results[x].Series;
 						TableData[i].OffredVehicle.Suffix = results[x].Suffix;
 						TableData[i].OffredVehicle.Colour = results[x].Int_Colour;
-						TableData[i].Int_Colour_Desc = results[x].Int_Colour_Desc;// interior Color Suffix issue
+						//TableData[i].Int_Colour_Desc = results[x].Int_Colour_Desc;// interior Color Suffix issue
 						TableData[i].OffredVehicle.Ext_Colour = results[x].Ext_Colour;
 						TableData[i].OffredVehicle.AccessoryInstalled = results[x].AccessoryInstalled;
 						if(results[x].VIN!= null)
@@ -292,7 +292,7 @@ sap.ui.define([
 						TableData[i].OffredVehicle.Series = results[x].Series;
 						TableData[i].OffredVehicle.Suffix = results[x].Suffix;
 						TableData[i].OffredVehicle.Colour = results[x].Int_Colour;
-						TableData[i].Int_Colour_Desc = results[x].Int_Colour_Desc;// interior Color Suffix issue
+						//TableData[i].Int_Colour_Desc = results[x].Int_Colour_Desc;// interior Color Suffix issue
 						TableData[i].OffredVehicle.Ext_Colour = results[x].Ext_Colour;
 						TableData[i].OffredVehicle.AccessoryInstalled = results[x].AccessoryInstalled;
 							if(results[x].VIN!= null)
@@ -324,7 +324,7 @@ sap.ui.define([
 						{
 							TableData[i].VIN = "";
 						}
-						TableData[i].Int_Colour_Desc = results[x].Int_Colour_Desc;// Interior Color Suffix issue
+						//TableData[i].Int_Colour_Desc = results[x].Int_Colour_Desc;// Interior Color Suffix issue
 						TableData[i].APX = results[x].APX;
 						TableData[i].Order_Type = results[x].Order_Type;
 						TableData[i].Status = results[x].Status;
