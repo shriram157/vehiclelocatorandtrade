@@ -1065,6 +1065,149 @@ sap.ui.define([
 
 				}
 				if (StatusData.Trade_Return == "N") {
+					if(StatusData.trade_type == "outbound")
+					{
+						this._oViewModel.setProperty("/showVinDiplayOff", false);
+					// this.getView().byId("offervehidContent").setVisible(true);
+					// Offered = {};
+					// this.getView().byId("Offerevehid").setText("");
+					// this.getView().byId("offeredDealer").setVisible(true);
+					// this.getView().byId("oRequesteddealer").setText("");
+					// this.getView().byId("oRequesteddealer").setVisible(true);
+					// this.getView().byId("oAccesIn").setText("");
+					// this.getView().byId("ovinIdText").setVisible(true);
+					// this.getView().byId("ovinId").setVisible(true);
+
+					this.getView().byId("oMdlyearLbl").setVisible(false);
+					// this.getView().byId("ofrmodelyeartext").setText("");
+					this.getView().byId("oMdlyear").setVisible(false);
+
+					this.getView().byId("oSeriesLbl").setVisible(false);
+					// this.getView().byId("ofrseriestxt").setText("");
+					this.getView().byId("oSeries").setVisible(false);
+
+					this.getView().byId("oModelLbl").setVisible(false);
+					// this.getView().byId("ofrmodltxt").setText("");
+					this.getView().byId("oModel").setVisible(false);
+
+					this.getView().byId("oSuffixLbl").setVisible(false);
+					// this.getView().byId("ofrsuffixstxt").setText("");
+					this.getView().byId("intdesr").setVisible(false);
+
+					this.getView().byId("extcoLbl").setVisible(false);
+					// this.getView().byId("ofrapxtxt").setText("");
+					this.getView().byId("extco").setVisible(false);
+
+					this.getView().byId("oapxLbl").setVisible(false);
+					// this.getView().byId("ofrexttxt").setText("");
+					this.getView().byId("oapx").setVisible(false);
+
+					this.getView().byId("ostatusLbl").setVisible(false);
+					// this.getView().byId("ofrstatustxt").setText("");
+					this.getView().byId("ostatus").setVisible(false);
+
+					this.getView().byId("ordTypLbl").setVisible(false);
+					// this.getView().byId("ofrordtypetxt").setText("");
+					this.getView().byId("oOdrtype").setVisible(false);
+
+					this.getView().byId("cetalabid").setVisible(false);
+					// this.getView().byId("ctqtid").setText("");
+					this.getView().byId("ctetid").setVisible(false);
+
+					// // this.getView().byId("fromqid").setVisible(false);
+					// this.getView().byId("txlab").setText("");
+					this.getView().byId("txtlab").setVisible(false);
+
+					this.getView().byId("prlabid").setVisible(false);
+					this.getView().byId("prpetid").setVisible(false);
+					this.getView().byId("VT_ARCTDnc").setVisible(false);
+					this.getView().byId("VT_ARCTDncLbl").setVisible(false);
+					this.getView().byId("ovtnIdText").setVisible(false);
+					this.getView().byId("ovtnId").setVisible(false);
+					this.getView().byId("ovinIdText").setVisible(false);
+					this.getView().byId("ovinId").setVisible(false);
+
+					// // this.getView().byId("tobid").setVisible(false);
+					// this.getView().byId("prptid").setText("");
+					this.getView().byId("accInstLbl").setVisible(false);
+
+					// // this.getView().byId("fmlbid").setVisible(false);
+					// /*	this.getView().byId("fromlbid").setVisible(false);*/
+					// this.getView().byId("otxlabel").setText("");
+					this.getView().byId("otxtlabel").setVisible(false);
+
+					this.getView().byId("accInst").setVisible(false);
+					}
+					else
+					{
+								this._oViewModel.setProperty("/showVinDiplayOff", false);
+					// this.getView().byId("offervehidContent").setVisible(true);
+					// Offered = {};
+					
+					this.getView().byId("vtnlabeid").setVisible(false);      
+					this.getView().byId("vtnid").setVisible(false);        
+					this.getView().byId("Offerevehid").setText("");
+					this.getView().byId("offeredDealer").setVisible(false);
+					this.getView().byId("oRequesteddealer").setText("");
+					this.getView().byId("oRequesteddealer").setVisible(false);
+					this.getView().byId("oAccesIn").setText("");
+					this.getView().byId("oAccesIn").setVisible(false);
+					this.getView().byId("accid").setVisible(false);
+
+					this.getView().byId("ofrModellabl").setVisible(false);
+					this.getView().byId("ofrmodelyeartext").setText("");
+					this.getView().byId("ofrmodelyeartext").setVisible(false);
+
+					this.getView().byId("ofrserieslabl").setVisible(false);
+					this.getView().byId("ofrseriestxt").setText("");
+					this.getView().byId("ofrseriestxt").setVisible(false);
+
+					this.getView().byId("ofrmodllabl").setVisible(false);
+					this.getView().byId("ofrmodltxt").setText("");
+					this.getView().byId("ofrmodltxt").setVisible(false);
+
+					this.getView().byId("ofrsuffixlabl").setVisible(false);
+					// this.getView().byId("ofrsuffixstxt").setText("");
+					this.getView().byId("ofrsuffixstxt").setVisible(false);
+
+					this.getView().byId("ofrapxlabl").setVisible(false);
+					// this.getView().byId("ofrapxtxt").setText("");
+					this.getView().byId("ofrapxtxt").setVisible(false);
+
+					this.getView().byId("ofrextcolorlabl").setVisible(false);
+					// this.getView().byId("ofrexttxt").setText("");
+					this.getView().byId("ofrexttxt").setVisible(false);
+
+					this.getView().byId("ofrstatuslabl").setVisible(false);
+					// this.getView().byId("ofrstatustxt").setText("");
+					this.getView().byId("ofrstatustxt").setVisible(false);
+
+					this.getView().byId("ofrordrtypelabl").setVisible(false);
+					// this.getView().byId("ofrordtypetxt").setText("");
+					this.getView().byId("ofrordtypetxt").setVisible(false);
+
+					this.getView().byId("cetalaid").setVisible(false);
+					// this.getView().byId("ctqtid").setText("");
+					this.getView().byId("ctqtid").setVisible(false);
+
+					// // this.getView().byId("fromqid").setVisible(false);
+					// this.getView().byId("txlab").setText("");
+					this.getView().byId("txlab").setVisible(false);
+
+					this.getView().byId("prolabid").setVisible(false);
+
+					// // this.getView().byId("tobid").setVisible(false);
+					// this.getView().byId("prptid").setText("");
+					this.getView().byId("prptid").setVisible(false);
+
+					// // this.getView().byId("fmlbid").setVisible(false);
+					// /*	this.getView().byId("fromlbid").setVisible(false);*/
+					// this.getView().byId("otxlabel").setText("");
+					this.getView().byId("otxlabel").setVisible(false);
+
+					// this.getView().byId("idlto").setVisible(false);
+
+					}
 
 					/*			var oDealer = StatusData.Requested_Dealer;
 								if (oDealer.length == 10) {
@@ -1177,6 +1320,8 @@ sap.ui.define([
 					// that.getView().byId("idlto").setVisible(false);
 
 				} else if (StatusData.Trade_Return == "Y") {
+					this.getView().byId("vtnlabeid").setVisible(true);      
+					this.getView().byId("vtnid").setVisible(true); 
 					/*
 										var oDealer = StatusData.Requested_Dealer;
 										if (oDealer.length == 10) {
