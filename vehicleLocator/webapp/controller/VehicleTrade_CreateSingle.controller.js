@@ -85,6 +85,19 @@ sap.ui.define([
 				});
 
 			}
+			var oArray = [{
+					"Trade_return": "Yes",
+					"State": "Yes"
+				}, {
+					"Trade_return": "No",
+					"State": "No"
+				}
+
+			];
+
+			var oModel = new sap.ui.model.json.JSONModel(oArray);
+			this.getView().byId("VT_CStradinRet").setModel(oModel);
+			
 
 			this.getView().setModel(oViewModel, "languageModel");
 
@@ -328,18 +341,6 @@ sap.ui.define([
 			// 		this.getView().byId("oOrdertype").setVisible(true);
 			// }
 
-			var oArray = [{
-					"Trade_return": "Yes",
-					"State": "Yes"
-				}, {
-					"Trade_return": "No",
-					"State": "No"
-				}
-
-			];
-
-			var oModel = new sap.ui.model.json.JSONModel(oArray);
-			this.getView().byId("VT_CStradinRet").setModel(oModel);
 			//	this.getView().byId("VT_CStradinRet").setSeletedKey("Yes");
 			/*	this.getView().byId("VT_CStradinRet").setSelectedKey("Yes");
 				var selVT_CStradinRet = this.getView().byId("VT_CStradinRet").getSelectedKey();
@@ -350,6 +351,7 @@ sap.ui.define([
 					this.getView().byId("oSeleBtn").setEnabled(false);
 				}*/
 			if (this.getView().byId("FromFourth").getText() == "FromPush") {
+				sap.ui.getCore().SelectedTradeStatus="No";
 				this.getView().byId("VT_CStradinRet").setSelectedKey("No");
 
 				this.getView().byId("dealridreq").setVisible(false);
@@ -429,30 +431,38 @@ sap.ui.define([
 				this.getView().byId("oSeleBtn").setVisible(false);
 				this.getView().byId("oOtherVehInfoid").setText("");
 				this.getView().byId("vtnlabeid").setVisible(false);
-				// this.getView().byId("vtnid").setVisible(false);
+				this.getView().byId("vtnid").setVisible(false);
+				this.getView().byId("vtnid").setText("");
 				this.getView().byId("moylablid").setVisible(false);
 				this.getView().byId("yearid").setVisible(false);
+				this.getView().byId("yearid").setText("");
 				this.getView().byId("serielabelid").setVisible(false);
 				this.getView().byId("seiresid").setVisible(false);
+				this.getView().byId("seiresid").setText("");
 				this.getView().byId("modlabelid").setVisible(false);
+				this.getView().byId("modlid").setText("");
 				this.getView().byId("modlid").setVisible(false);
 				this.getView().byId("sufflabeid").setVisible(false);
+				this.getView().byId("suffid").setText("");
 				this.getView().byId("suffid").setVisible(false);
 				this.getView().byId("apxlabelid").setVisible(false);
 				this.getView().byId("apxid").setVisible(false);
+				this.getView().byId("apxid").setText("");
 				this.getView().byId("acclabelid").setVisible(false);
-
+				this.getView().byId("accid").setText("");
 				this.getView().byId("accid").setVisible(false);
 				this.getView().byId("extcollabelid").setVisible(false);
 				this.getView().byId("extcolod").setVisible(false);
-
+				this.getView().byId("extcolod").setText("");
 				this.getView().byId("ofvestats").setVisible(false);
 				this.getView().byId("offeredStatus").setVisible(false);
+				this.getView().byId("offeredStatus").setText("");
 				this.getView().byId("offordetype").setVisible(false);
 				this.getView().byId("oofferedOrdertype").setVisible(false);
-
+				this.getView().byId("oofferedOrdertype").setText("");
 				this.getView().byId("ctrtaid").setVisible(false);
 				this.getView().byId("oCtraid").setVisible(false);
+				//this.getView().byId("oCtraid").setText("");
 				// this.getView().byId("fromLabeeid").setVisible(false);
 				/*	this.getView().byId("labidtxt").setVisible(false);*/
 				this.getView().byId("labetxteid").setVisible(false);
@@ -1018,7 +1028,7 @@ sap.ui.define([
 							"Accept": "application/json",
 							"Method": "POST"
 						});
-
+						
 						that.oDataModel.create("/TradeRequest", oEntry, null, function (s) {
 							//	that.getView().byId("oTrdareqstat").setText("Request Sent");
 							if (that.getView().byId("oTypeHere").getValue() != "" && that.getView().byId("oTypeHere").getValue() != " ") {
@@ -1040,7 +1050,7 @@ sap.ui.define([
 
 					},
 					error: function (err) {
-					//	that.simulateServerRequest();
+						//	that.simulateServerRequest();
 						MessageBox.error(JSON.parse(err.response.body).error.message.value);
 
 					}
@@ -1241,7 +1251,7 @@ sap.ui.define([
 				var ointeriorReq = that.getView().getModel("TradeModel").oData.zzintcol;
 				var ovtnReq = that.getView().getModel("TradeModel").oData.zzvtn;
 				var ovinReq = ""
-			
+
 				if (!that.getView().getModel("TradeModel").oData.dispalyVin1) {
 					ovinReq = ""
 				} else {
@@ -1278,20 +1288,20 @@ sap.ui.define([
 				};
 				oEntry2["Trade_Id"] = oEntry.Trade_Id;
 				oVehicleDetails.push(oEntry2);
-					for (var i = 0; i < oVehicleDetails.length; i++) {
-							that.oDataModel.create("/TradeVehicles", oVehicleDetails[i], null, function (s) {
-								/*	alert("ok");*/
-								//	MessageBox.error(JSON.parse(err.response.body).error.message.value);
-								//sap.ui.core.BusyIndicator.hide();
-							}, function (err) {
-								that.simulateServerRequest();
-								MessageBox.error(JSON.parse(err.response.body).error.message.value);
+				for (var i = 0; i < oVehicleDetails.length; i++) {
+					that.oDataModel.create("/TradeVehicles", oVehicleDetails[i], null, function (s) {
+						/*	alert("ok");*/
+						//	MessageBox.error(JSON.parse(err.response.body).error.message.value);
+						//sap.ui.core.BusyIndicator.hide();
+					}, function (err) {
+						that.simulateServerRequest();
+						MessageBox.error(JSON.parse(err.response.body).error.message.value);
 
-							});
-						}
+					});
+				}
 			}
 			if ((that.getView().byId("FromFourth").getText() == "FromFourth") || (that.getView().byId("FromFourth").getText() == "FromPush")) {
-				oVehicleDetails=[];
+				oVehicleDetails = [];
 				var Suffix = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzsuffix;
 
 				var intColor = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzintcol;
@@ -1315,13 +1325,13 @@ sap.ui.define([
 				var DNC = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.dnc_ind;
 				var sPrefix = "";
 				if (sLocation_conf == 0) {
-				sPrefix = "/vehicleLocatorNode";
-			} else {
-				sPrefix = "";
+					sPrefix = "/vehicleLocatorNode";
+				} else {
+					sPrefix = "";
 
-			}
+				}
 				var nodeJsUrl = sPrefix + "/node"; //local run comment before deployment
-		
+
 				var oDataUrl = nodeJsUrl + "/Z_VEHICLE_MASTER_SRV";
 
 				var oDealer = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.kunnr;
