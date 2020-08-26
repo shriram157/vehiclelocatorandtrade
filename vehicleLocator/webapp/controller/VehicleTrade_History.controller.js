@@ -223,7 +223,7 @@ sap.ui.define([
 						{
 							TableData[i].VIN = "";
 						}
-						TableData[i].Int_Colour_Desc = results[x].Int_Colour_Desc;// Interior Color Suffix issue
+						//TableData[i].Int_Colour_Desc = results[x].Int_Colour_Desc;// Interior Color Suffix issue
 						TableData[i].APX = results[x].APX;
 						TableData[i].Order_Type = results[x].Order_Type;
 						TableData[i].Status = results[x].Status;
@@ -238,7 +238,7 @@ sap.ui.define([
 						TableData[i].OffredVehicle.Series = results[x].Series;
 						TableData[i].OffredVehicle.Suffix = results[x].Suffix;
 						TableData[i].OffredVehicle.Colour = results[x].Int_Colour;
-						TableData[i].Int_Colour_Desc = results[x].Int_Colour_Desc;// interior Color Suffix issue
+						//TableData[i].Int_Colour_Desc = results[x].Int_Colour_Desc;// interior Color Suffix issue
 						TableData[i].OffredVehicle.Ext_Colour = results[x].Ext_Colour;
 						TableData[i].OffredVehicle.AccessoryInstalled = results[x].AccessoryInstalled;
 						if(results[x].VIN!= null)
@@ -292,7 +292,7 @@ sap.ui.define([
 						TableData[i].OffredVehicle.Series = results[x].Series;
 						TableData[i].OffredVehicle.Suffix = results[x].Suffix;
 						TableData[i].OffredVehicle.Colour = results[x].Int_Colour;
-						TableData[i].Int_Colour_Desc = results[x].Int_Colour_Desc;// interior Color Suffix issue
+						//TableData[i].Int_Colour_Desc = results[x].Int_Colour_Desc;// interior Color Suffix issue
 						TableData[i].OffredVehicle.Ext_Colour = results[x].Ext_Colour;
 						TableData[i].OffredVehicle.AccessoryInstalled = results[x].AccessoryInstalled;
 							if(results[x].VIN!= null)
@@ -324,7 +324,7 @@ sap.ui.define([
 						{
 							TableData[i].VIN = "";
 						}
-						TableData[i].Int_Colour_Desc = results[x].Int_Colour_Desc;// Interior Color Suffix issue
+						//TableData[i].Int_Colour_Desc = results[x].Int_Colour_Desc;// Interior Color Suffix issue
 						TableData[i].APX = results[x].APX;
 						TableData[i].Order_Type = results[x].Order_Type;
 						TableData[i].Status = results[x].Status;
@@ -378,7 +378,7 @@ sap.ui.define([
 								TableData[i].OffredVehicle.Model_Desc = results[j].Model_Desc;
 								TableData[i].OffredVehicle.Series_Desc = results[j].Series_Desc;
 								TableData[i].OffredVehicle.Suffix_Desc = results[j].Suffix_Desc;
-								TableData[i].Int_Colour_Desc = results[j].Int_Colour_Desc;
+								TableData[i].OffredVehicle.Int_Colour_Desc = results[j].Int_Colour_Desc;
 								TableData[i].OffredVehicle.Colour = results[j].Int_Colour;
 								TableData[i].OffredVehicle.Ext_Colour_Desc = results[j].Ext_Colour_Desc;
 							}
@@ -397,7 +397,7 @@ sap.ui.define([
 								TableData[i].OffredVehicle.Model_Desc = results[k].Model_Desc;
 								TableData[i].OffredVehicle.Series_Desc = results[k].Series_Desc;
 								TableData[i].OffredVehicle.Suffix_Desc = results[k].Suffix_Desc;
-								TableData[i].Int_Colour_Desc = results[k].Int_Colour_Desc;
+								TableData[i].OffredVehicle.Int_Colour_Desc = results[k].Int_Colour_Desc;
 								TableData[i].OffredVehicle.Colour = results[k].Int_Colour;
 								TableData[i].OffredVehicle.Ext_Colour_Desc = results[k].Ext_Colour_Desc;
 							}
@@ -689,7 +689,8 @@ var ModelData = arrData[i].OffredVehicle.Model + "-" + arrData[i].OffredVehicle.
 			var that = this;
 
 			that.oRecTableSelectObj = oEvent.getSource().getBindingContext().getObject();
-
+		 var trade_type=oEvent.getSource().getParent().mAggregations.cells[9].mProperties.text;
+		 that.oRecTableSelectObj.trade_type = trade_type;
 			if (that.oRecTableSelectObj != undefined) {
 
 				var model = new sap.ui.model.json.JSONModel(that.oRecTableSelectObj);

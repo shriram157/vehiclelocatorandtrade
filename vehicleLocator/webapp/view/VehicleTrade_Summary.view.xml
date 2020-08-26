@@ -177,7 +177,10 @@
 						<headerToolbar>
 							<OverflowToolbar id="otbSubheader1">
 								<!--<Title id="tableHeader1" text="{detailView>/tableCount}"/>-->
+								
 								<Label text="{i18n>MyTradeRequests}" class="flexdontclabllist"/>
+								<Text text="{i18n>MyTradeInfoSubText}" />
+								
 								<ToolbarSpacer/>
 							<SearchField  liveChange="onLiveChangeMTR" showSearchButton="true" placeholder="{i18n>placeHolderText}">
 								<layoutData>
