@@ -89,10 +89,17 @@
 											class="sapUiSmallMarginEnd">
 			 
 										</Text>
+										<Text text="{= ${RequestingDealerVisible} === true ?${path:'Req_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'Off_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="ctetid1"
+											class="sapUiSmallMarginEnd">
+			 
+										</Text>
 										<!--<Text text="{i18n>From}" id="frmid"/>-->
 									<!--</HBox>-->
 									<!--<HBox>-->
 										<Text text="{i18n>To} : {= ${RequestingDealerVisible} === true ?${path:'/OffredVehicle/Req_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'Off_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="txtlab"
+											class="sapUiSmallMarginEnd"></Text>
+											
+										<Text text="{i18n>To} : {= ${RequestingDealerVisible} === true ?${path:'Req_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'Off_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="txtlab1"
 											class="sapUiSmallMarginEnd"></Text>
 										<!--<Text text="{i18n>To}" id="tolbid"/>-->
 									 
@@ -103,11 +110,16 @@
 									<HBox>
 										<Text text="{= ${RequestingDealerVisible} === true ?${path:'/OffredVehicle/Req_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'Off_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="prpetid"
 											class="sapUiSmallMarginEnd"></Text>
+											<Text text="{= ${RequestingDealerVisible} === true ?${path:'Req_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'Off_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="prpetid1"
+											class="sapUiSmallMarginEnd"></Text>
 										<!--<Text text="{i18n>From}" id="fmlabid"/>-->
 									<!--</HBox>-->
 								 
 									<!--<HBox>-->
 										<Text text="{i18n>To} : {= ${RequestingDealerVisible} === true ?${path:'/OffredVehicle/Req_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'Off_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="otxtlabel"
+											class="sapUiSmallMarginEnd"></Text>
+											
+											<Text text="{i18n>To} : {= ${RequestingDealerVisible} === true ?${path:'Req_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'Off_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="otxtlabel1"
 											class="sapUiSmallMarginEnd"></Text>
 										<!--<Text text="{i18n>To}" id="idlbltxt"/>-->
 									</HBox>
@@ -184,11 +196,15 @@ id="oRequesteddealer"/>
 									<HBox>
 										<Text text="{= ${RequestingDealerVisible} === false ?${path:'Req_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'/OffredVehicle/Off_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="ctqtid"
 											class="sapUiSmallMarginEnd"></Text>
+										<Text text="{= ${RequestingDealerVisible} === false ?${path:'Req_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'Off_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="ctqtid1"
+											class="sapUiSmallMarginEnd"></Text>
 										<!--<Text text="{i18n>From}" id="fromqid"/>-->
 									<!--</HBox>-->
 									<!--<HBox>-->
 									 
 										<Text text="{i18n>To} : {= ${RequestingDealerVisible} === false ?${path:'Req_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'/OffredVehicle/Off_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="txlab"
+											class="sapUiSmallMarginEnd"></Text>
+										<Text text="{i18n>To} : {= ${RequestingDealerVisible} === false ?${path:'Req_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'Off_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="txlab1"
 											class="sapUiSmallMarginEnd"></Text>
 										<!--<Text text="{i18n>To}" id="tobid"/>-->
 									</HBox>
@@ -199,11 +215,16 @@ id="oRequesteddealer"/>
 									<HBox>
 										<Text text="{= ${RequestingDealerVisible} === false ?${path:'Req_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'/OffredVehicle/Off_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="prptid"
 											class="sapUiSmallMarginEnd"></Text>
+										
+										<Text text="{= ${RequestingDealerVisible} === false ?${path:'Req_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'Off_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="prptid1"
+											class="sapUiSmallMarginEnd"></Text>
 										<!--<Text text="{i18n>From}" id="fmlbid"/>-->
 									<!--</HBox>-->
 									<!--<HBox>-->
 									 
 										<Text text="{i18n>To} : {= ${RequestingDealerVisible} === false ?${path:'Req_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'/OffredVehicle/Off_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="otxlabel"
+											class="sapUiSmallMarginEnd"></Text>
+										<Text text="{i18n>To} : {= ${RequestingDealerVisible} === false ?${path:'Req_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'Off_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="otxlabel1"
 											class="sapUiSmallMarginEnd"></Text>
 										<!--<Text text="{i18n>To}" id="idlto"/>-->
 									</HBox>

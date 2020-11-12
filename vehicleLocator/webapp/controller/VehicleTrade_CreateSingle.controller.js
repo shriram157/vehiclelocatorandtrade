@@ -843,9 +843,9 @@ sap.ui.define([
 						}
 
 						var Req_Current_ETA_ToDate = that.getView().byId("totxtid").getText();
-						var Req_Current_ETA_ToDate = Req_Current_ETA_ToDate.replace("To : ", "");
+						var Req_Current_ETA_ToDate = Req_Current_ETA_ToDate.replace("To : ", "").replace(" ","");
 
-						var Req_Current_ETA_ToDate = Req_Current_ETA_ToDate.replace("À : ", "");
+						var Req_Current_ETA_ToDate = Req_Current_ETA_ToDate.replace("À : ", "").replace(" ","");
 						if (Req_Current_ETA_ToDate != "" && Req_Current_ETA_ToDate != " ") {
 							var Req_Current_ETA_To = new Date(oDateFormat.format(new Date(Req_Current_ETA_ToDate)));
 						} else {
@@ -860,8 +860,8 @@ sap.ui.define([
 							var Req_Proposed_ETA_From = "0000-00-00T00:00:00";
 						}
 						var Req_Proposed_ETA_ToDate = that.getView().byId("otextlabel").getText();
-						var Req_Proposed_ETA_ToDate = Req_Proposed_ETA_ToDate.replace("To : ", "");
-						var Req_Proposed_ETA_ToDate = Req_Proposed_ETA_ToDate.replace("À : ", "");
+						var Req_Proposed_ETA_ToDate = Req_Proposed_ETA_ToDate.replace("To : ", "").replace(" ","");
+						var Req_Proposed_ETA_ToDate = Req_Proposed_ETA_ToDate.replace("À : ", "").replace(" ","");
 						if (Req_Proposed_ETA_ToDate != "") {
 							var Req_Proposed_ETA_To = new Date(oDateFormat.format(new Date(Req_Proposed_ETA_ToDate)));
 						} else {
@@ -875,8 +875,8 @@ sap.ui.define([
 							var Off_Current_ETA_From = "0000-00-00T00:00:00";
 						}
 						var Off_Current_ETA_ToDate = that.getView().byId("labetxteid").getText();
-						var Off_Current_ETA_ToDate = Off_Current_ETA_ToDate.replace("To : ", "");
-						var Off_Current_ETA_ToDate = Off_Current_ETA_ToDate.replace("À : ", "");
+						var Off_Current_ETA_ToDate = Off_Current_ETA_ToDate.replace("To : ", "").replace(" ","");
+						var Off_Current_ETA_ToDate = Off_Current_ETA_ToDate.replace("À : ", "").replace(" ","");
 
 						if (Off_Current_ETA_ToDate != "") {
 							var Off_Current_ETA_To = new Date(oDateFormat.format(new Date(Off_Current_ETA_ToDate)));
@@ -892,8 +892,8 @@ sap.ui.define([
 						}
 
 						var Off_Proposed_ETA_ToDate = that.getView().byId("idlabeal").getText();
-						var Off_Proposed_ETA_ToDate = Off_Proposed_ETA_ToDate.replace("To : ", "");
-						var Off_Proposed_ETA_ToDate = Off_Proposed_ETA_ToDate.replace("À : ", "");
+						var Off_Proposed_ETA_ToDate = Off_Proposed_ETA_ToDate.replace("To : ", "").replace(" ","");
+						var Off_Proposed_ETA_ToDate = Off_Proposed_ETA_ToDate.replace("À : ", "").replace(" ","");
 
 						if (Off_Proposed_ETA_ToDate != "") {
 							var Off_Proposed_ETA_To = new Date(oDateFormat.format(new Date(Off_Proposed_ETA_ToDate)));

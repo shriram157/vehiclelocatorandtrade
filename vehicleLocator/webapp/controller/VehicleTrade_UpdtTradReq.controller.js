@@ -1663,7 +1663,7 @@ sap.ui.define([
 				"Requested_Vtn": Requested_Vtn,
 				"Offered_Vtn": Offered_Vtn,
 				"Trade_Return": Trade_Return,
-				"Req_Current_ETA_From": Req_Current_ETA_From,
+			/*	"Req_Current_ETA_From": Req_Current_ETA_From,
 				"Req_Current_ETA_To": Req_Current_ETA_To,
 				"Req_Proposed_ETA_From": Req_Proposed_ETA_From,
 				"Req_Proposed_ETA_To": Req_Proposed_ETA_To,
@@ -1673,7 +1673,7 @@ sap.ui.define([
 				"Off_Proposed_ETA_From": Off_Proposed_ETA_From,
 				"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
 				"Created_By": Created_By,
-				"Created_On": Created_On,
+				"Created_On": Created_On,*/
 				"Changed_on": new Date(Changed_on),
 				"Requested_Dealer": Requested_Dealer,
 				"Requested_Dealer_Name": Requested_Dealer_Name
