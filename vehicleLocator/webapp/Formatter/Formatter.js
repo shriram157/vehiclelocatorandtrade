@@ -25,6 +25,21 @@ sap.ui.define(function () {
 			}
 
 		},
+		ReturnCorrectValue:function(one, two)
+		{
+			if(one.getFullYear().toString() == "1970" && two.getFullYear().toString() == "1970" )
+			{
+				return this.TradeSummaryoDate(one);          
+			}
+			if(one.getFullYear().toString() != "1970" && two.getFullYear().toString() == "1970" )
+			{
+				return this.TradeSummaryoDate(one);
+			}
+			if(one.getFullYear().toString() == "1970" && two.getFullYear().toString() != "1970")
+			{
+				return this.TradeSummaryoDate(two);
+			}
+		},
 				AccInstall: function (zaccesories) {
 			switch (zaccesories) {
 			case "Yes":

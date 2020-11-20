@@ -66,17 +66,15 @@ sap.ui.define([
 			}
 
 			var that = this;
-				var sLocation = window.location.host;
+			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
-			var sPrefix="";
+			var sPrefix = "";
 			if (sLocation_conf == 0) {
 				sPrefix = "/vehicleLocatorNode"; // the destination
-				
 
-			} 
-		
+			}
+
 			var nodeJsUrl = sPrefix + "/node";
-			
 
 			var oDataUrl = nodeJsUrl + "/Z_VEHICLE_MASTER_SRV";
 			var oDataModel = new sap.ui.model.odata.ODataModel(oDataUrl, true);
@@ -99,6 +97,15 @@ sap.ui.define([
 			this.getView().byId("txlab1").setVisible(false);
 			this.getView().byId("prptid1").setVisible(false);
 			this.getView().byId("otxlabel1").setVisible(false);
+			this.getView().byId("ctetid2").setVisible(false);
+			this.getView().byId("txtlab2").setVisible(false);
+			this.getView().byId("prpetid2").setVisible(false);
+			this.getView().byId("otxtlabel2").setVisible(false);
+			this.getView().byId("ctqtid2").setVisible(false);
+			this.getView().byId("txlab2").setVisible(false);
+			this.getView().byId("prptid2").setVisible(false);
+			this.getView().byId("otxlabel2").setVisible(false);
+			
 
 			if (that.oSelectedItems != undefined && that.oSelectedItems != "SelectedFromTradeHistory") {
 				if (sap.ui.getCore().getModel("MyTradeRequestSelected") != undefined) {
@@ -116,102 +123,35 @@ sap.ui.define([
 					this._oViewModel.setProperty("/showVinDisplayOffInbound", false);
 					this.getView().setModel(this._oViewModel, "detailView");
 					this.getView().getModel("detailView").refresh(true);
+					var bool=false, bool1=false;
+					if(StatusData.Requested_Vtn == null || StatusData.Requested_Vtn == "")
+					{
+						bool=true;
+					}
+					if(StatusData.Offered_Vtn == "" || StatusData.Offered_Vtn == null)
+					{
+						bool1=true;
+					}
+					if (bool && StatusData.Trade_Return == "N") {
+						this.getView().byId("ctetid1").setVisible(true);
+						this.getView().byId("txtlab1").setVisible(true);
+						this.getView().byId("prpetid1").setVisible(true);
+						this.getView().byId("otxtlabel1").setVisible(true);
+						this.getView().byId("ctetid").setVisible(false);
+						this.getView().byId("txtlab").setVisible(false);
+						this.getView().byId("prpetid").setVisible(false);
+						this.getView().byId("otxtlabel").setVisible(false);
+					} else if (!bool && StatusData.Trade_Return == "Y") {
+						this.getView().byId("ctetid1").setVisible(false);
+						this.getView().byId("txtlab1").setVisible(false);
+						this.getView().byId("prpetid1").setVisible(false);
+						this.getView().byId("otxtlabel1").setVisible(false);
+						this.getView().byId("ctetid").setVisible(true);
+						this.getView().byId("txtlab").setVisible(true);
+						this.getView().byId("prpetid").setVisible(true);
+						this.getView().byId("otxtlabel").setVisible(true);
 
-					/*
-										var oDealer = StatusData.Requesting_Dealer;
-										if (oDealer.length == 10) {
-											oDealer = oDealer.slice(-5);
-										}
-										sap.ui.core.BusyIndicator.show(0);
-										var that = this;
-										var SeriesUrl = oDataUrl + "/ZVMS_CDS_ETA_consolidate('" + oDealer + "')/Set?$filter=zzvtn eq '" + StatusData.VTN +
-											"' and kunnr eq '" + StatusData.Requested_Dealer + "'&$format=json";
-										
-										$.ajax({
-											url: SeriesUrl,
-											type: "GET",
-											dataType: 'json',
-											xhrFields: {
-												withCredentials: true
-											},
-
-											success: function (odata, oresponse) {
-												var a = odata.d.results;
-												var patt1 = /^P/;
-
-												for (var k = 0; k < a.length; k++) {
-													if (StatusData.VTN == a[k].zzvtn) {
-												
-															if (a[k].mmsta < "M275" || patt1.test(a[k].mmsta) || a[k].vhvin == "") {
-																that._oViewModel.setProperty("/showVinDiplayOff", false);
-															} else {
-																that._oViewModel.setProperty("/showVinDiplayOff", true);
-															}
-														
-													}
-												}
-												that.getView().setModel(that._oViewModel, "detailView");
-												that._oViewModel.refresh(true);
-												sap.ui.core.BusyIndicator.hide();
-
-											},
-											error: function (s, result) {
-												debugger;
-												var a = s;
-												sap.ui.core.BusyIndicator.hide();
-										
-											}
-										});
-										
-										if(StatusData.Trade_Return == 'Y')
-										{
-										var oDealer = StatusData.Requested_Dealer;
-										if (oDealer.length == 10) {
-											oDealer = oDealer.slice(-5);
-										}
-										sap.ui.core.BusyIndicator.show(0);
-										var that = this;
-										var SeriesUrl = oDataUrl + "/ZVMS_CDS_ETA_consolidate('" + oDealer + "')/Set?$filter=zzvtn eq '" + StatusData.Offered_Vtn +
-											"' and kunnr eq '" + StatusData.Requesting_Dealer + "'&$format=json";
-										$.ajax({
-											url: SeriesUrl,
-											type: "GET",
-											dataType: 'json',
-											xhrFields: {
-												withCredentials: true
-											},
-
-											success: function (odata, oresponse) {
-												var a = odata.d.results;
-												var patt1 = /^P/;
-
-												for (var k = 0; k < a.length; k++) {
-													if (StatusData.Offered_Vtn == a[k].zzvtn) {
-														
-															if (a[k].mmsta < "M275" || patt1.test(a[k].mmsta) || a[k].vhvin == "") {
-																that._oViewModel.setProperty("/showVinDisplayOffInbound", false);
-															} else {
-																that._oViewModel.setProperty("/showVinDisplayOffInbound", true);
-															}
-														
-													}
-												}
-												that.getView().setModel(that._oViewModel, "detailView");
-												that._oViewModel.refresh(true);
-												sap.ui.core.BusyIndicator.hide();
-
-											},
-											error: function (s, result) {
-												debugger;
-												var a = s;
-												sap.ui.core.BusyIndicator.hide();
-
-											}
-										});
-											
-										}
-					*/
-
+					}
 					//  for the DNC = Y do not show order type. 
 					if (this.dnsStatus == "Y") {
 
@@ -380,6 +320,8 @@ sap.ui.define([
 					//	this.getView().byId("SimpleFormAproveTrReq").setModel(sap.ui.getCore().getModel("MyTradeRequested"));
 					var StatusData = sap.ui.getCore().getModel("MyTradeRequested").getData();
 					this._oViewModel.setProperty("/tradeId", StatusData.Trade_Id);
+					var AcceptVisible = StatusData.FromRequesting;
+					var Status = StatusData.Trade_Status;
 
 					if (StatusData.DNC == "Y") {
 
@@ -389,9 +331,11 @@ sap.ui.define([
 						this._oViewModel.setProperty("/showOrderType", true);
 					}
 
+					if (AcceptVisible && StatusData.Offered_Vtn == "" && StatusData.Trade_Return == "N") {
+						StatusData.RequestingDealerVisible = true;
+					}
+
 					this.VehicleTrade_SummaryData(StatusData);
-					var AcceptVisible = StatusData.FromRequesting;
-					var Status = StatusData.Trade_Status;
 
 					//  for a rejected trade request do not show the VTN on the screen. 
 					if (Status == "R") {
@@ -405,267 +349,27 @@ sap.ui.define([
 
 					if (StatusData.Trade_Return == "N") {
 						that._oViewModel.setProperty("/showVinDisplayOffInbound", false);
-						/*						var oDealer = StatusData.Requesting_Dealer;
-												if (oDealer.length == 10) {
-													oDealer = oDealer.slice(-5);
-												}
-												sap.ui.core.BusyIndicator.show(0);
-												var that = this;
-												var SeriesUrl = oDataUrl + "/ZVMS_CDS_ETA_consolidate('" + oDealer + "')/Set?$filter=zzvtn eq '" + StatusData.VTN +
-													"' and kunnr eq '" + StatusData.Requested_Dealer + "'&$format=json";
-												$.ajax({
-													url: SeriesUrl,
-													type: "GET",
-													dataType: 'json',
-													xhrFields: {
-														withCredentials: true
-													},
-
-													success: function (odata, oresponse) {
-														var a = odata.d.results;
-													var patt1 = /^P/;
-													
-														for (var k = 0; k < a.length; k++) {
-															if (StatusData.VTN == a[k].zzvtn) {
-
-																	if (a[k].mmsta < "M275" || patt1.test(a[k].mmsta) || a[k].vhvin == "") {
-																		//that.getView().byId("ovinId").setVisible(false);
-																		that._oViewModel.setProperty("/showVinDisplayOffInbound", false);
-																	} else {
-																		//that.getView().byId("ovinId").setVisible(true);
-																		that._oViewModel.setProperty("/showVinDisplayOffInbound", true);
-																	}
-																
-															}
-														}
-														that.getView().setModel(that._oViewModel, "detailView");
-													that._oViewModel.refresh(true);
-														sap.ui.core.BusyIndicator.hide();
-
-													},
-													error: function (s, result) {
-														debugger;
-														var a = s;
-														sap.ui.core.BusyIndicator.hide();
-													}
-												});
-						*/
-						// this._oViewModel.setProperty("/showVinDiplayOff", false);
-						// this.getView().byId("offervehidContent").setVisible(true);
-						// Offered = {};
-						// that.getView().byId("Offerevehid").setText("");
-						// that.getView().byId("offeredDealer").setVisible(true);
-						// // that.getView().byId("oRequesteddealer").setText("");
-						// that.getView().byId("oRequesteddealer").setVisible(true);
-						// // that.getView().byId("oAccesIn").setText("");
-						// that.getView().byId("oAccesIn").setVisible(true);
-						// that.getView().byId("accid").setVisible(true);
-
-						// that.getView().byId("ofrModellabl").setVisible(true);
-						// // that.getView().byId("ofrmodelyeartext").setText("");
-						// that.getView().byId("ofrmodelyeartext").setVisible(true);
-
-						// that.getView().byId("ofrserieslabl").setVisible(true);
-						// // that.getView().byId("ofrseriestxt").setText("");
-						// that.getView().byId("ofrseriestxt").setVisible(true);
-
-						// that.getView().byId("ofrmodllabl").setVisible(true);
-						// // that.getView().byId("ofrmodltxt").setText("");
-						// that.getView().byId("ofrmodltxt").setVisible(true);
-
-						// that.getView().byId("ofrsuffixlabl").setVisible(true);
-						// // that.getView().byId("ofrsuffixstxt").setText("");
-						// that.getView().byId("ofrsuffixstxt").setVisible(true);
-
-						// that.getView().byId("ofrapxlabl").setVisible(true);
-						// // that.getView().byId("ofrapxtxt").setText("");
-						// that.getView().byId("ofrapxtxt").setVisible(true);
-
-						// that.getView().byId("ofrextcolorlabl").setVisible(true);
-						// // that.getView().byId("ofrexttxt").setText("");
-						// that.getView().byId("ofrexttxt").setVisible(true);
-
-						// that.getView().byId("ofrstatuslabl").setVisible(true);
-						// // that.getView().byId("ofrstatustxt").setText("");
-						// that.getView().byId("ofrstatustxt").setVisible(true);
-
-						// that.getView().byId("ofrordrtypelabl").setVisible(true);
-						// // that.getView().byId("ofrordtypetxt").setText("");
-						// that.getView().byId("ofrordtypetxt").setVisible(true);
-
-						// that.getView().byId("cetalaid").setVisible(true);
-						// // that.getView().byId("ctqtid").setText("");
-						// that.getView().byId("ctqtid").setVisible(true);
-
-						// // // that.getView().byId("fromqid").setVisible(false);
-						// // that.getView().byId("txlab").setText("");
-						// that.getView().byId("txlab").setVisible(true);
-
-						// that.getView().byId("prolabid").setVisible(true);
-
-						// // // that.getView().byId("tobid").setVisible(false);
-						// // that.getView().byId("prptid").setText("");
-						// that.getView().byId("prptid").setVisible(true);
-
-						// // // that.getView().byId("fmlbid").setVisible(false);
-						// // /*	that.getView().byId("fromlbid").setVisible(false);*/
-						// // that.getView().byId("otxlabel").setText("");
-						// that.getView().byId("otxlabel").setVisible(true);
-
-						// that.getView().byId("idlto").setVisible(true);
+	var bool=false;
+	if(StatusData.Offered_Vtn == "" || StatusData.Offered_Vtn == null)
+	{
+		bool=true;
+	}
+	
+						if (AcceptVisible && bool) {
+							this.getView().byId("ctetid1").setVisible(true);
+							this.getView().byId("txtlab1").setVisible(true);
+							this.getView().byId("prpetid1").setVisible(true);
+							this.getView().byId("otxtlabel1").setVisible(true);
+							this.getView().byId("ctetid").setVisible(false);
+							this.getView().byId("txtlab").setVisible(false);
+							this.getView().byId("prpetid").setVisible(false);
+							this.getView().byId("otxtlabel").setVisible(false);
+							sap.ui.getCore().getModel("MyTradeRequested").getData().RequestingDealerVisible = true;
+						}
 
 					} else if (StatusData.Trade_Return == "Y") {
 						that._oViewModel.setProperty("/showVinDisplayOffInbound", false);
 						that._oViewModel.setProperty("/showVinDiplayOff", false);
-						/*						var oDealer = StatusData.Requested_Dealer;
-												if (oDealer.length == 10) {
-													oDealer = oDealer.slice(-5);
-												}
-												sap.ui.core.BusyIndicator.show(0);
-												var that = this;
-												var SeriesUrl = oDataUrl + "/ZVMS_CDS_ETA_consolidate('" + oDealer + "')/Set?$filter=zzvtn eq '" + StatusData.VTN +
-													"' and kunnr eq '" + StatusData.Requesting_Dealer + "'&$format=json";
-												$.ajax({
-													url: SeriesUrl,
-													type: "GET",
-													dataType: 'json',
-													xhrFields: {
-														withCredentials: true
-													},
-
-													success: function (odata, oresponse) {
-														var a = odata.d.results;
-													var patt1 = /^P/;
-													
-														for (var k = 0; k < a.length; k++) {
-															if (StatusData.VTN == a[k].zzvtn) {
-
-																	if (a[k].mmsta < "M275" || patt1.test(a[k].mmsta) || a[k].vhvin == "") {
-																		that._oViewModel.setProperty("/showVinDiplayOff", false);
-																	} else {
-																		that._oViewModel.setProperty("/showVinDiplayOff", true);
-																	}
-																
-															}
-														}
-														that.getView().setModel(that._oViewModel, "detailView");
-													that._oViewModel.refresh(true);
-														sap.ui.core.BusyIndicator.hide();
-
-													},
-													error: function (s, result) {
-														debugger;
-														var a = s;
-														sap.ui.core.BusyIndicator.hide();
-
-													}
-												});
-												
-												var oDealer = StatusData.Requesting_Dealer;
-												if (oDealer.length == 10) {
-													oDealer = oDealer.slice(-5);
-												}
-												sap.ui.core.BusyIndicator.show(0);
-												var that = this;
-												var SeriesUrl = oDataUrl + "/ZVMS_CDS_ETA_consolidate('" + oDealer + "')/Set?$filter=zzvtn eq '" + StatusData.Requested_Vtn +
-													"' and kunnr eq '" + StatusData.Requested_Dealer + "'&$format=json";
-												$.ajax({
-													url: SeriesUrl,
-													type: "GET",
-													dataType: 'json',
-													xhrFields: {
-														withCredentials: true
-													},
-
-													success: function (odata, oresponse) {
-														var a = odata.d.results;
-													var patt1 = /^P/;
-													
-														for (var k = 0; k < a.length; k++) {
-															if (StatusData.Requested_Vtn == a[k].zzvtn) {
-																
-																	if (a[k].mmsta < "M275" || patt1.test(a[k].mmsta) || a[k].vhvin == "") {
-																		that._oViewModel.setProperty("/showVinDisplayOffInbound", false);
-																	} else {
-																		that._oViewModel.setProperty("/showVinDisplayOffInbound", true);
-																	}
-																
-															}
-														}
-														that.getView().setModel(that._oViewModel, "detailView");
-													that._oViewModel.refresh(true);
-														sap.ui.core.BusyIndicator.hide();
-
-													},
-													error: function (s, result) {
-														debugger;
-														var a = s;
-														sap.ui.core.BusyIndicator.hide();
-												
-													}
-												});
-
-						*/
-						// this._oViewModel.setProperty("/showVinDiplayOff", true); //2207
-
-						// that.getView().byId("offeredDealer").setVisible(true);
-
-						// that.getView().byId("oRequesteddealer").setVisible(true);
-
-						// that.getView().byId("ofrModellabl").setVisible(true);
-
-						// that.getView().byId("ofrmodelyeartext").setVisible(true);
-
-						// that.getView().byId("ofrserieslabl").setVisible(true);
-
-						// that.getView().byId("ofrseriestxt").setVisible(true);
-
-						// that.getView().byId("ofrmodllabl").setVisible(true);
-
-						// that.getView().byId("ofrmodltxt").setVisible(true);
-
-						// that.getView().byId("ofrsuffixlabl").setVisible(true);
-
-						// that.getView().byId("ofrsuffixstxt").setVisible(true);
-						// // that.getView().byId("oAccesIn").setText("");
-						// that.getView().byId("oAccesIn").setVisible(true);
-						// that.getView().byId("accid").setVisible(true);
-
-						// that.getView().byId("ofrapxlabl").setVisible(true);
-
-						// that.getView().byId("ofrapxtxt").setVisible(true);
-
-						// that.getView().byId("ofrextcolorlabl").setVisible(true);
-
-						// that.getView().byId("ofrexttxt").setVisible(true);
-
-						// that.getView().byId("ofrstatuslabl").setVisible(true);
-
-						// that.getView().byId("ofrstatustxt").setVisible(true);
-
-						// that.getView().byId("ofrordrtypelabl").setVisible(true);
-
-						// that.getView().byId("ofrordtypetxt").setVisible(true);
-
-						// that.getView().byId("cetalaid").setVisible(true);
-
-						// that.getView().byId("ctqtid").setVisible(true);
-
-						// // that.getView().byId("fromqid").setVisible(true);
-
-						// that.getView().byId("txlab").setVisible(true);
-
-						// that.getView().byId("prolabid").setVisible(true);
-
-						// // that.getView().byId("tobid").setVisible(true);
-
-						// that.getView().byId("prptid").setVisible(true);
-
-						// // that.getView().byId("fmlbid").setVisible(true);
-
-						// that.getView().byId("otxlabel").setVisible(true);
-
-						// that.getView().byId("idlto").setVisible(true);
 
 					}
 					this.getView().setModel(this._oViewModel, "detailView");
@@ -1170,15 +874,30 @@ sap.ui.define([
 						this.getView().byId("cetalabid").setVisible(false);
 						// this.getView().byId("ctqtid").setText("");
 						this.getView().byId("ctetid").setVisible(false);
-							this.getView().byId("ctetid1").setVisible(false);
+						this.getView().byId("ctetid1").setVisible(false);
+						this.getView().byId("ctetid2").setVisible(false);
 						// // this.getView().byId("fromqid").setVisible(false);
 						// this.getView().byId("txlab").setText("");
 						this.getView().byId("txtlab").setVisible(false);
-							this.getView().byId("txtlab1").setVisible(false);
-
+						this.getView().byId("txtlab1").setVisible(false);
+						this.getView().byId("txtlab2").setVisible(false);
 						this.getView().byId("prlabid").setVisible(false);
-						this.getView().byId("prpetid1").setVisible(false);
+						this.getView().byId("ctqtid").setVisible(false);
+						this.getView().byId("ctqtid1").setVisible(false);
+						this.getView().byId("ctqtid2").setVisible(true);
+						this.getView().byId("txlab").setVisible(false);
+						this.getView().byId("txlab1").setVisible(false);
+						this.getView().byId("txlab2").setVisible(true);
+						this.getView().byId("prptid").setVisible(false);
+						this.getView().byId("prptid1").setVisible(false);
+						this.getView().byId("prptid2").setVisible(true);
+						this.getView().byId("otxlabel").setVisible(false);
+						this.getView().byId("otxlabel1").setVisible(false);
+						this.getView().byId("otxlabel2").setVisible(true);
 						this.getView().byId("prpetid").setVisible(false);
+						this.getView().byId("prpetid2").setVisible(false);
+						this.getView().byId("prpetid1").setVisible(false);
+					
 						this.getView().byId("VT_ARCTDnc").setVisible(false);
 						this.getView().byId("VT_ARCTDncLbl").setVisible(false);
 						this.getView().byId("ovtnIdText").setVisible(false);
@@ -1195,6 +914,7 @@ sap.ui.define([
 						// this.getView().byId("otxlabel").setText("");
 						this.getView().byId("otxtlabel").setVisible(false);
 						this.getView().byId("otxtlabel1").setVisible(false);
+						this.getView().byId("otxtlabel2").setVisible(false);
 
 						this.getView().byId("accInst").setVisible(false);
 					} else {
@@ -1251,18 +971,46 @@ sap.ui.define([
 						// // this.getView().byId("fromqid").setVisible(false);
 						// this.getView().byId("txlab").setText("");
 						this.getView().byId("txlab").setVisible(false);
-							this.getView().byId("txlab1").setVisible(false);
+						this.getView().byId("txlab1").setVisible(false);
 						this.getView().byId("prolabid").setVisible(false);
 
 						// // this.getView().byId("tobid").setVisible(false);
 						// this.getView().byId("prptid").setText("");
 						this.getView().byId("prptid").setVisible(false);
-							this.getView().byId("prptid1").setVisible(false);
+						this.getView().byId("prptid1").setVisible(false);
 						// // this.getView().byId("fmlbid").setVisible(false);
 						// /*	this.getView().byId("fromlbid").setVisible(false);*/
 						// this.getView().byId("otxlabel").setText("");
 						this.getView().byId("otxlabel").setVisible(false);
-							this.getView().byId("otxlabel1").setVisible(false);
+						this.getView().byId("otxlabel1").setVisible(false);
+						this.getView().byId("ctetid").setVisible(false);
+						this.getView().byId("ctetid1").setVisible(false);
+						this.getView().byId("ctetid2").setVisible(true);
+						// // this.getView().byId("fromqid").setVisible(false);
+						// this.getView().byId("txlab").setText("");
+						this.getView().byId("txtlab").setVisible(false);
+						this.getView().byId("txtlab1").setVisible(false);
+						this.getView().byId("txtlab2").setVisible(true);
+
+						this.getView().byId("ctqtid").setVisible(false);
+						this.getView().byId("ctqtid1").setVisible(false);
+						this.getView().byId("ctqtid2").setVisible(false);
+						this.getView().byId("txlab").setVisible(false);
+						this.getView().byId("txlab1").setVisible(false);
+						this.getView().byId("txlab2").setVisible(false);
+						this.getView().byId("prptid").setVisible(false);
+						this.getView().byId("prptid1").setVisible(false);
+						this.getView().byId("prptid2").setVisible(false);
+						this.getView().byId("otxlabel").setVisible(false);
+						this.getView().byId("otxlabel1").setVisible(false);
+						this.getView().byId("otxlabel2").setVisible(false);
+						this.getView().byId("prpetid").setVisible(false);
+						this.getView().byId("prpetid2").setVisible(true);
+						this.getView().byId("prpetid1").setVisible(false);
+					this.getView().byId("otxtlabel2").setVisible(true);
+					this.getView().byId("otxtlabel1").setVisible(false);
+this.getView().byId("otxtlabel").setVisible(false);
+	
 						// this.getView().byId("idlto").setVisible(false);
 
 					}
@@ -1600,14 +1348,12 @@ sap.ui.define([
 
 										if (a[k].mmsta < "M275" || patt1.test(a[k].mmsta) || a[k].vhvin == "") {
 											//	that.getView().byId("ovinId").setVisible(false);
-											
-												if (trade_type == "inbound") {
-											that._oViewModel.setProperty("/showVinDisplayOffInbound", false);
-												}
-												else
-												{
-													that._oViewModel.setProperty("/showVinDiplayOff", false);
-												}
+
+											if (trade_type == "inbound") {
+												that._oViewModel.setProperty("/showVinDisplayOffInbound", false);
+											} else {
+												that._oViewModel.setProperty("/showVinDiplayOff", false);
+											}
 										} else {
 											//	that.getView().byId("ovinId").setVisible(true);
 											if (trade_type == "inbound") {
@@ -1629,7 +1375,7 @@ sap.ui.define([
 
 							},
 							error: function (s, result) {
-								
+
 								sap.ui.core.BusyIndicator.hide();
 							}
 						});
@@ -3474,6 +3220,20 @@ sap.ui.define([
 				that.StatusData = TradeRequest.StatusData;
 				if (TradeRequest.StatusData) {
 					that.StatusData = TradeRequest.StatusData;
+				}
+				var isLocaleSent = window.location.search.match(/language=([^&]*)/i);
+				if (isLocaleSent) {
+					var sSelectedLocale = window.location.search.match(/language=([^&]*)/i)[1];
+				} else {
+					var sSelectedLocale = "EN"; // default is english 
+				}
+				if (sSelectedLocale == "fr") {
+
+					this.sCurrentLocale = 'FR';
+
+				} else {
+					this.sCurrentLocale = 'EN';
+
 				}
 
 				if (!that.StatusData.SPRAS) {
