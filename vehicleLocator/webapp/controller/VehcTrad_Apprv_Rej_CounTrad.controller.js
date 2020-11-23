@@ -105,7 +105,6 @@ sap.ui.define([
 			this.getView().byId("txlab2").setVisible(false);
 			this.getView().byId("prptid2").setVisible(false);
 			this.getView().byId("otxlabel2").setVisible(false);
-			
 
 			if (that.oSelectedItems != undefined && that.oSelectedItems != "SelectedFromTradeHistory") {
 				if (sap.ui.getCore().getModel("MyTradeRequestSelected") != undefined) {
@@ -123,14 +122,13 @@ sap.ui.define([
 					this._oViewModel.setProperty("/showVinDisplayOffInbound", false);
 					this.getView().setModel(this._oViewModel, "detailView");
 					this.getView().getModel("detailView").refresh(true);
-					var bool=false, bool1=false;
-					if(StatusData.Requested_Vtn == null || StatusData.Requested_Vtn == "")
-					{
-						bool=true;
+					var bool = false,
+						bool1 = false;
+					if (StatusData.Requested_Vtn == null || StatusData.Requested_Vtn == "") {
+						bool = true;
 					}
-					if(StatusData.Offered_Vtn == "" || StatusData.Offered_Vtn == null)
-					{
-						bool1=true;
+					if (StatusData.Offered_Vtn == "" || StatusData.Offered_Vtn == null) {
+						bool1 = true;
 					}
 					if (bool && StatusData.Trade_Return == "N") {
 						this.getView().byId("ctetid1").setVisible(true);
@@ -349,12 +347,11 @@ sap.ui.define([
 
 					if (StatusData.Trade_Return == "N") {
 						that._oViewModel.setProperty("/showVinDisplayOffInbound", false);
-	var bool=false;
-	if(StatusData.Offered_Vtn == "" || StatusData.Offered_Vtn == null)
-	{
-		bool=true;
-	}
-	
+						var bool = false;
+						if (StatusData.Offered_Vtn == "" || StatusData.Offered_Vtn == null) {
+							bool = true;
+						}
+
 						if (AcceptVisible && bool) {
 							this.getView().byId("ctetid1").setVisible(true);
 							this.getView().byId("txtlab1").setVisible(true);
@@ -897,7 +894,7 @@ sap.ui.define([
 						this.getView().byId("prpetid").setVisible(false);
 						this.getView().byId("prpetid2").setVisible(false);
 						this.getView().byId("prpetid1").setVisible(false);
-					
+
 						this.getView().byId("VT_ARCTDnc").setVisible(false);
 						this.getView().byId("VT_ARCTDncLbl").setVisible(false);
 						this.getView().byId("ovtnIdText").setVisible(false);
@@ -1007,10 +1004,10 @@ sap.ui.define([
 						this.getView().byId("prpetid").setVisible(false);
 						this.getView().byId("prpetid2").setVisible(true);
 						this.getView().byId("prpetid1").setVisible(false);
-					this.getView().byId("otxtlabel2").setVisible(true);
-					this.getView().byId("otxtlabel1").setVisible(false);
-this.getView().byId("otxtlabel").setVisible(false);
-	
+						this.getView().byId("otxtlabel2").setVisible(true);
+						this.getView().byId("otxtlabel1").setVisible(false);
+						this.getView().byId("otxtlabel").setVisible(false);
+
 						// this.getView().byId("idlto").setVisible(false);
 
 					}
@@ -2201,6 +2198,8 @@ this.getView().byId("otxtlabel").setVisible(false);
 				var Changed_on = new Date(oDateFormat.format(new Date()));
 				Changed_on = oDateFormat.format(new Date(Changed_on));
 			}
+			var oEntry = {};
+			/*
 			var oEntry = {
 
 				"Trade_Id": Trade_Id,
@@ -2226,7 +2225,7 @@ this.getView().byId("otxtlabel").setVisible(false);
 				"Requested_Dealer": Requested_Dealer,
 				"Requested_Dealer_Name": Requested_Dealer_Name
 
-			};
+			};*/
 
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
@@ -2242,34 +2241,77 @@ this.getView().byId("otxtlabel").setVisible(false);
 			that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
 
 			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
+
+			var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
+
 			that.oDataModel.setHeaders({
 				"Content-Type": "application/json",
 				"X-Requested-With": "XMLHttpRequest",
 				"DataServiceVersion": "2.0",
 				"Accept": "application/json",
-				"Method": "PUT"
+				"Method": "GET"
 			});
-			var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
-			that.oDataModel.update(UpdatedTreadeEntity, oEntry, {
-				merge: true
-			}, function (s) {
-				//	that.VehicleTrade_SummaryData();
+			that.oDataModel.read(UpdatedTreadeEntity, {
+				success: function (odata) {
+					//	odata=odata.results[0];
+					that.oDataModel.setHeaders({
+						"Content-Type": "application/json",
+						"X-Requested-With": "XMLHttpRequest",
+						"DataServiceVersion": "2.0",
+						"Accept": "application/json",
+						"Method": "PUT"
+					});
+					var oEntry = {
 
-				that.getView().byId("SimpleFormAproveTrReq").getModel().getData().Trade_Status = "A";
-				that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
+						"Trade_Id": odata.Trade_Id,
+						"Trade_Status": Trade_Status,
+						"Requesting_Dealer": odata.Requesting_Dealer,
+						"Requesting_Dealer_Name": odata.Requesting_Dealer_Name,
+						"Requested_Vtn": odata.Requested_Vtn,
+						"Offered_Vtn": odata.Offered_Vtn,
+						"Trade_Return": odata.Trade_Return,
+						"Req_Current_ETA_From": odata.Req_Current_ETA_From,
+						"Req_Current_ETA_To": odata.Req_Current_ETA_To,
+						"Req_Proposed_ETA_From": odata.Req_Proposed_ETA_From,
+						"Req_Proposed_ETA_To": odata.Req_Proposed_ETA_To,
+						"Off_Current_ETA_From": odata.Off_Current_ETA_From,
+						"Off_Current_ETA_To": odata.Off_Current_ETA_To,
+						"Off_Proposed_ETA_From": odata.Off_Proposed_ETA_From,
+						"Off_Proposed_ETA_To": odata.Off_Proposed_ETA_To,
 
-				/*	that.TradeComment(oEntry);
-					that.TradeVehcles(oEntry);
-					that.TradeStatus(oEntry);
-					that.VehicleTrade_Summary();
-				*/
-				/*	that.getRouter().navTo("VehicleTrade_Summary", {
-						DataClicked: "Yes"
-					});*/
+						"Created_By": odata.Created_By,
+						"Created_On": odata.Created_On,
 
-				//	that.getRouter().navTo("VehicleTrade_Summary");
-			}, function () {
+						"Changed_on": new Date(Changed_on),
+						"Requested_Dealer": odata.Requested_Dealer,
+						"Requested_Dealer_Name": odata.Requested_Dealer_Name
 
+					};
+					that.oDataModel.update(UpdatedTreadeEntity, oEntry, {
+						merge: true
+					}, function (s) {
+						//	that.VehicleTrade_SummaryData();
+
+						that.getView().byId("SimpleFormAproveTrReq").getModel().getData().Trade_Status = "A";
+						that.getView().byId("SimpleFormAproveTrReq").getModel().refresh(true);
+
+						/*	that.TradeComment(oEntry);
+							that.TradeVehcles(oEntry);
+							that.TradeStatus(oEntry);
+							that.VehicleTrade_Summary();
+						*/
+						/*	that.getRouter().navTo("VehicleTrade_Summary", {
+								DataClicked: "Yes"
+							});*/
+
+						//	that.getRouter().navTo("VehicleTrade_Summary");
+					}, function (err) {
+						console.log(err);
+					});
+				},
+				error: function (err) {
+					console.log(err);
+				}
 			});
 
 			// at this point hide the busyh indictor and relaod the page. 	
@@ -2402,7 +2444,7 @@ this.getView().byId("otxtlabel").setVisible(false);
 				Changed_on = oDateFormat.format(new Date(Changed_on));
 			}
 			//	Changed_on.setDate(Changed_on.getDate() + 1);
-			var oEntry = {
+			/*	var oEntry = {
 
 				"Trade_Id": Trade_Id,
 				"Trade_Status": Trade_Status,
@@ -2426,7 +2468,7 @@ this.getView().byId("otxtlabel").setVisible(false);
 				"Requested_Dealer_Name": Requested_Dealer_Name
 
 			};
-
+*/
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
 
@@ -2441,31 +2483,74 @@ this.getView().byId("otxtlabel").setVisible(false);
 			that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
 
 			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
+
+			var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
+
 			that.oDataModel.setHeaders({
 				"Content-Type": "application/json",
 				"X-Requested-With": "XMLHttpRequest",
 				"DataServiceVersion": "2.0",
 				"Accept": "application/json",
-				"Method": "PUT"
+				"Method": "GET"
 			});
-			var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
-			that.oDataModel.update(UpdatedTreadeEntity, oEntry, {
-				merge: true
-			}, function (s) {
+			that.oDataModel.read(UpdatedTreadeEntity, {
+				success: function (odata) {
+					that.oDataModel.setHeaders({
+						"Content-Type": "application/json",
+						"X-Requested-With": "XMLHttpRequest",
+						"DataServiceVersion": "2.0",
+						"Accept": "application/json",
+						"Method": "PUT"
+					});
+					var oEntry = {
 
-				/*	that.TradeComment(oEntry);
-					that.TradeVehcles(oEntry);
-					that.TradeStatus(oEntry);
-					that.VehicleTrade_Summary();
-				*/
-				/*	that.getRouter().navTo("VehicleTrade_Summary", {
+						"Trade_Id": odata.Trade_Id,
+						"Trade_Status": Trade_Status,
+						"Requesting_Dealer": odata.Requesting_Dealer,
+						"Requesting_Dealer_Name": odata.Requesting_Dealer_Name,
+						"Requested_Vtn": odata.Requested_Vtn,
+						"Offered_Vtn": odata.Offered_Vtn,
+						"Trade_Return": odata.Trade_Return,
+						"Req_Current_ETA_From": odata.Req_Current_ETA_From,
+						"Req_Current_ETA_To": odata.Req_Current_ETA_To,
+						"Req_Proposed_ETA_From": odata.Req_Proposed_ETA_From,
+						"Req_Proposed_ETA_To": odata.Req_Proposed_ETA_To,
+						"Off_Current_ETA_From": odata.Off_Current_ETA_From,
+						"Off_Current_ETA_To": odata.Off_Current_ETA_To,
+						"Off_Proposed_ETA_From": odata.Off_Proposed_ETA_From,
+						"Off_Proposed_ETA_To": odata.Off_Proposed_ETA_To,
+
+						"Created_By": odata.Created_By,
+						"Created_On": odata.Created_On,
+
+						"Changed_on": new Date(Changed_on),
+						"Requested_Dealer": odata.Requested_Dealer,
+						"Requested_Dealer_Name": odata.Requested_Dealer_Name
+
+					};
+					that.oDataModel.update(UpdatedTreadeEntity, oEntry, {
+						merge: true
+					}, function (s) {
+
+						/*	that.TradeComment(oEntry);
+							that.TradeVehcles(oEntry);
+							that.TradeStatus(oEntry);
+							that.VehicleTrade_Summary();
+						*/
+						/*	that.getRouter().navTo("VehicleTrade_Summary", {
 					DataClicked: "Yes"
 				});
 */
-				//	that.getRouter().navTo("VehicleTrade_Summary");
-			}, function () {
+						//	that.getRouter().navTo("VehicleTrade_Summary");
+					}, function () {
 
+					});
+				},
+				error: function (err) {
+					console.log(err);
+				}
 			});
+
 			// at this point hide the busyh indictor and relaod the page. 	
 			sap.ui.core.BusyIndicator.hide();
 			that.getRouter().navTo("VehcTrad_Apprv_Rej_CounTrad", {
@@ -2648,30 +2733,72 @@ this.getView().byId("otxtlabel").setVisible(false);
 						that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
 
 						that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
+						var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
+
 						that.oDataModel.setHeaders({
 							"Content-Type": "application/json",
 							"X-Requested-With": "XMLHttpRequest",
 							"DataServiceVersion": "2.0",
 							"Accept": "application/json",
-							"Method": "PUT"
+							"Method": "GET"
 						});
-						var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
-						that.oDataModel.update(UpdatedTreadeEntity, oEntry, {
-							merge: true
-						}, function (s) {
-							debugger
+						that.oDataModel.read(UpdatedTreadeEntity, {
+							success: function (odata) {
+								//	odata=odata.results[0];
+								that.oDataModel.setHeaders({
+									"Content-Type": "application/json",
+									"X-Requested-With": "XMLHttpRequest",
+									"DataServiceVersion": "2.0",
+									"Accept": "application/json",
+									"Method": "PUT"
+								});
+								var oEntry = {
 
-							if (dncBlockedDays != 0 && dncBlockedDays != "") {
-								that.DNCBlockoutDays();
+									"Trade_Id": odata.Trade_Id,
+									"Trade_Status": Trade_Status,
+									"Requesting_Dealer": odata.Requesting_Dealer,
+									"Requesting_Dealer_Name": odata.Requesting_Dealer_Name,
+									"Requested_Vtn": odata.Requested_Vtn,
+									"Offered_Vtn": odata.Offered_Vtn,
+									"Trade_Return": odata.Trade_Return,
+									"Req_Current_ETA_From": odata.Req_Current_ETA_From,
+									"Req_Current_ETA_To": odata.Req_Current_ETA_To,
+									"Req_Proposed_ETA_From": odata.Req_Proposed_ETA_From,
+									"Req_Proposed_ETA_To": odata.Req_Proposed_ETA_To,
+									"Off_Current_ETA_From": odata.Off_Current_ETA_From,
+									"Off_Current_ETA_To": odata.Off_Current_ETA_To,
+									"Off_Proposed_ETA_From": odata.Off_Proposed_ETA_From,
+									"Off_Proposed_ETA_To": odata.Off_Proposed_ETA_To,
+
+									"Created_By": odata.Created_By,
+									"Created_On": odata.Created_On,
+
+									"Changed_on": new Date(Changed_on),
+									"Requested_Dealer": odata.Requested_Dealer,
+									"Requested_Dealer_Name": odata.Requested_Dealer_Name
+
+								};
+								that.oDataModel.update(UpdatedTreadeEntity, oEntry, {
+									merge: true
+								}, function (s) {
+									debugger
+
+									if (dncBlockedDays != 0 && dncBlockedDays != "") {
+										that.DNCBlockoutDays();
+									}
+
+									that.getRouter().navTo("VehicleTrade_Summary", {
+										DataClicked: "Yes"
+									});
+
+									//	that.getRouter().navTo("VehicleTrade_Summary");
+								}, function () {
+									// alert("fail");
+								});
+							},
+							error: function (err) {
+								console.log(err);
 							}
-
-							that.getRouter().navTo("VehicleTrade_Summary", {
-								DataClicked: "Yes"
-							});
-
-							//	that.getRouter().navTo("VehicleTrade_Summary");
-						}, function () {
-							// alert("fail");
 						});
 
 						dialog.close();
@@ -2966,18 +3093,54 @@ this.getView().byId("otxtlabel").setVisible(false);
 			that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
 
 			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
+		var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
+			
 			that.oDataModel.setHeaders({
+				"Content-Type": "application/json",
+				"X-Requested-With": "XMLHttpRequest",
+				"DataServiceVersion": "2.0",
+				"Accept": "application/json",
+				"Method": "GET"
+			});
+			that.oDataModel.read(UpdatedTreadeEntity,{
+			success: function(odata){
+			//	odata=odata.results[0];
+				that.oDataModel.setHeaders({
 				"Content-Type": "application/json",
 				"X-Requested-With": "XMLHttpRequest",
 				"DataServiceVersion": "2.0",
 				"Accept": "application/json",
 				"Method": "PUT"
 			});
-			var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
+			var oEntry = {
+
+				"Trade_Id": odata.Trade_Id,
+				"Trade_Status": Trade_Status,
+				"Requesting_Dealer": odata.Requesting_Dealer,
+				"Requesting_Dealer_Name": odata.Requesting_Dealer_Name,
+				"Requested_Vtn": odata.Requested_Vtn,
+				"Offered_Vtn": odata.Offered_Vtn,
+				"Trade_Return": odata.Trade_Return,
+				"Req_Current_ETA_From": odata.Req_Current_ETA_From,
+				"Req_Current_ETA_To": odata.Req_Current_ETA_To,
+				"Req_Proposed_ETA_From": odata.Req_Proposed_ETA_From,
+				"Req_Proposed_ETA_To": odata.Req_Proposed_ETA_To,
+				"Off_Current_ETA_From": odata.Off_Current_ETA_From,
+				"Off_Current_ETA_To": odata.Off_Current_ETA_To,
+				"Off_Proposed_ETA_From": odata.Off_Proposed_ETA_From,
+				"Off_Proposed_ETA_To": odata.Off_Proposed_ETA_To,
+
+				"Created_By": odata.Created_By,
+				"Created_On": odata.Created_On,
+
+				"Changed_on": new Date(Changed_on),
+				"Requested_Dealer": odata.Requested_Dealer,
+				"Requested_Dealer_Name": odata.Requested_Dealer_Name
+
+			};			
 			that.oDataModel.update(UpdatedTreadeEntity, oEntry, {
 				merge: true
 			}, function (s) {
-				debugger
 
 				that.getRouter().navTo("VehicleTrade_Summary", {
 					DataClicked: "Yes"
@@ -2986,6 +3149,12 @@ this.getView().byId("otxtlabel").setVisible(false);
 			}, function () {
 				alert("fail");
 			});
+			}, 
+			error: function(err) { 
+				console.log(err);
+			}
+			});
+			
 
 		},
 		onCancel: function () {
