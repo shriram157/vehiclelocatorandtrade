@@ -81,7 +81,7 @@ modules:
            }
          ]
       OPTIMIZE_MEMORY: true
-      SESSION_TIMEOUT: 60
+      SESSION_TIMEOUT: 120
       XS_APP_LOG_LEVEL: info
       XS_LOG_CONNECTION_DATA: true
       XS_LOG_NETWORK: true
@@ -107,6 +107,7 @@ modules:
          name: vehiclelocatorandtrade-xsjs
          url: ~{url}
          forwardAuthToken: true
+         timeout: 2700000
 
 resources:
  - name: application-logs_vehiclelocatorandtrade
