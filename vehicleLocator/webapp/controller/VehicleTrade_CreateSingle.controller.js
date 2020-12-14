@@ -97,7 +97,6 @@ sap.ui.define([
 
 			var oModel = new sap.ui.model.json.JSONModel(oArray);
 			this.getView().byId("VT_CStradinRet").setModel(oModel);
-			
 
 			this.getView().setModel(oViewModel, "languageModel");
 
@@ -351,7 +350,7 @@ sap.ui.define([
 					this.getView().byId("oSeleBtn").setEnabled(false);
 				}*/
 			if (this.getView().byId("FromFourth").getText() == "FromPush") {
-				sap.ui.getCore().SelectedTradeStatus="No";
+				sap.ui.getCore().SelectedTradeStatus = "No";
 				this.getView().byId("VT_CStradinRet").setSelectedKey("No");
 
 				this.getView().byId("dealridreq").setVisible(false);
@@ -843,9 +842,9 @@ sap.ui.define([
 						}
 
 						var Req_Current_ETA_ToDate = that.getView().byId("totxtid").getText();
-						var Req_Current_ETA_ToDate = Req_Current_ETA_ToDate.replace("To : ", "");
+						var Req_Current_ETA_ToDate = Req_Current_ETA_ToDate.replace("To : ", "").replace(" ", "");
 
-						var Req_Current_ETA_ToDate = Req_Current_ETA_ToDate.replace("À : ", "");
+						var Req_Current_ETA_ToDate = Req_Current_ETA_ToDate.replace("À : ", "").replace(" ", "");
 						if (Req_Current_ETA_ToDate != "" && Req_Current_ETA_ToDate != " ") {
 							var Req_Current_ETA_To = new Date(oDateFormat.format(new Date(Req_Current_ETA_ToDate)));
 						} else {
@@ -860,8 +859,8 @@ sap.ui.define([
 							var Req_Proposed_ETA_From = "0000-00-00T00:00:00";
 						}
 						var Req_Proposed_ETA_ToDate = that.getView().byId("otextlabel").getText();
-						var Req_Proposed_ETA_ToDate = Req_Proposed_ETA_ToDate.replace("To : ", "");
-						var Req_Proposed_ETA_ToDate = Req_Proposed_ETA_ToDate.replace("À : ", "");
+						var Req_Proposed_ETA_ToDate = Req_Proposed_ETA_ToDate.replace("To : ", "").replace(" ", "");
+						var Req_Proposed_ETA_ToDate = Req_Proposed_ETA_ToDate.replace("À : ", "").replace(" ", "");
 						if (Req_Proposed_ETA_ToDate != "") {
 							var Req_Proposed_ETA_To = new Date(oDateFormat.format(new Date(Req_Proposed_ETA_ToDate)));
 						} else {
@@ -875,8 +874,8 @@ sap.ui.define([
 							var Off_Current_ETA_From = "0000-00-00T00:00:00";
 						}
 						var Off_Current_ETA_ToDate = that.getView().byId("labetxteid").getText();
-						var Off_Current_ETA_ToDate = Off_Current_ETA_ToDate.replace("To : ", "");
-						var Off_Current_ETA_ToDate = Off_Current_ETA_ToDate.replace("À : ", "");
+						var Off_Current_ETA_ToDate = Off_Current_ETA_ToDate.replace("To : ", "").replace(" ", "");
+						var Off_Current_ETA_ToDate = Off_Current_ETA_ToDate.replace("À : ", "").replace(" ", "");
 
 						if (Off_Current_ETA_ToDate != "") {
 							var Off_Current_ETA_To = new Date(oDateFormat.format(new Date(Off_Current_ETA_ToDate)));
@@ -892,8 +891,8 @@ sap.ui.define([
 						}
 
 						var Off_Proposed_ETA_ToDate = that.getView().byId("idlabeal").getText();
-						var Off_Proposed_ETA_ToDate = Off_Proposed_ETA_ToDate.replace("To : ", "");
-						var Off_Proposed_ETA_ToDate = Off_Proposed_ETA_ToDate.replace("À : ", "");
+						var Off_Proposed_ETA_ToDate = Off_Proposed_ETA_ToDate.replace("To : ", "").replace(" ", "");
+						var Off_Proposed_ETA_ToDate = Off_Proposed_ETA_ToDate.replace("À : ", "").replace(" ", "");
 
 						if (Off_Proposed_ETA_ToDate != "") {
 							var Off_Proposed_ETA_To = new Date(oDateFormat.format(new Date(Off_Proposed_ETA_ToDate)));
@@ -1028,7 +1027,7 @@ sap.ui.define([
 							"Accept": "application/json",
 							"Method": "POST"
 						});
-						
+
 						that.oDataModel.create("/TradeRequest", oEntry, null, function (s) {
 							//	that.getView().byId("oTrdareqstat").setText("Request Sent");
 							if (that.getView().byId("oTypeHere").getValue() != "" && that.getView().byId("oTypeHere").getValue() != " ") {
@@ -1421,6 +1420,26 @@ sap.ui.define([
 					/*pattern: "yyyy-MM-dd"*/
 			});
 			var oCommentdate = oDateFormat.format(new Date());
+			var sLocation = window.location.host;
+			var sLocation_conf = sLocation.search("webide");
+
+			if (sLocation_conf == 0) {
+				that.sPrefix = "/VehicleLocator_Xsodata";
+			} else {
+				that.sPrefix = "";
+
+			}
+			that.nodeJsUrl = that.sPrefix;
+			that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
+
+			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
+			that.oDataModel.setHeaders({
+				"Content-Type": "application/json",
+				"X-Requested-With": "XMLHttpRequest",
+				"DataServiceVersion": "2.0",
+				"Accept": "application/json",
+				"Method": "POST"
+			});
 
 			//	var Spars = sap.ui.getCore().getConfiguration().getLanguage();
 			//	var Spars = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].Language.slice(0, 1); //GSR
@@ -1482,8 +1501,24 @@ sap.ui.define([
 				Entry2["Trade_Id"] = oEntry.Trade_Id;
 				Entry2["VTN"] = oVTN;
 				Tradestatus.push(Entry2);
+				for (var i = 0; i < Tradestatus.length; i++) {
+					that.oDataModel.create("/TradeVehicleDesc", Tradestatus[i], null, function (s) {
+						//	MessageBox.error(JSON.parse(err.response.body).error.message.value);
+
+						that.getRouter().navTo("VehicleTrade_Summary", {
+							DataClicked: "Yes"
+						});
+						that.simulateServerRequest();
+					}, function (err) {
+						that.simulateServerRequest();
+						MessageBox.error(JSON.parse(err.response.body).error.message.value);
+
+					});
+				}
 			}
 			if ((that.getView().byId("FromFourth").getText() == "FromFourth") || (that.getView().byId("FromFourth").getText() == "FromPush")) {
+				Tradestatus = [];
+
 				var oVTN = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzvtn;
 				var oModel_Desc = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.model_desc_en;
 				var oSeries_Desc = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzseries_desc_en;
@@ -1524,42 +1559,23 @@ sap.ui.define([
 				Entry4["VTN"] = oVTN;
 				Tradestatus.push(Entry4);
 
-			}
+				for (var i = 0; i < Tradestatus.length; i++) {
+					that.oDataModel.create("/TradeVehicleDesc", Tradestatus[i], null, function (s) {
+						//	MessageBox.error(JSON.parse(err.response.body).error.message.value);
 
-			var sLocation = window.location.host;
-			var sLocation_conf = sLocation.search("webide");
+						that.getRouter().navTo("VehicleTrade_Summary", {
+							DataClicked: "Yes"
+						});
+						that.simulateServerRequest();
+					}, function (err) {
+						that.simulateServerRequest();
+						MessageBox.error(JSON.parse(err.response.body).error.message.value);
 
-			if (sLocation_conf == 0) {
-				that.sPrefix = "/VehicleLocator_Xsodata";
-			} else {
-				that.sPrefix = "";
-
-			}
-			that.nodeJsUrl = that.sPrefix;
-			that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
-
-			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
-			that.oDataModel.setHeaders({
-				"Content-Type": "application/json",
-				"X-Requested-With": "XMLHttpRequest",
-				"DataServiceVersion": "2.0",
-				"Accept": "application/json",
-				"Method": "POST"
-			});
-			for (var i = 0; i < Tradestatus.length; i++) {
-				that.oDataModel.create("/TradeVehicleDesc", Tradestatus[i], null, function (s) {
-					//	MessageBox.error(JSON.parse(err.response.body).error.message.value);
-
-					that.getRouter().navTo("VehicleTrade_Summary", {
-						DataClicked: "Yes"
 					});
-					that.simulateServerRequest();
-				}, function (err) {
-					that.simulateServerRequest();
-					MessageBox.error(JSON.parse(err.response.body).error.message.value);
+				}
 
-				});
 			}
+
 		},
 		onDummySummary: function () {
 			debugger

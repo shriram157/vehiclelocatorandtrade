@@ -107,6 +107,7 @@ modules:
          name: vehiclelocatorandtrade-xsjs
          url: ~{url}
          forwardAuthToken: true
+        
 
 resources:
  - name: application-logs_vehiclelocatorandtrade
