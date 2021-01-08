@@ -79,7 +79,7 @@ sap.ui.define([
 				var tradeStatus = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Trade_Return;
 				var tradeId = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Trade_Id.slice(2, 8);
 				//----Offered Vehicle---------------------------------
-				if (this.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Offered_Vtn) {
+				if (this.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Offered_Vtn && tradeStatus == "Y") {
 					Offered_V = this.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle.Offered_Vtn;
 				}
 				//=================================================
@@ -1705,11 +1705,14 @@ sap.ui.define([
 						var sTextFromi18n = that.getView().getModel("i18n").getResourceBundle().getText("updateSuccessfulNavigateBack");
 			that.oDataModel.update(UpdatedTreadeEntity, oEntry, null, function (s) {
 				//	that.getView().byId("oTrdareqstat").setText("Request Sent");"Update Successful, Navigate back using the Back Buttons"
-						sap.m.MessageBox.information(sTextFromi18n);   //GSR0805
+				//Changes made for update issue
+				
+				//sap.m.MessageBox.information(sTextFromi18n);   //GSR0805
 						
 						
 	//  after the comments are updated in order for the screen to refresh lets call the route matched again. 
-              that.onRouteMatched();
+              //that.onRouteMatched();
+              that.onBackpage();
 
 			}, function () {
 				
@@ -2371,6 +2374,7 @@ sap.ui.define([
 
 			
 				that.VehicleDelete(Offered_V);
+				that.VehicleDesc_delete(Offered_V);
 
 				that.TradeRequestCreate('O', 'S', that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle);
 
