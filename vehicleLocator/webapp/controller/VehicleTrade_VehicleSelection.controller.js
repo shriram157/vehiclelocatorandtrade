@@ -48,6 +48,7 @@ sap.ui.define([
 			var oDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerKey;
 
 			// var Series = this.getOwnerComponent().SelectedMSMData[0].SeriesCmbo;
+			sap.ui.core.BusyIndicator.show();
 
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
@@ -78,11 +79,19 @@ sap.ui.define([
 			} else {
 				// may be from block summary. 
 				// var oDropDownSelectedDealer = sap.ui.getCore().dropDownSelectionData;
+				if(sap.ui.getCore().getModel("dropDownSelectionData") !== undefined)
+				{
 				var oDropDownSelectedDealer = sap.ui.getCore().getModel("dropDownSelectionData").getData();
 				if (oDropDownSelectedDealer !== undefined) {
 					var requestDealerToSAP = oDropDownSelectedDealer.dropDownSelectedBP;
 					var oDealer1 = requestDealerToSAP;
 				}
+				}
+				else
+				{
+					var oDealer1 = 	oEvent.getParameter("arguments").Req_Dealer;
+				}
+				
 			}
             // var oDealer1 = this.RequestingDealerToSendToSAP;
                        // var oDealer1 = this.requestedDealerToSAP;
@@ -192,12 +201,12 @@ var that = this;
 								var oModeltemp = that.getView().setModel(oJsonModel, "vehicleSelectTableModel");
 				oModeltemp.updateBindings(true);
 
-					/*  sap.ui.core.BusyIndicator.hide();*/
+					 sap.ui.core.BusyIndicator.hide();
 
 				},
 				error: function () {
 				
-					/*	 sap.ui.core.BusyIndicator.hide();*/
+						 sap.ui.core.BusyIndicator.hide();
 				}
 			});
 				if (sap.ui.getCore().getModel("oVehicleSelectionResults") != undefined) {

@@ -41,6 +41,9 @@ sap.ui.define([
 		onRouteMatched: function (oEvent) {
 			
 			  this.getView().byId("oComments").setValue(""); //1804
+			  this.getView().byId("oUpdateSubmitbtn").setEnabled(true);
+			this.getView().byId("oUpdatePagebtn").setEnabled(true);
+			this.getView().byId("backpageId").setEnabled(true);
 			
 			this.i18n = sap.ui.getCore().getModel("i18n").getResourceBundle();
 			
@@ -527,6 +530,9 @@ sap.ui.define([
 
 		UpdatePress: function () {
 			var that = this;
+			this.getView().byId("oUpdateSubmitbtn").setEnabled(false);
+			this.getView().byId("oUpdatePagebtn").setEnabled(false);
+			this.getView().byId("backpageId").setEnabled(false);
 			
 		this.Tradeid = this.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Trade_Id;
 // 05-05 if an Update has been pressed just take the comments to HDB
@@ -544,6 +550,9 @@ sap.ui.define([
 			//=================================================================
 			if (oOfferedVehicle == "YesOffered" && SelectedTeade == "Y") {
 				sap.m.MessageBox.warning("Please select Vechicle");
+				this.getView().byId("oUpdateSubmitbtn").setEnabled(true);
+			this.getView().byId("oUpdatePagebtn").setEnabled(true);
+			this.getView().byId("backpageId").setEnabled(true);
 				//================================================================================
 				//=====No for offered ======================
 				//=================================================================	
@@ -635,7 +644,11 @@ sap.ui.define([
 			var VehicleUrl = "/TradeVehicles(Trade_Id='" + Trade_Id + "',VTN='" + OfferedVTn + "')";
 			that.getView().getModel('TradeRequestModel').remove(VehicleUrl, null, null, function (s) {
 
-			}, function () {
+			}, function (err) {
+				console.log(err);
+				that.getView().byId("oUpdateSubmitbtn").setEnabled(true);
+			that.getView().byId("oUpdatePagebtn").setEnabled(true);
+			that.getView().byId("backpageId").setEnabled(true);
 
 			});
 			// }
@@ -1302,6 +1315,9 @@ sap.ui.define([
 		
 		onBackpage: function () {
 			// this.getRouter().navTo("VehcTrad_Apprv_Rej_CounTrad");
+			this.getView().byId("oUpdateSubmitbtn").setEnabled(false);
+			this.getView().byId("oUpdatePagebtn").setEnabled(false);
+			this.getView().byId("backpageId").setEnabled(false);
 			this.getRouter().navTo("VehicleTrade_Summary", {
 				DataClicked: "FromUpdateScreen"
 
@@ -1426,23 +1442,28 @@ sap.ui.define([
 					var oJsonModel = new sap.ui.model.json.JSONModel(IncludeOrdertype);
 					///////
 
-					oJsonModel.setSizeLimit(1500);
+					oJsonModel.setSizeLimit(15000);
 					sap.ui.getCore().setModel(oJsonModel, "oVehicleSelectionResults");
 					that.getRouter().navTo("VehicleTrade_VehicleSelection", {
-						SelectedVehicleFrom: "VehileTrade_UpdtTradReq"
+						SelectedVehicleFrom: "VehileTrade_UpdtTradReq",
+						Req_Dealer:oDealer1
 					});
 					sap.ui.core.BusyIndicator.hide();
 
 				},
 				error: function () {
 					that.getRouter().navTo("VehicleTrade_VehicleSelection", {
-						SelectedVehicleFrom: "VehileTrade_UpdtTradReq"
+						SelectedVehicleFrom: "VehileTrade_UpdtTradReq",
+						Req_Dealer:oDealer1
 					});
 					sap.ui.core.BusyIndicator.hide();
 				}
 			});
 
-			this.getRouter().navTo("VehicleTrade_VehicleSelection");
+			this.getRouter().navTo("VehicleTrade_VehicleSelection", {
+				SelectedVehicleFrom: "VehileTrade_UpdtTradReq",
+						Req_Dealer:oDealer1
+			});
 
 		},
 		RequestedVehicleCreate: function () {
@@ -1714,8 +1735,11 @@ sap.ui.define([
               //that.onRouteMatched();
               that.onBackpage();
 
-			}, function () {
-				
+			}, function (err) {
+				console.log(err);
+				that.getView().byId("oUpdateSubmitbtn").setEnabled(true);
+			that.getView().byId("oUpdatePagebtn").setEnabled(true);
+			that.getView().byId("backpageId").setEnabled(true);
 			
 
 			});
@@ -2122,7 +2146,11 @@ sap.ui.define([
 			that.getView().getModel('TradeRequestModel').create("/TradeVehicles", oEntry1, null, function (s) {
 				/*	alert("ok");*/
 
-			}, function () {
+			}, function (err) {
+				console.log(err);
+				that.getView().byId("oUpdateSubmitbtn").setEnabled(true);
+			that.getView().byId("oUpdatePagebtn").setEnabled(true);
+			that.getView().byId("backpageId").setEnabled(true);
 
 			});
 			that.VehicleDesc_create(vtn, offeredv);
@@ -2284,12 +2312,20 @@ sap.ui.define([
 			// 	"',SPRAS='" + oEntry2.SPRAS + "')";
 			that.oDataModel.create("/TradeVehicleDesc", oEntry2, null, function (s) {
 
-			}, function () {
+			}, function (err) {
+					console.log(err);
+				that.getView().byId("oUpdateSubmitbtn").setEnabled(true);
+			that.getView().byId("oUpdatePagebtn").setEnabled(true);
+			that.getView().byId("backpageId").setEnabled(true);
 
 			});
 			that.oDataModel.create("/TradeVehicleDesc", oEntry1, null, function (s) {
 
-			}, function () {
+			}, function (err) {
+					console.log(err);
+				that.getView().byId("oUpdateSubmitbtn").setEnabled(true);
+			that.getView().byId("oUpdatePagebtn").setEnabled(true);
+			that.getView().byId("backpageId").setEnabled(true);
 
 			});
 
@@ -2332,14 +2368,22 @@ sap.ui.define([
 				"',SPRAS='" + "F" + "')";
 			that.oDataModel.remove(UpdatedTreadeEntity, null, function (s) {
 
-			}, function () {
+			}, function (err) {
+				console.log(err);
+				that.getView().byId("oUpdateSubmitbtn").setEnabled(true);
+			that.getView().byId("oUpdatePagebtn").setEnabled(true);
+			that.getView().byId("backpageId").setEnabled(true);
 
 			});
 			var UpdatedTreadeEntity1 = "/TradeVehicleDesc(Trade_Id ='" + Trade_Id + "',VTN ='" + vin +
 				"',SPRAS='" + "E" + "')";
 			that.oDataModel.remove(UpdatedTreadeEntity1, null, function (s) {
 
-			}, function () {
+			}, function (err) {
+				console.log(err);
+				that.getView().byId("oUpdateSubmitbtn").setEnabled(true);
+			that.getView().byId("oUpdatePagebtn").setEnabled(true);
+			that.getView().byId("backpageId").setEnabled(true);
 
 			});
 
@@ -2348,6 +2392,11 @@ sap.ui.define([
 			debugger;
  
 			var that = this;
+			this.getView().byId("oUpdateSubmitbtn").setEnabled(false);
+			this.getView().byId("oUpdatePagebtn").setEnabled(false);
+			this.getView().byId("backpageId").setEnabled(false);
+			
+			
 		// 05-05 if an Update has been pressed just take the comments to HDB
 	
 				this.Tradeid = this.getView().byId("SimpleFormUpdateTrReq").getModel().getData().Trade_Id;
@@ -2365,6 +2414,10 @@ sap.ui.define([
 			//=================================================================
 			if (oOfferedVehicle == "YesOffered" && SelectedTeade == "Y") {
 				sap.m.MessageBox.warning("Please select Vechicle");
+				this.getView().byId("oUpdateSubmitbtn").setEnabled(true);
+			this.getView().byId("oUpdatePagebtn").setEnabled(true);
+			this.getView().byId("backpageId").setEnabled(true);
+			
 				//================================================================================
 				//=====No for offered ======================
 				//=================================================================	

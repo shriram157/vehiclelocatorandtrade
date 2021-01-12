@@ -186,7 +186,7 @@
 				"name": "VehicleTrade_CreateSingle",
 				"target": "VehicleTrade_CreateSingle"
 			}, {
-				"pattern": "VehicleTrade_VehicleSelection/:SelectedVehicleFrom:",
+				"pattern": "VehicleTrade_VehicleSelection/:SelectedVehicleFrom:/:Req_Dealer:",
 				"name": "VehicleTrade_VehicleSelection",
 				"target": "VehicleTrade_VehicleSelection"
 			}, {
