@@ -1854,8 +1854,9 @@ sap.ui.define([
 						pattern: "yyyy-MM-dd'T'HH:mm:ss"
 					});
 					 
-					var date = new Date(oDateFormat.format(new Date(Created_On)));
-					return date.setDate(date.getDate()+1);
+					var date = new Date(Created_On);
+					date.setDate(date.getDate()+1);
+					return new Date(oDateFormat.format(date));
 
 				} else {
 					dateTo = dateTo;
@@ -1865,7 +1866,9 @@ sap.ui.define([
 					var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 						pattern: "yyyy-MM-dd'T'HH:mm:ss"
 					});
-					return new Date(oDateFormat.format(new Date(ValidTo)));
+					var date = new Date(ValidTo);
+					date.setDate(date.getDate()+1);
+					return new Date(oDateFormat.format(date));
 
 				}
 
