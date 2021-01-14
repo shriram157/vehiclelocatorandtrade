@@ -1853,7 +1853,9 @@ sap.ui.define([
 					var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 						pattern: "yyyy-MM-dd'T'HH:mm:ss"
 					});
-					return new Date(oDateFormat.format(new Date(Created_On)));
+					 
+					var date = new Date(oDateFormat.format(new Date(Created_On)));
+					return date.setDate(date.getDate()+1);
 
 				} else {
 					dateTo = dateTo;
