@@ -131,14 +131,13 @@ sap.ui.define([
 
 			}
 
-		
 			var StatusDataFilter = [{
 				"zz_trading_ind": "1"
 
 			}, {
 				"zz_trading_ind": "2"
 			}];
-			
+
 			var Model = new sap.ui.model.json.JSONModel(StatusDataFilter);
 			// var StatusFilter = StatusDataFilter.filter(function (x) {
 			// 	return (x.zz_trading_ind == "2" || x.zz_trading_ind == "3");
@@ -414,7 +413,6 @@ sap.ui.define([
 						);
 					}
 
-				
 					var BpDealerTemp = BpDealer.slice();
 					var confirmStockCode = "";
 					for (var i = 0; i < BpDealerTemp.length; i++) {
@@ -456,7 +454,6 @@ sap.ui.define([
 						}
 					}
 
-				
 					var LoggedInDealerCode1 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
 					var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
 					this.getView().byId("oDealerCode4").setText(LoggedInDealerCode1);
@@ -775,7 +772,6 @@ sap.ui.define([
 					filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.Contains, Status));
 				} else {
 					filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.NE, "1"));
-				
 
 				}
 			}
@@ -785,7 +781,6 @@ sap.ui.define([
 
 			}
 
-		
 			if (SelectedSeries != "" && SelectedSeries != "all") {
 
 				filterArray.push(new sap.ui.model.Filter("zzseries", sap.ui.model.FilterOperator.Contains, SelectedSeries));
@@ -2553,10 +2548,11 @@ sap.ui.define([
 				url: SeriesDes,
 				async: true,
 				success: function (result) {
-					var SeriesDes = result.d.results;
-
-					var SeriesDesModel = new sap.ui.model.json.JSONModel(SeriesDes);
+					//INC0190093 changes done by Minakshi for Filtering zzaddata4 0 values. start
+					var seriesList = result.d.results.filter(item => item.zzzadddata4 != "0");
+					var SeriesDesModel = new sap.ui.model.json.JSONModel(seriesList);
 					sap.ui.getCore().setModel(SeriesDesModel, "SeriesDesModel");
+					//INC0190093 end
 					//	var SelYear = new Date().getFullYear().toString();
 					var SelYear = new Date().getFullYear();
 					//temporary-2018, data avaialable for 2018, before deploying remove this
