@@ -2182,9 +2182,9 @@ else
 				url: SeriesDes,
 				async: true,
 				success: function (result) {
-					var SeriesDes = result.d.results;
+					var seriesList = result.d.results.filter(item => item.zzzadddata4 != "0");
 
-					var SeriesDesModel = new sap.ui.model.json.JSONModel(SeriesDes);
+					var SeriesDesModel = new sap.ui.model.json.JSONModel(seriesList);
 					sap.ui.getCore().setModel(SeriesDesModel, "SeriesDesModel");
 					//	var SelYear = new Date().getFullYear().toString();
 					var SelYear = that.getView().byId("MoyearCombo").getSelectedKey();
