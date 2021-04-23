@@ -2182,10 +2182,11 @@ else
 				url: SeriesDes,
 				async: true,
 				success: function (result) {
+					//INC0190093 changes done by Minakshi for Filtering zzaddata4 0 values. start
 					var seriesList = result.d.results.filter(item => item.zzzadddata4 != "0");
-
 					var SeriesDesModel = new sap.ui.model.json.JSONModel(seriesList);
 					sap.ui.getCore().setModel(SeriesDesModel, "SeriesDesModel");
+					//INC0190093 end
 					//	var SelYear = new Date().getFullYear().toString();
 					var SelYear = that.getView().byId("MoyearCombo").getSelectedKey();
 					that.SeriesBinding(SelYear);
