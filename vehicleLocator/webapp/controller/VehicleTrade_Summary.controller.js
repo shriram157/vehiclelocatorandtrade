@@ -351,7 +351,7 @@ onLiveChange: function (oEvent) {
 				///  performance improvement changes
 
 				var dateMinusThirty = new Date();
-				dateMinusThirty.setDate(dateMinusThirty.getDate() - 60);
+				dateMinusThirty.setDate(dateMinusThirty.getDate() - 50);
 
 				var loggedDealerCode = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()["0"].DealerCode;
 
