@@ -358,7 +358,7 @@ onLiveChange: function (oEvent) {
 				var Filter0 = new sap.ui.model.Filter('Requesting_Dealer', 'EndsWith', loggedDealerCode);
 				var Filter1 = new sap.ui.model.Filter('Requested_Dealer', 'EndsWith', loggedDealerCode);
 				var Filter2 = new sap.ui.model.Filter('Trade_Status', 'NE', "A");
-				var Filter3 = new sap.ui.model.Filter('Changed_on', "GE", dateMinusThirty);
+				var Filter3 = new sap.ui.model.Filter('Created_On', "GE", dateMinusThirty);
 				var Filter4 = new sap.ui.model.Filter([Filter0, Filter1], false);
 				var Filter = new sap.ui.model.Filter([Filter4, Filter2,Filter3], true);
 				// var Filterall1 = new sap.ui.model.Filter([Filter, Filter2], true);
@@ -383,7 +383,8 @@ onLiveChange: function (oEvent) {
 				filters: [Filterall],
 				urlParameters: {
 					"$expand": "TradeVehicles,TradeVehicleDesc",
-					"$top":1000
+					"$top":1000,
+					"$orderby":"Created_On desc"
 				},
 				async: false,
 				success: function (oData, oResponse) {
