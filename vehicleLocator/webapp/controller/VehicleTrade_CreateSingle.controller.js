@@ -1027,14 +1027,7 @@ sap.ui.define([
 							"Accept": "application/json",
 							"Method": "POST"
 						});
-							if (that.getView().byId("oTypeHere").getValue() != "" && that.getView().byId("oTypeHere").getValue() != " ") {
-								that.TradeComment(oEntry);
-							}
-							//	if(that.getView().byId("FromFourth").getText()=="FromFourth"){
-							that.TradeVehcles(oEntry);
-							//	}
-							that.TradeStatus(oEntry);
-							/*	that.VehicleTrade_Summary();*/
+							
 						that.oDataModel.create("/TradeRequest", oEntry, null, function (s) {
 							//	that.getView().byId("oTrdareqstat").setText("Request Sent");
 						
@@ -1046,6 +1039,14 @@ sap.ui.define([
 							that.simulateServerRequest();
 							//sap.ui.core.BusyIndicator.hide();
 						});
+						if (that.getView().byId("oTypeHere").getValue() != "" && that.getView().byId("oTypeHere").getValue() != " ") {
+								that.TradeComment(oEntry);
+							}
+							//	if(that.getView().byId("FromFourth").getText()=="FromFourth"){
+							that.TradeVehcles(oEntry);
+							//	}
+							that.TradeStatus(oEntry);
+							/*	that.VehicleTrade_Summary();*/
 
 					},
 					error: function (err) {
