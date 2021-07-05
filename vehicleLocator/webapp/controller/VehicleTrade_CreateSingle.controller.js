@@ -735,7 +735,7 @@ sap.ui.define([
 		},
 
 		onRequestVT: function () {
-			debugger;
+			
 
 			if (this.getView().byId("VT_CStradinRet").getSelectedKey() == "Yes" && this.getView().byId("FromFourth").getText() == "") {
 				var sTextFromi18n = this.getView().getModel("i18n").getResourceBundle().getText("pleaseSelectVehicle");
@@ -1027,9 +1027,6 @@ sap.ui.define([
 							"Accept": "application/json",
 							"Method": "POST"
 						});
-
-						that.oDataModel.create("/TradeRequest", oEntry, null, function (s) {
-							//	that.getView().byId("oTrdareqstat").setText("Request Sent");
 							if (that.getView().byId("oTypeHere").getValue() != "" && that.getView().byId("oTypeHere").getValue() != " ") {
 								that.TradeComment(oEntry);
 							}
@@ -1038,6 +1035,9 @@ sap.ui.define([
 							//	}
 							that.TradeStatus(oEntry);
 							/*	that.VehicleTrade_Summary();*/
+						that.oDataModel.create("/TradeRequest", oEntry, null, function (s) {
+							//	that.getView().byId("oTrdareqstat").setText("Request Sent");
+						
 
 							//	sap.ui.core.BusyIndicator.hide();
 							//	that.getRouter().navTo("VehicleTrade_Summary");
