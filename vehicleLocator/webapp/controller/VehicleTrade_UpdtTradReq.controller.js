@@ -2261,11 +2261,11 @@ sap.ui.define([
 			var oEntry1 = {
 
 				SPRAS: 'E',
-				Model_Desc: offeredv.model_desc_en,
-				Series_Desc: offeredv.zzseries_desc_en,
-				Suffix_Desc: offeredv.suffix_desc_en,
-				Int_Colour_Desc: offeredv.mrktg_int_desc_en,
-				Ext_Colour_Desc: offeredv.mktg_desc_en
+				Model_Desc: offeredv.model_desc_en.substring(0, 40),
+				Series_Desc: offeredv.zzseries_desc_en.substring(0, 50),
+				Suffix_Desc: offeredv.suffix_desc_en.substring(0, 30),
+				Int_Colour_Desc: offeredv.mrktg_int_desc_en.substring(0, 30),
+				Ext_Colour_Desc: offeredv.mktg_desc_en.substring(0, 50)
 
 			};
 			oEntry1["Trade_Id"] = tradeId_no;
@@ -2274,11 +2274,11 @@ sap.ui.define([
 			var oEntry2 = {
 
 				SPRAS: 'F',
-				Model_Desc: offeredv.model_desc_fr,
-				Series_Desc: offeredv.zzseries_desc_fr,
-				Suffix_Desc: offeredv.suffix_desc_fr,
-				Int_Colour_Desc: offeredv.mrktg_int_desc_fr,
-				Ext_Colour_Desc: offeredv.mktg_desc_fr
+				Model_Desc: offeredv.model_desc_fr.substring(0, 40),
+				Series_Desc: offeredv.zzseries_desc_fr.substring(0, 50),
+				Suffix_Desc: offeredv.suffix_desc_fr.substring(0, 30),
+				Int_Colour_Desc: offeredv.mrktg_int_desc_fr.substring(0, 30),
+				Ext_Colour_Desc: offeredv.mktg_desc_fr.substring(0, 50)
 
 			};
 			oEntry2["Trade_Id"] = tradeId_no;
