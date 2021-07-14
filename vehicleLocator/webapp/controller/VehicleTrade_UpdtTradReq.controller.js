@@ -2668,12 +2668,12 @@ sap.ui.define([
 								// vehicle_data.Off_Proposed_ETA_To = "/Date(" + Req_Proposed_ETA_To + ")/";
 
 								//====================================<< Delete the old data for Vehicle >>=======================================
-								that.VehicleDelete(VTN);
-								that.VehicleDesc_delete(VTN);
+							//	that.VehicleDelete(VTN);
+							//	that.VehicleDesc_delete(VTN);
 								//================<< Update the Trade Req with the new Offered Vehicle >>========
-								that.TradeRequestCreate('X', type, vehicle_data); //Update Trade Req
+							//	that.TradeRequestCreate('X', type, vehicle_data); //Update Trade Req
 								//========================<< Create new Vehicle with the new data after refresh >>=====================
-								that.TradeVehicleCreateFromVehicle_Selection(vehicle_data);
+							//	that.TradeVehicleCreateFromVehicle_Selection(vehicle_data);
 
 							}
 						} else {
