@@ -2679,6 +2679,7 @@ sap.ui.define([
 						} else {
 							that.TradeRequestCreate('X', 'S', that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle);
 						}
+						sap.ui.core.BusyIndicator.hide();
 					},
 					error: function () {
 						sap.ui.core.BusyIndicator.hide();
