@@ -1205,7 +1205,7 @@ sap.ui.define([
 
 						success: function (oData) {
 
-							debugger;
+							
 							var Data = oData.d.results;
 
 							// console.log("additional Comment", 	local.oViewModel);
@@ -1670,7 +1670,7 @@ sap.ui.define([
 				"Trade_Id": Trade_Id,
 				"Trade_Status": Trade_Status,
 				"Requesting_Dealer": Requesting_Dealer,
-				"Requesting_Dealer_Name": Requesting_Dealer_Name,
+				"Requesting_Dealer_Name": Requesting_Dealer_Name.substring(0, 35),
 				"Requested_Vtn": Requested_Vtn,
 				"Offered_Vtn": Offered_Vtn,
 				"Trade_Return": Trade_Return,
@@ -1687,7 +1687,7 @@ sap.ui.define([
 				"Created_On": Created_On,
 				"Changed_on": new Date(Changed_on),
 				"Requested_Dealer": Requested_Dealer,
-				"Requested_Dealer_Name": Requested_Dealer_Name
+				"Requested_Dealer_Name": Requested_Dealer_Name.substring(0, 35)
 
 			};
 
@@ -2393,7 +2393,7 @@ sap.ui.define([
 
 		},
 		oUpdateSubmitbtn: function (oEvent) {
-			debugger;
+			
 
 			var that = this;
 			sap.ui.core.BusyIndicator.show(0);
@@ -2512,24 +2512,32 @@ sap.ui.define([
 				// 	oDealer1 = "";
 				// }
 				var tempVar = this.getView().byId("SelectedSimpleFormAproveTrReq");
+				var oDealer1="";
 				if (tempVar != undefined) {
 					this.RequestingDealerToSAP = this.getView().byId("SelectedSimpleFormAproveTrReq").getModel().getData().Requested_Dealer;
 				} else {
 
 					this.RequestingDealerToSAP = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Requesting_Dealer;
 				}
+
+				oDealer1 = this.RequestingDealerToSAP;
+
+				if(oDealer1 == dealercode &&  tempVar == undefined )
+				{
+					oDealer1=sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Requested_Dealer;
+				}
 				// var oDealer1 = userAttributesModellen[0].DealerCode;
 				// if (oDealer1 == undefined){
 				// 	oDealer1 = "";
 				// }
-				var oDealer1 = this.RequestingDealerToSAP;
+			 
 
 				if (oDealer1.length == 10) {
 
 					oDealer1 = oDealer1.slice(-5);
 				}
 
-				var oDealer1 = "";
+				//var oDealer1 = "";
 
 				// var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=zzvtn eq '" + VTN + "' and kunnr eq '" + dealercode +
 				// 	"'&$format=json";

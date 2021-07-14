@@ -1648,7 +1648,7 @@ sap.ui.define([
 
 				},
 				error: function (s, result) {
-					debugger;
+					
 					var a = s;
 					sap.ui.core.BusyIndicator.hide();
 					/*	sap.m.MessageBox.warning("No Data");*/
@@ -1790,7 +1790,7 @@ sap.ui.define([
 
 				},
 				error: function (s, result) {
-					debugger;
+					
 					var a = s;
 					sap.ui.core.BusyIndicator.hide();
 					/*	sap.m.MessageBox.warning("No Data");*/
@@ -1956,7 +1956,7 @@ sap.ui.define([
 
 				success: function (oData) {
 
-					debugger;
+					
 					var Data = oData.d.results;
 				},
 		error: function (response) {
@@ -2095,7 +2095,7 @@ sap.ui.define([
 						}
 					}
 				}
-				// debugger;
+				// 
 				var oModel = new sap.ui.model.json.JSONModel(filtered);
 				sap.ui.getCore().setModel(oModel, "oVehicleTrade_Summary");
 				//	console(finalArray);
@@ -2105,14 +2105,14 @@ sap.ui.define([
 
 		},
 		BlockSummarypress: function () {
-			// debugger;
+			// 
 
 			var that = this;
 			that.getRouter().navTo("VehicleTrade_ModelBlock_Summary");
 
 		},
 		TradeSummaryLinkPress: function () {
-			// debugger;
+			// 
 			var that = this;
 			that.getRouter().navTo("VehicleTrade_Summary", {
 				DataClicked: "Yes"

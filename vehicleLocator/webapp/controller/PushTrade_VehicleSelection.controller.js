@@ -11,7 +11,7 @@ sap.ui.define([
 	return BaseController.extend("vehicleLocator.controller.PushTrade_VehicleSelection", {
 
 		onInit: function () {
-			//debugger;
+			//
 			var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
 			var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
 			this.getView().byId("oDealerCode4").setText(LoggedInDealerCode2);
@@ -48,7 +48,7 @@ sap.ui.define([
 		},
 
 		onRouteMatched: function (oEvent) {
-			//debugger;
+			//
 			this.SelectedDealer = this.getView().byId("VLRDealer").setSelectedKey(null);
 			var jsmodel = new sap.ui.model.json.JSONModel(null);
 
@@ -1042,7 +1042,7 @@ sap.ui.define([
 		},
 
 		handleoVt_SeriesChange: function () {
-			//debugger;
+			//
 
 			var that = this;
 			sap.ui.core.BusyIndicator.show();
@@ -1638,7 +1638,7 @@ sap.ui.define([
 				url: SeriesUrl,
 				async: true,
 				success: function (result) {
-					//debugger;
+					//
 					var Data = result.d.results[0];
 					/*	Data.MessageType="";
 						Data.Calculate="20181126";*/
@@ -3561,7 +3561,7 @@ sap.ui.define([
 			/*onSelectLink:function(oEvt)
 			   
 			{
-				debugger;
+				
 				var data=oEvt;
 				
 			}*/

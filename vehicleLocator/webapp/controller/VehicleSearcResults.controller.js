@@ -55,7 +55,7 @@ sap.ui.define([
 		},
 
 		onSuffixChange: function (oEvent) {
-			// debugger;
+			// 
 			/*eslint eqeqeq: ["error", "smart"]*/
 			sap.ui.core.BusyIndicator.show();
 			sap.ui.getCore().SelectedStauts = this.getView().byId("VLRStatus").getSelectedKey();
@@ -262,7 +262,7 @@ sap.ui.define([
 					},
 
 					success: function (odata, oresponse) {
-						//debugger;
+						//
 						var a = odata.d.results;
 
 						/*	var filtered_zone = a.filter(function (person) {
@@ -684,7 +684,7 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 		},
 
 		oTradeLinkPress: function (oEvt) {
-			debugger;
+			
 			var that = this;
 			//that.oTableSelectPath = oEvt.getSource().getParent().getBindingContext().getPath().split("/")[1]; //guna
 			that.oTableSelectPath = oEvt.getSource().getParent().getBindingContext("vehicleSearchTableModel").getPath().split("/")[1];
@@ -724,7 +724,7 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 				url: SeriesUrl,
 				async: true,
 				success: function (result) {
-					//debugger;
+					//
 					var Data = result.d.results[0];
 					/*	if (Data.MessageType == "E") {
 							Data.MessageType = "";
@@ -838,7 +838,7 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 
 		//},
 		onRouteMatched: function (oEvent) {
-			//debugger;
+			//
 			// if the user is retruning by pressing the back button,  then it is better, that we dont refresh the data again. 
 		this.getView().byId("VLRSuffix").setFilterFunction(function (sTerm, oItem) {
 				sTerm = sTerm.split("*")[0];
@@ -1022,7 +1022,7 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 
 			// 	}
 			// }
-			debugger;
+			
 			if (SuffixData.length != 0) {
 
 				if (this.getView().byId("VLRSuffix").getItems().filter(function (x) {
@@ -2651,7 +2651,7 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 
 		},
 		onNavBack2: function () {
-			/*	debugger*/
+			/*	*/
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
 
@@ -2663,14 +2663,14 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 			}
 		},
 		BlockSummarypress: function () {
-			// debugger;
+			// 
 
 			var that = this;
 			that.getRouter().navTo("VehicleTrade_ModelBlock_Summary");
 
 		},
 		TradeSummaryLinkPress: function () {
-			// debugger;
+			// 
 			var that = this;
 			that.getRouter().navTo("VehicleTrade_Summary", {
 				DataClicked: "Yes"

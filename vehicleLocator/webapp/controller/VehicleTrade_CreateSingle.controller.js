@@ -549,7 +549,7 @@ sap.ui.define([
 		},
 
 		onSelecveh: function () {
-			debugger
+			
 			this.getRouter().navTo("VehicleTrade_VehicleSelection", {
 				SelectedVehicleFrom: "VehileTrade_CreateSingle"
 			});
@@ -787,7 +787,7 @@ sap.ui.define([
 
 					success: function (oData) {
 
-						debugger;
+						
 						var Data = oData.d.results;
 
 						function dynamicSort(property) {
@@ -1088,7 +1088,7 @@ sap.ui.define([
 
 				success: function (oData) {
 
-					debugger;
+					
 					var Data = oData.d.results;
 					if (oData.d.results.length != 0) {
 						var CommentData = oData.d.results;
@@ -1398,7 +1398,7 @@ sap.ui.define([
 
 					},
 					error: function (s, result) {
-						debugger;
+						
 						var a = s;
 						sap.ui.core.BusyIndicator.hide();
 
@@ -1579,7 +1579,7 @@ sap.ui.define([
 
 		},
 		onDummySummary: function () {
-			debugger
+			
 			this.getRouter().navTo("VehicleTrade_Summary");
 
 		},
