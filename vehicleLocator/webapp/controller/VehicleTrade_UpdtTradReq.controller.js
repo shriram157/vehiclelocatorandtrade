@@ -2674,7 +2674,7 @@ sap.ui.define([
 							//	that.TradeRequestCreate('X', type, vehicle_data); //Update Trade Req
 								//========================<< Create new Vehicle with the new data after refresh >>=====================
 							//	that.TradeVehicleCreateFromVehicle_Selection(vehicle_data);
-
+							that.onBackpage();
 							}
 						} else {
 							that.TradeRequestCreate('X', 'S', that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle);
