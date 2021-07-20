@@ -1041,19 +1041,24 @@
  			// if (oDealer1 == undefined){
  			// 	oDealer1 = "";
  			// }
-
+			var oDealer1, oDropDownSelectedDealer,requestDealerToSAP;
  			var oReceivedData = sap.ui.getCore().SelectedTrade;
  			if (oReceivedData !== undefined) {
- 				var requestDealerToSAP = oReceivedData.kunnr;
- 				var oDealer1 = requestDealerToSAP;
+ 				requestDealerToSAP = oReceivedData.kunnr;
+ 				oDealer1 = requestDealerToSAP;
 
  			} else {
  				// may be from block summary. 
  				// var oDropDownSelectedDealer = sap.ui.getCore().dropDownSelectionData;
- 				var oDropDownSelectedDealer = sap.ui.getCore().getModel("dropDownSelectionData").getData();
+ 			
+ 				if(sap.ui.getCore().getModel("dropDownSelectionData"))
+ 				{
+ 				 oDropDownSelectedDealer = sap.ui.getCore().getModel("dropDownSelectionData").getData();
+ 				
+ 				}
  				if (oDropDownSelectedDealer !== undefined) {
- 					var requestDealerToSAP = oDropDownSelectedDealer.dropDownSelectedBP;
- 					var oDealer1 = requestDealerToSAP;
+ 					requestDealerToSAP = oDropDownSelectedDealer.dropDownSelectedBP;
+ 					oDealer1 = requestDealerToSAP;
  				}
  			}
  			if (oDealer1 !== undefined) {
