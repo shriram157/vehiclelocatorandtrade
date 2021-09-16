@@ -11,7 +11,7 @@
  	return BaseController.extend("vehicleLocator.controller.VehicleTrade_VehicleSelection", {
 
  		onInit: function () {
- 			//debugger;
+ 			//
  			var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
  			var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
  			this.getView().byId("oDealerCode4").setText(LoggedInDealerCode2);
@@ -43,7 +43,7 @@
  		},
 
  		onRouteMatched: function (oEvent) {
- 			//debugger;
+ 			//
  			var oDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerKey;
 
  			// var Series = this.getOwnerComponent().SelectedMSMData[0].SeriesCmbo;
@@ -1008,7 +1008,7 @@
  		},
 
  		handleoVt_SeriesChange: function () {
- 			//debugger;
+ 			//
 
  			var that = this;
  			sap.ui.core.BusyIndicator.show();
@@ -1041,19 +1041,24 @@
  			// if (oDealer1 == undefined){
  			// 	oDealer1 = "";
  			// }
-
+			var oDealer1, oDropDownSelectedDealer,requestDealerToSAP;
  			var oReceivedData = sap.ui.getCore().SelectedTrade;
  			if (oReceivedData !== undefined) {
- 				var requestDealerToSAP = oReceivedData.kunnr;
- 				var oDealer1 = requestDealerToSAP;
+ 				requestDealerToSAP = oReceivedData.kunnr;
+ 				oDealer1 = requestDealerToSAP;
 
  			} else {
  				// may be from block summary. 
  				// var oDropDownSelectedDealer = sap.ui.getCore().dropDownSelectionData;
- 				var oDropDownSelectedDealer = sap.ui.getCore().getModel("dropDownSelectionData").getData();
+ 			
+ 				if(sap.ui.getCore().getModel("dropDownSelectionData"))
+ 				{
+ 				 oDropDownSelectedDealer = sap.ui.getCore().getModel("dropDownSelectionData").getData();
+ 				
+ 				}
  				if (oDropDownSelectedDealer !== undefined) {
- 					var requestDealerToSAP = oDropDownSelectedDealer.dropDownSelectedBP;
- 					var oDealer1 = requestDealerToSAP;
+ 					requestDealerToSAP = oDropDownSelectedDealer.dropDownSelectedBP;
+ 					oDealer1 = requestDealerToSAP;
  				}
  			}
  			if (oDealer1 !== undefined) {
@@ -1728,7 +1733,7 @@
  				url: SeriesUrl,
  				async: true,
  				success: function (result) {
- 					//debugger;
+ 					//
  					var Data = result.d.results[0];
  					/*	Data.MessageType="";
  						Data.Calculate="20181126";*/
@@ -3370,7 +3375,7 @@
  			/*onSelectLink:function(oEvt)
  			   
  			{
- 				debugger;
+ 				
  				var data=oEvt;
  				
  			}*/

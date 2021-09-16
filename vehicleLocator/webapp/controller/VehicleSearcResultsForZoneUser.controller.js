@@ -60,7 +60,7 @@ sap.ui.define([
 		},
 
 		onSuffixChange: function (oEvent) {
-			// debugger;
+			// 
 			/*eslint eqeqeq: ["error", "smart"]*/
 			sap.ui.core.BusyIndicator.show();
 			sap.ui.getCore().SelectedStauts = this.getView().byId("VLRStatus").getSelectedKey();
@@ -292,7 +292,7 @@ sap.ui.define([
 					},
 
 					success: function (odata, oresponse) {
-						//debugger;
+						//
 						var a = odata.d.results;
 
 						var filtered_zone = [];
@@ -681,7 +681,7 @@ sap.ui.define([
 		},
 
 		onRouteMatched: function (oEvent) {
-			debugger;
+			
 
 			// var sapZoneForZoneUser = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()[0].UserType[0];
 
@@ -929,7 +929,7 @@ sap.ui.define([
 
 			// 	}
 			// }
-			debugger;
+			
 			if (SuffixData.length != 0) {
 
 				if (this.getView().byId("VLRSuffix").getItems().filter(function (x) {
@@ -2415,7 +2415,7 @@ sap.ui.define([
 		_reloadThePageWithnewData: function (sapMessage) {
 
 			// sap.ui.core.BusyIndicator.hide();
-			debugger;
+			
 
 			//  the messages to the ui are language dependent and has to be based on the logged in language. 
 			if (this.sCurrentLocaleD == 'French') {

@@ -19,14 +19,14 @@ sap.ui.define([
 		},
 		
 		ItemClicked: function() {
-          /*debugger;*/
+          /**/
           
 			this.oText = this.getView().byId("combo1Menu").getSelectedItem().getText();
 
 		},
 
 	/*	onSePress: function(oEvent) {
-	     debugger;
+	     
 
 			var oGetText = this.oText;
 		
@@ -67,7 +67,7 @@ sap.ui.define([
 		},
 
 	/*	handleLinkPress: function (oEvent) {
-			debugger
+			
 			var oGetText = oEvent.getSource().getText();
 			if (oGetText === "New Application") {
 				this.getRouter().navTo("newECPApp");
@@ -99,14 +99,14 @@ sap.ui.define([
 		},
 		
 		onBack: function() {
-			/*debugger;*/
+			/**/
 			this.getRouter().navTo("VehicleLocSearch");
 		
 
 		},
 
 		onNavBack: function() {
-		/*	debugger*/
+		/*	*/
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
 

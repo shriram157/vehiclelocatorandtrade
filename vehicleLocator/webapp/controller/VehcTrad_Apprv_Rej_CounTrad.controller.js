@@ -300,7 +300,7 @@ sap.ui.define([
 
 						success: function (oData) {
 
-							debugger;
+							
 							var Data = oData.d.results;
 							var Trade_Comment = Data.filter(function (x) {
 								return x["Trade_Id"] == Tradeid;
@@ -489,7 +489,7 @@ sap.ui.define([
 
 						success: function (oData) {
 
-							debugger;
+							
 							var Data = oData.d.results;
 							var Trade_Comment = Data.filter(function (x) {
 								return x["Trade_Id"] == Tradeid;
@@ -1051,7 +1051,7 @@ sap.ui.define([
 
 									},
 									error: function (s, result) {
-										debugger;
+										
 										var a = s;
 										sap.ui.core.BusyIndicator.hide();
 									}
@@ -1163,7 +1163,7 @@ sap.ui.define([
 
 											},
 											error: function (s, result) {
-												debugger;
+												
 												var a = s;
 												sap.ui.core.BusyIndicator.hide();
 										
@@ -1211,7 +1211,7 @@ sap.ui.define([
 
 											},
 											error: function (s, result) {
-												debugger;
+												
 												var a = s;
 												sap.ui.core.BusyIndicator.hide();
 											}
@@ -1492,7 +1492,7 @@ sap.ui.define([
 
 					success: function (oData) {
 
-						debugger;
+						
 						var Data = oData.d.results;
 						var Trade_Comment = Data.filter(function (x) {
 							return x["Trade_Id"] == Tradeid;
@@ -1660,7 +1660,7 @@ sap.ui.define([
 
 							success: function (oData) {
 
-								debugger;
+								
 								var Data = oData.d.results;
 
 								// console.log("additional Comment", 	this.oViewModel);
@@ -1720,7 +1720,7 @@ sap.ui.define([
 
 		},
 		oAccept: function () {
-			debugger;
+			
 			//  dated June 4th.  
 			sap.ui.core.BusyIndicator.show();
 			// also disable the accept button, preventing the user not to double click. 
@@ -1936,7 +1936,7 @@ sap.ui.define([
 							actions: [sap.m.MessageBox.Action.OK],
 							onClose: fnCallbackMessageBox1
 						});
-						debugger;
+						
 
 					}
 				},
@@ -2781,7 +2781,7 @@ sap.ui.define([
 								that.oDataModel.update(UpdatedTreadeEntity, oEntry, {
 									merge: true
 								}, function (s) {
-									debugger
+									
 
 									if (dncBlockedDays != 0 && dncBlockedDays != "") {
 										that.DNCBlockoutDays();
@@ -3314,7 +3314,7 @@ sap.ui.define([
 			that.oDataModel.update(UpdatedTreadeEntity, oEntry, {
 				merge: true
 			}, function (s) {
-				debugger
+				
 
 				/*	that.TradeComment(oEntry);
 					that.TradeVehcles(oEntry);

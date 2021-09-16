@@ -1205,7 +1205,7 @@ sap.ui.define([
 
 						success: function (oData) {
 
-							debugger;
+							
 							var Data = oData.d.results;
 
 							// console.log("additional Comment", 	local.oViewModel);
@@ -1670,7 +1670,7 @@ sap.ui.define([
 				"Trade_Id": Trade_Id,
 				"Trade_Status": Trade_Status,
 				"Requesting_Dealer": Requesting_Dealer,
-				"Requesting_Dealer_Name": Requesting_Dealer_Name,
+				"Requesting_Dealer_Name": Requesting_Dealer_Name.substring(0, 35),
 				"Requested_Vtn": Requested_Vtn,
 				"Offered_Vtn": Offered_Vtn,
 				"Trade_Return": Trade_Return,
@@ -1687,7 +1687,7 @@ sap.ui.define([
 				"Created_On": Created_On,
 				"Changed_on": new Date(Changed_on),
 				"Requested_Dealer": Requested_Dealer,
-				"Requested_Dealer_Name": Requested_Dealer_Name
+				"Requested_Dealer_Name": Requested_Dealer_Name.substring(0, 35)
 
 			};
 
@@ -2261,11 +2261,11 @@ sap.ui.define([
 			var oEntry1 = {
 
 				SPRAS: 'E',
-				Model_Desc: offeredv.model_desc_en,
-				Series_Desc: offeredv.zzseries_desc_en,
-				Suffix_Desc: offeredv.suffix_desc_en,
-				Int_Colour_Desc: offeredv.mrktg_int_desc_en,
-				Ext_Colour_Desc: offeredv.mktg_desc_en
+				Model_Desc: offeredv.model_desc_en.substring(0, 40),
+				Series_Desc: offeredv.zzseries_desc_en.substring(0, 50),
+				Suffix_Desc: offeredv.suffix_desc_en.substring(0, 30),
+				Int_Colour_Desc: offeredv.mrktg_int_desc_en.substring(0, 30),
+				Ext_Colour_Desc: offeredv.mktg_desc_en.substring(0, 50)
 
 			};
 			oEntry1["Trade_Id"] = tradeId_no;
@@ -2274,11 +2274,11 @@ sap.ui.define([
 			var oEntry2 = {
 
 				SPRAS: 'F',
-				Model_Desc: offeredv.model_desc_fr,
-				Series_Desc: offeredv.zzseries_desc_fr,
-				Suffix_Desc: offeredv.suffix_desc_fr,
-				Int_Colour_Desc: offeredv.mrktg_int_desc_fr,
-				Ext_Colour_Desc: offeredv.mktg_desc_fr
+				Model_Desc: offeredv.model_desc_fr.substring(0, 40),
+				Series_Desc: offeredv.zzseries_desc_fr.substring(0, 50),
+				Suffix_Desc: offeredv.suffix_desc_fr.substring(0, 30),
+				Int_Colour_Desc: offeredv.mrktg_int_desc_fr.substring(0, 30),
+				Ext_Colour_Desc: offeredv.mktg_desc_fr.substring(0, 50)
 
 			};
 			oEntry2["Trade_Id"] = tradeId_no;
@@ -2393,7 +2393,7 @@ sap.ui.define([
 
 		},
 		oUpdateSubmitbtn: function (oEvent) {
-			debugger;
+			
 
 			var that = this;
 			sap.ui.core.BusyIndicator.show(0);
@@ -2512,24 +2512,32 @@ sap.ui.define([
 				// 	oDealer1 = "";
 				// }
 				var tempVar = this.getView().byId("SelectedSimpleFormAproveTrReq");
+				var oDealer1="";
 				if (tempVar != undefined) {
 					this.RequestingDealerToSAP = this.getView().byId("SelectedSimpleFormAproveTrReq").getModel().getData().Requested_Dealer;
 				} else {
 
 					this.RequestingDealerToSAP = sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Requesting_Dealer;
 				}
+
+				oDealer1 = this.RequestingDealerToSAP;
+
+				if(oDealer1 == dealercode &&  tempVar == undefined )
+				{
+					oDealer1=sap.ui.getCore().getModel("SelectedSimpleFormAproveTrReq").getData().Requested_Dealer;
+				}
 				// var oDealer1 = userAttributesModellen[0].DealerCode;
 				// if (oDealer1 == undefined){
 				// 	oDealer1 = "";
 				// }
-				var oDealer1 = this.RequestingDealerToSAP;
+			 
 
 				if (oDealer1.length == 10) {
 
 					oDealer1 = oDealer1.slice(-5);
 				}
 
-				var oDealer1 = "";
+				//var oDealer1 = "";
 
 				// var SeriesUrl = that.oDataUrl + "/ZVMS_CDS_ETA_consolidate?$filter=zzvtn eq '" + VTN + "' and kunnr eq '" + dealercode +
 				// 	"'&$format=json";
@@ -2660,17 +2668,18 @@ sap.ui.define([
 								// vehicle_data.Off_Proposed_ETA_To = "/Date(" + Req_Proposed_ETA_To + ")/";
 
 								//====================================<< Delete the old data for Vehicle >>=======================================
-								that.VehicleDelete(VTN);
-								that.VehicleDesc_delete(VTN);
+							//	that.VehicleDelete(VTN);
+							//	that.VehicleDesc_delete(VTN);
 								//================<< Update the Trade Req with the new Offered Vehicle >>========
-								that.TradeRequestCreate('X', type, vehicle_data); //Update Trade Req
+							//	that.TradeRequestCreate('X', type, vehicle_data); //Update Trade Req
 								//========================<< Create new Vehicle with the new data after refresh >>=====================
-								that.TradeVehicleCreateFromVehicle_Selection(vehicle_data);
-
+							//	that.TradeVehicleCreateFromVehicle_Selection(vehicle_data);
+							that.onBackpage();
 							}
 						} else {
 							that.TradeRequestCreate('X', 'S', that.getView().byId("SimpleFormUpdateTrReq").getModel().getData().OffredVehicle);
 						}
+						sap.ui.core.BusyIndicator.hide();
 					},
 					error: function () {
 						sap.ui.core.BusyIndicator.hide();
