@@ -575,7 +575,7 @@ sap.ui.define([
 				that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_CATALOGUE_SRV";
 				var SelYear = new Date().getFullYear().toString();
 				that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
-				var SeriesUrl = that.oDataUrl + "/ZC_MODEL_DETAILS?$filter=Modelyear eq '" + SelYear + "'";
+				var SeriesUrl = that.oDataUrl + "/ZC_MODEL_DETAILS?$filter=Modelyear eq '" + SelYear + "'and visibility eq 'X'";
 				var ajax1 = $.ajax({
 					dataType: "json",
 					xhrFields: //
@@ -617,7 +617,7 @@ sap.ui.define([
 				that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_CATALOGUE_SRV";
 				var SelYear = new Date().getFullYear().toString();
 				that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
-				var SeriesUrl = that.oDataUrl + "/ZC_MODEL_DETAILS?$filter=Modelyear eq '" + SelYear + "'";
+				var SeriesUrl = that.oDataUrl + "/ZC_MODEL_DETAILS?$filter=Modelyear eq '" + SelYear + "'and visibility eq 'X'";
 				var ajax1 = $.ajax({
 					dataType: "json",
 					xhrFields: //
@@ -654,7 +654,7 @@ sap.ui.define([
 				that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_CATALOGUE_SRV";
 				var SelYear = new Date().getFullYear().toString();
 				that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
-				var SeriesUrl = that.oDataUrl + "/ZC_MODEL_DETAILS?$filter=Modelyear eq '" + SelYear + "'";
+				var SeriesUrl = that.oDataUrl + "/ZC_MODEL_DETAILS?$filter=Modelyear eq '" + SelYear + "'and visibility eq 'X'";
 				var ajax1 = $.ajax({
 					dataType: "json",
 					xhrFields: //
@@ -872,7 +872,7 @@ sap.ui.define([
 			//	var SelYear = new Date().getFullYear().toString();
 			//	that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
 			var ModelCode = that.oDataUrl + "/ZC_MODEL_DETAILS?$filter=Modelyear eq '" + that.oSelectedYear +
-				"' and TCISeries eq '" + that.oSelectedSeries + "'";
+				"' and TCISeries eq '" + that.oSelectedSeries + "'and visibility eq 'X'";
 			var ajax1 = $.ajax({
 				dataType: "json",
 				xhrFields: //
@@ -1176,7 +1176,7 @@ sap.ui.define([
 			that.oDataUrl = this.nodeJsUrl + "/Z_VEHICLE_CATALOGUE_SRV";
 
 			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
-			var SeriesUrl = that.oDataUrl + "/ZC_MODEL_DETAILS?$filter=Modelyear eq '" + that.oSelectedYear + "'";
+			var SeriesUrl = that.oDataUrl + "/ZC_MODEL_DETAILS?$filter=Modelyear eq '" + that.oSelectedYear + "'and visibility eq 'X'";
 			var ajax1 = $.ajax({
 				dataType: "json",
 				xhrFields: //
