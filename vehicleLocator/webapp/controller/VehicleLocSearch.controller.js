@@ -943,7 +943,7 @@ sap.ui.define([
 
 			that.oDataUrl = this.nodeJsUrl + "/Z_DEALER_TRADE_REQUEST_SRV";
 			var Suffix = that.oDataUrl + "/ZC_suffix_VL?$filter=Model eq '" + Model +
-				"'and ModelYear eq '" + Model_Year + "'visibility eq 'X'";
+				"'and ModelYear eq '" + Model_Year + "'and visibility eq 'X'";
 
 			var ajax3 = $.ajax({
 				dataType: "json",
