@@ -943,7 +943,7 @@ sap.ui.define([
 
 			that.oDataUrl = this.nodeJsUrl + "/Z_DEALER_TRADE_REQUEST_SRV";
 			var Suffix = that.oDataUrl + "/ZC_suffix_VL?$filter=Model eq '" + Model +
-				"'and ModelYear eq '" + Model_Year + "'";
+				"'and ModelYear eq '" + Model_Year + "'visibility eq 'X'";
 
 			var ajax3 = $.ajax({
 				dataType: "json",
@@ -1017,18 +1017,7 @@ sap.ui.define([
 
 				}
 
-				// need to add ALL
-				// var allText = that._oResourceBundle.getText("ALL");
-
-				//      oCombine.push({
-				// 	Suffix: allText,
-				// 		"SuffixDescriptionEN": allText,
-				// 	"SuffixDescriptionFR": allText,
-				// 	// SuffixDescriptionEN: "",
-				// 	// SuffixDescriptionFR:""
-				// 	//	sEtaToData: item.zzprod_month
-				// });
-
+			
 				var Suffix = new sap.ui.model.json.JSONModel(oCombine);
 				that.getView().setModel(Suffix, "Suffix");
 				sap.ui.getCore().setModel(Suffix, "VehicleLocatorSuffix");
