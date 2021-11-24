@@ -13,8 +13,8 @@
 	},
 	"description": "Node.js module for vehicle locator and trade consolidated app",
 	"devDependencies": {
-		"jest": "^24.1.0",
-		"jest-junit": "^6.3.0"
+		"jest": "^27.3.1",
+		"jest-junit": "^13.0.0"
 	},
 	"files": [],
 	"main": "server.js",
@@ -27,5 +27,5 @@
 	"engines": {
 		"node": "^12.0.0"
 	},
-	"version": "3.0.0"
+	"version": "2.0.0"
 }
