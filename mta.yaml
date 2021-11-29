@@ -3,14 +3,7 @@ _schema-version: '3.1'
 description: Vehicle locator and trade consolidated app
 version:  2.0.0
 
-
-
 modules:
- - name: "nodejs-buildpack"
-   version: "1.7.63"
-   url: "https://bosh.io/d/github.com/cloudfoundry/nodejs-buildpack-release?v=1.7.63"
-   sha1: "32342f79409505356e206885815a64452cb65531"
-  
  - name: vehiclelocatorandtrade-hdb
    type: hdb
    path: vehicleLocator_hdb
@@ -19,6 +12,7 @@ modules:
 
  - name: vehiclelocatorandtrade-node
    type: nodejs
+   buildpack: https://github.com/cloudfoundry/nodejs-buildpack#v1.7.62
    path: vehicleLocator_Node
    parameters:
       disk-quota: 512M
@@ -48,6 +42,7 @@ modules:
  - name: vehiclelocatorandtrade-xsjs
    type: nodejs
    path: vehicleLocator_XSJS
+   buildpack: https://github.com/cloudfoundry/nodejs-buildpack#v1.7.62
    parameters:
       disk-quota: 512M
       memory: 256M
