@@ -12,7 +12,7 @@ modules:
 
  - name: vehiclelocatorandtrade-node
    type: nodejs
-   buildpack: https://github.com/cloudfoundry/nodejs-buildpack#v1.7.61
+   buildpack: git://github.com/cloudfoundry/nodejs-buildpack#v1.7.61
    path: vehicleLocator_Node
    parameters:
       disk-quota: 512M
@@ -42,7 +42,7 @@ modules:
  - name: vehiclelocatorandtrade-xsjs
    type: nodejs
    path: vehicleLocator_XSJS
-   buildpack: https://github.com/cloudfoundry/nodejs-buildpack#v1.7.61
+   buildpack: git://github.com/cloudfoundry/nodejs-buildpack#v1.7.61
    parameters:
       disk-quota: 512M
       memory: 256M
