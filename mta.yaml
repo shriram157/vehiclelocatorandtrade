@@ -1,25 +1,24 @@
 ID: vehiclelocatorandtrade
 _schema-version: '3.1'
 description: Vehicle locator and trade consolidated app
-version:  2.0.0
-
+version: 2.0.0
 modules:
- - name: vehiclelocatorandtrade-hdb
-   type: hdb
-   path: vehicleLocator_hdb
-   requires:
-    - name: hdi_vehiclelocatorandtrade
-
- - name: vehiclelocatorandtrade-node
-   type: nodejs
-   path: vehicleLocator_Node
-   parameters:
+  - name: vehiclelocatorandtrade-hdb
+    type: hdb
+    path: vehicleLocator_hdb
+    requires:
+      - name: hdi_vehiclelocatorandtrade
+  - name: vehiclelocatorandtrade-node
+    type: nodejs
+    path: vehicleLocator_Node
+    parameters:
       disk-quota: 512M
       memory: 256M
-   properties:
+      buildpack: https://github.com/cloudfoundry/nodejs-buildpack#v1.7.61
+    properties:
       NODE_TLS_REJECT_UNAUTHORIZED: 0
       OPTIMIZE_MEMORY: true
-      TRADE_REQ_CLEANUP_TASK_CRON_TIME: "0 59 23 * * *"
+      TRADE_REQ_CLEANUP_TASK_CRON_TIME: '0 59 23 * * *'
       TRADE_REQ_CLEANUP_TASK_TIME_ZONE: America/Toronto
       UPS_NAME: VEHICLE_LOCATOR_AND_TRADE_APIM_CUPS
       XS_APP_LOG_LEVEL: info
@@ -27,59 +26,58 @@ modules:
       XS_LOG_NETWORK: true
       XS_LOG_REFERER: true
       XS_LOG_USER: true
-   provides:
-    - name: vehiclelocatorandtrade-node_api
-      properties:
-         url: ${default-url}
-   requires:
-    - name: application-logs_vehiclelocatorandtrade
-    - name: hdi_vehiclelocatorandtrade
-    - name: uaa_vehiclelocatorandtrade
-    - name: cf-drain
-    - name: VEHICLE_LOCATOR_AND_TRADE_APIM_CUPS
-
- - name: vehiclelocatorandtrade-xsjs
-   type: nodejs
-   path: vehicleLocator_XSJS
-   parameters:
+    provides:
+      - name: vehiclelocatorandtrade-node_api
+        properties:
+          url: '${default-url}'
+    requires:
+      - name: application-logs_vehiclelocatorandtrade
+      - name: hdi_vehiclelocatorandtrade
+      - name: uaa_vehiclelocatorandtrade
+      - name: cf-drain
+      - name: VEHICLE_LOCATOR_AND_TRADE_APIM_CUPS
+  - name: vehiclelocatorandtrade-xsjs
+    type: nodejs
+    path: vehicleLocator_XSJS
+    parameters:
       disk-quota: 512M
       memory: 256M
-   properties:
+   
+    properties:
       OPTIMIZE_MEMORY: true
       XS_APP_LOG_LEVEL: info
       XS_LOG_CONNECTION_DATA: true
       XS_LOG_REFERER: true
       XS_LOG_USER: true
-   provides:
-    - name: vehiclelocatorandtrade-xsjs_api
-      properties:
-         url: ${default-url}
-   requires:
-    - name: vehiclelocatorandtrade-hdb
-    - name: application-logs_vehiclelocatorandtrade
-    - name: hdi_vehiclelocatorandtrade
-    - name: uaa_vehiclelocatorandtrade
-    - name: cf-drain
-
- - name: vehiclelocatorandtrade
-   type: html5
-   path: vehicleLocator
-   parameters:
+    provides:
+      - name: vehiclelocatorandtrade-xsjs_api
+        properties:
+          url: '${default-url}'
+    requires:
+      - name: vehiclelocatorandtrade-hdb
+      - name: application-logs_vehiclelocatorandtrade
+      - name: hdi_vehiclelocatorandtrade
+      - name: uaa_vehiclelocatorandtrade
+      - name: cf-drain
+  - name: vehiclelocatorandtrade
+    type: html5
+    path: vehicleLocator
+    parameters:
       disk-quota: 512M
       memory: 256M
-   properties:
-      CORS: >
-         [
-           {
-             "allowedOrigin": [
-               {
-                 "host": "*"
-               }
-             ],
-             "allowedCredentials": true,
-             "uriPattern": "^/custom/do/logout"
-           }
-         ]
+    properties:
+      CORS: |
+        [
+          {
+            "allowedOrigin": [
+              {
+                "host": "*"
+              }
+            ],
+            "allowedCredentials": true,
+            "uriPattern": "^/custom/do/logout"
+          }
+        ]
       OPTIMIZE_MEMORY: true
       SESSION_TIMEOUT: 60
       XS_APP_LOG_LEVEL: info
@@ -87,56 +85,50 @@ modules:
       XS_LOG_NETWORK: true
       XS_LOG_REFERER: true
       XS_LOG_USER: true
-   build-parameters:
+    build-parameters:
       builder: grunt
       build-result: dist
-   requires:
-    - name: application-logs_vehiclelocatorandtrade
-    - name: uaa_vehiclelocatorandtrade
-    - name: cf-drain
-    - name: vehiclelocatorandtrade-node_api
-      group: destinations
-      properties:
-         name: vehiclelocatorandtrade-node
-         url: ~{url}
-         forwardAuthToken: true
-         timeout: 60000
-    - name: vehiclelocatorandtrade-xsjs_api
-      group: destinations
-      properties:
-         name: vehiclelocatorandtrade-xsjs
-         url: ~{url}
-         forwardAuthToken: true
-        
-
+    requires:
+      - name: application-logs_vehiclelocatorandtrade
+      - name: uaa_vehiclelocatorandtrade
+      - name: cf-drain
+      - name: vehiclelocatorandtrade-node_api
+        group: destinations
+        properties:
+          name: vehiclelocatorandtrade-node
+          url: '~{url}'
+          forwardAuthToken: true
+          timeout: 60000
+      - name: vehiclelocatorandtrade-xsjs_api
+        group: destinations
+        properties:
+          name: vehiclelocatorandtrade-xsjs
+          url: '~{url}'
+          forwardAuthToken: true
 resources:
- - name: application-logs_vehiclelocatorandtrade
-   type: org.cloudfoundry.managed-service
-   parameters:
+  - name: application-logs_vehiclelocatorandtrade
+    type: org.cloudfoundry.managed-service
+    parameters:
       service: application-logs
       service-plan: lite
-
- - name: hdi_vehiclelocatorandtrade
-   type: com.sap.xs.hdi-container
-   parameters:
+  - name: hdi_vehiclelocatorandtrade
+    type: com.sap.xs.hdi-container
+    parameters:
       config:
-         schema: vehicleLocator_hdb
-   properties:
-      hdi-container-name: ${service-name}
-
- - name: uaa_vehiclelocatorandtrade
-   type: org.cloudfoundry.managed-service
-   parameters:
+        schema: vehicleLocator_hdb
+    properties:
+      hdi-container-name: '${service-name}'
+  - name: uaa_vehiclelocatorandtrade
+    type: org.cloudfoundry.managed-service
+    parameters:
       service: xsuaa
       service-plan: application
       path: ./xs-security.json
-
- - name: cf-drain
-   type: org.cloudfoundry.existing-service
-   parameters:
+  - name: cf-drain
+    type: org.cloudfoundry.existing-service
+    parameters:
       service-name: cf-drain
-
- - name: VEHICLE_LOCATOR_AND_TRADE_APIM_CUPS
-   type: org.cloudfoundry.existing-service
-   parameters:
+  - name: VEHICLE_LOCATOR_AND_TRADE_APIM_CUPS
+    type: org.cloudfoundry.existing-service
+    parameters:
       service-name: VEHICLE_LOCATOR_AND_TRADE_APIM_CUPS
