@@ -126,7 +126,7 @@
 								</FlexBox>
 								
 								
-								<FlexBox alignItems="Start" justifyContent="Start" direction="row">
+								<FlexBox alignItems="Start" justifyContent="Start" >
 									<items>
 										<VBox>
 											<Label text="{i18n>Suffix}" labelFor="VLRSuffix1" design="Bold" class="sapUiTinyMarginBegin sapUiSmallMarginTop">
@@ -146,7 +146,7 @@
 										</VBox>
 									</items>
 								</FlexBox>
-								<FlexBox alignItems="Start" justifyContent="Start" direction="row">
+								<FlexBox alignItems="Start" justifyContent="Start" >
 									<items>
 										<VBox>
 											<Label text="{i18n>Color}" labelFor="VLRColor1" design="Bold" class="sapUiTinyMarginBegin sapUiSmallMarginTop">
@@ -164,7 +164,7 @@
 									</items>
 								</FlexBox>
 							
-								<FlexBox alignItems="Start" justifyContent="Start" direction="row">
+								<FlexBox alignItems="Start" justifyContent="Start" >
 									<items>
 										<VBox>
 											<Label text="{i18n>AccessoryInstall}" labelFor="AcceInstalledCobmo1" design="Bold" class="sapUiTinyMarginBegin sapUiSmallMarginTop">

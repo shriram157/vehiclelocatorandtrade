@@ -591,7 +591,7 @@
  			// 	that.oSelectedYear = that.oSelectedYearTemp + i;
 
  			// that.receivedCounter = 0;
- 			var SeriesUrl = that.oDataUrl + "/ZC_MODEL_DETAILS?$filter=Modelyear eq '" + that.oSelectedYear + "'";
+ 			var SeriesUrl = that.oDataUrl + "/ZC_MODEL_DETAILS?$filter=Modelyear eq '" + that.oSelectedYear + "'and visibility eq 'X'";
  			// var SeriesUrl = that.oDataUrl + "/ZC_MODEL_DETAILS";
 
  			var ajax1 = $.ajax({
@@ -1159,7 +1159,7 @@
 
  			that.oCatUrl = this.nodeJsUrl + "/Z_VEHICLE_CATALOGUE_SRV";
  			var ModelCode = that.oCatUrl + "/ZC_MODEL_DETAILS?$filter=Modelyear eq '" + that.oSelectedYear +
- 				"' and TCISeries eq '" + Series + "'";
+ 				"' and TCISeries eq '" + Series + "'and visibility eq 'X'";
  			var ajax1 = $.ajax({
  				dataType: "json",
  				xhrFields: //
