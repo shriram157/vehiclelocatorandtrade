@@ -1309,7 +1309,7 @@
  			// }
 
  			var SuffixURL = that.oDataUrl + "/ZC_suffix_VL?$filter=ModelYear eq '" + that.oSelectedYear +
- 				"' and Model eq '" + Model + "'";
+ 				"' and Model eq '" + Model + "'and visibility eq 'X'";
 
  			var ajax3 = $.ajax({
  				dataType: "json",
