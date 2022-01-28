@@ -41,7 +41,7 @@ modules:
     path: vehicleLocator_XSJS
     parameters:
       disk-quota: 512M
-      memory: 64M
+      memory: 256M
    
     properties:
       OPTIMIZE_MEMORY: true
