@@ -9,6 +9,12 @@ var options = {
 	redirectUrl: "/index.xsjs"
 };
 
+process.env.XS_APP_LOG_LEVEL = 'debug';
+process.env.XSODATA_METADATA = 2;
+process.env.XSODATA_LOG_SQL_DATA = 2;
+process.env.XSODATA_LOG_SQL_DATA_VALUE_SIZE = 20000;
+process.env.XSODATA_LOG_SQL_DATA_ARRAY_SIZE = 20000;
+
 // configure HANA
 try {
 	options = Object.assign(options, xsenv.getServices({
