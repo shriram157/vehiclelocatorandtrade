@@ -6,6 +6,7 @@ process.env.XSODATA_METADATA = 2;
 process.env.XSODATA_LOG_SQL_DATA = 2;
 process.env.XSODATA_LOG_SQL_DATA_VALUE_SIZE = 20000;
 process.env.XSODATA_LOG_SQL_DATA_ARRAY_SIZE = 20000;
+process.env.XSODATA_LOG_MEMORY_CONSUMPTION = 1;
 
 var xsjs = require("@sap/xsjs");
 var xsenv = require("@sap/xsenv");
