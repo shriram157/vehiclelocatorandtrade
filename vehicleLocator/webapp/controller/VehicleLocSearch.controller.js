@@ -284,7 +284,7 @@ sap.ui.define([
 
 					}
 					//  set your model or use the model below - 
-					if (that.userTypeReceived != "National") {
+					if (that.userTypeReceived != "National" && that.userTypeReceived != "Zone_User") {
 
 						that.getView().setModel(new sap.ui.model.json.JSONModel(BpDealer), "BpDealerModel");
 						sap.ui.getCore().setModel(new sap.ui.model.json.JSONModel(BpDealer), "LoginBpDealerModel");
@@ -1445,7 +1445,7 @@ sap.ui.define([
 			// 		 	if(Dealer_No.length == 10){
 			// 	Dealer_No=Dealer_No.slice(-5);
 			// }		
-			if (that.userTypeReceived != "National") {
+			if (that.userTypeReceived != "National" && that.userTypeReceived != "Zone_User") {
 				var userAttributesModellen = that.getView().getModel("userAttributesModel").getData();
 				var oDealer = userAttributesModellen[0].DealerCode;
 			} else {
