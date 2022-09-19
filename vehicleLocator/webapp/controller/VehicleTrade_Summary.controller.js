@@ -7,10 +7,8 @@ sap.ui.define([
 	"sap/ui/core/routing/History",
 	"sap/ui/model/Filter",
 	"vehicleLocator/Formatter/Formatter",
-	"sap/ui/table/SortOrder",
 	"sap/ui/model/Sorter"
-
-], function (BaseController, JSONModel, ResourceModel, MessageBox, History, Formatter, SortOrder, Sorter) {
+], function (BaseController, JSONModel, ResourceModel, MessageBox, History, Formatter, Sorter) {
 	"use strict";
 
 	return BaseController.extend("vehicleLocator.controller.VehicleTrade_Summary", {
