@@ -7,12 +7,11 @@ sap.ui.define([
 	"sap/ui/model/Sorter",
 	"sap/ui/model/Filter",
 	"vehicleLocator/Formatter/Formatter",
-	"sap/ui/table/SortOrder",
 	'sap/m/MessageView',
 	'sap/m/MessagePopoverItem',
 	'sap/m/Dialog',
 
-], function (Controller, BaseController, ResourceModel, JSONModel, Sorter, Filter, Formatter, SortOrder, MessageView, MessagePopoverItem,
+], function (Controller, BaseController, ResourceModel, JSONModel, Sorter, Filter, Formatter, MessageView, MessagePopoverItem,
 	Dialog) {
 	"use strict";
 
