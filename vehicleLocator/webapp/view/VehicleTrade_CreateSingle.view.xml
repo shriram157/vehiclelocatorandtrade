@@ -219,7 +219,7 @@
 						<contentRight>
 							<Button id="idVT_CSSubmitBt" text="{i18n>Submit}" type="Accept" width="130px" press="onRequestVT"/>
 							<!--	<Button text="DummySummary" type="Reject" width="130px" press="onDummySummary"/>-->
-						</contentRight>
+						</contentRight> 
 					</Bar>
 				</footer>
 			</Page>
