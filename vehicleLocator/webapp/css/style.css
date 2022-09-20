@@ -474,8 +474,3 @@ user agent stylesheet table {
 }
 .readonlycombo input
 {background-color: white !important;}
-
-.sapMBtnInner.sapMBtnHoverable.sapMFocusable.sapMBtnText.sapMBtnAccept {
-	padding: 0!important;
-}
-
