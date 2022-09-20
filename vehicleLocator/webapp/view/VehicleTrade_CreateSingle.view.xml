@@ -217,7 +217,7 @@
 				<footer>
 					<Bar>
 						<contentRight>
-							<Button text="{i18n>Submit}" type="Accept" width="100px" press="onRequestVT"/>
+							<Button text="{i18n>Submit}" type="Accept" width="auto" press="onRequestVT"/>
 							<!--	<Button text="DummySummary" type="Reject" width="130px" press="onDummySummary"/>-->
 						</contentRight>
 					</Bar>
