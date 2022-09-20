@@ -476,6 +476,6 @@ user agent stylesheet table {
 {background-color: white !important;}
 
 .sapMBtnInner.sapMBtnHoverable.sapMFocusable.sapMBtnText.sapMBtnAccept {
-	padding-bottom: 0!important;
+	padding: 0!important;
 }
 
