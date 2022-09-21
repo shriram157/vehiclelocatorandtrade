@@ -475,13 +475,12 @@ user agent stylesheet table {
 .readonlycombo input
 {background-color: white !important;}
 
-button#__xmlview1--idVT_CreateSingleSubmitBt {
-    margin-top: -4.075px;
-    /* margin-bottom: -102%; */
-    border-bottom: 51%;
-}
+
 .clColumnWidth .sapMText {
     display: inline !important;
     word-wrap: break-word !important;
    
+}
+.CLCreateSingleSubmitBt .sapMBar {
+     height: 3.5rem !important;
 }
