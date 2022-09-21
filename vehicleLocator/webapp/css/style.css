@@ -475,6 +475,13 @@ user agent stylesheet table {
 .readonlycombo input
 {background-color: white !important;}
 
-span#__xmlview2--idVT_CreateSingleSubmitBt-inner {					/*changes for submit button for version upgrade*/
-    margin-top: -6%;
+button#__xmlview1--idVT_CreateSingleSubmitBt {
+    margin-top: -4.075px;
+    /* margin-bottom: -102%; */
+    border-bottom: 51%;
+}
+.clColumnWidth .sapMText {
+    display: inline !important;
+    word-wrap: break-word !important;
+   
 }

@@ -214,7 +214,7 @@
 								</Table>
 									<ScrollContainer height="380px" width="100%" vertical="true">
 
-								<Table id="tableVTH" items="{ path: '/', sorter: { path: 'Changed_on', descending: true } }" >
+								<Table id="tableVTH" items="{ path: '/', sorter: { path: 'Changed_on', descending: true } }" class="clColumnWidth">
 
 								<items>
 									<ColumnListItem type="Inactive" press="detailItems">
