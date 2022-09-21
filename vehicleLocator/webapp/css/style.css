@@ -481,6 +481,6 @@ user agent stylesheet table {
     word-wrap: break-word !important;
    
 }
-.CLCreateSingleSubmitBt .sapMBar {
+.sapMPageFooter .sapMBar {
      height: 3.5rem !important;
 }
