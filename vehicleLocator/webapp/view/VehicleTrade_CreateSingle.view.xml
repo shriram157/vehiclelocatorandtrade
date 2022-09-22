@@ -214,12 +214,12 @@
 						</form:SimpleForm>
 					</VBox>
 				</content>
-				<footer>
+				<footer class="CLCreateSingleSubmitBt">
 					<Bar>
 						<contentRight>
-							<Button text="{i18n>Submit}" type="Accept" width="130px" press="onRequestVT"/>
+							<Button id="idVT_CreateSingleSubmitBt" text="{i18n>Submit}" type="Accept" width="130px" press="onRequestVT"/>
 							<!--	<Button text="DummySummary" type="Reject" width="130px" press="onDummySummary"/>-->
-						</contentRight>
+						</contentRight> 
 					</Bar>
 				</footer>
 			</Page>

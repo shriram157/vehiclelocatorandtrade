@@ -475,3 +475,12 @@ user agent stylesheet table {
 .readonlycombo input
 {background-color: white !important;}
 
+
+.clColumnWidth .sapMText {
+    display: inline !important;
+    word-wrap: break-word !important;
+   
+}
+.sapMPageFooter .sapMBar {
+     height: 3.5rem !important;
+}

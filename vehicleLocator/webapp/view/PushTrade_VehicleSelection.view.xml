@@ -243,7 +243,7 @@
 							<!--	<SearchField width="215px" id="idVehclSerTrad"/>-->
 							<!--	</FlexBox>-->
 							<!--</HBox>-->
-							<Table id="vehicleSelectTable" width="auto" class="sapUiResponsiveMargin" alternateRowColors="true"
+							<Table id="vehicleSelectTable" width="auto" class="sapUiResponsiveMargin" alternateRowColors="true" growing="true" growingThreshold="100"
 								items="{ path: 'vehicleSelectTableModel>/', sorter: { path: 'zzadddata4', descending: true } }" noDataText="{i18n>NoData}"
 								updateFinished="onUpdateFinished" mode="None" modeAnimationOn="true">
 								<headerToolbar>
