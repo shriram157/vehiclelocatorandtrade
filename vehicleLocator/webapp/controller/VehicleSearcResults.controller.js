@@ -6,10 +6,9 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/model/Sorter",
 	"sap/ui/model/Filter",
-	"vehicleLocator/Formatter/Formatter",
-	"sap/ui/table/SortOrder"
+	"vehicleLocator/Formatter/Formatter"
 
-], function (Controller, BaseController, ResourceModel, JSONModel, Sorter, Filter, Formatter, SortOrder) {
+], function (Controller, BaseController, ResourceModel, JSONModel, Sorter, Filter, Formatter) {
 	"use strict";
 
 	return BaseController.extend("vehicleLocator.controller.VehicleSearcResults", {
