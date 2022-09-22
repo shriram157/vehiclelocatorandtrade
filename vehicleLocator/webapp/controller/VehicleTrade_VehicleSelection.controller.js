@@ -3,9 +3,8 @@
  	"vehicleLocator/controller/BaseController",
  	"sap/ui/model/Sorter",
  	"sap/ui/model/Filter",
- 	"vehicleLocator/Formatter/Formatter",
- 	"sap/ui/table/SortOrder"
- ], function (BaseController, Sorter, Filter, Formatter, SortOrder) {
+ 	"vehicleLocator/Formatter/Formatter"
+ ], function (BaseController, Sorter, Filter, Formatter) {
  	"use strict";
 
  	return BaseController.extend("vehicleLocator.controller.VehicleTrade_VehicleSelection", {
