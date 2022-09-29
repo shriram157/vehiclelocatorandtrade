@@ -26,11 +26,36 @@
 				"name": "vehicleLocatorNode"
 			},
 			"description": "vehicleLocator_node"
-		}, {
+		},
+		{
+			"path": "vehicleLocatorNodenew",
+
+			"target": {
+				"type": "destination",
+				"name": "vehicleLocatorNodenew"
+			},
+			"description": "vehicleLocatorNodenew"
+		},{
+		"path": "Claim_Destination",
+		"target": {
+			"type": "destination",
+			"name": "Claim_Destination"
+		},
+		"description": "Claim_Destination"
+	}, {
 			"path": "/VehicleLocator_Xsodata",
 			"target": {
 				"type": "destination",
 				"name": "VehicleLocator_Xsodata"
+			},
+			"description": "vehicle Locator Xsodata"
+
+		},
+		{
+			"path": "/VehicleLocator_Xsodatanew",
+			"target": {
+				"type": "destination",
+				"name": "VehicleLocator_Xsodatanew"
 			},
 			"description": "vehicle Locator Xsodata"
 
