@@ -242,8 +242,8 @@ sap.ui.define([
 
 			if (sLocation_conf == 0) {
 				this.sPrefix = "/pipelineInventory-dest/node"; // the destination
-				// this.attributeUrl = "/userDetails/attributesforlocaltesting";
-				// this.currentScopeUrl = "/userDetails/currentScopesForUserLocaltesting";
+				 //this.attributeUrl = "/userDetails/attributesforlocaltesting";
+				 //this.currentScopeUrl = "/userDetails/currentScopesForUserLocaltesting";
 
 				// this.sPrefix = "";
 				// this.attributeUrl = "/userDetails/attributes";
