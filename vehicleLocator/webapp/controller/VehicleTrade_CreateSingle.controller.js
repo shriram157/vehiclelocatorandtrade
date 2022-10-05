@@ -1041,6 +1041,8 @@ sap.ui.define([
 						});
 							
 						that.oDataModel.create("/TradeRequest", oEntry, null, function (s) {
+							 
+							
 							
 							//	that.getView().byId("oTrdareqstat").setText("Request Sent");
 						
