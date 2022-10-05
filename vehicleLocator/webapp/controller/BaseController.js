@@ -19,7 +19,7 @@ sap.ui.define([
 		},
 		
 		ItemClicked: function() {
-          /**/
+          /*Base Controller*/
           
 			this.oText = this.getView().byId("combo1Menu").getSelectedItem().getText();
 
