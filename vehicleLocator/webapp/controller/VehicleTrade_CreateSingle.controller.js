@@ -1043,7 +1043,7 @@ sap.ui.define([
 						that.oDataModel.create("/TradeRequest", oEntry, null, function (s) {
 							
 							//	that.getView().byId("oTrdareqstat").setText("Request Sent");
-						that.getOwnerComponent().getModel("xsodata").refresh();
+						that.getOwnerComponent().getModel("xsodata").refresh(); 
 
 							//	sap.ui.core.BusyIndicator.hide();
 							//	that.getRouter().navTo("VehicleTrade_Summary");
