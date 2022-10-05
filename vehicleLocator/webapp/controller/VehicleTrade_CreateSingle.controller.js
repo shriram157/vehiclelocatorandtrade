@@ -10,7 +10,7 @@ sap.ui.define([
 ], function (BaseController, JSONModel, ResourceModel, MessageBox, History, Formatter) {
 	"use strict";
 
-	return BaseController.extend("vehicleLocator.controller.VehicleTrade_CreateSingle", {
+	return BaseController.extend("vehicleLocator.controller.VehicleTrade_CreateSingle", {        
 
 		onInit: function () {
 			var _that = this;
@@ -1041,6 +1041,9 @@ sap.ui.define([
 						});
 							
 						that.oDataModel.create("/TradeRequest", oEntry, null, function (s) {
+							 
+						//	that.getOwnerComponent().getModel("xsodata").refresh(); 
+							
 							//	that.getView().byId("oTrdareqstat").setText("Request Sent");
 						
 
