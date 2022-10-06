@@ -1041,8 +1041,9 @@ sap.ui.define([
 						});
 							
 						that.oDataModel.create("/TradeRequest", oEntry, null, function (s) {
-							 
-						//	that.getOwnerComponent().getModel("xsodata").refresh(); 
+							
+							// Refreshing XsOdata model after create call
+							that.getOwnerComponent().getModel("xsodata").refresh();
 							
 							//	that.getView().byId("oTrdareqstat").setText("Request Sent");
 						
