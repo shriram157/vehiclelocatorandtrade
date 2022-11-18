@@ -753,7 +753,8 @@ onLiveChange: function (oEvent) {
 					model.setSizeLimit(1000);
 
 					//18-11-22 Shriram Code to check vehicleTradeSummaryTable model data  code start //
-					console.log("vehicleTradeSummaryTable model data"+vehicleTradeSummaryTable);
+					console.log("vehicleTradeSummaryTable model data"+model);
+					console.log("vehicleTradeSummaryTable model RequesttingDealer JSONdata"+RequesttingDealer);
 					//18-11-22 Shriram Code to check vehicleTradeSummaryTable model data  code end //
 
 					that.getView().setModel(model, "vehicleTradeSummaryTable");
@@ -809,7 +810,8 @@ onLiveChange: function (oEvent) {
 					model.setSizeLimit(1000);
 					// that.getView().setModel(model, "oVehiclTrade_SummaryRequestedData");
                     //18-11-22 Shriram Code to check receivedRequestTable model data  code start //
-					console.log("receivedRequestTable model data"+receivedRequestTable);
+					console.log("receivedRequestTable model RequestedDealer JSONdata"+RequestedDealer);
+					console.log("receivedRequestTable model data"+model);
 					//18-11-22 Shriram Code to check receivedRequestTable model data  code start //
 					that.getView().setModel(model, "receivedRequestTable");
 
