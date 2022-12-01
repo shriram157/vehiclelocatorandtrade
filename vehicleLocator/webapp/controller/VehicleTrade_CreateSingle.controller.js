@@ -1271,7 +1271,7 @@ sap.ui.define([
 				if (!that.getView().getModel("TradeModel").oData.dispalyVin1) {
 					ovinReq = ""
 				} else {
-					ovinReq = that.getView().getModel("TradeModel").oData.vhvin;
+					ovinReq = that.getView().getModel("TradeModel").oData.VHVIN;
 				}
 
 				var accIns = that.getView().byId("oAccesIn").getText();
@@ -1328,7 +1328,7 @@ sap.ui.define([
 				var Series = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzseries;
 				var exterior = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzextcol;
 				var vtn = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzvtn;
-				that.vin = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.vhvin;
+				that.vin = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.VHVIN;
 				var accInstalled = that.getView().byId("accid").getText();
 				if (accInstalled == "Yes") {
 					accInstalled = 'Y';
@@ -1356,7 +1356,7 @@ sap.ui.define([
 				}
 				sap.ui.core.BusyIndicator.show(0);
 				var that = this;
-				var SeriesUrl = oDataUrl + "/ZVMS_CDS_ETA_consolidate('" + oDealer + "')/Set?$filter=vhvin eq '" + that.vin +
+				var SeriesUrl = oDataUrl + "/ZVMS_CDS_ETA_consolidate('" + oDealer + "')/Set?$filter=VHVIN eq '" + that.vin +
 					"'&$format=json";
 
 				$.ajax({
@@ -1374,7 +1374,7 @@ sap.ui.define([
 						for (var k = 0; k < a.length; k++) {
 							if (vtn == a[k].zzvtn) {
 
-								if (a[k].mmsta < "M275" || patt1.test(a[k].mmsta) || a[k].vhvin == "") {
+								if (a[k].mmsta < "M275" || patt1.test(a[k].mmsta) || a[k].VHVIN == "") {
 									that.vin = "";
 								}
 

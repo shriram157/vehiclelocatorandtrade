@@ -776,7 +776,7 @@ else{
 						that.selectedTrade.Proposed_ETA_From = Data.Calculate;
 						//that.selectedTrade=escape(JSON.stringify(that.selectedTrade));
 
-						if (that.selectedTrade.mmsta >= "M275" && that.selectedTrade.vhvin != "") {
+						if (that.selectedTrade.mmsta >= "M275" && that.selectedTrade.VHVIN != "") {
 							that.selectedTrade.dispalyVin = true;
 						} else {
 							that.selectedTrade.dispalyVin = false;
