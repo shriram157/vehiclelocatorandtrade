@@ -243,7 +243,7 @@
 							<!--	<SearchField width="215px" id="idVehclSerTrad"/>-->
 							<!--	</FlexBox>-->
 							<!--</HBox>-->
-							<Table id="vehicleSelectTable" width="auto" class="sapUiResponsiveMargin" alternateRowColors="true"
+							<Table id="vehicleSelectTable" width="auto" class="sapUiResponsiveMargin" alternateRowColors="true" growing="true" growingThreshold="100"
 								items="{ path: 'vehicleSelectTableModel>/', sorter: { path: 'zzadddata4', descending: true } }" noDataText="{i18n>NoData}"
 								updateFinished="onUpdateFinished" mode="None" modeAnimationOn="true">
 								<headerToolbar>
@@ -301,7 +301,7 @@
 										<cells>
 											<Link id="selectId" text="{i18n>Select}" class="link" subtle="true" press="oTradeLinkPress" wrapping="false"/>
 											<Text text="{vehicleSelectTableModel>zzvtn}" wrapping="false" width="6rem" id="zzvtnid"/>
-											<Text text="{vehicleSelectTableModel>vhvin}" wrapping="false" width="12rem" id="vhvinid"/>
+											<Text text="{vehicleSelectTableModel>VHVIN}" wrapping="false" width="12rem" id="vhvinid"/>
 											<Text
 												text="{=${languageModel>/SPRAS}==='English' ? ${vehicleSelectTableModel>zzseries_desc_en}:${vehicleSelectTableModel>zzseries_desc_fr} }"
 												id="oSeries"/>

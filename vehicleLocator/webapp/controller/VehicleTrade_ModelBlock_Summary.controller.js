@@ -198,7 +198,7 @@ sap.ui.define([
 
 			var that = this;
 			$.when(ajax3).done(function (Businesspartnerurl) {
-				debugger;
+				
 
 				// var Businesspartnerurl = Businesspartnerurl.d.results;
 					var Businesspartnerurl = Businesspartnerurl.attributes;
@@ -365,7 +365,7 @@ sap.ui.define([
 		//====<< Create >>===============
 		//=====================================
 		onSubmit_old: function () {
-			debugger
+			
 			var that = this;
 			/*	var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 		
@@ -439,7 +439,7 @@ sap.ui.define([
 		},
 
 		onSubmit: function (oEvent) {
-			debugger
+			
 			var that = this;
 			var oBlockId = 'X';
 			var BlockingDealer = '24000' + sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
@@ -576,7 +576,7 @@ sap.ui.define([
 		},
 
 		onSelect: function () {
-			debugger;
+			
 
 			var that = this;
 			that.getView().byId("submitDNCId").setEnabled(true);

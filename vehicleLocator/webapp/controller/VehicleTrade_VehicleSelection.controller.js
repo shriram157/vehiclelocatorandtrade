@@ -3,15 +3,14 @@
  	"vehicleLocator/controller/BaseController",
  	"sap/ui/model/Sorter",
  	"sap/ui/model/Filter",
- 	"vehicleLocator/Formatter/Formatter",
- 	"sap/ui/table/SortOrder"
- ], function (BaseController, Sorter, Filter, Formatter, SortOrder) {
+ 	"vehicleLocator/Formatter/Formatter"
+ ], function (BaseController, Sorter, Filter, Formatter) {
  	"use strict";
 
  	return BaseController.extend("vehicleLocator.controller.VehicleTrade_VehicleSelection", {
 
  		onInit: function () {
- 			//debugger;
+ 			//
  			var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
  			var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
  			this.getView().byId("oDealerCode4").setText(LoggedInDealerCode2);
@@ -43,7 +42,7 @@
  		},
 
  		onRouteMatched: function (oEvent) {
- 			//debugger;
+ 			//
  			var oDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerKey;
 
  			// var Series = this.getOwnerComponent().SelectedMSMData[0].SeriesCmbo;
@@ -591,7 +590,7 @@
  			// 	that.oSelectedYear = that.oSelectedYearTemp + i;
 
  			// that.receivedCounter = 0;
- 			var SeriesUrl = that.oDataUrl + "/ZC_MODEL_DETAILS?$filter=Modelyear eq '" + that.oSelectedYear + "'";
+ 			var SeriesUrl = that.oDataUrl + "/ZC_MODEL_DETAILS?$filter=Modelyear eq '" + that.oSelectedYear + "'and visibility eq 'X'";
  			// var SeriesUrl = that.oDataUrl + "/ZC_MODEL_DETAILS";
 
  			var ajax1 = $.ajax({
@@ -1008,7 +1007,7 @@
  		},
 
  		handleoVt_SeriesChange: function () {
- 			//debugger;
+ 			//
 
  			var that = this;
  			sap.ui.core.BusyIndicator.show();
@@ -1041,19 +1040,24 @@
  			// if (oDealer1 == undefined){
  			// 	oDealer1 = "";
  			// }
-
+			var oDealer1, oDropDownSelectedDealer,requestDealerToSAP;
  			var oReceivedData = sap.ui.getCore().SelectedTrade;
  			if (oReceivedData !== undefined) {
- 				var requestDealerToSAP = oReceivedData.kunnr;
- 				var oDealer1 = requestDealerToSAP;
+ 				requestDealerToSAP = oReceivedData.kunnr;
+ 				oDealer1 = requestDealerToSAP;
 
  			} else {
  				// may be from block summary. 
  				// var oDropDownSelectedDealer = sap.ui.getCore().dropDownSelectionData;
- 				var oDropDownSelectedDealer = sap.ui.getCore().getModel("dropDownSelectionData").getData();
+ 			
+ 				if(sap.ui.getCore().getModel("dropDownSelectionData"))
+ 				{
+ 				 oDropDownSelectedDealer = sap.ui.getCore().getModel("dropDownSelectionData").getData();
+ 				
+ 				}
  				if (oDropDownSelectedDealer !== undefined) {
- 					var requestDealerToSAP = oDropDownSelectedDealer.dropDownSelectedBP;
- 					var oDealer1 = requestDealerToSAP;
+ 					requestDealerToSAP = oDropDownSelectedDealer.dropDownSelectedBP;
+ 					oDealer1 = requestDealerToSAP;
  				}
  			}
  			if (oDealer1 !== undefined) {
@@ -1154,7 +1158,7 @@
 
  			that.oCatUrl = this.nodeJsUrl + "/Z_VEHICLE_CATALOGUE_SRV";
  			var ModelCode = that.oCatUrl + "/ZC_MODEL_DETAILS?$filter=Modelyear eq '" + that.oSelectedYear +
- 				"' and TCISeries eq '" + Series + "'";
+ 				"' and TCISeries eq '" + Series + "'and visibility eq 'X'";
  			var ajax1 = $.ajax({
  				dataType: "json",
  				xhrFields: //
@@ -1304,7 +1308,7 @@
  			// }
 
  			var SuffixURL = that.oDataUrl + "/ZC_suffix_VL?$filter=ModelYear eq '" + that.oSelectedYear +
- 				"' and Model eq '" + Model + "'";
+ 				"' and Model eq '" + Model + "'and visibility eq 'X'";
 
  			var ajax3 = $.ajax({
  				dataType: "json",
@@ -1728,7 +1732,7 @@
  				url: SeriesUrl,
  				async: true,
  				success: function (result) {
- 					//debugger;
+ 					//
  					var Data = result.d.results[0];
  					/*	Data.MessageType="";
  						Data.Calculate="20181126";*/
@@ -2528,7 +2532,7 @@
  			if (this.sSearchQuery) {
  				var oFilter = new Filter([
  					new Filter("zzvtn", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
- 					new Filter("vhvin", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+ 					new Filter("VHVIN", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
  					new Filter("matnr", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
  					new Filter("model_desc_en", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
  					new Filter("model_desc_fr", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
@@ -2643,10 +2647,11 @@
  				url: SeriesDes,
  				async: true,
  				success: function (result) {
- 					var SeriesDes = result.d.results;
-
- 					var SeriesDesModel = new sap.ui.model.json.JSONModel(SeriesDes);
+ 					//INC0190093 changes done by Minakshi for Filtering zzaddata4 0 values. start
+ 					var seriesList = result.d.results.filter(item => item.zzzadddata4 != "0");
+ 					var SeriesDesModel = new sap.ui.model.json.JSONModel(seriesList);
  					sap.ui.getCore().setModel(SeriesDesModel, "SeriesDesModel");
+ 					//INC0190093 end
  					//	var SelYear = new Date().getFullYear().toString();
  					var SelYear = new Date().getFullYear();
  					//temporary-2018, data avaialable for 2018, before deploying remove this
@@ -3369,7 +3374,7 @@
  			/*onSelectLink:function(oEvt)
  			   
  			{
- 				debugger;
+ 				
  				var data=oEvt;
  				
  			}*/

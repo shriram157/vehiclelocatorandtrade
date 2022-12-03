@@ -3,15 +3,14 @@ sap.ui.define([
 	"vehicleLocator/controller/BaseController",
 	"sap/ui/model/Sorter",
 	"sap/ui/model/Filter",
-	"vehicleLocator/Formatter/Formatter",
-	"sap/ui/table/SortOrder"
-], function (BaseController, Sorter, Filter, Formatter, SortOrder) {
+	"vehicleLocator/Formatter/Formatter"
+], function (BaseController, Sorter, Filter, Formatter) {
 	"use strict";
 
 	return BaseController.extend("vehicleLocator.controller.PushTrade_VehicleSelection", {
 
 		onInit: function () {
-			//debugger;
+			//
 			var LoggedInDealerCode2 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
 			var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
 			this.getView().byId("oDealerCode4").setText(LoggedInDealerCode2);
@@ -48,7 +47,7 @@ sap.ui.define([
 		},
 
 		onRouteMatched: function (oEvent) {
-			//debugger;
+			//
 			this.SelectedDealer = this.getView().byId("VLRDealer").setSelectedKey(null);
 			var jsmodel = new sap.ui.model.json.JSONModel(null);
 
@@ -72,7 +71,7 @@ sap.ui.define([
 			var sLocation_conf = sLocation.search("webide");
 
 			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehicleLocatorNode";
+				this.sPrefix = "/vehicleLocatorNodenew";
 			} else {
 				this.sPrefix = "";
 
@@ -131,14 +130,13 @@ sap.ui.define([
 
 			}
 
-		
 			var StatusDataFilter = [{
 				"zz_trading_ind": "1"
 
 			}, {
 				"zz_trading_ind": "2"
 			}];
-			
+
 			var Model = new sap.ui.model.json.JSONModel(StatusDataFilter);
 			// var StatusFilter = StatusDataFilter.filter(function (x) {
 			// 	return (x.zz_trading_ind == "2" || x.zz_trading_ind == "3");
@@ -244,8 +242,8 @@ sap.ui.define([
 
 			if (sLocation_conf == 0) {
 				this.sPrefix = "/pipelineInventory-dest/node"; // the destination
-				// this.attributeUrl = "/userDetails/attributesforlocaltesting";
-				// this.currentScopeUrl = "/userDetails/currentScopesForUserLocaltesting";
+				 this.attributeUrl = "/userDetails/attributesforlocaltesting";
+				 this.currentScopeUrl = "/userDetails/currentScopesForUserLocaltesting";
 
 				// this.sPrefix = "";
 				// this.attributeUrl = "/userDetails/attributes";
@@ -414,7 +412,6 @@ sap.ui.define([
 						);
 					}
 
-				
 					var BpDealerTemp = BpDealer.slice();
 					var confirmStockCode = "";
 					for (var i = 0; i < BpDealerTemp.length; i++) {
@@ -456,7 +453,6 @@ sap.ui.define([
 						}
 					}
 
-				
 					var LoggedInDealerCode1 = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartner;
 					var LoggedInDealer = sap.ui.getCore().getModel("LoginBpDealerModel").getData()[0].BusinessPartnerName.replace(/[^\w\s]/gi, '');
 					this.getView().byId("oDealerCode4").setText(LoggedInDealerCode1);
@@ -635,7 +631,7 @@ sap.ui.define([
 			var sLocation_conf = sLocation.search("webide");
 
 			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehicleLocatorNode";
+				this.sPrefix = "/vehicleLocatorNodenew";
 			} else {
 				this.sPrefix = "";
 
@@ -775,7 +771,6 @@ sap.ui.define([
 					filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.Contains, Status));
 				} else {
 					filterArray.push(new sap.ui.model.Filter("zz_trading_ind", sap.ui.model.FilterOperator.NE, "1"));
-				
 
 				}
 			}
@@ -785,7 +780,6 @@ sap.ui.define([
 
 			}
 
-		
 			if (SelectedSeries != "" && SelectedSeries != "all") {
 
 				filterArray.push(new sap.ui.model.Filter("zzseries", sap.ui.model.FilterOperator.Contains, SelectedSeries));
@@ -1047,7 +1041,7 @@ sap.ui.define([
 		},
 
 		handleoVt_SeriesChange: function () {
-			//debugger;
+			//
 
 			var that = this;
 			sap.ui.core.BusyIndicator.show();
@@ -1060,7 +1054,7 @@ sap.ui.define([
 			// var sLocation_conf = sLocation.search("webide");
 
 			// if (sLocation_conf == 0) {
-			// 	this.sPrefix = "/vehicleLocatorNode";
+			// 	this.sPrefix = "/vehicleLocatorNodenew";
 			// } else {
 			// 	this.sPrefix = "";
 
@@ -1267,7 +1261,7 @@ sap.ui.define([
 			var sLocation_conf = sLocation.search("webide");
 
 			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehicleLocatorNode";
+				this.sPrefix = "/vehicleLocatorNodenew";
 			} else {
 				this.sPrefix = "";
 
@@ -1277,7 +1271,7 @@ sap.ui.define([
 			this.nodeJsUrl = this.sPrefix + "/node";
 
 			var SuffixURL = that.oDataUrl + "/ZC_suffix_VL?$filter=ModelYear eq '" + that.oSelectedYear +
-				"' and Model eq '" + Model + "'";
+				"' and Model eq '" + Model + "'and visibility eq 'X'";
 
 			var ajax3 = $.ajax({
 				dataType: "json",
@@ -1393,7 +1387,7 @@ sap.ui.define([
 			var sLocation_conf = sLocation.search("webide");
 
 			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehicleLocatorNode";
+				this.sPrefix = "/vehicleLocatorNodenew";
 			} else {
 				this.sPrefix = "";
 
@@ -1625,7 +1619,7 @@ sap.ui.define([
 			var sLocation_conf = sLocation.search("webide");
 
 			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehicleLocatorNode";
+				this.sPrefix = "/vehicleLocatorNodenew";
 			} else {
 				this.sPrefix = "";
 
@@ -1643,7 +1637,7 @@ sap.ui.define([
 				url: SeriesUrl,
 				async: true,
 				success: function (result) {
-					//debugger;
+					//
 					var Data = result.d.results[0];
 					/*	Data.MessageType="";
 						Data.Calculate="20181126";*/
@@ -2454,7 +2448,7 @@ sap.ui.define([
 			if (this.sSearchQuery) {
 				var oFilter = new Filter([
 					new Filter("zzvtn", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-					new Filter("vhvin", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("VHVIN", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("matnr", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("model_desc_en", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("model_desc_fr", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
@@ -2531,7 +2525,7 @@ sap.ui.define([
 			var sLocation_conf = sLocation.search("webide");
 
 			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehicleLocatorNode";
+				this.sPrefix = "/vehicleLocatorNodenew";
 			} else {
 				this.sPrefix = "";
 
@@ -2553,10 +2547,11 @@ sap.ui.define([
 				url: SeriesDes,
 				async: true,
 				success: function (result) {
-					var SeriesDes = result.d.results;
-
-					var SeriesDesModel = new sap.ui.model.json.JSONModel(SeriesDes);
+					//INC0190093 changes done by Minakshi for Filtering zzaddata4 0 values. start
+					var seriesList = result.d.results.filter(item => item.zzzadddata4 != "0");
+					var SeriesDesModel = new sap.ui.model.json.JSONModel(seriesList);
 					sap.ui.getCore().setModel(SeriesDesModel, "SeriesDesModel");
+					//INC0190093 end
 					//	var SelYear = new Date().getFullYear().toString();
 					var SelYear = new Date().getFullYear();
 					//temporary-2018, data avaialable for 2018, before deploying remove this
@@ -2877,7 +2872,7 @@ sap.ui.define([
 			var sLocation_conf = sLocation.search("webide");
 
 			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehicleLocatorNode";
+				this.sPrefix = "/vehicleLocatorNodenew";
 			} else {
 				this.sPrefix = "";
 
@@ -3443,7 +3438,7 @@ sap.ui.define([
 			var sLocation_conf = sLocation.search("webide");
 
 			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehicleLocatorNode";
+				this.sPrefix = "/vehicleLocatorNodenew";
 			} else {
 				this.sPrefix = "";
 
@@ -3565,7 +3560,7 @@ sap.ui.define([
 			/*onSelectLink:function(oEvt)
 			   
 			{
-				debugger;
+				
 				var data=oEvt;
 				
 			}*/

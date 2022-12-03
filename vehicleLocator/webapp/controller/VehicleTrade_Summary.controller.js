@@ -7,10 +7,8 @@ sap.ui.define([
 	"sap/ui/core/routing/History",
 	"sap/ui/model/Filter",
 	"vehicleLocator/Formatter/Formatter",
-	"sap/ui/table/SortOrder",
 	"sap/ui/model/Sorter"
-
-], function (BaseController, JSONModel, ResourceModel, MessageBox, History, Formatter, SortOrder, Sorter) {
+], function (BaseController, JSONModel, ResourceModel, MessageBox, History, Formatter, Sorter) {
 	"use strict";
 
 	return BaseController.extend("vehicleLocator.controller.VehicleTrade_Summary", {
@@ -351,14 +349,14 @@ onLiveChange: function (oEvent) {
 				///  performance improvement changes
 
 				var dateMinusThirty = new Date();
-				dateMinusThirty.setDate(dateMinusThirty.getDate() - 60);
+				dateMinusThirty.setDate(dateMinusThirty.getDate() - 50);
 
 				var loggedDealerCode = sap.ui.getCore().getModel("LoginuserAttributesModel").getData()["0"].DealerCode;
 
 				var Filter0 = new sap.ui.model.Filter('Requesting_Dealer', 'EndsWith', loggedDealerCode);
 				var Filter1 = new sap.ui.model.Filter('Requested_Dealer', 'EndsWith', loggedDealerCode);
 				var Filter2 = new sap.ui.model.Filter('Trade_Status', 'NE', "A");
-				var Filter3 = new sap.ui.model.Filter('Changed_on', "GE", dateMinusThirty);
+				var Filter3 = new sap.ui.model.Filter('Created_On', "GE", dateMinusThirty);
 				var Filter4 = new sap.ui.model.Filter([Filter0, Filter1], false);
 				var Filter = new sap.ui.model.Filter([Filter4, Filter2,Filter3], true);
 				// var Filterall1 = new sap.ui.model.Filter([Filter, Filter2], true);
@@ -383,7 +381,8 @@ onLiveChange: function (oEvent) {
 				filters: [Filterall],
 				urlParameters: {
 					"$expand": "TradeVehicles,TradeVehicleDesc",
-					"$top":1000
+					"$top":1000,
+					"$orderby":"Created_On desc"
 				},
 				async: false,
 				success: function (oData, oResponse) {
@@ -753,6 +752,11 @@ onLiveChange: function (oEvent) {
 					var model = new sap.ui.model.json.JSONModel(RequesttingDealer);
 					model.setSizeLimit(1000);
 
+					//18-11-22 Shriram Code to check vehicleTradeSummaryTable model data  code start //
+					console.log("vehicleTradeSummaryTable model data"+model);
+					console.log("vehicleTradeSummaryTable model RequesttingDealer JSONdata"+RequesttingDealer);
+					//18-11-22 Shriram Code to check vehicleTradeSummaryTable model data  code end //
+
 					that.getView().setModel(model, "vehicleTradeSummaryTable");
 
 					// that.getView().byId("table1vts").setModel(model);
@@ -805,7 +809,10 @@ onLiveChange: function (oEvent) {
 					var model = new sap.ui.model.json.JSONModel(RequestedDealer);
 					model.setSizeLimit(1000);
 					// that.getView().setModel(model, "oVehiclTrade_SummaryRequestedData");
-
+                    //18-11-22 Shriram Code to check receivedRequestTable model data  code start //
+					console.log("receivedRequestTable model RequestedDealer JSONdata"+RequestedDealer);
+					console.log("receivedRequestTable model data"+model);
+					//18-11-22 Shriram Code to check receivedRequestTable model data  code start //
 					that.getView().setModel(model, "receivedRequestTable");
 
 					// that.getView().byId("table1Rts").setModel(model);

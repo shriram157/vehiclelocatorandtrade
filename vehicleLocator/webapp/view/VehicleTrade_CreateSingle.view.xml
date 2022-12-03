@@ -45,7 +45,7 @@
 								<Text text="{TradeModel>zzvtn}" id="vtnidReq" visible="true"/>
 
 	                            	<Label text="{i18n>VIN}" id="vinLabelId" visible="{detailView>/showVinDiplayReq}"/>
-								<Text text="{TradeModel>vhvin}" id="VINReq" visible="{detailView>/showVinDiplayReq}"/>              
+								<Text text="{TradeModel>VHVIN}" id="VINReq" visible="{detailView>/showVinDiplayReq}"/>    <!--changes by Swetha-->          
 							
 								<Label text="{i18n>ModelYear}" id = "moyrLabelReq"/>
 								<Text text="{TradeModel>zzmoyr}" id="zzMoyr"/>
@@ -121,7 +121,7 @@
 								<Text text="{TradeModel>/VehicleTradeVehicle/zzvtn}" id="vtnid" visible="true"/>
 								
 							     <Label text="{i18n>VIN}" id="vinLableIdOff" visible="{detailView>/showVinDiplayOff}"/>
-								<Text text="{TradeModel>/VehicleTradeVehicle/vhvin}" id="vinVinIdOff" visible="{detailView>/showVinDiplayOff}"/>		
+								<Text text="{TradeModel>/VehicleTradeVehicle/VHVIN}" id="vinVinIdOff" visible="{detailView>/showVinDiplayOff}"/><!--changes by swetha-->		
 								
 								
 								<Label text="{i18n>ModelYear}" id="moylablid" visible="false"/>
@@ -214,12 +214,12 @@
 						</form:SimpleForm>
 					</VBox>
 				</content>
-				<footer>
+				<footer class="CLCreateSingleSubmitBt">
 					<Bar>
 						<contentRight>
-							<Button text="{i18n>Submit}" type="Accept" width="130px" press="onRequestVT"/>
+							<Button id="idVT_CreateSingleSubmitBt" text="{i18n>Submit}" type="Accept" width="130px" press="onRequestVT"/>
 							<!--	<Button text="DummySummary" type="Reject" width="130px" press="onDummySummary"/>-->
-						</contentRight>
+						</contentRight> 
 					</Bar>
 				</footer>
 			</Page>

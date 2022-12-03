@@ -10,7 +10,7 @@ sap.ui.define([
 ], function (BaseController, JSONModel, ResourceModel, MessageBox, History, Formatter) {
 	"use strict";
 
-	return BaseController.extend("vehicleLocator.controller.VehicleTrade_CreateSingle", {
+	return BaseController.extend("vehicleLocator.controller.VehicleTrade_CreateSingle", {        
 
 		onInit: function () {
 			var _that = this;
@@ -549,7 +549,7 @@ sap.ui.define([
 		},
 
 		onSelecveh: function () {
-			debugger
+			
 			this.getRouter().navTo("VehicleTrade_VehicleSelection", {
 				SelectedVehicleFrom: "VehileTrade_CreateSingle"
 			});
@@ -735,7 +735,7 @@ sap.ui.define([
 		},
 
 		onRequestVT: function () {
-			debugger;
+			
 
 			if (this.getView().byId("VT_CStradinRet").getSelectedKey() == "Yes" && this.getView().byId("FromFourth").getText() == "") {
 				var sTextFromi18n = this.getView().getModel("i18n").getResourceBundle().getText("pleaseSelectVehicle");
@@ -787,7 +787,7 @@ sap.ui.define([
 
 					success: function (oData) {
 
-						debugger;
+						
 						var Data = oData.d.results;
 
 						function dynamicSort(property) {
@@ -843,6 +843,9 @@ sap.ui.define([
 
 						var Req_Current_ETA_ToDate = that.getView().byId("totxtid").getText();
 						var Req_Current_ETA_ToDate = Req_Current_ETA_ToDate.replace("To", "").replace(":", "").replace(" ", "");
+						while(Req_Current_ETA_ToDate.includes(" ")){
+							Req_Current_ETA_ToDate = Req_Current_ETA_ToDate.replace(" ", "");
+						}
 
 						var Req_Current_ETA_ToDate = Req_Current_ETA_ToDate.replace("À", "").replace(":", "").replace(" ", "");
 						if (Req_Current_ETA_ToDate != "" && Req_Current_ETA_ToDate != " ") {
@@ -861,6 +864,9 @@ sap.ui.define([
 						var Req_Proposed_ETA_ToDate = that.getView().byId("otextlabel").getText();
 						var Req_Proposed_ETA_ToDate = Req_Proposed_ETA_ToDate.replace("To", "").replace(":", "").replace(" ", "");
 						var Req_Proposed_ETA_ToDate = Req_Proposed_ETA_ToDate.replace("À", "").replace(":", "").replace(" ", "");
+						while(Req_Proposed_ETA_ToDate.includes(" ")){
+							Req_Proposed_ETA_ToDate = Req_Proposed_ETA_ToDate.replace(" ", "");
+						}
 						if (Req_Proposed_ETA_ToDate != "") {
 							var Req_Proposed_ETA_To = new Date(oDateFormat.format(new Date(Req_Proposed_ETA_ToDate)));
 						} else {
@@ -876,6 +882,9 @@ sap.ui.define([
 						var Off_Current_ETA_ToDate = that.getView().byId("labetxteid").getText();
 						var Off_Current_ETA_ToDate = Off_Current_ETA_ToDate.replace("To", "").replace(":", "").replace(" ", "");
 						var Off_Current_ETA_ToDate = Off_Current_ETA_ToDate.replace("À", "").replace(":", "").replace(" ", "");
+						while(Off_Current_ETA_ToDate.includes(" ")){
+							Off_Current_ETA_ToDate = Off_Current_ETA_ToDate.replace(" ", "");
+						}
 
 						if (Off_Current_ETA_ToDate != "") {
 							var Off_Current_ETA_To = new Date(oDateFormat.format(new Date(Off_Current_ETA_ToDate)));
@@ -893,7 +902,10 @@ sap.ui.define([
 						var Off_Proposed_ETA_ToDate = that.getView().byId("idlabeal").getText();
 						var Off_Proposed_ETA_ToDate = Off_Proposed_ETA_ToDate.replace("To", "").replace(":", "").replace(" ", "");
 						var Off_Proposed_ETA_ToDate = Off_Proposed_ETA_ToDate.replace("À", "").replace(":", "").replace(" ", "");
-
+						while(Off_Proposed_ETA_ToDate.includes(" ")){
+							Off_Proposed_ETA_ToDate = Off_Proposed_ETA_ToDate.replace(" ", "");
+						}
+			
 						if (Off_Proposed_ETA_ToDate != "") {
 							var Off_Proposed_ETA_To = new Date(oDateFormat.format(new Date(Off_Proposed_ETA_ToDate)));
 						} else {
@@ -1027,17 +1039,14 @@ sap.ui.define([
 							"Accept": "application/json",
 							"Method": "POST"
 						});
-
+							
 						that.oDataModel.create("/TradeRequest", oEntry, null, function (s) {
+							
+							// Refreshing XsOdata model after create call
+							//that.getOwnerComponent().getModel("xsodata").refresh();
+							that.simulateServerRequest();
 							//	that.getView().byId("oTrdareqstat").setText("Request Sent");
-							if (that.getView().byId("oTypeHere").getValue() != "" && that.getView().byId("oTypeHere").getValue() != " ") {
-								that.TradeComment(oEntry);
-							}
-							//	if(that.getView().byId("FromFourth").getText()=="FromFourth"){
-							that.TradeVehcles(oEntry);
-							//	}
-							that.TradeStatus(oEntry);
-							/*	that.VehicleTrade_Summary();*/
+						
 
 							//	sap.ui.core.BusyIndicator.hide();
 							//	that.getRouter().navTo("VehicleTrade_Summary");
@@ -1046,6 +1055,14 @@ sap.ui.define([
 							that.simulateServerRequest();
 							//sap.ui.core.BusyIndicator.hide();
 						});
+						if (that.getView().byId("oTypeHere").getValue() != "" && that.getView().byId("oTypeHere").getValue() != " ") {
+								that.TradeComment(oEntry);
+							}
+							//	if(that.getView().byId("FromFourth").getText()=="FromFourth"){
+							that.TradeVehcles(oEntry);
+							//	}
+							that.TradeStatus(oEntry);
+							/*	that.VehicleTrade_Summary();*/
 
 					},
 					error: function (err) {
@@ -1087,7 +1104,7 @@ sap.ui.define([
 
 				success: function (oData) {
 
-					debugger;
+					
 					var Data = oData.d.results;
 					if (oData.d.results.length != 0) {
 						var CommentData = oData.d.results;
@@ -1254,7 +1271,7 @@ sap.ui.define([
 				if (!that.getView().getModel("TradeModel").oData.dispalyVin1) {
 					ovinReq = ""
 				} else {
-					ovinReq = that.getView().getModel("TradeModel").oData.vhvin;
+					ovinReq = that.getView().getModel("TradeModel").oData.VHVIN;
 				}
 
 				var accIns = that.getView().byId("oAccesIn").getText();
@@ -1311,7 +1328,7 @@ sap.ui.define([
 				var Series = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzseries;
 				var exterior = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzextcol;
 				var vtn = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzvtn;
-				that.vin = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.vhvin;
+				that.vin = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.VHVIN;
 				var accInstalled = that.getView().byId("accid").getText();
 				if (accInstalled == "Yes") {
 					accInstalled = 'Y';
@@ -1339,7 +1356,7 @@ sap.ui.define([
 				}
 				sap.ui.core.BusyIndicator.show(0);
 				var that = this;
-				var SeriesUrl = oDataUrl + "/ZVMS_CDS_ETA_consolidate('" + oDealer + "')/Set?$filter=vhvin eq '" + that.vin +
+				var SeriesUrl = oDataUrl + "/ZVMS_CDS_ETA_consolidate('" + oDealer + "')/Set?$filter=VHVIN eq '" + that.vin +
 					"'&$format=json";
 
 				$.ajax({
@@ -1357,7 +1374,7 @@ sap.ui.define([
 						for (var k = 0; k < a.length; k++) {
 							if (vtn == a[k].zzvtn) {
 
-								if (a[k].mmsta < "M275" || patt1.test(a[k].mmsta) || a[k].vhvin == "") {
+								if (a[k].mmsta < "M275" || patt1.test(a[k].mmsta) || a[k].VHVIN == "") {
 									that.vin = "";
 								}
 
@@ -1397,7 +1414,7 @@ sap.ui.define([
 
 					},
 					error: function (s, result) {
-						debugger;
+						
 						var a = s;
 						sap.ui.core.BusyIndicator.hide();
 
@@ -1578,7 +1595,7 @@ sap.ui.define([
 
 		},
 		onDummySummary: function () {
-			debugger
+			
 			this.getRouter().navTo("VehicleTrade_Summary");
 
 		},

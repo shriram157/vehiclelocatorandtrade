@@ -10,7 +10,7 @@
 		"dataSources": {
 			"xsodata": {
 
-				"uri": "/xsodata/vehicleTrade_SRV.xsodata",
+				"uri": "/VehicleLocator_Xsodatanew/xsodata/vehicleTrade_SRV.xsodata",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0",
@@ -18,21 +18,21 @@
 				}
 			},
 			"ModelBlockS": {
-				"uri": "/node/Z_DEALER_TRADE_REQUEST_SRV",
+				"uri": "/vehicleLocatorNodenew/node/Z_DEALER_TRADE_REQUEST_SRV",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0"
 				}
 			},
 			"VehicleS": {
-				"uri": "/node/Z_VEHICLE_CATALOGUE_SRV",
+				"uri": "/vehicleLocatorNodenew/node/Z_VEHICLE_CATALOGUE_SRV",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0"
 				}
 			},
 			"DealersS": {
-			   "uri": "/node/API_BUSINESS_PARTNER",
+			   "uri": "/vehicleLocatorNodenew/node/API_BUSINESS_PARTNER",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0"

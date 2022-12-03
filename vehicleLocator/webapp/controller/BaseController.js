@@ -19,41 +19,13 @@ sap.ui.define([
 		},
 		
 		ItemClicked: function() {
-          /*debugger;*/
+          /*Base Controller*/
           
 			this.oText = this.getView().byId("combo1Menu").getSelectedItem().getText();
 
 		},
 
-	/*	onSePress: function(oEvent) {
-	     debugger;
 
-			var oGetText = this.oText;
-		
-			if (oGetText === "Vehicle Locator") {
-				this.getRouter().navTo("VehicleLocSearch");
-			} else if (oGetText === "Vehicle Search Results") {
-				this.getRouter().navTo("VehicleSearcResults");
-			} else if (oGetText === "VehicleTrade_CreateSingle") {
-				this.getRouter().navTo("VehicleTrade_CreateSingle");
-			} else if (oGetText === "VehicleTrade_VehicleSelection") {
-				this.getRouter().navTo("VehicleTrade_VehicleSelection");
-			} else if (oGetText === "VehcleTrade_Approve_Reject_CounterTrade") {
-				this.getRouter().navTo("VehcTrad_Apprv_Rej_CounTrad");
-			} else if (oGetText === "VehicleTrade_UpdatedTradeRequest") {
-				this.getRouter().navTo("VehicleTrade_UpdtTradReq");         
-			}  else if (oGetText === "VehicleTrade_History") {
-				this.getRouter().navTo("VehicleTrade_History");         
-			} else if (oGetText === "VehicleTrade_ModelBlock_Summary") {
-				this.getRouter().navTo("VehicleTrade_ModelBlock_Summary");         
-			} else if (oGetText === "VehicleTrade_Summary") {
-				this.getRouter().navTo("VehicleTrade_Summary");         
-			} else if (oGetText === "VehicleTrade_VehicleSelection") {
-				this.getRouter().navTo("VehicleTrade_VehicleSelection");         
-			} 
-		
-
-		},*/
      
      
 		/**
@@ -67,7 +39,7 @@ sap.ui.define([
 		},
 
 	/*	handleLinkPress: function (oEvent) {
-			debugger
+			
 			var oGetText = oEvent.getSource().getText();
 			if (oGetText === "New Application") {
 				this.getRouter().navTo("newECPApp");
@@ -99,14 +71,14 @@ sap.ui.define([
 		},
 		
 		onBack: function() {
-			/*debugger;*/
+			/**/
 			this.getRouter().navTo("VehicleLocSearch");
 		
 
 		},
 
 		onNavBack: function() {
-		/*	debugger*/
+		/*	*/
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
 
