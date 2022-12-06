@@ -228,7 +228,7 @@
 							<!--</HBox>-->
 							<Table id="vehicleSelectTable" width="auto" class="sapUiResponsiveMargin" alternateRowColors="true"
 								items="{ path: 'vehicleSelectTableModel>/', sorter: { path: 'zzadddata4', descending: true } }" noDataText="{i18n>NoData}"
-								updateFinished="onUpdateFinished" mode="None" modeAnimationOn="true">
+								updateFinished="onUpdateFinished" mode="None" modeAnimationOn="true" sticky="HeaderToolbar,InfoToolbar,ColumnHeaders">
 								<headerToolbar>
 									<OverflowToolbar id="otbSubheader">
 										<Title id="tableHeader1" text="{detailView>/tableCount}"/>
@@ -284,7 +284,7 @@
 										<cells>
 											<Link id="selectId" text="{i18n>Select}" class="link" subtle="true" press="oTradeLinkPress" wrapping="false"/>
 											<Text text="{vehicleSelectTableModel>zzvtn}" wrapping="false" width="6rem" id="zzvtnid"/>
-											<Text text="{vehicleSelectTableModel>VHVIN}" wrapping="false" width="12rem" id="vhvinid"/><!--changes by swetha-->
+											<Text text="{vehicleSelectTableModel>vhvin}" wrapping="false" width="12rem" id="vhvinid"/><!--changes by swetha-->
 											<Text
 												text="{=${languageModel>/SPRAS}==='English' ? ${vehicleSelectTableModel>zzseries_desc_en}:${vehicleSelectTableModel>zzseries_desc_fr} }"
 												id="oSeries"/>
