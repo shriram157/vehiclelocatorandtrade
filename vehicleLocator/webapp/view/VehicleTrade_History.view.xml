@@ -222,8 +222,8 @@
 											<Link id="tradeHId" text="{Trade_Id}" width="12em" class="link" subtle="true" press="oTradeHistoryLinkPress" wrapping="false"/>
 											<!--<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="false"/>-->
 											<Text text="{= ${RequestingDealerVisible} === true ?${Requested_Vtn}:${OffredVehicle/Offered_Vtn}}" wrapping="false" width="12em"/>
-											
-											<Text text="{= ${RequestingDealerVisible} === true ?${VIN}:${OffredVehicle/VHVIN}}" wrapping="false" width="12em"/>				<!--changes by swetha for DMND0003618-->
+											<Text text="{= ${RequestingDealerVisible} === true ?${VIN}:${OffredVehicle/vhvin}}" wrapping="false" width="12em"/>	<!--changes by Shriram for DMND0003618-->-->
+											<!--<Text text="{= ${RequestingDealerVisible} === true ?${VIN}:${OffredVehicle/VHVIN}}" wrapping="false" width="12em"/>				<!--changes by swetha for DMND0003618-->-->
 											<!--Text text="{parts:['RequestingDealerVisible','Requested_Dealer','Requesting_Dealer','VIN','OffredVehicle/VIN'], formatter:'vehicleLocator.Formatter.Formatter.TradeHistoryVIN'}" wrapping="false" width="12em"/-->
 			
 											<!--<Text text="{i18n>To}" wrapping="false"/>-->
@@ -362,7 +362,8 @@
 											<Link id="tradeHId1" text="{Trade_Id}" class="link" subtle="true" press="oTradeHistoryLinkPress" wrapping="false"/>
 											<!--<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" wrapping="false"/>-->
 										<Text id= "txt_in_VTN" text="{= ${RequestingDealerVisible} === false ?${Requested_Vtn}:${OffredVehicle/Offered_Vtn}}" wrapping="false"/>
-											<Text id= "txt_in_VIN" text="{= ${RequestingDealerVisible} === false ?${VIN}:${OffredVehicle/VHVIN}}" wrapping="false"/>			<!--changes by swetha for DMND0003618-->
+										   <Text id= "txt_in_VIN" text="{= ${RequestingDealerVisible} === false ?${VIN}:${OffredVehicle/vhvin}}" wrapping="false"/><!--changes by Shriram for DMND0003618-->-->
+											<!--<Text id= "txt_in_VIN" text="{= ${RequestingDealerVisible} === false ?${VIN}:${OffredVehicle/VHVIN}}" wrapping="false"/>			<!--changes by swetha for DMND0003618-->-->
 											<!--<Text text="{i18n>From}" wrapping="false"/>-->
 											
 											<!--Text text="{parts:['RequestingDealerVisible','Requested_Dealer','Requesting_Dealer','VIN','OffredVehicle/VIN'], formatter:'vehicleLocator.Formatter.Formatter.TradeHistoryVINOut'}" wrapping="false" width="12em"/-->
