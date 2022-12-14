@@ -10,7 +10,7 @@
 		"dataSources": {
 			"xsodata": {
 
-				"uri": "/xsodata/vehicleTrade_SRV.xsodata",                  ///VehicleLocator_Xsodatanew
+				"uri": "/VehicleLocator_Xsodatanew/xsodata/vehicleTrade_SRV.xsodata",                  //
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0",
