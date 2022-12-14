@@ -286,11 +286,11 @@ sap.ui.define([
 					}
 
 					// do not fetch the entire database and changing this to use a filter. 
-					// https://tci-dev-vehiclelocatorandtrade-xsjs.cfapps.us10.hana.ondemand.com/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id%20eq%20%27TR000245%27
-					// ttps://tci-dev-vehiclelocatorandtrade-xsjs.cfapps.us10.hana.ondemand.com/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id eq 'TR000245'
+					// https://tci-dev-vehiclelocatorandtrade-xsjs.cfapps.us10.hana.ondemand.com/VehicleLocator_Xsodatanew/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id%20eq%20%27TR000245%27
+					// ttps://tci-dev-vehiclelocatorandtrade-xsjs.cfapps.us10.hana.ondemand.com/VehicleLocator_Xsodatanew/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id eq 'TR000245'
 
 					this.nodeJsUrl = this.sPrefix;
-					that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id eq '" + this.Tradeid + "'";
+					that.oDataUrl = this.nodeJsUrl + "/VehicleLocator_Xsodatanew/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id eq '" + this.Tradeid + "'";
 
 					$.ajax({
 						url: that.oDataUrl,
@@ -478,9 +478,9 @@ sap.ui.define([
 					}
 					this.nodeJsUrl = this.sPrefix;
 
-					that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id eq '" + this.Tradeid + "'";
+					that.oDataUrl = this.nodeJsUrl + "/VehicleLocator_Xsodatanew/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id eq '" + this.Tradeid + "'";
 
-					// that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment";
+					// that.oDataUrl = this.nodeJsUrl + "/VehicleLocator_Xsodatanew/xsodata/vehicleTrade_SRV.xsodata/TradeComment";
 					$.ajax({
 						url: that.oDataUrl,
 						method: "GET",
@@ -1482,8 +1482,8 @@ sap.ui.define([
 
 				}
 				this.nodeJsUrl = this.sPrefix;
-				that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id eq '" + this.Tradeid + "'";
-				// that.oDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment";
+				that.oDataUrl = this.nodeJsUrl + "/VehicleLocator_Xsodatanew/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id eq '" + this.Tradeid + "'";
+				// that.oDataUrl = this.nodeJsUrl + "/VehicleLocator_Xsodatanew/xsodata/vehicleTrade_SRV.xsodata/TradeComment";
 				$.ajax({
 					url: that.oDataUrl,
 					method: "GET",
@@ -1627,7 +1627,7 @@ sap.ui.define([
 
 					}
 					that.nodeJsUrl = that.sPrefix;
-					that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
+					that.oDataUrl = that.nodeJsUrl + "/VehicleLocator_Xsodatanew/xsodata/vehicleTrade_SRV.xsodata";
 
 					that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
 					that.oDataModel.setHeaders({
@@ -1650,8 +1650,8 @@ sap.ui.define([
 
 						}
 						that.nodeJsUrl = that.sPrefix;
-						that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id eq '" + that.Tradeid + "'";
-						// that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeComment";
+						that.oDataUrl = that.nodeJsUrl + "/VehicleLocator_Xsodatanew/xsodata/vehicleTrade_SRV.xsodata/TradeComment?$filter=Trade_Id eq '" + that.Tradeid + "'";
+						// that.oDataUrl = that.nodeJsUrl + "/VehicleLocator_Xsodatanew/xsodata/vehicleTrade_SRV.xsodata/TradeComment";
 						$.ajax({
 							url: that.oDataUrl,
 							method: "GET",
@@ -2029,7 +2029,7 @@ sap.ui.define([
 
 				}
 				that.nodeJsUrl = that.sPrefix;
-				that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
+				that.oDataUrl = that.nodeJsUrl + "/VehicleLocator_Xsodatanew/xsodata/vehicleTrade_SRV.xsodata";
 
 				that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
 				that.oDataModel.setHeaders({
@@ -2238,7 +2238,7 @@ sap.ui.define([
 			}
 			//	that.nodeJsUrl = that.sPrefix + "/vehicleTrade";
 			that.nodeJsUrl = that.sPrefix;
-			that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
+			that.oDataUrl = that.nodeJsUrl + "/VehicleLocator_Xsodatanew/xsodata/vehicleTrade_SRV.xsodata";
 
 			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
 
@@ -2480,7 +2480,7 @@ sap.ui.define([
 			}
 			//	that.nodeJsUrl = that.sPrefix + "/vehicleTrade";
 			that.nodeJsUrl = that.sPrefix;
-			that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
+			that.oDataUrl = that.nodeJsUrl + "/VehicleLocator_Xsodatanew/xsodata/vehicleTrade_SRV.xsodata";
 
 			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
 
@@ -2730,7 +2730,7 @@ sap.ui.define([
 						}
 						//	that.nodeJsUrl = that.sPrefix + "/vehicleTrade";
 						that.nodeJsUrl = that.sPrefix;
-						that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
+						that.oDataUrl = that.nodeJsUrl + "/VehicleLocator_Xsodatanew/xsodata/vehicleTrade_SRV.xsodata";
 
 						that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
 						var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
@@ -3090,7 +3090,7 @@ sap.ui.define([
 			}
 			//	that.nodeJsUrl = that.sPrefix + "/vehicleTrade";
 			that.nodeJsUrl = that.sPrefix;
-			that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
+			that.oDataUrl = that.nodeJsUrl + "/VehicleLocator_Xsodatanew/xsodata/vehicleTrade_SRV.xsodata";
 
 			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
 			var UpdatedTreadeEntity = "/TradeRequest('" + Trade_Id + "')";
@@ -3300,7 +3300,7 @@ sap.ui.define([
 			}
 			//	that.nodeJsUrl = that.sPrefix + "/vehicleTrade";
 			that.nodeJsUrl = that.sPrefix;
-			that.oDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata";
+			that.oDataUrl = that.nodeJsUrl + "/VehicleLocator_Xsodatanew/xsodata/vehicleTrade_SRV.xsodata";
 
 			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl, true);
 			that.oDataModel.setHeaders({
@@ -3360,7 +3360,7 @@ sap.ui.define([
 			}
 			//TradeRequest('TR047813')
 			this.nodeJsUrl = this.sPrefix;
-			that.TradeRequestoDataUrl = this.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeRequest('" + that.StatusData.Trade_Id + "')";
+			that.TradeRequestoDataUrl = this.nodeJsUrl + "/VehicleLocator_Xsodatanew/xsodata/vehicleTrade_SRV.xsodata/TradeRequest('" + that.StatusData.Trade_Id + "')";
 			var ajax1 = $.ajax({
 				dataType: "json",
 				xhrFields: //
@@ -3420,7 +3420,7 @@ sap.ui.define([
 					vtn = TradeRequest.Offered_Vtn;
 				}
 				if (TradeRequest.Trade_Return == "Y") {
-					that.TradeVehiclesDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeVehicles(Trade_Id='" + TradeRequest.Trade_Id +
+					that.TradeVehiclesDataUrl = that.nodeJsUrl + "/VehicleLocator_Xsodatanew/xsodata/vehicleTrade_SRV.xsodata/TradeVehicles(Trade_Id='" + TradeRequest.Trade_Id +
 						"',VTN='" + vtn + "')";
 					/*var /zc_mmfields*/
 					var ajaxRequested_Vtn = $.ajax({
@@ -3438,7 +3438,7 @@ sap.ui.define([
 					if (TradeRequest.Requested_Vtn != null) {
 						var query = "(Trade_Id='" + TradeRequest.Trade_Id + "',VTN='" + TradeRequest.Requested_Vtn + "',SPRAS='" + that.StatusData.SPRAS +
 							"')";
-						that.oTradeVehicleDescDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeVehicleDesc" + query;
+						that.oTradeVehicleDescDataUrl = that.nodeJsUrl + "/VehicleLocator_Xsodatanew/xsodata/vehicleTrade_SRV.xsodata/TradeVehicleDesc" + query;
 						/*	var oTradeVehicleDesc = that.oDataUrl + "/TradeVehicleDesc";*/
 						var ajaxRequested_Vtn3 = $.ajax({
 							dataType: "json",
@@ -3452,7 +3452,7 @@ sap.ui.define([
 							error: function (err) {}
 						});
 					}
-					that.TradeVehiclesDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeVehicles(Trade_Id='" + TradeRequest.Trade_Id +
+					that.TradeVehiclesDataUrl = that.nodeJsUrl + "/VehicleLocator_Xsodatanew/xsodata/vehicleTrade_SRV.xsodata/TradeVehicles(Trade_Id='" + TradeRequest.Trade_Id +
 						"',VTN='" + TradeRequest.Offered_Vtn + "')";
 					/*var /zc_mmfields*/
 					var ajaxOffered_Vtn = $.ajax({
@@ -3469,7 +3469,7 @@ sap.ui.define([
 					//adding filters against fix for 
 					var query = "(Trade_Id='" + TradeRequest.Trade_Id + "',VTN='" + TradeRequest.Offered_Vtn + "',SPRAS='" + that.StatusData.SPRAS +
 						"')";
-					that.oTradeVehicleDescDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeVehicleDesc" + query;
+					that.oTradeVehicleDescDataUrl = that.nodeJsUrl + "/VehicleLocator_Xsodatanew/xsodata/vehicleTrade_SRV.xsodata/TradeVehicleDesc" + query;
 					/*	var oTradeVehicleDesc = that.oDataUrl + "/TradeVehicleDesc";*/
 					var ajaxOffered_Vtn3 = $.ajax({
 						dataType: "json",
@@ -3484,7 +3484,7 @@ sap.ui.define([
 					});
 				} else {
 					//(Trade_Id='TR047813',VTN='52800')
-					that.TradeVehiclesDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeVehicles(Trade_Id='" + TradeRequest.Trade_Id +
+					that.TradeVehiclesDataUrl = that.nodeJsUrl + "/VehicleLocator_Xsodatanew/xsodata/vehicleTrade_SRV.xsodata/TradeVehicles(Trade_Id='" + TradeRequest.Trade_Id +
 						"',VTN='" + vtn + "')";
 					/*var /zc_mmfields*/
 					var ajaxRequested_Vtn = $.ajax({
@@ -3501,7 +3501,7 @@ sap.ui.define([
 					//adding filters against fix for 
 					var query = "(Trade_Id='" + TradeRequest.Trade_Id + "',VTN='" + vtn + "',SPRAS='" + that.StatusData.SPRAS +
 						"')";
-					that.oTradeVehicleDescDataUrl = that.nodeJsUrl + "/xsodata/vehicleTrade_SRV.xsodata/TradeVehicleDesc" + query;
+					that.oTradeVehicleDescDataUrl = that.nodeJsUrl + "/VehicleLocator_Xsodatanew/xsodata/vehicleTrade_SRV.xsodata/TradeVehicleDesc" + query;
 					/*	var oTradeVehicleDesc = that.oDataUrl + "/TradeVehicleDesc";*/
 					var ajaxRequested_Vtn3 = $.ajax({
 						dataType: "json",
