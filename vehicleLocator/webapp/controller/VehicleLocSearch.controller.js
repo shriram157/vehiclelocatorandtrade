@@ -24,7 +24,7 @@ sap.ui.define([
 			var sLocation = window.location.host;
 			var sLocation_conf = sLocation.search("webide");
 			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehiclelocatorNodenew"; // the destination
+				this.sPrefix = "/vehicleLocatorNode"; // the destination
 				 this.attributeUrl = "/userDetails/attributesforlocaltesting";
 				 this.currentScopeUrl = "/userDetails/currentScopesForUserLocaltesting";
 
@@ -485,7 +485,7 @@ sap.ui.define([
 				var sLocation_conf = sLocation.search("webide");
 
 				if (sLocation_conf == 0) {
-					this.sPrefix = "/vehiclelocatorNodenew";
+					this.sPrefix = "/vehicleLocatorNode";
 				} else {
 					this.sPrefix = "";
 
@@ -565,7 +565,7 @@ sap.ui.define([
 				var sLocation_conf = sLocation.search("webide");
 
 				if (sLocation_conf == 0) {
-					this.sPrefix = "/vehiclelocatorNodenew";
+					this.sPrefix = "/vehicleLocatorNode";
 				} else {
 					this.sPrefix = "";
 
@@ -607,7 +607,7 @@ sap.ui.define([
 				var sLocation_conf = sLocation.search("webide");
 
 				if (sLocation_conf == 0) {
-					this.sPrefix = "/vehiclelocatorNodenew";
+					this.sPrefix = "/vehicleLocatorNode";
 				} else {
 					this.sPrefix = "";
 
@@ -644,7 +644,7 @@ sap.ui.define([
 				var sLocation_conf = sLocation.search("webide");
 
 				if (sLocation_conf == 0) {
-					this.sPrefix = "/vehiclelocatorNodenew";
+					this.sPrefix = "/vehicleLocatorNode";
 				} else {
 					this.sPrefix = "";
 
@@ -861,7 +861,7 @@ sap.ui.define([
 			var sLocation_conf = sLocation.search("webide");
 
 			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehiclelocatorNodenew";
+				this.sPrefix = "/vehicleLocatorNode";
 			} else {
 				this.sPrefix = "";
 
@@ -926,7 +926,7 @@ sap.ui.define([
 			var sLocation_conf = sLocation.search("webide");
 
 			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehiclelocatorNodenew";
+				this.sPrefix = "/vehicleLocatorNode";
 			} else {
 				this.sPrefix = "";
 
@@ -1064,7 +1064,7 @@ sap.ui.define([
 			var sLocation_conf = sLocation.search("webide");
 
 			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehiclelocatorNodenew";
+				this.sPrefix = "/vehicleLocatorNode";
 			} else {
 				this.sPrefix = "";
 
@@ -1155,7 +1155,7 @@ sap.ui.define([
 			var sLocation_conf = sLocation.search("webide");
 
 			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehiclelocatorNodenew";
+				this.sPrefix = "/vehicleLocatorNode";
 			} else {
 				this.sPrefix = "";
 
@@ -1429,7 +1429,7 @@ sap.ui.define([
 			var sLocation_conf = sLocation.search("webide");
 
 			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehiclelocatorNodenew";
+				this.sPrefix = "/vehicleLocatorNode";
 			} else {
 				this.sPrefix = "";
 
@@ -2126,7 +2126,7 @@ sap.ui.define([
 			var sLocation_conf = sLocation.search("webide");
 
 			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehiclelocatorNodenew";
+				this.sPrefix = "/vehicleLocatorNode";
 			} else {
 				this.sPrefix = "";
 
