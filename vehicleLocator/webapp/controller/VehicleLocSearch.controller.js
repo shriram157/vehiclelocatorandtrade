@@ -25,8 +25,8 @@ sap.ui.define([
 			var sLocation_conf = sLocation.search("webide");
 			if (sLocation_conf == 0) {
 				this.sPrefix = "/vehicleLocatorNodenew"; // the destination
-				 this.attributeUrl = "/userDetails/attributesforlocaltesting";
-				 this.currentScopeUrl = "/userDetails/currentScopesForUserLocaltesting";
+				 //this.attributeUrl = "/userDetails/attributesforlocaltesting";
+				 //this.currentScopeUrl = "/userDetails/currentScopesForUserLocaltesting";
 
 				// this.sPrefix = "";
 				this.attributeUrl = "/userDetails/attributes";
