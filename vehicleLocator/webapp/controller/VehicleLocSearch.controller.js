@@ -1,6 +1,6 @@
 var selectedSuffix;
 sap.ui.define([
-	/*"sap/ui/core/mvc/Controller"*/
+
 
 	"vehicleLocator/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
