@@ -751,7 +751,7 @@ onLiveChange: function (oEvent) {
 					});
 					var model = new sap.ui.model.json.JSONModel(RequesttingDealer);
 					model.setSizeLimit(1000);
-
+					
 					//18-11-22 Shriram Code to check vehicleTradeSummaryTable model data  code start //
 					console.log("vehicleTradeSummaryTable model data"+model);
 					console.log("vehicleTradeSummaryTable model RequesttingDealer JSONdata"+RequesttingDealer);
@@ -809,6 +809,7 @@ onLiveChange: function (oEvent) {
 					var model = new sap.ui.model.json.JSONModel(RequestedDealer);
 					model.setSizeLimit(1000);
 					// that.getView().setModel(model, "oVehiclTrade_SummaryRequestedData");
+					
                     //18-11-22 Shriram Code to check receivedRequestTable model data  code start //
 					console.log("receivedRequestTable model RequestedDealer JSONdata"+RequestedDealer);
 					console.log("receivedRequestTable model data"+model);

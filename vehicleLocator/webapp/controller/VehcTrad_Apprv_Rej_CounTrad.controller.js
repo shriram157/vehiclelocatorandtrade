@@ -1325,7 +1325,7 @@ sap.ui.define([
 						}
 						sap.ui.core.BusyIndicator.show(0);
 						var that = this;
-						var SeriesUrl = oDataUrl + "/ZVMS_CDS_ETA_consolidate('" + oDealer + "')/Set?$filter=VHVIN eq '" + VIN[j] +
+						var SeriesUrl = oDataUrl + "/ZVMS_CDS_ETA_consolidate('" + oDealer + "')/Set?$filter=vhvin eq '" + VIN[j] +
 							"'&$format=json";
 
 						$.ajax({
@@ -1343,7 +1343,7 @@ sap.ui.define([
 								if (a.length > 0) {
 									for (var k = 0; k < a.length; k++) {
 
-										if (a[k].mmsta < "M275" || patt1.test(a[k].mmsta) || a[k].VHVIN == "") {
+										if (a[k].mmsta < "M275" || patt1.test(a[k].mmsta) || a[k].vhvin == "") {
 											//	that.getView().byId("ovinId").setVisible(false);
 
 											if (trade_type == "inbound") {

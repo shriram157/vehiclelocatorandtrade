@@ -2448,7 +2448,7 @@ sap.ui.define([
 			if (this.sSearchQuery) {
 				var oFilter = new Filter([
 					new Filter("zzvtn", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
-					new Filter("VHVIN", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
+					new Filter("vhvin", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("matnr", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("model_desc_en", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
 					new Filter("model_desc_fr", sap.ui.model.FilterOperator.Contains, this.sSearchQuery),
