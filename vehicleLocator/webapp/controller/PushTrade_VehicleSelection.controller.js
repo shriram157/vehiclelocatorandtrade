@@ -71,7 +71,7 @@ sap.ui.define([
 			var sLocation_conf = sLocation.search("webide");
 
 			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehiclelocatorNode";
+				this.sPrefix = "/vehicleLocatorNode";
 			} else {
 				this.sPrefix = "";
 
@@ -631,7 +631,7 @@ sap.ui.define([
 			var sLocation_conf = sLocation.search("webide");
 
 			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehiclelocatorNode";
+				this.sPrefix = "/vehicleLocatorNode";
 			} else {
 				this.sPrefix = "";
 
@@ -1054,7 +1054,7 @@ sap.ui.define([
 			// var sLocation_conf = sLocation.search("webide");
 
 			// if (sLocation_conf == 0) {
-			// 	this.sPrefix = "/vehiclelocatorNode";
+			// 	this.sPrefix = "/vehicleLocatorNode";
 			// } else {
 			// 	this.sPrefix = "";
 
@@ -1261,7 +1261,7 @@ sap.ui.define([
 			var sLocation_conf = sLocation.search("webide");
 
 			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehiclelocatorNode";
+				this.sPrefix = "/vehicleLocatorNode";
 			} else {
 				this.sPrefix = "";
 
@@ -1387,7 +1387,7 @@ sap.ui.define([
 			var sLocation_conf = sLocation.search("webide");
 
 			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehiclelocatorNode";
+				this.sPrefix = "/vehicleLocatorNode";
 			} else {
 				this.sPrefix = "";
 
@@ -1619,7 +1619,7 @@ sap.ui.define([
 			var sLocation_conf = sLocation.search("webide");
 
 			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehiclelocatorNode";
+				this.sPrefix = "/vehicleLocatorNode";
 			} else {
 				this.sPrefix = "";
 
@@ -2525,7 +2525,7 @@ sap.ui.define([
 			var sLocation_conf = sLocation.search("webide");
 
 			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehiclelocatorNode";
+				this.sPrefix = "/vehicleLocatorNode";
 			} else {
 				this.sPrefix = "";
 
@@ -2872,7 +2872,7 @@ sap.ui.define([
 			var sLocation_conf = sLocation.search("webide");
 
 			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehiclelocatorNode";
+				this.sPrefix = "/vehicleLocatorNode";
 			} else {
 				this.sPrefix = "";
 
@@ -3438,7 +3438,7 @@ sap.ui.define([
 			var sLocation_conf = sLocation.search("webide");
 
 			if (sLocation_conf == 0) {
-				this.sPrefix = "/vehiclelocatorNode";
+				this.sPrefix = "/vehicleLocatorNode";
 			} else {
 				this.sPrefix = "";
 
