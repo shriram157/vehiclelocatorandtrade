@@ -284,7 +284,7 @@
 										<cells>
 											<Link id="selectId" text="{i18n>Select}" class="link" subtle="true" press="oTradeLinkPress" wrapping="false"/>
 											<Text text="{vehicleSelectTableModel>zzvtn}" wrapping="false" width="6rem" id="zzvtnid"/>
-											<Text text="{vehicleSelectTableModel>vhvin}" wrapping="false" width="12rem" id="vhvinid"/><!--changes by swetha-->
+											<Text text="{vehicleSelectTableModel>VHVIN}" wrapping="false" width="12rem" id="VHVINid"/><!--changes by swetha-->
 											<Text
 												text="{=${languageModel>/SPRAS}==='English' ? ${vehicleSelectTableModel>zzseries_desc_en}:${vehicleSelectTableModel>zzseries_desc_fr} }"
 												id="oSeries"/>
