@@ -186,7 +186,7 @@ id="oRequesteddealer"/>
 							   	<Label text="{i18n>VehicleTrackingNumber}" id="vtnlabeid" />
 								<Text text="{= ${RequestingDealerVisible} === false ?${Requested_Vtn}:${/OffredVehicle/Offered_Vtn}}" id="vtnid"/>
 								<Label text="{i18n>VIN}" id="vinlabeid" />
-							    <Text text="{= ${RequestingDealerVisible} === false ?${VIN}:${/OffredVehicle/vhvin}}" id="vinid"/> <!--changes by swetha for DMND0003618-->
+							    <Text text="{= ${RequestingDealerVisible} === false ?${VIN}:${OffredVehicle/vhvin}}" id="vinid"/> <!--changes by swetha for DMND0003618-->
 						    <!--		<Text text="{= ${RequestingDealerVisible} === false ?${VIN}:${/OffredVehicle/VIN}}" id="vinid" visible="{detailView>/showVinDiplayOff}"/>-->
 								<!--	"{path:'TradeModel>kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'}-{TradeModel>name1}"-->
 								<Label text="{i18n>ModelYear}" id="ofrModellabl"/>
