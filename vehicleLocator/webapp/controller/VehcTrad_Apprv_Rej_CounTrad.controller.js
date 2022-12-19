@@ -746,8 +746,6 @@ sap.ui.define([
 					// this.getView().byId("otxlabel").setText("");
 					this.getView().byId("otxlabel").setVisible(false);
 					this.getView().byId("otxlabel1").setVisible(false);
-					this.getView().byId("vinid").setVisible(false);
-					this.getView().byId("vinlabeid").setVisible(false);
 					// this.getView().byId("idlto").setVisible(false);
 
 				} else {
@@ -922,6 +920,8 @@ sap.ui.define([
 
 						this.getView().byId("vtnlabeid").setVisible(false);
 						this.getView().byId("vtnid").setVisible(false);
+						this.getView().byId("vinlabeid").setVisible(false);//changes by swetha for DMND0003618
+						this.getView().byId("vinid").setVisible(false);//changes by swetha for DMND0003618
 						this.getView().byId("Offerevehid").setText("");
 						this.getView().byId("offeredDealer").setVisible(false);
 						this.getView().byId("oRequesteddealer").setText("");
