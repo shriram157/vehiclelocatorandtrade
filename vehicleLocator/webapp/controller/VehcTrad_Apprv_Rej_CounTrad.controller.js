@@ -1355,7 +1355,7 @@ sap.ui.define([
 										} else {
 											//	that.getView().byId("ovinId").setVisible(true);
 											if (trade_type == "inbound") {
-												that._oViewModel.setProperty("/showVinDisplayOffInbound", true);
+												that._oViewModel.setProperty("/showVinDisplayOffInbound", false);
 
 												//that._oViewModel.setProperty("/showVinDiplayOff", false);
 											} else {
