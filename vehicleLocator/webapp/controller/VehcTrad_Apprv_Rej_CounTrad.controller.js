@@ -4281,7 +4281,7 @@ sap.ui.define([
 								local.getView().byId("vtnlabeid").setVisible(true);
 								local.getView().byId("vtnid").setVisible(true);
 								local.getView().byId("vinlabeid").setVisible(true);//changes by swetha for DMND0003618
-								local.getView().byId("vinid").setVisible(true);//changes by swetha for DMND0003618
+								local.getView().byId("vinid").setVisible(true);//changes by swetha for  DMND0003618
 								//	local._oViewModel.setProperty("/showVinDiplayOff", true);
 							}
 
