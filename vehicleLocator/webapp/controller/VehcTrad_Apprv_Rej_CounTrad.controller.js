@@ -502,6 +502,8 @@ sap.ui.define([
 
 				}
 			} else if (that.oSelectedItems != undefined && that.oSelectedItems == "SelectedFromTradeHistory") {
+				this.getView().byId("ovinIdText").setVisible(false);
+					this.getView().byId("ovinId").setVisible(false);
 				this._oViewModel.setProperty("/showVinDisplayOffInbound", false);
 				var StatusData = sap.ui.getCore().getModel("TradeRequestedHistory").getData();
 
