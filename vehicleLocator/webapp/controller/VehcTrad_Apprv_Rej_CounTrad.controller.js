@@ -3587,6 +3587,7 @@ sap.ui.define([
 								TradeVehicles[j].Requested_Dealer_Name = TradeRequest.Requested_Dealer_Name;
 								TradeVehicles[j].Requested_Vtn = TradeRequest.Requested_Vtn;
 								TradeVehicles[j].Offered_Vtn = TradeRequest.Offered_Vtn;
+								TradeVehicles[j].VIN = TradeRequest.VIN;                 //changes by swetha for DMND0003618
 								TradeVehicles[j].Req_Current_ETA_From = TradeRequest.Req_Current_ETA_From;
 								TradeVehicles[j].Req_Current_ETA_To = TradeRequest.Req_Current_ETA_To;
 								TradeVehicles[j].Req_Proposed_ETA_From = TradeRequest.Req_Proposed_ETA_From;
@@ -3666,6 +3667,11 @@ sap.ui.define([
 								filtered[n].Offered_Vtn = filtered[n].Offered_Vtn;
 							} else {
 								filtered[n].Offered_Vtn = "";
+							}
+							if ("VIN" in filtered[n]) {                //changes by swetha for DMND0003618
+								filtered[n].VIN = filtered[n].VIN;
+							} else {
+								filtered[n].VIN="";
 							}
 
 							if ("Req_Current_ETA_From" in filtered[n]) {
