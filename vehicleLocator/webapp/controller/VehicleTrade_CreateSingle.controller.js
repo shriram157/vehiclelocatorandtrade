@@ -830,6 +830,7 @@ sap.ui.define([
 						//var Requested_Vtn = that.getView().byId("vtnid").getText();
 						var Requested_Vtn = that.getView().getModel("TradeModel").getData().zzvtn;
 						var Offered_Vtn = that.getView().byId("vtnid").getText();
+						var VIN = that.getView().byId("vinid").getText();               //changes by swetha for DMND0003618
 						var DateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 							pattern: "yyyy-MM-dd"
 						});
@@ -1001,6 +1002,7 @@ sap.ui.define([
 							"Requesting_Dealer_Name": Requesting_Dealer_Name.substring(0, 35), //str.substring(0, 10);
 							"Requested_Vtn": Requested_Vtn,
 							"Offered_Vtn": Offered_Vtn,
+							"VIN": VIN,                     //changes by swetha for DMND0003618
 							"Trade_Return": Trade_Return,
 							"Req_Current_ETA_From": Req_Current_ETA_From,
 							"Req_Current_ETA_To": Req_Current_ETA_To,
