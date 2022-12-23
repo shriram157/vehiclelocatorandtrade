@@ -212,6 +212,8 @@ sap.ui.define([
 
 					this.getView().byId("vtnlabeid").setVisible(true);
 					this.getView().byId("vtnid").setVisible(true);
+					this.getView().byId("vinlabeid").setVisible(true);//changes by swetha for DMND0003618
+					this.getView().byId("vinid").setVisible(true);// changes by swetha for DMND0003618
 					this.getView().byId("moylablid").setVisible(true);
 					this.getView().byId("yearid").setVisible(true);
 					this.getView().byId("serielabelid").setVisible(true);
@@ -275,6 +277,8 @@ sap.ui.define([
 
 					this.getView().byId("vtnlabeid").setVisible(true);
 					this.getView().byId("vtnid").setVisible(true);
+					this.getView().byId("vinlabeid").setVisible(true); //changes by swetha for DMND0003618
+					this.getView().byId("vinid").setVisible(true);     //changes by swetha for DMND0003618
 					this.getView().byId("moylablid").setVisible(true);
 					this.getView().byId("yearid").setVisible(true);
 					this.getView().byId("serielabelid").setVisible(true);
@@ -830,6 +834,7 @@ sap.ui.define([
 						//var Requested_Vtn = that.getView().byId("vtnid").getText();
 						var Requested_Vtn = that.getView().getModel("TradeModel").getData().zzvtn;
 						var Offered_Vtn = that.getView().byId("vtnid").getText();
+						var VIN = that.getView().getModel("TradeModel").getData().vhvin;      //changes by swetha for DMND0003618
 						var DateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 							pattern: "yyyy-MM-dd"
 						});
@@ -1007,7 +1012,7 @@ sap.ui.define([
 							"Req_Proposed_ETA_From": Req_Proposed_ETA_From,
 							"Req_Proposed_ETA_To": Req_Proposed_ETA_To,
 							"Off_Current_ETA_From": Off_Current_ETA_From,
-
+							"VIN": VIN,                     //changes by swetha for DMND0003618
 							"Off_Current_ETA_To": Off_Current_ETA_To,
 							"Off_Proposed_ETA_From": Off_Proposed_ETA_From,
 							"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
