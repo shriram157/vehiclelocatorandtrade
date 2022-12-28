@@ -212,8 +212,6 @@ sap.ui.define([
 
 					this.getView().byId("vtnlabeid").setVisible(true);
 					this.getView().byId("vtnid").setVisible(true);
-					this.getView().byId("vinLableIdOff").setVisible(true);//changes by swetha for DMND0003618
-					this.getView().byId("vinVinIdOff").setVisible(true);// changes by swetha for DMND0003618
 					this.getView().byId("moylablid").setVisible(true);
 					this.getView().byId("yearid").setVisible(true);
 					this.getView().byId("serielabelid").setVisible(true);
@@ -277,8 +275,6 @@ sap.ui.define([
 
 					this.getView().byId("vtnlabeid").setVisible(true);
 					this.getView().byId("vtnid").setVisible(true);
-					this.getView().byId("vinVinIdOff").setVisible(true); //changes by swetha for DMND0003618
-					this.getView().byId("vinLableIdOff").setVisible(true);     //changes by swetha for DMND0003618
 					this.getView().byId("moylablid").setVisible(true);
 					this.getView().byId("yearid").setVisible(true);
 					this.getView().byId("serielabelid").setVisible(true);
