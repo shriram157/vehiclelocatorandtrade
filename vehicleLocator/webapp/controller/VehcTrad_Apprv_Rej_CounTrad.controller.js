@@ -502,6 +502,9 @@ sap.ui.define([
 
 				}
 			} else if (that.oSelectedItems != undefined && that.oSelectedItems == "SelectedFromTradeHistory") {
+				this.getView().byId("ovinIdText").setVisible(false);
+					this.getView().byId("ovinId").setVisible(false);
+				this._oViewModel.setProperty("/showVinDisplayOffInbound", false);
 				var StatusData = sap.ui.getCore().getModel("TradeRequestedHistory").getData();
 
 				if (StatusData.RequestingDealerVisible) {
@@ -901,7 +904,6 @@ sap.ui.define([
 						this.getView().byId("ovtnId").setVisible(false);
 						this.getView().byId("ovinIdText").setVisible(false);
 						this.getView().byId("ovinId").setVisible(false);
-
 						// // this.getView().byId("tobid").setVisible(false);
 						// this.getView().byId("prptid").setText("");
 						this.getView().byId("accInstLbl").setVisible(false);
@@ -921,6 +923,8 @@ sap.ui.define([
 
 						this.getView().byId("vtnlabeid").setVisible(false);
 						this.getView().byId("vtnid").setVisible(false);
+						this.getView().byId("vinlabeid").setVisible(false);//changes by swetha for DMND0003618
+						this.getView().byId("vinid").setVisible(false);//changes by swetha for DMND0003618
 						this.getView().byId("Offerevehid").setText("");
 						this.getView().byId("offeredDealer").setVisible(false);
 						this.getView().byId("oRequesteddealer").setText("");
@@ -1325,7 +1329,7 @@ sap.ui.define([
 						}
 						sap.ui.core.BusyIndicator.show(0);
 						var that = this;
-						var SeriesUrl = oDataUrl + "/ZVMS_CDS_ETA_consolidate('" + oDealer + "')/Set?$filter=VHVIN eq '" + VIN[j] +
+						var SeriesUrl = oDataUrl + "/ZVMS_CDS_ETA_consolidate('" + oDealer + "')/Set?$filter=vhvin eq '" + VIN[j] +
 							"'&$format=json";
 
 						$.ajax({
@@ -1343,7 +1347,7 @@ sap.ui.define([
 								if (a.length > 0) {
 									for (var k = 0; k < a.length; k++) {
 
-										if (a[k].mmsta < "M275" || patt1.test(a[k].mmsta) || a[k].VHVIN == "") {
+										if (a[k].mmsta < "M275" || patt1.test(a[k].mmsta) || a[k].vhvin == "") {
 											//	that.getView().byId("ovinId").setVisible(false);
 
 											if (trade_type == "inbound") {
@@ -1354,7 +1358,7 @@ sap.ui.define([
 										} else {
 											//	that.getView().byId("ovinId").setVisible(true);
 											if (trade_type == "inbound") {
-												that._oViewModel.setProperty("/showVinDisplayOffInbound", true);
+												that._oViewModel.setProperty("/showVinDisplayOffInbound", false);
 
 												//that._oViewModel.setProperty("/showVinDiplayOff", false);
 											} else {
@@ -3591,7 +3595,7 @@ sap.ui.define([
 								TradeVehicles[j].Off_Current_ETA_To = TradeRequest.Off_Current_ETA_To;
 								TradeVehicles[j].Off_Proposed_ETA_From = TradeRequest.Off_Proposed_ETA_From;
 								TradeVehicles[j].Off_Proposed_ETA_To = TradeRequest.Off_Proposed_ETA_To;
-
+								TradeVehicles[j].VIN = TradeRequest.VIN;                       //changes by swetha for DMND0003618
 								TradeVehicles[j].Created_By = TradeRequest.Created_By;
 								TradeVehicles[j].Created_On = TradeRequest.Created_On;
 								TradeVehicles[j].Changed_on = TradeRequest.Changed_on;
@@ -4173,6 +4177,8 @@ sap.ui.define([
 							// if (this.getView().byId("VT_ARCTtrdinStatus").getText() == "Rejected") {
 							local.getView().byId("vtnid").setVisible(false);
 							local.getView().byId("vtnlabeid").setVisible(false);
+							local.getView().byId("vinid").setVisible(false);//changes by swetha for DMND0003618
+							local.getView().byId("vinlabeid").setVisible(false);//changes by swetha for DMND0003618
 							local._oViewModel.setProperty("/showVinDiplayOff", false);
 							// this.getView().byId("vtnlabeid").setVisible(false);
 							// this.getView().byId("vtnid").setVisible(false);
@@ -4185,7 +4191,8 @@ sap.ui.define([
 							// 	// this.getView().byId("vtnid").setVisible(true);
 							// }
 
-						} else {
+						} 
+						else {
 							// local.getView().byId("offervehidContent").setVisible(true);
 
 							//	local._oViewModel.setProperty("/showVinDiplayOff", true);
@@ -4251,7 +4258,6 @@ sap.ui.define([
 							local.getView().byId("otxlabel").setVisible(true);
 
 							// that.getView().byId("idlto").setVisible(true);
-
 							local._oViewModel.setProperty("/showVinDiplayOff", false);
 
 							local._oViewModel.setProperty("/showVinDisplayOffInbound", false);
@@ -4260,6 +4266,7 @@ sap.ui.define([
 								// local.getView().byId("ovtnIdText").setVisible(false);
 								local.getView().byId("vtnlabeid").setVisible(false);
 								local.getView().byId("vtnid").setVisible(false);
+								
 
 							} else {
 
@@ -4267,6 +4274,8 @@ sap.ui.define([
 								// local.getView().byId("ovtnIdText").setVisible(true);
 								local.getView().byId("vtnlabeid").setVisible(true);
 								local.getView().byId("vtnid").setVisible(true);
+								local.getView().byId("vinlabeid").setVisible(true);//changes by swetha for DMND0003618
+								local.getView().byId("vinid").setVisible(true);//changes by swetha for  DMND0003618
 								//	local._oViewModel.setProperty("/showVinDiplayOff", true);
 							}
 
