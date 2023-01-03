@@ -56,7 +56,7 @@ sap.ui.define([
 			var oViewModel = new sap.ui.model.json.JSONModel({
 
 				showVinDiplayOff: false,
-				showVinDiplayReq: true
+				showVinDiplayReq: true                
 
 			});
 
@@ -152,7 +152,8 @@ sap.ui.define([
 					this.getView().byId("oSeleBtn").setVisible(true);
 					//	this.getView().byId("OtherVehInfoid").setText("");
 					this.getView().byId("vtnlabeidReq").setVisible(true);
-					this.getView().byId("vinLabelId").setVisible(true);
+					this.getView().byId("vinLabelId").setVisible(false); 
+					this.getView().byId("VINReq").setVisible(false);       //changes by swetha for DMND0003618 on 3/1/2023
 					this.getView().byId("moyrLabelReq").setVisible(true);
 					this.getView().byId("zzMoyr").setVisible(true);
 					this.getView().byId("seriesLabelReq").setVisible(true);
@@ -1329,7 +1330,7 @@ sap.ui.define([
 				var Series = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzseries;
 				var exterior = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzextcol;
 				var vtn = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzvtn;
-				that.vin = that.getView().getModel("TradeModel").getData().vhvin;          //changes by swetha for DMND0003618 on 3/1/2023
+				that.vin = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.vhvin;          
 				var accInstalled = that.getView().byId("accid").getText();
 				if (accInstalled == "Yes") {
 					accInstalled = 'Y';
