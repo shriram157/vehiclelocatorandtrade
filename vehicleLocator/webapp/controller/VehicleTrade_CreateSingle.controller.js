@@ -152,8 +152,7 @@ sap.ui.define([
 					this.getView().byId("oSeleBtn").setVisible(true);
 					//	this.getView().byId("OtherVehInfoid").setText("");
 					this.getView().byId("vtnlabeidReq").setVisible(true);
-					this.getView().byId("vinLabelId").setVisible(false); 
-					this.getView().byId("VINReq").setVisible(false);       //changes by swetha for DMND0003618 on 3/1/2023
+					this.getView().byId("vinLabelId").setVisible(true); 
 					this.getView().byId("moyrLabelReq").setVisible(true);
 					this.getView().byId("zzMoyr").setVisible(true);
 					this.getView().byId("seriesLabelReq").setVisible(true);
