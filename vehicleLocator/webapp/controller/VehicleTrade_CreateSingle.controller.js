@@ -830,7 +830,7 @@ sap.ui.define([
 						//var Requested_Vtn = that.getView().byId("vtnid").getText();
 						var Requested_Vtn = that.getView().getModel("TradeModel").getData().zzvtn;
 						var Offered_Vtn = that.getView().byId("vtnid").getText();
-						var VIN = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.vhvin;      //changes by swetha for DMND0003618
+						var VIN = that.getView().getModel("TradeModel").getData().vhvin;      //changes by swetha for DMND0003618
 						var DateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 							pattern: "yyyy-MM-dd"
 						});
