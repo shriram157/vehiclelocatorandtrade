@@ -1329,7 +1329,7 @@ sap.ui.define([
 				var Series = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzseries;
 				var exterior = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzextcol;
 				var vtn = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzvtn;
-				that.vin = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.vhvin;
+				that.vin = that.getView().getModel("TradeModel").getData().vhvin;          //changes by swetha for DMND0003618 on 3/1/2023
 				var accInstalled = that.getView().byId("accid").getText();
 				if (accInstalled == "Yes") {
 					accInstalled = 'Y';
