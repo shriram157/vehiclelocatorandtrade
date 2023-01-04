@@ -3667,7 +3667,7 @@ sap.ui.define([
 							} else {
 								filtered[n].Offered_Vtn = "";
 							}
-							if ("VIN" in filtered[n]) {                                  //changes for DMND0003618
+							if ("VIN" in filtered[n]) {                                  //changes for DMND0003618 on 4/1/23
 								filtered[n].VIN = filtered[n].VIN;
 							} else {
 								filtered[n].VIN = "";
