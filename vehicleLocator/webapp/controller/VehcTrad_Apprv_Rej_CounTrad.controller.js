@@ -3595,7 +3595,7 @@ sap.ui.define([
 								TradeVehicles[j].Off_Current_ETA_To = TradeRequest.Off_Current_ETA_To;
 								TradeVehicles[j].Off_Proposed_ETA_From = TradeRequest.Off_Proposed_ETA_From;
 								TradeVehicles[j].Off_Proposed_ETA_To = TradeRequest.Off_Proposed_ETA_To;
-								TradeVehicles[j].VIN = TradeRequest.VIN;                       //changes by swetha for DMND0003618
+								//TradeVehicles[j].VIN = TradeRequest.VIN;                       //changes by swetha for DMND0003618
 								TradeVehicles[j].Created_By = TradeRequest.Created_By;
 								TradeVehicles[j].Created_On = TradeRequest.Created_On;
 								TradeVehicles[j].Changed_on = TradeRequest.Changed_on;
