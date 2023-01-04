@@ -1267,13 +1267,13 @@ sap.ui.define([
 				var oexteriorReq = that.getView().byId("Zextcolo").getText().split("-")[0].trim();
 				var ointeriorReq = that.getView().getModel("TradeModel").oData.zzintcol;
 				var ovtnReq = that.getView().getModel("TradeModel").oData.zzvtn;
-				var ovinReq = ""
+				var ovinReq = that.getView().getModel("TradeModel").oData.vhvin;       //changes by swetha for DMND0003618 on 4/1/23
 
-				if (!that.getView().getModel("TradeModel").oData.dispalyVin1) {
+			/*	if (!that.getView().getModel("TradeModel").oData.dispalyVin1) {
 					ovinReq = ""
 				} else {
 					ovinReq = that.getView().getModel("TradeModel").oData.vhvin;
-				}
+				}*/
 
 				var accIns = that.getView().byId("oAccesIn").getText();
 				if (accIns == 'Yes') {
