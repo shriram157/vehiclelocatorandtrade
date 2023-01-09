@@ -1346,8 +1346,8 @@ sap.ui.define([
 
 								if (a.length > 0) {
 									for (var k = 0; k < a.length; k++) {
-
-										if (a[k].mmsta < "M275" || patt1.test(a[k].mmsta) || a[k].vhvin == "") {
+										//changes by swetha for DMND0003618 on 9/1/2023
+										if (a[k].mmsta < "M110" || patt1.test(a[k].mmsta) || a[k].vhvin == "") {
 											//	that.getView().byId("ovinId").setVisible(false);
 
 											if (trade_type == "inbound") {
