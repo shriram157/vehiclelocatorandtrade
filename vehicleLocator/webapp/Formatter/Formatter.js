@@ -512,6 +512,8 @@ sap.ui.define(function () {
 			if((mmsta<"M110")||(mmsta.startsWith("P")))
 			{
               return ""; 
+			}else{
+			return vhvin;
 			}
 		}
 
