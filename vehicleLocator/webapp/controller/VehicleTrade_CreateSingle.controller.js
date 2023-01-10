@@ -1375,7 +1375,7 @@ sap.ui.define([
 						for (var k = 0; k < a.length; k++) {
 							if (vtn == a[k].zzvtn) {
 
-								if ((a[k].mmsta < "M110" && a[k].mmsta.slice(0,1) == "P") || patt1.test(a[k].mmsta) || a[k].vhvin == "") {     //removed (a[k].mmsta < "M275" ||)  changes by swetha for DMND0003618 on 3/1/2023
+								if (a[k].mmsta < "M110" || patt1.test(a[k].mmsta) || a[k].vhvin == "") {     //removed (a[k].mmsta < "M275" ||)  changes by swetha for DMND0003618 on 3/1/2023
 									that.vin = "";
 								}
 
