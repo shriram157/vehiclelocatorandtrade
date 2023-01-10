@@ -506,6 +506,13 @@ sap.ui.define(function () {
 
 			}
 
+		},
+			VehicleSelectoinShowVIN:function(vhvin,mmsta)
+		{
+			if((mmsta<"M110")||(mmsta.startsWith("P")))
+			{
+              return ""; 
+			}
 		}
 
 	};
