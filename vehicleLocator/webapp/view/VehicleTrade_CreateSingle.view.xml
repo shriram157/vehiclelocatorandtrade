@@ -121,8 +121,9 @@
 								<Text text="{TradeModel>/VehicleTradeVehicle/zzvtn}" id="vtnid" visible="true"/>
 								
 							     <Label text="{i18n>VIN}" id="vinLableIdOff" visible="{detailView>/showVinDiplayOff}"/>
-								<Text text="{TradeModel>/VehicleTradeVehicle/vhvin}" id="vinVinIdOff" visible="{detailView>/showVinDiplayOff}"/>		
-								
+								<!-- <Text text="{TradeModel>/VehicleTradeVehicle/vhvin}" id="vinVinIdOff" visible="{detailView>/showVinDiplayOff}"/>		 -->
+								<Text text="{parts: [{path:'TradeModel>/VehicleTradeVehicle/vhvin'},{path:'TradeModel>/VehicleTradeVehicle/mmsta'}],formatter:'vehicleLocator.Formatter.Formatter.VehicleSelectoinShowVIN'}" id="vinVinIdOff" visible="{detailView>/showVinDiplayOff}"/> 
+							
 								
 								<Label text="{i18n>ModelYear}" id="moylablid" visible="false"/>
 								<Text text="{TradeModel>/VehicleTradeVehicle/zzmoyr}" id="yearid" visible="false"/>
