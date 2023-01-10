@@ -780,7 +780,7 @@ var selectedAccessInstalled = this.getView().byId("AcceInstalledCobmo").getSelec
 
 						var patt1 = /^P/;
 						//changes by swetha for DMND0003618 on 9/1/2023
-						if (that.selectedTrade.mmsta < "M110" || patt1.test(that.selectedTrade.mmsta) || that.selectedTrade.vhvin == "") {
+						if ((that.selectedTrade.mmsta < "M110" && that.selectedTrade.VehicleTradeVehicle.mmsta.slice(0,1) == "P")  || patt1.test(that.selectedTrade.mmsta) || that.selectedTrade.vhvin == "") {
 							that.selectedTrade.dispalyVin1 = false;
 						} else {
 							that.selectedTrade.dispalyVin1 = true;
