@@ -831,7 +831,7 @@ sap.ui.define([
 						var Requested_Vtn = that.getView().getModel("TradeModel").getData().zzvtn;
 						var Offered_Vtn = that.getView().byId("vtnid").getText();
 						var VIN = that.getView().byId("vinVinIdOff").getText(); 
-						var mmsta = that.getView().getModel("TradeModel").VehicleTradeVehicle.getData().mmsta;          //that.getView().getModel("TradeModel").getData().vhvin;      //changes by swetha for DMND0003618
+						var mmsta = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.mmsta;          //that.getView().getModel("TradeModel").getData().vhvin;      //changes by swetha for DMND0003618
 						if ( mmsta >= "M110" && mmsta.slice(0,1) != "P")  {                        //changes by swetha for mmsta value for DMND0003618
 							VIN = VIN;	
 						} else {
