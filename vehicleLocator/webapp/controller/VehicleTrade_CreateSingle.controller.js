@@ -830,7 +830,13 @@ sap.ui.define([
 						//var Requested_Vtn = that.getView().byId("vtnid").getText();
 						var Requested_Vtn = that.getView().getModel("TradeModel").getData().zzvtn;
 						var Offered_Vtn = that.getView().byId("vtnid").getText();
-						var VIN = that.getView().byId("vinVinIdOff").getText();     //that.getView().getModel("TradeModel").getData().vhvin;      //changes by swetha for DMND0003618
+						var VIN = that.getView().byId("vinVinIdOff").getText(); 
+						var mmsta = that.getView().getModel("TradeModel").VehicleTradeVehicle.getData().mmsta;          //that.getView().getModel("TradeModel").getData().vhvin;      //changes by swetha for DMND0003618
+						if ( mmsta >= "M110" && mmsta.slice(0,1) != "P")  {                        //changes by swetha for mmsta value for DMND0003618
+							VIN = VIN;	
+						} else {
+							VIN = "";
+						}
 						var DateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 							pattern: "yyyy-MM-dd"
 						});
@@ -1268,7 +1274,7 @@ sap.ui.define([
 				var ointeriorReq = that.getView().getModel("TradeModel").oData.zzintcol;
 				var ovtnReq = that.getView().getModel("TradeModel").oData.zzvtn;
 				var ovinReq = that.getView().getModel("TradeModel").oData.vhvin;       //changes by swetha for DMND0003618 on 4/1/23
-
+				
 			/*	if (!that.getView().getModel("TradeModel").oData.dispalyVin1) {
 					ovinReq = ""
 				} else {
