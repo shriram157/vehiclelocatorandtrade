@@ -831,12 +831,12 @@ sap.ui.define([
 						var Requested_Vtn = that.getView().getModel("TradeModel").getData().zzvtn;
 						var Offered_Vtn = that.getView().byId("vtnid").getText();
 						var VIN = that.getView().byId("vinVinIdOff").getText(); 
-						var mmsta = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.mmsta;          //that.getView().getModel("TradeModel").getData().vhvin;      //changes by swetha for DMND0003618
-						if ( mmsta >= "M110" && mmsta.slice(0,1) != "P")  {                        //changes by swetha for mmsta value for DMND0003618
-							VIN = VIN;	
-						} else {
-							VIN = "";
-						}
+						//var mmsta = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.mmsta;          //that.getView().getModel("TradeModel").getData().vhvin;      //changes by swetha for DMND0003618
+						//if ( mmsta >= "M110" && mmsta.slice(0,1) != "P")  {                        //changes by swetha for mmsta value for DMND0003618
+						//	VIN = VIN;	
+						//} else {
+						//	VIN = "";
+						//}
 						var DateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 							pattern: "yyyy-MM-dd"
 						});
@@ -1335,7 +1335,13 @@ sap.ui.define([
 				var Series = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzseries;
 				var exterior = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzextcol;
 				var vtn = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzvtn;
-				that.vin = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.vhvin;          
+				that.vin = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.vhvin;
+				var mmsta = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.mmsta;          //that.getView().getModel("TradeModel").getData().vhvin;      //changes by swetha for DMND0003618
+				if ( mmsta >= "M110" && mmsta.slice(0,1) != "P")  {                        //changes by swetha for mmsta value for DMND0003618
+						that.vin = that.vin;	
+					} else {
+						that.vin = "";
+					}
 				var accInstalled = that.getView().byId("accid").getText();
 				if (accInstalled == "Yes") {
 					accInstalled = 'Y';
