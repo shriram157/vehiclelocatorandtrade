@@ -831,12 +831,6 @@ sap.ui.define([
 						var Requested_Vtn = that.getView().getModel("TradeModel").getData().zzvtn;
 						var Offered_Vtn = that.getView().byId("vtnid").getText();
 						var VIN = that.getView().byId("vinVinIdOff").getText(); 
-						//var mmsta = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.mmsta;          //that.getView().getModel("TradeModel").getData().vhvin;      //changes by swetha for DMND0003618
-						//if ( mmsta >= "M110" && mmsta.slice(0,1) != "P")  {                        //changes by swetha for mmsta value for DMND0003618
-						//	VIN = VIN;	
-						//} else {
-						//	VIN = "";
-						//}
 						var DateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 							pattern: "yyyy-MM-dd"
 						});
@@ -1014,7 +1008,6 @@ sap.ui.define([
 							"Req_Proposed_ETA_From": Req_Proposed_ETA_From,
 							"Req_Proposed_ETA_To": Req_Proposed_ETA_To,
 							"Off_Current_ETA_From": Off_Current_ETA_From,
-							//"VIN": VIN,                     //changes by swetha for DMND0003618 test
 							"Off_Current_ETA_To": Off_Current_ETA_To,
 							"Off_Proposed_ETA_From": Off_Proposed_ETA_From,
 							"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
