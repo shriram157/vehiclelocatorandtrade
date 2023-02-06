@@ -1346,8 +1346,11 @@ sap.ui.define([
 
 								if (a.length > 0) {
 									for (var k = 0; k < a.length; k++) {
+										
+										//changes by swetha for DMND0003618 on 9/1/2023
+										if (a[k].mmsta < "M110"  || patt1.test(a[k].mmsta) || a[k].vhvin == "") {
 
-										if (a[k].mmsta < "M275" || patt1.test(a[k].mmsta) || a[k].vhvin == "") {
+										// if (a[k].mmsta < "M275" || patt1.test(a[k].mmsta) || a[k].vhvin == "") {
 											//	that.getView().byId("ovinId").setVisible(false);
 
 											if (trade_type == "inbound") {
@@ -3595,7 +3598,7 @@ sap.ui.define([
 								TradeVehicles[j].Off_Current_ETA_To = TradeRequest.Off_Current_ETA_To;
 								TradeVehicles[j].Off_Proposed_ETA_From = TradeRequest.Off_Proposed_ETA_From;
 								TradeVehicles[j].Off_Proposed_ETA_To = TradeRequest.Off_Proposed_ETA_To;
-								TradeVehicles[j].VIN = TradeRequest.VIN;                       //changes by swetha for DMND0003618
+							//	TradeVehicles[j].VIN = TradeRequest.VIN;                       //changes by swetha for DMND0003618
 								TradeVehicles[j].Created_By = TradeRequest.Created_By;
 								TradeVehicles[j].Created_On = TradeRequest.Created_On;
 								TradeVehicles[j].Changed_on = TradeRequest.Changed_on;

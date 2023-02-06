@@ -831,7 +831,10 @@ sap.ui.define([
 						var Requested_Vtn = that.getView().getModel("TradeModel").getData().zzvtn;
 						var Offered_Vtn = that.getView().byId("vtnid").getText();
 						//var VIN = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.vhvin;
-						var VIN = that.getView().getModel("TradeModel").getData().vhvin;      //changes by swetha for DMND0003618
+					//	var VIN = that.getView().getModel("TradeModel").getData().vhvin;      //changes by swetha for DMND0003618
+					
+						var VIN = that.getView().byId("vinVinIdOff").getText();     //changes by swetha for DMND0003618
+						
 						var DateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
 							pattern: "yyyy-MM-dd"
 						});
@@ -1009,7 +1012,7 @@ sap.ui.define([
 							"Req_Proposed_ETA_From": Req_Proposed_ETA_From,
 							"Req_Proposed_ETA_To": Req_Proposed_ETA_To,
 							"Off_Current_ETA_From": Off_Current_ETA_From,
-							"VIN": VIN,                     //changes by swetha for DMND0003618
+							// "VIN": VIN,                     //changes by swetha for DMND0003618
 							"Off_Current_ETA_To": Off_Current_ETA_To,
 							"Off_Proposed_ETA_From": Off_Proposed_ETA_From,
 							"Off_Proposed_ETA_To": Off_Proposed_ETA_To,
@@ -1268,13 +1271,14 @@ sap.ui.define([
 				var oexteriorReq = that.getView().byId("Zextcolo").getText().split("-")[0].trim();
 				var ointeriorReq = that.getView().getModel("TradeModel").oData.zzintcol;
 				var ovtnReq = that.getView().getModel("TradeModel").oData.zzvtn;
-				var ovinReq = ""
+				var ovinReq = that.getView().getModel("TradeModel").oData.vhvin;       //changes by swetha for DMND0003618 on 4/1/23
+			//	var ovinReq = ""
 
-				if (!that.getView().getModel("TradeModel").oData.dispalyVin1) {
-					ovinReq = ""
-				} else {
-					ovinReq = that.getView().getModel("TradeModel").oData.vhvin;
-				}
+				// if (!that.getView().getModel("TradeModel").oData.dispalyVin1) {
+				// 	ovinReq = ""
+				// } else {
+				// 	ovinReq = that.getView().getModel("TradeModel").oData.vhvin;
+				// }
 
 				var accIns = that.getView().byId("oAccesIn").getText();
 				if (accIns == 'Yes') {
@@ -1331,6 +1335,12 @@ sap.ui.define([
 				var exterior = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzextcol;
 				var vtn = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.zzvtn;
 				that.vin = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.vhvin;
+				var mmsta = that.getView().getModel("TradeModel").getData().VehicleTradeVehicle.mmsta;          //that.getView().getModel("TradeModel").getData().vhvin;      //changes by swetha for DMND0003618
+				if ( mmsta >= "M110" && mmsta.slice(0,1) != "P")  {                        //changes by swetha for mmsta value for DMND0003618
+						that.vin = that.vin;	
+					} else {
+						that.vin = "";
+					}
 				var accInstalled = that.getView().byId("accid").getText();
 				if (accInstalled == "Yes") {
 					accInstalled = 'Y';
@@ -1372,11 +1382,12 @@ sap.ui.define([
 					success: function (odata, oresponse) {
 						var a = odata.d.results;
 						var patt1 = /^P/;
+						
 
 						for (var k = 0; k < a.length; k++) {
 							if (vtn == a[k].zzvtn) {
-
-								if (a[k].mmsta < "M275" || patt1.test(a[k].mmsta) || a[k].vhvin == "") {
+								if (a[k].mmsta < "M110" || patt1.test(a[k].mmsta) || a[k].vhvin == "") {     //removed (a[k].mmsta < "M275" ||)  changes by swetha for DMND0003618 on 3/1/2023
+								// if (a[k].mmsta < "M275" || patt1.test(a[k].mmsta) || a[k].vhvin == "") {
 									that.vin = "";
 								}
 
