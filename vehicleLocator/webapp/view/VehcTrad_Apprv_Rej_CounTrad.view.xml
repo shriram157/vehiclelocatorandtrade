@@ -63,9 +63,9 @@
 								<Label text="{i18n>VehicleTrackingNumber}" id="ovtnIdText"/>
 								<Text text="{= ${RequestingDealerVisible} === true ?${Requested_Vtn}:${/OffredVehicle/Offered_Vtn}}" id="ovtnId"/>
 								<Label text="{i18n>VIN}" id="ovinIdText" visible="{detailView>/showVinDisplayOffInbound}"/>
-								<Text text="{= ${RequestingDealerVisible} === true ?${VIN}:${/OffredVehicle/VIN}}"  id="ovinId" visible="{detailView>/showVinDisplayOffInbound}"/> <!--visible="{detailView>/showVinDisplayOffInbound}"-->
-							<!--	<Label text="{i18n>VIN}" id="ovinIdText" visible="{detailView>/showVinDisplayOffInbound}" /> -->   <!--changes for defect #17812 on 07/03/2023-->
-							<!--	<Text text="{= ${RequestingDealerVisible} === true ?${VIN}:${/OffredVehicle/VIN}}"  id="ovinId" visible="{detailView>/showVinDisplayOffInbound}"/>--> <!--visible="{detailView>/showVinDisplayOffInbound}"-->
+								<Text text="{= ${RequestingDealerVisible} === true ?${VIN}:${/OffredVehicle/VIN}}"  id="ovinId"/> <!--visible="{detailView>/showVinDisplayOffInbound}"-->
+							<!--	<Label text="{i18n>VIN}" id="ovinIdText" visible="{detailView>/showVinDisplayOffInbound}" />-->    <!--changes for defect #17812 on 07/03/2023-->
+						<!--		<Text text="{= ${RequestingDealerVisible} === true ?${VIN}:${/OffredVehicle/VIN}}"  id="ovinId" />--> <!--visible="{detailView>/showVinDisplayOffInbound}"-->
 								<Label text="{i18n>ModelYear}" id="oMdlyearLbl"/>
 								<Text text="{= ${RequestingDealerVisible} === true ?${Model_Year}:${/OffredVehicle/Model_Year}}" id="oMdlyear"/>
 								<Label text="{i18n>Series}" id= "oSeriesLbl"/>
