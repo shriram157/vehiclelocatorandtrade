@@ -9,7 +9,6 @@
 		},
 		"dataSources": {
 			"xsodata": {
-
 				"uri": "/xsodata/vehicleTrade_SRV.xsodata",                  
 				"type": "OData",
 				"settings": {
