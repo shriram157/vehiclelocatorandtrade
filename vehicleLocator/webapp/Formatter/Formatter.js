@@ -41,7 +41,8 @@ sap.ui.define(function () {
 					two = new Date("1970-01-01");
 				}
 				if (one.getFullYear().toString() == "1970" && two.getFullYear().toString() == "1970") {
-					return dateFormat.format(one, true);
+					return "";// INC0232221 eta on trade screen showing 1970  Shriram 10-July-2023
+					//return dateFormat.format(one, true);
 				}
 				if (one.getFullYear().toString() != "1970" && two.getFullYear().toString() == "1970") {
 					return dateFormat.format(one, true);
