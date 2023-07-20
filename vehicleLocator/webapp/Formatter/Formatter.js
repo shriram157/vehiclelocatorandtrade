@@ -41,14 +41,25 @@ sap.ui.define(function () {
 					two = new Date("1970-01-01");
 				}
 				if (one.getFullYear().toString() == "1970" && two.getFullYear().toString() == "1970") {
-					return "";// INC0232221 eta on trade screen showing 1970  Shriram 10-July-2023
+					return ""; // INC0232221 eta on trade screen showing 1970  Shriram 10-July-2023
 					//return dateFormat.format(one, true);
 				}
 				if (one.getFullYear().toString() != "1970" && two.getFullYear().toString() == "1970") {
-					return dateFormat.format(one, true);
+					console.log("A is not equal to 1970" + dateFormat.format(one, true));
+					if (dateFormat.format(one, true) != 1970) {
+						return dateFormat.format(one, true);
+					} else {
+						return "";
+					}
 				}
 				if (one.getFullYear().toString() == "1970" && two.getFullYear().toString() != "1970") {
-					return dateFormat.format(two, true);
+					console.log("B is not equal to 1970" + dateFormat.format(two, true));
+					if (dateFormat.format(two, true) != 1970) {
+
+						return dateFormat.format(two, true);
+					} else {
+						return "";
+					}
 				}
 			} else {
 				return null;
@@ -508,21 +519,17 @@ sap.ui.define(function () {
 			}
 
 		},
-			VehicleSelectoinShowVIN:function(vhvin,mmsta)
-		{
-			if((mmsta !=null)||(mmsta !=undefined))
-			{
-			if((mmsta<"M110")||(mmsta.startsWith("P")))
-			{
-              return ""; 
-			}else{
-			return vhvin;
-			}
-			}else{
-			return vhvin;
+		VehicleSelectoinShowVIN: function (vhvin, mmsta) {
+			if ((mmsta != null) || (mmsta != undefined)) {
+				if ((mmsta < "M110") || (mmsta.startsWith("P"))) {
+					return "";
+				} else {
+					return vhvin;
+				}
+			} else {
+				return vhvin;
 			}
 		}
-
 
 	};
 
