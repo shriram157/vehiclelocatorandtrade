@@ -423,6 +423,7 @@ sap.ui.define(function () {
 			if (Created_On) {
 				//var oText = val.toUTCString();
 				Oval = moment.utc(Created_On).format("YYYY-MM-DD");
+				console.log("Detecting the value in @@@@@@@@@"+Oval); //Shriram 21-July-2023
 			} else {
 				Oval = null;
 			}
