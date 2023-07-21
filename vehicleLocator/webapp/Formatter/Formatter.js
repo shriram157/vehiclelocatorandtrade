@@ -46,7 +46,7 @@ sap.ui.define(function () {
 				}
 				if (one.getFullYear().toString() != "1970" && two.getFullYear().toString() == "1970") {
 					console.log("A is not equal to 1970" + dateFormat.format(one, true));
-					if (dateFormat.format(one, true) != 1970) {
+					if (one.getFullYear().toString() != "1970") { //INC0232221
 						return dateFormat.format(one, true);
 					} else {
 						return "";
@@ -54,7 +54,7 @@ sap.ui.define(function () {
 				}
 				if (one.getFullYear().toString() == "1970" && two.getFullYear().toString() != "1970") {
 					console.log("B is not equal to 1970" + dateFormat.format(two, true));
-					if (dateFormat.format(two, true) != 1970) {
+					if (two.getFullYear().toString() != "1970") {// INC0232221
 
 						return dateFormat.format(two, true);
 					} else {
