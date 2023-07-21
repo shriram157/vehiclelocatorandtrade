@@ -181,7 +181,7 @@ sap.ui.define([
 			
 			that.oDataUrl2 = this.nodeJsUrl + "/dealers";
 		
-			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl2, true);// commented INC0234628 VL&T application metadata failure  Model Block  20-July-2023	
+			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl2, false);// commented INC0234628 VL&T application metadata failure  Model Block  20-July-2023	
                  var Businesspartnerurl = that.oDataUrl2;
 			// var Businesspartnerurl = that.oDataUrl2 +
 			// 	"/A_BusinessPartner/?$format=json&$expand=to_Customer&$filter=(BusinessPartnerType eq 'Z001' or BusinessPartnerType eq 'Z004' or BusinessPartnerType eq 'Z005') and zstatus ne 'X' &$orderby=BusinessPartner asc";
