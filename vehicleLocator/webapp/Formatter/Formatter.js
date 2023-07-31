@@ -425,6 +425,9 @@ sap.ui.define(function () {
 				if(Created_On=="/Date(0)/") // INC0232221 eta on trade screen showing 1970  Shriram 10-July-2023   added if part
 				{
 					Oval="";
+				}else if(Created_On=="/Date(-2177280000000)/")
+				{
+                  Oval="";
 				}else
 				{
 				Oval = moment.utc(Created_On).format("YYYY-MM-DD");
