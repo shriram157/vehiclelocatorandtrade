@@ -422,7 +422,7 @@ sap.ui.define(function () {
 			var Oval;
 			if (Created_On) {
 				//var oText = val.toUTCString();
-				if(Created_On=="/Date(0)/" || Created_On=="/Date(-2177280000000)/") // INC0232221 eta on trade screen showing 1970  Shriram 10-July-2023   added if part
+				if(Created_On=="/Date(0)/") // INC0232221 eta on trade screen showing 1970  Shriram 10-July-2023   added if part
 				{
 					Oval="";
 				}else
