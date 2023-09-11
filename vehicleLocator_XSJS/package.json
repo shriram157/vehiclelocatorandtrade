@@ -1,11 +1,11 @@
 {
 	"dependencies": {
-    "@sap/xsenv": "^3.2.0",
-    "@sap/async-xsjs": "^1.0.0",
+		"@sap/xsenv": "^3.2.0",
+		"@sap/async-xsjs": "^1.0.0",
 	},
 	"description": "Vehicle Locator XSJS Application for XSoDATA Services",
 	"devDependencies": {
-	
+
 	},
 	"files": [],
 	"main": "server.js",
@@ -14,8 +14,8 @@
 		"start": "node --experimental-vm-modules --max-http-header-size=40960 server.js",
 	},
 	"engines": {
-		"node": 16.x"
+		"node": "16.x"
 	},
 	"version": "2.0.0"
-	
+
 }
