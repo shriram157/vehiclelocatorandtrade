@@ -8,14 +8,13 @@ process.env.XSODATA_LOG_SQL_DATA_VALUE_SIZE = 20000;
 process.env.XSODATA_LOG_SQL_DATA_ARRAY_SIZE = 20000;
 process.env.XSODATA_LOG_MEMORY_CONSUMPTION = 1;
 
-var xsjs = require("@sap/xsjs");
+var async_xsjs = require('@sap/async-xsjs');
 var xsenv = require("@sap/xsenv");
 var port = process.env.PORT || 3000;
 
 var options = {
 	redirectUrl: "/index.xsjs"
 };
-
 
 
 // configure HANA
@@ -41,6 +40,13 @@ try {
 }
 
 // start server
-xsjs(options).listen(port);
+async_xsjs(options).then((async_xsjs_server) => {
+	async_xsjs_server.listen(port, (err) => {
+		if (!err) {
+			console.log('Node XS server listening on port %d', port);
+		} else {
+			console.log('Node XS server failed to start on port %d', port);
+		}
+	});
+});
 
-console.log("Server listening on port %d", port);
