@@ -41,7 +41,7 @@ modules:
     type: nodejs
     path: vehicleLocator_XSJS
     parameters:
-      disk-quota: 512M
+      disk-quota: 1024M
       memory: 512M
    
     properties:
