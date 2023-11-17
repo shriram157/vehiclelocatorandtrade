@@ -42,12 +42,25 @@ sap.ui.define(function () {
 				}
 				if (one.getFullYear().toString() == "1970" && two.getFullYear().toString() == "1970") {
 					return dateFormat.format(one, true);
+				//	return ""; // INC0232221 eta on trade screen showing 1970  Shriram 10-July-2023
+					
 				}
 				if (one.getFullYear().toString() != "1970" && two.getFullYear().toString() == "1970") {
-					return dateFormat.format(one, true);
+					// console.log("A is not equal to 1970" + dateFormat.format(one, true));
+					// if (one.getFullYear().toString() != "1970") { //INC0232221
+						return dateFormat.format(one, true);
+					// } else {
+					// 	return "";
+					// }
 				}
 				if (one.getFullYear().toString() == "1970" && two.getFullYear().toString() != "1970") {
-					return dateFormat.format(two, true);
+					// console.log("B is not equal to 1970" + dateFormat.format(two, true));
+					// if (two.getFullYear().toString() != "1970") {// INC0232221
+
+						return dateFormat.format(two, true);
+					// } else {
+					// 	return "";
+					// }
 				}
 			} else {
 				return null;
@@ -410,7 +423,14 @@ sap.ui.define(function () {
 			var Oval;
 			if (Created_On) {
 				//var oText = val.toUTCString();
+			//	if(Created_On =="/Date(0)/") // INC0232221 eta on trade screen showing 1970  Shriram 10-July-2023   added if part
+			//	{
+			//		Oval="";
+			//	}else
+			//	{
 				Oval = moment.utc(Created_On).format("YYYY-MM-DD");
+			//	}
+				// console.log("Detecting the value in @@@@@@@@@"+Oval); //Shriram 21-July-2023
 			} else {
 				Oval = null;
 			}
@@ -507,21 +527,17 @@ sap.ui.define(function () {
 			}
 
 		},
-			VehicleSelectoinShowVIN:function(vhvin,mmsta)
-		{
-			if((mmsta !=null)||(mmsta !=undefined))
-			{
-			if((mmsta<"M110")||(mmsta.startsWith("P")))
-			{
-              return ""; 
-			}else{
-			return vhvin;
-			}
-			}else{
-			return vhvin;
+		VehicleSelectoinShowVIN: function (vhvin, mmsta) {
+			if ((mmsta != null) || (mmsta != undefined)) {
+				if ((mmsta < "M110") || (mmsta.startsWith("P"))) {
+					return "";
+				} else {
+					return vhvin;
+				}
+			} else {
+				return vhvin;
 			}
 		}
-
 
 	};
 

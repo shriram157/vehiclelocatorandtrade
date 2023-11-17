@@ -41,7 +41,7 @@ modules:
     type: nodejs
     path: vehicleLocator_XSJS
     parameters:
-      disk-quota: 512M
+      disk-quota: 1024M
       memory: 512M
    
     properties:
@@ -117,7 +117,7 @@ resources:
     parameters:
       config:
         schema: vehicleLocator_hdb
-    properties:
+    properties: 
       hdi-container-name: '${service-name}'
   - name: uaa_vehiclelocatorandtrade
     type: org.cloudfoundry.managed-service
