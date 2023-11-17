@@ -180,7 +180,7 @@ sap.ui.define([
 			// that.oDataUrl2 = this.nodeJsUrl + "/API_BUSINESS_PARTNER";
 			
 			that.oDataUrl2 = this.nodeJsUrl + "/dealers";
-		
+			that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl2, true);
 		//	that.oDataModel = new sap.ui.model.odata.ODataModel(that.oDataUrl2, yes);// commented INC0234628 VL&T application metadata failure  Model Block  20-July-2023	shriram
                  var Businesspartnerurl = that.oDataUrl2;
 			// var Businesspartnerurl = that.oDataUrl2 +

@@ -41,8 +41,9 @@ sap.ui.define(function () {
 					two = new Date("1970-01-01");
 				}
 				if (one.getFullYear().toString() == "1970" && two.getFullYear().toString() == "1970") {
-					return ""; // INC0232221 eta on trade screen showing 1970  Shriram 10-July-2023
-					//return dateFormat.format(one, true);
+					return dateFormat.format(one, true);
+				//	return ""; // INC0232221 eta on trade screen showing 1970  Shriram 10-July-2023
+					
 				}
 				if (one.getFullYear().toString() != "1970" && two.getFullYear().toString() == "1970") {
 					// console.log("A is not equal to 1970" + dateFormat.format(one, true));
@@ -422,13 +423,13 @@ sap.ui.define(function () {
 			var Oval;
 			if (Created_On) {
 				//var oText = val.toUTCString();
-				if(Created_On =="/Date(0)/") // INC0232221 eta on trade screen showing 1970  Shriram 10-July-2023   added if part
-				{
-					Oval="";
-				}else
-				{
+			//	if(Created_On =="/Date(0)/") // INC0232221 eta on trade screen showing 1970  Shriram 10-July-2023   added if part
+			//	{
+			//		Oval="";
+			//	}else
+			//	{
 				Oval = moment.utc(Created_On).format("YYYY-MM-DD");
-				}
+			//	}
 				// console.log("Detecting the value in @@@@@@@@@"+Oval); //Shriram 21-July-2023
 			} else {
 				Oval = null;
