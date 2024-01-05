@@ -1,0 +1,545 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:tnt="sap.tnt"
+	controllerName="vehicleLocator.controller.VehcTrad_Apprv_Rej_CounTrad" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form"
+	xmlns:uxap="sap.uxap" xmlns:t="sap.ui.table" xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages class="oImgsampl" height="200px">
+			<Page showNavButton="false" navButtonPress="onBack" id="App_Apprvpage">
+				<customHeader>
+					<Bar class="sapUiSmallPaddingBeginEnd clCustomHeaderBg">
+						<contentLeft>
+						
+							<Image id="idLexusLogo" src="Images/toyota_logo_colour.png" width="100px"/>
+							<Text text="|" class="sapUiTinyMarginBeginEnd"/>
+							<Text class="clCustomFont" text="{i18n>PageTitle}"/>
+						</contentLeft>
+						<contentRight>
+						 
+									<!--<Button   class="VLbtn2" text="{i18n>Back}" type="Transparent" press="onNavBack" width="auto"/>-->
+						<!--<Link text="{i18n>Back}" class="clCustomFont sapUiSmallMargin" press="handlebacksearch"/>-->
+						</contentRight>
+					</Bar>
+				</customHeader>
+				<!--<customHeader>-->
+				<!--	<Bar class="sapUiSmallPaddingBeginEnd clCustomHeaderBg">-->
+				<!--		<contentLeft>-->
+				<!--			<Image id="idLexusLogo" src="Images/toyota_logo_colour.png" width="100px"/>-->
+				<!--			<Text text="|" class="sapUiTinyMarginBeginEnd"/>-->
+				<!--			<Text class="clCustomFont" text="{i18n>PageTitle}"/>-->
+				<!--		</contentLeft>-->
+				<!--		<contentRight>-->
+				<!--			<Button text="Logout"/>-->
+				<!--		</contentRight>-->
+				<!--	</Bar>-->
+				<!--</customHeader>-->
+				<content>
+					<tnt:ToolHeader>
+			            <Label id="oDealerCode5" width="auto"/>
+						<Label id="oDealerAprvRejCntoffr" width="auto"/>
+					<ToolbarSpacer/>
+								<Button   class="VLbtn2" text="{i18n>Back}" type="Transparent" press="onNavBack" width="auto"/>
+					</tnt:ToolHeader>
+				<!--	<Toolbar height="45px" class="toolbar3">
+						
+						<ToolbarSpacer></ToolbarSpacer>
+							</Toolbar>-->
+						<!--<Button text="Vehicle Locator" press="handleLinkPress"/>
+						<Button text="Sold Order" press="handleLinkPress"/>
+						<Button text="Price Protection" press="handleLinkPress"/>
+						<Button text="Inventory Summary" press="handleLinkPress"/>
+						<Button text="Sujjest Order" press="handleLinkPress"/>-->
+				
+					<VBox class="sapUiSmallMargin">
+						<OverflowToolbar id="otb1">
+							<Label text="{i18n>CreateTradeRequest} {detailView>/tradeId}" width="250px" class="vHlabe1clss"/>
+						 
+							<ToolbarSpacer/>
+						</OverflowToolbar>
+					</VBox>
+					<VBox class="sapUiSmallMargin">
+						<form:SimpleForm id="SimpleFormAproveTrReq" editable="true" layout="ResponsiveGridLayout" labelSpanM="12" adjustLabelSpan="false"
+							emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2">
+							<form:content id = "requForm">
+								<core:Title text="{i18n>InboundVehicleInformation}"/>
+								<Label text="{i18n>VehicleTrackingNumber}" id="ovtnIdText"/>
+								<Text text="{= ${RequestingDealerVisible} === true ?${Requested_Vtn}:${/OffredVehicle/Offered_Vtn}}" id="ovtnId"/>
+								<Label text="{i18n>VIN}" id="ovinIdText" visible="{detailView>/showVinDisplayOffInbound}"/>
+								<Text text="{= ${RequestingDealerVisible} === true ?${VIN}:${/OffredVehicle/VIN}}"  id="ovinId" visible="{detailView>/showVinDisplayOffInbound}"/> 
+							<!--	<Label text="{i18n>VIN}" id="ovinIdText" visible="{detailView>/showVinDisplayOffInbound}" />-->    <!--changes for defect #17812 on 07/03/2023-->
+						<!--		<Text text="{= ${RequestingDealerVisible} === true ?${VIN}:${/OffredVehicle/VIN}}"  id="ovinId" />--> <!--visible="{detailView>/showVinDisplayOffInbound}"-->
+								<Label text="{i18n>ModelYear}" id="oMdlyearLbl"/>
+								<Text text="{= ${RequestingDealerVisible} === true ?${Model_Year}:${/OffredVehicle/Model_Year}}" id="oMdlyear"/>
+								<Label text="{i18n>Series}" id= "oSeriesLbl"/>
+								<Text text="{= ${RequestingDealerVisible} === true ?${Series_Desc}:${/OffredVehicle/Series_Desc}}" id="oSeries"/>
+								<Label text="{i18n>Model}" id = "oModelLbl"/>
+								<Text text="{= ${RequestingDealerVisible} === true ?${Model}:${OffredVehicle/Model}}-{=${RequestingDealerVisible} === true ?${Model_Desc}:${OffredVehicle/Model_Desc}}" id="oModel"/>
+								<Label text="{i18n>Suffix}" id= "oSuffixLbl"/>
+								<Text text="{= ${RequestingDealerVisible} === true ?${Suffix}:${OffredVehicle/Suffix}}-{=${RequestingDealerVisible} === true ?${Suffix_Desc}:${OffredVehicle/Suffix_Desc}}/{=${RequestingDealerVisible} === true ?${Int_Colour_Desc}:${OffredVehicle/Int_Colour_Desc}}" id="intdesr"/>
+								<Label text="{i18n>ExteriorColor}" id = "extcoLbl"/>
+								<Text text="{= ${RequestingDealerVisible} === true ?${Ext_Colour}:${OffredVehicle/Ext_Colour}}-{=${RequestingDealerVisible} === true ?${Ext_Colour_Desc}:${OffredVehicle/Ext_Colour_Desc}}" id="extco"/>							
+								<Label text="{i18n>APX}" id = "oapxLbl"/>
+								<Text text="{= ${RequestingDealerVisible} === true ?${APX}:${/OffredVehicle/APX}}" id="oapx"/>
+								<Label text="{i18n>AccessoryInstall}" id="accInstLbl"/>
+								<Text text="{= ${RequestingDealerVisible} === true ?${path:'AccessoryInstalled',formatter:'vehicleLocator.Formatter.Formatter.DNC'}:${path:'/OffredVehicle/AccessoryInstalled',formatter:'vehicleLocator.Formatter.Formatter.DNC'}}" id="accInst"/>
+								<Label text="{i18n>Status}" id="ostatusLbl"/>
+								<Text text="{= ${RequestingDealerVisible} === true ?${path:'Status',formatter:'vehicleLocator.Formatter.Formatter.Status'}:${path:'/OffredVehicle/Status',formatter:'vehicleLocator.Formatter.Formatter.Status'}}" id="ostatus"/>
+								<Label text="{i18n>OrderType}" visible="{detailView>/showOrderType}" id="ordTypLbl"/>
+								<Text text="{= ${RequestingDealerVisible} === true ?${path:'Order_Type',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}:${path:'/OffredVehicle/Order_Type',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}}" id="oOdrtype" visible="{detailView>/showOrderType}" />
+								<Label text="{i18n>CurrentETA} - {i18n>From}" id="cetalabid"/>
+								<VBox>
+									<HBox>
+										<Text text="{= ${RequestingDealerVisible} === true ?${path:'/OffredVehicle/Req_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'Off_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="ctetid"
+											class="sapUiSmallMarginEnd">
+			 
+										</Text>
+										<Text text="{= ${RequestingDealerVisible} === true ?${path:'Req_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'/OffredVehicle/Off_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="ctetid1"
+											class="sapUiSmallMarginEnd">
+			 
+										</Text>
+										
+										<Text text="{ parts:[{ path : 'Req_Current_ETA_From' }, { path : 'Off_Current_ETA_From' }],formatter:'vehicleLocator.Formatter.Formatter.ReturnCorrectValue'}" id="ctetid2"
+											class="sapUiSmallMarginEnd">
+			 
+										</Text>
+										
+										<!--<Text text="{i18n>From}" id="frmid"/>-->
+									<!--</HBox>-->
+									<!--<HBox>-->
+										<Text text="{i18n>To} : {= ${RequestingDealerVisible} === true ?${path:'/OffredVehicle/Req_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'Off_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="txtlab"
+											class="sapUiSmallMarginEnd"></Text>
+											
+										<Text text="{i18n>To} : {= ${RequestingDealerVisible} === true ?${path:'Req_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'/OffredVehicle/Off_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="txtlab1"
+											class="sapUiSmallMarginEnd"></Text>
+										<!--<Text text="{i18n>To}" id="tolbid"/>-->
+										
+										<Text text="{i18n>To} : { parts:[{ path : 'Req_Current_ETA_To' }, { path : 'Off_Current_ETA_To' }],formatter:'vehicleLocator.Formatter.Formatter.ReturnCorrectValue'}" id="txtlab2"
+											class="sapUiSmallMarginEnd">
+			 
+										</Text>
+									 
+									</HBox>
+								</VBox>
+								<Label text="{i18n>PropsedETAtoNewDealer} - {i18n>From}" id="prlabid"  wrapping="true"/>
+								<VBox>
+									<HBox>
+										<Text text="{= ${RequestingDealerVisible} === true ?${path:'/OffredVehicle/Req_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'Off_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="prpetid"
+											class="sapUiSmallMarginEnd"></Text>
+											<Text text="{= ${RequestingDealerVisible} === true ?${path:'Req_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'/OffredVehicle/Off_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="prpetid1"
+											class="sapUiSmallMarginEnd"></Text>
+										<!--<Text text="{i18n>From}" id="fmlabid"/>-->
+									<!--</HBox>-->
+								 	<Text text="{ parts:[{ path : 'Req_Proposed_ETA_From' }, { path : 'Off_Proposed_ETA_From' }],formatter:'vehicleLocator.Formatter.Formatter.ReturnCorrectValue'}" id="prpetid2"
+											class="sapUiSmallMarginEnd">
+			 
+										</Text>
+									<!--<HBox>-->
+										<Text text="{i18n>To} : {= ${RequestingDealerVisible} === true ?${path:'/OffredVehicle/Req_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'Off_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="otxtlabel"
+											class="sapUiSmallMarginEnd"></Text>
+											
+										<Text text="{i18n>To} : {= ${RequestingDealerVisible} === true ?${path:'Req_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'/OffredVehicle/Off_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="otxtlabel1"
+											class="sapUiSmallMarginEnd"></Text>
+										<!--<Text text="{i18n>To}" id="idlbltxt"/>-->
+										
+										<Text text="{i18n>To} : { parts:[{ path : 'Req_Proposed_ETA_To' }, { path : 'Off_Proposed_ETA_To' }],formatter:'vehicleLocator.Formatter.Formatter.ReturnCorrectValue'}" id="otxtlabel2"
+											class="sapUiSmallMarginEnd">
+			 
+										</Text>
+									</HBox>
+								</VBox>
+								<Label text="{i18n>DonotCall(DNC)Vehicle}" id= "VT_ARCTDncLbl"/>
+								<Text text="{path:'DNC',formatter:'vehicleLocator.Formatter.Formatter.DNC'}" id="VT_ARCTDnc"/>
+			 
+								<Label text="{i18n>DNCBlockout(Days)}"/>
+								<!--<ComboBox id="VT_ARCDnc" selectionChange="ondncblckoutchnage" width="220px" items="{/}" visible= "false">-->
+								<!--	<core:ListItem key="{Zzduration}" text="{Zzduration}"/>-->
+								<!--</ComboBox>-->
+							
+								    <ComboBox id="VT_ARCDnc" width="220px" 
+										items="{
+											path: 'dncDays>/'
+										}">
+										<core:Item key="{dncDays>key}" text="{dncDays>text}" />
+									</ComboBox>
+													
+													
+		
+								<Label text="{i18n>TradeinReturn}"/>
+			
+								<ComboBox id="VT_ARCTtrdinRet" selectionChange="onTradeReqStat" width="220px" items="{/}" selectedKey="{/0/Trade_Return}" editable="false">
+									<core:ListItem key="{Trade_Return}" text="{path:'Trade_Return',formatter:'vehicleLocator.Formatter.Formatter.TradeReturn'}"/>
+								</ComboBox>
+								<Label text="{i18n>Status}"/>
+							 
+								<Text text="{path:'Trade_Status',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryStatus'}" id="VT_ARCTtrdinStatus" width="220px"/>
+						 
+							</form:content>		
+
+								<form:content id="offervehidContent">	
+								<core:Title text="{i18n>OutboundVehicleInformation}" id="Offerevehid"/>
+								<Label text="Dealer" id="offeredDealer"/>
+		
+								<Text
+									text="{= ${RequestingDealerVisible} === true ?${path:'Requested_Dealer',formatter:'vehicleLocator.Formatter.Formatter.Dealer'}:${path:'Requesting_Dealer',formatter:'vehicleLocator.Formatter.Formatter.Dealer'}}-{= ${RequestingDealerVisible} === true ?${Requested_Dealer_Name}:${Requesting_Dealer_Name}}"
+id="oRequesteddealer"/>
+									<!--text="{path:'/OffredVehicle/Requesting_Dealer',formatter:'vehicleLocator.Formatter.Formatter.Dealer'}-{/OffredVehicle/Requesting_Dealer_Name}"-->
+									
+									
+									
+									
+							   	<Label text="{i18n>VehicleTrackingNumber}" id="vtnlabeid" />
+								<Text text="{= ${RequestingDealerVisible} === false ?${Requested_Vtn}:${/OffredVehicle/Offered_Vtn}}" id="vtnid"/>
+								<Label text="{i18n>VIN}" id="vinlabeid"/>
+							    <Text text="{= ${RequestingDealerVisible} === false ?${VIN}:${OffredVehicle/VIN}}" id="vinid"/> <!--changes by swetha for DMND0003618-->
+						    <!--		<Text text="{= ${RequestingDealerVisible} === false ?${VIN}:${/OffredVehicle/VIN}}" id="vinid" visible="{detailView>/showVinDiplayOff}"/>-->
+								<!--	"{path:'TradeModel>kunnr',formatter:'vehicleLocator.Formatter.Formatter.Dealer'}-{TradeModel>name1}"-->
+								<Label text="{i18n>ModelYear}" id="ofrModellabl"/>
+								<Text text="{= ${RequestingDealerVisible} === false ?${Model_Year}:${/OffredVehicle/Model_Year}}" id="ofrmodelyeartext"/>
+								<Label text="{i18n>Series}" id="ofrserieslabl"/>
+								<Text text="{= ${RequestingDealerVisible} === false ?${Series_Desc}:${/OffredVehicle/Series_Desc}}" id="ofrseriestxt"/>
+								<Label text="{i18n>Model}" id="ofrmodllabl"/>
+								<Text text="{= ${RequestingDealerVisible} === false ?${Model}:${OffredVehicle/Model}}-{=${RequestingDealerVisible} === false ?${Model_Desc}:${OffredVehicle/Model_Desc}}" id="ofrmodltxt"/>
+								<Label text="{i18n>Suffix}" id="ofrsuffixlabl"/>
+								<Text text="{= ${RequestingDealerVisible} === false ?${Suffix}:${OffredVehicle/Suffix}}-{=${RequestingDealerVisible} === false ?${Suffix_Desc}:${OffredVehicle/Suffix_Desc}}/{=${RequestingDealerVisible} === false ?${Int_Colour_Desc}:${OffredVehicle/Int_Colour_Desc}}" id="ofrsuffixstxt"/>
+						
+							<Label text="{i18n>ExteriorColor}" id="ofrextcolorlabl"/>
+								<Text text="{= ${RequestingDealerVisible} === false ?${Ext_Colour}:${OffredVehicle/Ext_Colour}}-{=${RequestingDealerVisible} === false ?${Ext_Colour_Desc}:${OffredVehicle/Ext_Colour_Desc}}" id="ofrexttxt"/>
+							
+							
+								<Label text="{i18n>APX}" id="ofrapxlabl"/>
+								<Text text="{= ${RequestingDealerVisible} === false ?${APX}:${/OffredVehicle/APX}}" id="ofrapxtxt"/>
+								<Label text="{i18n>AccessoryInstall}" id="accid"/>
+								<Text text="{= ${RequestingDealerVisible} === false ?${path:'AccessoryInstalled',formatter:'vehicleLocator.Formatter.Formatter.DNC'}:${path:'/OffredVehicle/AccessoryInstalled',formatter:'vehicleLocator.Formatter.Formatter.DNC'}}" id="oAccesIn"/>
+						
+								<Label text="{i18n>Status}" id="ofrstatuslabl"/>
+								<Text text="{= ${RequestingDealerVisible} === false ?${path:'Status',formatter:'vehicleLocator.Formatter.Formatter.Status'}:${path:'/OffredVehicle/Status',formatter:'vehicleLocator.Formatter.Formatter.Status'}}" id="ofrstatustxt"/>
+								<Label text="{i18n>OrderType}" id="ofrordrtypelabl"/>
+								<Text text="{= ${RequestingDealerVisible} === false ?${path:'Order_Type',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}:${path:'/OffredVehicle/Order_Type',formatter:'vehicleLocator.Formatter.Formatter.OrderType'}}" id="ofrordtypetxt"/>
+								<Label text="{i18n>CurrentETA} - {i18n>From}" id="cetalaid"></Label>
+								<VBox>
+									<HBox>
+										<Text text="{= ${RequestingDealerVisible} === false ?${path:'Req_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'/OffredVehicle/Off_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="ctqtid"
+											class="sapUiSmallMarginEnd"></Text>
+										<Text text="{= ${RequestingDealerVisible} === false ?${path:'Req_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'Off_Current_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="ctqtid1"
+											class="sapUiSmallMarginEnd"></Text>
+										<!--<Text text="{i18n>From}" id="fromqid"/>-->
+										<Text text="{ parts:[{ path : 'Req_Current_ETA_From' }, { path : 'Off_Current_ETA_From' }],formatter:'vehicleLocator.Formatter.Formatter.ReturnCorrectValue'}" id="ctqtid2"
+											class="sapUiSmallMarginEnd">
+			 
+										</Text>
+									<!--</HBox>-->
+									<!--<HBox>-->
+									 
+										<Text text="{i18n>To} : {= ${RequestingDealerVisible} === false ?${path:'Req_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'/OffredVehicle/Off_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="txlab"
+											class="sapUiSmallMarginEnd"></Text>
+										<Text text="{i18n>To} : {= ${RequestingDealerVisible} === false ?${path:'Req_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'Off_Current_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="txlab1"
+											class="sapUiSmallMarginEnd"></Text>
+										<!--<Text text="{i18n>To}" id="tobid"/>-->
+										<Text text="{i18n>To} : { parts:[{ path : 'Req_Current_ETA_To' }, { path : 'Off_Current_ETA_To' }],formatter:'vehicleLocator.Formatter.Formatter.ReturnCorrectValue'}" id="txlab2"
+											class="sapUiSmallMarginEnd">
+			 
+										</Text>
+									</HBox>
+								</VBox>
+					 
+								<Label text="{i18n>PropsedETAtoNewDealer} - {i18n>From}" id="prolabid"  wrapping="true"/>
+								<VBox>
+									<HBox>
+										<Text text="{= ${RequestingDealerVisible} === false ?${path:'Req_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'/OffredVehicle/Off_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="prptid"
+											class="sapUiSmallMarginEnd"></Text>
+										
+										<Text text="{= ${RequestingDealerVisible} === false ?${path:'Req_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'Off_Proposed_ETA_From',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="prptid1"
+											class="sapUiSmallMarginEnd"></Text>
+										<!--<Text text="{i18n>From}" id="fmlbid"/>-->
+										<Text text="{ parts:[{ path : 'Req_Proposed_ETA_From' }, { path : 'Off_Proposed_ETA_From' }],formatter:'vehicleLocator.Formatter.Formatter.ReturnCorrectValue'}" id="prptid2"
+											class="sapUiSmallMarginEnd">
+			 
+										</Text>
+									<!--</HBox>-->
+									<!--<HBox>-->
+									 
+										<Text text="{i18n>To} : {= ${RequestingDealerVisible} === false ?${path:'Req_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'/OffredVehicle/Off_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="otxlabel"
+											class="sapUiSmallMarginEnd"></Text>
+										<Text text="{i18n>To} : {= ${RequestingDealerVisible} === false ?${path:'Req_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}:${path:'Off_Proposed_ETA_To',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}}" id="otxlabel1"
+											class="sapUiSmallMarginEnd"></Text>
+											<Text text="{i18n>To} : { parts:[{ path : 'Req_Proposed_ETA_To' }, { path : 'Off_Proposed_ETA_To' }],formatter:'vehicleLocator.Formatter.Formatter.ReturnCorrectValue'}" id="otxlabel2"
+											class="sapUiSmallMarginEnd">
+			 
+										</Text>
+		
+											
+										<!--<Text text="{i18n>To}" id="idlto"/>-->
+									</HBox>
+								</VBox>
+							</form:content>
+						</form:SimpleForm>
+					</VBox>
+					
+		<f:SimpleForm id="SimpleFormApr"
+			editable="false"
+			layout="ResponsiveGridLayout"
+	 
+			labelSpanXL="3"
+			labelSpanL="3"
+			labelSpanM="3"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="4"
+			emptySpanL="4"
+			emptySpanM="4"
+			emptySpanS="0"
+			columnsXL="1"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="false" >
+			<f:content>
+				
+				
+						<Table id="tableVrade" width="98%" class="sapUiResponsiveMargin" alternateRowColors="true" 
+                   items="{
+                    path: 'commentsModel>/',
+                    sorter: [{
+                    path: 'Comment_Id',
+                    descending: true
+                    },
+                    {
+                    path: 'Comment_Id',
+                    descending: true
+                    }]
+                    }"
+                       noDataText="{i18n>NoData}"
+
+                   updateFinished="onUpdateFinished"
+                   mode="None"
+                   modeAnimationOn="true">
+
+                <!--<headerToolbar>-->
+                <!--    <OverflowToolbar id="otbSubheader">-->
+ 
+                <!--        <ToolbarSpacer/>-->
+                <!--        <SearchField id="searchVehicleList" liveChange="onLiveChange" showSearchButton="true"-->
+                <!--                     placeholder="Search table...">-->
+                <!--            <layoutData>-->
+                <!--                <OverflowToolbarLayoutData minWidth="200px" maxWidth="300px" shrinkable="true"/>-->
+                <!--            </layoutData>-->
+                <!--        </SearchField>-->
+                <!--        <Button text="Reset" type="Transparent" press="onReset"/>-->
+                <!--        <Button tooltip="Sort table by selected fields" icon="sap-icon://drop-down-list"-->
+                <!--                press="handleViewSettingsDialogButtonPressed" text="Sorting"/>-->
+                <!--    </OverflowToolbar>-->
+                <!--</headerToolbar>-->
+
+                <columns>
+
+                    <Column id="dateId" demandPopin="true" minScreenWidth="Tablet" width="13rem" hAlign="Center">
+                        <Text text="{i18n>Date}" id="date"/>
+                    </Column>
+                    <Column id="userId" demandPopin="true" minScreenWidth="Tablet" hAlign="Left" width="14rem">
+                        <Text text="{i18n>User}"/>
+                    </Column>
+                    <Column id="comments"  demandPopin="true"  width="auto"
+                            minScreenWidth="Tablet"  hAlign="Left">
+                        <Text text="{i18n>Comments}"/>
+                    </Column>
+
+                </columns>
+
+                <items>
+                   <ColumnListItem  >
+                        <cells>
+                          
+                          	<Text text="{path:'commentsModel>Comment_Date',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}"  wrapping="false" />
+                          	<Text text="{commentsModel>Created_By}" wrapping="false"/>
+                          	<Text text="{commentsModel>Comment_Txt}" wrapping="true"/>
+                 
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>			
+				
+
+						<!--<t:Table id="tableVrade" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None"-->
+						<!--		rows="{ path:'/', sorter : [{ path:'Comment_Date', descending : 'true' }] }">-->
+						<!--		<t:columns>-->
+						<!--			<t:Column sortProperty="Comment_Date" id="Comment_Date">-->
+						<!--				<Label text="{i18n>Date}"/>-->
+						<!--				<t:template>-->
+						<!--					<Text text="{path:'Comment_Date',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false"/>-->
+						<!--				</t:template>-->
+						<!--			</t:Column>-->
+						<!--			<t:Column>-->
+						<!--				<Label text="{i18n>User}"/>-->
+						<!--				<t:template>-->
+						<!--					<Text text="{Created_By}" wrapping="false"/>-->
+						<!--				</t:template>-->
+						<!--			</t:Column>-->
+						<!--			<t:Column sortProperty="matnr">-->
+						<!--				<Label text="{i18n>Comments}"/>-->
+						<!--				<t:template>-->
+						<!--					<Text text="{Comment_Txt}" wrapping="false"/>-->
+						<!--				</t:template>-->
+						<!--			</t:Column>-->
+						<!--		</t:columns>-->
+						<!--	</t:Table>-->
+			</f:content>
+		</f:SimpleForm>				
+					
+					
+					
+					
+					
+					<!--<form:SimpleForm id="SimpleFormApr" editable="true" layout="ResponsiveGridLayout" labelSpanM="12" adjustLabelSpan="false" emptySpanL="0"-->
+					<!--	emptySpanM="0" columnsL="2" columnsM="2">-->
+					<!--	<form:content>-->
+					<!--		<core:Title text=""/>-->
+					<!--		<t:Table id="tableVrade" cellClick="onRowPress" selectionBehavior="Row" selectionMode="None"-->
+					<!--			rows="{ path:'/', sorter : [{ path:'Comment_Date', descending : 'true' }] }">-->
+					<!--			<t:columns>-->
+					<!--				<t:Column sortProperty="Comment_Date" id="Comment_Date">-->
+					<!--					<Label text="{i18n>Date}"/>-->
+					<!--					<t:template>-->
+					<!--						<Text text="{path:'Comment_Date',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" wrapping="false"/>-->
+					<!--					</t:template>-->
+					<!--				</t:Column>-->
+					<!--				<t:Column>-->
+					<!--					<Label text="{i18n>User}"/>-->
+					<!--					<t:template>-->
+					<!--						<Text text="{Created_By}" wrapping="false"/>-->
+					<!--					</t:template>-->
+					<!--				</t:Column>-->
+					<!--				<t:Column sortProperty="matnr">-->
+					<!--					<Label text="{i18n>Comments}"/>-->
+					<!--					<t:template>-->
+					<!--						<Text text="{Comment_Txt}" wrapping="false"/>-->
+					<!--					</t:template>-->
+					<!--				</t:Column>-->
+					<!--			</t:columns>-->
+					<!--		</t:Table>-->
+					<!--	</form:content>-->
+					<!--</form:SimpleForm>-->
+		
+		
+		
+		
+					<!--	<Table id="tableVrade" width="auto" class="sapUiResponsiveMargin" items="{/}" growingThreshold="150">
+						<columns>
+							<Column minScreenWidth="Desktop" demandPopin="true">
+								<Text text="{i18n>Date}"/>
+							</Column>
+							<Column minScreenWidth="Desktop" demandPopin="true">
+								<Text text="{i18n>User}"/>
+							</Column>
+							<Column minScreenWidth="Desktop" demandPopin="true">
+								<Text text="{i18n>Comments}"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem press="onLineItemPressedtree1" type="Navigation">
+								<cells>
+									<Text text="{Created_On}"/>
+									<Text text="{Created_By}"/>
+									<Text text="{Comment_Txt}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>-->
+					<VBox class="sapUiSmallMargin">
+						<form:SimpleForm id="SimpleForrmDisa220" editable="true" layout="ResponsiveGridLayout" labelSpanM="12" adjustLabelSpan="false"
+							emptySpanL="0" emptySpanM="0" columnsL="3" columnsM="3">
+							<form:content>
+								<core:Title text="" class="Vtaprct1"/>
+								<VBox>
+									<!--	<FlexBox height="100px" alignItems="Start" justifyContent="Start"/>-->
+									<Label text="{i18n>Comments}" />
+									<TextArea width="100%" height="100px" id="oComments" value=""
+									showExceededText="false" maxLength="150"   valueState="{= ${/value}.length > 150 ? 'Warning' : 'None' }"	liveChange="handleLiveChangeText">
+										<layoutData>
+											<l:GridData span="L4 M12 S3"/>
+										</layoutData>
+									</TextArea>
+	<MessageStrip text="{i18n>TradeCreated} {Created_By} {i18n>On} {path:'Created_On',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}" class="Messagestrip1"/>
+ 
+								</VBox>
+ 	                    <core:Title text="" class="Vtaprct1"/>
+									<VBox>
+								<Text text="{Url}" />
+							    <!--<Label text="" />-->
+								<Button text="{i18n>AddComments}" id="oAddbutton" width="auto" enabled="false" press="oAddCommentsArea">
+									<layoutData>
+											<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Button>
+									</VBox>
+	
+								<core:Title text="" class="Vtaprct1"/>
+								<VBox>
+									<Text text="{i18n>counterOfferText}" width=""/>	
+									<Text text="{i18n>disclaimerText}"	width=""/>	
+									<Label text=""/>
+									<HBox>
+										<FlexBox width="10px"></FlexBox>
+										<FlexBox height="50px" alignItems="Start" justifyContent="Start">
+											<Button text="{i18n>Accept}" width="100px" id="oacceptbtn" press="oAccept"/>
+											<FlexBox width="7px"></FlexBox>
+										</FlexBox>
+										<FlexBox width="10px"></FlexBox>
+										<FlexBox height="50px" alignItems="Start" justifyContent="Start">
+											<Button text="{i18n>Reject}" width="100px" id="oRejectbtn" press="onReject"/>
+											<FlexBox width="7px"></FlexBox>
+										</FlexBox>
+										<FlexBox width="10px"></FlexBox>
+										<FlexBox height="50px" alignItems="Start" justifyContent="Start">
+											<Button text="{i18n>CounterOffer}" width="150px" id="oCounterofrbtn" press="onCounterTrade"/>
+											<FlexBox width="7px"></FlexBox>
+										</FlexBox>
+									</HBox>
+									<Label text=""/>
+									<HBox>
+										<FlexBox width="10px"></FlexBox>
+										<FlexBox height="200px" alignItems="Start" justifyContent="Start">
+											<Button text="{i18n>Back}" width="100px" press="oBack" id="oBackbtnid"/>
+											<FlexBox width="7px"></FlexBox>
+										</FlexBox>
+										<FlexBox width="10px"></FlexBox>
+										<FlexBox height="200px" alignItems="Start" justifyContent="Start">
+											<Button text="{i18n>Cancel}" width="100px" id="oCancelbtn" press="onCancel"/>
+											<FlexBox width="7px"></FlexBox>
+										</FlexBox>
+										<FlexBox width="10px"></FlexBox>
+										<FlexBox height="200px" alignItems="Start" justifyContent="Start">
+											<Button text="{i18n>Update}" width="150px" press="oUpdateTradeRequest" id="oUpdatebtn"/>
+											<FlexBox width="7px"></FlexBox>
+										</FlexBox>
+									</HBox>
+									
+								</VBox>
+							</form:content>
+						</form:SimpleForm>
+					</VBox>
+				</content>
+				<footer>
+					<Bar>
+						<contentRight>
+							<Button
+								text="{i18n>TradeCreated}{Created_By} {i18n>On} {path:'Created_On',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}"/>
+							<!--	<MessageStrip 
+			text="{i18n>TradeCreated}{Created_By} {i18n>On} {path:'Created_On',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}"
+		
+				showIcon="false"
+				showCloseButton="false"
+				class="sapUiMediumMarginTop">
+			</MessageStrip>	-->
+						</contentRight>
+					</Bar>
+				</footer>
+				<!--	<footer>
+					<Bar>
+						<contentLeft>
+							<ToolbarSpacer/>
+							<Text text="Trade Requested Created By {Created_By} on {path:'Created_On',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDate'}"
+								id="cretby"/>
+						</contentLeft>
+					</Bar>
+				</footer>-->
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

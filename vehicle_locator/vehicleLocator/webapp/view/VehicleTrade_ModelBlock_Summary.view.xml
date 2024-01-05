@@ -1,0 +1,204 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:tnt="sap.tnt" xmlns:uxap="sap.uxap" xmlns:t="sap.ui.table" xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml" controllerName="vehicleLocator.controller.VehicleTrade_ModelBlock_Summary">
+	<App>
+		<pages>
+			<Page showNavButton="false" navButtonPress="onBack">
+				
+				 				<customHeader>
+					<Bar class="sapUiSmallPaddingBeginEnd clCustomHeaderBg">
+						<contentLeft>
+						
+							<Image id="idLexusLogo" src="Images/toyota_logo_colour.png" width="100px"/>
+							<Text text="|" class="sapUiTinyMarginBeginEnd"/>
+							<Text class="clCustomFont" text="{i18n>PageTitle}"/>
+						</contentLeft>
+						<contentRight>
+						 
+									<!--<Button   class="VLbtn2" text="{i18n>Back}" type="Transparent" press="onNavBack" width="auto"/>-->
+						<!--<Link text="{i18n>Back}" class="clCustomFont sapUiSmallMargin" press="handlebacksearch"/>-->
+						</contentRight>
+					</Bar>
+				</customHeader>
+
+				<content>
+					<tnt:ToolHeader>
+
+						 <Label id="oDealerCode9" width="auto"/>
+                         <Label id="oDealerMdlBlkSumry" width="auto"/>
+						
+										    <Label text="{i18n>Dealer}" required="true" visible="{detailView>/visibleByDefault}"/>   
+											    
+												<ComboBox showSecondaryValues="true" required="true" visible="{detailView>/visibleByDefault}" fieldGroupIds="requiredField" editable="{detailView>/editAllowed}" width="20rem" value="{BpDealerModelZone>/BusinessPartnerKey}" filterSecondaryValues="true" id="dealerID" enabled="{detailView>/onlyShownoEditForChange}" items="{path: 'BpDealerModelZone>/', sorter: { path: 'dummyFieldForSort' }, length:750 }" selectedKey="{BusinessPartnerKey}" selectionChange="onBusinessPartnerSelected" showValueStateMessage="false" textAlign="Begin">
+													<core:ListItem key="{BpDealerModelZone>BusinessPartnerKey}" text="{BpDealerModelZone>BusinessPartner}" additionalText="{BpDealerModelZone>BusinessPartnerName}"/>
+						
+												</ComboBox>
+											    
+										   <Label text="{detailView>/texttoshow}"/>    	
+						
+						
+						
+						
+						
+						<ToolbarSpacer/>
+						<Button text="{i18n>LocateVechicles}" type="Transparent" press="VehicleLocSearchPressMBS"/>
+						<Button text="{i18n>TradeSummary}" type="Transparent" press="TradeSummaryLinkPressMBS"/>
+						<Button text="{i18n>TradeHistory}" type="Transparent" press="TradeHistoryLinkPressMBS"/>
+							<Button class="VLbtn2" text="{i18n>Back}" type="Transparent" press="onNavBack" width="auto"/>
+					</tnt:ToolHeader>
+					<VBox>
+						<OverflowToolbar id="otb1">
+							<Label text="{i18n>AddModelBlock}" width="auto" class="vHlabe1clss"/>
+							<ToolbarSpacer/>
+						</OverflowToolbar>
+					</VBox>
+					<VBox class="sapUiSmallMargin">
+						<form:SimpleForm id="SimpleFormDisplay480_12dg0" editable="true" layout="ResponsiveGridLayout" labelSpanM="12" adjustLabelSpan="false" emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2" visible="{detailView>/zoneUserDisplay}">
+							<form:content>
+								<core:Title text="" class="VTMBSClass"/>
+								<Label text="{i18n>Dealer}" required="true"/>         
+								<ComboBox id="VT_MBSdeal" showSecondaryValues="true" filterSecondaryValues="true" selectionChange="onBusinessPartnerSelected" width="76%" items="{path: '/', length:750 }">
+									<core:ListItem key="{BusinessPartnerKey}" text="{path:'BusinessPartnerKey',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDealer'}" additionalText="{BusinessPartnerName}"/>
+								</ComboBox>
+								
+		
+								<Text text="{detailView>/texttoshow}"/>
+								<!--	<SearchField id="Searcid" width="76%"/>-->
+								<Label text="{i18n>VehicleTrackingNumber}" required="true"/>
+								<!--<Text text=""/>-->
+								<Text text="" id="oVtno">
+									<layoutData>
+										<l:GridData span="L3 M12 S3"/>
+									</layoutData>
+								</Text>
+								<Button text="{i18n>SelectVehicle}" width="60%" press="onSelect"/>
+								<Label text="{i18n>BlockModelNo.ofDays}" required="true"/>
+								<!--<Input value="15" id="inputblocknofdays"/>-->
+								
+								    <ComboBox id="inputblocknofdays" width="220px" selectionChange="ondncblckoutchnage" items="{            path: 'dncDays>/'           }">
+										<core:Item key="{dncDays>key}" text="{dncDays>text}"/>
+									</ComboBox>
+	
+								
+								<!--	<Select id="VT_MBSbmnd" change="onVT_MBSbnmd" width="76%"   items="{}">
+									<core:ListItem key="{}" text="{jsonDatamodel>Status}"/>
+								</Select>-->
+								<!--	<SearchField id="Searcid2" width="76%"/>-->
+								<Label text="{i18n>Comments}"/>
+								<TextArea id="TypeHerid" value=" " maxLength="50"/>
+								<!--<FlexBox width="40px"></FlexBox>
+								<FlexBox height="100px" alignItems="Center" justifyContent="Center">
+									<Button text="Submit"/>
+								</FlexBox>-->
+								<Label text=""/>
+								<Button text="{i18n>Submit}" press="onSubmit" width="26%" id="submitDNCId"/>
+								<core:Title text=""/>
+								<!--<ToolbarSpacer></ToolbarSpacer>-->
+								<!--<Label text="Zone"/>
+								<VBox>
+									<CheckBox text="Pasific"/>
+									<CheckBox text="Prairie"/>
+									<CheckBox text="Central"/>
+									<CheckBox text="Atlantic"/>
+									<CheckBox text="Cubic"/>
+								</VBox>-->
+							</form:content>
+						</form:SimpleForm>
+					</VBox>
+				
+					<VBox class="sapUiSmallMargin">
+						<Table id="tableVTMBS" items="{ModelBlock>/ModelBlockSet}" class="sapUiContentPadding" ariaLabelledBy="title" delete="onDelete" mode="{detailView>/zoneUserDelete}">
+							<headerToolbar>
+								<Toolbar>
+									<content>
+										<Title id="title" text="{i18n>DoNotCallBlockList}" titleStyle="H3"/>
+										<ToolbarSpacer/>
+										<Button tooltip="View Sort Settings" icon="sap-icon://sort" press="handleSortButtonPressed"/>
+										<!--<ToggleButton text="{i18n>Delete}" icon="sap-icon://delete" tooltip="" press="oDeletepress"/>-->
+									</content>
+								</Toolbar>
+							</headerToolbar>
+							<columns>
+								<!--<Column width="1.5rem">-->
+								<!--	<Text text=""/>-->
+								<!--<Text text="{ZzblockedDlr}-{OrganizationBPName1}" wrapping="false"/>-->
+								<!--</Column>-->
+								<Column width="20%">
+									<Text text="{i18n>Dealer}"/>
+									<!--<Text text="{ZzblockedDlr}-{OrganizationBPName1}" wrapping="false"/>-->
+								</Column>
+								<Column width="20%">
+									<Text text="{i18n>Series}" wrapping="false"/>
+									<!--<Text text="{Zzseries}-{TCISeriesDescriptionEN}" wrapping="false"/>-->
+								</Column>
+								<Column width="20%">
+									<Label text="{i18n>Model}"/>
+									<!--<Text text="{Zzmodel}-{ModelDescriptionEN}" wrapping="false"/>-->
+								</Column>
+								<Column width="5%">
+									<Text text="{i18n>BlockDuration}" wrapping="true"/>
+								</Column>
+								<Column width="10%">
+									<Text text="{i18n>FromDate}" wrapping="false"/>
+								</Column>
+								<Column width="10%">
+									<Text text="{i18n>ToDate}" wrapping="false"/>
+								</Column>
+								<Column width="15%">
+									<Text text="{i18n>Comments}" wrapping="false"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem type="Inactive" press="detailItems">
+									<cells>
+									 
+									 <!--   	<ComboBox editable="false" width="100%"-->
+										<!--	items="{path:'Dealers>',filters: [ { path: 'BusinessPartnerKey', operator: 'StartsWith', value1:'240' }], length:750}"-->
+										<!--	selectedKey="{path:'ModelBlock>ZzblockedDlr'}" modelContextChange="onDealernum"   class="readonlycombo" >-->
+											<!--<items>-->
+											<!--	<core:Item key="{Dealers>/attributes}"-->
+											<!--		text="{path:'Dealers>attributes',formatter:'vehicleLocator.Formatter.Formatter.DealerNameFormat'}-{Dealers>/BusinessPartnerName}"/>-->
+											<!--</items>-->
+										<!--				<items>-->
+										<!--		<core:Item key="{Dealers>BusinessPartnerKey}"-->
+										<!--			text="{path:'Dealers>BusinessPartnerKey',formatter:'vehicleLocator.Formatter.Formatter.DealerNameFormat'}-{Dealers>BusinessPartnerName}"/>-->
+										<!--	</items>-->
+											
+											
+											
+										<!--</ComboBox>-->
+										
+											<ComboBox editable="false" width="100%" items="{path:'Dealers>/A_BusinessPartner',filters: [ { path: 'Customer', operator: 'StartsWith', value1:'240' }], length:750}" selectedKey="{path:'ModelBlock>ZzblockedDlr'}" modelContextChange="onDealernum" class="readonlycombo">
+											<items>
+												<core:Item key="{Dealers>Customer}" text="{path:'Dealers>Customer',formatter:'vehicleLocator.Formatter.Formatter.DealerNameFormat'}-{Dealers&gt;OrganizationBPName1}"/>
+											</items>
+										</ComboBox>			
+										
+										
+										
+										
+										
+		
+										<ComboBox editable="false" width="100%" items="{Vehicles>/zc_mmfields}" class="readonlycombo" selectedKey="{ModelBlock>Zzseries}" modelContextChange="onSeriesnum">
+											<items>
+							 					
+												<core:Item key="{Vehicles>ModelSeriesNo}" text="{=${languageModel>/SPRAS}==='English' ? ${Vehicles>TCISeriesDescriptionEN}:${Vehicles>TCISeriesDescriptionFR} }"/>
+											</items>
+										</ComboBox>
+										<ComboBox editable="false" width="100%" items="{Vehicles>/zc_model}" class="readonlycombo" selectedKey="{ModelBlock>Zzmodel}" modelContextChange="onModelnum">
+											<items>
+											     <core:Item key="{Vehicles>Model}" text="{Vehicles>Model} - {=${languageModel>/SPRAS}==='English' ? ${Vehicles>ModelDescriptionEN}:${Vehicles>ModelDescriptionFR} }"/>
+											</items>
+										</ComboBox>
+										<Text text="{ModelBlock>Zzduration}" wrapping="true" textAlign="Center"/>
+										<Text text="{path:'ModelBlock>ZzblkstartDate',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDateModelBlock'}" textAlign="Center" wrapping="false"/>
+										<Text text="{path:'ModelBlock>ZzblkendDate',formatter:'vehicleLocator.Formatter.Formatter.TradeSummaryoDateModelBlock'}" textAlign="Center" wrapping="false"/>
+										<Text text="{ModelBlock>Zzcomment}" wrapping="true"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</VBox>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

@@ -1,0 +1,196 @@
+<mvc:View controllerName="vehicleLocator.controller.VehicleLocSearch" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:uxap="sap.uxap" xmlns:tnt="sap.tnt"
+	xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form">
+	<App id="idAppControl">
+		<pages class="oImgsampl" height="200px">
+			<Page showNavButton="false">
+				
+				 				<customHeader>
+					<Bar class="sapUiSmallPaddingBeginEnd clCustomHeaderBg">
+						<contentLeft>
+						
+							<Image id="idLexusLogo" src="Images/toyota_logo_colour.png" width="100px"/>
+							<Text text="|" class="sapUiTinyMarginBeginEnd"/>
+							<Text class="clCustomFont" text="{i18n>PageTitle}"/>
+						</contentLeft>
+					</Bar>
+				</customHeader>
+				
+				<!--<customHeader>-->
+				<!--	<Bar class="sapUiSmallPaddingBeginEnd clCustomHeaderBg">-->
+				<!--		<contentLeft>-->
+				<!--			<Image id="idLexusLogo" src="Images/toyota_logo_colour.png" width="100px"/>-->
+				<!--			<Text text="|" class="sapUiTinyMarginBeginEnd"/>-->
+				<!--			<Text class="clCustomFont" text="{i18n>PageTitle}"/>-->
+				<!--		</contentLeft>-->
+				<!--		<contentRight>-->
+				<!--			<Button text="{i18n>Logout}"/>-->
+				<!--		</contentRight>-->
+				<!--	</Bar>-->
+				<!--</customHeader>-->
+				<content>
+					<tnt:ToolHeader>
+						   <Title id="oDealerCode1" titleStyle="H3" width="auto" textAlign="Left" visible="true" wrapping="false" class="titledealervehiclesearch"/>
+					
+						<Title id="oDealertitle" titleStyle="H3" width="auto" textAlign="Left" visible="true" wrapping="false" class="titledealervehiclesearch"/>
+		
+						
+						
+										    <Label text="{i18n>Dealer}" required="true" visible="{detailView>/visibleForNational}"/>   
+											    
+												<ComboBox showSecondaryValues="true" required="true" visible="{detailView>/visibleForNational}" fieldGroupIds="requiredField"
+													editable="{detailView>/editAllowed}" width="20rem"   value="{BpDealerModelZone>/BusinessPartnerKey}"
+													filterSecondaryValues="true" id="dealerID" enabled="{detailView>/onlyShownoEditForChange}"
+													items="{path: 'BpDealerModelZone>/', sorter: { path: 'dummyFieldForSort' }, length:750 }" selectedKey="{BusinessPartnerKey}"
+													selectionChange="onBusinessPartnerSelected" showValueStateMessage="false" textAlign="Begin">
+													<core:ListItem key="{BpDealerModelZone>BusinessPartnerKey}" text="{BpDealerModelZone>BusinessPartner}"
+														additionalText="{BpDealerModelZone>BusinessPartnerName}"/>
+						
+												</ComboBox>
+													   <Label text="{detailView>/texttoshow}" />   
+											    	  
+										   
+				
+						<ToolbarSpacer></ToolbarSpacer>
+						<Button text="{i18n>PushTrade}" type="Transparent" press="PushTradeLinkPress" id = "pushTradeId"/>
+						<Button text="{i18n>TradeSummary}" type="Transparent" press="TradeSummaryLinkPress"/>
+						<Button text="{i18n>TradeHistory}" type="Transparent" press="TradeHistoryLinkPress"/>
+						<Button text="{i18n>ModelBlock}" type="Transparent" press="BlockSummarypress"/>
+						<!--	<Button text="Vehicle Locator"  type="Transparent" press="handleLinkPress"/>-->
+					</tnt:ToolHeader>
+					<!--	<Toolbar height="48px" class="toolbar1">
+						
+					
+						
+						<Title id="oDealertitle" titleStyle="H2" width="auto" textAlign="Left" visible="true" wrapping="false"/>
+							<ToolbarSpacer></ToolbarSpacer>
+							<Button text="BlockSummary" press="BlockSummarypress"/>
+						
+							<Button text="Vehicle Locator" press="handleLinkPress"/>
+						<Button text="Sold Order" press="handleLinkPress"/>
+				
+					</Toolbar>-->
+					<VBox class="sapUiSmallMargin">
+						<l:HorizontalLayout>
+							<l:content>
+								<!--<ComboBox placeholder="Menu" selectionChange="ItemClicked" id="combo1Menu">
+									<items>
+										<core:Item text="Vehicle Locator"/>
+										<core:Item text="Vehicle Search Results"/>
+										<core:Item text="VehicleTrade_CreateSingle"/>
+										<core:Item text="VehicleTrade_VehicleSelection"/>
+										<core:Item text="VehcleTrade_Approve_Reject_CounterTrade"/>
+										<core:Item text="VehicleTrade_UpdatedTradeRequest"/>
+										<core:Item text="VehicleTrade_Summary"/>
+										<core:Item text="VehicleTrade_History"/>
+										<core:Item text="VehicleTrade_ModelBlock_Summary"/>
+										<core:Item text="Trade Summary"/>
+										<core:Item text="Trade History"/>
+										<core:Item text="Do Not Call Block List"/>
+									</items>
+								</ComboBox>-->
+							</l:content>
+						</l:HorizontalLayout>
+						<MessageStrip id="SeriesErrMsgStrip" text="" showIcon="true" showCloseButton="false" visible="false" type="Error" class="customMargin"></MessageStrip>
+						<form:SimpleForm id="SimpleFormDisplay480_12120" editable="true" layout="ResponsiveGridLayout" labelSpanM="12" adjustLabelSpan="false"
+							emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2">
+							<form:content>
+								<core:Title text=""/>
+								<Label text="{i18n>ModelYear}" required="true"/>
+								<ComboBox placeholder="" width="70%" selectionChange="ItemClickedVLS" id="MoyearCombo" items="{/}">
+									<core:Item key="{year}" text="{year}"/>
+									<!--	<core:Item text="2016" key="0"/>
+									<core:Item text="2017" key="1"/>
+									<core:Item text="2018" key="2"/>
+									<core:Item text="2019" key="3"/>-->
+								</ComboBox>
+								<!--<ComboBox placeholder="Menu" selectedKey="2" width="70%" selectionChange="ItemClickedVLS" id="MoyearCombo"
+								items="{path: 'oJsonModelVLS>/', sorter: { path: 'ModelYear' } }"  />-->
+								<!--	<core:Item text="2016" key="0"/>
+										<core:Item text="2017" key="1"/>
+										<core:Item text="2018" key="2"/>
+										<core:Item text="2019" key="3"/>-->
+								<!--<DatePicker id="IdYearPicker" value="2018" valueFormat="yyyy" width="70%" displayFormat="yyyy" change="OnYearChange"/>-->
+								<!--	<DatePicker id="IdYearPicker" value="2018" valueFormat="yyyy" width="70%" displayFormat="yyyy" change="OnYearChange"/>-->
+								<Label text="{i18n>Series}" required="true"/>
+								<!--	<ComboBox placeholder="Series"  width="70%" showSecondaryValues= "true" filterSecondaryValues="true"
+ selectionChange="SeriesClickedVLS11" id="SeriesCmbo" class="sapUiSizeCompact VLSSSelectSeries" change="SeriesChange" 
+								items="{/}" > 
+									<core:ListItem   text="{ModelSeriesNo}"      key="{ModelSeriesNo}"  additionalText =""/>
+				   	</ComboBox>-->
+								<ComboBox placeholder="" width="70%" showSecondaryValues="true" filterSecondaryValues="true" selectionChange="SeriesClickedVLS11"
+									id="SeriesCmbo" items="{path:'/'}" change="handleSeriesChange">
+									<core:ListItem text="{=${SPRAS}==='English' ? ${TCISeriesDescriptionEN}:${TCISeriesDescriptionFR} }" key="{TCISeries}" additionalText=""/>
+								</ComboBox>
+								
+								
+								<Label text="{i18n>ModelCode}" required="true"/>
+								<ComboBox placeholder="" selectedKey="" showSecondaryValues="true" width="90%" selectionChange="MCClickedVLS11" id="McCmbo"
+									change="handleModelChange" items="{ path:'ModelCode>/', sorter : [{ path:'Model', ascending : 'true' } ] }">
+									<core:ListItem text="{ModelCode>Model}-{=${ModelCode>SPRAS}==='English' ? ${ModelCode>ENModelDesc}:${ModelCode>FRModelDesc} }"
+										key="{ModelCode>Model}" additionalText=""/>
+									<!--	<core:ListItem text="{ModelCode>Model} - {ModelCode>ENModelDesc}" key="{ModelCode>Model}"/>-->
+								</ComboBox>
+								<Label text="{i18n>Suffix}" required="true"/>
+								<ComboBox placeholder="" selectedKey="" showSecondaryValues="true" width="90%" change="handleSuffixChange"
+									selectionChange="SufficClickedVLS11" id="SuffCmbo" items="{ path:'Suffix>/', sorter : [{ path:'Suffix', ascending : 'true' } ] }">
+									<!--<core:ListItem text="{Suffix>Suffix} - {Suffix>SuffixDescriptionEN}/{Suffix>TrimInteriorColor}" key="{Suffix>Suffix}"
+										additionalText=""/>	-->
+									<core:ListItem
+										text="{Suffix>Suffix} - {=${Suffix>SPRAS}==='English' ? ${Suffix>SuffixDescriptionEN}:${Suffix>SuffixDescriptionFR} }/{=${Suffix>SPRAS}==='English' ? ${Suffix>mrktg_int_desc_en}:${Suffix>mrktg_int_desc_fr} }"
+										key="{Suffix>Suffix}" additionalText=""/>
+									<!--	<core:ListItem text="{Suffix>Suffix} - {Suffix>SuffixDescriptionEN}/{Suffix>TrimInteriorColor}" key="{Suffix>Suffix}"
+										additionalText=""/>-->
+									<!--{MarktgIntDescEN MarktgIntDescEN , MarketingTrimInteriorDescEN} /{Suffix>InteriorDescriptionEN} -->
+								</ComboBox>
+								<Label text=""/>
+								<Text text="{i18n>WildSearch}"/>
+								<!--{SuffixDescriptionEN}- -->
+								<!--<Select id="VLSSuffix" change="onVlsMoSuffix" width="90%" forceSelection="true" class="sapUiSizeCompact VLSSSelectSuffix" items="{}">
+									<core:ListItem key="{}" text="{jsonDatamodel>Suffix}"/>
+								</Select>-->
+								<core:Title text=""/>
+								<ToolbarSpacer></ToolbarSpacer>
+								<Label text="{i18n>Zone}" required="true"/>
+								<VBox>
+									<CheckBox text="{i18n>Pacific}" id="Pacific" selected="false" editable="{editZoneProperty>/allow}" visible="{displayZoneLexus>/fortoyota}"/>
+									<CheckBox text="{i18n>Prairie}" id="Prairie" selected="false" editable="{editZoneProperty>/allow}" visible="{displayZoneLexus>/fortoyota}"/>
+									<CheckBox text="{i18n>Central}" id="Central" selected="false" editable="{editZoneProperty>/allow}" visible="{displayZoneLexus>/fortoyota}"/>
+									<CheckBox text="{i18n>Quebec}" id="Quebec" selected="false" editable="{editZoneProperty>/allow}" visible="{displayZoneLexus>/fortoyota}"/>
+									<CheckBox text="{i18n>Atlantic}" id="Atlantic" selected="false" editable="{editZoneProperty>/allow}" visible="{displayZoneLexus>/fortoyota}"/>
+								    <CheckBox text="Lexus" id="Lexus" selected="false" visible="{displayZoneLexus>/forlexus}"/>
+								</VBox>
+							</form:content>
+						</form:SimpleForm>
+					</VBox>
+					<VBox class="sapUiSmallMargin">
+						<form:SimpleForm id="SimpleF2sa220" editable="true" layout="ResponsiveGridLayout" labelSpanM="12" adjustLabelSpan="false" emptySpanL="0"
+							emptySpanM="0" columnsL="2" columnsM="2">
+							<form:content>
+								<core:Title text=""/>
+							<Button width="40px" visible="false">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Button>
+								<Button text="{i18n>Search}" icon="sap-icon://search" press="onSePress"  type="Emphasized">
+									<layoutData>
+										<l:GridData span="L4 M12 S3"/>
+									</layoutData>
+								</Button>
+								<core:Title text=""/>
+								<Label text=""/>
+							</form:content>
+						</form:SimpleForm>
+					</VBox>
+				</content>
+				<footer>
+					<OverflowToolbar></OverflowToolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

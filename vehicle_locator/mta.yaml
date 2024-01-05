@@ -1,0 +1,151 @@
+_schema-version: '3.1'
+ID: vehiclelocatorandtrade
+version: 3.0.1
+description: "Vehicle locator and trade consolidated app"
+parameters:
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npx cds build --production
+modules:
+  - name: vehiclelocatorandtrade-xsjs
+    type: nodejs
+    path: gen/srv
+    parameters:
+      buildpack: nodejs_buildpack
+    build-parameters:
+      builder: npm
+    provides:
+      - name: vehiclelocatorandtrade-xsjs_api # required by consumers of CAP services (e.g. approuter)
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: vehiclelocatorandtrade-hdb
+      - name: application-logs_vehiclelocatorandtrade
+      - name: hdi_vehiclelocatorandtrade
+      - name: uaa_vehiclelocatorandtrade
+      - name: cf-drain
+      # - name: capmt-dst 
+
+  - name: vehiclelocatorandtrade-hdb
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    requires:
+      - name: hdi_vehiclelocatorandtrade
+
+  - name: vehiclelocatorandtrade-node
+    type: nodejs
+    path: vehicleLocator_Node
+    parameters:
+      disk-quota: 512M
+      memory: 256M
+      buildpack: https://github.com/cloudfoundry/nodejs-buildpack#v1.8.5
+      stack: cflinuxfs4
+    properties:
+      NODE_TLS_REJECT_UNAUTHORIZED: 0
+      OPTIMIZE_MEMORY: true
+      TRADE_REQ_CLEANUP_TASK_CRON_TIME: "0 59 23 * * *"
+      TRADE_REQ_CLEANUP_TASK_TIME_ZONE: America/Toronto
+      UPS_NAME: VEHICLE_LOCATOR_AND_TRADE_APIM_CUPS
+      XS_APP_LOG_LEVEL: info
+      XS_LOG_CONNECTION_DATA: true
+      XS_LOG_NETWORK: true
+      XS_LOG_REFERER: true
+      XS_LOG_USER: true
+    provides:
+      - name: vehiclelocatorandtrade-node_api
+        properties:
+          url: "${default-url}"
+    requires:
+      - name: application-logs_vehiclelocatorandtrade
+      - name: hdi_vehiclelocatorandtrade
+      - name: uaa_vehiclelocatorandtrade
+      - name: cf-drain
+      - name: VEHICLE_LOCATOR_AND_TRADE_APIM_CUPS
+
+  - name: vehiclelocatorandtrade
+    type: html5
+    path: vehicleLocator
+    parameters:
+      disk-quota: 512M
+      memory: 256M
+    properties:
+      CORS: |
+        [
+          {
+            "allowedOrigin": [
+              {
+                "host": "*"
+              }
+            ],
+            "allowedCredentials": true,
+            "uriPattern": "^/custom/do/logout"
+          }
+        ]
+      OPTIMIZE_MEMORY: true
+      SESSION_TIMEOUT: 60
+      XS_APP_LOG_LEVEL: info
+      XS_LOG_CONNECTION_DATA: true
+      XS_LOG_NETWORK: true
+      XS_LOG_REFERER: true
+      XS_LOG_USER: true
+    build-parameters:
+      builder: grunt
+      build-result: dist
+    requires:
+      - name: application-logs_vehiclelocatorandtrade
+      - name: uaa_vehiclelocatorandtrade
+      - name: cf-drain
+      - name: vehiclelocatorandtrade-node_api
+        group: destinations
+        properties:
+          name: vehiclelocatorandtrade-node
+          url: "~{url}"
+          forwardAuthToken: true
+          timeout: 60000
+      - name: vehiclelocatorandtrade-xsjs_api
+        group: destinations
+        properties:
+          name: vehicleTrade
+          url: "~{srv-url}"
+          forwardAuthToken: true
+      # - name: capmt-dst
+
+resources:
+  - name: uaa_vehiclelocatorandtrade
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+  - name: hdi_vehiclelocatorandtrade
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+      config:
+       schema: vehicleLocator_hdb
+  - name: application-logs_vehiclelocatorandtrade
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: application-logs
+      service-plan: lite
+  - name: cf-drain
+    type: org.cloudfoundry.existing-service
+    parameters:
+      service-name: cf-drain
+  - name: VEHICLE_LOCATOR_AND_TRADE_APIM_CUPS
+    type: org.cloudfoundry.existing-service
+    parameters:
+      service-name: VEHICLE_LOCATOR_AND_TRADE_APIM_CUPS
+  # - name: capmt-dst
+  #   type: org.cloudfoundry.managed-service
+  #   parameters:
+  #     service: destination
+  #     service-plan: lite
+  #     service-name: CAPMT_DST_VEHICLELOCATOR   
+      

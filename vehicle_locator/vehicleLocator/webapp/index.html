@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta charset="UTF-8" />
+
+		<title id="oTitleText" titleStyle="H3" width="auto" textAlign="Left" >Vehicle Locator and Trade </title>
+		<!--
+		 When upgrading SAPUI5 to >= 1.54, make sure to update compatVersion in Gruntfile.js according to
+		 https://github.com/SAP/grunt-openui5#compatversion to ensure Component-preload.js format is updated
+		 -->
+		
+		<!--Changes done for demand DMND0003799--><!--For Ui5 version update-->
+		<script id="sap-ui-bootstrap"
+			src="https://sapui5.hana.ondemand.com/1.71.59/resources/sap-ui-core.js"
+			data-sap-ui-preload="async"                                                
+			data-sap-ui-libs="sap.m"
+			data-sap-ui-theme="sap_belize"
+			data-sap-ui-compatVersion="edge"
+			data-sap-ui-xx-bindingSyntax="complex"
+			data-sap-ui-resourceroots='{"vehicleLocator": "./"}'
+			data-sap-ui-frameOptions="trusted"
+			data-sap-ui-oninit="module:sap/ui/core/ComponentSupport">
+		</script>
+
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	</head>
+
+	<div data-sap-ui-component
+		data-name="vehicleLocator"
+		data-height="100%"
+		data-id="container"
+		data-settings='{"id" : "vehicleLocator"}'
+		style="height: 100%">
+	</div>
+
+</html>

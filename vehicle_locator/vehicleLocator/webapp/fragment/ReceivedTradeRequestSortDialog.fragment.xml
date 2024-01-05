@@ -1,0 +1,16 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog
+		confirm="handleConfirmReceiveTradeRequest" cancel="handleCancel" id="vsd41" title="{i18n>sortBy}">
+		<sortItems>
+			<ViewSettingsItem selected="true" key="Trade_Id"  text="{i18n>Request}" />
+			<ViewSettingsItem key="Requesting_Dealer" text="{i18n>RequestedDealer}"  />
+		    <ViewSettingsItem key="Model" text="{i18n>Model}"/>
+            <ViewSettingsItem key="Suffix" text="{i18n>Suffix}" />
+            <ViewSettingsItem key="Trade_Return" text="{i18n>TradeinReturn}" />
+            <ViewSettingsItem key="Trade_Status" text="{i18n>Status}" />	
+
+		</sortItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

@@ -1,0 +1,486 @@
+/* Enter your custom styles here */
+
+
+/* Enter your custom styles here */
+
+
+/*Code for Header and footer tool bars */
+
+
+/*@import url('https://fonts.googleapis.com/css?family=Satisfy');
+.clCustomFont {
+    font-family: 'Satisfy', cursive;
+}*/
+/*======================= Start custom fonts and custom color on header style ==========================*/
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+.clCustomFont {font-family: 'Raleway', sans-serif;}
+.sapContrastPlus.clCustomHeaderBg,.clCustomHeaderBg.sapMIBar {  background-color: #fff!important; color: #2f3c48; text-shadow: none;}
+.sapContrastPlus.clCustomHeaderBg .sapMBtnInner {color: #2f3c48;text-shadow: none;}
+.sapContrastPlus.clCustomHeaderBg .sapMText {color: #2f3c48;}
+.sapContrastPlus.sapMIBar-CTX.clCustomHeaderBg .sapMBtn:hover>.sapMBtnHoverable:not(.sapMBtnActive) {background-color: transparent;color: #346187;}
+/*======================= End custom fonts and custom color on header style ==========================*/
+.oDealertitle{
+    color: #cae4fb;
+}
+.margin {
+    margin-top: 1rem;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.textAlign {
+    text-align: center;
+}
+
+.link {
+    color: #FF0000;
+}
+
+.link:hover {
+    color: #FF0000 !important;
+}
+
+.columnLabelStyle {
+    cursor: pointer !important;
+}
+
+.tableStyle .sapMListTblHeader {
+    cursor: pointer;
+}
+
+.fixedHeader{
+	position: fixed !important;
+    top: 8rem;
+    width: 96% !important;
+}
+.sapContrastPlus.clCustomHeaderBg {
+    background-color: #fff!important;
+    color: #2f3c48;
+    text-shadow: none;
+}
+
+.sapContrastPlus.clCustomHeaderBg .sapMBtnInner {
+    color: #2f3c48;
+    text-shadow: none;
+}
+
+.sapContrastPlus.clCustomHeaderBg .sapMText {
+    color: #2f3c48;
+}
+
+.sapContrastPlus.sapMIBar-CTX.clCustomHeaderBg .sapMBtn:hover>.sapMBtnHoverable:not(.sapMBtnActive) {
+    background-color: transparent;
+    color: #346187;
+}
+
+
+
+
+.toolbar1.sapMTB {
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    align-items: center;
+    box-sizing: border-box;
+    -webkit-text-size-adjust: none;
+    -moz-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+    height: 3rem;
+    background: #343f4a;
+}
+
+
+
+.sapUiMedia-Std-Desktop .sapUxAPObjectPageHeaderContent {
+    padding-left: 40rem;
+}
+
+.sapUxAPObjectPageHeaderIdentifier .sapUxAPObjectPageHeaderObjectImageForce .sapUxAPObjectPageHeaderObjectImage,
+.sapUxAPObjectPageHeaderStickied .sapUxAPObjectPageHeaderIdentifier .sapUxAPObjectPageHeaderObjectImage {
+    width: 15rem;
+    height: 3rem;
+    border: 0px;
+}
+
+
+
+
+.toolbar1.sapMIBar.sapMTB .sapMBarChild {
+    margin-right: 1.90rem;
+    color: #a9cce8;
+}
+
+
+/*underline bottom*/
+
+.toolbar1.sapMTBStandard {
+    border-bottom: 0px solid #cccccc;
+}
+
+
+/*toolbar2 link spaces*/
+
+.toolbar2.sapMIBar.sapMTB .sapMBarChild {
+    margin-right: 2.90rem;
+}
+
+
+/* toolbar2 height*/
+
+.toolbar2.sapMTB {
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    align-items: center;
+    box-sizing: border-box;
+    -webkit-text-size-adjust: none;
+    -moz-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+    height: 3.5rem;
+    background: #343f4a;
+}
+
+
+/*toolbar2 underline bottom*/
+
+.toolbar2.sapMTBStandard {
+    border-bottom: 0px solid #cccccc;
+}
+
+
+/*vehicle locator label in VehicleLocator Page*/
+
+.vHlabe1clss.sapMLabel {
+    color: #000000;
+    font-size: 1.275rem;
+    font-family: "72", Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: text;
+}
+
+
+/*toolbar3 link spaces*/
+
+.toolbar3.sapMIBar.sapMTB .sapMBarChild {
+    margin-right: 1.90rem;
+}
+
+
+/*toolbar3 link spaces*/
+
+.toolbar3.sapMIBar.sapMTB .sapMBarChild {
+    margin-right: 1.90rem;
+}
+
+
+/*vehicle Trade locator header*/
+
+.toolbar1.sapMTB {
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    align-items: center;
+    box-sizing: border-box;
+    -webkit-text-size-adjust: none;
+    -moz-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+    height: 3rem;
+    background: #343f4a;
+}
+
+
+/*toolbar3 Vehicl Trade underline bottom*/
+
+.toolbar3.sapMTBStandard {
+    border-bottom: 1px solid #cccccc;
+}
+
+
+/*vehicle Trade Create label in VehicleLocator Page*/
+
+.vTlabe1clss.sapMLabel {
+    color: #a9cce8;
+    font-size: 1.100rem;
+    font-family: "72", Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: text;
+    text-align: right;
+}
+
+
+/*vehicle Trade screen header links skyblue color*/
+
+.toolbar3.sapMIBar.sapMTB .sapMBarChild {
+    color: #a9cce8;
+}
+
+
+/*vehicle Trade screen header background*/
+
+.toolbar3.sapMTB {
+    background: #343f4a;
+}
+
+
+/*Vehicletrade_modelBlock_Summary simpleform height*/
+
+.VTMBSClass.sapUiFormM .sapUiFormContainerTitle>.sapUiFormTitle {
+    height: 0.1rem;
+    line-height: 0.1rem;
+}
+
+
+/*donnotcallbacj*/
+
+.flexdontclabllist.sapMLabel {
+    color: #333333;
+    font-size: 1.100rem;
+    font-family: "72", Arial, Helvetica, sans-serif;
+    font-weight: 800;
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: text;
+}
+
+
+/*VehiclTrade_Model_Block_SummarySimple Form Title height change*/
+
+.VTMBSClass.sapUiFormM .sapUiFormContainerTitle>.sapUiFormTitle {
+    height: 0rem;
+    /* line-height: 3rem; */
+}
+
+
+/*vehicl trade approv_rej_Count_Form heigt*/
+
+.simplVTARC.sapUiFormM .sapUiFormContainerTitle>.sapUiFormTitle {
+    height: 3rem;
+    line-height: 3rem;
+}
+
+
+/* Enter your custom styles here */
+
+
+/* VehicleSearcHResutls table  Column hilight*/
+
+
+/*.oVSRTableColumns:active
+{
+  background-color: yellow;	
+}*/
+
+
+/*.columnLabelStyle oVSRTableColumns.sapFactsheetUtiLabel,
+.sapMListTbl .sapMLabel:active {
+    background-color: yellow;
+}
+*/
+
+
+/*.oVSRTableColumns:checked + .oVSRTableColumns{
+	background-color: yellow;
+	
+}*/
+
+
+/*removing space in fragmennt in vehiclesearchresults*/
+
+oRespover.sapMBar sapMBar-CTX sapMContent-CTX sapMHeader-CTX sapMIBar sapMIBar-CTX {
+    height: 0rem;
+}
+
+.Resptable .sapMCbBg {
+    left: 8.8125rem !important;
+}
+
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-touch-callout: none;
+    -webkit-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+}
+
+user agent stylesheet div {
+    display: block;
+}
+
+.sapMCb {
+    display: inline-block;
+    position: relative;
+    white-space: normal;
+    box-sizing: border-box;
+    height: 3rem;
+    line-height: 3rem;
+    vertical-align: top;
+    text-align: left;
+    padding: 0 0 0 3rem;
+    cursor: default;
+}
+
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-touch-callout: none;
+    -webkit-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+}
+
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-touch-callout: none;
+    -webkit-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+}
+
+user agent stylesheet th {
+    font-weight: bold;
+    text-align: -internal-center;
+}
+
+.tableStyle .sapMListTblHeader {
+    cursor: pointer;
+}
+
+.tableStyle .sapMListTblHeader {
+    cursor: pointer;
+}
+
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-touch-callout: none;
+    -webkit-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+}
+
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-touch-callout: none;
+    -webkit-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+}
+
+.sapMListTbl {
+    font-size: 0.875rem;
+}
+
+.sapMListTbl {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+}
+
+.sapMListUl {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-touch-callout: none;
+    -webkit-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+}
+
+user agent stylesheet table {
+    display: table;
+    border-collapse: separate;
+    border-spacing: 2px;
+    border-color: grey;
+}
+
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-touch-callout: none;
+    -webkit-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+}
+
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-touch-callout: none;
+    -webkit-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+}
+
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-touch-callout: none;
+    -webkit-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+}
+
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-touch-callout: none;
+    -webkit-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+}
+
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-touch-callout: none;
+    -webkit-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+}
+/*/ serach results table css/*/
+.customStyleBox .sapMPanel {	margin: 0 0.5rem 0.5rem !important;}
+.customStyleBox .sapMPanelWrappingDiv,.customStyleBox .sapMPanelWrappingDivTb {	background: #ebebeb;}
+.customStyleBox .sapMPanelBGTranslucent,.customStyleBox .sapMPanelWrappingDiv,.customStyleBox .sapMPanelWrappingDivTb {	border-bottom: none !important;}
+.customStyleBox .sapMPanelWrappingDivTb {	padding-bottom: 1rem !important;}
+.customStyleBox .sapMPanelWrappingDivTb .sapMCb {	height: 2rem !important;}
+.customStyleBox .sapMPanelExpandableIcon {	color: #ebebeb !important;	outline: none !important;}
+
+/*screen 5 MessageStrip*/
+.Messagestrip1.sapMMsgStrip {
+     border: 0px; 
+    border-radius: 0.1875rem;
+    box-sizing: border-box;
+    font-size: 0.875rem;
+    font-weight: normal;
+    padding: 0.4375rem 1rem;
+    position: relative;
+    min-height: 2rem;
+}
+
+.sapUiTableTbr
+{height:auto !important;}
+.sapMListTblCell {
+    vertical-align: middle !important; 
+}
+.readonlycombo
+{
+	background-color: #ffffff !important;
+    border: 0px solid #bfbfbf;
+    
+    /*margin: 0.25rem 0;*/
+    /*height: 2.5rem;*/
+}
+.readonlycombo input
+{background-color: white !important;}
+
+
+.clColumnWidth .sapMText {
+    display: inline !important;
+    word-wrap: break-word !important;
+   
+}
+.sapMPageFooter .sapMBar {
+     height: 3.5rem !important;
+}

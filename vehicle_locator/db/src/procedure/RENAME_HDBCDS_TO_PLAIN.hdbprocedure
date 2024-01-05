@@ -1,0 +1,82 @@
+PROCEDURE RENAME_HDBCDS_TO_PLAIN LANGUAGE SQLSCRIPT AS BEGIN
+  --
+  -- vehicleTrade.Trade_Request
+  --
+  EXEC 'RENAME TABLE "vehicleTrade.Trade_Request" TO vehicleTrade_Trade_Request';
+    EXEC 'RENAME COLUMN vehicleTrade_Trade_Request."Trade_Id" TO Trade_Id';
+  EXEC 'ALTER TABLE vehicleTrade_Trade_Request DROP ASSOCIATION "COMMENTS"';
+    EXEC 'RENAME COLUMN vehicleTrade_Trade_Request."Trade_Status" TO Trade_Status';
+    EXEC 'RENAME COLUMN vehicleTrade_Trade_Request."Requesting_Dealer" TO Requesting_Dealer';
+    EXEC 'RENAME COLUMN vehicleTrade_Trade_Request."Requesting_Dealer_Name" TO Requesting_Dealer_Name';
+    EXEC 'RENAME COLUMN vehicleTrade_Trade_Request."Requested_Dealer" TO Requested_Dealer';
+    EXEC 'RENAME COLUMN vehicleTrade_Trade_Request."Requested_Dealer_Name" TO Requested_Dealer_Name';
+    EXEC 'RENAME COLUMN vehicleTrade_Trade_Request."Requested_Vtn" TO Requested_Vtn';
+    EXEC 'RENAME COLUMN vehicleTrade_Trade_Request."Offered_Vtn" TO Offered_Vtn';
+    EXEC 'RENAME COLUMN vehicleTrade_Trade_Request."Trade_Return" TO Trade_Return';
+    EXEC 'RENAME COLUMN vehicleTrade_Trade_Request."Req_Current_ETA_From" TO Req_Current_ETA_From';
+    EXEC 'RENAME COLUMN vehicleTrade_Trade_Request."Req_Current_ETA_To" TO Req_Current_ETA_To';
+    EXEC 'RENAME COLUMN vehicleTrade_Trade_Request."Req_Proposed_ETA_From" TO Req_Proposed_ETA_From';
+    EXEC 'RENAME COLUMN vehicleTrade_Trade_Request."Req_Proposed_ETA_To" TO Req_Proposed_ETA_To';
+    EXEC 'RENAME COLUMN vehicleTrade_Trade_Request."Off_Current_ETA_From" TO Off_Current_ETA_From';
+    EXEC 'RENAME COLUMN vehicleTrade_Trade_Request."Off_Current_ETA_To" TO Off_Current_ETA_To';
+    EXEC 'RENAME COLUMN vehicleTrade_Trade_Request."Off_Proposed_ETA_From" TO Off_Proposed_ETA_From';
+    EXEC 'RENAME COLUMN vehicleTrade_Trade_Request."Off_Proposed_ETA_To" TO Off_Proposed_ETA_To';
+    EXEC 'RENAME COLUMN vehicleTrade_Trade_Request."Created_By" TO Created_By';
+    EXEC 'RENAME COLUMN vehicleTrade_Trade_Request."Created_On" TO Created_On';
+    EXEC 'RENAME COLUMN vehicleTrade_Trade_Request."Changed_on" TO Changed_on';
+    --EXEC 'RENAME COLUMN vehicleTrade_Trade_Request."VIN" TO VIN';
+  --
+  -- vehicleTrade.Trade_Comment
+  --
+  EXEC 'RENAME TABLE "vehicleTrade.Trade_Comment" TO vehicleTrade_Trade_Comment';
+    EXEC 'RENAME COLUMN vehicleTrade_Trade_Comment."Trade_Id" TO Trade_Id';
+    EXEC 'RENAME COLUMN vehicleTrade_Trade_Comment."Comment_Id" TO Comment_Id';
+    EXEC 'RENAME COLUMN vehicleTrade_Trade_Comment."Comment_Txt" TO Comment_Txt';
+    EXEC 'RENAME COLUMN vehicleTrade_Trade_Comment."Comment_Date" TO Comment_Date';
+    EXEC 'RENAME COLUMN vehicleTrade_Trade_Comment."Created_By" TO Created_By';
+  --
+  -- vehicleTrade.Vehicle
+  --
+  EXEC 'RENAME TABLE "vehicleTrade.Vehicle" TO vehicleTrade_Vehicle';
+    EXEC 'RENAME COLUMN vehicleTrade_Vehicle."Trade_Id" TO Trade_Id';
+    --EXEC 'RENAME COLUMN vehicleTrade_Vehicle."VTN" TO VTN';
+    EXEC 'RENAME COLUMN vehicleTrade_Vehicle."Model_Year" TO Model_Year';
+    EXEC 'RENAME COLUMN vehicleTrade_Vehicle."Model" TO Model';
+    EXEC 'RENAME COLUMN vehicleTrade_Vehicle."Series" TO Series';
+    EXEC 'RENAME COLUMN vehicleTrade_Vehicle."Suffix" TO Suffix';
+    EXEC 'RENAME COLUMN vehicleTrade_Vehicle."Int_Colour" TO Int_Colour';
+    EXEC 'RENAME COLUMN vehicleTrade_Vehicle."Ext_Colour" TO Ext_Colour';
+    --EXEC 'RENAME COLUMN vehicleTrade_Vehicle."APX" TO APX';
+    --EXEC 'RENAME COLUMN vehicleTrade_Vehicle."DNC" TO DNC';
+    EXEC 'RENAME COLUMN vehicleTrade_Vehicle."Status" TO Status';
+    EXEC 'RENAME COLUMN vehicleTrade_Vehicle."Order_Type" TO Order_Type';
+    EXEC 'RENAME COLUMN vehicleTrade_Vehicle."AccessoryInstalled" TO AccessoryInstalled';
+    --EXEC 'RENAME COLUMN vehicleTrade_Vehicle."VIN" TO VIN';
+  --
+  -- vehicleTrade.Vehicle_Desc
+  --
+  EXEC 'RENAME TABLE "vehicleTrade.Vehicle_Desc" TO vehicleTrade_Vehicle_Desc';
+    EXEC 'RENAME COLUMN vehicleTrade_Vehicle_Desc."Trade_Id" TO Trade_Id';
+    --EXEC 'RENAME COLUMN vehicleTrade_Vehicle_Desc."VTN" TO VTN';
+    --EXEC 'RENAME COLUMN vehicleTrade_Vehicle_Desc."SPRAS" TO SPRAS';
+    EXEC 'RENAME COLUMN vehicleTrade_Vehicle_Desc."Model_Desc" TO Model_Desc';
+    EXEC 'RENAME COLUMN vehicleTrade_Vehicle_Desc."Series_Desc" TO Series_Desc';
+    EXEC 'RENAME COLUMN vehicleTrade_Vehicle_Desc."Suffix_Desc" TO Suffix_Desc';
+    EXEC 'RENAME COLUMN vehicleTrade_Vehicle_Desc."Int_Colour_Desc" TO Int_Colour_Desc';
+    EXEC 'RENAME COLUMN vehicleTrade_Vehicle_Desc."Ext_Colour_Desc" TO Ext_Colour_Desc';
+  --
+  -- vehicleTrade.Trade_Status
+  --
+  EXEC 'RENAME TABLE "vehicleTrade.Trade_Status" TO vehicleTrade_Trade_Status';
+  EXEC 'ALTER TABLE vehicleTrade_Trade_Status DROP ASSOCIATION "Value"';
+    EXEC 'RENAME COLUMN vehicleTrade_Trade_Status."Value.Trade_Status" TO Value_Trade_Status';
+    EXEC 'RENAME COLUMN vehicleTrade_Trade_Status."Description" TO Description';
+  --
+  -- vehicleTrade.Trade_Return
+  --
+  EXEC 'RENAME TABLE "vehicleTrade.Trade_Return" TO vehicleTrade_Trade_Return';
+  EXEC 'ALTER TABLE vehicleTrade_Trade_Return DROP ASSOCIATION "value"';
+    EXEC 'RENAME COLUMN vehicleTrade_Trade_Return."value.Trade_Return" TO value_Trade_Return';
+    EXEC 'RENAME COLUMN vehicleTrade_Trade_Return."Description" TO Description';
+END;
+

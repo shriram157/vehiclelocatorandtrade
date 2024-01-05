@@ -1,0 +1,109 @@
+{
+	"xsappname": "vehiclelocatorandtrade",
+	"tenant-mode": "dedicated",
+	"description": "Security profile of called application",
+	"scopes": [{
+		"name": "$XSAPPNAME.Manage_DNC",
+		"description": "Manage DNC"
+	}, {
+		"name": "$XSAPPNAME.Manage_Trade_Requests",
+		"description": "Manage Trade Requests"
+	}, {
+		"name": "$XSAPPNAME.Manage_Vehicles",
+		"description": "Manage Vehicles"
+	}, {
+		"name": "$XSAPPNAME.View_DNC",
+		"description": "View DNC"
+	}, {
+		"name": "$XSAPPNAME.View_Trade_Requests",
+		"description": "View Trade Requests"
+	}, {
+		"name": "$XSAPPNAME.View_Vehicles",
+		"description": "View Vehicles"
+	}],
+	"attributes": [{
+		"name": "DealerCode",
+		"description": "Dealer Code",
+		"valueType": "s"
+	}, {
+		"name": "FirstName",
+		"description": "First Name From Token",
+		"valueType": "s"
+	}, {
+		"name": "Language",
+		"description": "Language",
+		"valueType": "s"
+	}, {
+		"name": "LastName",
+		"description": "Last Name From Token",
+		"valueType": "s"
+	}, {
+		"name": "UserType",
+		"description": "UserType, identifies dealer or not",
+		"valueType": "s"
+	}, {
+		"name": "Zone",
+		"description": "restrict based on Zone",
+		"valueType": "s"
+	}],
+	"role-templates": [{
+		"name": "Dealer_User",
+		"description": "Vehicle Trade Dealer User",
+		"scope-references": [
+			"$XSAPPNAME.Manage_DNC",
+			"$XSAPPNAME.Manage_Trade_Requests",
+			"$XSAPPNAME.View_Vehicles"
+		],
+		"attribute-references": [
+			"DealerCode",
+			"FirstName",
+			"Language",
+			"LastName",
+			"UserType"
+		]
+	}, {
+		"name": "VehicleTrade_Dealer_User",
+		"description": "Vehicle Trade Dealer User",
+		"scope-references": [
+			"$XSAPPNAME.Manage_DNC",
+			"$XSAPPNAME.Manage_Trade_Requests",
+			"$XSAPPNAME.View_Vehicles"
+		],
+		"attribute-references": [
+			"DealerCode",
+			"FirstName",
+			"Language",
+			"LastName",
+			"UserType"
+		]
+	}, {
+		"name": "TCI_user",
+		"description": "This is a TCI User",
+		"scope-references": [
+			"$XSAPPNAME.Manage_Vehicles",
+			"$XSAPPNAME.View_DNC",
+			"$XSAPPNAME.View_Trade_Requests"
+		],
+		"attribute-references": [
+			"FirstName",
+			"Language",
+			"LastName",
+			"UserType"
+		]
+	}, {
+		"name": "Zone_User",
+		"description": "This is a Zone User",
+		"scope-references": [
+			"$XSAPPNAME.Manage_Vehicles",
+			"$XSAPPNAME.View_DNC",
+			"$XSAPPNAME.View_Trade_Requests"
+		],
+		"attribute-references": [
+			"FirstName",
+			"Language",
+			"LastName",
+			"UserType",
+			"Zone"
+		]
+	}]
+}

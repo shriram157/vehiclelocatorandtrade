@@ -1,0 +1,35 @@
+{
+  "name": "vehiclelocatorandtrade",
+  "version": "1.0.0",
+  "description": "Vehicle locator and trade consolidated app",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^7",
+    "@sap/cds-hana": "^2",
+    "@cap-js-community/odata-v2-adapter": "^1.11.4",
+    "@sap/xssec": "^3",
+    "express": "^4",
+    "passport": "^0"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^7"
+  },
+  "scripts": {
+    "start": "cds-serve"
+  },
+  "cds": {
+    "hana": {
+      "deploy-format": "hdbtable"
+    },
+    "requires": {
+      "db": "hana",
+      "auth": "xsuaa"
+    },
+    "cov2ap": {
+      "plugin": true
+    }
+  }
+}

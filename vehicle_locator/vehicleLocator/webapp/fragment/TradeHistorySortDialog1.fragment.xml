@@ -1,0 +1,14 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<ViewSettingsDialog confirm="handleSortDialogConfirm1" title="{i18n>sortBy}">
+		<sortItems>
+			<ViewSettingsItem text="{i18n>RequestingDealer}" key="Requesting_Dealer" selected="true"/>
+			<ViewSettingsItem text="{i18n>Model}" key="Model"/>
+			<ViewSettingsItem text="{i18n>VehicleTrackingNumber}" key="Requested_Vtn"/>
+			<ViewSettingsItem text="{i18n>VIN}" key="Requested_Vin"/>
+			<ViewSettingsItem text="{i18n>RequestNo}" key="Trade_Id"/>
+			<ViewSettingsItem text="{i18n>Suffix}" key="Suffix"/>
+			<ViewSettingsItem text="{i18n>ExteriorColor}" key="Ext_Colour"/>
+			<ViewSettingsItem text="{i18n>APX}" key="APX"/>
+		</sortItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

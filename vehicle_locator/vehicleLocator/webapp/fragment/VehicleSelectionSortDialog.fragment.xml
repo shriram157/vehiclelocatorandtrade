@@ -1,0 +1,17 @@
+ <core:FragmentDefinition xmlns="sap.m"
+                         xmlns:core="sap.ui.core">
+    <ViewSettingsDialog confirm="handleConfirm" cancel="handleCancel" id="vsd1" title="{i18n>sortBy}">
+        <sortItems>
+            <ViewSettingsItem selected="true" key="zzvtn" text="{i18n>VehicleTrackingNumber}" />
+            <ViewSettingsItem key="zzseries" text="{i18n>Series}" />
+             <ViewSettingsItem key="matnr" text="{i18n>Model}" />
+            <ViewSettingsItem key="zzsuffix" text="{i18n>Suffix}" />
+            <ViewSettingsItem key="zzapx" text="{i18n>APX}" />
+            <ViewSettingsItem key="zzextcol" text="{i18n>Color}" />
+            <ViewSettingsItem key="zzordertype" text="{i18n>OrderType}" />
+            <ViewSettingsItem key="zzadddata4" text="{i18n>ETAFrom}" />
+            <ViewSettingsItem key="pstsp" text="{i18n>ETATo}" />
+        </sortItems>
+     </ViewSettingsDialog>
+</core:FragmentDefinition>
+

@@ -1,0 +1,11 @@
+[
+  "src/*.hdbcds",
+  "src/defaults/*",
+  "src/procedures/RENAME_HDBCDS_TO_PLAIN.hdbprocedure",
+  "src/gen/*.hdbcds",
+  "src/vehicletrade/VehicleTradeExtension.hdbcds",
+  "src/gen/**/*.hdbview",
+  "src/gen/**/*.hdbindex",
+  "src/gen/**/*.hdbconstraint",
+  "src/vehicletrade/.package.hdbcds" 
+]
